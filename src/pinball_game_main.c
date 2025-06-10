@@ -9,6 +9,7 @@ extern struct PinballGame gUnknown_02000000;
 
 typedef void (*VoidFunc)(void);
 
+/*** pair of function pointers for board specific behavior ***/
 struct Unk20028D8
 {
     void (*unk0)(void);
@@ -32,10 +33,13 @@ extern u8 gUnknown_020030A0[][0x400];
  * Function pointers, as paired sets.
  * Used with sub_4A90C, for setting processing per field into gUnknown_020028D8 array
  * 
- * Index sub match:
- * 0:sub_47100, sub_47160, - All boards      -- ; pause menu code, main board drain code?
- * 1:sub_4D6C4, sub_4D960, - Main boards     -- ; board scroll down; launcher?
+ * Index sub match (with load index):
+ * ----> gUnknown_020028D8[l]
+ * 0:sub_47100, sub_47160, -  All boards -- ; pause menu code, main board drain code?
+ *    -> gUnknown_020028D8[2]
+ * 1:sub_4D6C4, sub_4D960, -  Main boards     -- ; board scroll down; launcher?
  * 2:sub_4D6C4, sub_4DBFC, - Bonus boards    -- ; board scroll, drain code?
+ * ----> gUnknown_020028D8[3]
  * 3:sub_19A20, sub_19B10, - Ruby board
  * 4:sub_326F4, sub_3276C, - Sapphire board
  * 5:sub_32F3C, sub_33130, - Dusclops board
@@ -44,14 +48,20 @@ extern u8 gUnknown_020030A0[][0x400];
  * 8:sub_3B120, sub_3B49C, - Groudon board
  * 9:sub_3E79C, sub_3EB2C, - Rayquaza board
  * 10:sub_42E48, sub_43228, - Spheal board
+ * ----> gUnknown_020028D8[4]
  * 11:sub_19304, sub_19490, - Main boards
  * 12:sub_19304, sub_19734, - Bonus boards
+ * ----> gUnknown_020028D8[5]
  * 13:sub_11B9C, sub_11C98, - Main boards
  * 14:sub_11B9C, sub_11F88, - Bonus boards
+ * ----> gUnknown_020028D8[6]
  * 15:sub_1332C, sub_1333C, - All boards
+ * ----> gUnknown_020028D8[7]
  * 16:nullsub_19, sub_12524, - Main boards
  * 17:nullsub_19, sub_12BF8, - Bonus boards
+ * ----> gUnknown_020028D8[8]
  * 18:sub_4CEA8, sub_4CEB4, - All boards
+ * ----> gUnknown_020028D8[0]
  * 19:sub_50848, sub_50918, - Ruby board
  * 20:sub_50AD4, sub_50B80, - Sapphire board
  * 21:sub_50D48, sub_50DB8, - Dusclops board

@@ -92,7 +92,7 @@ struct BallState
     /*0x20*/ u8 filler20[0x4];
     /*0x24*/ u16 unk24;
     /*0x26*/ u16 unk26;
-    /*0x28*/ struct Vector16 unk28;
+    /*0x28*/ struct Vector16 unk28; //Double the x/y values in unk10
     /*0x2C*/ struct Vector16 unk2C;
     /*0x30*/ struct Vector16 velocity;
     /*0x34*/ struct Vector32 position; // fixed-point Q_24_8 values
@@ -146,7 +146,7 @@ struct PinballGame
     /*0x024*/ s8 unk24;
     /*0x025*/ s8 unk25;
     /*0x026*/ u16 unk26;
-    /*0x028*/ u16 unk28;
+    /*0x028*/ u16 unk28; // Has check for values > 97 
     /*0x02A*/ u8 filler2A[0x6];
     /*0x030*/ u8 numLives;
     /*0x031*/ u8 ballSpeed;

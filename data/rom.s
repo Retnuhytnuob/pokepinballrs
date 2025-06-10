@@ -3094,7 +3094,7 @@ gUnknown_086B077C:: @ 0x086B077C
 	.4byte sub_4D6C4, sub_4D960
 	.4byte sub_4D6C4, sub_4DBFC
 	.4byte sub_19A20, sub_19B10
-	.4byte sub_326F4, nullsub_10 @sub_326F4, sub_3276C
+	.4byte sub_326F4, sub_3276C
 	.4byte sub_32F3C, sub_33130
 	.4byte sub_35860, sub_35AA4
 	.4byte sub_383E4, sub_3869C

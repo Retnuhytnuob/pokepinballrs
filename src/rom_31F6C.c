@@ -441,6 +441,8 @@ void sub_327C0(void)
     sub_472E4();
 }
 
+
+//Sapphire board subprocess used when gMain.unkF is false
 void sub_328C8(void)
 {
     sub_300D8();
@@ -479,6 +481,7 @@ void sub_32914(void)
     gCurrentPinballGame->unk26 = 60;
 }
 
+//Saphire board subprocess
 void sub_32968(void)
 {
     if (gCurrentPinballGame->unk26)
@@ -586,6 +589,7 @@ void sub_32B74(void)
     sub_11B0(8);
 }
 
+// Saphire board subprocess gCurrentPinballGame->unk25 = 1
 void sub_32BE4(void)
 {
     if (gCurrentPinballGame->unk28)
