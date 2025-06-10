@@ -86,7 +86,7 @@ struct BallState
     /*0x0A*/ u16 unkA;
     /*0x0C*/ u16 unkC;
     /*0x0E*/ u16 unkE;
-    /*0x10*/ struct Vector16 unk10;
+    /*0x10*/ struct Vector16 unk10; //Ball position for internal logic
     /*0x14*/ u8 filler14[0xB];
     /*0x1F*/ u8 unk1F;
     /*0x20*/ u8 filler20[0x4];
@@ -95,8 +95,8 @@ struct BallState
     /*0x28*/ struct Vector16 unk28; //Double the x/y values in unk10
     /*0x2C*/ struct Vector16 unk2C;
     /*0x30*/ struct Vector16 velocity;
-    /*0x34*/ struct Vector32 position; // fixed-point Q_24_8 values
-    /*0x3C*/ struct Vector32 prevPosition;
+    /*0x34*/ struct Vector32 position; // fixed-point Q_24_8 values; for physics calc. unk10*256
+    /*0x3C*/ struct Vector32 prevPosition; //prev phys position
 };
 
 //Vector2i

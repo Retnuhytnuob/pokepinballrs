@@ -165,7 +165,7 @@
 #define SE_UNKNOWN_0xD3             0xD3 // SE86 *Wave shot*
 #define SE_UNKNOWN_0xD4             0xD4 // SE87 *Swamp frog bubbling*
 #define SE_UNKNOWN_0xD5             0xD5 // SE88 *Smaller puddle slap*
-#define SE_UNKNOWN_0xD6             0xD6 // SE89 *Juicy slash*
+#define SE_UNKNOWN_0xD6             0xD6 // SE89 Whalmer eject ball
 #define SE_UNKNOWN_0xD7             0xD7 // SE90 *Explosive collapse*
 #define SE_UNKNOWN_0xD8             0xD8 // SE91 *Ti-ring* RS: Exp. Bar filled up
 #define SE_UNKNOWN_0xD9             0xD9 // No Sound

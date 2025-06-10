@@ -589,10 +589,10 @@ void sub_32B74(void)
     sub_11B0(8);
 }
 
-// Saphire board subprocess gCurrentPinballGame->unk25 = 1
+// Saphire board:Whalmer captures ball; Catch Mode
 void sub_32BE4(void)
 {
-    if (gCurrentPinballGame->unk28)
+    if (gCurrentPinballGame->unk28) // Initiating catch mode
     {
         gCurrentPinballGame->unk5F7 = 1;
         gCurrentPinballGame->unk1F = 1;
@@ -603,7 +603,7 @@ void sub_32BE4(void)
         if (gCurrentPinballGame->unk28 > 97)
         {
             gCurrentPinballGame->unk5FA = 1;
-            gCurrentPinballGame->unk2F4 = 2;
+            gCurrentPinballGame->unk2F4 = 2; //Whalemer:  state?/tile?
             gCurrentPinballGame->unk132c->unk10.x = 0xb5;
             gCurrentPinballGame->unk132c->unk10.y = 0xc3;
         }
@@ -671,8 +671,8 @@ void sub_32BE4(void)
         gCurrentPinballGame->unk132c->velocity.y = 0xC8;
         sub_11B0(7);
         gCurrentPinballGame->unk132c->unk6 = 0;
-        gCurrentPinballGame->unk132c->unk10.x = 0xAB;
-        gCurrentPinballGame->unk132c->unk10.y = 0xD4;
+        gCurrentPinballGame->unk132c->unk10.x = 0xAB;  // AB
+        gCurrentPinballGame->unk132c->unk10.y = 0xD4;  //D4
         gCurrentPinballGame->unk132c->unk28.x = gCurrentPinballGame->unk132c->unk10.x * 2;
         gCurrentPinballGame->unk132c->unk28.y = gCurrentPinballGame->unk132c->unk10.y * 2;
         gCurrentPinballGame->unk132c->unk2C = gCurrentPinballGame->unk132c->unk28;
