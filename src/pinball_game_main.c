@@ -15,10 +15,53 @@ struct Unk20028D8
     void (*unk4)(void);
 };
 
+/***
+ * Holds a set of function pointers, for the current processing board.AGB_ASSERT_EX
+ * 
+ * Indexes 1,6,8 are shared by all boards.
+ * 
+ * Indexes 2,4,5,7 have one set shared by main boards, and a second set shared by bonus boards
+ * Indexes 0 and 3 are unique per board
+ ***/
 extern struct Unk20028D8 gUnknown_020028D8[9];
 extern u8 gUnknown_0200FBB0[][0x400];
 extern u8 gUnknown_020030A0[][0x400];
 
+
+/***
+ * Function pointers, as paired sets.
+ * Used with sub_4A90C, for setting processing per field into gUnknown_020028D8 array
+ * 
+ * Index sub match:
+ * 0:sub_47100, sub_47160, - All boards      -- ; pause menu code, main board drain code?
+ * 1:sub_4D6C4, sub_4D960, - Main boards     -- ; board scroll down; launcher?
+ * 2:sub_4D6C4, sub_4DBFC, - Bonus boards    -- ; board scroll, drain code?
+ * 3:sub_19A20, sub_19B10, - Ruby board
+ * 4:sub_326F4, sub_3276C, - Sapphire board
+ * 5:sub_32F3C, sub_33130, - Dusclops board
+ * 6:sub_35860, sub_35AA4, - Kecleon board
+ * 7:sub_383E4, sub_3869C, - Kyogre board
+ * 8:sub_3B120, sub_3B49C, - Groudon board
+ * 9:sub_3E79C, sub_3EB2C, - Rayquaza board
+ * 10:sub_42E48, sub_43228, - Spheal board
+ * 11:sub_19304, sub_19490, - Main boards
+ * 12:sub_19304, sub_19734, - Bonus boards
+ * 13:sub_11B9C, sub_11C98, - Main boards
+ * 14:sub_11B9C, sub_11F88, - Bonus boards
+ * 15:sub_1332C, sub_1333C, - All boards
+ * 16:nullsub_19, sub_12524, - Main boards
+ * 17:nullsub_19, sub_12BF8, - Bonus boards
+ * 18:sub_4CEA8, sub_4CEB4, - All boards
+ * 19:sub_50848, sub_50918, - Ruby board
+ * 20:sub_50AD4, sub_50B80, - Sapphire board
+ * 21:sub_50D48, sub_50DB8, - Dusclops board
+ * 22:sub_50DE0, nullsub_20, - Kecleon board
+ * 23:sub_50F04, sub_50FAC, - Kyogre board
+ * 24:sub_50FD4, sub_51068, - Groudon board
+ * 25:sub_51090, sub_51128, - Rayquaza board
+ * 26:sub_51150, sub_511F8, - Spheal board
+ * 27:nullsub_19, nullsub_19
+ ***/
 extern const struct Unk20028D8 gUnknown_086B077C[];
 extern const VoidFunc gUnknown_086B085C[];
 extern struct SpriteGroup *gMainFieldSpriteGroups[][60];
@@ -245,6 +288,7 @@ void sub_49ED4(void)
     gMain.subState++;
 }
 
+//Load base background tile spritesheet info based on current active field. (sheet size, color density, draw order, etc)
 static void sub_4A270(void)
 {
     REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_FORCED_BLANK | DISPCNT_OBJ_ON;
@@ -470,16 +514,16 @@ void sub_4A6A0(void)
 
 void sub_4A90C(void)
 {
-    gUnknown_020028D8[1] = gUnknown_086B077C[0];
-    gUnknown_020028D8[8] = gUnknown_086B077C[18];
-    gUnknown_020028D8[6] = gUnknown_086B077C[15];
+    gUnknown_020028D8[1] = gUnknown_086B077C[0];  
+    gUnknown_020028D8[8] = gUnknown_086B077C[18]; 
+    gUnknown_020028D8[6] = gUnknown_086B077C[15]; 
     switch (gMain.selectedField)
     {
     case FIELD_RUBY:
         gUnknown_020028D8[3] = gUnknown_086B077C[3];
         gUnknown_020028D8[7] = gUnknown_086B077C[16];
         gUnknown_020028D8[0] = gUnknown_086B077C[19];
-        gUnknown_020028D8[4] = gUnknown_086B077C[11];
+        gUnknown_020028D8[4] = gUnknown_086B077C[11]; 
         gUnknown_020028D8[2] = gUnknown_086B077C[1];
         gUnknown_020028D8[5] = gUnknown_086B077C[13];
         gMain.unk44 = gMainFieldSpriteGroups[gMain.selectedField];
@@ -488,7 +532,7 @@ void sub_4A90C(void)
         gUnknown_020028D8[3] = gUnknown_086B077C[4];
         gUnknown_020028D8[7] = gUnknown_086B077C[16];
         gUnknown_020028D8[0] = gUnknown_086B077C[20];
-        gUnknown_020028D8[4] = gUnknown_086B077C[11];
+        gUnknown_020028D8[4] = gUnknown_086B077C[11]; 
         gUnknown_020028D8[2] = gUnknown_086B077C[1];
         gUnknown_020028D8[5] = gUnknown_086B077C[13];
         gMain.unk44 = gMainFieldSpriteGroups[gMain.selectedField];

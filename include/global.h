@@ -99,18 +99,35 @@ struct BallState
     /*0x3C*/ struct Vector32 prevPosition;
 };
 
+//Vector2i
 struct UnkPinballGame3C4
 {
-    s16 unk0;
-    s16 unk2;
+    s16 unk0; // X
+    s16 unk2; // Y
 };
 
 struct PinballGame
 {
     /*0x000*/ u32 unk0;
-    /*0x004*/ u8 newButtonActions[5]; // e.g. player pressing the appropriate buttons to trigger the left flipper action, etc.
+
+    /***
+     * e.g. player pressing the appropriate buttons to trigger the left flipper action, etc.
+     *   0:left flipper, 1:right flipper, 2:tilt left, 3:tilt right, 4=tilt up 
+     ***/
+    /*0x004*/ u8 newButtonActions[5]; 
+    
+    /***
+     * e.g. player let go of the appropriate buttons to trigger the left flipper action, etc.
+     *   0:left flipper, 1:right flipper, 2:tilt left, 3:tilt right, 4=tilt up 
+     ***/
     /*0x009*/ u8 releasedButtonActions[5];
+    
+    /***
+     * e.g. player is holding (initiated in current or past frame) the appropriate buttons to trigger the left flipper action, etc.
+     *   0:left flipper, 1:right flipper, 2:tilt left, 3:tilt right, 4=tilt up 
+     ***/
     /*0x00E*/ u8 heldButtonActions[5];
+
     /*0x013*/ s8 unk13; // Current field state. In main fields seems to be related to the 3 Pokeballs that unlock bonus fields, in bonus fields acts as a field state
     /*0x014*/ s8 unk14;
     /*0x015*/ s8 unk15;
@@ -297,8 +314,8 @@ struct PinballGame
     /*0x372*/ u8 filler372[0x11];
     /*0x383*/ s8 unk383;
     /*0x384*/ u8 unk384;
-    /*0x385*/ u8 unk385;
-    /*0x386*/ s8 unk386;
+    /*0x385*/ u8 unk385; //Number of hits towards goal
+    /*0x386*/ s8 unk386; 
     /*0x387*/ s8 unk387;
     /*0x388*/ s8 unk388;
     /*0x389*/ u8 filler389[0x3];
@@ -306,21 +323,21 @@ struct PinballGame
     /*0x38E*/ u8 filler38E[0x4];
     /*0x392*/ u16 unk392;
     /*0x394*/ u16 unk394;
-    /*0x396*/ u8 unk396;
-    /*0x397*/ u8 unk397[3];
-    /*0x39A*/ u8 unk39A[3];
-    /*0x39D*/ u8 unk39D[3];
-    /*0x3A0*/ u8 unk3A0[3];
-    /*0x3A3*/ u8 unk3A3[3];
-    /*0x3A6*/ u8 unk3A6[3];
-    /*0x3A9*/ u8 unk3A9[3];
+    /*0x396*/ u8 unk396; //Number of active 'entities'
+    /*0x397*/ u8 unk397[3]; //?? entity previous sprite tile
+    /*0x39A*/ u8 unk39A[3]; //?? entity sprite tile 
+    /*0x39D*/ u8 unk39D[3]; //?? entity sprite palette
+    /*0x3A0*/ u8 unk3A0[3]; //entity state number
+    /*0x3A3*/ u8 unk3A3[3]; //entity animation sprite index
+    /*0x3A6*/ u8 unk3A6[3]; //entity should draw flag
+    /*0x3A9*/ u8 unk3A9[3]; //??entity 'check for colision' flag
     /*0x3AC*/ u8 unk3AC[3];
-    /*0x3B0*/ u16 unk3B0[3];
-    /*0x3B6*/ u16 unk3B6[3];
-    /*0x3BC*/ u16 unk3BC[3];
+    /*0x3B0*/ u16 unk3B0[3]; //entity ticks since entered state.
+    /*0x3B6*/ u16 unk3B6[3]; //entity time alive
+    /*0x3BC*/ u16 unk3BC[3]; //entity time to expiration
     /*0x3C2*/ u8 filler3C2[0x2];
-    /*0x3C4*/ struct UnkPinballGame3C4 unk3C4[3];
-    /*0x3D0*/ struct UnkPinballGame3C4 unk3D0[3];
+    /*0x3C4*/ struct UnkPinballGame3C4 unk3C4[3]; //Entity sprite local ref pos
+    /*0x3D0*/ struct UnkPinballGame3C4 unk3D0[3]; //Entity sprite screen px pos
     /*0x3DC*/ s8 unk3DC;
     /*0x3DD*/ u8 unk3DD;
     /*0x3DE*/ u8 unk3DE;
@@ -475,7 +492,7 @@ struct PinballGame
     /*0x1326*/s16 unk1326;
     /*0x1328*/u16 unk1328;
     /*0x132A*/u8 filler132A[0x2];
-    /*0x132C*/struct BallState *unk132c;
+    /*0x132C*/struct BallState *unk132c; //Active pokeball
     /*0x1330*/struct BallState *unk1330;
     /*0x1334*/struct BallState unk1334[2];
     /*0x13BC*/u8 filler13BC[0x4];

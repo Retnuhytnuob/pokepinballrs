@@ -26,7 +26,7 @@ enum
     SUBSTATE_ANIM_CLOSE_MENU,
     SUBSTATE_7,
     SUBSTATE_8,
-    SUBSTATE_9,
+    SUBSTATE_DELETE_SAVE_GAME_CONFIRMATION,
     SUBSTATE_EXEC_MENU_SELECTION,
     SUBSTATE_11,
 };
@@ -231,6 +231,7 @@ void TitleScreen2_8010CF0(void)
     sub_11640();
 }
 
+//Delete Save State confirmation dialog, listen for confirmation keys.
 void TitleScreen9_8010D84(void)
 {
     if (JOY_HELD(RESTART_GAME_BUTTONS) == RESTART_GAME_BUTTONS)
@@ -601,6 +602,7 @@ void TitleScreen11_80114B4(void)
     SetMainGameState(gUnknown_086A964C[gTitlescreen.unk6]);
 }
 
+// Track 'delete save file' key combination pressed
 static void sub_114FC(void)
 {
     // To delete save file, press R_BUTTON 3 times while holding L_BUTTON And DPAD_LEFT.
@@ -615,7 +617,7 @@ static void sub_114FC(void)
                 gEraseSaveDataAccessCounter = 0;
                 m4aSongNumStart(SE_UNKNOWN_0x68);
                 gTitlescreen.deleteSaveWindowVisible = TRUE;
-                gMain.subState = SUBSTATE_9;
+                gMain.subState = SUBSTATE_DELETE_SAVE_GAME_CONFIRMATION;
             }
         }
     }
@@ -858,6 +860,7 @@ void sub_11968(void)
     r8->available = FALSE;
 }
 
+//Clear save game info
 void sub_11B74(void)
 {
     sub_52C64();

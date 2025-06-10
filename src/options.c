@@ -1636,8 +1636,8 @@ void sub_525CC(s8 buttonConfigType)
     {
     case BUTTON_CONFIG_RESET:
         gMain.buttonConfigs[0][0] = gUnknown_086BB910[5][0];
-        gMain.buttonConfigs[0][1] = gUnknown_086BB910[10][0];
-        gMain.buttonConfigs[1][0] = gUnknown_086BB910[0][0];
+        gMain.buttonConfigs[0][1] = gUnknown_086BB910[10][0]; 
+        gMain.buttonConfigs[1][0] = gUnknown_086BB910[0][0]; 
         gMain.buttonConfigs[1][1] = gUnknown_086BB910[10][0];
         gMain.buttonConfigs[2][0] = gUnknown_086BB910[9][0];
         gMain.buttonConfigs[2][1] = gUnknown_086BB910[10][0];
