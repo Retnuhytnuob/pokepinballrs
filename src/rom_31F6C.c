@@ -326,6 +326,7 @@ void PickSpeciesForEggMode(void)
     gCurrentPinballGame->lastEggSpecies = gCurrentPinballGame->currentSpecies;
 }
 
+//Saphire specific board process. Cousin to sub_19A20
 void sub_326F4(void)
 {
     gCurrentPinballGame->catchModeArrows = 2;
@@ -349,7 +350,7 @@ void sub_326F4(void)
     sub_31B30();
 }
 
-//Context: sapphire board specific logic
+//Context: sapphire board specific logic -- Board relative cousin to sub_19B10
 void sub_3276C(void)
 {
     sub_19B90();

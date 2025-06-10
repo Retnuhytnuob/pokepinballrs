@@ -25,9 +25,11 @@ extern void sub_4E814(void);
 
 void sub_19D04(void)
 {
+    //If board state is in normal mode, and {some condition} call sub
     if (gCurrentPinballGame->unk13 == 2 && gCurrentPinballGame->unk14 > 2)
         sub_21238(0);
 
+    //If board state is not in its normal mode (ie: during catch/hatch/evolve) do nothing.
     if (gCurrentPinballGame->unk13 > 2)
         return;
 
@@ -62,6 +64,7 @@ void sub_19D04(void)
     }
 }
 
+//Ruby board specific process
 void sub_19E10(void) {
     int randNum;
     
@@ -156,7 +159,7 @@ void sub_19F70(void)
     }
 }
 
-//Duplicate of sub_32DF8, with "gCurrentPinballGame->unk301 = 1;" added in the final if statement
+//Ruby board cousin of sub_32DF8, with "gCurrentPinballGame->unk301 = 1;" added in the final if statement
 void sub_19FA0(void) {
     int tmp;
 

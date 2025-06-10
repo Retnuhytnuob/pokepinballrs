@@ -280,6 +280,11 @@ void sub_11F88(void)
     }
 
     unk132c->unk2C = unk132c->unk28;
+
+	//Note: the + 64 math would result in a +0.5 difference vs original on the unk28
+	//and a .25 difference vs the original unk10 'logic position' value.
+	//With integer math, this rounds out. 
+	//The bonus helps when the physics calculation has an position representing the other .75 px
     unk132c->unk28.x = (unk132c->position.x + 64) / 128;
     unk132c->unk28.y = (unk132c->position.y + 64) / 128;
     unk132c->unk8 = unk132c->unk6;

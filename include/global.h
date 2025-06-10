@@ -295,7 +295,7 @@ struct PinballGame
     /*0x2F5*/ s8 unk2F5;
     /*0x2F6*/ u8 filler2F6[0xA];
     /*0x300*/ u8 unk300;
-    /*0x301*/ u8 unk301;
+    /*0x301*/ u8 unk301; //Presumably related to an attempt to use makuhita punch?
     /*0x302*/ u8 filler302[0x4];
     /*0x306*/ s8 unk306;
     /*0x307*/ u8 filler307[0x1];

@@ -21,6 +21,7 @@ void sub_23E18(void);
 void sub_2C9A4(void);
 void sub_4E9F0(s8);
 
+//Ruby specific board process. Cousin to sub_326F4
 void sub_19A20(void)
 {
     gCurrentPinballGame->catchModeArrows = 2;
@@ -59,6 +60,7 @@ void sub_19A20(void)
     sub_31B30();
 }
 
+//Ruby board specific logic -- Board relative cousin to sub_3276C
 void sub_19B10(void)
 {
     sub_19B90();
@@ -88,6 +90,7 @@ void sub_19B64(u8 arg0)
         gMain.unk44[13]->available = 0;
 }
 
+//Used for both main boards
 void sub_19B90(void)
 {
     switch (gCurrentPinballGame->unk16)
