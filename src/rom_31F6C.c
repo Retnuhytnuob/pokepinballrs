@@ -329,7 +329,7 @@ void PickSpeciesForEggMode(void)
     gCurrentPinballGame->lastEggSpecies = gCurrentPinballGame->currentSpecies;
 }
 
-//Saphire specific board process. Cousin to sub_19A20
+//Sapphire specific board initialization. Cousin to sub_19A20
 void sub_326F4(void)
 {
     gCurrentPinballGame->catchModeArrows = 2;
@@ -690,7 +690,7 @@ void sub_32BE4(void)
 }
 
 
-// check for flipper action pressed
+// tracks moving hole lights and poke power up lights
 void sub_32DF8(void)
 {
     int tmp;

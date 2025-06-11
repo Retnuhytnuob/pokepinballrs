@@ -21,7 +21,7 @@ void sub_23E18(void);
 void sub_2C9A4(void);
 void sub_4E9F0(s8);
 
-//Ruby specific board process. Cousin to sub_326F4
+//Ruby specific board board initialization. Cousin to sub_326F4
 void sub_19A20(void)
 {
     gCurrentPinballGame->catchModeArrows = 2;

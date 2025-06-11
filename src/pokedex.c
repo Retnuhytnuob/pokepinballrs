@@ -710,6 +710,7 @@ void sub_4BB4(void)
     gUnknown_0201B120 += 1;
 }
 
+//Delete pokedex confirmation dialog
 void sub_4C80(void)
 {
     s32 i;
@@ -881,11 +882,14 @@ static void PokedexListScrollDownFast(void)
     gPokedexScrollWaitFrames = SCROLL_WAIT_FRAMES;
 }
 
+
 void sub_4FC8(void)
 {
+	//Check for delete pokedex info pro
+	//Requires held L button and Left dpad, plus 3 R presses within 40 ticks of each other
     if (JOY_HELD(L_BUTTON | DPAD_LEFT) == (L_BUTTON | DPAD_LEFT) && JOY_NEW(R_BUTTON))
     {
-        gUnknown_02002830 = 40;
+        gUnknown_02002830 = 40; //Time before action count expires
         if (++gUnknown_02002831 == 3)
         {
             gUnknown_02002831 = 0;
@@ -899,6 +903,7 @@ void sub_4FC8(void)
         }
     }
 
+	//Countdown for the reset timer for the 'triple tap' input count
     if (gUnknown_02002830 > 0)
     {
         gUnknown_02002830--;
@@ -1520,6 +1525,7 @@ static int sub_6144(void)
     return 0;
 }
 
+//Link transfer as host (See sub_65DC for client)
 int sub_639C(void)
 {
     int i, j;
@@ -1608,6 +1614,7 @@ int sub_639C(void)
     return 0;
 }
 
+//Link transfer as client (See sub_639C for host)
 static int sub_65DC(void)
 {
     int i, j;
