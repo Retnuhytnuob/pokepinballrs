@@ -329,8 +329,8 @@ struct PinballGame
     /*0x39D*/ s8 unk39D[3]; //?? entity sprite palette
     /*0x3A0*/ s8 unk3A0[3]; //entity state number
     /*0x3A3*/ s8 unk3A3[3]; //entity animation sprite index
-    /*0x3A6*/ u8 unk3A6[3]; //entity should draw flag
-    /*0x3A9*/ s8 unk3A9[3]; //??entity 'check for colision' flag
+    /*0x3A6*/ s8 unk3A6[3]; //entity should draw flag
+    /*0x3A9*/ u8 unk3A9[3]; //??entity 'check for colision' flag
     /*0x3AC*/ s8 unk3AC[3];
     /*0x3B0*/ u16 unk3B0[3]; //entity ticks since entered state.
     /*0x3B6*/ u16 unk3B6[3]; //entity time alive
