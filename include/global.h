@@ -141,7 +141,7 @@ struct PinballGame
     /*0x01E*/ u8 unk1E;
     /*0x01F*/ u8 unk1F;
     /*0x020*/ u8 filler20[0x2];
-    /*0x022*/ s8 unk22;
+    /*0x022*/ s8 unk22; // Collision physics type
     /*0x023*/ u8 unk23; // Holds the value of some enum state
     /*0x024*/ s8 unk24;
     /*0x025*/ s8 unk25;
@@ -227,10 +227,10 @@ struct PinballGame
     /*0x1B6*/ u8 filler1B6[0x4];
     /*0x1BA*/ u16 unk1BA;
     /*0x1BC*/ u8 filler1BC[0x4];
-    /*0x1C0*/ u16 unk1C0;
+    /*0x1C0*/ u16 unk1C0; // if value present; pikachu doesn't swap lanes
     /*0x1C2*/ s8 unk1C2;
     /*0x1C3*/ u8 filler1C3[0x1];
-    /*0x1C4*/ u16 unk1C4;
+    /*0x1C4*/ u16 unk1C4; // if value present; pikachu doesn't swap lanes
     /*0x1C6*/ u16 unk1C6;
     /*0x1C8*/ u16 unk1C8;
     /*0x1CA*/ u16 unk1CA;
@@ -249,7 +249,7 @@ struct PinballGame
     /*0x1E5*/ u8 unk1E5;
     /*0x1E6*/ u8 unk1E6;
     /*0x1E7*/ u8 filler1E7[0x6];
-    /*0x1ED*/ s8 unk1ED;
+    /*0x1ED*/ s8 unk1ED; // ??Evo mode flag?
     /*0x1EE*/ u8 filler1EE[0x1a];
     /*0x208*/ u16 unk208;
     /*0x20A*/ u8 unk20A;
@@ -404,7 +404,7 @@ struct PinballGame
     /*0x602*/ u8 filler602[0x12];
     /*0x614*/ u16 unk614;
     /*0x616*/ u8 filler616[0x6];
-    /*0x61C*/ s8 unk61C;
+    /*0x61C*/ s8 unk61C; // if value present; pikachu doesn't swap lanes
     /*0x61D*/ u8 filler61D[0x8];
     /*0x625*/ u8 unk625;
     /*0x626*/ u8 filler626[0x9];

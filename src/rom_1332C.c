@@ -12,6 +12,7 @@ void sub_1332C()
 	gCurrentPinballGame->unk26 = 60;
 }
 
+//Process logic used for all boards. - Ball colision physics seems highly likely. 
 void sub_1333C()
 {
     struct Vector16 var0;
@@ -21,13 +22,13 @@ void sub_1333C()
     u16 r7;
 
     r7 = sub_13824(&var0);
-    switch (gCurrentPinballGame->unk22) 
+    switch (gCurrentPinballGame->unk22) //colision behavior.
     {
         case 7:
             gCurrentPinballGame->unk132c->velocity.x = 0;
             gCurrentPinballGame->unk132c->velocity.y = 0;
             break;
-        case 1:
+        case 1: //Board geometry style hit (Curves, hard flat surfaces)
             sub_13934(&var0, &var1, r7);
             sub_13D24(r7, &gCurrentPinballGame->unk132c->velocity, &var2);
             for (i = 0; i < 9; i++)
@@ -42,13 +43,13 @@ void sub_1333C()
             gCurrentPinballGame->unk132c->velocity.x = var2.x + var1.x;
             gCurrentPinballGame->unk132c->velocity.y = var2.y + var1.y;
             break;
-        case 6:
+        case 6: //Unknown physics colision type... 
             sub_13934(&var0, &var1,r7);
             sub_13D24(r7, &gCurrentPinballGame->unk132c->velocity, &var2); 
             gCurrentPinballGame->unk132c->velocity.x = var2.x + var1.x;
             gCurrentPinballGame->unk132c->velocity.y = var2.y + var1.y;
             break;
-        case 2:
+        case 2: //Bumper style hit: includes the triangle blocks and the bumper pool
             sub_13934(&var0, &var1, r7);
             sub_13D24(r7, &gCurrentPinballGame->unk132c->velocity, &var2);
             for (i = 0; i < 9; i++)
@@ -63,7 +64,7 @@ void sub_1333C()
             gCurrentPinballGame->unk132c->velocity.x = var2.x + var1.x;
             gCurrentPinballGame->unk132c->velocity.y = var2.y + var1.y;
             break;
-        case 3:
+        case 3: //Left Flipper
             sub_13934(&var0, &var1, r7);
             var0.x -= (gUnknown_02031520.unk22 * 2);
             var0.y -= (gUnknown_02031520.unk20 * 2);
@@ -95,7 +96,7 @@ void sub_1333C()
             var0.x += gUnknown_02031520.unk22 * 2;
             var0.y += gUnknown_02031520.unk20 * 2;
             break;
-        case 4:
+        case 4: //Right flipper
             sub_13934(&var0, &var1, r7);
             var0.x -= (gUnknown_02031520.unk24 * 2);
             var0.y -= (gUnknown_02031520.unk20 * 2);

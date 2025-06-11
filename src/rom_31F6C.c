@@ -596,7 +596,7 @@ void sub_32B74(void)
 // Saphire board:Whalmer captures ball; Catch Mode
 void sub_32BE4(void)
 {
-    if (gCurrentPinballGame->unk28) // Initiating catch mode
+    if (gCurrentPinballGame->unk28) // Countdown timer while message displays
     {
         gCurrentPinballGame->unk5F7 = 1;
         gCurrentPinballGame->unk1F = 1;
@@ -690,7 +690,7 @@ void sub_32BE4(void)
 }
 
 
-// tracks moving hole lights and poke power up lights
+// Ruby board: tracks moving of "HOLE" and pokeball power up lights, pikachu swapping
 void sub_32DF8(void)
 {
     int tmp;
