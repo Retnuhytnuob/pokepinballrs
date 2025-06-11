@@ -99,11 +99,11 @@ struct BallState
     /*0x3C*/ struct Vector32 prevPosition; //prev phys position
 };
 
-//Vector2i
-struct UnkPinballGame3C4
+struct UnkPinballGame13BC
 {
-    s16 unk0; // X
-    s16 unk2; // Y
+    /*0x00*/ u8 filler0[0x4];
+    /*0x04*/ s8 unk4;
+    /*0x05*/ u8 filler5[0x7];
 };
 
 struct PinballGame
@@ -314,8 +314,8 @@ struct PinballGame
     /*0x372*/ u8 filler372[0x11];
     /*0x383*/ s8 unk383;
     /*0x384*/ u8 unk384;
-    /*0x385*/ u8 unk385; //Number of hits towards goal
-    /*0x386*/ s8 unk386; 
+    /*0x385*/ s8 unk385;//Number of hits towards goal
+    /*0x386*/ s8 unk386;
     /*0x387*/ s8 unk387;
     /*0x388*/ s8 unk388;
     /*0x389*/ u8 filler389[0x3];
@@ -323,21 +323,21 @@ struct PinballGame
     /*0x38E*/ u8 filler38E[0x4];
     /*0x392*/ u16 unk392;
     /*0x394*/ u16 unk394;
-    /*0x396*/ u8 unk396; //Number of active 'entities'
-    /*0x397*/ u8 unk397[3]; //?? entity previous sprite tile
+    /*0x396*/ s8 unk396; //Number of active 'entities'
+    /*0x397*/ s8 unk397[3]; //?? entity previous sprite tile
     /*0x39A*/ u8 unk39A[3]; //?? entity sprite tile 
-    /*0x39D*/ u8 unk39D[3]; //?? entity sprite palette
-    /*0x3A0*/ u8 unk3A0[3]; //entity state number
-    /*0x3A3*/ u8 unk3A3[3]; //entity animation sprite index
+    /*0x39D*/ s8 unk39D[3]; //?? entity sprite palette
+    /*0x3A0*/ s8 unk3A0[3]; //entity state number
+    /*0x3A3*/ s8 unk3A3[3]; //entity animation sprite index
     /*0x3A6*/ u8 unk3A6[3]; //entity should draw flag
-    /*0x3A9*/ u8 unk3A9[3]; //??entity 'check for colision' flag
-    /*0x3AC*/ u8 unk3AC[3];
+    /*0x3A9*/ s8 unk3A9[3]; //??entity 'check for colision' flag
+    /*0x3AC*/ s8 unk3AC[3];
     /*0x3B0*/ u16 unk3B0[3]; //entity ticks since entered state.
     /*0x3B6*/ u16 unk3B6[3]; //entity time alive
     /*0x3BC*/ u16 unk3BC[3]; //entity time to expiration
     /*0x3C2*/ u8 filler3C2[0x2];
-    /*0x3C4*/ struct UnkPinballGame3C4 unk3C4[3]; //Entity sprite local ref pos
-    /*0x3D0*/ struct UnkPinballGame3C4 unk3D0[3]; //Entity sprite screen px pos
+    /*0x3C4*/ struct Vector16 unk3C4[3]; //Entity sprite local ref pos
+    /*0x3D0*/ struct Vector16 unk3D0[3];//Entity sprite screen px pos
     /*0x3DC*/ s8 unk3DC;
     /*0x3DD*/ u8 unk3DD;
     /*0x3DE*/ u8 unk3DE;
@@ -495,13 +495,8 @@ struct PinballGame
     /*0x132C*/struct BallState *unk132c; //Active pokeball
     /*0x1330*/struct BallState *unk1330;
     /*0x1334*/struct BallState unk1334[2];
-    /*0x13BC*/u8 filler13BC[0x4];
-    /*0x13BC*/s8 unk13C0;
-    /*0x13BC*/u8 filler13C1[0xB];
-    /*0x13CC*/s8 unk13CC;
-    /*0x13CD*/u8 filler13CD[0x1];
-    /*0x13CE*/u8 unk13CE;
-    /*0x13CF*/u8 filler[0x41];
+    /*0x13BC*/struct UnkPinballGame13BC unk13BC[2];
+    /*0x13D4*/u8 filler13D4[0x3C];
 } /* size=0x1410 */;
 
 struct Unk02031520_unk10
