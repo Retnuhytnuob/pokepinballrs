@@ -147,6 +147,7 @@ void sub_19E10(void) {
     }
 }
 
+//Ruby board specific process when gMain.unkF == 0
 void sub_19F70(void) 
 {
     sub_1DDDC();
@@ -159,7 +160,14 @@ void sub_19F70(void)
     }
 }
 
-//Ruby board cousin of sub_32DF8, with "gCurrentPinballGame->unk301 = 1;" added in the final if statement
+/****
+ * Ruby board 
+ * tracks moving of "HOLE" and pokeball power up lights, pikachu swapping
+ * Has a cousin process at sub_32DF8.
+ *
+ * this copy has extra "gCurrentPinballGame->unk301 = 1;" flag for the 'right flipper' pressed
+ * This is presumed to be the trigger condition for the 'makuhita' hit. 
+ *****/
 void sub_19FA0(void) {
     int tmp;
 

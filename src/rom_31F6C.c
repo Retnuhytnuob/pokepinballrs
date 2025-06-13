@@ -478,7 +478,7 @@ void sub_32914(void)
         sub_329B0();
         break;
     case 4:
-        sub_1C560();
+        sub_1C560(); // Called both here and by sub_32914
         break;
     }
 
@@ -500,7 +500,7 @@ void sub_32968(void)
         sub_329F4();
         break;
     case 4:
-        sub_1C5AC();
+        sub_1C5AC(); //Called both here and by sub_1A9E8
         break;
     }
 }
@@ -515,11 +515,14 @@ void sub_329B0(void)
     gCurrentPinballGame->unk5F7 = 1;
 }
 
+
+// Presumed Saphire board Whalmer interaction
+// reached when gCurrentPinballGame->unk25 =3
 void sub_329F4(void)
 {
     s16 i;
 
-    if (gCurrentPinballGame->unk28 > 0x18)
+    if (gCurrentPinballGame->unk28 > 0x18) // Countdown timer
     {
         gCurrentPinballGame->unk132c->unk0 = 1;
         gCurrentPinballGame->unk1F = 1;
@@ -593,7 +596,8 @@ void sub_32B74(void)
     sub_11B0(8);
 }
 
-// Saphire board:Whalmer captures ball; Catch Mode
+// Saphire board: Catch Mode initiation: Whalmer captures ball while banner shows
+// Reached when gCurrentPinballGame->unk25 = 1
 void sub_32BE4(void)
 {
     if (gCurrentPinballGame->unk28) // Countdown timer while message displays
@@ -675,8 +679,8 @@ void sub_32BE4(void)
         gCurrentPinballGame->unk132c->velocity.y = 0xC8;
         sub_11B0(7);
         gCurrentPinballGame->unk132c->unk6 = 0;
-        gCurrentPinballGame->unk132c->unk10.x = 0xAB;  // AB
-        gCurrentPinballGame->unk132c->unk10.y = 0xD4;  //D4
+        gCurrentPinballGame->unk132c->unk10.x = 0xAB;
+        gCurrentPinballGame->unk132c->unk10.y = 0xD4;
         gCurrentPinballGame->unk132c->unk28.x = gCurrentPinballGame->unk132c->unk10.x * 2;
         gCurrentPinballGame->unk132c->unk28.y = gCurrentPinballGame->unk132c->unk10.y * 2;
         gCurrentPinballGame->unk132c->unk2C = gCurrentPinballGame->unk132c->unk28;
@@ -690,7 +694,11 @@ void sub_32BE4(void)
 }
 
 
-// Ruby board: tracks moving of "HOLE" and pokeball power up lights, pikachu swapping
+/*****
+ * Sapphire board 
+ * tracks moving of "HOLE" and pokeball power up lights, pikachu swapping
+ * Has a cousin process at sub_19FA0.
+ ****/
 void sub_32DF8(void)
 {
     int tmp;
@@ -756,6 +764,7 @@ void sub_32F3C(void)
     gCurrentPinballGame->unk394 = 0;
     gCurrentPinballGame->unk396 = 0;
 
+    //Clear any data for the entities; will be used for dusclops, and later
     for (i = 0; i < 3; i++)
     {
         gCurrentPinballGame->unk397[i] = 0;
@@ -1264,6 +1273,7 @@ void sub_336E0(void) {
 
 extern const u8 gUnknown_08510E4C[];
 extern const u16 gUnknown_086BA0A0[][2][3];
+//Draw sprites. Used by at least the dusclops mode. Possibly others.
 void sub_340EC() {
     s16 i, j;
     s16 sb;

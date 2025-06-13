@@ -141,7 +141,7 @@ struct PinballGame
     /*0x01E*/ u8 unk1E;
     /*0x01F*/ u8 unk1F;
     /*0x020*/ u8 filler20[0x2];
-    /*0x022*/ s8 unk22; // Collision physics type
+    /*0x022*/ s8 unk22; // Colision physics type
     /*0x023*/ u8 unk23; // Holds the value of some enum state
     /*0x024*/ s8 unk24;
     /*0x025*/ s8 unk25;

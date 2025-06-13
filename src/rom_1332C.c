@@ -12,7 +12,7 @@ void sub_1332C()
 	gCurrentPinballGame->unk26 = 60;
 }
 
-//Process logic used for all boards. - Ball colision physics seems highly likely. 
+//Process logic used for all boards. - Ball colision physics. 
 void sub_1333C()
 {
     struct Vector16 var0;

@@ -30,13 +30,14 @@ void sub_1A98C(void)
         sub_1AF84();
         break;
     case 4:
-        sub_1C560();
+        sub_1C560(); // Called both here and by 1A98C
         break;
     }
 
     gCurrentPinballGame->unk26 = 60;
 }
 
+// Called from at least a Ruby process
 void sub_1A9E8(void)
 {
     if (gCurrentPinballGame->unk26 > 0)
@@ -45,7 +46,7 @@ void sub_1A9E8(void)
     switch (gCurrentPinballGame->unk25)
     {
     case 1:
-        sub_1AAA0();
+        sub_1AAA0(); //Presumed sharpedo: catch mode initiation. (compare with sub32be4)
         break;
     case 2:
         sub_1ADF4();
