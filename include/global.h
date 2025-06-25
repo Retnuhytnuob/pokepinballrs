@@ -86,24 +86,27 @@ struct BallState
     /*0x0A*/ u16 unkA;
     /*0x0C*/ u16 unkC;
     /*0x0E*/ u16 unkE;
-    /*0x10*/ struct Vector16 unk10; //Ball position for internal logic
+    /*0x10*/ struct Vector16 positionQ0;
     /*0x14*/ u8 filler14[0xB];
     /*0x1F*/ u8 unk1F;
     /*0x20*/ u8 filler20[0x4];
     /*0x24*/ u16 unk24;
     /*0x26*/ u16 unk26;
-    /*0x28*/ struct Vector16 unk28; //Double the x/y values in unk10
-    /*0x2C*/ struct Vector16 unk2C;
+    /*0x28*/ struct Vector16 positionQ1;
+    /*0x2C*/ struct Vector16 prevPositionQ1;
     /*0x30*/ struct Vector16 velocity;
-    /*0x34*/ struct Vector32 position; // fixed-point Q_24_8 values; for physics calc. unk10*256
-    /*0x3C*/ struct Vector32 prevPosition; //prev phys position
+    /*0x34*/ struct Vector32 positionQ8; // fixed-point Q_24_8 values
+    /*0x3C*/ struct Vector32 prevPositionQ8;
 };
 
 struct UnkPinballGame13BC
 {
-    /*0x00*/ u8 filler0[0x4];
+    /*0x00*/ s8 unk0;
+    /*0x01*/ u8 filler1[0x3];
     /*0x04*/ s8 unk4;
-    /*0x05*/ u8 filler5[0x7];
+    /*0x05*/ u8 filler5[0x3];
+    /*0x08*/ s8 unk8;
+    /*0x09*/ u8 filler9[0x3];
 };
 
 struct PinballGame
@@ -244,7 +247,7 @@ struct PinballGame
     /*0x1DA*/ u16 unk1DA;
     /*0x1DC*/ u16 unk1DC;
     /*0x1DE*/ u8 filler1DE[0x4];
-    /*0x1E2*/ s8 unk1E2; //Pikachu coverage 0=left lane, 1= right lane, 2 = both lanes
+    /*0x1E2*/ s8 outLanePikaPosition; //Pikachu coverage. 0= left lane, 1=right lane, 2 = both
     /*0x1E3*/ u8 filler1E3[0x2];
     /*0x1E5*/ u8 unk1E5;
     /*0x1E6*/ u8 unk1E6;
@@ -260,7 +263,7 @@ struct PinballGame
     /*0x280*/ s8 evolvingPartyIndex;
     /*0x281*/ s8 evolvablePartySize;
     /*0x282*/ s8 unk282;
-    /*0x283*/ u8 bonusFieldsComplete; //how many bonus fields have been completed
+    /*0x283*/ u8 numCompletedBonusStages;
     /*0x284*/ u8 filler284[0xC];
     /*0x290*/ u32 unk290;
     /*0x294*/ s8 unk294;
@@ -341,37 +344,46 @@ struct PinballGame
     /*0x3D0*/ struct Vector16 unk3D0[3];//Entity sprite screen px pos
     /*0x3DC*/ s8 unk3DC;
     /*0x3DD*/ u8 unk3DD;
-    /*0x3DE*/ u8 unk3DE;
+    /*0x3DE*/ s8 unk3DE;
     /*0x3DF*/ u8 unk3DF;
     /*0x3E0*/ u8 unk3E0;
     /*0x3E1*/ u8 unk3E1;
-    /*0x3E2*/ u16 unk3E2;
+    /*0x3E2*/ s16 unk3E2;
     /*0x3E4*/ u16 unk3E4;
-    /*0x3E6*/ u16 unk3E6;
-    /*0x3E8*/ u16 unk3E8;
-    /*0x3EA*/ u16 unk3EA;
-    /*0x3EC*/ u16 unk3EC;
-    /*0x3EE*/ u16 unk3EE;
+    /*0x3E6*/ s16 unk3E6;
+    /*0x3E8*/ s16 unk3E8;
+    /*0x3EA*/ s16 unk3EA;
+    /*0x3EC*/ s16 unk3EC;
+    /*0x3EE*/ s16 unk3EE;
     /*0x3F0*/ u16 unk3F0;
     /*0x3F2*/ u16 unk3F2;
-    /*0x3F4*/ u16 unk3F4;
-    /*0x3F6*/ u8 filler3F6[0x2];
-    /*0x3F8*/ s16 unk3F8;
-    /*0x3FA*/ u8 filler3FA[0x2];
+    /*0x3F4*/ s8 unk3F4;
+    /*0x3F5*/ s8 unk3F5;
+    /*0x3F6*/ s8 unk3F6;
+    /*0x3F7*/ u8 unk3F7;
+    /*0x3F8*/ u8 unk3F8;
+    /*0x3F9*/ u8 filler3F9[0x1];
+    /*0x3FA*/ s16 unk3FA;
     /*0x3FC*/ s16 unk3FC;
     /*0x3FE*/ u8 filler3FE[0x2];
     /*0x400*/ s16 unk400;
-    /*0x402*/ u8 filler402[0x2];
-    /*0x404*/ s16 unk404;
-    /*0x406*/ u8 filler406[0x2];
+    /*0x402*/ u16 unk402;
+    /*0x404*/ u8 unk404;
+    /*0x405*/ u8 unk405;
+    /*0x406*/ u8 unk406;
+    /*0x407*/ u8 filler407[0x1];
     /*0x408*/ s16 unk408;
-    /*0x40A*/ u8 filler40A[0x2];
+    /*0x40A*/ s16 unk40A;
     /*0x40C*/ s16 unk40C;
-    /*0x40E*/ u8 filler40E[0x2];
+    /*0x40E*/ u16 unk40E;
     /*0x410*/ s16 unk410;
-    /*0x412*/ u8 filler412[0x2];
+    /*0x412*/ s16 unk412;
     /*0x414*/ s8 unk414;
-    /*0x415*/ u8 filler415[0x3D];
+    /*0x415*/ u8 filler415[0x7];
+    /*0x41C*/ u8 unk41C[4];
+    /*0x420*/ u8 unk420[10];
+    /*0x42A*/ u8 unk42A[7];
+    /*0x431*/ u8 filler431[0x21];
     /*0x452*/ u16 unk452;
     /*0x454*/ u8 filler454[0xDE];
     /*0x532*/ u8 unk532;
@@ -440,17 +452,17 @@ struct PinballGame
     /*0x6F0*/ u8 filler6F0[0x1E];
     /*0x70E*/ s8 unk70E;
     /*0x70F*/ s8 unk70F;
-    /*0x710*/ s8 unk710; // 'H' light in Ruby/Sapphire field
-    /*0x711*/ s8 unk711; // 'O' light in Ruby/Sapphire field
-    /*0x712*/ s8 unk712; // 'L' light in Ruby/Sapphire field
-    /*0x713*/ s8 unk713; // 'E' light in Ruby/Saphire field
+    /*0x710*/ s8 hLight; // 'H' light indicator in Ruby/Sapphire field
+    /*0x711*/ s8 oLight; // 'O' light indicator in Ruby/Sapphire field
+    /*0x712*/ s8 lLight; // 'L' light indicator in Ruby/Sapphire field
+    /*0x713*/ s8 eLight; // 'E' light indicator in Ruby/Sapphire field
     /*0x714*/ s8 unk714;
     /*0x715*/ u8 filler715[0x1];
     /*0x716*/ s8 unk716;
-    /*0x717*/ u8 filler717[0x1];
-    /*0x718*/ s8 unk718; // Left ball power up light
-    /*0x719*/ s8 unk719; // Center ball power up light
-    /*0x71A*/ s8 unk71A; // Right ball power up light
+    /*0x717*/ u8 unk717;
+    /*0x718*/ s8 leftBallPowerUpLight;
+    /*0x719*/ s8 centerBallPowerUpLight;
+    /*0x71A*/ s8 rightBallPowerUpLight;
     /*0x71B*/ u8 unk71B;
     /*0x71C*/ u8 unk71C;
     /*0x71D*/ u8 filler71D[0x7];
@@ -506,7 +518,7 @@ struct PinballGame
     /*0x1326*/s16 unk1326;
     /*0x1328*/u16 unk1328;
     /*0x132A*/u8 filler132A[0x2];
-    /*0x132C*/struct BallState *unk132c; //Active pokeball
+    /*0x132C*/struct BallState *ball;
     /*0x1330*/struct BallState *unk1330;
     /*0x1334*/struct BallState unk1334[2];
     /*0x13BC*/struct UnkPinballGame13BC unk13BC[2];
@@ -522,12 +534,16 @@ struct Unk02031520_unk10
 
 struct Unk02031520
 {
-    /*0x00*/ u8 filler0[0x8];
+    /*0x00*/ u8 eReaderBonuses[NUM_EREADER_CARDS];
+    /*0x05*/ bool8 rumbleEnabled;
+    /*0x06*/ s16 unk6;
     /*0x08*/ s16 unk8;
     /*0x0A*/ u8 fillerA[0x2];
     /*0x0C*/ struct PinballGame *unkC;
     /*0x10*/ struct Unk02031520_unk10 *unk10;
-    /*0x14*/ u8 filler14[0xc];
+    /*0x14*/ u8 filler14[0x8];
+    /*0x1C*/ u16 unk1C;
+    /*0x1E*/ u8 filler1E[0x2];
     /*0x20*/ s16 unk20;
     /*0x22*/ s16 unk22;
     /*0x24*/ s16 unk24;
@@ -545,16 +561,35 @@ struct Unk02031590
     u8 unk16;
 };
 
+struct Unk086ACE8C
+{
+    u16 unk0;
+    u16 unk2;
+    u16 unk4;
+    u16 unk6;
+};
+
 extern struct PinballGame *gCurrentPinballGame;
+extern const StateFunc gIdlePinballGameStateFuncs[];
 extern u32 gUnknown_02031510;
 extern struct Unk02031520 gUnknown_02031520;
 extern struct Unk02031590 gUnknown_02031590;
 extern u16 gUnknown_08137B3C[][6][16];
 extern const u8 gUnknown_08137E14[][0x20];
 extern const u8 gUnknown_08138834[0x2000];
+extern struct Unk02031520_unk10 gUnknown_081450F4;
+extern struct Unk02031520_unk10 gUnknown_08148934;
+extern struct Unk02031520_unk10 gUnknown_0814C174;
+extern struct Unk02031520_unk10 gUnknown_0814F9B4;
+extern struct PinballGame gUnknown_081531F4;
+extern struct PinballGame gUnknown_08154618;
+extern struct PinballGame gUnknown_08155A3C;
+extern struct PinballGame gUnknown_08156E60;
 extern s32 gUnknown_081B36A4[64];
 extern s32 gUnknown_082EE0E0[0x3E0];
 extern const u16 gUnknown_08391A4C[0x1000];
 extern const u16 gUnknown_08393A4C[0x1000];
+extern const s16 gUnknown_086ACDF4[9];
+extern struct Unk086ACE8C gUnknown_086ACE8C[13];
 
 #endif // GUARD_GLOBAL_H
