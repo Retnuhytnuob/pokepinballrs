@@ -280,7 +280,7 @@ void sub_11F88(void)
     }
 
     unk132c->prevPositionQ1 = unk132c->positionQ1;
-?	//Note: the + 64 math would result in a +0.5 difference vs original on the unk28
+	//Note: the + 64 math would result in a +0.5 difference vs original on the unk28
 	//and a .25 difference vs the original unk10 'logic position' value.
 	//With integer math, this rounds out. 
 	//The bonus helps when the physics calculation has an position representing the other .75 px
