@@ -2074,7 +2074,35 @@ gClockTable:: @ 0x0852DB0C
 	.incbin "baserom.gba", 0x52DB0C, 0x34
 
 gPokemonCrySongTemplate:: @ 0x0852DB40
-	.incbin "baserom.gba", 0x52DB40, 0x34
+	.byte 1 			@ trackCount
+	.byte 0 			@ blockCount
+	.byte 0xFF 			@ priority
+	.byte 0 			@ reverb
+	.4byte 0x0852DBAC 	@ *tone
+	.4byte 0x00000000, 0x00000000 @ *part[2]
+	.byte 0x00 			@ gap
+	.byte 0xC8 			@ part0
+	.byte 0x40 			@ tuneValue
+	.byte 0xB2 			@ gotoCmd
+	.4byte 0x00000000 	@ gotoTarget
+	.byte 0xC8 			@ part1
+	.byte 0x50 			@ tuneValue2
+	.byte 0xBD, 0x00 	@ cont[2]
+	.byte 0xBE 			@ volCmd
+	.byte 0x7F 			@ volumeValue
+	.byte 0xCD, 0x0D 	@ unkCmd0D[2]
+	.4byte 0x00000000 	@ unkCmd0DParam
+	.byte 0xCD, 0x07 	@ xreleCmd[2]
+	.byte 0x00 			@ releaseValue
+	.byte 0xBF 			@ panCmd
+	.byte 0x40 			@ panValue
+	.byte 0xCF 			@ tieCmd
+	.byte 0x3C 			@ tieKeyValue
+	.byte 0x7F 			@ tieVelocityValue
+	.byte 0xCD, 0x0C 	@ unkCmd0C[2]
+	.2byte 0x003C 		@ unkCmd0CParam
+	.byte 0xCE, 0xB1 	@ end[2]
+	.align 2, 0
 
 gXcmdTable:: @ 0x0852DB74
 	.incbin "baserom.gba", 0x52DB74, 0x51F8
