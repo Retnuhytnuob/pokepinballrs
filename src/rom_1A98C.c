@@ -196,7 +196,7 @@ void sub_1AAA0(void)
             gCurrentPinballGame->unk2F4 = 18;
             if (gCurrentPinballGame->unk28 == 18)
             {
-                m4aSongNumStart(194);
+                m4aSongNumStart(SE_UNKNOWN_0xC2);
                 sub_11B0(7);
             }
         }

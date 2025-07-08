@@ -2092,7 +2092,25 @@ gUnknown_08533F60:: @ 0x08533F60
 	.incbin "baserom.gba", 0x533F60, 0xE74
 
 gMPlayTable:: @ 0x08534DD4
-	.incbin "baserom.gba", 0x534DD4, 0x30
+	.4byte 0x02032EE0, 0x02002998
+	.byte 0x0A 
+	.align 1,0
+	.2byte 0x0000
+
+	.4byte 0x02032F20, 0x02002CB8
+	.byte 0x03
+	.align 1,0
+	.2byte 0x0000
+	
+	.4byte 0x02032F60, 0x02002DA8
+	.byte 0x03
+	.align 1,0
+	.2byte 0x0000
+	
+	.4byte 0x02032FB0, 0x02002E98
+	.byte 0x02
+	.align 1,0
+	.2byte 0x0000
 
 gSongTable:: @ 0x08534E04
 	.incbin "baserom.gba", 0x534E04, 0x16A43C
