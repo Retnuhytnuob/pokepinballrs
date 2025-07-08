@@ -17,6 +17,7 @@ extern struct SongHeader gUnknown_086A1588;
 extern s16 gUnknown_086AE5EC[][3];
 
 #define BONUS_DUSKULL_TIME 7200 //2 minutes, 60FPS
+#define BONUS_DUSKULL_COMPLETE_POINTS 30000000
 
 static inline u32 GetTimeAdjustedRandom()
 {
@@ -744,8 +745,7 @@ void sub_32DF8(void)
     }
 }
 
-//Initialization for Dusclops bonus stage
-void sub_32F3C(void)
+void DuskullBonus_Setup(void)
 {
     s16 i;
     gCurrentPinballGame->unk18 = 0;
@@ -885,7 +885,7 @@ void sub_33130(void)
             {
                 gCurrentPinballGame->unk1C = 1;
                 gCurrentPinballGame->unk38 = 400000;
-                gCurrentPinballGame->unk3C = 30000000;
+                gCurrentPinballGame->unk3C = BONUS_DUSKULL_COMPLETE_POINTS;
             }
             if (gCurrentPinballGame->unk18 < 240)
             {

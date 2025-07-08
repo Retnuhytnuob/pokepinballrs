@@ -863,7 +863,7 @@ void sub_11968(void)
 //Clear save game info
 void sub_11B74(void)
 {
-    sub_52C64();
+    ResetSaveFile();
     SaveFile_WriteToSram();
     gMain.hasSavedGame = FALSE;
     WriteAndVerifySramFast((const u8 *)&gMain.hasSavedGame, (void *)0x0E000544, sizeof(gMain.hasSavedGame));
