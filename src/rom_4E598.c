@@ -1,6 +1,7 @@
 #include "global.h"
 #include "main.h"
 
+//End of ball reset
 void sub_4E598(void)
 {
     gCurrentPinballGame->unk18 = 10199;

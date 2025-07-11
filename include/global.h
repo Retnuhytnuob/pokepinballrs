@@ -75,7 +75,7 @@ struct BgOffsets
 };
 
 // This struct holds data about the ball's velocity, position, etc.
-struct BallState
+struct BallState //Main ball object at 02001334
 {
     /*0x00*/ s8 unk0;
     /*0x01*/ s8 unk1; // oam data priority
@@ -113,7 +113,7 @@ struct UnkPinballGame13BC
     /*0x09*/ u8 filler9[0x3];
 };
 
-struct PinballGame
+struct PinballGame //CurrentPinball game lives at 0x02000000
 {
     /*0x000*/ u32 unk0;
 
@@ -315,6 +315,7 @@ struct PinballGame
     /*0x2F5*/ s8 unk2F5;
     /*0x2F6*/ u16 unk2F6;
     /*0x2F8*/ u8 filler2F8[0x8];
+        //2FA Ruby board nuzleaf position 0/1/2. (2 = form ramp)
     /*0x300*/ u8 unk300;
     /*0x301*/ u8 unk301; //Presumably related to an attempt to use makuhita punch?
     /*0x302*/ u8 filler302[0x4];
@@ -326,7 +327,7 @@ struct PinballGame
     /*0x30E*/ u8 filler30E[0x2];
     /*0x310*/ u16 unk310;
     /*0x312*/ u8 filler312[0x33];
-    /*0x345*/ s8 unk345;
+    /*0x345*/ s8 unk345; // Hatch readiness count 0/1/2/3/A for reset
     /*0x346*/ s8 unk346;
     /*0x347*/ u8 filler347[0x23];
     /*0x36A*/ u8 unk36A[0x2];
@@ -436,7 +437,7 @@ struct PinballGame
     /*0x5F2*/ u8 filler5F2[0x1];
     /*0x5F3*/ s8 unk5F3;
     /*0x5F4*/ u8 filler5F4[0x2];
-    /*0x5F6*/ s8 unk5F6;
+    /*0x5F6*/ s8 unk5F6; //Ball upgrade 0/1/2/3 (normal/great/ultra/master)
     /*0x5F7*/ u8 unk5F7;
     /*0x5F8*/ u16 unk5F8;
     /*0x5FA*/ u8 unk5FA;
@@ -454,7 +455,8 @@ struct PinballGame
     /*0x62F*/ u8 unk62F;
     /*0x630*/ u8 filler630[0x7];
     /*0x637*/ u8 unk637;
-    /*0x638*/ u8 filler638[0x8C];
+    /*0x638*/ u8 filler638[0x8C];//670 - 6B3, at minimum: end of ball text. 
+            // 6BD is used for the 'travel' count seedot/gulpin
     /*0x6C4*/ u8 unk6C4;
     /*0x6C5*/ u8 unk6C5; // TODO: unknown type
     /*0x6C6*/ u8 unk6C6;
@@ -467,7 +469,7 @@ struct PinballGame
     /*0x6D3*/ u8 filler6D3[0x1B];
     /*0x6EE*/ u16 unk6EE;
     /*0x6F0*/ u8 filler6F0[0x1E];
-    /*0x70E*/ s8 unk70E;
+    /*0x70E*/ s8 unk70E; // Bonus Multiplier
     /*0x70F*/ s8 unk70F;
     /*0x710*/ s8 hLight; // 'H' light indicator in Ruby/Sapphire field
     /*0x711*/ s8 oLight; // 'O' light indicator in Ruby/Sapphire field
@@ -487,11 +489,12 @@ struct PinballGame
     /*0x726*/ u8 filler726[0x2];
     /*0x728*/ u8 unk728; // TODO: unknown type
     /*0x729*/ u8 filler729[0x5];
-    /*0x72E*/ s8 unk72E;
-    /*0x72F*/ s8 unk72F;
+    /*0x72E*/ s8 unk72E; //Evo arrow count
+    /*0x72F*/ s8 unk72F; //Get arrow count
     /*0x730*/ u8 unk730;
     /*0x731*/ u8 unk731;
     /*0x732*/ u8 filler732[0xA];
+            //734 'blink' pace for catch/evo indicator 
     /*0x73C*/ u8 unk73C; // TODO: unknown type
     /*0x73D*/ s8 catchModeArrows;   // Affects which encounter table is used per area
     /*0x73E*/ u8 filler73E[0x8];
