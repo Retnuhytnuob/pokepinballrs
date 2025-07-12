@@ -346,14 +346,14 @@ struct PinballGame //CurrentPinball game lives at 0x02000000
     /*0x392*/ u16 unk392;
     /*0x394*/ u16 unk394;
     /*0x396*/ s8 unk396; //Number of active 'entities'
-    /*0x397*/ s8 unk397[3]; //?? entity previous sprite tile
-    /*0x39A*/ u8 unk39A[3]; //?? entity sprite tile 
-    /*0x39D*/ s8 unk39D[3]; //?? entity sprite palette
+    /*0x397*/ s8 unk397[3]; //entity previous sprite tile
+    /*0x39A*/ u8 unk39A[3]; //entity sprite tile 
+    /*0x39D*/ s8 unk39D[3]; //OAM data lookup Ix
     /*0x3A0*/ s8 unk3A0[3]; //entity state number
-    /*0x3A3*/ s8 unk3A3[3]; //entity animation sprite index
+    /*0x3A3*/ s8 unk3A3[3]; //entity animation index
     /*0x3A6*/ s8 unk3A6[3]; //entity should draw flag
-    /*0x3A9*/ u8 unk3A9[3]; //??entity 'check for colision' flag
-    /*0x3AC*/ s8 unk3AC[3];
+    /*0x3A9*/ u8 unk3A9[3]; //entity 'check for colision' flag
+    /*0x3AC*/ s8 unk3AC[3]; //Death stretch timer
     /*0x3B0*/ u16 unk3B0[3]; //entity ticks since entered state.
     /*0x3B6*/ u16 unk3B6[3]; //entity time alive
     /*0x3BC*/ u16 unk3BC[3]; //entity time to expiration
@@ -490,7 +490,7 @@ struct PinballGame //CurrentPinball game lives at 0x02000000
     /*0x728*/ u8 unk728; // TODO: unknown type
     /*0x729*/ u8 filler729[0x5];
     /*0x72E*/ s8 unk72E; //Evo arrow count
-    /*0x72F*/ s8 unk72F; //Get arrow count
+    /*0x72F*/ s8 unk72F; //Catch arrow count
     /*0x730*/ u8 unk730;
     /*0x731*/ u8 unk731;
     /*0x732*/ u8 filler732[0xA];
