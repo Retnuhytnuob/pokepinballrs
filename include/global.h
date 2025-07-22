@@ -485,6 +485,7 @@ struct PinballGame //CurrentPinball game lives at 0x02000000
     /*0x6B4*/ u32 unk6B4;
     /*0x6B8*/ u32 unk6B8;
     /*0x6BC*/ u8 filler6BC[0x8];
+    // 6BD is used for the 'travel' count seedot/gulpin
     /*0x6C4*/ u8 unk6C4;
     /*0x6C5*/ u8 unk6C5; // TODO: unknown type
     /*0x6C6*/ u8 unk6C6;
