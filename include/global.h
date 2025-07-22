@@ -155,7 +155,7 @@ struct PinballGame //CurrentPinball game lives at 0x02000000
     /*0x026*/ u16 unk26;
     /*0x028*/ u16 unk28; // Has check for values > 97 
     /*0x02A*/ u8 filler2A[0x6];
-    /*0x030*/ u8 numLives;
+    /*0x030*/ s8 numLives;
     /*0x031*/ u8 ballSpeed;
     /*0x032*/ u8 filler32[0x3];
     /*0x035*/ s8 area;
@@ -198,7 +198,17 @@ struct PinballGame //CurrentPinball game lives at 0x02000000
     /*0x0F3*/ u8 fillerF3[0x7];
     /*0x0FA*/ s8 unkFA;
     /*0x0FB*/ s8 unkFB;
-    /*0x0FC*/ u8 fillerFC[0x25];
+    /*0x0FC*/ s16 unkFC;
+    /*0x0FE*/ s16 unkFE;
+    /*0x100*/ s32 unk100;
+    /*0x104*/ s32 unk104;
+    /*0x108*/ s16 unk108;
+    /*0x10A*/ s16 unk10A;
+    /*0x10C*/ s16 unk10C;
+    /*0x10E*/ s16 unk10E;
+    /*0x110*/ s32 unk110;
+    /*0x114*/ s32 unk114;
+    /*0x118*/ u8 filler118[0x9];
     /*0x121*/ s8 unk121;
     /*0x122*/ s8 unk122;
     /*0x123*/ s8 unk123;
@@ -206,7 +216,9 @@ struct PinballGame //CurrentPinball game lives at 0x02000000
     /*0x125*/ s8 unk125;
     /*0x126*/ s8 unk126;
     /*0x127*/ s8 unk127;
-    /*0x128*/ u8 filler128[0x3];
+    /*0x128*/ u8 unk128;
+    /*0x129*/ u8 unk129;
+    /*0x12A*/ u8 filler12A;
     /*0x12B*/ s8 forceSpecialMons;  // When on, force next catch mode species to be special mons
     /*0x12C*/ s8 forcePichuEgg;     // When on, force next egg mode species to be Pichu
     /*0x12D*/ u8 filler12D;
@@ -279,7 +291,10 @@ struct PinballGame //CurrentPinball game lives at 0x02000000
     /*0x281*/ s8 evolvablePartySize;
     /*0x282*/ s8 unk282;
     /*0x283*/ u8 numCompletedBonusStages;
-    /*0x284*/ u8 filler284[0xC];
+    /*0x284*/ u8 filler284[0x4];
+    /*0x288*/ s16 unk288;
+    /*0x28A*/ s16 unk28A;
+    /*0x28C*/ u8 filler28C[0x4];
     /*0x290*/ u32 unk290;
     /*0x294*/ s8 unk294;
     /*0x295*/ u8 unk295;
@@ -364,7 +379,7 @@ struct PinballGame //CurrentPinball game lives at 0x02000000
     /*0x3DD*/ u8 unk3DD;
     /*0x3DE*/ s8 unk3DE;
     /*0x3DF*/ s8 unk3DF;
-    /*0x3E0*/ u8 unk3E0;
+    /*0x3E0*/ s8 unk3E0;
     /*0x3E1*/ u8 unk3E1;
     /*0x3E2*/ s16 unk3E2;
     /*0x3E4*/ u16 unk3E4;
@@ -398,8 +413,8 @@ struct PinballGame //CurrentPinball game lives at 0x02000000
     /*0x412*/ s16 unk412;
     /*0x414*/ s8 unk414;
     /*0x415*/ u8 filler415[0x7];
-    /*0x41C*/ u8 unk41C[4];
-    /*0x420*/ u8 unk420[10];
+    /*0x41C*/ s8 unk41C[4];
+    /*0x420*/ s8 unk420[10];
     /*0x42A*/ u8 unk42A[7];
     /*0x431*/ u8 filler431[0x21];
     /*0x452*/ u16 unk452;
@@ -427,10 +442,12 @@ struct PinballGame //CurrentPinball game lives at 0x02000000
     /*0x5A0*/ u8 filler5A0[0x4];
     /*0x5A4*/ u8 unk5A4;
     /*0x5A5*/ u8 unk5A5;
-    /*0x5A6*/ u8 filler5A6[0x3];
+    /*0x5A6*/ u16 unk5A6;
+    /*0x5A8*/ u8 filler5A8;
     /*0x5A9*/ u8 unk5A9;
     /*0x5AA*/ u16 unk5AA;
-    /*0x5AC*/ u8 filler5AC[0x6];
+    /*0x5AC*/ s32 unk5AC;
+    /*0x5B0*/ u16 unk5B0;
     /*0x5B2*/ u8 unk5B2;
     /*0x5B3*/ u8 filler5B3[0x3D];
     /*0x5F0*/ u16 caughtMonCount; // Number of mons caught in this game
@@ -451,12 +468,23 @@ struct PinballGame //CurrentPinball game lives at 0x02000000
     /*0x61C*/ s8 unk61C; // if value present; pikachu doesn't swap lanes
     /*0x61D*/ u8 filler61D[0x8];
     /*0x625*/ u8 unk625;
-    /*0x626*/ u8 filler626[0x9];
+    /*0x626*/ u8 filler626[0x4];
+    /*0x62A*/ u8 unk62A;
+    /*0x62B*/ u8 unk62B;
+    /*0x62C*/ u8 unk62C;
+    /*0x62D*/ u8 unk62D;
+    /*0x62E*/ u8 unk62E;
     /*0x62F*/ u8 unk62F;
-    /*0x630*/ u8 filler630[0x7];
-    /*0x637*/ u8 unk637;
-    /*0x638*/ u8 filler638[0x8C];//670 - 6B3, at minimum: end of ball text. 
-            // 6BD is used for the 'travel' count seedot/gulpin
+    /*0x630*/ u32 unk630;
+    /*0x634*/ u32 unk634;
+    /*0x638*/ s8 unk638;
+    /*0x639*/ s8 unk639;
+    /*0x63A*/ u16 unk63A;
+    /*0x63C*/ s8 unk63C[3][20];
+    /*0x678*/ s8 unk678[3][20];
+    /*0x6B4*/ u32 unk6B4;
+    /*0x6B8*/ u32 unk6B8;
+    /*0x6BC*/ u8 filler6BC[0x8];
     /*0x6C4*/ u8 unk6C4;
     /*0x6C5*/ u8 unk6C5; // TODO: unknown type
     /*0x6C6*/ u8 unk6C6;
@@ -497,7 +525,9 @@ struct PinballGame //CurrentPinball game lives at 0x02000000
             //734 'blink' pace for catch/evo indicator 
     /*0x73C*/ u8 unk73C; // TODO: unknown type
     /*0x73D*/ s8 catchModeArrows;   // Affects which encounter table is used per area
-    /*0x73E*/ u8 filler73E[0x8];
+    /*0x73E*/ u8 filler73E[0x2];
+    /*0x740*/ u8 unk740;
+    /*0x741*/ u8 filler741[0x5];
     /*0x746*/ u8 unk746;
     /*0x747*/ u8 filler747[0x2];
     /*0x749*/ u8 unk749;
@@ -519,10 +549,11 @@ struct PinballGame //CurrentPinball game lives at 0x02000000
     /*0x1101*/u8 unk1101;
     /*0x1102*/u8 unk1102;
     /*0x1103*/u8 unk1103;
-    /*0x1104*/u8 filler1104[0x2];
-    /*0x1106*/u16 unk1106;
-    /*0x1108*/u16 unk1108;
-    /*0x110A*/u16 unk110A;
+    /*0x1104*/s8 unk1104;
+    /*0x1105*/u8 filler1105[0x1];
+    /*0x1106*/volatile u16 unk1106;
+    /*0x1108*/volatile u16 unk1108;
+    /*0x110A*/volatile u16 unk110A;
     /*0x110C*/u16 unk110C;
     /*0x110E*/u16 unk110E;
     /*0x1110*/volatile u16 unk1110;
@@ -530,8 +561,9 @@ struct PinballGame //CurrentPinball game lives at 0x02000000
     /*0x1114*/volatile u16 unk1114;
     /*0x1116*/u16 unk1116;
     /*0x1118*/u16 unk1118;
-    /*0x111A*/u8 unk111A[OBJ_PLTT_SIZE];
-    /*0x131A*/u8 filler131A[0x6];
+    /*0x111A*/u16 unk111A[OBJ_PLTT_SIZE / 0x20][0x10];
+    /*0x131A*/u8 filler131A[0x2];
+    /*0x131C*/u32 unk131C;
     /*0x1320*/s16 unk1320;
     /*0x1322*/s16 unk1322;
     /*0x1324*/s16 unk1324;
@@ -570,9 +602,9 @@ struct Unk02031520
     /*0x26*/ s16 unk26;
     /*0x28*/ s16 unk28;
     /*0x2C*/ u32 *unk2C[3];
-    /*0x38*/ s16 *unk38[4];
-    /*0x48*/ u16 *unk48[4];
-    /*0x58*/ u8 *unk58[4];
+    /*0x38*/ const s16 *unk38[4];
+    /*0x48*/ const u16 *unk48[4];
+    /*0x58*/ const u8 *unk58[4];
 };
 
 struct Unk02031590
@@ -608,11 +640,20 @@ extern struct PinballGame gUnknown_08155A3C;
 extern struct PinballGame gUnknown_08156E60;
 extern s32 gUnknown_081B36A4[64];
 extern s32 gUnknown_082EE0E0[0x3E0];
+extern u16 gUnknown_0832D604[0x1600];
+extern u16 gUnknown_08330204[0x1600];
 extern const u16 gUnknown_08391A4C[0x1000];
 extern const u16 gUnknown_08393A4C[0x1000];
 extern const s16 gUnknown_086ACDF4[9]; //Possibly only 4, with a gap?
 extern u8 gUnknown_083FE44C[][0x200];
 extern struct Unk086ACE8C gUnknown_086ACE8C[13];
 extern u16 gUnknown_086ACEF4[2];
+extern s16 gUnknown_086AE68E[][2]; 
+extern struct SongHeader gUnknown_086A17D8;
+extern u16 gUnknown_08137D40[]; 
+extern u16 gUnknown_084EDACC[]; 
+extern u16 gUnknown_08494E4C[]; 
+extern u8 gUnknown_084FF30C[];
+
 
 #endif // GUARD_GLOBAL_H
