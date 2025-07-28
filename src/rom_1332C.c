@@ -7,7 +7,7 @@ void sub_13D24(u16,struct Vector16*, struct Vector16*);
 void sub_13934(struct Vector16 *arg0, struct Vector16 *arg1, u16 angle);
 void sub_1493C(void);
 u16 sub_14488(struct Vector16*, struct Vector16);
-u16 sub_14AF4(struct Vector16 r0, s16 r1, s16 *r2 /* s16 or u16 */, s16 r3);
+
 void sub_14B84(u32 r0, s16 r1, struct Vector16 *r2, u16 r3);
 
 void sub_1332C()
@@ -69,8 +69,8 @@ void sub_1333C()
             break;
         case 3: //Left Flipper
             sub_13934(&var0, &var1, r7);
-            var0.x -= (gUnknown_02031520.unk22 * 2);
-            var0.y -= (gUnknown_02031520.unk20 * 2);
+            var0.x -= (gUnknown_02031520.unk14.unk22 * 2);
+            var0.y -= (gUnknown_02031520.unk14.unk20 * 2);
             if (gCurrentPinballGame->unk13BC[0].unk4 == 0)
             {
                 sub_13D24(r7, &gCurrentPinballGame->ball->velocity, &var2);
@@ -96,13 +96,13 @@ void sub_1333C()
                     }
                 }
             }
-            var0.x += gUnknown_02031520.unk22 * 2;
-            var0.y += gUnknown_02031520.unk20 * 2;
+            var0.x += gUnknown_02031520.unk14.unk22 * 2;
+            var0.y += gUnknown_02031520.unk14.unk20 * 2;
             break;
         case 4: //Right flipper
             sub_13934(&var0, &var1, r7);
-            var0.x -= (gUnknown_02031520.unk24 * 2);
-            var0.y -= (gUnknown_02031520.unk20 * 2);
+            var0.x -= (gUnknown_02031520.unk14.unk24 * 2);
+            var0.y -= (gUnknown_02031520.unk14.unk20 * 2);
             if (gCurrentPinballGame->unk13BC[1].unk4 == 0)
             {
                 sub_13D24(r7, &gCurrentPinballGame->ball->velocity, &var2);
@@ -132,8 +132,8 @@ void sub_1333C()
                 }
             }
             var0.x = 0x5f - var0.x;
-            var0.x += gUnknown_02031520.unk24 * 2;
-            var0.y += gUnknown_02031520.unk20 * 2;
+            var0.x += gUnknown_02031520.unk14.unk24 * 2;
+            var0.y += gUnknown_02031520.unk14.unk20 * 2;
             break;
         default:
             if (gCurrentPinballGame->unk122 > 0)
