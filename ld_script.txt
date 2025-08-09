@@ -48,8 +48,7 @@ SECTIONS
         src/rom_13D24.o(.text);
         asm/rom_11B9C.o(.text);
         src/rom_17634.o(.text);
-        asm/rom_11B9C.o(.text17F28);
-        src/rom_18784.o(.text);
+        src/rom_19028.o(.text);
         src/rom_19B64.o(.text);
         src/rom_19D04.o(.text);
         asm/rom_11B9C.o(.text1A2C0);
@@ -72,6 +71,8 @@ SECTIONS
         asm/rom_4CEA8.o(.text);
         src/rom_4E598.o(.text);
         asm/rom_4CEA8.o(.text4E598);
+        src/rom_4F258.o(.text);
+        asm/rom_4CEA8.o(.text4F258);
         src/rom_50AD4.o(.text);
         src/rom_50FAC.o(.text);
         src/options.o(.text);
