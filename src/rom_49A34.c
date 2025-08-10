@@ -5261,7 +5261,7 @@ void sub_47670(void)
         {
             gMain.unkF |= 0x20;
             gMain.unk12 = 3600;
-            m4aSongNumStart(MUS_GAME_OVER);
+            m4aSongNumStart(MUS_SLOTS_PRIZE);
         }
     }
 }
