@@ -72,7 +72,7 @@ void LoadEReaderGraphics(void)
     DmaCopy16(3, gPokedexSprites_Pals,   (void *)OBJ_PLTT,          0xC0);
     DmaCopy16(3, gPokedexSprites_Gfx,   (void *)OBJ_VRAM0,         0x6C20);
 
-    LeadEReaderGraphics_SubFunc1();
+    sub_2DF0();
     gUnknown_0202C604 = 0;
     gUnknown_0202A580 = 0;
     gUnknown_0202C5A4 = 0;
@@ -88,7 +88,7 @@ void LoadEReaderGraphics(void)
     gMain.subState = 1;
 }
 
-void LeadEReaderGraphics_SubFunc1(void)
+void sub_2DF0(void)
 {
     gUnknown_0202A58C = 0;
     gUnknown_0202C584 = 0;
@@ -338,7 +338,7 @@ void Ereader_State6_343C(void)
     DmaCopy16(3, gPokedexSprites_Pals,   (void *)OBJ_PLTT,          0xC0);
     DmaCopy16(3, gPokedexSprites_Gfx,   (void *)OBJ_VRAM0,         0x6C20);
 
-    LeadEReaderGraphics_SubFunc1();
+    sub_2DF0();
     gUnknown_0202C604 = 0;
     gUnknown_0202A580 = 0;
     gUnknown_0202C5A4 = 0;

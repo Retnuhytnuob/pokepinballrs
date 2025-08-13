@@ -330,8 +330,7 @@ void PickSpeciesForEggMode(void)
     gCurrentPinballGame->lastEggSpecies = gCurrentPinballGame->currentSpecies;
 }
 
-//Sapphire specific board initialization. Cousin to sub_19A20
-void sub_326F4(void)
+void SapphireBoardProcess_3A_326F4(void)
 {
     gCurrentPinballGame->catchModeArrows = 2;
     gCurrentPinballGame->unk1E5 = 0;
@@ -354,8 +353,7 @@ void sub_326F4(void)
     sub_31B30();
 }
 
-//Context: sapphire board specific logic -- Board relative cousin to sub_19B10
-void sub_3276C(void)
+void SapphireBoardProcess_3B_3276C(void)
 {
     sub_19B90();
     sub_327C0();
@@ -807,7 +805,7 @@ void DuskullBonus_Setup(void)
     DmaCopy16(3, (void *)gUnknown_081B36A4, (void *)0x05000320, 32);
 }
 
-void sub_33130(void)
+void DusclopsBoardProcess_3B_33130(void)
 {
     s16 temp;
     switch (gCurrentPinballGame->unk13)
