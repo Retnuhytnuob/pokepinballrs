@@ -33,13 +33,14 @@ void sub_1A98C(void)
         sub_1AF84();
         break;
     case 4:
-        sub_1C560();
+        sub_1C560(); // Called both here and by 1A98C
         break;
     }
 
     gCurrentPinballGame->unk26 = 60;
 }
 
+// Called from at least a Ruby process
 void sub_1A9E8(void)
 {
     if (gCurrentPinballGame->unk26 > 0)
@@ -198,7 +199,7 @@ void sub_1AAA0(void)
             gCurrentPinballGame->unk2F4 = 18;
             if (gCurrentPinballGame->unk28 == 18)
             {
-                m4aSongNumStart(194);
+                m4aSongNumStart(SE_UNKNOWN_0xC2);
                 sub_11B0(7);
             }
         }
@@ -640,7 +641,7 @@ void sub_1B140(s16 arg0)
             {
                 gCurrentPinballGame->unk252 = 30;
                 gCurrentPinballGame->unk1B8 = 30;
-                m4aSongNumStart(SE_UNKNOWN_0x66);
+                m4aSongNumStart(SE_MENU_CANCEL_0x66);
             }
         }
 

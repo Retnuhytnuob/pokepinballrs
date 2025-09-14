@@ -78,7 +78,7 @@ struct BgOffsets
 };
 
 // This struct holds data about the ball's velocity, position, etc.
-struct BallState
+struct BallState //Main ball object at 02001334
 {
     /*0x00*/ s8 unk0;
     /*0x01*/ s8 oamPriority;
@@ -86,8 +86,8 @@ struct BallState
     /*0x04*/ u16 unk4;
     /*0x06*/ s16 unk6;
     /*0x08*/ s16 unk8;
-    /*0x0A*/ u16 unkA;
-    /*0x0C*/ u16 unkC;
+    /*0x0A*/ u16 unkA; //Ball Displayed Rotation
+    /*0x0C*/ u16 unkC; //Ball Displayed Previous Rotation
     /*0x0E*/ u16 scale;
     /*0x10*/ struct Vector16 positionQ0;
     /*0x14*/ struct Vector16 prevPositionsQ0[4];
@@ -113,12 +113,28 @@ struct UnkPinballGame13BC
     /*0x09*/ u8 filler9[0x3];
 };
 
-struct PinballGame
+struct PinballGame //CurrentPinball game lives at 0x02000000
 {
     /*0x000*/ u32 unk0;
-    /*0x004*/ u8 newButtonActions[5]; // e.g. player pressing the appropriate buttons to trigger the left flipper action, etc.
+
+    /***
+     * e.g. player pressing the appropriate buttons to trigger the left flipper action, etc.
+     *   0:left flipper, 1:right flipper, 2:tilt left, 3:tilt right, 4=tilt up 
+     ***/
+    /*0x004*/ u8 newButtonActions[5]; 
+    
+    /***
+     * e.g. player let go of the appropriate buttons to trigger the left flipper action, etc.
+     *   0:left flipper, 1:right flipper, 2:tilt left, 3:tilt right, 4=tilt up 
+     ***/
     /*0x009*/ u8 releasedButtonActions[5];
+    
+    /***
+     * e.g. player is holding (initiated in current or past frame) the appropriate buttons to trigger the left flipper action, etc.
+     *   0:left flipper, 1:right flipper, 2:tilt left, 3:tilt right, 4=tilt up 
+     ***/
     /*0x00E*/ u8 heldButtonActions[5];
+
     /*0x013*/ s8 unk13; // Current field state. In main fields seems to be related to the 3 Pokeballs that unlock bonus fields, in bonus fields acts as a field state
     /*0x014*/ s8 unk14;
     /*0x015*/ s8 unk15;
@@ -133,12 +149,12 @@ struct PinballGame
     /*0x01F*/ u8 unk1F;
     /*0x020*/ u8 unk20;
     /*0x021*/ u8 unk21;
-    /*0x022*/ s8 unk22;
+    /*0x022*/ s8 unk22; // Colision physics type
     /*0x023*/ u8 unk23; // Holds the value of some enum state
     /*0x024*/ s8 unk24;
     /*0x025*/ s8 unk25;
     /*0x026*/ u16 unk26;
-    /*0x028*/ u16 unk28;
+    /*0x028*/ u16 unk28; // Has check for values > 97 
     /*0x02A*/ u16 unk2A;
     /*0x02C*/ int unk2C;
     /*0x030*/ s8 numLives;
@@ -281,10 +297,10 @@ struct PinballGame
     /*0x1BC*/ u16 unk1BC;
     /*0x1BE*/ s8 unk1BE;
     /*0x1BF*/ u8 filler1BF[0x1];
-    /*0x1C0*/ u16 unk1C0;
+    /*0x1C0*/ u16 unk1C0; // if value present; pikachu doesn't swap lanes
     /*0x1C2*/ s8 unk1C2;
     /*0x1C3*/ u8 filler1C3[0x1];
-    /*0x1C4*/ u16 unk1C4;
+    /*0x1C4*/ u16 unk1C4; // if value present; pikachu doesn't swap lanes
     /*0x1C6*/ s16 unk1C6;
     /*0x1C8*/ s16 unk1C8;
     /*0x1CA*/ s16 unk1CA;
@@ -307,7 +323,7 @@ struct PinballGame
     /*0x1E8*/ s16 unk1E8;
     /*0x1EA*/ s16 unk1EA;
     /*0x1EC*/ s8 unk1EC;
-    /*0x1ED*/ s8 unk1ED;
+    /*0x1ED*/ s8 unk1ED; // ??Evo mode flag?
     /*0x1EE*/ s8 unk1EE;
     /*0x1EF*/ u8 unk1EF;
     /*0x1F0*/ u16 unk1F0;
@@ -424,7 +440,7 @@ struct PinballGame
     /*0x2FD*/ s8 unk2FD;
     /*0x2FE*/ u16 unk2FE;
     /*0x300*/ s8 unk300;
-    /*0x301*/ s8 unk301;
+    /*0x301*/ s8 unk301; //Presumably related to an attempt to use makuhita punch?
     /*0x302*/ s8 unk302;
     /*0x303*/ s8 unk303;
     /*0x304*/ u16 unk304;
@@ -459,7 +475,7 @@ struct PinballGame
     /*0x342*/ s8 unk342;
     /*0x343*/ s8 unk343;
     /*0x344*/ s8 unk344;
-    /*0x345*/ s8 unk345;
+    /*0x345*/ s8 unk345; // Hatch readiness count 0/1/2/3/A for reset
     /*0x346*/ s8 unk346;
     /*0x347*/ u8 filler347[0x1];
     /*0x348*/ u16 unk348;
@@ -488,7 +504,7 @@ struct PinballGame
     /*0x382*/ s8 unk382;
     /*0x383*/ s8 unk383;
     /*0x384*/ s8 unk384;
-    /*0x385*/ s8 unk385;
+    /*0x385*/ s8 unk385;//Number of hits towards goal
     /*0x386*/ s8 unk386;
     /*0x387*/ s8 unk387;
     /*0x388*/ s8 unk388;
@@ -499,21 +515,21 @@ struct PinballGame
     /*0x390*/ u16 unk390;
     /*0x392*/ u16 unk392;
     /*0x394*/ s16 unk394;
-    /*0x396*/ s8 unk396;
-    /*0x397*/ s8 unk397[3];
-    /*0x39A*/ u8 unk39A[3];
-    /*0x39D*/ s8 unk39D[3];
-    /*0x3A0*/ s8 unk3A0[3];
-    /*0x3A3*/ s8 unk3A3[3];
-    /*0x3A6*/ s8 unk3A6[3];
-    /*0x3A9*/ s8 unk3A9[3];
-    /*0x3AC*/ s8 unk3AC[3];
-    /*0x3B0*/ u16 unk3B0[3];
-    /*0x3B6*/ u16 unk3B6[3];
-    /*0x3BC*/ u16 unk3BC[3];
+    /*0x396*/ s8 unk396; //Number of active 'entities'
+    /*0x397*/ s8 unk397[3]; //entity previous sprite tile
+    /*0x39A*/ u8 unk39A[3]; //entity sprite tile 
+    /*0x39D*/ s8 unk39D[3]; //OAM data lookup Ix
+    /*0x3A0*/ s8 unk3A0[3]; //entity state number
+    /*0x3A3*/ s8 unk3A3[3]; //entity animation index
+    /*0x3A6*/ s8 unk3A6[3]; //entity should draw flag
+    /*0x3A9*/ s8 unk3A9[3]; //entity 'check for colision' flag
+    /*0x3AC*/ s8 unk3AC[3]; //Death stretch timer
+    /*0x3B0*/ u16 unk3B0[3]; //entity ticks since entered state.
+    /*0x3B6*/ u16 unk3B6[3]; //entity time alive
+    /*0x3BC*/ u16 unk3BC[3]; //entity time to expiration
     /*0x3C2*/ u8 filler3C2[0x2];
-    /*0x3C4*/ struct Vector16 unk3C4[3];
-    /*0x3D0*/ struct Vector16 unk3D0[3];
+    /*0x3C4*/ struct Vector16 unk3C4[3]; //Entity sprite local ref pos
+    /*0x3D0*/ struct Vector16 unk3D0[3];//Entity sprite screen px pos
     /*0x3DC*/ s8 unk3DC;
     /*0x3DD*/ s8 unk3DD;
     /*0x3DE*/ s8 unk3DE;
@@ -711,7 +727,7 @@ struct PinballGame
     /*0x616*/ u16 unk616;
     /*0x618*/ u16 unk618;
     /*0x61A*/ s16 unk61A;
-    /*0x61C*/ s8 unk61C;
+    /*0x61C*/ s8 unk61C; // if value present; pikachu doesn't swap lanes
     /*0x61D*/ u8 filler61D;
     /*0x61E*/ u16 unk61E;
     /*0x620*/ struct Vector16 unk620;
@@ -736,7 +752,7 @@ struct PinballGame
     /*0x6B4*/ u32 unk6B4;
     /*0x6B8*/ u32 unk6B8;
     /*0x6BC*/ s8 unk6BC;
-    /*0x6BD*/ s8 unk6BD;
+    /*0x6BD*/ s8 unk6BD; // used for the 'travel' count seedot/gulpin
     /*0x6BE*/ s8 unk6BE;
     /*0x6BF*/ u8 filler6BF[0x1];
     /*0x6C0*/ u16 unk6C0;
@@ -774,7 +790,7 @@ struct PinballGame
     /*0x706*/ u8 filler706[0x2];
     /*0x708*/ u32 unk708;
     /*0x70C*/ u16 unk70C;
-    /*0x70E*/ s8 unk70E;
+    /*0x70E*/ s8 unk70E; // Bonus Multiplier
     /*0x70F*/ s8 unk70F;
     /*0x710*/ s8 holeIndicators[4]; // 'HOLE' light indicators in Ruby/Sapphire field
     /*0x714*/ s8 unk714;
@@ -797,13 +813,13 @@ struct PinballGame
     /*0x72A*/ s8 unk72A;
     /*0x72B*/ s8 unk72B;
     /*0x72C*/ u16 unk72C;
-    /*0x72E*/ s8 unk72E;
-    /*0x72F*/ s8 unk72F;
+    /*0x72E*/ s8 unk72E; //Evo arrow count
+    /*0x72F*/ s8 unk72F; //Catch arrow count
     /*0x730*/ s8 unk730;
     /*0x731*/ s8 unk731;
     /*0x732*/ s8 unk732;
     /*0x733*/ u8 filler733[0x1];
-    /*0x734*/ s16 unk734;
+    /*0x734*/ s16 unk734; //'blink' pace for catch/evo indicator 
     /*0x736*/ s8 unk736[3];
     /*0x739*/ s8 unk739[3];
     /*0x73C*/ u8 unk73C; // TODO: unknown type

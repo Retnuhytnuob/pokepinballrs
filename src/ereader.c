@@ -141,7 +141,7 @@ void Ereader_State1_2E40(void)
         }
     }
     else if (JOY_NEW(B_BUTTON)) {
-        m4aSongNumStart(SE_UNKNOWN_0x66);
+        m4aSongNumStart(SE_MENU_CANCEL_0x66);
         gUnknown_0202BEF8 = STATE_TITLE;
         gMain.subState = 8;
     }
@@ -300,7 +300,7 @@ void Ereader_State5_33A0(void)
             break;
         case 0x96:
             gUnknown_0202A58C = 3;
-            m4aSongNumStart(SE_UNKNOWN_0x65);
+            m4aSongNumStart(SE_MENU_SELECT_0x65);
             break;
         case 0x10e:
             gUnknown_0201A44C = 0;

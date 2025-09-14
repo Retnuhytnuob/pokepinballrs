@@ -9,6 +9,7 @@ extern struct PinballGame gUnknown_02000000;
 
 typedef void (*VoidFunc)(void);
 
+/*** pair of function pointers for board specific behavior ***/
 struct Unk20028D8
 {
     void (*unk0)(void);
@@ -228,6 +229,7 @@ void PinballGame_State0_49ED4(void)
     gMain.subState++;
 }
 
+//Load base background tile spritesheet info based on current active field. (sheet size, color density, draw order, etc)
 static void sub_4A270(void)
 {
     REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_FORCED_BLANK | DISPCNT_OBJ_ON;

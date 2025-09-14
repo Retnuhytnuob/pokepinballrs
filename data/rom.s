@@ -4,7 +4,8 @@
 #include "constants/species.h"
 #include "constants/bg_music.h"
 #include "gba/io_reg.h"
-	.include "asm/macros.inc"
+
+.include "asm/macros.inc"
 
 gUnknown_08055A68:: @ 0x08055A68
 	.2byte AREA_FOREST_RUBY
@@ -2004,7 +2005,7 @@ gUnknown_08526DCC:: @ 0x08526DCC
 
 gOptionsBGMList:: @ 0x08527D22
 	.2byte MUS_TITLE, MUS_TABLE_SELECT, MUS_UNKNOWN_0x5, MUS_OPENING, MUS_HI_SCORE
-	.2byte MUS_POKEDEX, MUS_SHOP, MUS_GAME_OVER, MUS_END_OF_BALL, MUS_BONUS_CHANCE, MUS_BONUS_CHANCE_LEGENDARY
+	.2byte MUS_POKEDEX, MUS_SHOP, MUS_SLOTS_PRIZE, MUS_END_OF_BALL, MUS_BONUS_CHANCE, MUS_BONUS_CHANCE_LEGENDARY
 	.2byte MUS_TRAVEL_MODE_START, MUS_SUCCESS, MUS_UNKNOWN_0x14, MUS_EGG_MODE, MUS_EGG_MODE_START
 	.2byte MUS_TRAVEL_MODE, MUS_HURRY_UP, MUS_EVOLUTION, MUS_FIELD_RUBY, MUS_CATCH_EM_MODE
 	.2byte MUS_EVO_MODE, MUS_FIELD_RUBY2, MUS_FIELD_SAPPHIRE, MUS_CATCH_EM_MODE2, MUS_FIELD_SAPPHIRE2
@@ -2012,7 +2013,7 @@ gOptionsBGMList:: @ 0x08527D22
 	.2byte MUS_BONUS_FIELD_KYOGRE, MUS_BONUS_FIELD_RAYQUAZA, MUS_JIRACHI
 
 gOptionsSEList:: @ 0x08527D66 
-    .2byte SE_UNKNOWN_0x65, SE_UNKNOWN_0x66, SE_SELECT, SE_UNKNOWN_0x68, SE_UNKNOWN_0x69
+    .2byte SE_MENU_SELECT_0x65, SE_MENU_CANCEL_0x66, SE_MENU_MOVE_0x67, SE_MENU_POPUP_OPEN_0x68, SE_MENU_POPUP_CLOSE_0x69
     .2byte SE_UNKNOWN_0x6A, SE_UNKNOWN_0x6B, SE_UNKNOWN_0x6D, SE_UNKNOWN_0x72, SE_UNKNOWN_0x73
     .2byte SE_UNKNOWN_0x74, SE_UNKNOWN_0x75, SE_UNKNOWN_0x76, SE_UNKNOWN_0x77, SE_UNKNOWN_0x78
     .2byte SE_UNKNOWN_0x79, SE_UNKNOWN_0x7A, SE_UNKNOWN_0x7B, SE_UNKNOWN_0x7C, SE_UNKNOWN_0x7E
@@ -2048,7 +2049,7 @@ gOptionsSEList:: @ 0x08527D66
     .2byte SE_UNKNOWN_0x135, SE_UNKNOWN_0x136, SE_UNKNOWN_0x137, SE_UNKNOWN_0x138, SE_UNKNOWN_0x139
     .2byte SE_UNKNOWN_0x13B, SE_UNKNOWN_0x13C, SE_UNKNOWN_0x13D, SE_UNKNOWN_0x13E, SE_UNKNOWN_0x140
     .2byte SE_UNKNOWN_0x144, SE_UNKNOWN_0x145, SE_UNKNOWN_0x146, SE_UNKNOWN_0x147, SE_UNKNOWN_0x148
-    .2byte SE_UNKNOWN_0x149, SE_UNKNOWN_0x14C, SE_UNKNOWN_0x14A, SE_UNKNOWN_0x14B, SE_UNKNOWN_0x71
+    .2byte SE_UNKNOWN_0x149, SE_UNKNOWN_0x14C, SE_HIGH_SCORE_EARNED_0x14A, SE_UNKNOWN_0x14B, SE_UNKNOWN_0x71
     .2byte SE_UNKNOWN_0xB1, SE_UNKNOWN_0xB2, SE_UNKNOWN_0xB3, SE_UNKNOWN_0x142
 
 
@@ -2121,7 +2122,35 @@ gClockTable:: @ 0x0852DB0C
 	.incbin "baserom.gba", 0x52DB0C, 0x34
 
 gPokemonCrySongTemplate:: @ 0x0852DB40
-	.incbin "baserom.gba", 0x52DB40, 0x34
+	.byte 1 			@ trackCount
+	.byte 0 			@ blockCount
+	.byte 0xFF 			@ priority
+	.byte 0 			@ reverb
+	.4byte 0x0852DBAC 	@ *tone
+	.4byte 0x00000000, 0x00000000 @ *part[2]
+	.byte 0x00 			@ gap
+	.byte 0xC8 			@ part0
+	.byte 0x40 			@ tuneValue
+	.byte 0xB2 			@ gotoCmd
+	.4byte 0x00000000 	@ gotoTarget
+	.byte 0xC8 			@ part1
+	.byte 0x50 			@ tuneValue2
+	.byte 0xBD, 0x00 	@ cont[2]
+	.byte 0xBE 			@ volCmd
+	.byte 0x7F 			@ volumeValue
+	.byte 0xCD, 0x0D 	@ unkCmd0D[2]
+	.4byte 0x00000000 	@ unkCmd0DParam
+	.byte 0xCD, 0x07 	@ xreleCmd[2]
+	.byte 0x00 			@ releaseValue
+	.byte 0xBF 			@ panCmd
+	.byte 0x40 			@ panValue
+	.byte 0xCF 			@ tieCmd
+	.byte 0x3C 			@ tieKeyValue
+	.byte 0x7F 			@ tieVelocityValue
+	.byte 0xCD, 0x0C 	@ unkCmd0C[2]
+	.2byte 0x003C 		@ unkCmd0CParam
+	.byte 0xCE, 0xB1 	@ end[2]
+	.align 2, 0
 
 gXcmdTable:: @ 0x0852DB74
 	.incbin "baserom.gba", 0x52DB74, 0x51F8
@@ -2139,7 +2168,25 @@ gUnknown_08533F60:: @ 0x08533F60
 	.incbin "baserom.gba", 0x533F60, 0xE74
 
 gMPlayTable:: @ 0x08534DD4
-	.incbin "baserom.gba", 0x534DD4, 0x30
+	.4byte 0x02032EE0, 0x02002998
+	.byte 0x0A 
+	.align 1,0
+	.2byte 0x0000
+
+	.4byte 0x02032F20, 0x02002CB8
+	.byte 0x03
+	.align 1,0
+	.2byte 0x0000
+	
+	.4byte 0x02032F60, 0x02002DA8
+	.byte 0x03
+	.align 1,0
+	.2byte 0x0000
+	
+	.4byte 0x02032FB0, 0x02002E98
+	.byte 0x02
+	.align 1,0
+	.2byte 0x0000
 
 gSongTable:: @ 0x08534E04
 	.incbin "baserom.gba", 0x534E04, 0x16A43C
@@ -3087,7 +3134,37 @@ gCommonAndEggWeights:: @ 0x086AE5E0
 	.2byte 10, 10, 15, 15, 2, 0
 
 gUnknown_086AE5EC:: @ 0x086AE5EC
-	.incbin "baserom.gba", 0x6AE5EC, 0xA2
+	.2byte 0, 15, 0
+	.2byte 1, 15, 1
+	.2byte 0, 15, 0
+	.2byte 2, 15, 2
+	.2byte 3, 5, 3
+	.2byte 4, 7, 4
+	.2byte 5, 11, 5
+	.2byte 6, 15, 0
+	.2byte 7, 15, 1
+	.2byte 6, 15, 0
+
+	.2byte 8, 15, 2
+	.2byte 9, 5, 3
+	.2byte 10, 7, 4
+	.2byte 11, 11, 5
+	.2byte 12, 7, 6
+	.2byte 12, 22, 6
+	.2byte 3, 5, 3
+	.2byte 3, 5, 3
+	.2byte 14, 5, 8
+	.2byte 15, 4, 9
+	
+	.2byte 16, 1, 10
+	.2byte 15, 4, 9
+	.2byte 14, 5, 8
+	.2byte 15, 4, 9
+	.2byte 16, 1, 10
+	.2byte 15, 4, 9
+	.2byte 3, 5, 3
+	
+	@ .incbin "baserom.gba", 0x6AE5EC, 0xA2
 
 gUnknown_086AE68E:: @ 0x086AE68E
 	.incbin "baserom.gba", 0x6AE68E, 0x8A

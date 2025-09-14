@@ -51,6 +51,7 @@ SECTIONS
         src/board_process4.o(.text);
         src/board_process3_ruby.o(.text);
         src/rom_1A0F4.o(.text);
+ 
         src/rom_1A98C.o(.text);
         src/rom_201B8.o(.text);
         src/rom_27E08.o(.text);

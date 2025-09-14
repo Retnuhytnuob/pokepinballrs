@@ -286,6 +286,15 @@ extern s16 gUnknown_0202BF14;
 extern s8 gUnknown_0202C590;
 extern s16 gUnknown_0201B120;
 extern s8 gUnknown_0202BEC4;
+
+/****
+ *  Yellow confirmation/info window mode
+ *  0= Transmession connection prompt, 
+ *  1= Transferring in progress?
+ *  2= transmission error message
+ *  3= transfer complete?
+ *  4= delete save data confirmation
+ * ****/
 extern s8 gUnknown_0202BEFC;
 extern s8 gUnknown_02002830;
 extern s8 gUnknown_02002831;

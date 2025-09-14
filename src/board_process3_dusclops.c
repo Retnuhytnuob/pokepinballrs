@@ -30,6 +30,7 @@ void DuskullBonus_Setup(void)
     gCurrentPinballGame->unk394 = 0;
     gCurrentPinballGame->unk396 = 0;
 
+    //Clear any data for the entities; will be used for dusclops, and later
     for (i = 0; i < 3; i++)
     {
         gCurrentPinballGame->unk397[i] = 0;
@@ -64,8 +65,8 @@ void DuskullBonus_Setup(void)
     gCurrentPinballGame->unk3F2 = 0;
     gCurrentPinballGame->unk1A = 0;
 
-    sub_336E0();
-    sub_340EC();
+    sub_336E0(); //Process Dusclops entity state
+    sub_340EC(); //Draw Sprites?
 
     m4aSongNumStart(MUS_BONUS_FIELD_DUSKULL);
 
@@ -77,7 +78,7 @@ void DusclopsBoardProcess_3B_33130(void)
     s16 temp;
     switch (gCurrentPinballGame->unk13)
     {
-        case 0:
+        case 0: //Dusclops stage intro
             gCurrentPinballGame->unk5F7 = 1;
             if (gCurrentPinballGame->unk18 < 120)
             {
@@ -98,17 +99,17 @@ void DusclopsBoardProcess_3B_33130(void)
             }
 
             break;
-        case 1:
+        case 1: //Duskull phase
             if (!gCurrentPinballGame->unk386)
             {
                 gMain.blendControl = 0x1C10;
                 gMain.blendAlpha = 0x30D;
             }
             gCurrentPinballGame->unk387 = 1;
-            sub_336E0();
-            sub_340EC();
+            sub_336E0(); //Process Dusclops entity state
+            sub_340EC(); //Draw Sprites?
             break;
-        case 2:
+        case 2: //Dusclops phase start
             gCurrentPinballGame->unk13 = 3;
             gMain.spriteGroups[13].available = 1;
             gMain.spriteGroups[14].available = 1;
@@ -117,13 +118,13 @@ void DusclopsBoardProcess_3B_33130(void)
             gCurrentPinballGame->unk385 = 0;
             m4aSongNumStart(MUS_BONUS_FIELD_DUSCLOPS);
             break;
-        case 3:
+        case 3: //Dusclops phase
             if (!gCurrentPinballGame->unk386)
             {
                 gMain.blendControl = 0x1C10;
                 gMain.blendAlpha = 0x1000;
             }
-            sub_34450();
+            sub_34450(); //Process Duskull behavior
             break;
         case 4:
             if (gCurrentPinballGame->unk18 < 120)
@@ -140,7 +141,7 @@ void DusclopsBoardProcess_3B_33130(void)
                 gCurrentPinballGame->unk394 = 136;
             }
             break;
-        case 5:
+        case 5: //Score Dusclops round
             sub_351A8();
             if (gCurrentPinballGame->unk1C)
             {
@@ -169,7 +170,7 @@ void DusclopsBoardProcess_3B_33130(void)
             }
 
             break;
-        case 6:
+        case 6: //Prep return to main board
             sub_351A8();
             gCurrentPinballGame->unk386 = 1;
             break;
@@ -194,6 +195,7 @@ void DusclopsBoardProcess_3B_33130(void)
     sub_472E4();
 }
 
+//Entity index swap, for ysort reasons.
 void sub_3342C(s16 index1, s16 index2)
 {
     u8 temp397, temp39A, temp39D, temp3A0, temp3A3, temp3A6, temp3A9, temp3AC;
