@@ -45,7 +45,7 @@ void RayquazaBoardProcess_3A_3E79C(void)
     gCurrentPinballGame->unk392 = 0;
     gCurrentPinballGame->ball->unk0 = 1;
     gCurrentPinballGame->unkE6 = -88;
-    gCurrentPinballGame->unk387 = 1;
+    gCurrentPinballGame->boardEntityCollisionMode = 1;
     gCurrentPinballGame->unk6C4 = 3;
     gCurrentPinballGame->unk382 = 0;
     gCurrentPinballGame->unk383 = 0;
@@ -60,8 +60,8 @@ void RayquazaBoardProcess_3A_3E79C(void)
 
     for (i = 0; i < 3; i++)
     {
-        gCurrentPinballGame->unk3C4[i].x = 0;
-        gCurrentPinballGame->unk3C4[i].y = 0;
+        gCurrentPinballGame->minionLogicPosition[i].x = 0;
+        gCurrentPinballGame->minionLogicPosition[i].y = 0;
     }
 
     gCurrentPinballGame->unk3DC = 0;
@@ -271,11 +271,11 @@ void sub_3EDF0(void)
     if (gCurrentPinballGame->unk50C)
     {
         gCurrentPinballGame->unk50C--;
-        gCurrentPinballGame->unk387 = 0;
+        gCurrentPinballGame->boardEntityCollisionMode = 0;
     }
     else
     {
-        gCurrentPinballGame->unk387 = 1;
+        gCurrentPinballGame->boardEntityCollisionMode = 1;
     }
 
     switch (gCurrentPinballGame->unk3DC)
@@ -646,10 +646,10 @@ void sub_3EDF0(void)
         gCurrentPinballGame->unk5FA = 1;
         gMain.unkF = 0x80;
         gMain.spriteGroups[14].available = 1;
-        gCurrentPinballGame->unk3C4[0].x = 0;
-        gCurrentPinballGame->unk3C4[0].y = -5000;
-        gCurrentPinballGame->unk3C4[1].x = 1400;
-        gCurrentPinballGame->unk3C4[1].y = -2000;
+        gCurrentPinballGame->minionLogicPosition[0].x = 0;
+        gCurrentPinballGame->minionLogicPosition[0].y = -5000;
+        gCurrentPinballGame->minionLogicPosition[1].x = 1400;
+        gCurrentPinballGame->minionLogicPosition[1].y = -2000;
         gCurrentPinballGame->unk418.x = -200;
         gCurrentPinballGame->unk418.y = 800;
         gCurrentPinballGame->unk414.x = 24;
@@ -1845,59 +1845,59 @@ void sub_423D8(void)
 
             if (gCurrentPinballGame->unk516 == 1)
             {
-                gCurrentPinballGame->unk3C4[0].x = 300;
-                gCurrentPinballGame->unk3C4[0].y = 1200;
-                gCurrentPinballGame->unk3C4[1].x = 1200;
-                gCurrentPinballGame->unk3C4[1].y = 400;
-                gCurrentPinballGame->unk3C4[2].x = 1000;
-                gCurrentPinballGame->unk3C4[2].y = 2500;
+                gCurrentPinballGame->minionLogicPosition[0].x = 300;
+                gCurrentPinballGame->minionLogicPosition[0].y = 1200;
+                gCurrentPinballGame->minionLogicPosition[1].x = 1200;
+                gCurrentPinballGame->minionLogicPosition[1].y = 400;
+                gCurrentPinballGame->minionLogicPosition[2].x = 1000;
+                gCurrentPinballGame->minionLogicPosition[2].y = 2500;
             }
 
             if (gCurrentPinballGame->unk516 == 88)
             {
-                gCurrentPinballGame->unk3C4[0].x = 1600;
-                gCurrentPinballGame->unk3C4[0].y = 1800;
+                gCurrentPinballGame->minionLogicPosition[0].x = 1600;
+                gCurrentPinballGame->minionLogicPosition[0].y = 1800;
             }
 
             if (gCurrentPinballGame->unk516 == 120)
             {
-                gCurrentPinballGame->unk3C4[1].x = 600;
-                gCurrentPinballGame->unk3C4[1].y = 1800;
+                gCurrentPinballGame->minionLogicPosition[1].x = 600;
+                gCurrentPinballGame->minionLogicPosition[1].y = 1800;
             }
 
             if (gCurrentPinballGame->unk516 == 170)
             {
-                gCurrentPinballGame->unk3C4[2].x = 1800;
-                gCurrentPinballGame->unk3C4[2].y = 2000;
+                gCurrentPinballGame->minionLogicPosition[2].x = 1800;
+                gCurrentPinballGame->minionLogicPosition[2].y = 2000;
             }
 
             if (gCurrentPinballGame->unk516 == 215)
             {
-                gCurrentPinballGame->unk3C4[0].x = 0;
-                gCurrentPinballGame->unk3C4[0].y = 2000;
+                gCurrentPinballGame->minionLogicPosition[0].x = 0;
+                gCurrentPinballGame->minionLogicPosition[0].y = 2000;
             }
 
             if (gCurrentPinballGame->unk516 == 305)
             {
-                gCurrentPinballGame->unk3C4[1].x = 1800;
-                gCurrentPinballGame->unk3C4[1].y = 1800;
+                gCurrentPinballGame->minionLogicPosition[1].x = 1800;
+                gCurrentPinballGame->minionLogicPosition[1].y = 1800;
             }
 
             if (gCurrentPinballGame->unk516 == 315)
             {
-                gCurrentPinballGame->unk3C4[2].x = 300;
-                gCurrentPinballGame->unk3C4[2].y = 1800;
+                gCurrentPinballGame->minionLogicPosition[2].x = 300;
+                gCurrentPinballGame->minionLogicPosition[2].y = 1800;
             }
 
             group = &gMain.spriteGroups[11];
             if (group->available)
             {
-                group->baseX = gCurrentPinballGame->unk3C4[0].x / 10;
-                group->baseY = gCurrentPinballGame->unk3C4[0].y / 10;
+                group->baseX = gCurrentPinballGame->minionLogicPosition[0].x / 10;
+                group->baseY = gCurrentPinballGame->minionLogicPosition[0].y / 10;
                 if (group->baseY <= -60)
                     group->baseY = -60;
                 else
-                    gCurrentPinballGame->unk3C4[0].y -= 20;
+                    gCurrentPinballGame->minionLogicPosition[0].y -= 20;
 
                 if (group->baseY > 200)
                     group->baseY = 180;
@@ -1913,12 +1913,12 @@ void sub_423D8(void)
             group = &gMain.spriteGroups[12];
             if (group->available)
             {
-                group->baseX = gCurrentPinballGame->unk3C4[1].x / 10;
-                group->baseY = gCurrentPinballGame->unk3C4[1].y / 10;
+                group->baseX = gCurrentPinballGame->minionLogicPosition[1].x / 10;
+                group->baseY = gCurrentPinballGame->minionLogicPosition[1].y / 10;
                 if (group->baseY <= -60)
                     group->baseY = -60;
                 else
-                    gCurrentPinballGame->unk3C4[1].y -= 12;
+                    gCurrentPinballGame->minionLogicPosition[1].y -= 12;
 
                 if (group->baseY > 200)
                     group->baseY = 180;
@@ -1934,12 +1934,12 @@ void sub_423D8(void)
             group = &gMain.spriteGroups[13];
             if (group->available)
             {
-                group->baseX = gCurrentPinballGame->unk3C4[2].x / 10;
-                group->baseY = gCurrentPinballGame->unk3C4[2].y / 10;
+                group->baseX = gCurrentPinballGame->minionLogicPosition[2].x / 10;
+                group->baseY = gCurrentPinballGame->minionLogicPosition[2].y / 10;
                 if (group->baseY <= -60)
                     group->baseY = -60;
                 else
-                    gCurrentPinballGame->unk3C4[2].y -= 18;
+                    gCurrentPinballGame->minionLogicPosition[2].y -= 18;
 
                 if (group->baseY > 200)
                     group->baseY = 180;
@@ -2018,12 +2018,12 @@ void sub_423D8(void)
         group = &gMain.spriteGroups[11];
         if (group->available)
         {
-            group->baseX = gCurrentPinballGame->unk3C4[0].x / 10;
-            group->baseY = gCurrentPinballGame->unk3C4[0].y / 10;
+            group->baseX = gCurrentPinballGame->minionLogicPosition[0].x / 10;
+            group->baseY = gCurrentPinballGame->minionLogicPosition[0].y / 10;
             if (group->baseY > 180)
                 group->baseY = 180;
             else if (gCurrentPinballGame->unk516 < 256)
-                gCurrentPinballGame->unk3C4[0].y += 20;
+                gCurrentPinballGame->minionLogicPosition[0].y += 20;
 
             if (group->baseY < -60)
                 group->baseY = -60;
@@ -2039,12 +2039,12 @@ void sub_423D8(void)
         group = &gMain.spriteGroups[12];
         if (group->available)
         {
-            group->baseX = gCurrentPinballGame->unk3C4[1].x / 10;
-            group->baseY = gCurrentPinballGame->unk3C4[1].y / 10;
+            group->baseX = gCurrentPinballGame->minionLogicPosition[1].x / 10;
+            group->baseY = gCurrentPinballGame->minionLogicPosition[1].y / 10;
             if (group->baseY > 180)
                 group->baseY = 180;
             else if (gCurrentPinballGame->unk516 < 256)
-                gCurrentPinballGame->unk3C4[1].y += 10;
+                gCurrentPinballGame->minionLogicPosition[1].y += 10;
 
             if (group->baseY < -60)
                 group->baseY = -60;

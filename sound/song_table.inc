@@ -248,8 +248,8 @@ gSongTable:: @ 0x08534E04
 	song mus_dummy, MUSIC_PLAYER_BGM, 0
 	song mus_dummy, MUSIC_PLAYER_BGM, 0
 	song mus_dummy, MUSIC_PLAYER_BGM, 0
-	song se_unk_f1, MUSIC_PLAYER_SE2, 2
-	song se_unk_f2, MUSIC_PLAYER_SE2, 2
+	song se_duskull_appear, MUSIC_PLAYER_SE2, 2
+	song se_duskull_death_cry, MUSIC_PLAYER_SE2, 2
 	song se_dusclops_depart_incomplete, MUSIC_PLAYER_SE2, 2
 	song se_dusclops_move, MUSIC_PLAYER_SE2, 2
 	song se_dusclops_appear, MUSIC_PLAYER_SE2, 2

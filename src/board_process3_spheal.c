@@ -74,8 +74,8 @@ void SphealBoardProcess_3A_42E48(void)
     for (i = 0; i < 3; i++)
     {
         gCurrentPinballGame->minionState[i] = 0;
-        gCurrentPinballGame->unk3A3[i] = 0;
-        gCurrentPinballGame->unk3B0[i] = 0;
+        gCurrentPinballGame->minionFramesetIx[i] = 0;
+        gCurrentPinballGame->minionStateTimer[i] = 0;
     }
 
     for (i = 0; i < 3; i++)
@@ -299,8 +299,8 @@ void sub_43500(void)
             switch (gCurrentPinballGame->minionState[i])
             {
             case 0:
-                gCurrentPinballGame->unk3B0[i] = 0;
-                gCurrentPinballGame->unk3A3[i] = 4;
+                gCurrentPinballGame->minionStateTimer[i] = 0;
+                gCurrentPinballGame->minionFramesetIx[i] = 4;
                 gCurrentPinballGame->minionState[i] = 1;
                 break;
             case 1:
@@ -310,16 +310,16 @@ void sub_43500(void)
                 }
                 else
                 {
-                    if (gUnknown_086AFAE2[gCurrentPinballGame->unk3A3[i]][0] > gCurrentPinballGame->unk3B0[i])
+                    if (gUnknown_086AFAE2[gCurrentPinballGame->minionFramesetIx[i]][0] > gCurrentPinballGame->minionStateTimer[i])
                     {
-                        gCurrentPinballGame->unk3B0[i]++;
+                        gCurrentPinballGame->minionStateTimer[i]++;
                     }
                     else
                     {
-                        gCurrentPinballGame->unk3B0[i] = 0;
-                        gCurrentPinballGame->unk3A3[i]++;
-                        if (gCurrentPinballGame->unk3A3[i] == 6)
-                            gCurrentPinballGame->unk3A3[i] = 4;
+                        gCurrentPinballGame->minionStateTimer[i] = 0;
+                        gCurrentPinballGame->minionFramesetIx[i]++;
+                        if (gCurrentPinballGame->minionFramesetIx[i] == 6)
+                            gCurrentPinballGame->minionFramesetIx[i] = 4;
                     }
                 }
                 break;
@@ -330,14 +330,14 @@ void sub_43500(void)
                 }
                 else
                 {
-                    if (gCurrentPinballGame->unk3B0[i] != 0)
+                    if (gCurrentPinballGame->minionStateTimer[i] != 0)
                     {
-                        gCurrentPinballGame->unk3B0[i]--;
-                        gCurrentPinballGame->unk3A3[i] = 8;
+                        gCurrentPinballGame->minionStateTimer[i]--;
+                        gCurrentPinballGame->minionFramesetIx[i] = 8;
                     }
                     else
                     {
-                        gCurrentPinballGame->unk3A3[i] = 7;
+                        gCurrentPinballGame->minionFramesetIx[i] = 7;
                     }
                 }
                 break;
@@ -348,17 +348,17 @@ void sub_43500(void)
                 }
                 else
                 {
-                    if (gUnknown_086AFAE2[gCurrentPinballGame->unk3A3[i]][0] > gCurrentPinballGame->unk3B0[i])
+                    if (gUnknown_086AFAE2[gCurrentPinballGame->minionFramesetIx[i]][0] > gCurrentPinballGame->minionStateTimer[i])
                     {
-                        gCurrentPinballGame->unk3B0[i]++;
+                        gCurrentPinballGame->minionStateTimer[i]++;
                     }
                     else
                     {
-                        gCurrentPinballGame->unk3B0[i] = 0;
-                        gCurrentPinballGame->unk3A3[i]++;
-                        if (gCurrentPinballGame->unk3A3[i] > 14)
+                        gCurrentPinballGame->minionStateTimer[i] = 0;
+                        gCurrentPinballGame->minionFramesetIx[i]++;
+                        if (gCurrentPinballGame->minionFramesetIx[i] > 14)
                         {
-                            gCurrentPinballGame->unk3A3[i] = 4;
+                            gCurrentPinballGame->minionFramesetIx[i] = 4;
                             gCurrentPinballGame->minionState[i] = 1;
                         }
                     }
@@ -376,7 +376,7 @@ void sub_43500(void)
         if (gCurrentPinballGame->unk548[0] > 0)
             var0 = 0;
         else
-            var0 = gUnknown_086AFAE0[gCurrentPinballGame->unk3A3[0]][0];
+            var0 = gUnknown_086AFAE0[gCurrentPinballGame->minionFramesetIx[0]][0];
 
         DmaCopy16(3, gUnknown_084B47EC[var0], (void *)0x060114A0, 0x600);
         oamSimple = &group->oam[0];
@@ -392,7 +392,7 @@ void sub_43500(void)
         if (gCurrentPinballGame->unk548[1] > 0)
             var0 = 0;
         else
-            var0 = gUnknown_086AFAE0[gCurrentPinballGame->unk3A3[1]][0];
+            var0 = gUnknown_086AFAE0[gCurrentPinballGame->minionFramesetIx[1]][0];
 
         DmaCopy16(3, gUnknown_084B47EC[var0], (void *)0x06010CA0, 0x600);
         oamSimple = &group->oam[0];
@@ -1174,8 +1174,8 @@ void sub_455D0(void)
         case 1:
             var0 = gCurrentPinballGame->unk530[i];
             gCurrentPinballGame->minionState[var0] = 2;
-            gCurrentPinballGame->unk3B0[var0] = 0;
-            gCurrentPinballGame->unk3A3[var0] = 7;
+            gCurrentPinballGame->minionStateTimer[var0] = 0;
+            gCurrentPinballGame->minionFramesetIx[var0] = 7;
             if (gCurrentPinballGame->unk53C[i])
             {
                 gCurrentPinballGame->unk53C[i]--;
@@ -1183,8 +1183,8 @@ void sub_455D0(void)
                 {
                     gCurrentPinballGame->unk536[i] = 0;
                     gCurrentPinballGame->minionState[var0] = 1;
-                    gCurrentPinballGame->unk3B0[var0] = 0;
-                    gCurrentPinballGame->unk3A3[var0] = 4;
+                    gCurrentPinballGame->minionStateTimer[var0] = 0;
+                    gCurrentPinballGame->minionFramesetIx[var0] = 4;
                 }
             }
             break;
@@ -1199,8 +1199,8 @@ void sub_455D0(void)
             gCurrentPinballGame->unk536[i] = 3;
             gCurrentPinballGame->unk533[i] = 0;
             gCurrentPinballGame->minionState[var0] = 2;
-            gCurrentPinballGame->unk3B0[var0] = 0;
-            gCurrentPinballGame->unk3A3[var0] = 7;
+            gCurrentPinballGame->minionStateTimer[var0] = 0;
+            gCurrentPinballGame->minionFramesetIx[var0] = 7;
             break;
         case 3:
             var0 = gCurrentPinballGame->unk530[i];
@@ -1226,8 +1226,8 @@ void sub_455D0(void)
                         gCurrentPinballGame->unk533[i] = 0;
                         gCurrentPinballGame->unk536[i] = 5;
                         gCurrentPinballGame->minionState[var0] = 3;
-                        gCurrentPinballGame->unk3A3[var0] = 15;
-                        gCurrentPinballGame->unk3B0[var0] = 0;
+                        gCurrentPinballGame->minionFramesetIx[var0] = 15;
+                        gCurrentPinballGame->minionStateTimer[var0] = 0;
                     }
                 }
                 else
@@ -1242,8 +1242,8 @@ void sub_455D0(void)
                             gCurrentPinballGame->unk578[i].y = 0xFED4;
                             gCurrentPinballGame->unk553[i] = 13;
                             gCurrentPinballGame->minionState[var0] = 2;
-                            gCurrentPinballGame->unk3A3[var0] = 8;
-                            gCurrentPinballGame->unk3B0[var0] = 12;
+                            gCurrentPinballGame->minionFramesetIx[var0] = 8;
+                            gCurrentPinballGame->minionStateTimer[var0] = 12;
                         }
                         else
                         {
@@ -1252,8 +1252,8 @@ void sub_455D0(void)
                             gCurrentPinballGame->unk533[i] = 0;
                             gCurrentPinballGame->unk536[i] = 4;
                             gCurrentPinballGame->minionState[var0] = 3;
-                            gCurrentPinballGame->unk3A3[var0] = 11;
-                            gCurrentPinballGame->unk3B0[var0] = 0;
+                            gCurrentPinballGame->minionFramesetIx[var0] = 11;
+                            gCurrentPinballGame->minionStateTimer[var0] = 0;
                             gCurrentPinballGame->unk542 = 100;
                             gCurrentPinballGame->unk52C[0]++;
                         }
@@ -1284,8 +1284,8 @@ void sub_455D0(void)
                         gCurrentPinballGame->ball->positionQ8.y = 0x6500;
                         gCurrentPinballGame->ball->velocity.y = -0x5A;
                         gCurrentPinballGame->minionState[var0] = 2;
-                        gCurrentPinballGame->unk3A3[var0] = 8;
-                        gCurrentPinballGame->unk3B0[var0] = 12;
+                        gCurrentPinballGame->minionFramesetIx[var0] = 8;
+                        gCurrentPinballGame->minionStateTimer[var0] = 12;
                     }
                     else
                     {
@@ -1294,8 +1294,8 @@ void sub_455D0(void)
                         gCurrentPinballGame->unk533[i] = 0;
                         gCurrentPinballGame->unk536[i] = 4;
                         gCurrentPinballGame->minionState[var0] = 3;
-                        gCurrentPinballGame->unk3A3[var0] = 11;
-                        gCurrentPinballGame->unk3B0[var0] = 0;
+                        gCurrentPinballGame->minionFramesetIx[var0] = 11;
+                        gCurrentPinballGame->minionStateTimer[var0] = 0;
                         gCurrentPinballGame->unk542 = 106;
                         gCurrentPinballGame->unk52C[1]++;
                     }

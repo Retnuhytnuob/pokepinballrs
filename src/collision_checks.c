@@ -1578,7 +1578,7 @@ void CheckDusclopsEntitiesCollision(struct Vector16 *arg0, s16* arg1, u8* arg2) 
     maskedResult = 0;
     lowerNibble = 0;
 
-    if(gCurrentPinballGame->unk387 == DUSCLOPS_ENTITY_COLISION_MODE_DUSCLOPS)
+    if(gCurrentPinballGame->boardEntityCollisionMode == DUSCLOPS_ENTITY_COLISION_MODE_DUSCLOPS)
     {
         if (*arg2 != 0)
             return;
@@ -1607,7 +1607,7 @@ void CheckDusclopsEntitiesCollision(struct Vector16 *arg0, s16* arg1, u8* arg2) 
         return;
     }
 
-    if(gCurrentPinballGame->unk387 == DUSCLOPS_ENTITY_COLISION_MODE_DUSKULL)
+    if(gCurrentPinballGame->boardEntityCollisionMode == DUSCLOPS_ENTITY_COLISION_MODE_DUSKULL)
     {
         if (*arg2 != 0)
             return;
@@ -1686,7 +1686,7 @@ void sub_17634(u8 arg0, u16 *arg1, u16 *arg2)
     case 4:
         gCurrentPinballGame->unk3DC = 6;
         gCurrentPinballGame->unk1F = 1;
-        gCurrentPinballGame->unk387 = DUSCLOPS_ENTITY_COLISION_MODE_NONE;
+        gCurrentPinballGame->boardEntityCollisionMode = DUSCLOPS_ENTITY_COLISION_MODE_NONE;
         break;
     case 5:
     case 6:
@@ -1777,7 +1777,7 @@ void sub_17898(struct Vector16 *arg0, u16 *arg1, u8 *arg2)
     s16 deltaY;
     u16 arrayValue;
 
-    if (gCurrentPinballGame->unk387 == 1)
+    if (gCurrentPinballGame->boardEntityCollisionMode == 1)
     {
         if (*arg2 & 0xF)
             return;
@@ -1799,7 +1799,7 @@ void sub_17898(struct Vector16 *arg0, u16 *arg1, u8 *arg2)
 
         gCurrentPinballGame->unk3DC = 9;
     }
-    else if (gCurrentPinballGame->unk387 == 2)
+    else if (gCurrentPinballGame->boardEntityCollisionMode == 2)
     {
         u16 maskedResult;
 
@@ -2218,7 +2218,7 @@ void sub_18180(struct Vector16 *arg0, u16 *arg1, u8 *arg2)
     u16 arrayValue;
     u16 maskedResult;
 
-    if (gCurrentPinballGame->unk387 == 1)
+    if (gCurrentPinballGame->boardEntityCollisionMode == 1)
     {
         if (*arg2 & 0xF)
             return;
@@ -2239,7 +2239,7 @@ void sub_18180(struct Vector16 *arg0, u16 *arg1, u8 *arg2)
         *arg1 = maskedResult;
         *arg2 = 6;
     }
-    else if (gCurrentPinballGame->unk387 == 2)
+    else if (gCurrentPinballGame->boardEntityCollisionMode == 2)
     {
         if (*arg2 & 0xF)
             return;
@@ -2260,7 +2260,7 @@ void sub_18180(struct Vector16 *arg0, u16 *arg1, u8 *arg2)
         *arg1 = maskedResult;
         *arg2 = 6;
     }
-    else if (gCurrentPinballGame->unk387 == 3)
+    else if (gCurrentPinballGame->boardEntityCollisionMode == 3)
     {
         if (*arg2 & 0xF)
             return;
@@ -2413,7 +2413,7 @@ void sub_1857C(struct Vector16 *arg0, u16 *arg1, u8 *arg2)
     u16 lowerNibble;
     s16 i;
 
-    if (gCurrentPinballGame->unk387 == 1)
+    if (gCurrentPinballGame->boardEntityCollisionMode == 1)
     {
         if ((*arg2 & 0xF) == 0)
         {
@@ -2613,7 +2613,7 @@ void sub_18A4C(struct Vector16 *arg0, u16 *arg1, u8 *arg2)
     u16 maskedResult;
     u16 lowerNibble;
 
-    if (gCurrentPinballGame->unk387 != 1)
+    if (gCurrentPinballGame->boardEntityCollisionMode != 1)
         return;
     if (*arg2 & 0xF)
         return;

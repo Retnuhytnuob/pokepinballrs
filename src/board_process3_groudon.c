@@ -51,7 +51,7 @@ void GroudonBoardProcess_3A_3B120(void)
     gCurrentPinballGame->unk392 = 0;
     gCurrentPinballGame->ball->unk0 = 1;
     gCurrentPinballGame->unk386 = 0;
-    gCurrentPinballGame->unk387 = 1;
+    gCurrentPinballGame->boardEntityCollisionMode = 1;
     gCurrentPinballGame->unk6C4 = 3;
     gCurrentPinballGame->unk382 = 0;
     gCurrentPinballGame->unk383 = 0;
@@ -613,7 +613,7 @@ void sub_3B7C4(void)
             // bonus completed
             gCurrentPinballGame->unk3DC = 7;
             gCurrentPinballGame->unk3E2 = 32;
-            gCurrentPinballGame->unk387 = 0;
+            gCurrentPinballGame->boardEntityCollisionMode = 0;
             gMain.unkF = 0x80;
             gCurrentPinballGame->unk388 = 2;
             gCurrentPinballGame->unk392 = 0;

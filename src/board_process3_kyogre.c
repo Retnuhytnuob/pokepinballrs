@@ -61,7 +61,7 @@ void KyogreBoardProcess_3A_383E4(void)
     gCurrentPinballGame->unk394 = 0;
     gCurrentPinballGame->unk38E = 0;
     gCurrentPinballGame->unk385 = 0;
-    gCurrentPinballGame->unk387 = 0;
+    gCurrentPinballGame->boardEntityCollisionMode = 0;
     gCurrentPinballGame->unk6C4 = 3;
     gCurrentPinballGame->unk3DF = 14;
     gCurrentPinballGame->unk3DC = 0;
@@ -266,7 +266,7 @@ void sub_38A20(void)
                 gCurrentPinballGame->scoreAddedInFrame = 500000;
                 gCurrentPinballGame->unk385++;
                 if (gCurrentPinballGame->unk385 >= gCurrentPinballGame->legendaryHitsRequired &&
-                    gCurrentPinballGame->unk387 == 1)
+                    gCurrentPinballGame->boardEntityCollisionMode == 1)
                     gCurrentPinballGame->unk3DC = 7;
             }
         }
@@ -313,7 +313,7 @@ void sub_38A20(void)
             if (gCurrentPinballGame->unk3E2 == 33)
             {
                 MPlayStart(&gMPlayInfo_SE1, &se_unk_10b);
-                gCurrentPinballGame->unk387 = 1;
+                gCurrentPinballGame->boardEntityCollisionMode = 1;
             }
         }
 
@@ -339,7 +339,7 @@ void sub_38A20(void)
 
             if (gCurrentPinballGame->unk3E2 == 11)
             {
-                gCurrentPinballGame->unk387 = 1;
+                gCurrentPinballGame->boardEntityCollisionMode = 1;
                 MPlayStart(&gMPlayInfo_SE1, &se_unk_10b);
             }
         }
@@ -362,7 +362,7 @@ void sub_38A20(void)
 
             if (gCurrentPinballGame->unk3E2 == 5)
             {
-                gCurrentPinballGame->unk387 = 0;
+                gCurrentPinballGame->boardEntityCollisionMode = 0;
                 MPlayStart(&gMPlayInfo_SE1, &se_unk_10c);
             }
         }
@@ -537,7 +537,7 @@ void sub_38A20(void)
 
             if (gCurrentPinballGame->unk3E2 == 97)
             {
-                gCurrentPinballGame->unk387 = 0;
+                gCurrentPinballGame->boardEntityCollisionMode = 0;
                 MPlayStart(&gMPlayInfo_SE1, &se_unk_10f);
             }
         }
@@ -604,7 +604,7 @@ void sub_38A20(void)
             gCurrentPinballGame->unk3E4 = 0;
             gCurrentPinballGame->unk3E2 = 67;
             gCurrentPinballGame->unk3DC = 12;
-            gCurrentPinballGame->unk387 = 2;
+            gCurrentPinballGame->boardEntityCollisionMode = 2;
             MPlayStart(&gMPlayInfo_SE1, &se_unk_10b);
             playRumbleType(8);
         }
@@ -637,10 +637,10 @@ void sub_38A20(void)
             }
 
             if (gCurrentPinballGame->unk3E2 == 70)
-                gCurrentPinballGame->unk387 = 3;
+                gCurrentPinballGame->boardEntityCollisionMode = 3;
 
             if (gCurrentPinballGame->unk3E2 == 73)
-                gCurrentPinballGame->unk387 = 0;
+                gCurrentPinballGame->boardEntityCollisionMode = 0;
 
             if (gCurrentPinballGame->unk3E2 == 72)
             {
@@ -695,12 +695,12 @@ void sub_395D8(void)
         group->baseY = gCurrentPinballGame->unk3EA / 10 + 66u - gCurrentPinballGame->unk5A;
         gCurrentPinballGame->unk288 = gCurrentPinballGame->unk3E8 / 10 + 120;
         gCurrentPinballGame->unk28A = gCurrentPinballGame->unk3EA / 10 + 50;
-        if (gCurrentPinballGame->unk387 == 2)
+        if (gCurrentPinballGame->boardEntityCollisionMode == 2)
         {
             gCurrentPinballGame->unk3F0 = (gCurrentPinballGame->unk3E8 / 10) * 2 + 192;
             gCurrentPinballGame->unk3F2 = (gCurrentPinballGame->unk3EA / 10) * 2 + 134;
         }
-        else if (gCurrentPinballGame->unk387 == 3)
+        else if (gCurrentPinballGame->boardEntityCollisionMode == 3)
         {
             gCurrentPinballGame->unk3F0 = (gCurrentPinballGame->unk3E8 / 10) * 2 + 192;
             gCurrentPinballGame->unk3F2 = (gCurrentPinballGame->unk3EA / 10) * 2 + 150;

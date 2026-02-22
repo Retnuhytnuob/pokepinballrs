@@ -75,7 +75,7 @@ void KecleonBoardProcess_3A_35860(void)
     gCurrentPinballGame->unk3EA = 360;
     gCurrentPinballGame->unk3DF = 3;
     gCurrentPinballGame->unk385 = 0;
-    gCurrentPinballGame->unk387 = 0;
+    gCurrentPinballGame->boardEntityCollisionMode = 0;
     gCurrentPinballGame->unk394 = 0;
     gCurrentPinballGame->unk3DE = 0;
     gCurrentPinballGame->unk3E0 = 0;
@@ -108,7 +108,7 @@ void KecleonBoardProcess_3A_35860(void)
     gCurrentPinballGame->unk1A = 0;
     gCurrentPinballGame->unk400.y = gCurrentPinballGame->unk3EA / 10 + 58;
     sub_38218();
-    gCurrentPinballGame->unk387 = 1;
+    gCurrentPinballGame->boardEntityCollisionMode = 1;
     sub_35D54();
     sub_36CB4();
     m4aSongNumStart(MUS_BONUS_FIELD_KECLEON);
@@ -644,7 +644,7 @@ void sub_35D54(void)
                     gCurrentPinballGame->unk404 = 0;
                     gCurrentPinballGame->unk408 = 0;
                     gCurrentPinballGame->unk406 = 0;
-                    gCurrentPinballGame->unk387 = 0;
+                    gCurrentPinballGame->boardEntityCollisionMode = 0;
                 }
             }
         }
@@ -798,21 +798,21 @@ void sub_36CB4(void)
         gCurrentPinballGame->unk3F0 = 2 * (gCurrentPinballGame->unk3E8 / 10) + 144;
         gCurrentPinballGame->unk3F2 = 2 * (gCurrentPinballGame->unk3EA / 10) + 84;
         if (gCurrentPinballGame->unk385 < 10)
-            gCurrentPinballGame->unk387 = 2;
+            gCurrentPinballGame->boardEntityCollisionMode = 2;
     }
     else if (gCurrentPinballGame->unk3E2 >= 33 && gCurrentPinballGame->unk3E2 < 36)
     {
         gCurrentPinballGame->unk3F0 = 2 * (gCurrentPinballGame->unk3E8 / 10) + 240;
         gCurrentPinballGame->unk3F2 = 2 * (gCurrentPinballGame->unk3EA / 10) + 84;
         if (gCurrentPinballGame->unk385 < 10)
-            gCurrentPinballGame->unk387 = 2;
+            gCurrentPinballGame->boardEntityCollisionMode = 2;
     }
     else
     {
         gCurrentPinballGame->unk3F0 = 2 * (gCurrentPinballGame->unk3E8 / 10) + 208;
         gCurrentPinballGame->unk3F2 = 2 * (gCurrentPinballGame->unk3EA / 10) + 56;
         if (gCurrentPinballGame->unk385 < 10)
-            gCurrentPinballGame->unk387 = 1;
+            gCurrentPinballGame->boardEntityCollisionMode = 1;
     }
 
     gCurrentPinballGame->unk400.x = (gCurrentPinballGame->unk3E8 / 10) + 120;

@@ -12,7 +12,7 @@
 #define DUSKULL_CONCURRENT_MAX 3
 #define DUSKULL_ALLOWED_TO_SPAWN DUSKULL_NEEDED_TO_PHASE_TRANSFER - DUSKULL_CONCURRENT_MAX + 1
 
-extern struct SongHeader se_unk_f1;
+extern struct SongHeader se_duskull_appear;
 extern s16 DusclopsFramesetData[][3];
 
 
@@ -22,7 +22,7 @@ void DuskullBonus_Setup(void)
     s16 i;
     gCurrentPinballGame->unk18 = 0;
     gCurrentPinballGame->unk17 = 0;
-    gCurrentPinballGame->unk13 = DUSCLOPS_BOARD_STATE_0;
+    gCurrentPinballGame->unk13 = DUSCLOPS_BOARD_STATE_0_INTRO;
     gCurrentPinballGame->unk294 = 1;
     gCurrentPinballGame->eventTimer = gCurrentPinballGame->timerBonus + BONUS_DUSKULL_TIME;
     gCurrentPinballGame->timerBonus = 0;
@@ -31,7 +31,7 @@ void DuskullBonus_Setup(void)
     gCurrentPinballGame->ball->unk0 = 1;
     gCurrentPinballGame->unk385 = 0;
     gCurrentPinballGame->unk386 = 0;
-    gCurrentPinballGame->unk387 = DUSCLOPS_ENTITY_COLISION_MODE_NONE;
+    gCurrentPinballGame->boardEntityCollisionMode = DUSCLOPS_ENTITY_COLISION_MODE_NONE;
     gCurrentPinballGame->unk392 = 0;
     gCurrentPinballGame->unk394 = 0;
     gCurrentPinballGame->minionActiveCount = 0;
@@ -42,15 +42,15 @@ void DuskullBonus_Setup(void)
         gCurrentPinballGame->minionNextSpriteVariant[i] = 0;
         gCurrentPinballGame->minionOamIx[i] = 0;
         gCurrentPinballGame->minionState[i] = DUSKULL_ENTITY_STATE_SPAWN;
-        gCurrentPinballGame->unk3A3[i] = 0;
+        gCurrentPinballGame->minionFramesetIx[i] = 0;
         gCurrentPinballGame->unk3A6[i] = 0;
         gCurrentPinballGame->unk3A9[i] = 0;
         gCurrentPinballGame->unk3AC[i] = 0;
-        gCurrentPinballGame->unk3B0[i] = 0;
-        gCurrentPinballGame->unk3B6[i] = 0;
-        gCurrentPinballGame->unk3BC[i] = 0;
-        gCurrentPinballGame->unk3C4[i].x = 0;
-        gCurrentPinballGame->unk3C4[i].y = 0;
+        gCurrentPinballGame->minionStateTimer[i] = 0;
+        gCurrentPinballGame->minionTimeAlive[i] = 0;
+        gCurrentPinballGame->minionEscapeAtTime[i] = 0;
+        gCurrentPinballGame->minionLogicPosition[i].x = 0;
+        gCurrentPinballGame->minionLogicPosition[i].y = 0;
         gCurrentPinballGame->minionColisionPosition[i].x = 0;
         gCurrentPinballGame->minionColisionPosition[i].y = 0;
     }
@@ -70,8 +70,8 @@ void DuskullBonus_Setup(void)
     gCurrentPinballGame->unk3F2 = 0;
     gCurrentPinballGame->unk1A = 0;
 
-    duskull_phase_process_entity_logic();
-    duskull_phase_process_graphics();
+    DuskullPhase_ProcessEntityLogic();
+    DuskullPhase_ProcessGraphics();
 
     m4aSongNumStart(MUS_BONUS_FIELD_DUSKULL);
 
@@ -83,7 +83,7 @@ void DusclopsBoardProcess_3B_33130(void)
     s16 temp;
     switch (gCurrentPinballGame->unk13)
     {
-        case DUSCLOPS_BOARD_STATE_0:
+        case DUSCLOPS_BOARD_STATE_0_INTRO:
             gCurrentPinballGame->unk5F7 = 1;
             if (gCurrentPinballGame->unk18 < 120)
             {
@@ -96,9 +96,9 @@ void DusclopsBoardProcess_3B_33130(void)
             else
             {
                 gCurrentPinballGame->unkE6 = 0;
-                gMain.spriteGroups[7].available = 1;
-                gMain.spriteGroups[8].available = 1;
-                gMain.spriteGroups[9].available = 1;
+                gMain.spriteGroups[7].available = TRUE;
+                gMain.spriteGroups[8].available = TRUE;
+                gMain.spriteGroups[9].available = TRUE;
                 gCurrentPinballGame->unk13 = DUSCLOPS_BOARD_STATE_1_DUSKULL_PHASE;
                 gCurrentPinballGame->unk18 = 0;
             }
@@ -110,16 +110,16 @@ void DusclopsBoardProcess_3B_33130(void)
                 gMain.blendControl = 0x1C10;
                 gMain.blendAlpha = 0x30D;
             }
-            gCurrentPinballGame->unk387 = DUSCLOPS_ENTITY_COLISION_MODE_DUSKULL;
-            duskull_phase_process_entity_logic();
-            duskull_phase_process_graphics();
+            gCurrentPinballGame->boardEntityCollisionMode = DUSCLOPS_ENTITY_COLISION_MODE_DUSKULL;
+            DuskullPhase_ProcessEntityLogic();
+            DuskullPhase_ProcessGraphics();
             break;
-        case DUSCLOPS_BOARD_STATE_2:
+        case DUSCLOPS_BOARD_STATE_2_INIT_DUSCLOPS_PHASE:
             gCurrentPinballGame->unk13 = DUSCLOPS_BOARD_STATE_3;
-            gMain.spriteGroups[13].available = 1;
-            gMain.spriteGroups[14].available = 1;
-            gMain.spriteGroups[12].available = 1;
-            gCurrentPinballGame->unk387 = DUSCLOPS_ENTITY_COLISION_MODE_NONE;
+            gMain.spriteGroups[13].available = TRUE;
+            gMain.spriteGroups[14].available = TRUE;
+            gMain.spriteGroups[12].available = TRUE;
+            gCurrentPinballGame->boardEntityCollisionMode = DUSCLOPS_ENTITY_COLISION_MODE_NONE;
             gCurrentPinballGame->unk385 = 0;
             m4aSongNumStart(MUS_BONUS_FIELD_DUSCLOPS);
             break;
@@ -140,8 +140,8 @@ void DusclopsBoardProcess_3B_33130(void)
             {
                 gCurrentPinballGame->unk13 = DUSCLOPS_BOARD_STATE_5;
                 gCurrentPinballGame->unk18 = 0;
-                gMain.spriteGroups[6].available = 1;
-                gMain.spriteGroups[5].available = 1;
+                gMain.spriteGroups[6].available = TRUE;
+                gMain.spriteGroups[5].available = TRUE;
                 DmaCopy16(3, gDusclopsBonusClear_Gfx, OBJ_VRAM1+0x1800, 8192);
                 gCurrentPinballGame->unk394 = 136;
             }
@@ -210,15 +210,15 @@ void swap_duskull_entity_index(s16 index1, s16 index2)
     temp39A = gCurrentPinballGame->minionNextSpriteVariant[index1];
     temp39D = gCurrentPinballGame->minionOamIx[index1];
     temp3A0 = gCurrentPinballGame->minionState[index1];
-    temp3A3 = gCurrentPinballGame->unk3A3[index1];
+    temp3A3 = gCurrentPinballGame->minionFramesetIx[index1];
     temp3A6 = gCurrentPinballGame->unk3A6[index1];
     temp3A9 = gCurrentPinballGame->unk3A9[index1];
     temp3AC = gCurrentPinballGame->unk3AC[index1];
-    temp3B0 = gCurrentPinballGame->unk3B0[index1];
-    temp3B6 = gCurrentPinballGame->unk3B6[index1];
-    temp3BC = gCurrentPinballGame->unk3BC[index1];
-    temp3C4.x = gCurrentPinballGame->unk3C4[index1].x;
-    temp3C4.y = gCurrentPinballGame->unk3C4[index1].y;
+    temp3B0 = gCurrentPinballGame->minionStateTimer[index1];
+    temp3B6 = gCurrentPinballGame->minionTimeAlive[index1];
+    temp3BC = gCurrentPinballGame->minionEscapeAtTime[index1];
+    temp3C4.x = gCurrentPinballGame->minionLogicPosition[index1].x;
+    temp3C4.y = gCurrentPinballGame->minionLogicPosition[index1].y;
     temp3D0.x = gCurrentPinballGame->minionColisionPosition[index1].x;
     temp3D0.y = gCurrentPinballGame->minionColisionPosition[index1].y;
 
@@ -226,15 +226,15 @@ void swap_duskull_entity_index(s16 index1, s16 index2)
     gCurrentPinballGame->minionNextSpriteVariant[index1] = gCurrentPinballGame->minionNextSpriteVariant[index2];
     gCurrentPinballGame->minionOamIx[index1] = gCurrentPinballGame->minionOamIx[index2];
     gCurrentPinballGame->minionState[index1] = gCurrentPinballGame->minionState[index2];
-    gCurrentPinballGame->unk3A3[index1] = gCurrentPinballGame->unk3A3[index2];
+    gCurrentPinballGame->minionFramesetIx[index1] = gCurrentPinballGame->minionFramesetIx[index2];
     gCurrentPinballGame->unk3A6[index1] = gCurrentPinballGame->unk3A6[index2];
     gCurrentPinballGame->unk3A9[index1] = gCurrentPinballGame->unk3A9[index2];
     gCurrentPinballGame->unk3AC[index1] = gCurrentPinballGame->unk3AC[index2];
-    gCurrentPinballGame->unk3B0[index1] = gCurrentPinballGame->unk3B0[index2];
-    gCurrentPinballGame->unk3B6[index1] = gCurrentPinballGame->unk3B6[index2];
-    gCurrentPinballGame->unk3BC[index1] = gCurrentPinballGame->unk3BC[index2];
-    gCurrentPinballGame->unk3C4[index1].x = gCurrentPinballGame->unk3C4[index2].x;
-    gCurrentPinballGame->unk3C4[index1].y = gCurrentPinballGame->unk3C4[index2].y;
+    gCurrentPinballGame->minionStateTimer[index1] = gCurrentPinballGame->minionStateTimer[index2];
+    gCurrentPinballGame->minionTimeAlive[index1] = gCurrentPinballGame->minionTimeAlive[index2];
+    gCurrentPinballGame->minionEscapeAtTime[index1] = gCurrentPinballGame->minionEscapeAtTime[index2];
+    gCurrentPinballGame->minionLogicPosition[index1].x = gCurrentPinballGame->minionLogicPosition[index2].x;
+    gCurrentPinballGame->minionLogicPosition[index1].y = gCurrentPinballGame->minionLogicPosition[index2].y;
     gCurrentPinballGame->minionColisionPosition[index1].x = gCurrentPinballGame->minionColisionPosition[index2].x;
     gCurrentPinballGame->minionColisionPosition[index1].y = gCurrentPinballGame->minionColisionPosition[index2].y;
 
@@ -242,20 +242,20 @@ void swap_duskull_entity_index(s16 index1, s16 index2)
     gCurrentPinballGame->minionNextSpriteVariant[index2] = temp39A;
     gCurrentPinballGame->minionOamIx[index2] = temp39D;
     gCurrentPinballGame->minionState[index2] = temp3A0;
-    gCurrentPinballGame->unk3A3[index2] = temp3A3;
+    gCurrentPinballGame->minionFramesetIx[index2] = temp3A3;
     gCurrentPinballGame->unk3A6[index2] = temp3A6;
     gCurrentPinballGame->unk3A9[index2] = temp3A9;
     gCurrentPinballGame->unk3AC[index2] = temp3AC;
-    gCurrentPinballGame->unk3B0[index2] = temp3B0;
-    gCurrentPinballGame->unk3B6[index2] = temp3B6;
-    gCurrentPinballGame->unk3BC[index2] = temp3BC;
-    gCurrentPinballGame->unk3C4[index2].x = temp3C4.x;
-    gCurrentPinballGame->unk3C4[index2].y = temp3C4.y;
+    gCurrentPinballGame->minionStateTimer[index2] = temp3B0;
+    gCurrentPinballGame->minionTimeAlive[index2] = temp3B6;
+    gCurrentPinballGame->minionEscapeAtTime[index2] = temp3BC;
+    gCurrentPinballGame->minionLogicPosition[index2].x = temp3C4.x;
+    gCurrentPinballGame->minionLogicPosition[index2].y = temp3C4.y;
     gCurrentPinballGame->minionColisionPosition[index2].x = temp3D0.x;
     gCurrentPinballGame->minionColisionPosition[index2].y = temp3D0.y;
 }
 
-void duskull_phase_process_entity_logic(void) {
+void DuskullPhase_ProcessEntityLogic(void) {
     s16 i, j;
     bool32 r4 = TRUE;
     u16 oamIx = 0;
@@ -271,58 +271,58 @@ void duskull_phase_process_entity_logic(void) {
         }
         if (r4)
         {
-            gCurrentPinballGame->unk13 = DUSCLOPS_BOARD_STATE_2; // Transition to next phase of bonus game
-            gMain.spriteGroups[7].available = 0;
-            gMain.spriteGroups[8].available = 0;
-            gMain.spriteGroups[9].available = 0;
+            gCurrentPinballGame->unk13 = DUSCLOPS_BOARD_STATE_2_INIT_DUSCLOPS_PHASE;
+            gMain.spriteGroups[7].available = FALSE;
+            gMain.spriteGroups[8].available = FALSE;
+            gMain.spriteGroups[9].available = FALSE;
         }
     }
 
     for (i = 0; i < DUSKULL_CONCURRENT_MAX; i++)
     {
-        switch(gCurrentPinballGame->minionState[i]) // duskull lifecycle state
+        switch(gCurrentPinballGame->minionState[i])
         {
         case DUSKULL_ENTITY_STATE_SPAWN:
             if (gCurrentPinballGame->unk385 <= DUSKULL_ALLOWED_TO_SPAWN && 
                 gCurrentPinballGame->minionActiveCount < 2)
             {
-                gCurrentPinballGame->minionActiveCount++; //Number of active duskull
+                gCurrentPinballGame->minionActiveCount++;
                 gCurrentPinballGame->minionState[i] = DUSKULL_ENTITY_STATE_APPEARS; 
-                gCurrentPinballGame->unk3A3[i] = 0; //unknown
-                gCurrentPinballGame->unk3B0[i] = 0; //Time since last decision
-                gCurrentPinballGame->unk3C4[i].x = (Random() % 1400) - 700; //Sprite x pos
-                gCurrentPinballGame->unk3C4[i].y = (Random() % 9) * 80; // sprite y pos
-                gCurrentPinballGame->unk3BC[i] = (Random() % 1000) + 200; //Time before escaping
-                gCurrentPinballGame->unk3A6[i] = 0; // = r7 //unknown
-                gCurrentPinballGame->unk3A9[i] = 0; // = r7
+                gCurrentPinballGame->minionFramesetIx[i] = 0;
+                gCurrentPinballGame->minionStateTimer[i] = 0;
+                gCurrentPinballGame->minionLogicPosition[i].x = (Random() % 1400) - 700;
+                gCurrentPinballGame->minionLogicPosition[i].y = (Random() % 9) * 80;
+                gCurrentPinballGame->minionEscapeAtTime[i] = (Random() % 1000) + 200;
+                gCurrentPinballGame->unk3A6[i] = 0;
+                gCurrentPinballGame->unk3A9[i] = 0;
                 oamIx = 4;
-                tileOffset = 4;
-                gCurrentPinballGame->unk3B6[i] = 0; //Time alive
-                MPlayStart(&gMPlayInfo_SE1, &se_unk_f1);
+                tileOffset = 4; // Facing forward picture
+                gCurrentPinballGame->minionTimeAlive[i] = 0;
+                MPlayStart(&gMPlayInfo_SE1, &se_duskull_appear);
 
-                //Check Y index ordering, for proper sprite draw layering
-                for (j = 2; j > 0; j--)
+                //Check/swap Y index ordering, for proper sprite draw layering
+                for (j = DUSKULL_CONCURRENT_MAX - 1; j > 0; j--)
                 {
-                    if (gCurrentPinballGame->unk3C4[j].y > gCurrentPinballGame->unk3C4[j-1].y)
+                    if (gCurrentPinballGame->minionLogicPosition[j].y > gCurrentPinballGame->minionLogicPosition[j-1].y)
                     {
                         swap_duskull_entity_index(j, j - 1);
-                        j = 3;
+                        j = DUSKULL_CONCURRENT_MAX;
                     }
                 }
             }
             else
             {
-                gCurrentPinballGame->unk3C4[i].x = 0;
-                gCurrentPinballGame->unk3C4[i].y = 120;
+                gCurrentPinballGame->minionLogicPosition[i].x = 0;
+                gCurrentPinballGame->minionLogicPosition[i].y = 120;
                 gCurrentPinballGame->unk3A6[i] = 0;
                 Random();
             }
             break;
         case DUSKULL_ENTITY_STATE_APPEARS: //Spawn in, Wait and initial movement decision
-            if (gCurrentPinballGame->unk3B0[i] < 20) //Time since last decision
+            if (gCurrentPinballGame->minionStateTimer[i] < 20)
             {
-                gCurrentPinballGame->unk3B0[i]++; //Time since last decision
-                gCurrentPinballGame->unk3A6[i] = (gCurrentPinballGame->unk3B0[i] % 4) / 2;
+                gCurrentPinballGame->minionStateTimer[i]++;
+                gCurrentPinballGame->unk3A6[i] = (gCurrentPinballGame->minionStateTimer[i] % 4) / 2;
                 oamIx = 4;
                 tileOffset = 4;
                 break;
@@ -332,101 +332,104 @@ void duskull_phase_process_entity_logic(void) {
                 if (gMain.systemFrameCount % 2)
                 {
                     gCurrentPinballGame->minionState[i] = DUSKULL_ENTITY_STATE_MOVE_LEFT;
-                    gCurrentPinballGame->unk3A3[i] = 0; //Sprite = move left sprite
+                    gCurrentPinballGame->minionFramesetIx[i] = DUSCLOPS_FRAMESET_MOVE_LEFT_START;
                 }
                 else
                 {
                     gCurrentPinballGame->minionState[i] = DUSKULL_ENTITY_STATE_MOVE_RIGHT;
-                    gCurrentPinballGame->unk3A3[i] = 7; //Sprite = move right sprite
+                    gCurrentPinballGame->minionFramesetIx[i] = DUSCLOPS_FRAMESET_MOVE_RIGHT_START;
                 }
 
-                gCurrentPinballGame->unk3B0[i] = 0; //Time since last decision
+                gCurrentPinballGame->minionStateTimer[i] = 0;
                 gCurrentPinballGame->unk3A6[i] = 1;
                 gCurrentPinballGame->unk3A9[i] = 1;
-                oamIx = DusclopsFramesetData[gCurrentPinballGame->unk3A3[i]][0];
-                tileOffset = DusclopsFramesetData[gCurrentPinballGame->unk3A3[i]][2];
+                oamIx = DusclopsFramesetData[gCurrentPinballGame->minionFramesetIx[i]][0];
+                tileOffset = DusclopsFramesetData[gCurrentPinballGame->minionFramesetIx[i]][2];
             }
             break;
         case DUSKULL_ENTITY_STATE_MOVE_LEFT:
-            gCurrentPinballGame->unk3B6[i]++; //Time Alive
-            if (gCurrentPinballGame->unk3C4[i].x > -800) //Dusclops x pos
+            gCurrentPinballGame->minionTimeAlive[i]++;
+            if (gCurrentPinballGame->minionLogicPosition[i].x > -800)
             {
-                gCurrentPinballGame->unk3C4[i].x -= 3; //Move left
-                if (DusclopsFramesetData[gCurrentPinballGame->unk3A3[i]][1] > gCurrentPinballGame->unk3B0[i])
+                gCurrentPinballGame->minionLogicPosition[i].x -= 3; //Move left
+                if (DusclopsFramesetData[gCurrentPinballGame->minionFramesetIx[i]][1] > gCurrentPinballGame->minionStateTimer[i])
                 {
-                    gCurrentPinballGame->unk3B0[i]++; //Time since last decision
+                    gCurrentPinballGame->minionStateTimer[i]++;
                 }
                 else
                 {
-                    gCurrentPinballGame->unk3B0[i] = 0; //Time since last decision
-                    gCurrentPinballGame->unk3A3[i]++; //Animation frame advance
-                    if (gCurrentPinballGame->unk3A3[i] > 3) //Animation frame reset
-                        gCurrentPinballGame->unk3A3[i] = 0;
+                    gCurrentPinballGame->minionStateTimer[i] = 0;
+                    gCurrentPinballGame->minionFramesetIx[i]++;
+
+                    //Animation frame reset
+                    if (gCurrentPinballGame->minionFramesetIx[i] > DUSCLOPS_FRAMESET_MOVE_LEFT_END)
+                        gCurrentPinballGame->minionFramesetIx[i] = DUSCLOPS_FRAMESET_MOVE_LEFT_START;
                 }
             }
             else
             {
-                if (DusclopsFramesetData[gCurrentPinballGame->unk3A3[i]][1] > gCurrentPinballGame->unk3B0[i])
+                if (DusclopsFramesetData[gCurrentPinballGame->minionFramesetIx[i]][1] > gCurrentPinballGame->minionStateTimer[i])
                 {
-                    gCurrentPinballGame->unk3B0[i]++; //Time since last decision
+                    gCurrentPinballGame->minionStateTimer[i]++;
                 }
                 else
                 {
-                    gCurrentPinballGame->unk3B0[i] = 0; //Time since last decision
-                    gCurrentPinballGame->unk3A3[i]++; //Animation frame advance 'move left to neutral state'
-                    if (gCurrentPinballGame->unk3A3[i] > 6) //Animation frame at neutral forward, continue with move right
+                    gCurrentPinballGame->minionStateTimer[i] = 0;
+                    gCurrentPinballGame->minionFramesetIx[i]++;
+
+                    if (gCurrentPinballGame->minionFramesetIx[i] > 6) //Animation frame at neutral forward, continue with move right
                     {
-                        gCurrentPinballGame->unk3A3[i] = 7;
+                        gCurrentPinballGame->minionFramesetIx[i] = 7;
                         gCurrentPinballGame->minionState[i] = DUSKULL_ENTITY_STATE_MOVE_RIGHT;
                     }
                 }
             }
-            oamIx = DusclopsFramesetData[gCurrentPinballGame->unk3A3[i]][0];
-            tileOffset = DusclopsFramesetData[gCurrentPinballGame->unk3A3[i]][2];
+            oamIx = DusclopsFramesetData[gCurrentPinballGame->minionFramesetIx[i]][0];
+            tileOffset = DusclopsFramesetData[gCurrentPinballGame->minionFramesetIx[i]][2];
             break;
         case DUSKULL_ENTITY_STATE_MOVE_RIGHT:
-            gCurrentPinballGame->unk3B6[i]++; //Time Alive
-            if (gCurrentPinballGame->unk3C4[i].x < 800) //Dusclops x pos
+            gCurrentPinballGame->minionTimeAlive[i]++;
+            if (gCurrentPinballGame->minionLogicPosition[i].x < 800) //Dusclops x pos
             {
-                gCurrentPinballGame->unk3C4[i].x += 3;
-                gCurrentPinballGame->unk3C4[i].y += 0; // ! Dead code needed for matching
-                if (DusclopsFramesetData[gCurrentPinballGame->unk3A3[i]][1] > gCurrentPinballGame->unk3B0[i])
+                gCurrentPinballGame->minionLogicPosition[i].x += 3;
+                gCurrentPinballGame->minionLogicPosition[i].y += 0; // ! Dead code needed for matching
+                if (DusclopsFramesetData[gCurrentPinballGame->minionFramesetIx[i]][1] > gCurrentPinballGame->minionStateTimer[i])
                 {
-                    gCurrentPinballGame->unk3B0[i]++;
+                    gCurrentPinballGame->minionStateTimer[i]++;
                 }
                 else
                 {
-                    gCurrentPinballGame->unk3B0[i] = 0; //Time since last decision
-                    gCurrentPinballGame->unk3A3[i]++; //Animation frame advance
-                    if (gCurrentPinballGame->unk3A3[i] > 10)
-                        gCurrentPinballGame->unk3A3[i] = 7;
+                    gCurrentPinballGame->minionStateTimer[i] = 0; //Time since last decision
+                    gCurrentPinballGame->minionFramesetIx[i]++; //Animation frame advance
+                    if (gCurrentPinballGame->minionFramesetIx[i] > 10)
+                        gCurrentPinballGame->minionFramesetIx[i] = 7;
                 }
             }
             else
             {
-                if (DusclopsFramesetData[gCurrentPinballGame->unk3A3[i]][1] > gCurrentPinballGame->unk3B0[i])
+                if (DusclopsFramesetData[gCurrentPinballGame->minionFramesetIx[i]][1] > gCurrentPinballGame->minionStateTimer[i])
                 {
-                    gCurrentPinballGame->unk3B0[i]++; //Time since last decision
+                    gCurrentPinballGame->minionStateTimer[i]++; //Time since last decision
                 }
                 else
                 {
-                    gCurrentPinballGame->unk3B0[i] = 0; //Time since last decision
-                    gCurrentPinballGame->unk3A3[i]++; //Animation frame advance
-                    if (gCurrentPinballGame->unk3A3[i] > 13)
+                    gCurrentPinballGame->minionStateTimer[i] = 0; //Time since last decision
+                    gCurrentPinballGame->minionFramesetIx[i]++; //Animation frame advance
+                    if (gCurrentPinballGame->minionFramesetIx[i] > 13)
                     {
-                        gCurrentPinballGame->unk3A3[i] = 0; //Animation frame set
+                        gCurrentPinballGame->minionFramesetIx[i] = 0; //Animation frame set
                         gCurrentPinballGame->minionState[i] = DUSKULL_ENTITY_STATE_MOVE_LEFT;
                     }
                 }
             }
-            oamIx = DusclopsFramesetData[gCurrentPinballGame->unk3A3[i]][0];
-            tileOffset = DusclopsFramesetData[gCurrentPinballGame->unk3A3[i]][2];
+            oamIx = DusclopsFramesetData[gCurrentPinballGame->minionFramesetIx[i]][0];
+            tileOffset = DusclopsFramesetData[gCurrentPinballGame->minionFramesetIx[i]][2];
             break;
         case DUSKULL_ENTITY_STATE_HIT:
-            oamIx = DusclopsFramesetData[gCurrentPinballGame->unk3A3[i]][0];
-            tileOffset = DusclopsFramesetData[gCurrentPinballGame->unk3A3[i]][2];
-            gCurrentPinballGame->unk3A3[i] = 14; //Animation frame
-            gCurrentPinballGame->unk3B0[i] = 0; //Time since last decision
+            oamIx = DusclopsFramesetData[gCurrentPinballGame->minionFramesetIx[i]][0];
+            tileOffset = DusclopsFramesetData[gCurrentPinballGame->minionFramesetIx[i]][2];
+            gCurrentPinballGame->minionFramesetIx[i] = 14; //Animation frame
+            gCurrentPinballGame->minionStateTimer[i] = 0; //Time since last decision
             gCurrentPinballGame->minionState[i] = DUSKULL_ENTITY_STATE_DYING;
             gCurrentPinballGame->unk3AC[i] = 0;
             gCurrentPinballGame->unk3A9[i] = 0;
@@ -434,41 +437,41 @@ void duskull_phase_process_entity_logic(void) {
                 gCurrentPinballGame->minionActiveCount--; //Number of active duskull
             gCurrentPinballGame->scoreAddedInFrame = 100000;
             gCurrentPinballGame->unk385++; // Number hit
-            m4aSongNumStart(SE_UNKNOWN_0xF2); //Duskull Death cry
+            m4aSongNumStart(SE_DUSKULL_DEATH_CRY); //Duskull Death cry
             playRumbleType(7);
             break;
         case DUSKULL_ENTITY_STATE_DYING:
-            if (DusclopsFramesetData[gCurrentPinballGame->unk3A3[i]][1] > gCurrentPinballGame->unk3B0[i])
+            if (DusclopsFramesetData[gCurrentPinballGame->minionFramesetIx[i]][1] > gCurrentPinballGame->minionStateTimer[i])
             {
-                gCurrentPinballGame->unk3B0[i]++; //Time since last decision
+                gCurrentPinballGame->minionStateTimer[i]++; //Time since last decision
             }
             else
             {
-                gCurrentPinballGame->unk3B0[i] = 0; //Time since last decision
-                gCurrentPinballGame->unk3A3[i]++; //Animation frame advance
-                if (gCurrentPinballGame->unk3A3[i] > 15) //Animation frame
+                gCurrentPinballGame->minionStateTimer[i] = 0; //Time since last decision
+                gCurrentPinballGame->minionFramesetIx[i]++; //Animation frame advance
+                if (gCurrentPinballGame->minionFramesetIx[i] > 15) //Animation frame
                 {
-                    gCurrentPinballGame->unk3A3[i] = 15; //Animation frame
+                    gCurrentPinballGame->minionFramesetIx[i] = 15; //Animation frame
                     gCurrentPinballGame->minionState[i] = DUSKULL_ENTITY_STATE_CLEANUP;
                     gCurrentPinballGame->unk3A6[i] = 0;
                 }
             }
-            if (gCurrentPinballGame->unk3A3[i] == 15) //Animation frame
+            if (gCurrentPinballGame->minionFramesetIx[i] == 15) //Animation frame
                 gCurrentPinballGame->unk3AC[i]++;
-            oamIx = DusclopsFramesetData[gCurrentPinballGame->unk3A3[i]][0];
-            tileOffset = DusclopsFramesetData[gCurrentPinballGame->unk3A3[i]][2];
+            oamIx = DusclopsFramesetData[gCurrentPinballGame->minionFramesetIx[i]][0];
+            tileOffset = DusclopsFramesetData[gCurrentPinballGame->minionFramesetIx[i]][2];
             break;
         case DUSKULL_ENTITY_STATE_ESCAPE_WHILE_WALKING_LEFT:
-            if (gCurrentPinballGame->unk3B0[i] < 6) //Time since last decision
+            if (gCurrentPinballGame->minionStateTimer[i] < 6) //Time since last decision
             {
-                gCurrentPinballGame->unk3B0[i]++; //Time since last decision
+                gCurrentPinballGame->minionStateTimer[i]++; //Time since last decision
                 oamIx = 3;
                 tileOffset = 3;
             }
             else
             {
-                gCurrentPinballGame->unk3B0[i] = 0; //Time since last decision
-                gCurrentPinballGame->unk3A3[i] = 18; //Animation frame
+                gCurrentPinballGame->minionStateTimer[i] = 0; //Time since last decision
+                gCurrentPinballGame->minionFramesetIx[i] = 18; //Animation frame
                 gCurrentPinballGame->minionState[i] = DUSKULL_ENTITY_STATE_ESCAPE;
                 gCurrentPinballGame->unk3A9[i] = 0;
                 if (gCurrentPinballGame->minionActiveCount > 0)
@@ -479,16 +482,16 @@ void duskull_phase_process_entity_logic(void) {
             }
             break;
         case DUSKULL_ENTITY_STATE_ESCAPE_WHILE_WALKING_RIGHT:
-            if (gCurrentPinballGame->unk3B0[i] < 6)
+            if (gCurrentPinballGame->minionStateTimer[i] < 6)
             {
-                gCurrentPinballGame->unk3B0[i]++; //Time since last decision
+                gCurrentPinballGame->minionStateTimer[i]++; //Time since last decision
                 oamIx = 9;
                 tileOffset = 3;
             }
             else
             {
-                gCurrentPinballGame->unk3B0[i] = 0; //Time since last decision
-                gCurrentPinballGame->unk3A3[i] = 18; //Animation frame
+                gCurrentPinballGame->minionStateTimer[i] = 0; //Time since last decision
+                gCurrentPinballGame->minionFramesetIx[i] = 18; //Animation frame
                 gCurrentPinballGame->minionState[i] = DUSKULL_ENTITY_STATE_ESCAPE;
                 gCurrentPinballGame->unk3A9[i] = 0;
                 if (gCurrentPinballGame->minionActiveCount > 0)
@@ -499,56 +502,56 @@ void duskull_phase_process_entity_logic(void) {
             }
             break;
         case DUSKULL_ENTITY_STATE_ESCAPE:
-            if (DusclopsFramesetData[gCurrentPinballGame->unk3A3[i]][1] > gCurrentPinballGame->unk3B0[i])
+            if (DusclopsFramesetData[gCurrentPinballGame->minionFramesetIx[i]][1] > gCurrentPinballGame->minionStateTimer[i])
             {
-                gCurrentPinballGame->unk3B0[i]++; //Time since last decision
+                gCurrentPinballGame->minionStateTimer[i]++; //Time since last decision
             }
             else
             {
-                gCurrentPinballGame->unk3B0[i] = 0; //Time since last decision
-                gCurrentPinballGame->unk3A3[i]++; //Animation frame Advance
-                if (gCurrentPinballGame->unk3A3[i] > 25) //Animation frame
+                gCurrentPinballGame->minionStateTimer[i] = 0; //Time since last decision
+                gCurrentPinballGame->minionFramesetIx[i]++; //Animation frame Advance
+                if (gCurrentPinballGame->minionFramesetIx[i] > 25) //Animation frame
                 {
-                    gCurrentPinballGame->unk3A3[i] = 25; //Animation frame
+                    gCurrentPinballGame->minionFramesetIx[i] = 25; //Animation frame
                     gCurrentPinballGame->minionState[i] = DUSKULL_ENTITY_STATE_CLEANUP;
                 }
             }
-            oamIx = DusclopsFramesetData[gCurrentPinballGame->unk3A3[i]][0];
-            tileOffset = DusclopsFramesetData[gCurrentPinballGame->unk3A3[i]][2];
+            oamIx = DusclopsFramesetData[gCurrentPinballGame->minionFramesetIx[i]][0];
+            tileOffset = DusclopsFramesetData[gCurrentPinballGame->minionFramesetIx[i]][2];
             break;
         case DUSKULL_ENTITY_STATE_CLEANUP:
             gCurrentPinballGame->unk3A6[i] = 0;
             gCurrentPinballGame->unk3A9[i] = 0;
             gCurrentPinballGame->minionState[i] = DUSKULL_ENTITY_STATE_SPAWN;
-            oamIx = DusclopsFramesetData[gCurrentPinballGame->unk3A3[i]][0];
-            tileOffset = DusclopsFramesetData[gCurrentPinballGame->unk3A3[i]][2];
+            oamIx = DusclopsFramesetData[gCurrentPinballGame->minionFramesetIx[i]][0];
+            tileOffset = DusclopsFramesetData[gCurrentPinballGame->minionFramesetIx[i]][2];
             break;
         }
 
         // Time alive > time before escape, && number hit < 18
-        if (gCurrentPinballGame->unk3B6[i] > gCurrentPinballGame->unk3BC[i] &&
+        if (gCurrentPinballGame->minionTimeAlive[i] > gCurrentPinballGame->minionEscapeAtTime[i] &&
             gCurrentPinballGame->unk385 <= DUSKULL_ALLOWED_TO_SPAWN)
         {
-            gCurrentPinballGame->unk3B6[i] = 0;
+            gCurrentPinballGame->minionTimeAlive[i] = 0;
             if (gCurrentPinballGame->minionState[i] == DUSKULL_ENTITY_STATE_MOVE_LEFT)
                 gCurrentPinballGame->minionState[i] = DUSKULL_ENTITY_STATE_ESCAPE_WHILE_WALKING_LEFT; //Escape after moving left
             else
                 gCurrentPinballGame->minionState[i] = DUSKULL_ENTITY_STATE_ESCAPE_WHILE_WALKING_RIGHT; //Escape after moving right
 
-            gCurrentPinballGame->unk3B0[i] = 0;
+            gCurrentPinballGame->minionStateTimer[i] = 0;
         }
 
         gCurrentPinballGame->minionSpriteVariant[i] = gCurrentPinballGame->minionNextSpriteVariant[i];
         gCurrentPinballGame->minionNextSpriteVariant[i] = tileOffset;
         gCurrentPinballGame->minionOamIx[i] = oamIx;
-        gCurrentPinballGame->minionColisionPosition[i].x = (gCurrentPinballGame->unk3C4[i].x / 10) * 2 + 208;
-        gCurrentPinballGame->minionColisionPosition[i].y = (gCurrentPinballGame->unk3C4[i].y / 10) * 2 + 66;
+        gCurrentPinballGame->minionColisionPosition[i].x = (gCurrentPinballGame->minionLogicPosition[i].x / 10) * 2 + 208;
+        gCurrentPinballGame->minionColisionPosition[i].y = (gCurrentPinballGame->minionLogicPosition[i].y / 10) * 2 + 66;
     }
 }
 
 extern const u8 gDusclopsBoardDuskull_Gfx[];
 extern const u16 gDuskullSpritesheetOam[][2][3];
-void duskull_phase_process_graphics() {
+void DuskullPhase_ProcessGraphics() {
     s16 i, animPiece;
     s16 oamIx;
     struct SpriteGroup *spriteGroup;
@@ -562,10 +565,11 @@ void duskull_phase_process_graphics() {
         DmaCopy16(3, gDusclopsBoardDuskull_Gfx + spriteVariant * 0x280, OBJ_VRAM0 + 0x920 + i * 0x280, 0x280);
         oamIx = gCurrentPinballGame->minionOamIx[i];
         spriteGroup = &gMain_spriteGroups[7 + i];
+
         if (gCurrentPinballGame->unk3A6[i]) {
             s32 x = 0; // Scrub C to get the compiler to add before subtracting
-            spriteGroup->baseX = gCurrentPinballGame->unk3C4[i].x / 10 + 108 + x - gCurrentPinballGame->unk58;
-            spriteGroup->baseY = gCurrentPinballGame->unk3C4[i].y / 10 + 28 + x - gCurrentPinballGame->unk5A;
+            spriteGroup->baseX = gCurrentPinballGame->minionLogicPosition[i].x / 10 + 108 + x - gCurrentPinballGame->unk58;
+            spriteGroup->baseY = gCurrentPinballGame->minionLogicPosition[i].y / 10 + 28 + x - gCurrentPinballGame->unk5A;
         } else {
             spriteGroup->baseX = 240;
             spriteGroup->baseY = 180;
@@ -721,7 +725,7 @@ void sub_34450(void)
         }
         else
         {
-            gCurrentPinballGame->unk387 = DUSCLOPS_ENTITY_COLISION_MODE_DUSCLOPS;
+            gCurrentPinballGame->boardEntityCollisionMode = DUSCLOPS_ENTITY_COLISION_MODE_DUSCLOPS;
             gCurrentPinballGame->unk294 = 2;
         }
 
@@ -833,7 +837,7 @@ void sub_34450(void)
         r9 = 7;
 
         m4aSongNumStart(SE_DUSCLOPS_HIT); //Dusclops hit
-        gCurrentPinballGame->unk387 = DUSCLOPS_ENTITY_COLISION_MODE_NONE;
+        gCurrentPinballGame->boardEntityCollisionMode = DUSCLOPS_ENTITY_COLISION_MODE_NONE;
         playRumbleType(7);
         break;
     }
@@ -851,7 +855,7 @@ void sub_34450(void)
             gCurrentPinballGame->unk3E4 = 128;
             gCurrentPinballGame->unk3E2 = 0;
             gCurrentPinballGame->unk3DC = 2;
-            gCurrentPinballGame->unk387 = DUSCLOPS_ENTITY_COLISION_MODE_NONE;
+            gCurrentPinballGame->boardEntityCollisionMode = DUSCLOPS_ENTITY_COLISION_MODE_NONE;
             r9 = 7;
         }
         else
@@ -921,12 +925,12 @@ void sub_34450(void)
         if (gCurrentPinballGame->ballSpeed != 0)
         {
             if ((gCurrentPinballGame->unk3E2 == 16) && (gCurrentPinballGame->unk3E4 > 4))
-                gCurrentPinballGame->unk387 = DUSCLOPS_ENTITY_COLISION_MODE_DUSCLOPS;
+                gCurrentPinballGame->boardEntityCollisionMode = DUSCLOPS_ENTITY_COLISION_MODE_DUSCLOPS;
         }
         else
         {
             if ((gCurrentPinballGame->unk3E2 == 16) && (gCurrentPinballGame->unk3E4 != 0))
-                gCurrentPinballGame->unk387 = DUSCLOPS_ENTITY_COLISION_MODE_DUSCLOPS;
+                gCurrentPinballGame->boardEntityCollisionMode = DUSCLOPS_ENTITY_COLISION_MODE_DUSCLOPS;
         }
 
         if (gCurrentPinballGame->unk5A6 <= 29)
@@ -986,9 +990,9 @@ void sub_34450(void)
             break;
         }
 
-        gMain.spriteGroups[13].available = 0;
-        gMain.spriteGroups[14].available = 0;
-        gMain.spriteGroups[12].available = 0;
+        gMain.spriteGroups[13].available = FALSE;
+        gMain.spriteGroups[14].available = FALSE;
+        gMain.spriteGroups[12].available = FALSE;
         gCurrentPinballGame->unk13 = DUSCLOPS_BOARD_STATE_4;
         gCurrentPinballGame->unk18 = 0;
         break;
