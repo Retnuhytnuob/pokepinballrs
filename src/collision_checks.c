@@ -2,6 +2,7 @@
 #include "main.h"
 #include "m4a.h"
 #include "constants/bg_music.h"
+#include "constants/dusclops_states.h"
 
 extern const u16 gUnknown_08254B10[];
 extern const u16 gUnknown_08257390[];
@@ -765,7 +766,7 @@ void sub_153CC(s32 arg0, s16* arg1, u16* arg2)
         *arg1 = 1;
         gCurrentPinballGame->scoreAddedInFrame = 5000;
         m4aSongNumStart(SE_UNKNOWN_0xB7);
-        sub_11B0(7);
+        playRumbleType(7);
         return;
     case 13:
         if (gCurrentPinballGame->unk2D8 == 0)
@@ -786,7 +787,7 @@ void sub_153CC(s32 arg0, s16* arg1, u16* arg2)
 
         m4aSongNumStart(SE_UNKNOWN_0xB7);
         gCurrentPinballGame->scoreAddedInFrame = 5000;
-        sub_11B0(7);
+        playRumbleType(7);
         return;
     case 14:
         if ((gCurrentPinballGame->unk13 > 2) && (gCurrentPinballGame->unk13 != 5))
@@ -803,7 +804,7 @@ void sub_153CC(s32 arg0, s16* arg1, u16* arg2)
 
                     m4aSongNumStart(SE_UNKNOWN_0xB7);
                     gCurrentPinballGame->scoreAddedInFrame = 5000;
-                    sub_11B0(7);
+                    playRumbleType(7);
                     return;
                 }
                 else if (gCurrentPinballGame->unk2DA == 3)
@@ -815,7 +816,7 @@ void sub_153CC(s32 arg0, s16* arg1, u16* arg2)
 
                     m4aSongNumStart(SE_UNKNOWN_0xB7);
                     gCurrentPinballGame->unk2D9 = 1;
-                    sub_11B0(7);
+                    playRumbleType(7);
                     return;
                 }
             }
@@ -831,7 +832,7 @@ void sub_153CC(s32 arg0, s16* arg1, u16* arg2)
 
             m4aSongNumStart(SE_UNKNOWN_0xB7);
             gCurrentPinballGame->scoreAddedInFrame = 5000;
-            sub_11B0(7);
+            playRumbleType(7);
         }
 
         break;
@@ -1055,7 +1056,7 @@ void sub_1642C(u8 arg0, u16* arg1, u16* arg2)
 
                         gCurrentPinballGame->unk36E[1] = 0;
                         gCurrentPinballGame->unk36A[1] = 1;
-                        sub_11B0(7);
+                        playRumbleType(7);
 
                         gCurrentPinballGame->ball->velocity.x /= 2;
                         gCurrentPinballGame->ball->velocity.y /= 2;
@@ -1078,7 +1079,7 @@ void sub_1642C(u8 arg0, u16* arg1, u16* arg2)
                         gCurrentPinballGame->unk36E[0] = 0;
                         gCurrentPinballGame->unk36A[0] = 1;
 
-                        sub_11B0(7);
+                        playRumbleType(7);
 
                         gCurrentPinballGame->ball->velocity.x /= 2;
                         gCurrentPinballGame->ball->velocity.y /= 2;
@@ -1505,7 +1506,7 @@ s16 COLLISION_CHECK_DUSCLOPS_171C8(struct Vector16* arg0, u16* arg1) {
     sp00 = gUnknown_02031520.unk14.unk48[unk2 + unk1][unk0 * 64 + vec2.y * 8 + vec2.x];
     sp02 = gUnknown_02031520.unk14.unk58[unk2 + unk1][unk0 * 64 + vec2.y * 8 + vec2.x];
 
-    sub_173FC(arg0, &sp00, &sp02);
+    CheckDusclopsEntitiesCollision(arg0, &sp00, &sp02);
     switch_enum = sp02 & 0xF;
     some_enum = sp02 >> 4;
 
@@ -1567,7 +1568,7 @@ s16 COLLISION_CHECK_DUSCLOPS_171C8(struct Vector16* arg0, u16* arg1) {
     return return_val;
 }
 
-void sub_173FC(struct Vector16 *arg0, s16* arg1, u8* arg2) {
+void CheckDusclopsEntitiesCollision(struct Vector16 *arg0, s16* arg1, u8* arg2) {
     s16 deltaX;
     s16 deltaY;
     u16 maskedResult;
@@ -1577,7 +1578,7 @@ void sub_173FC(struct Vector16 *arg0, s16* arg1, u8* arg2) {
     maskedResult = 0;
     lowerNibble = 0;
 
-    if(gCurrentPinballGame->unk387 == 2)
+    if(gCurrentPinballGame->unk387 == DUSCLOPS_ENTITY_COLISION_MODE_DUSCLOPS)
     {
         if (*arg2 != 0)
             return;
@@ -1606,15 +1607,15 @@ void sub_173FC(struct Vector16 *arg0, s16* arg1, u8* arg2) {
         return;
     }
 
-    if(gCurrentPinballGame->unk387 == 1)
+    if(gCurrentPinballGame->unk387 == DUSCLOPS_ENTITY_COLISION_MODE_DUSKULL)
     {
         if (*arg2 != 0)
             return;
 
         if (gCurrentPinballGame->unk3A9[0] != 0)
         {
-            deltaX = arg0->x - gCurrentPinballGame->unk3D0[0].x;
-            deltaY = arg0->y - gCurrentPinballGame->unk3D0[0].y;
+            deltaX = arg0->x - gCurrentPinballGame->minionColisionPosition[0].x;
+            deltaY = arg0->y - gCurrentPinballGame->minionColisionPosition[0].y;
 
             if (deltaX < 64U && deltaY < 64U)
             {
@@ -1622,7 +1623,7 @@ void sub_173FC(struct Vector16 *arg0, s16* arg1, u8* arg2) {
                 lowerNibble = 0xF & gUnknown_08252B10[deltaY * 64 + deltaX];
 
                 if (lowerNibble != 0)
-                    gCurrentPinballGame->unk3A0[0] = 4;
+                    gCurrentPinballGame->minionState[0] = DUSKULL_ENTITY_STATE_HIT;
             }
         }
 
@@ -1630,8 +1631,8 @@ void sub_173FC(struct Vector16 *arg0, s16* arg1, u8* arg2) {
         {
             if (gCurrentPinballGame->unk3A9[1] != 0)
             {
-                deltaX = arg0->x - gCurrentPinballGame->unk3D0[1].x;
-                deltaY = arg0->y - gCurrentPinballGame->unk3D0[1].y;
+                deltaX = arg0->x - gCurrentPinballGame->minionColisionPosition[1].x;
+                deltaY = arg0->y - gCurrentPinballGame->minionColisionPosition[1].y;
 
                 if (deltaX < 64U && deltaY < 64U)
                 {
@@ -1639,7 +1640,7 @@ void sub_173FC(struct Vector16 *arg0, s16* arg1, u8* arg2) {
                     lowerNibble = 0xF & gUnknown_08252B10[deltaY * 64 + deltaX];
 
                     if (lowerNibble != 0)
-                        gCurrentPinballGame->unk3A0[1] = 4;
+                        gCurrentPinballGame->minionState[1] = DUSKULL_ENTITY_STATE_HIT;
                 }
             }
         }
@@ -1648,8 +1649,8 @@ void sub_173FC(struct Vector16 *arg0, s16* arg1, u8* arg2) {
         {
             if ( gCurrentPinballGame->unk3A9[2] != 0)
             {
-                deltaX = arg0->x - gCurrentPinballGame->unk3D0[2].x;
-                deltaY = arg0->y - gCurrentPinballGame->unk3D0[2].y;
+                deltaX = arg0->x - gCurrentPinballGame->minionColisionPosition[2].x;
+                deltaY = arg0->y - gCurrentPinballGame->minionColisionPosition[2].y;
 
                 if (deltaX < 64U && deltaY < 64U)
                 {
@@ -1658,7 +1659,7 @@ void sub_173FC(struct Vector16 *arg0, s16* arg1, u8* arg2) {
 
                     if (lowerNibble != 0)
                     {
-                        gCurrentPinballGame->unk3A0[2] = 4;
+                        gCurrentPinballGame->minionState[2] = DUSKULL_ENTITY_STATE_HIT;
                     }
                 }
             }
@@ -1673,7 +1674,7 @@ void sub_173FC(struct Vector16 *arg0, s16* arg1, u8* arg2) {
     }
 }
 
-
+// ?? ToConfirm: cancel hit based on hitting Dusclop's 'catch zone'?
 void sub_17634(u8 arg0, u16 *arg1, u16 *arg2)
 {
     switch (arg0)
@@ -1685,7 +1686,7 @@ void sub_17634(u8 arg0, u16 *arg1, u16 *arg2)
     case 4:
         gCurrentPinballGame->unk3DC = 6;
         gCurrentPinballGame->unk1F = 1;
-        gCurrentPinballGame->unk387 = 0;
+        gCurrentPinballGame->unk387 = DUSCLOPS_ENTITY_COLISION_MODE_NONE;
         break;
     case 5:
     case 6:

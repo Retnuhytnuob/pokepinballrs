@@ -94,7 +94,7 @@ gPokedexStateFuncs:: @ 0x0805C880
 	.4byte Pokedex_State8_4B34          @ POKEDEX_STATE_8
 	.4byte Pokedex_State9_4BB4          @ POKEDEX_STATE_9
 	.4byte Pokedex_State10_4B10         @ POKEDEX_STATE_10
-	.4byte Pokedex_State11_4C80         @ POKEDEX_STATE_11
+	.4byte Pokedex_DeleteConfirmation         @ POKEDEX_STATE_DELETE_CONFIRMATION
 	.4byte Pokedex_ReturnToTitle        @ POKEDEX_STATE_RETURN_TO_TITLE
 
 gPokedexEntries:: @ 0x0805C8B4
@@ -292,7 +292,7 @@ gTitlescreenStateFuncs:: @ 0x08079890
 	.4byte TitleScreen6_AnimCloseMenu        @ SUBSTATE_ANIM_CLOSE_MENU
 	.4byte TitleScreen7_8011020              @ SUBSTATE_7
 	.4byte TitleScreen8_8011228              @ SUBSTATE_8
-	.4byte TitleScreen9_8010D84              @ SUBSTATE_9
+	.4byte TitleScreen9_8010D84              @ SUBSTATE_DELETE_SAVE_GAME_CONFIRMATION
 	.4byte TitleScreen10_ExecMenuSelection   @ SUBSTATE_EXEC_MENU_SELECTION
 	.4byte TitleScreen11_80114B4             @ SUBSTATE_11
 

@@ -46,9 +46,9 @@ void KyogreBoardProcess_3A_383E4(void)
     gCurrentPinballGame->eventTimer = gCurrentPinballGame->timerBonus + 10800;
     gCurrentPinballGame->timerBonus = 0;
     if (gCurrentPinballGame->numCompletedBonusStages % 5 == 3)
-        gCurrentPinballGame->unk384 = 18;
+        gCurrentPinballGame->legendaryHitsRequired = 18;
     else
-        gCurrentPinballGame->unk384 = 15;
+        gCurrentPinballGame->legendaryHitsRequired = 15;
 
     gCurrentPinballGame->unk390 = 0;
     gCurrentPinballGame->unk389 = 0;
@@ -262,10 +262,11 @@ void sub_38A20(void)
             if (gCurrentPinballGame->unk452 == 4)
             {
                 MPlayStart(&gMPlayInfo_SE1, &se_unk_10a);
-                sub_11B0(7);
+                playRumbleType(7);
                 gCurrentPinballGame->scoreAddedInFrame = 500000;
                 gCurrentPinballGame->unk385++;
-                if (gCurrentPinballGame->unk385 >= gCurrentPinballGame->unk384 && gCurrentPinballGame->unk387 == 1)
+                if (gCurrentPinballGame->unk385 >= gCurrentPinballGame->legendaryHitsRequired &&
+                    gCurrentPinballGame->unk387 == 1)
                     gCurrentPinballGame->unk3DC = 7;
             }
         }
@@ -386,7 +387,7 @@ void sub_38A20(void)
                 {
                     if (gCurrentPinballGame->unk3DD == 3)
                     {
-                        if (gCurrentPinballGame->unk385 >= gCurrentPinballGame->unk384)
+                        if (gCurrentPinballGame->unk385 >= gCurrentPinballGame->legendaryHitsRequired)
                         {
                             gCurrentPinballGame->unk3E2 = 0;
                             gCurrentPinballGame->unk3DC = 4;
@@ -483,8 +484,10 @@ void sub_38A20(void)
         break;
     case 7:
         gCurrentPinballGame->unk294 = 3;
+
         if (gCurrentPinballGame->numCompletedBonusStages % 5 == 3)
         {
+            // catch kyogre
             gCurrentPinballGame->unk3DC = 10;
             gCurrentPinballGame->unk3E2 = 0;
             gMain.spriteGroups[10].available = 1;
@@ -497,6 +500,7 @@ void sub_38A20(void)
         }
         else
         {
+            // normal completion
             gCurrentPinballGame->unk3DC = 9;
             gCurrentPinballGame->unk3E2 = 79;
             gMain.unkF = 0x80;
@@ -602,7 +606,7 @@ void sub_38A20(void)
             gCurrentPinballGame->unk3DC = 12;
             gCurrentPinballGame->unk387 = 2;
             MPlayStart(&gMPlayInfo_SE1, &se_unk_10b);
-            sub_11B0(8);
+            playRumbleType(8);
         }
         break;
     case 12:
@@ -641,7 +645,7 @@ void sub_38A20(void)
             if (gCurrentPinballGame->unk3E2 == 72)
             {
                 MPlayStart(&gMPlayInfo_SE1, &se_unk_10c);
-                sub_11B0(8);
+                playRumbleType(8);
             }
         }
         break;
@@ -1040,11 +1044,11 @@ void sub_39A40(void)
                     yy = tempVector.y * tempVector.y;
                     squaredMagnitude = xx + yy;
                     if (gCurrentPinballGame->unk383 == 0 && gCurrentPinballGame->unk388 == 0 &&
-                        gCurrentPinballGame->unk385 < gCurrentPinballGame->unk384 &&
+                        gCurrentPinballGame->unk385 < gCurrentPinballGame->legendaryHitsRequired &&
                         gCurrentPinballGame->unk452 == 0 && squaredMagnitude < 400)
                     {
                         m4aSongNumStart(SE_UNKNOWN_0x113);
-                        sub_11B0(12);
+                        playRumbleType(12);
                         gCurrentPinballGame->unk1F = 1;
                         gCurrentPinballGame->unk458[i] = 0;
                         gCurrentPinballGame->unk441[i] = 3;
@@ -1092,7 +1096,7 @@ void sub_39A40(void)
                 {
                     gCurrentPinballGame->unk458[i]++;
                     if (gCurrentPinballGame->unk458[i] % 9 == 0)
-                        sub_11B0(12);
+                        playRumbleType(12);
                 }
                 else
                 {
@@ -1255,7 +1259,7 @@ void sub_39A40(void)
                 gCurrentPinballGame->unk448 = 0;
                 gCurrentPinballGame->unk454 = 0;
                 if (!gMain.spriteGroups[16].available)
-                    sub_11B0(8);
+                    playRumbleType(8);
 
                 gMain.spriteGroups[16].available = 1;
             }

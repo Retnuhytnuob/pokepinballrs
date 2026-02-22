@@ -1862,7 +1862,7 @@ void sub_2AADC(void)
             if (gCurrentPinballGame->unk5A6 == 0)
             {
                 m4aMPlayAllStop();
-                sub_11B0(8);
+                playRumbleType(8);
             }
 
             if (gCurrentPinballGame->unk5A6 == 2)
@@ -2061,7 +2061,7 @@ void sub_2AADC(void)
             if (temp_r0 > 183)
             {
                 if (temp_r0 == 185)
-                    sub_11B0(6);
+                    playRumbleType(6);
 
                 if (temp_r0 == 184)
                     m4aSongNumStart(158);
@@ -2077,7 +2077,7 @@ void sub_2AADC(void)
             else if (temp_r0 > 167)
             {
                 if (temp_r0 == 169)
-                    sub_11B0(6);
+                    playRumbleType(6);
 
                 if (temp_r0 == 168)
                     m4aSongNumStart(0x9E);
@@ -2095,7 +2095,7 @@ void sub_2AADC(void)
                 if (temp_r0 > 115)
                 {
                     if (temp_r0 == 117)
-                        sub_11B0(6);
+                        playRumbleType(6);
 
                     if (temp_r0 == 116)
                         m4aSongNumStart(0x9E);
@@ -2111,7 +2111,7 @@ void sub_2AADC(void)
                 else if (temp_r0 > 99)
                 {
                     if (temp_r0 == 101)
-                        sub_11B0(6);
+                        playRumbleType(6);
 
                     if (temp_r0 == 100)
                         m4aSongNumStart(0x9E);

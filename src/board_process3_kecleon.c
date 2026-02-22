@@ -616,7 +616,7 @@ void sub_35D54(void)
         gCurrentPinballGame->scoreAddedInFrame = 500000;
         gCurrentPinballGame->unk385++;
         MPlayStart(&gMPlayInfo_SE1, &se_unk_101);
-        sub_11B0(7);
+        playRumbleType(7);
         break;
     case 12:
         if (gUnknown_086AE718[gCurrentPinballGame->unk3E2][1] > gCurrentPinballGame->unk3E4)
@@ -1135,7 +1135,7 @@ void sub_37850(void)
     if (gCurrentPinballGame->unk40C == 40)
     {
         m4aSongNumStart(SE_KECLEON_TREE_HIT);
-        sub_11B0(7);
+        playRumbleType(7);
     }
 
     if (var0 < 0)

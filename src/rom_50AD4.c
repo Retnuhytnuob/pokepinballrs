@@ -347,7 +347,7 @@ void sub_4F9F0(void)
         {
             m4aSongNumStart(SE_SLINGSHOT_HIT);
             gCurrentPinballGame->scoreAddedInFrame = 500;
-            sub_11B0(7);
+            playRumbleType(7);
         }
     }
 

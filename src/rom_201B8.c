@@ -390,7 +390,7 @@ void sub_1D5D8(void)
         var1 = gUnknown_086AD7C0[gCurrentPinballGame->unk2FD][0];
         var0 = gUnknown_086AD7C0[gCurrentPinballGame->unk2FD][2];
         m4aSongNumStart(SE_UNKNOWN_0xCF);
-        sub_11B0(7);
+        playRumbleType(7);
         gCurrentPinballGame->scoreAddedInFrame = 50000;
         break;
     case 2:
@@ -419,7 +419,7 @@ void sub_1D5D8(void)
         var1 = gUnknown_086AD7C0[gCurrentPinballGame->unk2FD][0];
         var0 = gUnknown_086AD7C0[gCurrentPinballGame->unk2FD][2];
         m4aSongNumStart(SE_UNKNOWN_0xCF);
-        sub_11B0(7);
+        playRumbleType(7);
         gCurrentPinballGame->scoreAddedInFrame = 100000;
         break;
     case 4:
@@ -663,7 +663,7 @@ void sub_1DDDC(void)
             gCurrentPinballGame->ball->oamPriority = 0;
             gCurrentPinballGame->scoreAddedInFrame = 5000;
             m4aSongNumStart(SE_UNKNOWN_0xD5);
-            sub_11B0(7);
+            playRumbleType(7);
             break;
         case 3:
             if (gUnknown_086AD862[gCurrentPinballGame->unk2A5][1] > gCurrentPinballGame->unk2A6)
@@ -790,7 +790,7 @@ void sub_1DDDC(void)
             gCurrentPinballGame->unk2A2 = 8;
             gCurrentPinballGame->scoreAddedInFrame = 10;
             m4aSongNumStart(SE_UNKNOWN_0xB6);
-            sub_11B0(7);
+            playRumbleType(7);
             if (gCurrentPinballGame->unk724)
                 gCurrentPinballGame->unk724 = 1;
             break;
@@ -823,7 +823,7 @@ void sub_1DDDC(void)
                     MPlayStart(&gMPlayInfo_SE3, &se_unk_d7);
 
                 if (gCurrentPinballGame->unk2A6 % 10 == 0)
-                    sub_11B0(12);
+                    playRumbleType(12);
             }
             break;
         case 9:
@@ -1053,7 +1053,7 @@ void sub_1EC48(void)
         {
             gCurrentPinballGame->scoreAddedInFrame = 500;
             m4aSongNumStart(SE_UNKNOWN_0xB6);
-            sub_11B0(7);
+            playRumbleType(7);
             if (gCurrentPinballGame->unk13 == 4 && gCurrentPinballGame->unk17 == 5 && gCurrentPinballGame->unk625 < 6)
             {
                 if (gCurrentPinballGame->unk625 == 0)
@@ -1768,7 +1768,7 @@ void sub_1FF0C(void)
         gCurrentPinballGame->unk2E3[0] = 0;
         gCurrentPinballGame->unk2E3[1] = 0;
         gCurrentPinballGame->unk2E2 = 0;
-        sub_11B0(7);
+        playRumbleType(7);
         m4aSongNumStart(SE_UNKNOWN_0xB7);
         gCurrentPinballGame->scoreAddedInFrame = 3000;
         gCurrentPinballGame->unk2E5[0] = 0;
@@ -2019,7 +2019,7 @@ void sub_203CC(void)
                 gCurrentPinballGame->scoreAddedInFrame = 4000;
             }
 
-            sub_11B0(11);
+            playRumbleType(11);
         }
 
         if (gCurrentPinballGame->unk61E >= 100)
