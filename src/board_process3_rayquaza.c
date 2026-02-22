@@ -4,7 +4,7 @@
 #include "constants/bg_music.h"
 
 extern const s16 gUnknown_08137D48[];
-extern const u8 gUnknown_081408B4[];
+extern const u8 gRayquazaBonusClear_Gfx[];
 extern const u8 gUnknown_083C5A2C[];
 extern const u8 gUnknown_084A6EEC[][0x280];
 extern const u8 gUnknown_084A856C[];
@@ -14,12 +14,12 @@ extern const s16 gUnknown_086AEF28[];
 extern const u16 gUnknown_086AF3CC[][3];
 extern const struct Vector16 gUnknown_086AF744[32];
 extern const s16 gUnknown_086AF784[];
-extern const u16 gUnknown_086B5ECA[][6][3];
-extern const u16 gUnknown_086B5CC0[][5][3];
-extern const u16 gUnknown_086B5D56[][2][3];
-extern const u16 gUnknown_086B5DCE[][7][3];
-extern const u16 gUnknown_086B609E[][3][3];
-extern const u16 gUnknown_086B612E[][3];
+extern const u16 gUnknown_086B5ECA[39][6][3];
+extern const u16 gUnknown_086B5CC0[10][5][3];
+extern const u16 gUnknown_086B5D56[20][2][3];
+extern const u16 gUnknown_086B5DCE[12][7][3];
+extern const u16 gUnknown_086B609E[10][3][3];
+extern const u16 gUnknown_086B612E[212][3];
 
 void RayquazaBoardProcess_3A_3E79C(void)
 {
@@ -151,21 +151,21 @@ void RayquazaBoardProcess_3B_3EB2C(void)
         gCurrentPinballGame->unk18 = 0;
         gMain.spriteGroups[6].available = 1;
         gMain.spriteGroups[5].available = 1;
-        DmaCopy16(3, gUnknown_081408B4, (void *)0x06015800, 0x2000);
+        DmaCopy16(3, gRayquazaBonusClear_Gfx, (void *)0x06015800, 0x2000);
         gCurrentPinballGame->unk394 = 136;
         gMain.unkF = 0x80;
         gCurrentPinballGame->unk5FA = 1;
         break;
     case 3:
         sub_351A8();
-        if (gCurrentPinballGame->unk1C)
+        if (gCurrentPinballGame->scoreCounterAnimationEnabled)
             gCurrentPinballGame->unk18 = 181;
 
         if (gCurrentPinballGame->unk18 == 180)
         {
-            gCurrentPinballGame->unk1C = 1;
-            gCurrentPinballGame->unk38 = 400000;
-            gCurrentPinballGame->unk3C = 99999999;
+            gCurrentPinballGame->scoreCounterAnimationEnabled = TRUE;
+            gCurrentPinballGame->scoreAddStepSize = 400000;
+            gCurrentPinballGame->scoreAddedInFrame = 99999999;
         }
 
         if (gCurrentPinballGame->unk18 < 240)
@@ -192,20 +192,20 @@ void RayquazaBoardProcess_3B_3EB2C(void)
         gCurrentPinballGame->unk18 = 140;
         gMain.spriteGroups[6].available = 1;
         gMain.spriteGroups[5].available = 1;
-        DmaCopy16(3, gUnknown_081408B4, (void *)0x06015800, 0x2000);
+        DmaCopy16(3, gRayquazaBonusClear_Gfx, (void *)0x06015800, 0x2000);
         gCurrentPinballGame->unk394 = 136;
         gMain.unkF = 0x80;
         break;
     case 5:
         sub_351A8();
-        if (gCurrentPinballGame->unk1C)
+        if (gCurrentPinballGame->scoreCounterAnimationEnabled)
             gCurrentPinballGame->unk18 = 181;
 
         if (gCurrentPinballGame->unk18 == 180)
         {
-            gCurrentPinballGame->unk1C = 1;
-            gCurrentPinballGame->unk38 = 400000;
-            gCurrentPinballGame->unk3C = 99999999;
+            gCurrentPinballGame->scoreCounterAnimationEnabled = TRUE;
+            gCurrentPinballGame->scoreAddStepSize = 400000;
+            gCurrentPinballGame->scoreAddedInFrame = 99999999;
         }
 
         if (gCurrentPinballGame->unk18 < 240)
@@ -255,8 +255,8 @@ void sub_3EDF0(void)
         gCurrentPinballGame->unk389 = 1;
         if (gCurrentPinballGame->unk452 == 5)
         {
-            m4aSongNumStart(SE_UNKNOWN_0x126);
-            gCurrentPinballGame->unk3C = 1000000;
+            m4aSongNumStart(SE_RAYQUAZA_HIT);
+            gCurrentPinballGame->scoreAddedInFrame = 1000000;
             gCurrentPinballGame->unk385++;
             sub_11B0(7);
             if (gCurrentPinballGame->unk385 >= gCurrentPinballGame->unk384 && gCurrentPinballGame->unk3DC != 6)
@@ -509,7 +509,7 @@ void sub_3EDF0(void)
             gCurrentPinballGame->unk528.y = 0;
             gCurrentPinballGame->unk514 = 0;
             gCurrentPinballGame->unk3E4 = 0;
-            m4aSongNumStart(SE_UNKNOWN_0x127);
+            m4aSongNumStart(SE_RAYQUAZA_WIND);
         }
         break;
     case 8:
@@ -632,7 +632,7 @@ void sub_3EDF0(void)
                 gCurrentPinballGame->unk3DC = 12;
                 gCurrentPinballGame->unk3E1 = 0;
             }
-        
+
         break;
     case 12:
         DmaCopy16(3, gUnknown_084AA18C, (void *)0x06011620, 0x860);
@@ -1064,7 +1064,7 @@ void sub_40288(void)
         {
             gCurrentPinballGame->unk510 = 0;
             gCurrentPinballGame->unk507 = 3;
-            m4aSongNumStart(SE_UNKNOWN_0x129);
+            m4aSongNumStart(SE_RAYQUAZA_FLYBY);
         }
         break;
     case 3:
@@ -1819,7 +1819,7 @@ void sub_423D8(void)
                     m4aMPlayFadeOutTemporarily(&gMPlayInfo_SE1, 5);
 
                 if (gCurrentPinballGame->unk516 % 160 == 1)
-                    m4aSongNumStart(SE_UNKNOWN_0x12E);
+                    m4aSongNumStart(SE_RAYQUAZA_STAGE_WIND);
 
                 if (gCurrentPinballGame->unk516 % 160 == 2)
                     m4aMPlayVolumeControl(&gMPlayInfo_SE1, TRACKS_ALL, 0x33);

@@ -171,7 +171,7 @@ void TitleScreen1_WaitForStartButton(void)
 
         if (JOY_NEW(A_BUTTON | START_BUTTON))
         {
-            m4aSongNumStart(SE_MENU_SELECT_0x65);
+            m4aSongNumStart(SE_MENU_SELECT);
             gTitlescreen.animTimer = 0;
             gTitlescreen.unk2 = 0;
             gMain.subState = SUBSTATE_2;
@@ -245,7 +245,7 @@ void TitleScreen9_8010D84(void)
     {
         if (JOY_NEW(A_BUTTON))
         {
-            m4aSongNumStart(SE_MENU_SELECT_0x65);
+            m4aSongNumStart(SE_MENU_SELECT);
             sub_11B74();
             sub_02B4();
             m4aMPlayAllStop();
@@ -254,7 +254,7 @@ void TitleScreen9_8010D84(void)
         }
         else if (JOY_NEW(B_BUTTON))
         {
-            m4aSongNumStart(SE_MENU_CANCEL_0x66);
+            m4aSongNumStart(SE_MENU_CANCEL);
             gTitlescreen.deleteSaveWindowVisible = FALSE;
             gMain.subState = SUBSTATE_WAIT_FOR_START_BUTTON;
         }
@@ -271,7 +271,7 @@ void TitleScreen3_8010E00(void)
         gTitlescreen.unk6 = 9;
         gMain.subState = SUBSTATE_11;
     }
-    
+
     if (gUnknown_020028A4)
         return;
 
@@ -337,27 +337,27 @@ void TitleScreen4_MenuInputNoSavedGame(void)
 
         if (JOY_NEW(DPAD_UP))
         {
-            m4aSongNumStart(SE_MENU_MOVE_0x67);
+            m4aSongNumStart(SE_MENU_MOVE);
             if (--gTitlescreen.menuCursorIndex < 0)
                 gTitlescreen.menuCursorIndex = 3;
         }
         else if (JOY_NEW(DPAD_DOWN))
         {
-            m4aSongNumStart(SE_MENU_MOVE_0x67);
+            m4aSongNumStart(SE_MENU_MOVE);
             if (++gTitlescreen.menuCursorIndex > 3)
                 gTitlescreen.menuCursorIndex = 0;
         }
 
         if (JOY_NEW(A_BUTTON | START_BUTTON))
         {
-            m4aSongNumStart(SE_MENU_SELECT_0x65);
+            m4aSongNumStart(SE_MENU_SELECT);
             gTitlescreen.animTimer = 0;
             gTitlescreen.unk2 = 0;
             gMain.subState = SUBSTATE_7;
         }
         else if (JOY_NEW(B_BUTTON))
         {
-            m4aSongNumStart(SE_MENU_CANCEL_0x66);
+            m4aSongNumStart(SE_MENU_CANCEL);
             gTitlescreen.animTimer = 0;
             gTitlescreen.unk2 = 12;
             gTitlescreen.unkD = 0;
@@ -436,27 +436,27 @@ void TitleScreen5_MenuInputSavedGame(void)
 
         if (JOY_NEW(DPAD_UP))
         {
-            m4aSongNumStart(SE_MENU_MOVE_0x67);
+            m4aSongNumStart(SE_MENU_MOVE);
             if (--gTitlescreen.menuCursorIndex < 0)
                 gTitlescreen.menuCursorIndex = 4;
         }
         else if (JOY_NEW(DPAD_DOWN))
         {
-            m4aSongNumStart(SE_MENU_MOVE_0x67);
+            m4aSongNumStart(SE_MENU_MOVE);
             if (++gTitlescreen.menuCursorIndex > 4)
                 gTitlescreen.menuCursorIndex = 0;
         }
 
         if (JOY_NEW(A_BUTTON | START_BUTTON))
         {
-            m4aSongNumStart(SE_MENU_SELECT_0x65);
+            m4aSongNumStart(SE_MENU_SELECT);
             gTitlescreen.animTimer = 0;
             gTitlescreen.unk2 = 0;
             gMain.subState = SUBSTATE_8;
         }
         else if (JOY_NEW(B_BUTTON))
         {
-            m4aSongNumStart(SE_MENU_CANCEL_0x66);
+            m4aSongNumStart(SE_MENU_CANCEL);
             gTitlescreen.animTimer = 0;
             gTitlescreen.unk2 = 12;
             gTitlescreen.unkD = 0;
@@ -615,7 +615,7 @@ static void sub_114FC(void)
             {
                 gEraseSaveDataAccessStep = 0;
                 gEraseSaveDataAccessCounter = 0;
-                m4aSongNumStart(SE_MENU_POPUP_OPEN_0x68);
+                m4aSongNumStart(SE_MENU_POPUP_OPEN);
                 gTitlescreen.deleteSaveWindowVisible = TRUE;
                 gMain.subState = SUBSTATE_DELETE_SAVE_GAME_CONFIRMATION;
             }
@@ -644,7 +644,7 @@ static void sub_1157C(void)
         {
             gEReaderAccessStep = 0;
             gEReaderAccessCounter = 0;
-            m4aSongNumStart(SE_MENU_SELECT_0x65);
+            m4aSongNumStart(SE_MENU_SELECT);
             gTitlescreen.unk6 = 5;
             if (gMain.subState == SUBSTATE_WAIT_FOR_START_BUTTON)
                 gMain.subState = SUBSTATE_11;

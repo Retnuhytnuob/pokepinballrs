@@ -17,7 +17,7 @@ void sub_22D54(void);
 
 
 void sub_1A98C(void)
-{    
+{
     if (gMain.unkF != 0)
         return;
 
@@ -44,7 +44,7 @@ void sub_1A98C(void)
 void sub_1A9E8(void)
 {
     if (gCurrentPinballGame->unk26 > 0)
-        gCurrentPinballGame->unk26 -= 1;
+        gCurrentPinballGame->unk26--;
 
     switch (gCurrentPinballGame->unk25)
     {
@@ -63,20 +63,20 @@ void sub_1A9E8(void)
     }
 }
 
-void sub_1AA38(void) 
+void sub_1AA38(void)
 {
     if (gCurrentPinballGame->unk72F > 1)
     {
         sub_19B64(4);
     }
-    
+
     gCurrentPinballGame->unk5FC = 0;
     gCurrentPinballGame->unk5FB = 0;
     gCurrentPinballGame->unk5FE = 0;
     gCurrentPinballGame->unk28 = 113;
-    
+
     m4aSongNumStart(SE_UNKNOWN_0xCE);
-    gCurrentPinballGame->unk3C = 50000;
+    gCurrentPinballGame->scoreAddedInFrame = 50000;
 
     sub_11B0(8);
 }
@@ -88,7 +88,7 @@ void sub_1AA38(void)
 * Note: this *does not* affect the start of the catch mode itself.
 * When this function is nulled out at sub_1A9E8, the banner *doesn't* show, and
 * the ball bounces off the sharpedo. However, the grid still shows a picked mon,
-* and the mode otherwise works mostly normally, with the exception of affecting 
+* and the mode otherwise works mostly normally, with the exception of affecting
 * the 'tilt' behavior, and the colision with the cyndaquil pushback.
 */
 void sub_1AAA0(void)
@@ -96,11 +96,11 @@ void sub_1AAA0(void)
     if (gCurrentPinballGame->unk28) //Countdown timer; ball grabbed/held while banner shows
     {
         gCurrentPinballGame->unk28--;
-        if (gCurrentPinballGame->unk28 > 100) 
+        if (gCurrentPinballGame->unk28 > 100)
         {
             gCurrentPinballGame->unk5F7 = 1;
             gCurrentPinballGame->unk1F = 1;
-    
+
             gCurrentPinballGame->ball->velocity.x = 0;
             gCurrentPinballGame->ball->velocity.y = 0;
             gCurrentPinballGame->ball->unk6 = 0;
@@ -108,7 +108,7 @@ void sub_1AAA0(void)
             if (gCurrentPinballGame->unk28 > 108)
             {
                 gCurrentPinballGame->unk5FA = 1;
-                
+
                 if (gCurrentPinballGame->unk28 > 110)
                 {
                     gCurrentPinballGame->ball->positionQ0.x = 195;
@@ -121,7 +121,7 @@ void sub_1AAA0(void)
                 }
                 //Presumed controling either the message board 'state'/'tile'
                 // or the sharpedo animation 'state'/tile.
-                gCurrentPinballGame->unk2F4 =6;  
+                gCurrentPinballGame->unk2F4 =6;
             }
             else if (gCurrentPinballGame->unk28 > 104)
             {
@@ -129,7 +129,7 @@ void sub_1AAA0(void)
                 gCurrentPinballGame->ball->positionQ0.y = 219;
                 gCurrentPinballGame->unk2F4 = 7;
             }
-            else 
+            else
             {
                 gCurrentPinballGame->ball->unk0 = 1;
                 gCurrentPinballGame->unk2F4 = 8;
@@ -178,14 +178,14 @@ void sub_1AAA0(void)
                 gCurrentPinballGame->unk2F4 = 16;
             }
         }
-        else if (gCurrentPinballGame->unk28 > 18) 
+        else if (gCurrentPinballGame->unk28 > 18)
         {
             gCurrentPinballGame->ball->positionQ0.x = 193;
             gCurrentPinballGame->ball->positionQ0.y = 226;
             gCurrentPinballGame->ball->unk0 = 0;
             gCurrentPinballGame->unk2F4 = 17;
         }
-        else if (gCurrentPinballGame->unk28 > 16) 
+        else if (gCurrentPinballGame->unk28 > 16)
         {
             gCurrentPinballGame->unk1F = 0;
             gCurrentPinballGame->unk5FE = 0;
@@ -203,17 +203,17 @@ void sub_1AAA0(void)
                 sub_11B0(7);
             }
         }
-        else if (gCurrentPinballGame->unk28 > 12) 
+        else if (gCurrentPinballGame->unk28 > 12)
         {
             gCurrentPinballGame->ball->unk6 = 0;
             gCurrentPinballGame->unk2F4 = 19;
         }
-        else if (gCurrentPinballGame->unk28 > 8) 
+        else if (gCurrentPinballGame->unk28 > 8)
         {
             gCurrentPinballGame->ball->unk6 = 0;
             gCurrentPinballGame->unk2F4 = 20;
         }
-        else if (gCurrentPinballGame->unk28 > 4) 
+        else if (gCurrentPinballGame->unk28 > 4)
         {
             gCurrentPinballGame->ball->unk6 = 0;
             gCurrentPinballGame->unk2F4 = 21;
@@ -228,7 +228,7 @@ void sub_1AAA0(void)
         gCurrentPinballGame->ball->prevPositionQ1 = gCurrentPinballGame->ball->positionQ1;
         gCurrentPinballGame->ball->positionQ8.x= gCurrentPinballGame->ball->positionQ0.x << 8;
         gCurrentPinballGame->ball->positionQ8.y = gCurrentPinballGame->ball->positionQ0.y << 8;
-        
+
     }
     else
     {
@@ -244,7 +244,7 @@ void sub_1AAA0(void)
 
 void sub_1AD84(void)
 {
-    gCurrentPinballGame->unk3C = 100000;
+    gCurrentPinballGame->scoreAddedInFrame = 100000;
     if (gCurrentPinballGame->unk2DA == 3)
     {
         gCurrentPinballGame->unk2DA = 4;
@@ -293,7 +293,7 @@ void sub_1ADF4(void)
                 gCurrentPinballGame->unk28++;
             else
             {
-                if (gCurrentPinballGame->unk48 != 0 && gCurrentPinballGame->unk16C == 4)
+                if (gCurrentPinballGame->scoreHi != 0 && gCurrentPinballGame->unk16C == 4)
                     sub_22978();
                 else
                     sub_22C6C();
@@ -301,7 +301,7 @@ void sub_1ADF4(void)
         }
         else
         {
-            if (gCurrentPinballGame->unk48 != 0 && gCurrentPinballGame->unk16C == 4)
+            if (gCurrentPinballGame->scoreHi != 0 && gCurrentPinballGame->unk16C == 4)
                 sub_22A30();
             else
                 sub_22D54();
@@ -343,7 +343,7 @@ void sub_1AF84(void)
     gCurrentPinballGame->unk1B6 = 0;
     gCurrentPinballGame->unk28 = 0xB4;
     gCurrentPinballGame->unk1BA = 0xB4;
-    gCurrentPinballGame->unk3C = 0x7A120;
+    gCurrentPinballGame->scoreAddedInFrame = 500000;
     gMain.blendControl = 0xCE;
     gMain.blendBrightness = 0;
     gCurrentPinballGame->unk5F7 = 1;
@@ -356,7 +356,7 @@ void sub_1AFD4(void)
     {
         gCurrentPinballGame->ball->unk0 = 1;
         gCurrentPinballGame->unk1F = 1;
-        gCurrentPinballGame->unk28 = gCurrentPinballGame->unk28 - 1;
+        gCurrentPinballGame->unk28--;
         gCurrentPinballGame->ball->velocity.x = 0;
         gCurrentPinballGame->ball->velocity.y = 0;
         gCurrentPinballGame->ball->positionQ0.x = 0xDC;
@@ -551,7 +551,7 @@ void sub_1B140(s16 arg0)
             {
                 if (JOY_NEW(DPAD_LEFT) && gCurrentPinballGame->unk6DD == 0)
                 {
-                    m4aSongNumStart(SE_UNKNOWN_0x82);
+                    m4aSongNumStart(SE_EVO_SELECTION_MOVE);
 
                     if (gCurrentPinballGame->unk1A6 > 0)
                         gCurrentPinballGame->unk1A6--;
@@ -566,7 +566,7 @@ void sub_1B140(s16 arg0)
                 {
                     if (gCurrentPinballGame->unk6DD == 0)
                     {
-                        m4aSongNumStart(SE_UNKNOWN_0x82);
+                        m4aSongNumStart(SE_EVO_SELECTION_MOVE);
 
                         if (gCurrentPinballGame->unk1A6 <= 6)
                             gCurrentPinballGame->unk1A6++;
@@ -629,7 +629,7 @@ void sub_1B140(s16 arg0)
                     gCurrentPinballGame->coins -= var_r3;
 
                     m4aMPlayAllStop();
-                    m4aSongNumStart(SE_UNKNOWN_0x83);
+                    m4aSongNumStart(SE_EVO_SELECTION_CONFIRM);
 
                     gCurrentPinballGame->unk1AB = 19;
                     gCurrentPinballGame->unk376 = 30;
@@ -641,7 +641,7 @@ void sub_1B140(s16 arg0)
             {
                 gCurrentPinballGame->unk252 = 30;
                 gCurrentPinballGame->unk1B8 = 30;
-                m4aSongNumStart(SE_MENU_CANCEL_0x66);
+                m4aSongNumStart(SE_MENU_CANCEL);
             }
         }
 
@@ -874,7 +874,7 @@ void sub_1B140(s16 arg0)
                             int stage1Evo;
                             int stage2Evo;
 
-                            m4aSongNumStart(SE_UNKNOWN_0x82);
+                            m4aSongNumStart(SE_EVO_SELECTION_MOVE);
 
                             if (gCurrentPinballGame->evolvingPartyIndex > 0)
                                 gCurrentPinballGame->evolvingPartyIndex--;
@@ -903,7 +903,7 @@ void sub_1B140(s16 arg0)
                             int stage1Evo;
                             int stage2Evo;
 
-                            m4aSongNumStart(SE_UNKNOWN_0x82);
+                            m4aSongNumStart(SE_EVO_SELECTION_MOVE);
 
                             if (gCurrentPinballGame->evolvingPartyIndex < gCurrentPinballGame->evolvablePartySize - 1)
                                 gCurrentPinballGame->evolvingPartyIndex++;
@@ -937,7 +937,7 @@ void sub_1B140(s16 arg0)
 
                             if (evoTarget < SPECIES_NONE)
                             {
-                                m4aSongNumStart(SE_UNKNOWN_0x82);
+                                m4aSongNumStart(SE_EVO_SELECTION_MOVE);
                                 gCurrentPinballGame->unk59A = evoTarget;
                                 gCurrentPinballGame->unk1B8 = 30;
                                 gCurrentPinballGame->unk1B0 = 1;
@@ -950,7 +950,7 @@ void sub_1B140(s16 arg0)
 
                             if (evoTarget < SPECIES_NONE)
                             {
-                                m4aSongNumStart(SE_UNKNOWN_0x82);
+                                m4aSongNumStart(SE_EVO_SELECTION_MOVE);
                                 gCurrentPinballGame->unk59A = evoTarget;
                                 gCurrentPinballGame->unk1B8 = 30;
                                 gCurrentPinballGame->unk1B0 = 1;
@@ -968,7 +968,7 @@ void sub_1B140(s16 arg0)
 
                             if (evoTarget < SPECIES_NONE)
                             {
-                                m4aSongNumStart(SE_UNKNOWN_0x82);
+                                m4aSongNumStart(SE_EVO_SELECTION_MOVE);
                                 gCurrentPinballGame->unk59A = evoTarget;
                                 gCurrentPinballGame->unk1B8 = 30;
                                 gCurrentPinballGame->unk1B0 = 1;
@@ -981,7 +981,7 @@ void sub_1B140(s16 arg0)
 
                             if (evoTarget < SPECIES_NONE)
                             {
-                                m4aSongNumStart(SE_UNKNOWN_0x82);
+                                m4aSongNumStart(SE_EVO_SELECTION_MOVE);
                                 gCurrentPinballGame->unk59A = evoTarget;
                                 gCurrentPinballGame->unk1B8 = 30;
                                 gCurrentPinballGame->unk1B0 = 1;
@@ -1089,7 +1089,7 @@ void sub_1B140(s16 arg0)
                 gCurrentPinballGame->unk252 = 30;
                 gCurrentPinballGame->unk1B0 = 0;
                 gCurrentPinballGame->unk1B8 = 30;
-                m4aSongNumStart(SE_UNKNOWN_0x83);
+                m4aSongNumStart(SE_EVO_SELECTION_CONFIRM);
             }
 
             if (gCurrentPinballGame->unk252 == 0)
@@ -1179,7 +1179,7 @@ void sub_1C560(void)
     gCurrentPinballGame->unk28 = 0x96;
     gMain.unk44[13]->available = 0;
     gCurrentPinballGame->unk5F3 = 0;
-    gCurrentPinballGame->unk3C = 10000;
+    gCurrentPinballGame->scoreAddedInFrame = 10000;
     gCurrentPinballGame->unk5F7 = 1;
     sub_11B0(8);
 }

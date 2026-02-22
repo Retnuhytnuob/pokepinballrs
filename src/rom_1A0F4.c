@@ -17,13 +17,13 @@ void sub_1A0F4(void)
             gCurrentPinballGame->unk5FA = 1;
             if (gCurrentPinballGame->unkEA != 0)
             {
-                gCurrentPinballGame->unkEA -= 1;
+                gCurrentPinballGame->unkEA--;
             }
             else if (gCurrentPinballGame->unkEE == 0)
             {
                 if (gCurrentPinballGame->unkEC != 0)
                 {
-                    gCurrentPinballGame->unkEC -= 1;
+                    gCurrentPinballGame->unkEC--;
                 }
                 else
                 {
@@ -42,7 +42,7 @@ void sub_1A0F4(void)
                 }
                 else if (gCurrentPinballGame->unkEC != 0)
                 {
-                    gCurrentPinballGame->unkEC -= 1;
+                    gCurrentPinballGame->unkEC--;
                 }
                 else
                 {
@@ -171,7 +171,7 @@ void sub_1A2C0(void)
                 {
                     if (gCurrentPinballGame->unkF0 == 0x28)
                     {
-                        MPlayStart(&gMPlayInfo_SE1, &gUnknown_0869F7C8);
+                        MPlayStart(&gMPlayInfo_SE1, &se_unk_8b);
                     }
                     gCurrentPinballGame->unkF0--;
                     if (gCurrentPinballGame->unkF0 <= 0xF)
@@ -204,7 +204,7 @@ void sub_1A2C0(void)
                                 {
                                     DmaCopy16(3, gUnknown_02031520.unk14.unk2C[2] + 0x40, (void *)(OBJ_PLTT + 0x40), 0xE0);
                                 }
-                                DmaCopy16(3, gUnknown_02031520.unk14.unk2C[2] + 0x140, (void *)(OBJ_PLTT + 0x140), 0x60);  
+                                DmaCopy16(3, gUnknown_02031520.unk14.unk2C[2] + 0x140, (void *)(OBJ_PLTT + 0x140), 0x60);
                                 gCurrentPinballGame->unk6F = 2;
                             }
                         }
@@ -231,7 +231,7 @@ void sub_1A2C0(void)
                                 {
                                     DmaCopy16(3, gUnknown_02031520.unk14.unk2C[1] + 0x40, (void *)(OBJ_PLTT + 0x40), 0xE0);
                                 }
-                                DmaCopy16(3, gUnknown_02031520.unk14.unk2C[1] + 0x140, (void *)(OBJ_PLTT + 0x140), 0x60);    
+                                DmaCopy16(3, gUnknown_02031520.unk14.unk2C[1] + 0x140, (void *)(OBJ_PLTT + 0x140), 0x60);
                                 gCurrentPinballGame->unk6F = 1;
                             }
                         }
@@ -269,7 +269,7 @@ void sub_1A2C0(void)
                         {
                             DmaCopy16(3, gUnknown_02031520.unk14.unk2C[1] + 0x40, (void *)(OBJ_PLTT + 0x40), 0xE0);
                         }
-                        DmaCopy16(3, gUnknown_02031520.unk14.unk2C[1] + 0x140, (void *)(OBJ_PLTT + 0x140), 0x60);         
+                        DmaCopy16(3, gUnknown_02031520.unk14.unk2C[1] + 0x140, (void *)(OBJ_PLTT + 0x140), 0x60);
                         gCurrentPinballGame->unk6F = 1;
                         gCurrentPinballGame->unk70 = 1;
                     }
@@ -296,7 +296,7 @@ void sub_1A2C0(void)
                         {
                             DmaCopy16(3, gUnknown_02031520.unk14.unk2C[0] + 0x40, (void *)(OBJ_PLTT + 0x40), 0xE0);
                         }
-                        DmaCopy16(3, gUnknown_02031520.unk14.unk2C[0] + 0x140, (void *)(OBJ_PLTT + 0x140), 0x60);          
+                        DmaCopy16(3, gUnknown_02031520.unk14.unk2C[0] + 0x140, (void *)(OBJ_PLTT + 0x140), 0x60);
                         gCurrentPinballGame->unk6F = 0;
                         gCurrentPinballGame->unk70 = 1;
                     }

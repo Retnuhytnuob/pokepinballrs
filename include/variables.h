@@ -51,7 +51,7 @@ extern u16 gUnknown_086BB910[11][4];
 extern struct {u8 unk0; s16 unk2;} gUnknown_086BB9B4[];
 extern u16 gOptionsSEList[];
 extern u8 gUnknown_02031AF0[][10];
-extern u8 gUnknown_08527ED6[4][10];
+extern u8 gDefaultButtonConfigs[4][10];
 extern void (*const gOptionsStateFuncs[])(void);
 extern u32 gHighScoreNameEntry[HIGH_SCORE_NAME_LENGTH];
 extern u16 gUnknown_0201A520[3][BG_PLTT_SIZE];
@@ -190,7 +190,7 @@ extern u8 gFieldSelectWindowTilemap[];
 extern u16 gFieldSelectBGPals[];
 extern u16 gFieldSelectSpritePals[];
 extern u8 gFieldSelectSpriteGfx[];
-extern u8 gUnknown_080ACC60[];
+extern u8 gEReaderText_Gfx[];
 extern const u8 gTitlescreenBgTilemap[];
 extern const u16 gTitlescreenBg_Pals[];
 extern const u8 gTitlescreenBg_Gfx[];
@@ -320,7 +320,7 @@ extern s16 gUnknown_086A61BC[];
 extern s16 gUnknown_086A77A8[][10][2];
 extern u8 gUnknown_0201B124;
 
-extern struct PokemonSpecies gSpeciesInfo[];
+extern const struct PokemonSpecies gSpeciesInfo[];
 extern const struct SpriteSet * const gUnknown_086A54D8[13];
 extern u8 (*gMonHatchSpriteGroupGfx[])[0x10E0];
 extern u8 (*gMonHatchSpriteGroupPals[])[0x20];
@@ -368,7 +368,7 @@ extern const struct SpriteSet *const gUnknown_086A795C[];
 extern const struct SpriteSet *const gUnknown_086A79EC[];
 extern u8 gUnknown_080E1540[];
 extern u8 gUnknown_080E1740[];
-extern u8 gUnknown_080E1F40[];
+extern u8 gIntroScene4Sprites_Gfx[];
 extern u8 gUnknown_080E5F60[];
 extern u8 gUnknown_080E7F60[];
 
@@ -378,9 +378,9 @@ extern u8 gUnknown_080E9F60[];
 extern u8 gUnknown_080EA160[];
 extern u8 gUnknown_080EB160[];
 extern u8 gUnknown_080EC160[];
-extern u8 gUnknown_080EC960[];
+extern u8 gIntroScene5Text_Gfx[];
 extern u8 gUnknown_080F1980[];
-extern u8 gUnknown_080F2180[];
+extern u8 gIntroScene5Sprites_Gfx[];
 extern s16 gUnknown_086A7A1C[];
 
 extern s8 gUnknown_0202C548;
@@ -388,11 +388,11 @@ extern s8 gUnknown_0202BEB4;
 
 extern u8 gUnknown_080F61A0[];
 extern u8 gUnknown_080F63A0[];
-extern u8 gUnknown_080F6BA0[];
+extern u8 gIntroScene6Sprites_Gfx[];
 extern u8 gUnknown_080FCFC0[];
 extern u8 gUnknown_080FD7C0[];
 extern u8 gUnknown_080FDFC0[];
-extern u8 gUnknown_080FFFC0[];
+extern u8 gIntroScene6Stars_Gfx[];
 
 extern u8 gUnknown_086A7AE4[];
 extern const struct SpriteSet *const gUnknown_086A7A78[];
@@ -403,18 +403,18 @@ extern const struct SpriteSet *const gUnknown_086A7B74[];
 extern const struct SpriteSetTableEntry gUnknown_086B155C[];
 extern u8 gUnknown_08100FE0[];
 extern u8 gUnknown_081011E0[];
-extern u8 gUnknown_081019E0[];
+extern u8 gIntroScene7Sprites_Gfx[];
 extern u8 gUnknown_08106A00[];
 extern u8 gUnknown_08108A00[];
 extern u8 gUnknown_0810AA00[];
-extern u8 gUnknown_0810CA00[];
+extern u8 gIntroScene7Wailmer_Gfx[];
 
 extern s8 gUnknown_0201A4BC;
 
 extern u8 gUnknown_0810EA20[];
 extern u8 gUnknown_0810EC20[];
-extern u8 gUnknown_0810F420[];
-extern u8 gUnknown_08112840[];
+extern u8 gIntroScene7Explosion_Gfx[];
+extern u8 gIntroScene7WailmerLaunch_Gfx[];
 
 extern s8 gUnknown_086A7D4C[];
 extern s8 gUnknown_0202BEDC;
@@ -422,8 +422,8 @@ extern s8 gUnknown_0202A56C;
 
 extern u8 gUnknown_08115860[];
 extern u8 gUnknown_08115A60[];
-extern u8 gUnknown_08116260[];
-extern u8 gUnknown_08118680[];
+extern u8 gIntroScene8Clouds_Gfx[];
+extern u8 gIntroScene8Ball_Gfx[];
 
 extern u16 gCommonAndEggWeights[];
 extern u16 gMain_saveData_pokedexFlags_90[10];

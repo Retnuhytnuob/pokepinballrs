@@ -4,7 +4,7 @@
 #include "constants/bg_music.h"
 
 extern const u8 gUnknown_0847DF0C[][0x300];
-extern const u8 gUnknown_084FEF0C[][0x80];
+extern const u8 gRubyBoardRampPrize_Gfx[][0x80];
 
 
 void sub_2C538(void)
@@ -39,7 +39,7 @@ void sub_2C538(void)
         gCurrentPinballGame->unk304++;
         if (gCurrentPinballGame->unk304 == 9)
         {
-             gCurrentPinballGame->unk300 = 3;  
+             gCurrentPinballGame->unk300 = 3;
             gCurrentPinballGame->unk304 = 0;
         }
         break;
@@ -99,14 +99,14 @@ void sub_2C538(void)
             group->baseX = 192 - gCurrentPinballGame->unk58;
             group->baseY = 278 - gCurrentPinballGame->unk5A;
         }
-        
+
         if (gCurrentPinballGame->unk302 > 0)
         {
             gCurrentPinballGame->unk302--;
             if (gCurrentPinballGame->unk302 == 0)
                 gMain.spriteGroups[68].available = 0;
         }
-       
+
         oamSimple = &group->oam[0];
         gOamBuffer[oamSimple->oamId].x = oamSimple->xOffset + group->baseX;
         gOamBuffer[oamSimple->oamId].y = oamSimple->yOffset + group->baseY;
@@ -122,7 +122,7 @@ void sub_2C538(void)
             if (gCurrentPinballGame->unk302 <= 0)
             {
                 m4aSongNumStart(SE_UNKNOWN_0xC5);
-                gCurrentPinballGame->unk3C = 10000;
+                gCurrentPinballGame->scoreAddedInFrame = 10000;
                 gCurrentPinballGame->ball->velocity.x = -600;
                 gCurrentPinballGame->ball->velocity.y = -300;
                 gCurrentPinballGame->ball->unk6 = 0;
@@ -136,7 +136,7 @@ void sub_2C538(void)
     group = &gMain.spriteGroups[58];
     if (group->available)
     {
-        group->baseX = 184 - gCurrentPinballGame->unk58;        
+        group->baseX = 184 - gCurrentPinballGame->unk58;
         group->baseY = 277 - gCurrentPinballGame->unk5A;
         DmaCopy16(3, gUnknown_0847DF0C[index], (void*) 0x06013580, 0x300);
         for (i = 0; i < 3;i++)
@@ -168,7 +168,7 @@ void sub_2C9A4(void)
         else
             index = (gCurrentPinballGame->unk290 % 32) / 8;
 
-        DmaCopy16(3, gUnknown_084FEF0C[index], (void *) 0x06014B00, 0x80);
+        DmaCopy16(3, gRubyBoardRampPrize_Gfx[index], (void *) 0x06014B00, 0x80);
         oamSimple = &group->oam[0];
         gOamBuffer[oamSimple->oamId].x =  oamSimple->xOffset + group->baseX;
         gOamBuffer[oamSimple->oamId].y =  oamSimple->yOffset + group->baseY;

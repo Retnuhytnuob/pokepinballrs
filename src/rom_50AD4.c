@@ -33,12 +33,12 @@ void sub_4F2B8(void)
     {
         if (gCurrentPinballGame->unk72C < gUnknown_086B08C4[gCurrentPinballGame->unk72B - 1])
         {
-            gCurrentPinballGame->unk72C = gCurrentPinballGame->unk72C + 1;
+            gCurrentPinballGame->unk72C++;
         }
         else
         {
             gCurrentPinballGame->unk72C = 0;
-            gCurrentPinballGame->unk72B = gCurrentPinballGame->unk72B - 1;
+            gCurrentPinballGame->unk72B--;
         }
     }
 }
@@ -345,8 +345,8 @@ void sub_4F9F0(void)
         gCurrentPinballGame->unk716--;
         if (gCurrentPinballGame->unk716 == 3)
         {
-            m4aSongNumStart(SE_UNKNOWN_0x73);
-            gCurrentPinballGame->unk3C = 500;
+            m4aSongNumStart(SE_SLINGSHOT_HIT);
+            gCurrentPinballGame->scoreAddedInFrame = 500;
             sub_11B0(7);
         }
     }
@@ -442,7 +442,7 @@ void sub_4FC7C(void)
             gCurrentPinballGame->holeIndicators[3] = gCurrentPinballGame->holeIndicators[0];
         }
     }
-    
+
     for (i = 0; i < 4; i++)
     {
         src = &gUnknown_086B1300[i][gCurrentPinballGame->holeIndicators[i]];

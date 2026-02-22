@@ -7,15 +7,15 @@ extern const s16 gUnknown_086AE45A[];
 extern const s16 gUnknown_086AE3DC[][3];
 extern const s8 gUnknown_08137CBC[][2];
 extern const u8 gUnknown_084BB16C[][0x480];
-extern const u16 gUnknown_086B3EF6[][4][3];
+extern const u16 gUnknown_086B3EF6[20][4][3];
 extern const s16 gUnknown_086AE462[][2];
-extern const u8 gUnknown_083FFD8C[][0x300];
-extern const u16 gUnknown_086B4A72[][2][3];
-extern const u8 gUnknown_08526DCC[];
+extern const u8 gSapphireBoardWailmer_Gfx[][0x300];
+extern const u16 gWailmerSpritesheetOam[26][2][3];
+extern const u8 gSapphireBoardZigzagoonFx_Gfx[];
 extern const s16 gUnknown_086AE496[][3];
-extern const u8 gUnknown_08512C4C[][0x380];
-extern const u16 gUnknown_086B3CA4[][3][3];
-extern const u16 gUnknown_086B3B7E[][7][3];
+extern const u8 gSapphireBoardZigzagoon_Gfx[][0x380];
+extern const u16 gSapphireBoardZigzagoonSpritesheetOam[42][3][3];
+extern const u16 gUnknown_086B3B7E[14][7][3];
 extern const u8 gUnknown_084ED6CC[][0x200];
 extern const s16 gUnknown_086AE4FC[][2];
 extern const s16 gUnknown_08137CD6[];
@@ -23,7 +23,7 @@ extern const u8 gUnknown_0847A40C[][0x300];
 extern const u8 gUnknown_0847D10C[][0x200];
 extern const u8 gUnknown_084C1E6C[][0x300];
 extern const u8 gUnknown_084C4B6C[][0x200];
-extern const u8 gUnknown_084FEA0C[][0x80];
+extern const u8 gSapphireBoardShopShockWall_Gfx[][0x80];
 extern const u8 gUnknown_0845690C[][0x200];
 extern const u8 gUnknown_08483D8C[][0x480];
 extern const u8 gUnknown_08488A0C[][0x480];
@@ -35,12 +35,12 @@ extern const s16 gUnknown_086AE394[][3];
 extern const s16 gUnknown_08137928[];
 extern const s16 gUnknown_08055A68[][7];
 extern u16 gUnknown_086B3FE6[][18];
-extern struct SongHeader gUnknown_086A11A4;
+extern struct SongHeader se_unk_e3;
 extern const s16 gUnknown_086AE0D0[];
-extern const u16 gUnknown_086B4E62[][12];
+extern const u16 gUnknown_086B4E62[22][12];
 extern const u8 gUnknown_08158284[];
 extern const u8 gUnknown_0815A6A4[];
-extern const u16 gUnknown_086B4112[][12];
+extern const u16 gUnknown_086B4112[20][12];
 extern const u8 gUnknown_083A562C[];
 extern const u8 gUnknown_083A6E4C[];
 extern const s16 gUnknown_086AE344[][2];
@@ -49,8 +49,8 @@ extern const u8 gUnknown_08455E8C[][0x200];
 extern const u8 gUnknown_0845648C[][0x40];
 extern const u8 gUnknown_086AE324[];
 
-extern struct SongHeader gUnknown_086A1ABC;
-extern struct SongHeader gUnknown_0869F2A0;
+extern struct SongHeader se_unk_fc;
+extern struct SongHeader se_unk_7a;
 
 extern u8 gUnknown_020028A8[][3];
 
@@ -160,11 +160,11 @@ void sub_2CA9C(void)
         }
 
         if (gCurrentPinballGame->unk286 == 85)
-            MPlayStart(&gMPlayInfo_SE1, &gUnknown_086A1ABC);
+            MPlayStart(&gMPlayInfo_SE1, &se_unk_fc);
 
         if (gCurrentPinballGame->unk286 == 58)
         {
-            MPlayStart(&gMPlayInfo_SE1, &gUnknown_0869F2A0);
+            MPlayStart(&gMPlayInfo_SE1, &se_unk_7a);
             if (gCurrentPinballGame->numLives < 9)
                 gCurrentPinballGame->numLives++;
         }
@@ -357,7 +357,7 @@ void sub_2D204(void)
         if (gCurrentPinballGame->unkCC < 236)
             gCurrentPinballGame->unkE6 = gCurrentPinballGame->unk18 / 2;;
 
-        if (gCurrentPinballGame->unk18 > 35) 
+        if (gCurrentPinballGame->unk18 > 35)
         {
             if (gCurrentPinballGame->unk18 < 68)
             {
@@ -664,7 +664,7 @@ void sub_2D204(void)
         {
             if (var0 == 1)
                 m4aMPlayStop(&gMPlayInfo_BGM);
-    
+
             gMain.blendControl = 0x9F;
             gMain.blendBrightness = 16 - (var0  / 4);
             if (var0 == 32)
@@ -672,7 +672,7 @@ void sub_2D204(void)
                 gCurrentPinballGame->unk29C = 140;
                 PlayCry_Normal(gSpeciesInfo[gCurrentPinballGame->currentSpecies].mainSeriesIndexNumber, 0);
             }
-    
+
             if (var0 == 64)
             {
                 gCurrentPinballGame->unk604 = 0;
@@ -701,14 +701,14 @@ void sub_2D204(void)
                     gCurrentPinballGame->unkE4 = 0;
                 }
             }
-    
+
             index = gCurrentPinballGame->unk603;
             group = gMain.unk44[37];
             group->baseX = 96 - gCurrentPinballGame->unk58;
             group->baseY = 300 - gCurrentPinballGame->unk5A;
             if (group->baseY >= 200)
                 group->baseY = 200;
-    
+
             for (i = 0; i < 4; i++)
             {
                 oamSimple = &group->oam[i];
@@ -850,7 +850,7 @@ void sub_2E094(void)
                 if (gCurrentPinballGame->unk18 % 10 == 0)
                     m4aSongNumStart(SE_UNKNOWN_0x97);
         }
-        
+
         if (gMain.selectedField == FIELD_RUBY)
         {
             DmaCopy16(3, gUnknown_08483D8C[index], (void *) 0x06015800, 0x480);
@@ -943,7 +943,7 @@ void sub_2E6AC(void)
                 gCurrentPinballGame->ball->unk6 = 0;
                 m4aSongNumStart(SE_UNKNOWN_0xE2);
                 sub_11B0(7);
-                gCurrentPinballGame->unk3C = 100000;
+                gCurrentPinballGame->scoreAddedInFrame = 100000;
             }
 
             gCurrentPinballGame->ball->positionQ0.x = 156;
@@ -1156,11 +1156,11 @@ void sub_2E6AC(void)
         {
             gCurrentPinballGame->unk30C = 0;
             gCurrentPinballGame->unk306 = 10;
-            MPlayStart(&gMPlayInfo_SE1, &gUnknown_086A11A4);
+            MPlayStart(&gMPlayInfo_SE1, &se_unk_e3);
         }
 
         if (gCurrentPinballGame->unk310++ % 35 == 34)
-            MPlayStart(&gMPlayInfo_SE1, &gUnknown_086A11A4);
+            MPlayStart(&gMPlayInfo_SE1, &se_unk_e3);
 
         gCurrentPinballGame->unk30C++;
         break;
@@ -1211,12 +1211,12 @@ void sub_2F140(void)
     index = gUnknown_086AE462[index][1];
     group->baseX = 164 - gCurrentPinballGame->unk58;
     group->baseY = 166 - gCurrentPinballGame->unk5A;
-    DmaCopy16(3, gUnknown_083FFD8C[index], (void *)0x06012720, 0x300);
+    DmaCopy16(3, gSapphireBoardWailmer_Gfx[index], (void *)0x06012720, 0x300);
     for (i = 0; i < 2; i++)
     {
         oamSimple = &group->oam[i];
         dst = (u16*)&gOamBuffer[oamSimple->oamId];
-        src = gUnknown_086B4A72[var0][i];
+        src = gWailmerSpritesheetOam[var0][i];
         *dst++ = *src++;
         *dst++ = *src++;
         *dst++ = *src++;
@@ -1271,9 +1271,9 @@ void sub_2F26C(void)
         gCurrentPinballGame->unk37B = 0;
         gMain.spriteGroups[27].available = 1;
         gCurrentPinballGame->unkE4 = 22;
-        DmaCopy16(3, gUnknown_08526DCC, (void *)0x06015800, 0xC00);
+        DmaCopy16(3, gSapphireBoardZigzagoonFx_Gfx, (void *)0x06015800, 0xC00);
         m4aSongNumStart(SE_UNKNOWN_0xEC);
-        gCurrentPinballGame->unk3C = 5000;
+        gCurrentPinballGame->scoreAddedInFrame = 5000;
         break;
     case 3:
         if (gUnknown_086AE496[gCurrentPinballGame->unk37D][1] > gCurrentPinballGame->unk37E)
@@ -1314,20 +1314,20 @@ void sub_2F504(void)
     u16 *dst;
     const u16 *src;
     s16 index;
-    
+
     group = &gMain.spriteGroups[26];
     if (group->available)
     {
         group->baseX = 198 - gCurrentPinballGame->unk58;
         group->baseY = gCurrentPinballGame->unk380 + 284 - gCurrentPinballGame->unk5A;
         index = gCurrentPinballGame->unk379;
-        DmaCopy16(3, gUnknown_08512C4C[index], (void *)0x06012A20, 0x380);
+        DmaCopy16(3, gSapphireBoardZigzagoon_Gfx[index], (void *)0x06012A20, 0x380);
         index = gCurrentPinballGame->unk37A;
         for (i = 0; i < 3; i++)
         {
             oamSimple = &group->oam[i];
             dst = (u16*)&gOamBuffer[oamSimple->oamId];
-            src = gUnknown_086B3CA4[index][i];
+            src = gSapphireBoardZigzagoonSpritesheetOam[index][i];
             *dst++ = *src++;
             *dst++ = *src++;
             *dst++ = *src++;
@@ -1417,7 +1417,7 @@ void sub_2F79C(void)
                 if (gCurrentPinballGame->unk36C[i] == 5)
                 {
                     m4aSongNumStart(SE_UNKNOWN_0xE6);
-                    gCurrentPinballGame->unk3C = 2000;
+                    gCurrentPinballGame->scoreAddedInFrame = 2000;
                 }
             }
 
@@ -1528,7 +1528,7 @@ void sub_2F79C(void)
         if (gCurrentPinballGame->unk368 == 17)
         {
             m4aSongNumStart(SE_UNKNOWN_0xE8);
-            gCurrentPinballGame->unk3C = 10;
+            gCurrentPinballGame->scoreAddedInFrame = 10;
             sub_11B0(13);
         }
 
@@ -1671,7 +1671,7 @@ void sub_2FCD0(void)
     else
         index = 9;
 
-    DmaCopy16(3, &gUnknown_084FEA0C[index], (void *)0x060146A0, 0x80);
+    DmaCopy16(3, &gSapphireBoardShopShockWall_Gfx[index], (void *)0x060146A0, 0x80);
     oamSimple = &group->oam[0];
     gOamBuffer[oamSimple->oamId].x = oamSimple->xOffset + group->baseX;
     gOamBuffer[oamSimple->oamId].y = oamSimple->yOffset + group->baseY;
@@ -1699,7 +1699,7 @@ void sub_30178(void)
     {
         if (gCurrentPinballGame->unk624 == 2)
         {
-            gCurrentPinballGame->unk3C = 500;
+            gCurrentPinballGame->scoreAddedInFrame = 500;
             m4aSongNumStart(SE_UNKNOWN_0xB6);
             sub_11B0(7);
             if (gCurrentPinballGame->unk13 == 4 && gCurrentPinballGame->unk17 == 5)
@@ -1741,7 +1741,7 @@ void sub_30178(void)
             gCurrentPinballGame->unk176++;
             gCurrentPinballGame->unk308++;
             if (gCurrentPinballGame->unk308 == 100)
-                gCurrentPinballGame->unk3C = 50000;
+                gCurrentPinballGame->scoreAddedInFrame = 50000;
         }
 
         gCurrentPinballGame->unk624--;

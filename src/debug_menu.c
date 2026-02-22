@@ -8,15 +8,15 @@ extern s16 gUnknown_020306C0[];
 extern s16 gUnknown_02030750[];
 extern s16 gUnknown_02031500[];
 
-extern const u8 gUnknown_08137DBE[];
+extern const u8 gDebugTextStrings[];
 extern const u8 gUnknown_08137DE8[];
 extern u8 gUnknown_08137E00[];
-extern const u8 gUnknown_0850100C[];
-extern const u8 gUnknown_085028CC[];
-extern const u8 gUnknown_085038CC[];
-extern const u8 gUnknown_0850398C[];
+extern const u8 gMainBoardBallSave_Gfx[];
+extern const u8 gMainBoardBallSaveLatios_Gfx[];
+extern const u8 gMainBoardBallSaveLatiosArm_Gfx[];
+extern const u8 gMainBoardEndOfBall_Gfx[];
 extern const u8 gUnknown_0850558C[][0x20];
-extern const u8 gUnknown_08509F4C[];
+extern const u8 gMainBoardGameOverText_Gfx[];
 extern const u8 gUnknown_08514F4C[];
 extern const u8 gUnknown_08514F6C[];
 extern const u8 gUnknown_08521FAC[];
@@ -80,7 +80,7 @@ void sub_47344(void)
     u8 str0[42];
     u8 str1[24];
 
-    memcpy(str0, gUnknown_08137DBE, 42);
+    memcpy(str0, gDebugTextStrings, 42);
     memcpy(str1, gUnknown_08137DE8, 24);
 
     for (i = 0x340; i < 0x380; i++)
@@ -164,7 +164,7 @@ void sub_474F4(void)
 
     if (gMain.unk12 == 3600)
     {
-        DmaCopy16(3, gUnknown_08509F4C, (void *)0x06015800, 0x400);
+        DmaCopy16(3, gMainBoardGameOverText_Gfx, (void *)0x06015800, 0x400);
         gMain.unk44[42]->available = 1;
         for (i = 0; i < 8; i++)
         {
@@ -215,7 +215,7 @@ void sub_47670(void)
             gMain.spriteGroups[6].available = 1;
             gMain.spriteGroups[7].available = 1;
             gMain.spriteGroups[8].available = 1;
-            DmaCopy16(3, gUnknown_0850398C, (void *)0x6015800, 0x2800);
+            DmaCopy16(3, gMainBoardEndOfBall_Gfx, (void *)0x6015800, 0x2800);
             if (gMain.selectedField == FIELD_RUBY)
             {
                 DmaCopy16(3, gUnknown_08521FAC, (void *)0x050003C0, 0x20);
@@ -228,7 +228,7 @@ void sub_47670(void)
             m4aSongNumStart(SE_UNKNOWN_0xA4);
             for (i = 0; i < 3; i++)
                 for (j = 0; j < 20; j++)
-                    gCurrentPinballGame->unk63C[i][j] = 0;            
+                    gCurrentPinballGame->unk63C[i][j] = 0;
         }
         else if (gMain.unk12 == 1)
         {
@@ -465,14 +465,14 @@ void sub_478D8(void)
             gMain.spriteGroups[3].available = 1;
             if (gMain.selectedField == FIELD_RUBY)
             {
-                DmaCopy16(3, gUnknown_0850100C, (void *)0x06015800, 0x2400);
-                DmaCopy16(3, gUnknown_085028CC, (void *)0x06016800, 0x800);
-                DmaCopy16(3, gUnknown_085038CC, (void *)0x06017000, 0xC0);
+                DmaCopy16(3, gMainBoardBallSave_Gfx, (void *)0x06015800, 0x2400);
+                DmaCopy16(3, gMainBoardBallSaveLatios_Gfx, (void *)0x06016800, 0x800);
+                DmaCopy16(3, gMainBoardBallSaveLatiosArm_Gfx, (void *)0x06017000, 0xC0);
                 DmaCopy16(3, gUnknown_08514F4C, (void *)0x050003C0, 0x20);
             }
             else
             {
-                DmaCopy16(3, gUnknown_0850100C, (void *)0x06015800, 0x2400);
+                DmaCopy16(3, gMainBoardBallSave_Gfx, (void *)0x06015800, 0x2400);
                 DmaCopy16(3, gUnknown_08514F6C, (void *)0x050003C0, 0x20);
             }
 
@@ -629,21 +629,21 @@ void sub_48190(void)
                     gCurrentPinballGame->unk62C * 500000 +
                     gCurrentPinballGame->unk62D * 100000 +
                     gCurrentPinballGame->unk62E * 100000;
-                
+
                 gCurrentPinballGame->unk634 = 0;
                 gMain.unk12 = 150;
-    
+
                 for (j = 0; j < 20; j++)
                     gCurrentPinballGame->unk63C[0][j] = 1;
                 for (j = 0; j < 20; j++)
                     gCurrentPinballGame->unk63C[1][j] = 1;
                 for (j = 0; j < 20; j++)
                     gCurrentPinballGame->unk63C[2][j] = 1;
-    
+
                 for (i = 0; i < 3; i++)
                     for (j = 0; j < 20; j++)
                         gCurrentPinballGame->unk678[i][j] = gUnknown_086B0128[gCurrentPinballGame->unk638][i][j];
-    
+
                 sp14 = 1;
             }
             else
@@ -653,8 +653,8 @@ void sub_48190(void)
                 var0 = 100;
                 if (gCurrentPinballGame->unk6B4 || gCurrentPinballGame->unk6B8)
                 {
-                    gCurrentPinballGame->unk44 += gCurrentPinballGame->unk6B4;
-                    gCurrentPinballGame->unk48 += gCurrentPinballGame->unk6B8;
+                    gCurrentPinballGame->scoreLo += gCurrentPinballGame->unk6B4;
+                    gCurrentPinballGame->scoreHi += gCurrentPinballGame->unk6B8;
                     gCurrentPinballGame->unk6B4 = 0;
                     gCurrentPinballGame->unk6B8 = 0;
                     m4aSongNumStart(SE_UNKNOWN_0x91);
@@ -778,7 +778,7 @@ void sub_48190(void)
     value = 0;
     multiplier = 0;
     if (gCurrentPinballGame->unk63A == 212 || sp14 != 0)
-    {   
+    {
         switch (gCurrentPinballGame->unk638)
         {
         case 0:
@@ -919,7 +919,7 @@ void sub_48190(void)
             if (value / 100000000 > 0)
             {
                 value -= 100000000;
-                var4 += 1;
+                var4++;
             }
 
             gCurrentPinballGame->unk6B8 = var4;
@@ -989,19 +989,19 @@ void sub_48190(void)
                 if (gCurrentPinballGame->unk6B4 >= 200000)
                 {
                     gCurrentPinballGame->unk6B4 -= 200000;
-                    gCurrentPinballGame->unk44 += 200000;
+                    gCurrentPinballGame->scoreLo += 200000;
                     m4aSongNumStart(SE_UNKNOWN_0x91);
                 }
                 else if (gCurrentPinballGame->unk6B8 != 0)
                 {
                     gCurrentPinballGame->unk6B8--;
                     gCurrentPinballGame->unk6B4 += 99800000;
-                    gCurrentPinballGame->unk44 += 200000;
+                    gCurrentPinballGame->scoreLo += 200000;
                     m4aSongNumStart(SE_UNKNOWN_0x91);
                 }
                 else if (gCurrentPinballGame->unk6B4 != 0)
                 {
-                    gCurrentPinballGame->unk44 += gCurrentPinballGame->unk6B4;
+                    gCurrentPinballGame->scoreLo += gCurrentPinballGame->unk6B4;
                     gCurrentPinballGame->unk6B4 = 0;
                     m4aSongNumStart(SE_UNKNOWN_0x91);
                 }
@@ -1011,7 +1011,7 @@ void sub_48190(void)
                 sp0[i] = 0;
             for (j = 0; j < 20; j++)
                 gCurrentPinballGame->unk678[2][j] = gUnknown_086B0128[gCurrentPinballGame->unk638][2][j];
-            
+
             var4 = gCurrentPinballGame->unk6B8;
             value = gCurrentPinballGame->unk6B4;
             sp0[10] = (var4 % 1000) / 100;

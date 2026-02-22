@@ -99,16 +99,18 @@ struct BallState //Main ball object at 02001334
     /*0x3C*/ struct Vector32 prevPositionQ8;
 };
 
-struct UnkPinballGame13BC
+// Position rises in steps of 2 from 0 to 10.
+// Releasing the button continues rising till it reaches 10, and stalls for 3 frames before falling
+struct FlipperState
 {
-    /*0x00*/ s8 unk0;
-    /*0x01*/ s8 unk1;
+    /*0x00*/ s8 position;
+    /*0x01*/ s8 prevPosition;
     /*0x02*/ s8 unk2;
     /*0x03*/ s8 unk3;
     /*0x04*/ s8 unk4;
     /*0x05*/ s8 unk5;
-    /*0x06*/ s8 unk6;
-    /*0x07*/ u8 unk7;
+    /*0x06*/ s8 active;
+    /*0x07*/ u8 stallTicks;
     /*0x08*/ s8 unk8;
     /*0x09*/ u8 filler9[0x3];
 };
@@ -143,7 +145,7 @@ struct PinballGame //CurrentPinball game lives at 0x02000000
     /*0x018*/ u16 unk18;
     /*0x01A*/ s8 unk1A;
     /*0x01B*/ u8 unk1B;
-    /*0x01C*/ u8 unk1C;
+    /*0x01C*/ bool8 scoreCounterAnimationEnabled;
     /*0x01D*/ u8 unk1D;
     /*0x01E*/ u8 unk1E;
     /*0x01F*/ u8 unk1F;
@@ -164,11 +166,11 @@ struct PinballGame //CurrentPinball game lives at 0x02000000
     /*0x034*/ s8 unk34;
     /*0x035*/ s8 area;
     /*0x036*/ s8 unk36;
-    /*0x038*/ u32 unk38; //score to add every frame until unk3C score has been added to player's total
-    /*0x03C*/ u32 unk3C; //score to add in a bonus field or mode (by completion or other ways, like hitting Duskulls)
-    /*0x040*/ u32 unk40;
-    /*0x044*/ u32 unk44;
-    /*0x048*/ u32 unk48;
+    /*0x038*/ u32 scoreAddStepSize; //score to add every frame until scoreAddedInFrame score has been added to player's total
+    /*0x03C*/ u32 scoreAddedInFrame; //score to add in a bonus field or mode (by completion or other ways, like hitting Duskulls)
+    /*0x040*/ u32 scoreAdditionAccumulator; //score left to be counted up on the score registers
+    /*0x044*/ u32 scoreLo; //counts score until 99_999_999, overflows into scoreHi
+    /*0x048*/ u32 scoreHi; //counts score until 9_999, then freezes total score to 999_999_999_999!
     /*0x04C*/ s16 unk4C;
     /*0x04E*/ s16 unk4E;
     /*0x050*/ u8 filler50[0x4];
@@ -429,8 +431,8 @@ struct PinballGame //CurrentPinball game lives at 0x02000000
     /*0x2F0*/ u8 unk2F0;
     /*0x2F1*/ u8 unk2F1;
     /*0x2F2*/ u16 unk2F2;
-    /*0x2F4*/ s8 unk2F4;
-    /*0x2F5*/ s8 unk2F5;
+    /*0x2F4*/ s8 unk2F4; //Sharpedo/Wailmer Oam Ix
+    /*0x2F5*/ s8 unk2F5; //Sharpedo tile variant Ix
     /*0x2F6*/ u16 unk2F6;
     /*0x2F8*/ s8 unk2F8;
     /*0x2F9*/ s8 unk2F9;
@@ -873,7 +875,7 @@ struct PinballGame //CurrentPinball game lives at 0x02000000
     /*0x132C*/struct BallState *ball;
     /*0x1330*/struct BallState *unk1330;
     /*0x1334*/struct BallState unk1334[2];
-    /*0x13BC*/struct UnkPinballGame13BC unk13BC[2];
+    /*0x13BC*/struct FlipperState flipper[2];
     /*0x13D4*/u16 unk13D4[10];
     /*0x13E8*/struct Vector16 unk13E8[10];
 } /* size=0x1410 */;
@@ -937,7 +939,7 @@ extern u8 gUnknown_02031590[];
 extern u16 gUnknown_08137B3C[][6][16];
 extern u16 gUnknown_08137D40[]; 
 extern const u8 gUnknown_08137E14[][0x20];
-extern const u8 gUnknown_08138834[];
+extern const u8 gDusclopsBonusClear_Gfx[];
 extern struct Unk02031520_unk10 gUnknown_081450F4;
 extern struct Unk02031520_unk10 gUnknown_08148934;
 extern struct Unk02031520_unk10 gUnknown_0814C174;
@@ -958,11 +960,11 @@ extern u16 gUnknown_0835E9C8[0x2A80];
 extern const u16 gUnknown_08391A4C[0x1000];
 extern const u16 gUnknown_08393A4C[0x1000];
 extern u8 gUnknown_083FE44C[][0x200];
-extern u16 gUnknown_08494E4C[]; 
-extern u16 gUnknown_084EDACC[]; 
-extern u8 gUnknown_084FF30C[];
-extern struct SongHeader gUnknown_0869F7C8;
-extern struct SongHeader gUnknown_086A17D8;
+extern u16 gDusclopsBoardDusclopsAppearFx_Gfx[]; 
+extern u16 gDusclopsBoardDusclops_Gfx[]; 
+extern u8 gDusclopsBoardDusclopsBallGrabSwirl_Gfx[];
+extern struct SongHeader se_unk_8b;
+extern struct SongHeader se_dusclops_appear;
 extern const s16 gUnknown_086ACDF4[9]; //Possibly only 4, with a gap?
 extern const s16 gUnknown_086ACDF4[9];
 typedef s16 (*Unk86ACE0C)(struct Vector16*, u16*);
@@ -973,7 +975,7 @@ extern u16 gUnknown_086ACEF4[2];
 extern const u8 *const gUnknown_086ACEF8[];
 extern const u8 *const gUnknown_086ACF18[];
 extern s16 gUnknown_086AE68E[][2];
-extern u16 gUnknown_086B4568[][45];
+extern u16 gUnknown_086B4568[14][45];
 extern const u8 gUnknown_084F61EC[]; 
 extern u8 gUnknown_081B45A4[]; 
 extern const u16 gUnknown_086AD2DE[];
@@ -997,11 +999,11 @@ extern const u8 gUnknown_08397E6C[];
 extern const u8 gUnknown_083A8EEC[][0x300];
 extern const u8 gUnknown_083BB16C[][0x80];
 extern const u8 gUnknown_083BD36C[][0x200];
-extern const u8 gUnknown_0844838C[][0x300];
+extern const u8 gMainStageBonusTrap_Gfx[][0x300];
 extern const u8 gUnknown_0848D68C[][0x300];
 extern const u8 gUnknown_084C00EC[][0x80];
 extern const u8 gUnknown_084C07EC[];
-extern const u8 gUnknown_084FA48C[][0x120];
+extern const u8 gMainBoardPikaSpinner_Gfx[][0x120];
 extern const u8 gUnknown_084FD18C[][0x200];
 extern const u8 *gUnknown_086AD49C[];
 extern const u16 gUnknown_086AD2EE[][4];

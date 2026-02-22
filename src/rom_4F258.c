@@ -18,13 +18,13 @@ extern const u8 *gUnknown_086B094C[][3];
 extern const s16 gUnknown_086B08CA[];
 extern const u8 *gUnknown_086B08D4[][3][5];
 
-extern struct SongHeader gUnknown_0869F664;
+extern struct SongHeader se_unk_87;
 
 
 void sub_4E814(void)
 {
     gCurrentPinballGame->unk734 = (gCurrentPinballGame->unk70C % 40) / 20;
-    gCurrentPinballGame->unk70C = gCurrentPinballGame->unk70C + 1;
+    gCurrentPinballGame->unk70C++;
     sub_4EA44();
     if (gCurrentPinballGame->unk6A < 232)
     {
@@ -81,8 +81,8 @@ void sub_4E920(void)
         gCurrentPinballGame->unk716--;
         if (gCurrentPinballGame->unk716 == 3)
         {
-            m4aSongNumStart(SE_UNKNOWN_0x73);
-            gCurrentPinballGame->unk3C = 500;
+            m4aSongNumStart(SE_SLINGSHOT_HIT);
+            gCurrentPinballGame->scoreAddedInFrame = 500;
             sub_11B0(7);
         }
     }
@@ -181,7 +181,7 @@ void sub_4EBD0(void)
             gCurrentPinballGame->holeIndicators[3] = gCurrentPinballGame->holeIndicators[0];
         }
     }
-    
+
     for (i = 0; i < 4; i++)
     {
         src = &gUnknown_086B0BC4[i][gCurrentPinballGame->holeIndicators[i]];
@@ -297,7 +297,7 @@ void sub_4EF38(void)
     s16 index;
     const u8 **src;
     const u8 **dest;
-    
+
     index = 0;
     if (gCurrentPinballGame->unk2F0 > 2)
         gCurrentPinballGame->unk72A = 1;
@@ -373,7 +373,7 @@ void sub_4F0F0(void)
         }
 
         if (gCurrentPinballGame->unk71C == 40)
-        MPlayStart(&gMPlayInfo_SE1, &gUnknown_0869F664);
+        MPlayStart(&gMPlayInfo_SE1, &se_unk_87);
 
         if (gCurrentPinballGame->unk71C == 60)
             gMain.unk44[43]->available = 1;

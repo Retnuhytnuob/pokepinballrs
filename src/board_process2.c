@@ -301,19 +301,19 @@ void sub_4DFA0(void)
                 if (gCurrentPinballGame->unk128 == 0)
                 {
                     gCurrentPinballGame->unk128 = 4;
-                    m4aSongNumStart(SE_UNKNOWN_0x78);
+                    m4aSongNumStart(SE_TILT_TRIGGERED);
                     sub_11B0(8);
                 }
             }
         }
 
-        if (gCurrentPinballGame->newButtonActions[3] && gCurrentPinballGame->unk12A == 0) 
+        if (gCurrentPinballGame->newButtonActions[3] && gCurrentPinballGame->unk12A == 0)
         {
             gCurrentPinballGame->unk129 = 1;
             if (gCurrentPinballGame->unk128 == 0)
             {
                 gCurrentPinballGame->unk128 = 4;
-                m4aSongNumStart(SE_UNKNOWN_0x78);
+                m4aSongNumStart(SE_TILT_TRIGGERED);
                 sub_11B0(8);
             }
         }
@@ -324,7 +324,7 @@ void sub_4DFA0(void)
             if (gCurrentPinballGame->unk128 == 0)
             {
                 gCurrentPinballGame->unk128 = 4;
-                m4aSongNumStart(SE_UNKNOWN_0x78);
+                m4aSongNumStart(SE_TILT_TRIGGERED);
                 sub_11B0(8);
             }
         }
@@ -581,7 +581,7 @@ void sub_4E598(void)
         gCurrentPinballGame->unk16F = 1;
         gCurrentPinballGame->unk174 = 0x40;
         gCurrentPinballGame->unk2AA = 0;
-  
+
     }
 
     gCurrentPinballGame->unk300 = 0;

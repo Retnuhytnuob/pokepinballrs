@@ -325,12 +325,12 @@ void Pokedex_HandleListInput(void)
         }
         else if (JOY_NEW(B_BUTTON))
         {
-            m4aSongNumStart(SE_MENU_CANCEL_0x66);
+            m4aSongNumStart(SE_MENU_CANCEL);
             gMain.subState = POKEDEX_STATE_RETURN_TO_TITLE;
         }
         else if (JOY_NEW(START_BUTTON))
         {
-            m4aSongNumStart(SE_MENU_POPUP_OPEN_0x68);
+            m4aSongNumStart(SE_MENU_POPUP_OPEN);
             gUnknown_0202BEC4 = 1;
             gUnknown_0202BEFC = 0;
             gUnknown_0202BF04 = 0;
@@ -409,7 +409,7 @@ void Pokedex_State5_45A4(void)
             m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
         }
     }
-    gUnknown_0202BEF4 = gUnknown_0202BEF4 + 1;
+    gUnknown_0202BEF4++;
     if (0x1e < gUnknown_0202BEF4)
     {
         gUnknown_0202BEF4 = 0;
@@ -451,7 +451,7 @@ void Pokedex_State5_45A4(void)
             }
             else
             {
-                m4aSongNumStart(SE_MENU_POPUP_CLOSE_0x69);
+                m4aSongNumStart(SE_MENU_POPUP_CLOSE);
                 m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
                 gUnknown_0202C794 = 0;
                 gUnknown_0202C5E8 = 0;
@@ -463,7 +463,7 @@ void Pokedex_State5_45A4(void)
     }
     else if (JOY_NEW(B_BUTTON))
     {
-        m4aSongNumStart(SE_MENU_POPUP_CLOSE_0x69);
+        m4aSongNumStart(SE_MENU_POPUP_CLOSE);
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
         gUnknown_0202C794 = 0;
         gUnknown_0202C5E8 = 0;
@@ -580,7 +580,7 @@ void Pokedex_State7_49D0(void)
 
     if (JOY_NEW(B_BUTTON))
     {
-        m4aSongNumStart(SE_MENU_CANCEL_0x66);
+        m4aSongNumStart(SE_MENU_CANCEL);
         gUnknown_0202BEC4 = 0;
         gUnknown_0202BEFC = 0;
         gUnknown_0202BF04 = 1;
@@ -683,7 +683,7 @@ void Pokedex_State9_4BB4(void)
             break;
         case 0x82:
             gUnknown_0202BEFC = 3;
-            m4aSongNumStart(SE_MENU_SELECT_0x65);
+            m4aSongNumStart(SE_MENU_SELECT);
             break;
         case 0xFA:
             gUnknown_0201B120 = 0;
@@ -706,7 +706,7 @@ void Pokedex_State9_4BB4(void)
             gMain.subState = POKEDEX_STATE_LOAD_GRAPHICS;
             break;
     }
-    gUnknown_0201B120 += 1;
+    gUnknown_0201B120++;
 }
 
 //Delete pokedex confirmation dialog
@@ -718,7 +718,7 @@ void Pokedex_State11_4C80(void)
 
     if (JOY_NEW(A_BUTTON))
     {
-        m4aSongNumStart(SE_MENU_SELECT_0x65);
+        m4aSongNumStart(SE_MENU_SELECT);
         for (i = 0; i < 0xE1; i++)
         {
             gPokedexFlagExchangeBuffer[i] = 0;
@@ -742,7 +742,7 @@ void Pokedex_State11_4C80(void)
     }
     else if (JOY_NEW(B_BUTTON))
     {
-        m4aSongNumStart(SE_MENU_CANCEL_0x66);
+        m4aSongNumStart(SE_MENU_CANCEL);
         gUnknown_0202BEC4 = 0;
         gUnknown_0202BEFC = 0;
         gUnknown_0202BF04 = 1;
@@ -780,21 +780,21 @@ static void PokedexListScrollUp(void)
                 gPokedexListPosition = gPokedexListEntryCount - NUM_BONUS_SPECIES - 1;
                 gPokedexSelectedMon = gPokedexListEntryCount - 1;
                 gUnknown_0202A57C = 4;
-                m4aSongNumStart(SE_MENU_MOVE_0x67);
+                m4aSongNumStart(SE_MENU_MOVE);
             }
         }
         else
         {
             gPokedexListPosition--;
             gPokedexSelectedMon--;
-            m4aSongNumStart(SE_MENU_MOVE_0x67);
+            m4aSongNumStart(SE_MENU_MOVE);
         }
 
         gPokedexScrollWaitFrames = SCROLL_WAIT_FRAMES;
     }
     else
     {
-        m4aSongNumStart(SE_MENU_MOVE_0x67);
+        m4aSongNumStart(SE_MENU_MOVE);
         gUnknown_0202A57C--;
         gPokedexSelectedMon--;
 
@@ -820,21 +820,21 @@ static void PokedexListScrollDown(void)
                 gPokedexListPosition = 0;
                 gPokedexSelectedMon = 0;
                 gUnknown_0202A57C = 0;
-                m4aSongNumStart(SE_MENU_MOVE_0x67);
+                m4aSongNumStart(SE_MENU_MOVE);
             }
         }
         else
         {
             gPokedexListPosition++;
             gPokedexSelectedMon++;
-            m4aSongNumStart(SE_MENU_MOVE_0x67);
+            m4aSongNumStart(SE_MENU_MOVE);
         }
 
         gPokedexScrollWaitFrames = SCROLL_WAIT_FRAMES;
     }
     else
     {
-        m4aSongNumStart(SE_MENU_MOVE_0x67);
+        m4aSongNumStart(SE_MENU_MOVE);
         gUnknown_0202A57C++;
         gPokedexSelectedMon++;
         gPokedexScrollWaitFrames = SCROLL_WAIT_FRAMES;
@@ -853,7 +853,7 @@ static void PokedexListScrollUpFast(void)
     if (gPokedexListPosition == 0)
         return;
 
-    m4aSongNumStart(SE_MENU_MOVE_0x67);
+    m4aSongNumStart(SE_MENU_MOVE);
     gPokedexListPosition -= ENTRIES_SHOWN_COUNT;
     if (gPokedexListPosition < 0)
         gPokedexListPosition = 0;
@@ -872,7 +872,7 @@ static void PokedexListScrollDownFast(void)
     if (gPokedexListPosition == gPokedexListEntryCount - NUM_BONUS_SPECIES - 1)
         return;
 
-    m4aSongNumStart(SE_MENU_MOVE_0x67);
+    m4aSongNumStart(SE_MENU_MOVE);
     gPokedexListPosition += ENTRIES_SHOWN_COUNT;
     if (gPokedexListPosition > gPokedexListEntryCount - NUM_BONUS_SPECIES - 1)
         gPokedexListPosition = gPokedexListEntryCount - NUM_BONUS_SPECIES - 1;
@@ -893,7 +893,7 @@ void sub_4FC8(void)
         {
             gUnknown_02002831 = 0;
             gUnknown_02002830 = 0;
-            m4aSongNumStart(SE_MENU_POPUP_OPEN_0x68);
+            m4aSongNumStart(SE_MENU_POPUP_OPEN);
             gUnknown_0202BEC4 = 1;
             gUnknown_0202BEFC = 4;
             gUnknown_0202BF04 = 0;
@@ -1892,7 +1892,7 @@ void PrintDexNumbersFromListPosition(s16 listPosition)
         {
             for (j = 0; j < 7; j++)
                 CopyBgTilesRect((void *)&gPokedexTextGlyphs_Gfx[ENGLISH_GLYPHS_START], (void *)0x06000000 + gUnknown_086A64F0[i] + j * 0x20, 1, 2);
-        
+
             CopyBgTilesRect((void *)gPokedexTextGlyphs_Gfx, (void *)0x06000000 + gUnknown_086A64F0[i] + j * 0x20, 1, 2);
         }
     }
@@ -1970,9 +1970,9 @@ void sub_70E0(s16 species, u32 page)
 void sub_71DC(s32 arg0, s32 arg1, s32 arg2) {
     int i;
     s32 temp_r2;
-    
+
     temp_r2 = ((arg1 / 8) * 0x10) + (arg2 * 0x400);
-    
+
     switch (arg0) {
     case 6:
         switch (arg1 % 8) {
@@ -2009,7 +2009,7 @@ void sub_71DC(s32 arg0, s32 arg1, s32 arg2) {
                 gUnknown_03000000[(i * 2) + temp_r2] |= (gUnknown_0202BE30[i * 2] & 0xF) << 0xC;
                 gUnknown_03000000[(i * 2 + 1) + temp_r2] |= ((gUnknown_0202BE30[i * 2] & 0xFFF0) >> 0x4) | ((gUnknown_0202BE30[i * 2 + 1] & 0xF) << 0xC);
                 gUnknown_03000000[(i * 2 + 0x10) + temp_r2] |= (gUnknown_0202BE30[i * 2 + 1] & 0xF0) >> 0x4;
-                
+
                 gUnknown_03000000[(i * 2) + temp_r2 + 0x200] |= (gUnknown_0201B130[i * 2] & 0xF) << 0xC;
                 gUnknown_03000000[(i * 2 + 1) + temp_r2 + 0x200] |= ((gUnknown_0201B130[i * 2] & 0xFFF0) >> 0x4) | ((gUnknown_0201B130[i * 2 + 1] & 0xF) << 0xC);
                 gUnknown_03000000[(i * 2 + 0x10) + temp_r2 + 0x200] |= (gUnknown_0201B130[i * 2 + 1] & 0xF0) >> 0x4;
@@ -2059,9 +2059,9 @@ void sub_71DC(s32 arg0, s32 arg1, s32 arg2) {
             return;
         }
         break;
-    case 5:     
+    case 5:
         switch (arg1 % 8) {
-        case 0:             
+        case 0:
             for(i = 0; i <=7; i++)
             {
                 gUnknown_03000000[i * 2 + temp_r2] |= gUnknown_0202BE30[i * 2];
@@ -2071,7 +2071,7 @@ void sub_71DC(s32 arg0, s32 arg1, s32 arg2) {
 
             }
             return;
-        case 1:           
+        case 1:
             for(i = 0; i <=7; i++)
             {
                 gUnknown_03000000[i * 2 + temp_r2] |= (gUnknown_0202BE30[i * 2] & 0xFFF) << 4;
@@ -2143,9 +2143,9 @@ void sub_71DC(s32 arg0, s32 arg1, s32 arg2) {
             return;
         }
         break;
-    case 4:     
+    case 4:
         switch (arg1 % 8) {
-        case 0:             
+        case 0:
             for(i = 0; i <=7; i++)
             {
                 gUnknown_03000000[(i * 2) + temp_r2] |= gUnknown_0202BE30[i * 2];
@@ -2283,7 +2283,7 @@ void sub_71DC(s32 arg0, s32 arg1, s32 arg2) {
             return;
         }
         break;
-    case 2:     
+    case 2:
         switch (arg1 % 8) {
         case 0:
             for(i = 0; i <=7; i++)
