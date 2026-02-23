@@ -96,7 +96,7 @@ void MainBoardProcess_2B_4D960(void)
     int var4;
 
     var0 = 0x1000;
-    if (gMain.unkF == 0)
+    if (gMain.modeChangeFlags == 0)
         sub_4E2F8();
 
     if (gCurrentPinballGame->unk5FB)
@@ -185,7 +185,7 @@ void BonusBoardProcess_2B_4DBFC(void)
     int var4;
 
     var0 = 0x1000;
-    if ((gMain.unkF & ~0x40) == 0)
+    if ((gMain.modeChangeFlags & ~0x40) == 0)
         sub_4E468();
 
     if (gCurrentPinballGame->unk5FB)
@@ -489,10 +489,10 @@ void sub_4E468(void)
     {
         unk1334->velocity.x = 0;
         gCurrentPinballGame->ball->velocity.y = 0;
-        if (gMain.unkF & 0x40)
+        if (gMain.modeChangeFlags & 0x40)
         {
-            gCurrentPinballGame->unk386 = 1;
-            gMain.unkF = 0x80;
+            gCurrentPinballGame->returnToMainBoardFlag = 1;
+            gMain.modeChangeFlags = 0x80;
             gCurrentPinballGame->ball->positionQ0.y = gUnknown_02031520.unk14.unk2A - 10;
         }
         else

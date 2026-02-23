@@ -18,7 +18,7 @@ void sub_22D54(void);
 
 void sub_1A98C(void)
 {
-    if (gMain.unkF != 0)
+    if (gMain.modeChangeFlags != 0)
         return;
 
     switch (gCurrentPinballGame->unk25)
@@ -409,7 +409,7 @@ void sub_1B140(s16 arg0)
 {
     int var_r7 = 0;
 
-    if (gMain.unkF == 0 && gCurrentPinballGame->unk1BA != 0)
+    if (gMain.modeChangeFlags == 0 && gCurrentPinballGame->unk1BA != 0)
         gCurrentPinballGame->unk1BA--;
 
     if (arg0 == 0)
@@ -761,7 +761,7 @@ void sub_1B140(s16 arg0)
             {
                 m4aMPlayAllStop();
 
-                gMain.unkF |= 1;
+                gMain.modeChangeFlags |= 1;
                 gCurrentPinballGame->unkEA = 0;
                 gCurrentPinballGame->unkEC = 120;
                 gCurrentPinballGame->unkE8 = 0;

@@ -51,7 +51,7 @@ void MainBoardProcess_4B_19490(void)
 {
     s16 i;
 
-    if ((gMain.unkF & 1) == 0)
+    if ((gMain.modeChangeFlags & 1) == 0)
         sub_195C4();
 
     for (i = 0; i < 2; i++)
@@ -160,10 +160,10 @@ void BonusBoardProcess_4B_19734(void)
     s16 i;
     s16 priority = 1;
 
-    if ((gMain.unkF & 1) == 0)
+    if ((gMain.modeChangeFlags & 1) == 0)
     {
         sub_19894();
-        gMain.unkF = gMain.unkF;
+        gMain.modeChangeFlags = gMain.modeChangeFlags;
     }
     for (i = 0; i < 2; i++)
     {
@@ -212,7 +212,7 @@ void sub_19894(void)
         flipper->prevPosition = flipper->position;
         flipper->unk2 = 0;
 
-        if (gCurrentPinballGame->heldButtonActions[i] && gMain.unkF == 0)
+        if (gCurrentPinballGame->heldButtonActions[i] && gMain.modeChangeFlags == 0)
         {
             if (flipper->active == 0 && gCurrentPinballGame->unk25 == 0 && gCurrentPinballGame->unk1A == 0)
             {

@@ -25,20 +25,20 @@ void AllBoardProcess_1B_47160(void)
 {
     if (JOY_NEW(START_BUTTON) && gMain.mainState != STATE_GAME_IDLE && gCurrentPinballGame->unk1100 == 0)
     {
-        if (gMain.unkF & 0x2)
+        if (gMain.modeChangeFlags & 0x2)
         {
-            gMain.unkF &= ~0x2;
+            gMain.modeChangeFlags &= ~0x2;
             sub_497BC();
         }
-        else if ((gMain.unkF & 0x20) == 0)
+        else if ((gMain.modeChangeFlags & 0x20) == 0)
         {
-            gMain.unkF |= 0x2;
+            gMain.modeChangeFlags |= 0x2;
             sub_495A0();
         }
     }
 
     //Game is paused
-    if (gMain.unkF & 0x2)
+    if (gMain.modeChangeFlags & 0x2)
     {
         if (JOY_NEW(DPAD_UP))
         {
@@ -60,24 +60,24 @@ void AllBoardProcess_1B_47160(void)
                 sub_49850();
             }
 
-            gMain.unkF &= ~0x2;
+            gMain.modeChangeFlags &= ~0x2;
             sub_497BC();
             gMain.newKeys &= ~A_BUTTON;
         }
 
         if (JOY_NEW(B_BUTTON))
         {
-            gMain.unkF &= ~0x2;
+            gMain.modeChangeFlags &= ~0x2;
             sub_497BC();
             gMain.newKeys &= ~B_BUTTON;
         }
 
-        if (gMain.unkF & 0x2)
+        if (gMain.modeChangeFlags & 0x2)
             sub_49A34();
     }
 
     //Game is not paused
-    if (gMain.unkF == 0x0)
+    if (gMain.modeChangeFlags == 0x0)
     {
         gCurrentPinballGame->unk740 = 0;
         if (gMain.unk14 != 0)
@@ -94,7 +94,7 @@ void AllBoardProcess_1B_47160(void)
             }
 
             if (gMain.unk14 == 0)
-                gMain.unkF = gMain.unk11;
+                gMain.modeChangeFlags = gMain.unk11;
         }
     }
 }

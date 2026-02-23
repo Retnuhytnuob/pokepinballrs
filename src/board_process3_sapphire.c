@@ -35,7 +35,7 @@ void SapphireBoardProcess_3B_3276C(void)
     sub_19B90();
     sub_327C0();
 
-    if (!gMain.unkF)
+    if (!gMain.modeChangeFlags)
         sub_328C8();
 
     sub_32DF8();
@@ -118,7 +118,7 @@ void sub_327C0(void)
     if (gCurrentPinballGame->unk194)
         sub_225F0();
 
-    sub_472E4();
+    BonusStage_HandleModeChangeFlags();
 }
 
 void sub_328C8(void)
@@ -134,13 +134,13 @@ void sub_328C8(void)
     sub_2E67C();
     sub_31144();
 
-    if (!(gMain.unkF & 0x20))
+    if (!(gMain.modeChangeFlags & 0x20))
         sub_2F79C();
 }
 
 void sub_32914(void)
 {
-    if (gMain.unkF != 0)
+    if (gMain.modeChangeFlags != 0)
         return;
 
     switch (gCurrentPinballGame->unk25)

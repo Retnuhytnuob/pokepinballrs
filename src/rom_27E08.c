@@ -1581,7 +1581,7 @@ void sub_23E18(void)
                 gCurrentPinballGame->unk1EC = 2;
                 gCurrentPinballGame->unk746 = 1;
                 DmaCopy16(3, gRubyStageCyndaquil_Gfx[gCurrentPinballGame->unk746], (void *)0x06013300, 0x280);
-                gMain.unkF |= 0x1;
+                gMain.modeChangeFlags |= 0x1;
                 gCurrentPinballGame->unkEA = 0;
                 gCurrentPinballGame->unkEC = 60;
                 gCurrentPinballGame->unkE8 = 72;
@@ -2846,7 +2846,7 @@ void sub_26A10(void)
     switch (gCurrentPinballGame->unk17)
     {
     case 0:
-        if (gMain.unkF == 0)
+        if (gMain.modeChangeFlags == 0)
         {
             gCurrentPinballGame->unk17++;
             gCurrentPinballGame->unk708 = 0;

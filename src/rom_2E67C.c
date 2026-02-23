@@ -1717,7 +1717,7 @@ void sub_30178(void)
                     {
                         if (gCurrentPinballGame->unk6C6 == 0)
                         {
-                            gMain.unkF |= 0x1;
+                            gMain.modeChangeFlags |= 0x1;
                             gCurrentPinballGame->unkEA = 50;
                             gCurrentPinballGame->unkEC = 600;
                             gCurrentPinballGame->unkE8 = 0xEC;

@@ -71,6 +71,17 @@
 #define JOY_NEW(button) TEST_BUTTON(gMain.newKeys,  button)
 #define JOY_HELD(button)  TEST_BUTTON(gMain.heldKeys, button)
 
+#define MODE_CHANGE_NONE 0 // Used for If checks
+#define MODE_CHANGE_BANNER        0x1  //2^0
+#define MODE_CHANGE_PAUSE         0x2  //2^1
+#define MODE_CHANGE_DEBUG         0x4  //2^2
+#define MODE_CHANGE_BALL_SAVER    0x8  //2^3
+#define MODE_CHANGE_END_OF_BALL   0x10 //2^4
+#define MODE_CHANGE_END_OF_GAME   0x20 //2^5
+#define MODE_CHANGE_EXPIRED_BONUS 0x40 //2^6
+#define MODE_CHANGE_BONUS_BANNER  0x80 //2^7
+
+
 struct BgOffsets
 {
     u16 xOffset;
@@ -491,7 +502,7 @@ struct PinballGame
     /*0x383*/ s8 unk383;
     /*0x384*/ s8 legendaryHitsRequired;
     /*0x385*/ s8 bonusModeHitCount;
-    /*0x386*/ s8 unk386;
+    /*0x386*/ s8 returnToMainBoardFlag;
     /*0x387*/ s8 boardEntityCollisionMode;
     /*0x388*/ s8 unk388;
     /*0x389*/ s8 unk389;
@@ -958,7 +969,7 @@ extern struct Unk086ACE8C gUnknown_086ACE8C[13];
 extern u16 gUnknown_086ACEF4[2];
 extern const u8 *const gUnknown_086ACEF8[];
 extern const u8 *const gUnknown_086ACF18[];
-extern s16 gUnknown_086AE68E[][2];
+extern s16 DuclopsFramesetData[][2];
 extern u16 gUnknown_086B4568[14][45];
 extern const u8 gUnknown_084F61EC[]; 
 extern u8 gUnknown_081B45A4[]; 

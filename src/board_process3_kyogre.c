@@ -57,7 +57,7 @@ void KyogreBoardProcess_3A_383E4(void)
     gCurrentPinballGame->unk388 = 3;
     gCurrentPinballGame->unk392 = 0;
     gCurrentPinballGame->ball->unk0 = 1;
-    gCurrentPinballGame->unk386 = 0;
+    gCurrentPinballGame->returnToMainBoardFlag = 0;
     gCurrentPinballGame->unk394 = 0;
     gCurrentPinballGame->unk38E = 0;
     gCurrentPinballGame->bonusModeHitCount = 0;
@@ -155,12 +155,12 @@ void KyogreBoardProcess_3B_3869C(void)
             gMain.spriteGroups[5].available = 1;
             DmaCopy16(3, gKyogreBonusClear_Gfx, (void *)0x06015800, 0x2000);
             gCurrentPinballGame->unk394 = 136;
-            gMain.unkF = 0x80;
+            gMain.modeChangeFlags = 0x80;
             gCurrentPinballGame->unk5FA = 1;
         }
         break;
     case 3:
-        sub_351A8();
+        ProceessBonusBannerAndScoring();
         if (gCurrentPinballGame->scoreCounterAnimationEnabled)
             gCurrentPinballGame->unk18 = 181;
 
@@ -197,10 +197,10 @@ void KyogreBoardProcess_3B_3869C(void)
         gMain.spriteGroups[5].available = 1;
         DmaCopy16(3, gKyogreBonusClear_Gfx, (void *)0x06015800, 0x2000);
         gCurrentPinballGame->unk394 = 136;
-        gMain.unkF = 0x80;
+        gMain.modeChangeFlags = 0x80;
         break;
     case 5:
-        sub_351A8();
+        ProceessBonusBannerAndScoring();
         if (gCurrentPinballGame->scoreCounterAnimationEnabled)
             gCurrentPinballGame->unk18 = 181;
 
@@ -223,8 +223,8 @@ void KyogreBoardProcess_3B_3869C(void)
         }
         break;
     case 6:
-        sub_351A8();
-        gCurrentPinballGame->unk386 = 1;
+        ProceessBonusBannerAndScoring();
+        gCurrentPinballGame->returnToMainBoardFlag = 1;
         gCurrentPinballGame->unk5FA = 1;
     }
 
@@ -232,20 +232,20 @@ void KyogreBoardProcess_3B_3869C(void)
     sub_38A20();
     sub_395D8();
     sub_3AE14();
-    if (gCurrentPinballGame->unk294 && gCurrentPinballGame->eventTimer < 2 && gMain.unkF == 0)
+    if (gCurrentPinballGame->unk294 && gCurrentPinballGame->eventTimer < 2 && gMain.modeChangeFlags == 0)
     {
         m4aMPlayAllStop();
         m4aSongNumStart(MUS_END_OF_BALL3);
-        gMain.unkF |= 0x40;
+        gMain.modeChangeFlags |= 0x40;
     }
 
-    if (gCurrentPinballGame->unk386)
+    if (gCurrentPinballGame->returnToMainBoardFlag)
     {
         gCurrentPinballGame->unk5FA = 1;
-        sub_350F0();
+        FadeToMainBoard();
     }
 
-    sub_472E4();
+    BonusStage_HandleModeChangeFlags();
 }
 
 void sub_38A20(void)
@@ -503,7 +503,7 @@ void sub_38A20(void)
             // normal completion
             gCurrentPinballGame->unk3DC = 9;
             gCurrentPinballGame->unk3E2 = 79;
-            gMain.unkF = 0x80;
+            gMain.modeChangeFlags = 0x80;
             gCurrentPinballGame->unk388 = 2;
             gCurrentPinballGame->unk392 = 0;
         }
@@ -1006,7 +1006,7 @@ void sub_39A40(void)
     for (i = 0; i < 2; i++)
     {
         group = &gMain.spriteGroups[22 + i];
-        if ((gMain.unkF & 0x80) == 0)
+        if ((gMain.modeChangeFlags & 0x80) == 0)
         {
             switch (gCurrentPinballGame->unk441[i]) {
             case 0:
@@ -1226,7 +1226,7 @@ void sub_39A40(void)
         gCurrentPinballGame->unk46C[2].y = 0x20 + scale / 8;
         gCurrentPinballGame->unk46C[3].y = 0x20 + scale / 8;
 
-        if ((gMain.unkF & 0xC0) == 0)
+        if ((gMain.modeChangeFlags & 0xC0) == 0)
         {
             gMain.blendControl = 0x1E10;
             gMain.blendAlpha = BLDALPHA_BLEND(var6, 16 - var6);
@@ -1265,7 +1265,7 @@ void sub_39A40(void)
             }
         }
 
-        if (gMain.unkF & 0xC0)
+        if (gMain.modeChangeFlags & 0xC0)
             gMain.spriteGroups[24].available = 0;
     }
 }

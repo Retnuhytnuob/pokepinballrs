@@ -1564,7 +1564,7 @@ s16 COLLISION_CHECK_DUSCLOPS_171C8(struct Vector16* arg0, u16* arg1) {
         break;
     }
 
-    sub_17634(some_enum, &return_val, arg1);
+    CheckDusclopsAbzorbZoneHit(some_enum, &return_val, arg1);
     return return_val;
 }
 
@@ -1595,13 +1595,14 @@ void CheckDusclopsEntitiesCollision(struct Vector16 *arg0, s16* arg1, u8* arg2) 
         if (lowerNibble == 0)
             return;
 
+        //Can be hit when ready to absorb (2) or when walking (3)
         temp = gCurrentPinballGame->unk3DC -3;
         if (temp <= 1U)
             *arg2 = 1;
         else
             *arg2 = lowerNibble;
 
-        gCurrentPinballGame->unk3DC = 4;
+        gCurrentPinballGame->unk3DC = DUSCLOPS_ENTITY_STATE_HIT;
         *arg1 = maskedResult;
 
         return;
@@ -1675,7 +1676,7 @@ void CheckDusclopsEntitiesCollision(struct Vector16 *arg0, s16* arg1, u8* arg2) 
 }
 
 // ?? ToConfirm: cancel hit based on hitting Dusclop's 'catch zone'?
-void sub_17634(u8 arg0, u16 *arg1, u16 *arg2)
+void CheckDusclopsAbzorbZoneHit(u8 arg0, u16 *arg1, u16 *arg2)
 {
     switch (arg0)
     {
@@ -1684,7 +1685,7 @@ void sub_17634(u8 arg0, u16 *arg1, u16 *arg2)
     case 3:
         break;
     case 4:
-        gCurrentPinballGame->unk3DC = 6;
+        gCurrentPinballGame->unk3DC = DUSCLOPS_ENTITY_STATE_HIT_ABSORB_ZONE;
         gCurrentPinballGame->unk1F = 1;
         gCurrentPinballGame->boardEntityCollisionMode = DUSCLOPS_ENTITY_COLISION_MODE_NONE;
         break;

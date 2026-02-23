@@ -526,7 +526,7 @@ void sub_1DAD8(void)
         {
             if (gCurrentPinballGame->unk2F2 == 5)
             {
-                gMain.unkF |= 0x1;
+                gMain.modeChangeFlags |= 0x1;
                 gCurrentPinballGame->unkEA = 0;
                 gCurrentPinballGame->unkEC = 3;
                 gCurrentPinballGame->unkE8 = 0;
@@ -1069,7 +1069,7 @@ void sub_1EC48(void)
                     {
                         if (gCurrentPinballGame->unk16C == 4)
                         {
-                            gMain.unkF |= 0x1;
+                            gMain.modeChangeFlags |= 0x1;
                             gCurrentPinballGame->unkEA = 50;
                             gCurrentPinballGame->unkEC = 600;
                             gCurrentPinballGame->unkE8 = 236;
@@ -1087,7 +1087,7 @@ void sub_1EC48(void)
                         }
                         else
                         {
-                            gMain.unkF |= 0x1;
+                            gMain.modeChangeFlags |= 0x1;
                             gCurrentPinballGame->unkEA = 50;
                             gCurrentPinballGame->unkEC = 600;
                             gCurrentPinballGame->unkE8 = 236;
@@ -1818,7 +1818,7 @@ void sub_201B8(void)
 
             if (gCurrentPinballGame->unk6C2 == 0)
             {
-                gMain.unkF |= 0x1;
+                gMain.modeChangeFlags |= 0x1;
                 gCurrentPinballGame->unkEA = 70;
                 gCurrentPinballGame->unkEC = 160;
                 gCurrentPinballGame->unkE8 = 0;

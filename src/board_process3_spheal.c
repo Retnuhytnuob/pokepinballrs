@@ -58,7 +58,7 @@ void SphealBoardProcess_3A_42E48(void)
     gCurrentPinballGame->ball->velocity.x = 0;
     gCurrentPinballGame->ball->velocity.y = 0;
     gCurrentPinballGame->ball->unk6 = 0;
-    gCurrentPinballGame->unk386 = 0;
+    gCurrentPinballGame->returnToMainBoardFlag = 0;
     gCurrentPinballGame->unk53A = 0;
     gCurrentPinballGame->unk542 = 0;
     gCurrentPinballGame->unk544 = 0;
@@ -171,7 +171,7 @@ void SphealBoardProcess_3B_43228(void)
             {
                 m4aMPlayAllStop();
                 MPlayStart(&gMPlayInfo_SE1, &se_unk_13b);
-                gMain.unkF = 0x80;
+                gMain.modeChangeFlags = 0x80;
                 gCurrentPinballGame->unk388 = 2;
                 gCurrentPinballGame->unk392 = 0;
             }
@@ -257,7 +257,7 @@ void SphealBoardProcess_3B_43228(void)
         break;
     case 5:
         sub_45E90();
-        gCurrentPinballGame->unk386 = 1;
+        gCurrentPinballGame->returnToMainBoardFlag = 1;
         gCurrentPinballGame->unk5FA = 1;
         break;
     }
@@ -266,13 +266,13 @@ void SphealBoardProcess_3B_43228(void)
     sub_43500();
     sub_44D58();
     sub_45E08();
-    if (gCurrentPinballGame->unk386)
+    if (gCurrentPinballGame->returnToMainBoardFlag)
     {
         gCurrentPinballGame->unk5FA = 1;
-        sub_350F0();
+        FadeToMainBoard();
     }
 
-    sub_472E4();
+    BonusStage_HandleModeChangeFlags();
 }
 
 void sub_43500(void)
@@ -282,10 +282,10 @@ void sub_43500(void)
     struct OamDataSimple *oamSimple;
     s16 var0;
 
-    if (gCurrentPinballGame->unk13 < 2 && gMain.unkF == 0)
+    if (gCurrentPinballGame->unk13 < 2 && gMain.modeChangeFlags == 0)
         sub_455D0();
 
-    if (gCurrentPinballGame->unk13 < 2 && gMain.unkF == 0)
+    if (gCurrentPinballGame->unk13 < 2 && gMain.modeChangeFlags == 0)
     {
         for (i = 0; i < 2; i++)
         {
@@ -416,7 +416,7 @@ void sub_4387C(void)
     s16 var4;
     const struct Unk_086AFAC0 *var5;
 
-    if (gCurrentPinballGame->unk13 == 1 && gMain.unkF == 0)
+    if (gCurrentPinballGame->unk13 == 1 && gMain.modeChangeFlags == 0)
     {
         for (i = 0; i < 2; i++)
         {
@@ -955,7 +955,7 @@ void sub_44D58(void)
     if (gCurrentPinballGame->unk13 == 1)
         gMain.spriteGroups[11].available = 1;
 
-    if (gCurrentPinballGame->unk13 < 2 && gMain.unkF == 0 && gCurrentPinballGame->unk542)
+    if (gCurrentPinballGame->unk13 < 2 && gMain.modeChangeFlags == 0 && gCurrentPinballGame->unk542)
     {
         if (gCurrentPinballGame->unk542 == 21)
             MPlayStart(&gMPlayInfo_SE1, &se_unk_138);
