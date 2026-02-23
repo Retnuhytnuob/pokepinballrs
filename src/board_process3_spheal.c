@@ -282,10 +282,10 @@ void sub_43500(void)
     struct OamDataSimple *oamSimple;
     s16 var0;
 
-    if (gCurrentPinballGame->unk13 < 2 && gMain.modeChangeFlags == 0)
+    if (gCurrentPinballGame->unk13 < 2 && gMain.modeChangeFlags == MODE_CHANGE_NONE)
         sub_455D0();
 
-    if (gCurrentPinballGame->unk13 < 2 && gMain.modeChangeFlags == 0)
+    if (gCurrentPinballGame->unk13 < 2 && gMain.modeChangeFlags == MODE_CHANGE_NONE)
     {
         for (i = 0; i < 2; i++)
         {
@@ -416,7 +416,7 @@ void sub_4387C(void)
     s16 var4;
     const struct Unk_086AFAC0 *var5;
 
-    if (gCurrentPinballGame->unk13 == 1 && gMain.modeChangeFlags == 0)
+    if (gCurrentPinballGame->unk13 == 1 && gMain.modeChangeFlags == MODE_CHANGE_NONE)
     {
         for (i = 0; i < 2; i++)
         {
@@ -955,7 +955,7 @@ void sub_44D58(void)
     if (gCurrentPinballGame->unk13 == 1)
         gMain.spriteGroups[11].available = 1;
 
-    if (gCurrentPinballGame->unk13 < 2 && gMain.modeChangeFlags == 0 && gCurrentPinballGame->unk542)
+    if (gCurrentPinballGame->unk13 < 2 && gMain.modeChangeFlags == MODE_CHANGE_NONE && gCurrentPinballGame->unk542)
     {
         if (gCurrentPinballGame->unk542 == 21)
             MPlayStart(&gMPlayInfo_SE1, &se_unk_138);

@@ -2846,7 +2846,7 @@ void sub_26A10(void)
     switch (gCurrentPinballGame->unk17)
     {
     case 0:
-        if (gMain.modeChangeFlags == 0)
+        if (gMain.modeChangeFlags == MODE_CHANGE_NONE)
         {
             gCurrentPinballGame->unk17++;
             gCurrentPinballGame->unk708 = 0;

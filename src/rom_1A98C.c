@@ -409,7 +409,7 @@ void sub_1B140(s16 arg0)
 {
     int var_r7 = 0;
 
-    if (gMain.modeChangeFlags == 0 && gCurrentPinballGame->unk1BA != 0)
+    if (gMain.modeChangeFlags == MODE_CHANGE_NONE && gCurrentPinballGame->unk1BA != 0)
         gCurrentPinballGame->unk1BA--;
 
     if (arg0 == 0)

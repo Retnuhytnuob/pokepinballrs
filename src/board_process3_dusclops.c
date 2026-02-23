@@ -190,7 +190,7 @@ void DusclopsBoardProcess_3B_33130(void)
             {
                 m4aMPlayAllStop();
                 m4aSongNumStart(MUS_END_OF_BALL3);
-                gMain.modeChangeFlags = gMain.modeChangeFlags | 0x40;
+                gMain.modeChangeFlags |= MODE_CHANGE_EXPIRED_BONUS;
             }
         }
     }

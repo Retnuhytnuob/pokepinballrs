@@ -87,7 +87,7 @@ void sub_27F94(void)
             gCurrentPinballGame->unk6D3[i] = 15;
         break;
     case 4:
-        if (gMain.modeChangeFlags == 0)
+        if (gMain.modeChangeFlags == MODE_CHANGE_NONE)
         {
             if (gMain.selectedField == FIELD_RUBY)
             {
@@ -294,7 +294,7 @@ void sub_28544(void)
         gCurrentPinballGame->unk17++;
         return;
     case 1:
-        if (gMain.modeChangeFlags == 0)
+        if (gMain.modeChangeFlags == MODE_CHANGE_NONE)
         {
             if (gMain.selectedField == FIELD_RUBY)
             {

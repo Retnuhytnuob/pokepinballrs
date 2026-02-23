@@ -212,7 +212,7 @@ void sub_19894(void)
         flipper->prevPosition = flipper->position;
         flipper->unk2 = 0;
 
-        if (gCurrentPinballGame->heldButtonActions[i] && gMain.modeChangeFlags == 0)
+        if (gCurrentPinballGame->heldButtonActions[i] && gMain.modeChangeFlags == MODE_CHANGE_NONE)
         {
             if (flipper->active == 0 && gCurrentPinballGame->unk25 == 0 && gCurrentPinballGame->unk1A == 0)
             {

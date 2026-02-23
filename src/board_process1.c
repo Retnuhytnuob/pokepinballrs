@@ -77,7 +77,7 @@ void AllBoardProcess_1B_47160(void)
     }
 
     //Game is not paused
-    if (gMain.modeChangeFlags == 0x0)
+    if (gMain.modeChangeFlags == MODE_CHANGE_NONE)
     {
         gCurrentPinballGame->unk740 = 0;
         if (gMain.unk14 != 0)

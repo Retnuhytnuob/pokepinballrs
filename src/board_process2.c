@@ -96,7 +96,7 @@ void MainBoardProcess_2B_4D960(void)
     int var4;
 
     var0 = 0x1000;
-    if (gMain.modeChangeFlags == 0)
+    if (gMain.modeChangeFlags == MODE_CHANGE_NONE)
         sub_4E2F8();
 
     if (gCurrentPinballGame->unk5FB)
