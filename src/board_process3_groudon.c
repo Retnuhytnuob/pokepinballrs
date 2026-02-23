@@ -257,7 +257,7 @@ void GroudonBoardProcess_3B_3B49C(void)
     {
         m4aMPlayAllStop();
         m4aSongNumStart(MUS_END_OF_BALL3);
-        gMain.modeChangeFlags |= 0x40;
+        gMain.modeChangeFlags |= MODE_CHANGE_EXPIRED_BONUS;
     }
 
     if (gCurrentPinballGame->returnToMainBoardFlag)
@@ -1604,7 +1604,7 @@ void sub_3CBC4(void)
         gCurrentPinballGame->unk46C[2].y = 0x20 + scale / 8;
         gCurrentPinballGame->unk46C[3].y = 0x20 + scale / 8;
 
-        if ((gMain.modeChangeFlags & 0xC0) == 0)
+        if ((gMain.modeChangeFlags & MODE_CHANGE_EXPIRED_BONUS_BANNER) == 0)
         {
             gMain.blendControl = 0x1E10;
             gMain.blendAlpha = BLDALPHA_BLEND(var6, 16 - var6);
@@ -1640,7 +1640,7 @@ void sub_3CBC4(void)
             }
         }
 
-        if ((gMain.modeChangeFlags & 0xC0) != 0)
+        if ((gMain.modeChangeFlags & MODE_CHANGE_EXPIRED_BONUS_BANNER) != 0)
             gMain.spriteGroups[30].available = 0;
     }
 }

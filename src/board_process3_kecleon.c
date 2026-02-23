@@ -222,7 +222,7 @@ void KecleonBoardProcess_3B_35AA4(void)
         gCurrentPinballGame->unk404 = 0;
         gCurrentPinballGame->unk408 = 0;
         gCurrentPinballGame->unk406 = 0;
-        gMain.modeChangeFlags |= 0x40;
+        gMain.modeChangeFlags |= MODE_CHANGE_EXPIRED_BONUS;
     }
 
     if (gCurrentPinballGame->returnToMainBoardFlag)

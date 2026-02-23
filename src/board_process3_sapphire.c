@@ -134,7 +134,7 @@ void sub_328C8(void)
     sub_2E67C();
     sub_31144();
 
-    if (!(gMain.modeChangeFlags & 0x20))
+    if (!(gMain.modeChangeFlags & MODE_CHANGE_END_OF_GAME))
         sub_2F79C();
 }
 

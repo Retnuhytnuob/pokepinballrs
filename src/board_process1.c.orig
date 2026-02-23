@@ -77,7 +77,11 @@ void AllBoardProcess_1B_47160(void)
     }
 
     //Game is not paused
+<<<<<<< Updated upstream
     if (gMain.modeChangeFlags == MODE_CHANGE_NONE)
+=======
+    if (gMain.modeChangeFlags)
+>>>>>>> Stashed changes
     {
         gCurrentPinballGame->unk740 = 0;
         if (gMain.unk14 != 0)

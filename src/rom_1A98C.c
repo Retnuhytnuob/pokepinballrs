@@ -761,7 +761,7 @@ void sub_1B140(s16 arg0)
             {
                 m4aMPlayAllStop();
 
-                gMain.modeChangeFlags |= 1;
+                gMain.modeChangeFlags |= MODE_CHANGE_BANNER;
                 gCurrentPinballGame->unkEA = 0;
                 gCurrentPinballGame->unkEC = 120;
                 gCurrentPinballGame->unkE8 = 0;

@@ -37,7 +37,11 @@ extern const struct Unk_86AFCB0 gUnknown_086AFCB0[][2];
 // Handle debug system flags
 void BonusStage_HandleModeChangeFlags(void)
 {
+<<<<<<< Updated upstream
     if (gMain.modeChangeFlags == MODE_CHANGE_NONE)
+=======
+    if (gMain.modeChangeFlags)
+>>>>>>> Stashed changes
         return;
 
     if (gMain.modeChangeFlags & MODE_CHANGE_BALL_SAVER)

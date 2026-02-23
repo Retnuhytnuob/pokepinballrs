@@ -185,7 +185,7 @@ void BonusBoardProcess_2B_4DBFC(void)
     int var4;
 
     var0 = 0x1000;
-    if ((gMain.modeChangeFlags & ~0x40) == 0)
+    if ((gMain.modeChangeFlags & ~MODE_CHANGE_EXPIRED_BONUS) == 0)
         sub_4E468();
 
     if (gCurrentPinballGame->unk5FB)
@@ -489,7 +489,7 @@ void sub_4E468(void)
     {
         unk1334->velocity.x = 0;
         gCurrentPinballGame->ball->velocity.y = 0;
-        if (gMain.modeChangeFlags & 0x40)
+        if (gMain.modeChangeFlags & MODE_CHANGE_EXPIRED_BONUS)
         {
             gCurrentPinballGame->returnToMainBoardFlag = 1;
             gMain.modeChangeFlags = 0x80;

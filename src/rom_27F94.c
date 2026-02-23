@@ -97,7 +97,7 @@ void sub_27F94(void)
                 }
                 else if (gCurrentPinballGame->unk28 == 93)
                 {
-                    gMain.modeChangeFlags |= 1;
+                    gMain.modeChangeFlags |= MODE_CHANGE_BANNER;
                     gCurrentPinballGame->unkEA = 0;
                     gCurrentPinballGame->unkEC = 120;
                     gCurrentPinballGame->unkE8 = 0;
@@ -132,7 +132,7 @@ void sub_27F94(void)
                 }
                 else if (gCurrentPinballGame->unk28 == 67)
                 {
-                    gMain.modeChangeFlags |= 1;
+                    gMain.modeChangeFlags |= MODE_CHANGE_BANNER;
                     gCurrentPinballGame->unkEA = 0;
                     gCurrentPinballGame->unkEC = 120;
                     gCurrentPinballGame->unkE8 = 0;
@@ -304,7 +304,7 @@ void sub_28544(void)
                 }
                 else if (gCurrentPinballGame->unk28 == 93)
                 {
-                    gMain.modeChangeFlags |= 1;
+                    gMain.modeChangeFlags |= MODE_CHANGE_BANNER;
                     gCurrentPinballGame->unkEA = 0;
                     gCurrentPinballGame->unkEC = 120;
                     gCurrentPinballGame->unkE8 = 0;
@@ -338,7 +338,7 @@ void sub_28544(void)
                 }
                 else if (gCurrentPinballGame->unk28 == 67)
                 {
-                    gMain.modeChangeFlags |= 1;
+                    gMain.modeChangeFlags |= MODE_CHANGE_BANNER;
                     gCurrentPinballGame->unkEA = 0;
                     gCurrentPinballGame->unkEC = 120;
                     gCurrentPinballGame->unkE8 = 0;
@@ -367,7 +367,7 @@ void sub_28544(void)
                 }
             }
         }
-        else if ((gMain.modeChangeFlags & 0x1) && gCurrentPinballGame->unkF0 == 1)
+        else if ((gMain.modeChangeFlags & MODE_CHANGE_BANNER) && gCurrentPinballGame->unkF0 == 1)
         {
             gCurrentPinballGame->unk6C4 = 3;
             return;
@@ -1273,7 +1273,7 @@ void sub_2A354(void)
         {
             if (gCurrentPinballGame->unk6DE == 120)
             {
-                gMain.modeChangeFlags |= 1;
+                gMain.modeChangeFlags |= MODE_CHANGE_BANNER;
                 gCurrentPinballGame->unkEA = 0;
                 gCurrentPinballGame->unkEC = 250;
                 gCurrentPinballGame->unkE8 = 272;

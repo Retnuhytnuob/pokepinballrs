@@ -236,7 +236,7 @@ void KyogreBoardProcess_3B_3869C(void)
     {
         m4aMPlayAllStop();
         m4aSongNumStart(MUS_END_OF_BALL3);
-        gMain.modeChangeFlags |= 0x40;
+        gMain.modeChangeFlags |= MODE_CHANGE_EXPIRED_BONUS;
     }
 
     if (gCurrentPinballGame->returnToMainBoardFlag)
@@ -1006,7 +1006,7 @@ void sub_39A40(void)
     for (i = 0; i < 2; i++)
     {
         group = &gMain.spriteGroups[22 + i];
-        if ((gMain.modeChangeFlags & 0x80) == 0)
+        if ((gMain.modeChangeFlags & MODE_CHANGE_BONUS_BANNER) == 0)
         {
             switch (gCurrentPinballGame->unk441[i]) {
             case 0:
@@ -1226,7 +1226,7 @@ void sub_39A40(void)
         gCurrentPinballGame->unk46C[2].y = 0x20 + scale / 8;
         gCurrentPinballGame->unk46C[3].y = 0x20 + scale / 8;
 
-        if ((gMain.modeChangeFlags & 0xC0) == 0)
+        if ((gMain.modeChangeFlags & MODE_CHANGE_EXPIRED_BONUS_BANNER) == 0)
         {
             gMain.blendControl = 0x1E10;
             gMain.blendAlpha = BLDALPHA_BLEND(var6, 16 - var6);
@@ -1265,7 +1265,7 @@ void sub_39A40(void)
             }
         }
 
-        if (gMain.modeChangeFlags & 0xC0)
+        if (gMain.modeChangeFlags & MODE_CHANGE_EXPIRED_BONUS_BANNER)
             gMain.spriteGroups[24].available = 0;
     }
 }

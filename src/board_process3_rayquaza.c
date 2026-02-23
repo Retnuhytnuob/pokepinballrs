@@ -235,7 +235,7 @@ void RayquazaBoardProcess_3B_3EB2C(void)
     {
         m4aMPlayAllStop();
         m4aSongNumStart(MUS_END_OF_BALL3);
-        gMain.modeChangeFlags |= 0x40;
+        gMain.modeChangeFlags |= MODE_CHANGE_EXPIRED_BONUS;
     }
 
     if (gCurrentPinballGame->returnToMainBoardFlag)
@@ -890,7 +890,7 @@ void sub_3FAE0(void)
                 }
                 else
                 {
-                    if ((gMain.modeChangeFlags & 0xC0) == 0)
+                    if ((gMain.modeChangeFlags & MODE_CHANGE_EXPIRED_BONUS_BANNER) == 0)
                     {
                         gMain.blendControl = 0x1E10;
                         gMain.blendAlpha = BLDALPHA_BLEND(var2, 0x10 - var2);

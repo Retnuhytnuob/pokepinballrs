@@ -566,7 +566,7 @@ void PinballGame_State1_4AAD8(void)
                 sub_3E5D0();
             }
 
-            if (gMain.modeChangeFlags & 0x2)
+            if (gMain.modeChangeFlags & MODE_CHANGE_PAUSE)
                 DmaCopy16(3, gCurrentPinballGame->unk111A, (void *)OBJ_PLTT, OBJ_PLTT_SIZE);
 
             gCurrentPinballGame->unk1D = 2;
@@ -600,7 +600,7 @@ void sub_4ABEC(void)
 
     UpdateButtonActionsFromJoy();
     CurrentBoardProcPairs_020028D8[1].unk4();
-    if (gMain.unkE == 0 && !(gMain.modeChangeFlags & 0x2))
+    if (gMain.unkE == 0 && !(gMain.modeChangeFlags & MODE_CHANGE_PAUSE))
     {
         CurrentBoardProcPairs_020028D8[2].unk4();
         CurrentBoardProcPairs_020028D8[0].unk4();
@@ -656,7 +656,7 @@ void sub_4ACF0(void)
 
     sub_4B334();
     CurrentBoardProcPairs_020028D8[1].unk4();
-    if (!(gMain.modeChangeFlags & 0x2))
+    if (!(gMain.modeChangeFlags & MODE_CHANGE_PAUSE))
     {
         CurrentBoardProcPairs_020028D8[2].unk4();
         CurrentBoardProcPairs_020028D8[0].unk4();
@@ -724,14 +724,14 @@ void sub_4AE8C(void)
 
     UpdateButtonActionsFromJoy();
     CurrentBoardProcPairs_020028D8[1].unk4();
-    if (gMain.modeChangeFlags & 0x2)
+    if (gMain.modeChangeFlags & MODE_CHANGE_PAUSE)
         return;
 
     CurrentBoardProcPairs_020028D8[0].unk4();
     CurrentBoardProcPairs_020028D8[2].unk4();
     CurrentBoardProcPairs_020028D8[3].unk4();
     CurrentBoardProcPairs_020028D8[4].unk4();
-    if (gMain.modeChangeFlags & ~0x40)
+    if (gMain.modeChangeFlags & ~MODE_CHANGE_EXPIRED_BONUS)
     {
         if (!gCurrentPinballGame->unk1F)
         {
@@ -789,13 +789,13 @@ void sub_4B000(void)
     s16 i;
 
     sub_4B334();
-    if (!(gMain.modeChangeFlags & 0x2))
+    if (!(gMain.modeChangeFlags & MODE_CHANGE_PAUSE))
     {
         CurrentBoardProcPairs_020028D8[0].unk4();
         CurrentBoardProcPairs_020028D8[2].unk4();
         CurrentBoardProcPairs_020028D8[3].unk4();
         CurrentBoardProcPairs_020028D8[4].unk4();
-        if (gMain.modeChangeFlags & ~0x40)
+        if (gMain.modeChangeFlags & ~MODE_CHANGE_EXPIRED_BONUS)
         {
             if (!gCurrentPinballGame->unk1F)
             {
