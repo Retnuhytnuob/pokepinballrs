@@ -60,7 +60,7 @@ void KyogreBoardProcess_3A_383E4(void)
     gCurrentPinballGame->unk386 = 0;
     gCurrentPinballGame->unk394 = 0;
     gCurrentPinballGame->unk38E = 0;
-    gCurrentPinballGame->unk385 = 0;
+    gCurrentPinballGame->bonusModeHitCount = 0;
     gCurrentPinballGame->boardEntityCollisionMode = 0;
     gCurrentPinballGame->unk6C4 = 3;
     gCurrentPinballGame->unk3DF = 14;
@@ -264,8 +264,8 @@ void sub_38A20(void)
                 MPlayStart(&gMPlayInfo_SE1, &se_unk_10a);
                 playRumbleType(7);
                 gCurrentPinballGame->scoreAddedInFrame = 500000;
-                gCurrentPinballGame->unk385++;
-                if (gCurrentPinballGame->unk385 >= gCurrentPinballGame->legendaryHitsRequired &&
+                gCurrentPinballGame->bonusModeHitCount++;
+                if (gCurrentPinballGame->bonusModeHitCount >= gCurrentPinballGame->legendaryHitsRequired &&
                     gCurrentPinballGame->boardEntityCollisionMode == 1)
                     gCurrentPinballGame->unk3DC = 7;
             }
@@ -387,7 +387,7 @@ void sub_38A20(void)
                 {
                     if (gCurrentPinballGame->unk3DD == 3)
                     {
-                        if (gCurrentPinballGame->unk385 >= gCurrentPinballGame->legendaryHitsRequired)
+                        if (gCurrentPinballGame->bonusModeHitCount >= gCurrentPinballGame->legendaryHitsRequired)
                         {
                             gCurrentPinballGame->unk3E2 = 0;
                             gCurrentPinballGame->unk3DC = 4;
@@ -1044,7 +1044,7 @@ void sub_39A40(void)
                     yy = tempVector.y * tempVector.y;
                     squaredMagnitude = xx + yy;
                     if (gCurrentPinballGame->unk383 == 0 && gCurrentPinballGame->unk388 == 0 &&
-                        gCurrentPinballGame->unk385 < gCurrentPinballGame->legendaryHitsRequired &&
+                        gCurrentPinballGame->bonusModeHitCount < gCurrentPinballGame->legendaryHitsRequired &&
                         gCurrentPinballGame->unk452 == 0 && squaredMagnitude < 400)
                     {
                         m4aSongNumStart(SE_UNKNOWN_0x113);

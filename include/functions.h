@@ -575,7 +575,7 @@ extern void sub_32BE4();
 extern void swap_duskull_entity_index(s16 index1, s16 index2);
 extern void DuskullPhase_ProcessEntityLogic();
 extern void DuskullPhase_ProcessGraphics();
-extern void sub_34450();
+extern void DusclopsPhase_ProcessEntityLogicAndGraphics();
 extern void sub_350F0();
 extern void sub_351A8();
 extern void sub_356A0();

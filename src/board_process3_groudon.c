@@ -55,7 +55,7 @@ void GroudonBoardProcess_3A_3B120(void)
     gCurrentPinballGame->unk6C4 = 3;
     gCurrentPinballGame->unk382 = 0;
     gCurrentPinballGame->unk383 = 0;
-    gCurrentPinballGame->unk385 = 0;
+    gCurrentPinballGame->bonusModeHitCount = 0;
     gCurrentPinballGame->unk389 = 0;
     gCurrentPinballGame->unk38E = 0;
     gCurrentPinballGame->unk390 = 0;
@@ -283,8 +283,8 @@ void sub_3B7C4(void)
             MPlayStart(&gMPlayInfo_SE1, &se_unk_118);
             gCurrentPinballGame->scoreAddedInFrame = 500000;
             playRumbleType(7);
-            gCurrentPinballGame->unk385++;
-            if (gCurrentPinballGame->unk385 >= gCurrentPinballGame->legendaryHitsRequired)
+            gCurrentPinballGame->bonusModeHitCount++;
+            if (gCurrentPinballGame->bonusModeHitCount >= gCurrentPinballGame->legendaryHitsRequired)
                 gCurrentPinballGame->unk3DC = 6;
         }
 

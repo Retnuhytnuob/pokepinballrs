@@ -1612,10 +1612,10 @@ void CheckDusclopsEntitiesCollision(struct Vector16 *arg0, s16* arg1, u8* arg2) 
         if (*arg2 != 0)
             return;
 
-        if (gCurrentPinballGame->unk3A9[0] != 0)
+        if (gCurrentPinballGame->minionCanCollide[0] )
         {
-            deltaX = arg0->x - gCurrentPinballGame->minionColisionPosition[0].x;
-            deltaY = arg0->y - gCurrentPinballGame->minionColisionPosition[0].y;
+            deltaX = arg0->x - gCurrentPinballGame->minionCollisionPosition[0].x;
+            deltaY = arg0->y - gCurrentPinballGame->minionCollisionPosition[0].y;
 
             if (deltaX < 64U && deltaY < 64U)
             {
@@ -1629,10 +1629,10 @@ void CheckDusclopsEntitiesCollision(struct Vector16 *arg0, s16* arg1, u8* arg2) 
 
         if (lowerNibble == 0)
         {
-            if (gCurrentPinballGame->unk3A9[1] != 0)
+            if (gCurrentPinballGame->minionCanCollide[1] )
             {
-                deltaX = arg0->x - gCurrentPinballGame->minionColisionPosition[1].x;
-                deltaY = arg0->y - gCurrentPinballGame->minionColisionPosition[1].y;
+                deltaX = arg0->x - gCurrentPinballGame->minionCollisionPosition[1].x;
+                deltaY = arg0->y - gCurrentPinballGame->minionCollisionPosition[1].y;
 
                 if (deltaX < 64U && deltaY < 64U)
                 {
@@ -1647,10 +1647,10 @@ void CheckDusclopsEntitiesCollision(struct Vector16 *arg0, s16* arg1, u8* arg2) 
 
         if (lowerNibble == 0)
         {
-            if ( gCurrentPinballGame->unk3A9[2] != 0)
+            if ( gCurrentPinballGame->minionCanCollide[2] )
             {
-                deltaX = arg0->x - gCurrentPinballGame->minionColisionPosition[2].x;
-                deltaY = arg0->y - gCurrentPinballGame->minionColisionPosition[2].y;
+                deltaX = arg0->x - gCurrentPinballGame->minionCollisionPosition[2].x;
+                deltaY = arg0->y - gCurrentPinballGame->minionCollisionPosition[2].y;
 
                 if (deltaX < 64U && deltaY < 64U)
                 {

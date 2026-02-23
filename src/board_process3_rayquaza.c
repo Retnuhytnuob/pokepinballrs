@@ -49,7 +49,7 @@ void RayquazaBoardProcess_3A_3E79C(void)
     gCurrentPinballGame->unk6C4 = 3;
     gCurrentPinballGame->unk382 = 0;
     gCurrentPinballGame->unk383 = 0;
-    gCurrentPinballGame->unk385 = 0;
+    gCurrentPinballGame->bonusModeHitCount = 0;
     gCurrentPinballGame->unk386 = 0;
     gCurrentPinballGame->unk389 = 0;
     gCurrentPinballGame->unk38A = 0;
@@ -257,9 +257,9 @@ void sub_3EDF0(void)
         {
             m4aSongNumStart(SE_RAYQUAZA_HIT);
             gCurrentPinballGame->scoreAddedInFrame = 1000000;
-            gCurrentPinballGame->unk385++;
+            gCurrentPinballGame->bonusModeHitCount++;
             playRumbleType(7);
-            if (gCurrentPinballGame->unk385 >= gCurrentPinballGame->legendaryHitsRequired && gCurrentPinballGame->unk3DC != 6)
+            if (gCurrentPinballGame->bonusModeHitCount >= gCurrentPinballGame->legendaryHitsRequired && gCurrentPinballGame->unk3DC != 6)
                 gCurrentPinballGame->unk3DC = 9;
         }
 
@@ -409,7 +409,7 @@ void sub_3EDF0(void)
                 }
                 else if (gCurrentPinballGame->unk3DD == 6)
                 {
-                    if (gCurrentPinballGame->unk385 >= gCurrentPinballGame->legendaryHitsRequired - 1)
+                    if (gCurrentPinballGame->bonusModeHitCount >= gCurrentPinballGame->legendaryHitsRequired - 1)
                     {
                         gCurrentPinballGame->unk3E2 = 13;
                         gCurrentPinballGame->unk3DC = 4;
@@ -1265,7 +1265,7 @@ void sub_40288(void)
                 yy = tempVector.y * tempVector.y;
                 squaredMagnitude = xx + yy;
                 if (gCurrentPinballGame->unk383 == 0 && gCurrentPinballGame->unk388 == 0 &&
-                    gCurrentPinballGame->unk385 < gCurrentPinballGame->legendaryHitsRequired &&
+                    gCurrentPinballGame->bonusModeHitCount < gCurrentPinballGame->legendaryHitsRequired &&
                     gCurrentPinballGame->unk452 == 0 && squaredMagnitude < 300)
                 {
                     gCurrentPinballGame->unk486 = 6;

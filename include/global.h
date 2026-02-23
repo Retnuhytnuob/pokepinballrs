@@ -490,7 +490,7 @@ struct PinballGame
     /*0x382*/ s8 unk382;
     /*0x383*/ s8 unk383;
     /*0x384*/ s8 legendaryHitsRequired;
-    /*0x385*/ s8 unk385;
+    /*0x385*/ s8 bonusModeHitCount;
     /*0x386*/ s8 unk386;
     /*0x387*/ s8 boardEntityCollisionMode;
     /*0x388*/ s8 unk388;
@@ -502,23 +502,20 @@ struct PinballGame
     /*0x392*/ u16 unk392;
     /*0x394*/ s16 unk394;
     /*0x396*/ s8 minionActiveCount;
-
-    // This array of 3 entities is used by the dusclops and
-    // spheal in their bonus games.
     /*0x397*/ s8 minionSpriteVariant[3];
     /*0x39A*/ u8 minionNextSpriteVariant[3];
     /*0x39D*/ s8 minionOamIx[3];
     /*0x3A0*/ s8 minionState[3];
     /*0x3A3*/ s8 minionFramesetIx[3];
-    /*0x3A6*/ s8 unk3A6[3];
-    /*0x3A9*/ s8 unk3A9[3];
-    /*0x3AC*/ s8 unk3AC[3];
+    /*0x3A6*/ s8 minionDrawInFrame[3];
+    /*0x3A9*/ s8 minionCanCollide[3];
+    /*0x3AC*/ s8 minionDeathTimer[3];
     /*0x3B0*/ u16 minionStateTimer[3];
     /*0x3B6*/ u16 minionTimeAlive[3];
     /*0x3BC*/ u16 minionEscapeAtTime[3];
     /*0x3C2*/ u8 filler3C2[0x2];
     /*0x3C4*/ struct Vector16 minionLogicPosition[3];
-    /*0x3D0*/ struct Vector16 minionColisionPosition[3];
+    /*0x3D0*/ struct Vector16 minionCollisionPosition[3];
     /*0x3DC*/ s8 unk3DC;
     /*0x3DD*/ s8 unk3DD;
     /*0x3DE*/ s8 unk3DE;

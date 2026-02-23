@@ -74,7 +74,7 @@ void KecleonBoardProcess_3A_35860(void)
     gCurrentPinballGame->unk3E8 = 750;
     gCurrentPinballGame->unk3EA = 360;
     gCurrentPinballGame->unk3DF = 3;
-    gCurrentPinballGame->unk385 = 0;
+    gCurrentPinballGame->bonusModeHitCount = 0;
     gCurrentPinballGame->boardEntityCollisionMode = 0;
     gCurrentPinballGame->unk394 = 0;
     gCurrentPinballGame->unk3DE = 0;
@@ -415,7 +415,7 @@ void sub_35D54(void)
         gCurrentPinballGame->unk3EA += tempVec.y;
         if (deltaMagSquared < 2500)
         {
-            if (gCurrentPinballGame->unk385 > 9)
+            if (gCurrentPinballGame->bonusModeHitCount > 9)
             {
                 if (gCurrentPinballGame->unk3DE == 66)
                 {
@@ -614,7 +614,7 @@ void sub_35D54(void)
         gCurrentPinballGame->unk3E4 = 0;
         gCurrentPinballGame->unk3FA = 0;
         gCurrentPinballGame->scoreAddedInFrame = 500000;
-        gCurrentPinballGame->unk385++;
+        gCurrentPinballGame->bonusModeHitCount++;
         MPlayStart(&gMPlayInfo_SE1, &se_unk_101);
         playRumbleType(7);
         break;
@@ -630,7 +630,7 @@ void sub_35D54(void)
             if (gCurrentPinballGame->unk3E2 == gCurrentPinballGame->unk3DE + 4)
             {
                 gCurrentPinballGame->unk3E2 = gCurrentPinballGame->unk3DE + 3;
-                if (gCurrentPinballGame->unk385 < 10)
+                if (gCurrentPinballGame->bonusModeHitCount < 10)
                 {
                     gCurrentPinballGame->unk3DC = 13;
                 }
@@ -657,7 +657,7 @@ void sub_35D54(void)
         }
         else
         {
-            if (gCurrentPinballGame->unk385 > 9)
+            if (gCurrentPinballGame->bonusModeHitCount > 9)
             {
                 if (gCurrentPinballGame->unk3F6 == 0)
                 {
@@ -797,21 +797,21 @@ void sub_36CB4(void)
     {
         gCurrentPinballGame->unk3F0 = 2 * (gCurrentPinballGame->unk3E8 / 10) + 144;
         gCurrentPinballGame->unk3F2 = 2 * (gCurrentPinballGame->unk3EA / 10) + 84;
-        if (gCurrentPinballGame->unk385 < 10)
+        if (gCurrentPinballGame->bonusModeHitCount < 10)
             gCurrentPinballGame->boardEntityCollisionMode = 2;
     }
     else if (gCurrentPinballGame->unk3E2 >= 33 && gCurrentPinballGame->unk3E2 < 36)
     {
         gCurrentPinballGame->unk3F0 = 2 * (gCurrentPinballGame->unk3E8 / 10) + 240;
         gCurrentPinballGame->unk3F2 = 2 * (gCurrentPinballGame->unk3EA / 10) + 84;
-        if (gCurrentPinballGame->unk385 < 10)
+        if (gCurrentPinballGame->bonusModeHitCount < 10)
             gCurrentPinballGame->boardEntityCollisionMode = 2;
     }
     else
     {
         gCurrentPinballGame->unk3F0 = 2 * (gCurrentPinballGame->unk3E8 / 10) + 208;
         gCurrentPinballGame->unk3F2 = 2 * (gCurrentPinballGame->unk3EA / 10) + 56;
-        if (gCurrentPinballGame->unk385 < 10)
+        if (gCurrentPinballGame->bonusModeHitCount < 10)
             gCurrentPinballGame->boardEntityCollisionMode = 1;
     }
 
