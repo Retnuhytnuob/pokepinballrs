@@ -171,7 +171,7 @@ void SphealBoardProcess_3B_43228(void)
             {
                 m4aMPlayAllStop();
                 MPlayStart(&gMPlayInfo_SE1, &se_unk_13b);
-                gMain.modeChangeFlags = 0x80;
+                gMain.modeChangeFlags = MODE_CHANGE_BONUS_BANNER;
                 gCurrentPinballGame->unk388 = 2;
                 gCurrentPinballGame->unk392 = 0;
             }

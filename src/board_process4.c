@@ -51,7 +51,7 @@ void MainBoardProcess_4B_19490(void)
 {
     s16 i;
 
-    if ((gMain.modeChangeFlags & 1) == 0)
+    if ((gMain.modeChangeFlags & MODE_CHANGE_BANNER) == 0)
         sub_195C4();
 
     for (i = 0; i < 2; i++)
@@ -160,7 +160,7 @@ void BonusBoardProcess_4B_19734(void)
     s16 i;
     s16 priority = 1;
 
-    if ((gMain.modeChangeFlags & 1) == 0)
+    if ((gMain.modeChangeFlags & MODE_CHANGE_BANNER) == 0)
     {
         sub_19894();
         gMain.modeChangeFlags = gMain.modeChangeFlags;

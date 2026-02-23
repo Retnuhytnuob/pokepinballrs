@@ -317,7 +317,7 @@ static void sub_4A270(void)
 
 void sub_4A518(void)
 {
-    gMain.modeChangeFlags = 0;
+    gMain.modeChangeFlags = MODE_CHANGE_NONE;
     gMain.unk10 = 0;
     gMain.fieldFrameCount = 0;
     gMain.unk11 = 0;

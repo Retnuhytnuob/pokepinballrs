@@ -153,7 +153,7 @@ void RayquazaBoardProcess_3B_3EB2C(void)
         gMain.spriteGroups[5].available = 1;
         DmaCopy16(3, gRayquazaBonusClear_Gfx, (void *)0x06015800, 0x2000);
         gCurrentPinballGame->unk394 = 136;
-        gMain.modeChangeFlags = 0x80;
+        gMain.modeChangeFlags = MODE_CHANGE_BONUS_BANNER;
         gCurrentPinballGame->unk5FA = 1;
         break;
     case 3:
@@ -194,7 +194,7 @@ void RayquazaBoardProcess_3B_3EB2C(void)
         gMain.spriteGroups[5].available = 1;
         DmaCopy16(3, gRayquazaBonusClear_Gfx, (void *)0x06015800, 0x2000);
         gCurrentPinballGame->unk394 = 136;
-        gMain.modeChangeFlags = 0x80;
+        gMain.modeChangeFlags = MODE_CHANGE_BONUS_BANNER;
         break;
     case 5:
         ProceessBonusBannerAndScoring();
@@ -575,7 +575,7 @@ void sub_3EDF0(void)
             // Normal Completion
             gCurrentPinballGame->unk3DC = 10;
             gCurrentPinballGame->unk3E2 = 98;
-            gMain.modeChangeFlags = 0x80;
+            gMain.modeChangeFlags = MODE_CHANGE_BONUS_BANNER;
             gCurrentPinballGame->unk388 = 2;
             gCurrentPinballGame->unk392 = 0;
         }
@@ -644,7 +644,7 @@ void sub_3EDF0(void)
         gCurrentPinballGame->unk506 = 2;
         gCurrentPinballGame->unk516 = 0;
         gCurrentPinballGame->unk5FA = 1;
-        gMain.modeChangeFlags = 0x80;
+        gMain.modeChangeFlags = MODE_CHANGE_BONUS_BANNER;
         gMain.spriteGroups[14].available = 1;
         gCurrentPinballGame->minionLogicPosition[0].x = 0;
         gCurrentPinballGame->minionLogicPosition[0].y = -5000;

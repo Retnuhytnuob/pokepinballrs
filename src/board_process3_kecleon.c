@@ -173,7 +173,7 @@ void KecleonBoardProcess_3B_35AA4(void)
             gMain.spriteGroups[5].available = 1;
             DmaCopy16(3, gKecleonBonusClear_Gfx, (void *)0x6015800, 0x2000);
             gCurrentPinballGame->unk394 = 0x88;
-            gMain.modeChangeFlags = 0x80;
+            gMain.modeChangeFlags = MODE_CHANGE_BONUS_BANNER;
         }
         break;
     case 3:
@@ -637,7 +637,7 @@ void sub_35D54(void)
                 else
                 {
                     gCurrentPinballGame->unk294 = 3;
-                    gMain.modeChangeFlags = 0x80;
+                    gMain.modeChangeFlags = MODE_CHANGE_BONUS_BANNER;
                     gCurrentPinballGame->unk388 = 2;
                     gCurrentPinballGame->unk392 = 0;
                     gCurrentPinballGame->unk3DC = 13;

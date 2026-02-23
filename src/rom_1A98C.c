@@ -18,7 +18,7 @@ void sub_22D54(void);
 
 void sub_1A98C(void)
 {
-    if (gMain.modeChangeFlags != 0)
+    if (gMain.modeChangeFlags != MODE_CHANGE_NONE)
         return;
 
     switch (gCurrentPinballGame->unk25)

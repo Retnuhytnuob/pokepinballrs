@@ -251,7 +251,7 @@ void sub_357B8(void)
     gMain.unk5 = gMain.selectedField;
     gMain.selectedField = temp;
     gMain.unk6 = 0;
-    gMain.modeChangeFlags = 0;
+    gMain.modeChangeFlags = MODE_CHANGE_NONE;
     gCurrentPinballGame->eventTimer = 0;
     gCurrentPinballGame->unk294 = 0;
     if (gCurrentPinballGame->numCompletedBonusStages > 4)

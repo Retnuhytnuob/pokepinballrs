@@ -175,7 +175,7 @@ void GroudonBoardProcess_3B_3B49C(void)
             gMain.spriteGroups[5].available = 1;
             DmaCopy16(3, gGroudonBonusClear_Gfx, (void *)0x06015800, 0x2000);
             gCurrentPinballGame->unk394 = 136;
-            gMain.modeChangeFlags = 0x80;
+            gMain.modeChangeFlags = MODE_CHANGE_BONUS_BANNER;
             gCurrentPinballGame->unk5FA = 1;
         }
         break;
@@ -217,7 +217,7 @@ void GroudonBoardProcess_3B_3B49C(void)
         gMain.spriteGroups[5].available = 1;
         DmaCopy16(3, gGroudonBonusClear_Gfx, (void *)0x06015800, 0x2000);
         gCurrentPinballGame->unk394 = 136;
-        gMain.modeChangeFlags = 0x80;
+        gMain.modeChangeFlags = MODE_CHANGE_BONUS_BANNER;
         break;
     case 5:
         ProceessBonusBannerAndScoring();
@@ -614,7 +614,7 @@ void sub_3B7C4(void)
             gCurrentPinballGame->unk3DC = 7;
             gCurrentPinballGame->unk3E2 = 32;
             gCurrentPinballGame->boardEntityCollisionMode = 0;
-            gMain.modeChangeFlags = 0x80;
+            gMain.modeChangeFlags = MODE_CHANGE_BONUS_BANNER;
             gCurrentPinballGame->unk388 = 2;
             gCurrentPinballGame->unk392 = 0;
         }

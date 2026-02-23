@@ -155,7 +155,7 @@ void KyogreBoardProcess_3B_3869C(void)
             gMain.spriteGroups[5].available = 1;
             DmaCopy16(3, gKyogreBonusClear_Gfx, (void *)0x06015800, 0x2000);
             gCurrentPinballGame->unk394 = 136;
-            gMain.modeChangeFlags = 0x80;
+            gMain.modeChangeFlags = MODE_CHANGE_BONUS_BANNER;
             gCurrentPinballGame->unk5FA = 1;
         }
         break;
@@ -197,7 +197,7 @@ void KyogreBoardProcess_3B_3869C(void)
         gMain.spriteGroups[5].available = 1;
         DmaCopy16(3, gKyogreBonusClear_Gfx, (void *)0x06015800, 0x2000);
         gCurrentPinballGame->unk394 = 136;
-        gMain.modeChangeFlags = 0x80;
+        gMain.modeChangeFlags = MODE_CHANGE_BONUS_BANNER;
         break;
     case 5:
         ProceessBonusBannerAndScoring();
@@ -503,7 +503,7 @@ void sub_38A20(void)
             // normal completion
             gCurrentPinballGame->unk3DC = 9;
             gCurrentPinballGame->unk3E2 = 79;
-            gMain.modeChangeFlags = 0x80;
+            gMain.modeChangeFlags = MODE_CHANGE_BONUS_BANNER;
             gCurrentPinballGame->unk388 = 2;
             gCurrentPinballGame->unk392 = 0;
         }

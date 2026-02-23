@@ -240,7 +240,7 @@ void sub_47670(void)
     }
     else
     {
-        gMain.modeChangeFlags &= 0xEF;
+        gMain.modeChangeFlags &= ~MODE_CHANGE_END_OF_BALL;
         sub_47FBC();
         if (gCurrentPinballGame->numLives > 0)
         {
@@ -490,7 +490,7 @@ void sub_478D8(void)
     }
     else
     {
-        gMain.modeChangeFlags &= 0xF7;
+        gMain.modeChangeFlags &= ~MODE_CHANGE_BALL_SAVER;
         gCurrentPinballGame->unk26 = 60;
         sub_11C14(0);
         gCurrentPinballGame->unk1F = 0;

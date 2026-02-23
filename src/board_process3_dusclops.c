@@ -972,7 +972,7 @@ void DusclopsPhase_ProcessEntityLogicAndGraphics(void)
     case DUSCLOPS_ENTITY_STATE_VANISH:
     {
         gCurrentPinballGame->unk294 = 3;
-        gMain.modeChangeFlags = 128;
+        gMain.modeChangeFlags = MODE_CHANGE_BONUS_BANNER;
 
         if (gCurrentPinballGame->unk3E6 == 0)
         {

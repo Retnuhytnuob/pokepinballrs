@@ -492,7 +492,7 @@ void sub_4E468(void)
         if (gMain.modeChangeFlags & MODE_CHANGE_EXPIRED_BONUS)
         {
             gCurrentPinballGame->returnToMainBoardFlag = 1;
-            gMain.modeChangeFlags = 0x80;
+            gMain.modeChangeFlags = MODE_CHANGE_BONUS_BANNER;
             gCurrentPinballGame->ball->positionQ0.y = gUnknown_02031520.unk14.unk2A - 10;
         }
         else
