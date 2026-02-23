@@ -32,7 +32,7 @@ void DuskullBonus_Setup(void)
     gCurrentPinballGame->ball->unk0 = 1;
     gCurrentPinballGame->bonusModeHitCount = 0;
     gCurrentPinballGame->returnToMainBoardFlag = 0;
-    gCurrentPinballGame->boardEntityCollisionMode = DUSCLOPS_ENTITY_COLISION_MODE_NONE;
+    gCurrentPinballGame->boardEntityCollisionMode = DUSCLOPS_ENTITY_COLLISION_MODE_NONE;
     gCurrentPinballGame->unk392 = 0;
     gCurrentPinballGame->unk394 = 0;
     gCurrentPinballGame->minionActiveCount = 0;
@@ -111,7 +111,7 @@ void DusclopsBoardProcess_3B_33130(void)
                 gMain.blendControl = 0x1C10;
                 gMain.blendAlpha = 0x30D;
             }
-            gCurrentPinballGame->boardEntityCollisionMode = DUSCLOPS_ENTITY_COLISION_MODE_DUSKULL;
+            gCurrentPinballGame->boardEntityCollisionMode = DUSCLOPS_ENTITY_COLLISION_MODE_DUSKULL;
             DuskullPhase_ProcessEntityLogic();
             DuskullPhase_ProcessGraphics();
             break;
@@ -120,7 +120,7 @@ void DusclopsBoardProcess_3B_33130(void)
             gMain.spriteGroups[13].available = TRUE;
             gMain.spriteGroups[14].available = TRUE;
             gMain.spriteGroups[12].available = TRUE;
-            gCurrentPinballGame->boardEntityCollisionMode = DUSCLOPS_ENTITY_COLISION_MODE_NONE;
+            gCurrentPinballGame->boardEntityCollisionMode = DUSCLOPS_ENTITY_COLLISION_MODE_NONE;
             gCurrentPinballGame->bonusModeHitCount = 0;
             m4aSongNumStart(MUS_BONUS_FIELD_DUSCLOPS);
             break;
@@ -730,7 +730,7 @@ void DusclopsPhase_ProcessEntityLogicAndGraphics(void)
         }
         else
         {
-            gCurrentPinballGame->boardEntityCollisionMode = DUSCLOPS_ENTITY_COLISION_MODE_DUSCLOPS;
+            gCurrentPinballGame->boardEntityCollisionMode = DUSCLOPS_ENTITY_COLLISION_MODE_DUSCLOPS;
             gCurrentPinballGame->unk294 = 2;
         }
 
@@ -843,7 +843,7 @@ void DusclopsPhase_ProcessEntityLogicAndGraphics(void)
         tileOffset = DUSCLOPS_TILE_OFFSET_HIT;
 
         m4aSongNumStart(SE_DUSCLOPS_HIT); //Dusclops hit
-        gCurrentPinballGame->boardEntityCollisionMode = DUSCLOPS_ENTITY_COLISION_MODE_NONE;
+        gCurrentPinballGame->boardEntityCollisionMode = DUSCLOPS_ENTITY_COLLISION_MODE_NONE;
         playRumbleType(7);
         break;
     }
@@ -861,7 +861,7 @@ void DusclopsPhase_ProcessEntityLogicAndGraphics(void)
             gCurrentPinballGame->unk3E4 = 128;
             gCurrentPinballGame->unk3E2 = DUSCLOPS_FRAME_WALK_NEUTRAL;
             gCurrentPinballGame->unk3DC = DUSCLOPS_ENTITY_STATE_GUARD_READY;
-            gCurrentPinballGame->boardEntityCollisionMode = DUSCLOPS_ENTITY_COLISION_MODE_NONE;
+            gCurrentPinballGame->boardEntityCollisionMode = DUSCLOPS_ENTITY_COLLISION_MODE_NONE;
             tileOffset = DUSCLOPS_TILE_OFFSET_HIT;
         }
         else
@@ -931,12 +931,12 @@ void DusclopsPhase_ProcessEntityLogicAndGraphics(void)
         if (gCurrentPinballGame->ballSpeed != 0)
         {
             if ((gCurrentPinballGame->unk3E2 == DUSCLOPS_FRAME_ABSOLB_LAUNCH) && (gCurrentPinballGame->unk3E4 > 4))
-                gCurrentPinballGame->boardEntityCollisionMode = DUSCLOPS_ENTITY_COLISION_MODE_DUSCLOPS;
+                gCurrentPinballGame->boardEntityCollisionMode = DUSCLOPS_ENTITY_COLLISION_MODE_DUSCLOPS;
         }
         else
         {
             if ((gCurrentPinballGame->unk3E2 == DUSCLOPS_FRAME_ABSOLB_LAUNCH) && (gCurrentPinballGame->unk3E4 != 0))
-                gCurrentPinballGame->boardEntityCollisionMode = DUSCLOPS_ENTITY_COLISION_MODE_DUSCLOPS;
+                gCurrentPinballGame->boardEntityCollisionMode = DUSCLOPS_ENTITY_COLLISION_MODE_DUSCLOPS;
         }
 
         if (gCurrentPinballGame->unk5A6 <= 29)

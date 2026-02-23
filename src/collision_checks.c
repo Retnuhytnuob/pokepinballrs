@@ -1578,7 +1578,7 @@ void CheckDusclopsEntitiesCollision(struct Vector16 *arg0, s16* arg1, u8* arg2) 
     maskedResult = 0;
     lowerNibble = 0;
 
-    if(gCurrentPinballGame->boardEntityCollisionMode == DUSCLOPS_ENTITY_COLISION_MODE_DUSCLOPS)
+    if(gCurrentPinballGame->boardEntityCollisionMode == DUSCLOPS_ENTITY_COLLISION_MODE_DUSCLOPS)
     {
         if (*arg2 != 0)
             return;
@@ -1608,7 +1608,7 @@ void CheckDusclopsEntitiesCollision(struct Vector16 *arg0, s16* arg1, u8* arg2) 
         return;
     }
 
-    if(gCurrentPinballGame->boardEntityCollisionMode == DUSCLOPS_ENTITY_COLISION_MODE_DUSKULL)
+    if(gCurrentPinballGame->boardEntityCollisionMode == DUSCLOPS_ENTITY_COLLISION_MODE_DUSKULL)
     {
         if (*arg2 != 0)
             return;
@@ -1687,7 +1687,7 @@ void CheckDusclopsAbzorbZoneHit(u8 arg0, u16 *arg1, u16 *arg2)
     case 4:
         gCurrentPinballGame->unk3DC = DUSCLOPS_ENTITY_STATE_HIT_ABSORB_ZONE;
         gCurrentPinballGame->unk1F = 1;
-        gCurrentPinballGame->boardEntityCollisionMode = DUSCLOPS_ENTITY_COLISION_MODE_NONE;
+        gCurrentPinballGame->boardEntityCollisionMode = DUSCLOPS_ENTITY_COLLISION_MODE_NONE;
         break;
     case 5:
     case 6:

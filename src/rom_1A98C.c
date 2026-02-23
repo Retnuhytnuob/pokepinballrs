@@ -88,7 +88,7 @@ void sub_1AA38(void)
 * When this function is nulled out at sub_1A9E8, the banner *doesn't* show, and
 * the ball bounces off the sharpedo. However, the grid still shows a picked mon,
 * and the mode otherwise works mostly normally, with the exception of affecting
-* the 'tilt' behavior, and the colision with the cyndaquil pushback.
+* the 'tilt' behavior, and the collision with the cyndaquil pushback.
 */
 void sub_1AAA0(void)
 {
