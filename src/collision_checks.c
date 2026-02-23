@@ -1675,7 +1675,6 @@ void CheckDusclopsEntitiesCollision(struct Vector16 *arg0, s16* arg1, u8* arg2) 
     }
 }
 
-// ?? ToConfirm: cancel hit based on hitting Dusclop's 'catch zone'?
 void CheckDusclopsAbzorbZoneHit(u8 arg0, u16 *arg1, u16 *arg2)
 {
     switch (arg0)
