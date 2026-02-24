@@ -3,6 +3,7 @@
 #include "main.h"
 #include "m4a.h"
 #include "constants/bg_music.h"
+#include "constants/ruby_states.h"
 
 extern const void (*gUnknown_086AD4C4[])(void);
 extern const void (*gUnknown_086AD4E8[])(void);
@@ -50,7 +51,7 @@ void RubyBoardProcess_3A_19A20(void)
     gCurrentPinballGame->unk170[0] = 10;
     gCurrentPinballGame->unk170[1] = 10;
     gCurrentPinballGame->unk170[2] = 10;
-    gCurrentPinballGame->unk16C = 0;
+    gCurrentPinballGame->rubyPondState = RUBY_POND_STATE_CHINCHOU_STAGGERED;
     sub_1EC48();
     sub_1F158();
 
@@ -246,7 +247,7 @@ void sub_19E10(void)
     if (gCurrentPinballGame->unk68 < 220)
     {
         sub_23E18();
-        if (gCurrentPinballGame->unk2A4 != 0)
+        if (gCurrentPinballGame->shouldProcessWhiscash)
         {
             sub_1DC7C();
         }

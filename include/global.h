@@ -254,17 +254,17 @@ struct PinballGame
     /*0x166*/ u16 unk166;
     /*0x168*/ u16 unk168;
     /*0x16A*/ s16 unk16A;
-    /*0x16C*/ s8 unk16C;
+    /*0x16C*/ s8 rubyPondState;
     /*0x16D*/ u8 filler16D[0x1];
     /*0x16E*/ s8 unk16E;
-    /*0x16F*/ s8 unk16F;
+    /*0x16F*/ s8 rubyPondContentsChanging;
     /*0x170*/ s8 unk170[3];
     /*0x173*/ u8 unk173;
-    /*0x174*/ u16 unk174;
+    /*0x174*/ u16 rubyPondChangeTimer;
     /*0x176*/ u8 unk176;
     /*0x177*/ u8 filler177[0x1];
-    /*0x178*/ struct Vector16 unk178[3];
-    /*0x184*/ struct Vector16 unk184[3];
+    /*0x178*/ struct Vector16 rubyBumperLogicPosition[3]; //chinchou or lotad
+    /*0x184*/ struct Vector16 rubyBumperCollisionPosition[3]; //chinchou or lotad
     /*0x190*/ s16 unk190;
     /*0x192*/ u8 coins;
     /*0x193*/ s8 unk193;
@@ -381,9 +381,9 @@ struct PinballGame
     /*0x29E*/ u8 unk29E;
     /*0x29F*/ s8 unk29F;
     /*0x2A0*/ u16 unk2A0;
-    /*0x2A2*/ s8 unk2A2;
+    /*0x2A2*/ s8 whiscashState;
     /*0x2A3*/ s8 unk2A3;
-    /*0x2A4*/ s8 unk2A4;
+    /*0x2A4*/ s8 shouldProcessWhiscash;
     /*0x2A5*/ s8 unk2A5;
     /*0x2A6*/ u16 unk2A6;
     /*0x2A8*/ u16 unk2A8;

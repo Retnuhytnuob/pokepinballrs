@@ -895,6 +895,7 @@ void sub_2E67C(void)
     }
 }
 
+//Sapphire pond - Pelliper
 void sub_2E6AC(void)
 {
     s16 i;
@@ -1679,12 +1680,12 @@ void sub_2FCD0(void)
 
 void sub_300D8(void)
 {
-    gCurrentPinballGame->unk178[0].x = 920;
-    gCurrentPinballGame->unk178[0].y = (133 - (gCurrentPinballGame->unk290 % 60) / 30) * 10;
-    gCurrentPinballGame->unk178[1].x = 1260;
-    gCurrentPinballGame->unk178[1].y = (131 - ((gCurrentPinballGame->unk290 + 10) % 60) / 30) * 10;
-    gCurrentPinballGame->unk178[2].x = 1080;
-    gCurrentPinballGame->unk178[2].y = (161 - ((gCurrentPinballGame->unk290 + 20) % 60) / 30) * 10;
+    gCurrentPinballGame->rubyBumperLogicPosition[0].x = 920;
+    gCurrentPinballGame->rubyBumperLogicPosition[0].y = (133 - (gCurrentPinballGame->unk290 % 60) / 30) * 10;
+    gCurrentPinballGame->rubyBumperLogicPosition[1].x = 1260;
+    gCurrentPinballGame->rubyBumperLogicPosition[1].y = (131 - ((gCurrentPinballGame->unk290 + 10) % 60) / 30) * 10;
+    gCurrentPinballGame->rubyBumperLogicPosition[2].x = 1080;
+    gCurrentPinballGame->rubyBumperLogicPosition[2].y = (161 - ((gCurrentPinballGame->unk290 + 20) % 60) / 30) * 10;
 }
 
 void sub_30178(void)
@@ -1766,10 +1767,10 @@ void sub_30178(void)
 
             DmaCopy16(3, &gUnknown_0845690C[index], (void *)0x060133A0 + i * 0x200, 0x200);
 
-            group->baseX = gCurrentPinballGame->unk178[i].x / 10 - gCurrentPinballGame->unk58 - 8;
-            group->baseY = gCurrentPinballGame->unk178[i].y / 10 - gCurrentPinballGame->unk5A - 10;
-            gCurrentPinballGame->unk184[i].x = (-(gCurrentPinballGame->unk178[i].x / 10) + 8) * 2;
-            gCurrentPinballGame->unk184[i].y = (-(gCurrentPinballGame->unk178[i].y / 10) + 3) * 2;
+            group->baseX = gCurrentPinballGame->rubyBumperLogicPosition[i].x / 10 - gCurrentPinballGame->unk58 - 8;
+            group->baseY = gCurrentPinballGame->rubyBumperLogicPosition[i].y / 10 - gCurrentPinballGame->unk5A - 10;
+            gCurrentPinballGame->rubyBumperCollisionPosition[i].x = (-(gCurrentPinballGame->rubyBumperLogicPosition[i].x / 10) + 8) * 2;
+            gCurrentPinballGame->rubyBumperCollisionPosition[i].y = (-(gCurrentPinballGame->rubyBumperLogicPosition[i].y / 10) + 3) * 2;
 
             oamSimple = &group->oam[i];
             gOamBuffer[oamSimple->oamId].x = oamSimple->xOffset + group->baseX;

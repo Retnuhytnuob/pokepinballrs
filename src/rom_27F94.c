@@ -1417,10 +1417,10 @@ void sub_2A354(void)
         }
         break;
     case 22:
-        if (gCurrentPinballGame->unk6DE == 150 && gCurrentPinballGame->unk2A4 == 0)
+        if (gCurrentPinballGame->unk6DE == 150 && gCurrentPinballGame->shouldProcessWhiscash == 0)
         {
-            gCurrentPinballGame->unk174 = 0;
-            gCurrentPinballGame->unk16F = 1;
+            gCurrentPinballGame->rubyPondChangeTimer = 0;
+            gCurrentPinballGame->rubyPondContentsChanging = 1;
             gCurrentPinballGame->unk162 = 1;
         }
         break;

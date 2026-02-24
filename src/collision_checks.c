@@ -3,6 +3,7 @@
 #include "m4a.h"
 #include "constants/bg_music.h"
 #include "constants/dusclops_states.h"
+#include "constants/ruby_states.h"
 
 extern const u16 gUnknown_08254B10[];
 extern const u16 gUnknown_08257390[];
@@ -95,7 +96,7 @@ s16 COLLISION_CHECK_RUBY_14E08(struct Vector16 *arg0, u16* arg1) {
 
         break;
     case 4:
-        gCurrentPinballGame->unk2A2 = 2;
+        gCurrentPinballGame->whiscashState = WHISCASH_STATE_2;
         gCurrentPinballGame->unk1F = 1;
         some_enum = 0;
         break;
@@ -123,13 +124,13 @@ void sub_15054(struct Vector16* arg0, u16* arg1, u8* arg2)
         if (gCurrentPinballGame->unk24 != 0)
             return;
 
-        if (gCurrentPinballGame->unk2A4 != 0)
+        if (gCurrentPinballGame->shouldProcessWhiscash != 0)
         {
             if (gCurrentPinballGame->unk2A3 == 0)
                 return;
 
-            deltaX = arg0->x + gCurrentPinballGame->unk184[0].x;
-            deltaY = arg0->y + gCurrentPinballGame->unk184[0].y;
+            deltaX = arg0->x + gCurrentPinballGame->rubyBumperCollisionPosition[0].x;
+            deltaY = arg0->y + gCurrentPinballGame->rubyBumperCollisionPosition[0].y;
 
             if (deltaX > 79U)
                 return;
@@ -145,10 +146,10 @@ void sub_15054(struct Vector16* arg0, u16* arg1, u8* arg2)
 
             *arg1 = maskedResult;
 
-            if (gCurrentPinballGame->unk2A2 <= 1)
+            if (gCurrentPinballGame->whiscashState <= WHISCASH_STATE_1)
             {
                 *arg2 = lowerNibble;
-                gCurrentPinballGame->unk2A2 = 7;
+                gCurrentPinballGame->whiscashState = WHISCASH_STATE_7;
                 return;
             }
 
@@ -159,8 +160,8 @@ void sub_15054(struct Vector16* arg0, u16* arg1, u8* arg2)
         if (0xF & *arg2)
             return;
 
-        deltaX = arg0->x + (u16) gCurrentPinballGame->unk184[0].x;
-        deltaY = arg0->y + (u16) gCurrentPinballGame->unk184[0].y;
+        deltaX = arg0->x + (u16) gCurrentPinballGame->rubyBumperCollisionPosition[0].x;
+        deltaY = arg0->y + (u16) gCurrentPinballGame->rubyBumperCollisionPosition[0].y;
 
         if (deltaX <= 63U && deltaY <= 63U)
         {
@@ -173,8 +174,8 @@ void sub_15054(struct Vector16* arg0, u16* arg1, u8* arg2)
 
         if (lowerNibble == 0)
         {
-            deltaX = gCurrentPinballGame->unk184[1].x + arg0->x;
-            deltaY = gCurrentPinballGame->unk184[1].y + arg0->y;
+            deltaX = gCurrentPinballGame->rubyBumperCollisionPosition[1].x + arg0->x;
+            deltaY = gCurrentPinballGame->rubyBumperCollisionPosition[1].y + arg0->y;
 
             if (deltaX <= 63U && deltaY <= 63U)
             {
@@ -186,8 +187,8 @@ void sub_15054(struct Vector16* arg0, u16* arg1, u8* arg2)
 
             if (lowerNibble == 0)
             {
-                deltaX = gCurrentPinballGame->unk184[2].x + arg0->x;
-                deltaY = gCurrentPinballGame->unk184[2].y + arg0->y;
+                deltaX = gCurrentPinballGame->rubyBumperCollisionPosition[2].x + arg0->x;
+                deltaY = gCurrentPinballGame->rubyBumperCollisionPosition[2].y + arg0->y;
 
                 if (deltaX <= 63U && deltaY <= 63U)
                 {
@@ -205,7 +206,7 @@ void sub_15054(struct Vector16* arg0, u16* arg1, u8* arg2)
             }
         }
 
-        if (gCurrentPinballGame->unk16F == 0)
+        if (gCurrentPinballGame->rubyPondContentsChanging == 0)
             gCurrentPinballGame->unk170[ix] = 107;
 
         *arg1 = maskedResult;
@@ -337,8 +338,8 @@ void sub_153CC(s32 arg0, s16* arg1, u16* arg2)
             else if (gCurrentPinballGame->ball->positionQ0.x > 91)
             {
                 gCurrentPinballGame->scoreAddedInFrame = 2000;
-                gCurrentPinballGame->unk174 = 0;
-                gCurrentPinballGame->unk16F = 1;
+                gCurrentPinballGame->rubyPondChangeTimer = 0;
+                gCurrentPinballGame->rubyPondContentsChanging = 1;
             }
             else
             {
@@ -940,8 +941,8 @@ void sub_162B8(struct Vector16 *arg0, s16 *arg1, u8 *arg2) {
         if (gCurrentPinballGame->unk24 != 0)
             return;
 
-        deltaX = arg0->x + gCurrentPinballGame->unk184[0].x;
-        deltaY = arg0->y + gCurrentPinballGame->unk184[0].y;
+        deltaX = arg0->x + gCurrentPinballGame->rubyBumperCollisionPosition[0].x;
+        deltaY = arg0->y + gCurrentPinballGame->rubyBumperCollisionPosition[0].y;
 
         if (deltaX <= 63U && deltaY <= 63U)
         {
@@ -951,8 +952,8 @@ void sub_162B8(struct Vector16 *arg0, s16 *arg1, u8 *arg2) {
         }
          if (lowerNibble == 0)
         {
-            deltaX = gCurrentPinballGame->unk184[1].x + arg0->x;
-            deltaY = gCurrentPinballGame->unk184[1].y + arg0->y;
+            deltaX = gCurrentPinballGame->rubyBumperCollisionPosition[1].x + arg0->x;
+            deltaY = gCurrentPinballGame->rubyBumperCollisionPosition[1].y + arg0->y;
 
             if (deltaX <= 63U && deltaY <= 63U)
             {
@@ -963,8 +964,8 @@ void sub_162B8(struct Vector16 *arg0, s16 *arg1, u8 *arg2) {
 
             if (lowerNibble == 0)
             {
-                deltaX = gCurrentPinballGame->unk184[2].x + arg0->x;
-                deltaY = gCurrentPinballGame->unk184[2].y + arg0->y;
+                deltaX = gCurrentPinballGame->rubyBumperCollisionPosition[2].x + arg0->x;
+                deltaY = gCurrentPinballGame->rubyBumperCollisionPosition[2].y + arg0->y;
 
                 if (deltaX <= 63U && deltaY <= 63U)
                 {

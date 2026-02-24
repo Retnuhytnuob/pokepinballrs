@@ -2,6 +2,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "constants/bg_music.h"
+#include "constants/ruby_states.h"
 
 #define BONUS_CATCH_TIME 7200 //2 minutes, 60FPS
 
@@ -2556,7 +2557,7 @@ void sub_260B8(void)
             gCurrentPinballGame->unk170[1] = 0;
             gCurrentPinballGame->unk170[2] = 0;
         }
-        gCurrentPinballGame->unk174 = 0;
+        gCurrentPinballGame->rubyPondChangeTimer = 0;
         break;
     case 2:
         if (gCurrentPinballGame->unk5FC == 0)
@@ -2567,16 +2568,16 @@ void sub_260B8(void)
 
         if (gMain.selectedField == FIELD_RUBY)
         {
-            if (gCurrentPinballGame->unk174 < 143)
-                gCurrentPinballGame->unk170[0] = gUnknown_08137944[gCurrentPinballGame->unk174 / 8];
+            if (gCurrentPinballGame->rubyPondChangeTimer < 143)
+                gCurrentPinballGame->unk170[0] = gUnknown_08137944[gCurrentPinballGame->rubyPondChangeTimer / 8];
 
-            if (gCurrentPinballGame->unk174 >= 18 && gCurrentPinballGame->unk174 < 161)
-                gCurrentPinballGame->unk170[2] = gUnknown_08137944[(gCurrentPinballGame->unk174 - 18) / 8];
+            if (gCurrentPinballGame->rubyPondChangeTimer >= 18 && gCurrentPinballGame->rubyPondChangeTimer < 161)
+                gCurrentPinballGame->unk170[2] = gUnknown_08137944[(gCurrentPinballGame->rubyPondChangeTimer - 18) / 8];
 
-            if (gCurrentPinballGame->unk174 >= 36 && gCurrentPinballGame->unk174 < 179)
-                gCurrentPinballGame->unk170[1] = gUnknown_08137944[(gCurrentPinballGame->unk174 - 36) / 8];
+            if (gCurrentPinballGame->rubyPondChangeTimer >= 36 && gCurrentPinballGame->rubyPondChangeTimer < 179)
+                gCurrentPinballGame->unk170[1] = gUnknown_08137944[(gCurrentPinballGame->rubyPondChangeTimer - 36) / 8];
 
-            gCurrentPinballGame->unk174++;
+            gCurrentPinballGame->rubyPondChangeTimer++;
         }
 
         gCurrentPinballGame->unk6E0 = (gCurrentPinballGame->unk6F0 * 32) / gCurrentPinballGame->unk6F2;
@@ -2620,7 +2621,7 @@ void sub_260B8(void)
                     gCurrentPinballGame->unk163 = 1;
                     gCurrentPinballGame->unk21 = 1;
                     gCurrentPinballGame->unk724 = 3600;
-                    gCurrentPinballGame->unk16C = 2;
+                    gCurrentPinballGame->rubyPondState = RUBY_POND_STATE_CHINCHOU_COUNTERCLOCKWISE;
                 }
             }
 

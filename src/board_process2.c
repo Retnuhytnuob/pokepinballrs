@@ -575,11 +575,11 @@ void sub_4E598(void)
     gCurrentPinballGame->unk70E = 1;
     if (gCurrentPinballGame->unk2A5 == 45)
     {
-        gCurrentPinballGame->unk2A4 = 0;
+        gCurrentPinballGame->shouldProcessWhiscash = 0;
         gCurrentPinballGame->unk2A5 = 0;
         gCurrentPinballGame->unk2A6 = 0;
-        gCurrentPinballGame->unk16F = 1;
-        gCurrentPinballGame->unk174 = 0x40;
+        gCurrentPinballGame->rubyPondContentsChanging = 1;
+        gCurrentPinballGame->rubyPondChangeTimer = 0x40;
         gCurrentPinballGame->unk2AA = 0;
 
     }
