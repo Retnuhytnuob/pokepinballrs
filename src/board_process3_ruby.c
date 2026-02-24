@@ -15,7 +15,7 @@ extern void sub_19FA0(void);
 extern void sub_1D5D8(void);
 extern void sub_1DA74(void);
 extern void sub_1DAD8(void);
-extern void sub_1DC7C(void);
+extern void DrawWhiscash(void);
 extern void sub_1DDDC(void);
 extern void sub_1EC48(void);
 extern void sub_1F158(void);
@@ -249,7 +249,7 @@ void sub_19E10(void)
         sub_23E18();
         if (gCurrentPinballGame->shouldProcessWhiscash)
         {
-            sub_1DC7C();
+            DrawWhiscash();
         }
         else
         {

@@ -96,7 +96,7 @@ s16 COLLISION_CHECK_RUBY_14E08(struct Vector16 *arg0, u16* arg1) {
 
         break;
     case 4:
-        gCurrentPinballGame->whiscashState = WHISCASH_STATE_2;
+        gCurrentPinballGame->whiscashState = WHISCASH_STATE_ABSORB_ZONE_HIT;
         gCurrentPinballGame->unk1F = 1;
         some_enum = 0;
         break;
@@ -124,7 +124,7 @@ void sub_15054(struct Vector16* arg0, u16* arg1, u8* arg2)
         if (gCurrentPinballGame->unk24 != 0)
             return;
 
-        if (gCurrentPinballGame->shouldProcessWhiscash != 0)
+        if (gCurrentPinballGame->shouldProcessWhiscash)
         {
             if (gCurrentPinballGame->unk2A3 == 0)
                 return;
@@ -146,10 +146,12 @@ void sub_15054(struct Vector16* arg0, u16* arg1, u8* arg2)
 
             *arg1 = maskedResult;
 
-            if (gCurrentPinballGame->whiscashState <= WHISCASH_STATE_1)
+            // if hit, while in its base mode, processes as a hit
+            // Ball in the area being sucked in, or already hitting it won't affect it.
+            if (gCurrentPinballGame->whiscashState <= WHISCASH_STATE_SITTING)
             {
                 *arg2 = lowerNibble;
-                gCurrentPinballGame->whiscashState = WHISCASH_STATE_7;
+                gCurrentPinballGame->whiscashState = WHISCASH_STATE_HIT;
                 return;
             }
 
@@ -212,10 +214,10 @@ void sub_15054(struct Vector16* arg0, u16* arg1, u8* arg2)
         *arg1 = maskedResult;
         *arg2 = lowerNibble;
 
-        if (gCurrentPinballGame->unk624 > 0)
+        if (gCurrentPinballGame->bumperHitCountdown > 0)
             return;
 
-        gCurrentPinballGame->unk624 = 2;
+        gCurrentPinballGame->bumperHitCountdown = 2;
     }
     else
     {
@@ -983,8 +985,8 @@ void sub_162B8(struct Vector16 *arg0, s16 *arg1, u8 *arg2) {
         *arg1 = maskedResult;
         *arg2 = lowerNibble;
 
-        if (gCurrentPinballGame->unk624 <= 0)
-            gCurrentPinballGame->unk624 = 2;
+        if (gCurrentPinballGame->bumperHitCountdown <= 0)
+            gCurrentPinballGame->bumperHitCountdown = 2;
     }
 }
 

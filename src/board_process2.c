@@ -573,11 +573,11 @@ void sub_4E598(void)
     DmaCopy16(3, &gUnknown_08137E14[gCurrentPinballGame->ballUpgradeType], (void *)OBJ_PLTT + 0x20, 0x20);
     gCurrentPinballGame->unk62F = gCurrentPinballGame->unk70E;
     gCurrentPinballGame->unk70E = 1;
-    if (gCurrentPinballGame->unk2A5 == 45)
+    if (gCurrentPinballGame->whiscashFrameIx == 45)
     {
-        gCurrentPinballGame->shouldProcessWhiscash = 0;
-        gCurrentPinballGame->unk2A5 = 0;
-        gCurrentPinballGame->unk2A6 = 0;
+        gCurrentPinballGame->shouldProcessWhiscash = FALSE;
+        gCurrentPinballGame->whiscashFrameIx = 0;
+        gCurrentPinballGame->whiscashStateTimer = 0;
         gCurrentPinballGame->rubyPondContentsChanging = 1;
         gCurrentPinballGame->rubyPondChangeTimer = 0x40;
         gCurrentPinballGame->unk2AA = 0;

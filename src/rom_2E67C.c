@@ -1696,27 +1696,27 @@ void sub_30178(void)
     s16 index;
 
     group = &gMain.spriteGroups[63];
-    if (gCurrentPinballGame->unk624 > 0)
+    if (gCurrentPinballGame->bumperHitCountdown > 0)
     {
-        if (gCurrentPinballGame->unk624 == 2)
+        if (gCurrentPinballGame->bumperHitCountdown == 2)
         {
             gCurrentPinballGame->scoreAddedInFrame = 500;
             m4aSongNumStart(SE_UNKNOWN_0xB6);
             playRumbleType(7);
             if (gCurrentPinballGame->unk13 == 4 && gCurrentPinballGame->unk17 == 5)
             {
-                if (gCurrentPinballGame->unk625 < 6)
+                if (gCurrentPinballGame->hatchTilesBumperAcknowledged < 6)
                 {
-                    if (gCurrentPinballGame->unk625 == 0)
-                        gCurrentPinballGame->unk625 = 1;
-                    else if (gCurrentPinballGame->unk625 == 1)
-                        gCurrentPinballGame->unk625 = 3;
+                    if (gCurrentPinballGame->hatchTilesBumperAcknowledged == 0)
+                        gCurrentPinballGame->hatchTilesBumperAcknowledged = 1;
+                    else if (gCurrentPinballGame->hatchTilesBumperAcknowledged == 1)
+                        gCurrentPinballGame->hatchTilesBumperAcknowledged = 3;
                     else
-                        gCurrentPinballGame->unk625 = 6;
+                        gCurrentPinballGame->hatchTilesBumperAcknowledged = 6;
 
-                    if (gCurrentPinballGame->unk625 == 6)
+                    if (gCurrentPinballGame->hatchTilesBumperAcknowledged == 6)
                     {
-                        if (gCurrentPinballGame->unk6C6 == 0)
+                        if (gCurrentPinballGame->hatchTilesBoardAcknowledged == 0)
                         {
                             gMain.modeChangeFlags |= MODE_CHANGE_BANNER;
                             gCurrentPinballGame->unkEA = 50;
@@ -1745,7 +1745,7 @@ void sub_30178(void)
                 gCurrentPinballGame->scoreAddedInFrame = 50000;
         }
 
-        gCurrentPinballGame->unk624--;
+        gCurrentPinballGame->bumperHitCountdown--;
     }
 
     if (group->available)

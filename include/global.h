@@ -384,8 +384,8 @@ struct PinballGame
     /*0x2A2*/ s8 whiscashState;
     /*0x2A3*/ s8 unk2A3;
     /*0x2A4*/ s8 shouldProcessWhiscash;
-    /*0x2A5*/ s8 unk2A5;
-    /*0x2A6*/ u16 unk2A6;
+    /*0x2A5*/ s8 whiscashFrameIx;
+    /*0x2A6*/ u16 whiscashStateTimer;
     /*0x2A8*/ u16 unk2A8;
     /*0x2AA*/ u16 unk2AA;
     /*0x2AC*/ s16 unk2AC;
@@ -729,8 +729,8 @@ struct PinballGame
     /*0x61D*/ u8 filler61D;
     /*0x61E*/ u16 unk61E;
     /*0x620*/ struct Vector16 unk620;
-    /*0x624*/ s8 unk624;
-    /*0x625*/ s8 unk625;
+    /*0x624*/ s8 bumperHitCountdown; // 2 when Hit, one frame of ignored collision, then ready to hit again
+    /*0x625*/ s8 hatchTilesBumperAcknowledged;
     /*0x626*/ s8 unk626;
     /*0x627*/ u8 filler627[0x1];
     /*0x628*/ u16 unk628;
@@ -756,13 +756,13 @@ struct PinballGame
     /*0x6C0*/ u16 unk6C0;
     /*0x6C2*/ u16 unk6C2;
     /*0x6C4*/ s8 unk6C4;
-    /*0x6C5*/ s8 unk6C5;
-    /*0x6C6*/ s8 unk6C6;
-    /*0x6C7*/ s8 unk6C7;
+    /*0x6C5*/ s8 hatchTileRevealState;
+    /*0x6C6*/ s8 hatchTilesBoardAcknowledged;
+    /*0x6C7*/ s8 hatchSequentialTilesRevealed;
     /*0x6C8*/ s8 unk6C8;
     /*0x6C9*/ s8 unk6C9;
-    /*0x6CA*/ u16 unk6CA;
-    /*0x6CC*/ s8 unk6CC;
+    /*0x6CA*/ u16 hatchSequentialTileRevealFrameAnimTimer;
+    /*0x6CC*/ s8 hatchFrameId;
     /*0x6CD*/ u8 unk6CD[6];
     /*0x6D3*/ u8 unk6D3[6];
     /*0x6D9*/ s8 unk6D9[2];
