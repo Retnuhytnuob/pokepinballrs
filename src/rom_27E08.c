@@ -454,7 +454,7 @@ void sub_216FC(void)
 
         if (gCurrentPinballGame->unk28 == 130)
         {
-            m4aSongNumStart(SE_UNKNOWN_0x9F);
+            m4aSongNumStart(SE_WARP);
             gCurrentPinballGame->unk18 = 65;
             gMain.blendControl = 0x9F;
         }

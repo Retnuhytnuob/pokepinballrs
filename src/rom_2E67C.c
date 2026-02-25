@@ -1020,9 +1020,9 @@ void sub_2E6AC(void)
         gCurrentPinballGame->unk30C++;
         if (gCurrentPinballGame->ball->positionQ0.y < -12)
         {
-            if (gCurrentPinballGame->unk308 > 99)
+            if (gCurrentPinballGame->bumperHitsSinceReset > 99)
             {
-                gCurrentPinballGame->unk308 = 0;
+                gCurrentPinballGame->bumperHitsSinceReset = 0;
                 gCurrentPinballGame->unk306 = 6;
                 gCurrentPinballGame->unk30C = 65;
                 m4aMPlayAllStop();
@@ -1042,7 +1042,7 @@ void sub_2E6AC(void)
         var_sl = gUnknown_08137CBC[0][0];
         if (gCurrentPinballGame->unk30C == 65)
         {
-            m4aSongNumStart(SE_UNKNOWN_0x9F);
+            m4aSongNumStart(SE_WARP);
             gMain.blendControl = 0x9E;
         }
 
@@ -1740,8 +1740,8 @@ void sub_30178(void)
             }
 
             gCurrentPinballGame->unk176++;
-            gCurrentPinballGame->unk308++;
-            if (gCurrentPinballGame->unk308 == 100)
+            gCurrentPinballGame->bumperHitsSinceReset++;
+            if (gCurrentPinballGame->bumperHitsSinceReset == 100)
                 gCurrentPinballGame->scoreAddedInFrame = 50000;
         }
 

@@ -382,7 +382,7 @@ struct PinballGame
     /*0x29F*/ s8 unk29F;
     /*0x2A0*/ u16 unk2A0;
     /*0x2A2*/ s8 whiscashState;
-    /*0x2A3*/ s8 unk2A3;
+    /*0x2A3*/ s8 unk2A3; //Whiscash alternating invuln timer?
     /*0x2A4*/ s8 shouldProcessWhiscash;
     /*0x2A5*/ s8 whiscashFrameIx;
     /*0x2A6*/ u16 whiscashStateTimer;
@@ -444,7 +444,7 @@ struct PinballGame
     /*0x304*/ u16 unk304;
     /*0x306*/ s8 unk306;
     /*0x307*/ s8 unk307;
-    /*0x308*/ u16 unk308;
+    /*0x308*/ u16 bumperHitsSinceReset;
     /*0x30A*/ u16 unk30A;
     /*0x30C*/ u16 unk30C;
     /*0x30E*/ s16 unk30E;

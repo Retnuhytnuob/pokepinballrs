@@ -1434,7 +1434,7 @@ void sub_2A354(void)
     case 23:
         if (gCurrentPinballGame->unk6DE == 150)
         {
-            gCurrentPinballGame->unk308 = 100;
+            gCurrentPinballGame->bumperHitsSinceReset = 100;
             gCurrentPinballGame->unk30C = 1800;
             gCurrentPinballGame->unk306 = 1;
         }

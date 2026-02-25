@@ -1035,7 +1035,7 @@ void SphealBoard_WhiscashDeliversBall(void)
 
         if (gCurrentPinballGame->unk591 == 8)
         {
-            m4aSongNumStart(SE_UNKNOWN_0xD6);
+            m4aSongNumStart(SE_WHISCASH_SPIT_BALL);
             gCurrentPinballGame->ball->unk0 = 0;
             gCurrentPinballGame->ball->unkA -= 0x40;
             gCurrentPinballGame->ball->positionQ8.x = 0x8F00;
