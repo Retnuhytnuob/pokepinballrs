@@ -23,11 +23,11 @@ extern const u8 gUnknown_08137998[];
 extern const u8 gUnknown_081379B8[];
 extern const s16 gUnknown_08137968[];
 extern const struct Vector16 gUnknown_086AD9DC[];
-extern const s16 gUnknown_086AD862[][4];
+extern const s16 gWhiscashFramesetData[][4];
 extern const s16 gUnknown_086AD9EC[];
 extern const s16 gUnknown_0813798C[];
 extern const u8 gUnknown_081379D8[];
-extern const u8 gUnknown_084B7FEC[][0x480];
+extern const u8 gWhiscash_Gfx[][0x480];
 extern const u8 gRubyBoardShopDoor_Gfx[][0x180];
 extern const s16 gUnknown_086AD7C0[50][3];
 extern const s16 gUnknown_086AD856[][2];
@@ -49,6 +49,8 @@ extern s16 gUnknown_086ADF48[100];
 extern s16 gUnknown_086ADF8A[3];
 extern u16 gUnknown_086ADEE0[][2];
 extern s16 gUnknown_086B4922[28][12];
+
+#define MIN_POND_SWITCHES_BEFORE_WHISCASH_AVAILABLE 3
 
 
 void sub_1C7F4(s16 arg0, s16 arg1)
@@ -583,12 +585,12 @@ void DrawWhiscash(void)
     const s16 *var1;
 
     group = &gMain.spriteGroups[63];
-    var1 = gUnknown_086AD862[gCurrentPinballGame->whiscashFrameIx];
+    var1 = gWhiscashFramesetData[gCurrentPinballGame->whiscashFrameIx];
     if (group->available)
     {
         var0 = var1[0];
         DmaCopy16(3, gUnknown_081379D8 + gCurrentPinballGame->unk6F * 0x60, (void *)0x05000320, 0x20);
-        DmaCopy16(3, gUnknown_084B7FEC[var0], (void *)0x06014680, 0x460);
+        DmaCopy16(3, gWhiscash_Gfx[var0], (void *)0x06014680, 0x460);
         gCurrentPinballGame->rubyBumperCollisionPosition[0].x = -248;
         gCurrentPinballGame->rubyBumperCollisionPosition[0].y = -316;
         group->baseX = var1[2] + 124u - gCurrentPinballGame->unk58;
@@ -607,8 +609,8 @@ void DrawWhiscash(void)
     }
 }
 
-//Ruby Pond + Whiscash
-void sub_1DDDC(void)
+//Ruby Pond
+void RubyPond_EntityLogic(void)
 {
     s16 i;
     u16 angle;
@@ -619,30 +621,29 @@ void sub_1DDDC(void)
     struct Vector32 tempVec2;
     int squaredMagnitude;
 
-    // 2A4 = wishcash present
     if (gCurrentPinballGame->shouldProcessWhiscash)
     {
         // If board is currently in one of the modes (catch/etc) force reset to the 3 chinchou
         if (gCurrentPinballGame->unk13 > 2)
-            gCurrentPinballGame->rubyPondContentsChanging = 1;
+            gCurrentPinballGame->rubyPondContentsChanging = TRUE;
 
         // Don't immediately force change state if Wishcash is actively doing something
         if (gCurrentPinballGame->rubyPondContentsChanging)
         {
             if (gCurrentPinballGame->whiscashState < WHISCASH_STATE_ABSORB_ZONE_HIT)
             {
-                gCurrentPinballGame->whiscashState = WHISCASH_STATE_9;
+                gCurrentPinballGame->whiscashState = WHISCASH_STATE_LEAVING;
                 gCurrentPinballGame->whiscashFrameIx = 8;
                 gCurrentPinballGame->whiscashStateTimer = 0;
             }
 
-            gCurrentPinballGame->rubyPondContentsChanging = 0;
+            gCurrentPinballGame->rubyPondContentsChanging = FALSE;
         }
 
         switch (gCurrentPinballGame->whiscashState)
         {
         case WHISCASH_STATE_ARRIVAL:
-            if (gUnknown_086AD862[gCurrentPinballGame->whiscashFrameIx][1] > gCurrentPinballGame->whiscashStateTimer)
+            if (gWhiscashFramesetData[gCurrentPinballGame->whiscashFrameIx][1] > gCurrentPinballGame->whiscashStateTimer)
             {
                 gCurrentPinballGame->whiscashStateTimer++;
             }
@@ -654,7 +655,7 @@ void sub_1DDDC(void)
                     gCurrentPinballGame->whiscashState = WHISCASH_STATE_SITTING;
 
                 if (gCurrentPinballGame->whiscashFrameIx == 2)
-                    m4aSongNumStart(SE_UNKNOWN_0xD3);
+                    m4aSongNumStart(SE_WHISCASH_EMERGE_SPLASH);
             }
             break;
         case WHISCASH_STATE_SITTING:
@@ -664,14 +665,14 @@ void sub_1DDDC(void)
         case WHISCASH_STATE_ABSORB_ZONE_HIT:
             gCurrentPinballGame->whiscashFrameIx = 6;
             gCurrentPinballGame->whiscashStateTimer = 0;
-            gCurrentPinballGame->whiscashState = WHISCASH_STATE_3;
+            gCurrentPinballGame->whiscashState = WHISCASH_STATE_ABSORBING;
             gCurrentPinballGame->ball->oamPriority = 0;
             gCurrentPinballGame->scoreAddedInFrame = 5000;
             m4aSongNumStart(SE_UNKNOWN_0xD5);
             playRumbleType(7);
             break;
-        case WHISCASH_STATE_3:
-            if (gUnknown_086AD862[gCurrentPinballGame->whiscashFrameIx][1] > gCurrentPinballGame->whiscashStateTimer)
+        case WHISCASH_STATE_ABSORBING:
+            if (gWhiscashFramesetData[gCurrentPinballGame->whiscashFrameIx][1] > gCurrentPinballGame->whiscashStateTimer)
             {
                 gCurrentPinballGame->whiscashStateTimer++;
             }
@@ -687,7 +688,7 @@ void sub_1DDDC(void)
                 }
 
                 if (gCurrentPinballGame->whiscashFrameIx == 9)
-                    m4aSongNumStart(SE_UNKNOWN_0xD4);
+                    m4aSongNumStart(SE_WHISCASH_LEAVE_BURBLE);
             }
 
             if (gCurrentPinballGame->whiscashFrameIx == 6)
@@ -733,14 +734,14 @@ void sub_1DDDC(void)
                 }
             }
             break;
-        case WHISCASH_STATE_5: //from board initialization
+        case WHISCASH_STATE_INIT_RETURN_FROM_BONUS: //from board initialization
             gCurrentPinballGame->whiscashFrameIx = 12;
             gCurrentPinballGame->whiscashStateTimer = 0;
-            gCurrentPinballGame->whiscashState = WHISCASH_STATE_6;
+            gCurrentPinballGame->whiscashState = WHISCASH_STATE_RISE_SPIT_LEAVE;
             gCurrentPinballGame->ball->oamPriority = 0;
             break;
-        case WHISCASH_STATE_6:
-            if (gUnknown_086AD862[gCurrentPinballGame->whiscashFrameIx][1] > gCurrentPinballGame->whiscashStateTimer)
+        case WHISCASH_STATE_RISE_SPIT_LEAVE:
+            if (gWhiscashFramesetData[gCurrentPinballGame->whiscashFrameIx][1] > gCurrentPinballGame->whiscashStateTimer)
             {
                 gCurrentPinballGame->whiscashStateTimer++;
             }
@@ -751,7 +752,7 @@ void sub_1DDDC(void)
                 if (gCurrentPinballGame->whiscashFrameIx == 31)
                 {
                     gCurrentPinballGame->whiscashFrameIx = 0;
-                    gCurrentPinballGame->whiscashState = WHISCASH_STATE_10;
+                    gCurrentPinballGame->whiscashState = WHISCASH_STATE_CLEANUP;
                 }
 
                 if (gCurrentPinballGame->whiscashFrameIx == 21)
@@ -765,10 +766,10 @@ void sub_1DDDC(void)
                 }
 
                 if (gCurrentPinballGame->whiscashFrameIx == 14)
-                    m4aSongNumStart(SE_UNKNOWN_0xD3);
+                    m4aSongNumStart(SE_WHISCASH_EMERGE_SPLASH);
 
                 if (gCurrentPinballGame->whiscashFrameIx == 27) {
-                    m4aSongNumStart(SE_UNKNOWN_0xD4);
+                    m4aSongNumStart(SE_WHISCASH_LEAVE_BURBLE);
                 }
                 if (gCurrentPinballGame->whiscashFrameIx == 20)
                 {
@@ -792,15 +793,15 @@ void sub_1DDDC(void)
         case WHISCASH_STATE_HIT:
             gCurrentPinballGame->whiscashFrameIx = 31;
             gCurrentPinballGame->whiscashStateTimer = 0;
-            gCurrentPinballGame->whiscashState = WHISCASH_STATE_8;
+            gCurrentPinballGame->whiscashState = WHISCASH_STATE_ANGRY;
             gCurrentPinballGame->scoreAddedInFrame = 10;
-            m4aSongNumStart(SE_UNKNOWN_0xB6);
+            m4aSongNumStart(SE_RUBY_BUMPER_HIT);
             playRumbleType(7);
             if (gCurrentPinballGame->unk724)
                 gCurrentPinballGame->unk724 = 1;
             break;
-        case WHISCASH_STATE_8:
-            if (gUnknown_086AD862[gCurrentPinballGame->whiscashFrameIx][1] > gCurrentPinballGame->whiscashStateTimer)
+        case WHISCASH_STATE_ANGRY:
+            if (gWhiscashFramesetData[gCurrentPinballGame->whiscashFrameIx][1] > gCurrentPinballGame->whiscashStateTimer)
             {
                 gCurrentPinballGame->whiscashStateTimer++;
             }
@@ -811,14 +812,14 @@ void sub_1DDDC(void)
                 if (gCurrentPinballGame->whiscashFrameIx == 46)
                 {
                     gCurrentPinballGame->whiscashFrameIx = 0;
-                    gCurrentPinballGame->whiscashState = WHISCASH_STATE_10;
+                    gCurrentPinballGame->whiscashState = WHISCASH_STATE_CLEANUP;
                 }
 
                 if (gCurrentPinballGame->whiscashFrameIx == 42)
-                    m4aSongNumStart(SE_UNKNOWN_0xD4);
+                    m4aSongNumStart(SE_WHISCASH_LEAVE_BURBLE);
 
                 if (gCurrentPinballGame->whiscashFrameIx == 33)
-                    m4aSongNumStart(SE_UNKNOWN_0x14C); //Wishcash angry
+                    m4aSongNumStart(SE_WHISCASH_EARTHQUAKE); //Wishcash angry
             }
 
             // Heavy shaking starts
@@ -832,8 +833,8 @@ void sub_1DDDC(void)
                     playRumbleType(12);
             }
             break;
-        case WHISCASH_STATE_9: //Early Exit (mode started)
-            if (gUnknown_086AD862[gCurrentPinballGame->whiscashFrameIx][1] > gCurrentPinballGame->whiscashStateTimer)
+        case WHISCASH_STATE_LEAVING: //Early Exit (mode started)
+            if (gWhiscashFramesetData[gCurrentPinballGame->whiscashFrameIx][1] > gCurrentPinballGame->whiscashStateTimer)
             {
                 gCurrentPinballGame->whiscashStateTimer++;
             }
@@ -844,18 +845,18 @@ void sub_1DDDC(void)
                 if (gCurrentPinballGame->whiscashFrameIx == 13)
                 {
                     gCurrentPinballGame->whiscashFrameIx = 0;
-                    gCurrentPinballGame->whiscashState = WHISCASH_STATE_10;
+                    gCurrentPinballGame->whiscashState = WHISCASH_STATE_CLEANUP;
                 }
 
                 if (gCurrentPinballGame->whiscashFrameIx == 9)
-                    m4aSongNumStart(SE_UNKNOWN_0xD4);
+                    m4aSongNumStart(SE_WHISCASH_LEAVE_BURBLE);
             }
             break;
-        case WHISCASH_STATE_10:
+        case WHISCASH_STATE_CLEANUP:
             gCurrentPinballGame->shouldProcessWhiscash = FALSE;
             gCurrentPinballGame->whiscashFrameIx = 0;
             gCurrentPinballGame->whiscashStateTimer = 0;
-            gCurrentPinballGame->rubyPondContentsChanging = 1;
+            gCurrentPinballGame->rubyPondContentsChanging = TRUE;
             gCurrentPinballGame->rubyPondChangeTimer = 64;
             gCurrentPinballGame->unk2AA = 0;
             break;
@@ -873,15 +874,18 @@ void sub_1DDDC(void)
             }
             else
             {
-                gCurrentPinballGame->rubyPondContentsChanging = 0;
+                gCurrentPinballGame->rubyPondContentsChanging = FALSE;
             }
 
             if (gCurrentPinballGame->unk170[0] == 10)
             {
                 if (gCurrentPinballGame->rubyPondChangeTimer % 8 == 0 && gCurrentPinballGame->rubyPondChangeTimer / 8 == 8)
                 {
-                    gCurrentPinballGame->unk2A8++;
-                    if (gCurrentPinballGame->unk2A8 < 3 || gCurrentPinballGame->unk13 > 2)
+                    // Can't switch to Whiscash if in a catch/hatch/etc state, or if it hasn't yet hit a threshold
+                    // of pond states first.
+                    gCurrentPinballGame->pondSwitchesSinceLastWhiscash++;
+                    if (gCurrentPinballGame->pondSwitchesSinceLastWhiscash < MIN_POND_SWITCHES_BEFORE_WHISCASH_AVAILABLE ||
+                        gCurrentPinballGame->unk13 > 2)
                     {
                         var2 = (gMain.systemFrameCount % 5) + 1;
                         if (gCurrentPinballGame->rubyPondState == var2)
@@ -898,9 +902,9 @@ void sub_1DDDC(void)
                             gCurrentPinballGame->rubyPondState = var2;
                     }
 
-                    if (gCurrentPinballGame->unk162)
+                    if (gCurrentPinballGame->forcePondToWhiscash)
                     {
-                        gCurrentPinballGame->unk162 = 0;
+                        gCurrentPinballGame->forcePondToWhiscash = FALSE;
                         gCurrentPinballGame->rubyPondState = RUBY_POND_STATE_WHISCASH;
                     }
 
@@ -910,8 +914,8 @@ void sub_1DDDC(void)
                         gCurrentPinballGame->whiscashState = WHISCASH_STATE_ARRIVAL;
                         gCurrentPinballGame->whiscashStateTimer = 0;
                         gCurrentPinballGame->whiscashFrameIx = 0;
-                        gCurrentPinballGame->rubyPondContentsChanging = 0;
-                        gCurrentPinballGame->unk2A8 = 0;
+                        gCurrentPinballGame->rubyPondContentsChanging = FALSE;
+                        gCurrentPinballGame->pondSwitchesSinceLastWhiscash = 0;
                     }
 
                     if (gCurrentPinballGame->rubyPondState == RUBY_POND_STATE_CHINCHOU_SINGLE_CLOCKWISE)
@@ -957,7 +961,7 @@ void sub_1DDDC(void)
 
     switch (gCurrentPinballGame->rubyPondState)
     {
-    case 0:
+    case RUBY_POND_STATE_CHINCHOU_STAGGERED:
         gCurrentPinballGame->rubyBumperLogicPosition[0].x = 1250;
         gCurrentPinballGame->rubyBumperLogicPosition[0].y = 1270;
         gCurrentPinballGame->rubyBumperLogicPosition[2].x = 1600;
@@ -965,7 +969,7 @@ void sub_1DDDC(void)
         gCurrentPinballGame->rubyBumperLogicPosition[1].x = 1370;
         gCurrentPinballGame->rubyBumperLogicPosition[1].y = 1610;
         break;
-    case 1:
+    case RUBY_POND_STATE_CHINCHOU_CLOCKWISE:
         for (i = 0; i < 3; i++)
         {
             angle = (gCurrentPinballGame->unk290 & 0x7F) * 0x200 + i * 0x5555;
@@ -978,7 +982,7 @@ void sub_1DDDC(void)
             gCurrentPinballGame->rubyBumperLogicPosition[i].y = (gCurrentPinballGame->unk190 * Sin(angle)) / 20000 + 1500;
         }
         break;
-    case 2:
+    case RUBY_POND_STATE_CHINCHOU_COUNTERCLOCKWISE:
         for (i = 0; i < 3; i++)
         {
             angle = 10000 - ((gCurrentPinballGame->unk290 & 0x7F) * 0x200 + i * 0x5555);
@@ -991,7 +995,7 @@ void sub_1DDDC(void)
             gCurrentPinballGame->rubyBumperLogicPosition[i].y = (gCurrentPinballGame->unk190 * Sin(angle)) / 20000 + 1500;
         }
         break;
-    case 3:
+    case RUBY_POND_STATE_CHINCHOU_ROWS:
         for (i = 0; i < 2; i++)
         {
             var1 = 23 - (gCurrentPinballGame->unk290 % 46);
@@ -1009,7 +1013,7 @@ void sub_1DDDC(void)
         gCurrentPinballGame->rubyBumperLogicPosition[0].x = 1370;
         gCurrentPinballGame->rubyBumperLogicPosition[0].y = var1 * 5 + 1620;
         break;
-    case 4:
+    case RUBY_POND_STATE_LOTAD:
         gCurrentPinballGame->rubyBumperLogicPosition[0].x = 1210;
         gCurrentPinballGame->rubyBumperLogicPosition[0].y = gUnknown_0813798C[(gCurrentPinballGame->unk290 % 60) / 10] + 1300;
         gCurrentPinballGame->rubyBumperLogicPosition[1].x = 1600;
@@ -1017,7 +1021,7 @@ void sub_1DDDC(void)
         gCurrentPinballGame->rubyBumperLogicPosition[2].x = 1370;
         gCurrentPinballGame->rubyBumperLogicPosition[2].y = gUnknown_0813798C[((gCurrentPinballGame->unk290 + 40) % 60) / 10] + 1660;
         break;
-    case 5:
+    case RUBY_POND_STATE_CHINCHOU_SINGLE_CLOCKWISE:
         tempVec.x = gUnknown_086AD9DC[gCurrentPinballGame->unk16E].x * 10 - gCurrentPinballGame->rubyBumperLogicPosition[0].x;
         tempVec.y = gUnknown_086AD9DC[gCurrentPinballGame->unk16E].y * 10 - gCurrentPinballGame->rubyBumperLogicPosition[0].y;
         squaredMagnitude = (tempVec.x * tempVec.x) + (tempVec.y * tempVec.y);
@@ -1029,12 +1033,14 @@ void sub_1DDDC(void)
         if (squaredMagnitude < 2500)
             gCurrentPinballGame->unk16E = Random() % 4;
 
+        // moved off screen
         gCurrentPinballGame->rubyBumperLogicPosition[1].x = 0;
         gCurrentPinballGame->rubyBumperLogicPosition[1].y = -300;
         gCurrentPinballGame->rubyBumperLogicPosition[2].x = 0;
         gCurrentPinballGame->rubyBumperLogicPosition[2].y = -300;
         break;
-    case 6:
+    case RUBY_POND_STATE_WHISCASH:
+        // moved off screen
         gCurrentPinballGame->rubyBumperLogicPosition[0].x = 0;
         gCurrentPinballGame->rubyBumperLogicPosition[0].y = -300;
         gCurrentPinballGame->rubyBumperLogicPosition[1].x = 0;
@@ -1046,7 +1052,7 @@ void sub_1DDDC(void)
 }
 
 // Ruby pond bumpers (? Handle Hit ?) and draw
-void sub_1EC48(void)
+void RubyPondTriBumperHandleHitAndDraw(void)
 {
     s16 i;
     s16 j;
@@ -1059,7 +1065,7 @@ void sub_1EC48(void)
         if (gCurrentPinballGame->bumperHitCountdown == 2)
         {
             gCurrentPinballGame->scoreAddedInFrame = 500;
-            m4aSongNumStart(SE_UNKNOWN_0xB6);
+            m4aSongNumStart(SE_RUBY_BUMPER_HIT);
             playRumbleType(7);
             if (gCurrentPinballGame->unk13 == 4 && gCurrentPinballGame->unk17 == 5 && gCurrentPinballGame->hatchTilesBumperAcknowledged < 6)
             {
@@ -1153,7 +1159,7 @@ void sub_1EC48(void)
 
         DmaCopy16(3, gUnknown_081379B8 + gCurrentPinballGame->unk6F * 0x60, (void *)0x05000320, 0x20);
     }
-    else
+    else // chinchou
     {
         for (i = 0; i < 3; i++)
         {

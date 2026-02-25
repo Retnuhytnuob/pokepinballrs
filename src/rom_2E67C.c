@@ -6,7 +6,7 @@
 extern const s16 gUnknown_086AE45A[];
 extern const s16 gUnknown_086AE3DC[][3];
 extern const s8 gUnknown_08137CBC[][2];
-extern const u8 gUnknown_084BB16C[][0x480];
+extern const u8 gPelliper_Gfx[][0x480];
 extern const u16 gUnknown_086B3EF6[20][4][3];
 extern const s16 gUnknown_086AE462[][2];
 extern const u8 gSapphireBoardWailmer_Gfx[][0x300];
@@ -1175,7 +1175,7 @@ void sub_2E6AC(void)
 
     if (group->available)
     {
-        DmaCopy16(3, gUnknown_084BB16C[var_sl], (void *)0x060122A0, 0x480);
+        DmaCopy16(3, gPelliper_Gfx[var_sl], (void *)0x060122A0, 0x480);
         group->baseX = gCurrentPinballGame->unk320 / 10 + 146 - gCurrentPinballGame->unk58;
         group->baseY = gCurrentPinballGame->unk322 / 10 + 110 - gCurrentPinballGame->unk5A + gCurrentPinballGame->unk30E / 10;
         for (i = 0; i < 4; i++)
@@ -1701,7 +1701,7 @@ void sub_30178(void)
         if (gCurrentPinballGame->bumperHitCountdown == 2)
         {
             gCurrentPinballGame->scoreAddedInFrame = 500;
-            m4aSongNumStart(SE_UNKNOWN_0xB6);
+            m4aSongNumStart(SE_RUBY_BUMPER_HIT);
             playRumbleType(7);
             if (gCurrentPinballGame->unk13 == 4 && gCurrentPinballGame->unk17 == 5)
             {

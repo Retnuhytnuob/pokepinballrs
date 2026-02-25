@@ -578,7 +578,7 @@ void sub_4E598(void)
         gCurrentPinballGame->shouldProcessWhiscash = FALSE;
         gCurrentPinballGame->whiscashFrameIx = 0;
         gCurrentPinballGame->whiscashStateTimer = 0;
-        gCurrentPinballGame->rubyPondContentsChanging = 1;
+        gCurrentPinballGame->rubyPondContentsChanging = TRUE;
         gCurrentPinballGame->rubyPondChangeTimer = 0x40;
         gCurrentPinballGame->unk2AA = 0;
 

@@ -410,7 +410,7 @@ void sub_4A6A0(void)
         gCurrentPinballGame->ball->unk0 = 1;
         gCurrentPinballGame->unk1F = 1;
         gCurrentPinballGame->unk730 = 0;
-        gCurrentPinballGame->whiscashState = WHISCASH_STATE_5;
+        gCurrentPinballGame->whiscashState = WHISCASH_STATE_INIT_RETURN_FROM_BONUS;
         gCurrentPinballGame->unk4C = 0;
         gCurrentPinballGame->unk4E = 118;
         break;

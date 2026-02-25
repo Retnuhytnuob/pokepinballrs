@@ -41,7 +41,7 @@ s16 COLLISION_CHECK_RUBY_14E08(struct Vector16 *arg0, u16* arg1) {
     sp00 = gUnknown_02031520.unk14.unk48[unk2 + unk1][unk0 * 64 + vec2.y * 8 + vec2.x];
     sp02 = gUnknown_02031520.unk14.unk58[unk2 + unk1][unk0 * 64 + vec2.y * 8 + vec2.x];
 
-    sub_15054(arg0, &sp00, &sp02);
+    CheckRubyPondBumperCollision(arg0, &sp00, &sp02);
 
     switch_enum = sp02 & 0xF;
     some_enum = sp02 >> 4;
@@ -107,7 +107,7 @@ s16 COLLISION_CHECK_RUBY_14E08(struct Vector16 *arg0, u16* arg1) {
 }
 
 
-void sub_15054(struct Vector16* arg0, u16* arg1, u8* arg2)
+void CheckRubyPondBumperCollision(struct Vector16* arg0, u16* arg1, u8* arg2)
 {
     s16 deltaX;
     s16 deltaY;
@@ -146,8 +146,8 @@ void sub_15054(struct Vector16* arg0, u16* arg1, u8* arg2)
 
             *arg1 = maskedResult;
 
-            // if hit, while in its base mode, processes as a hit
-            // Ball in the area being sucked in, or already hitting it won't affect it.
+            // if hit, while in its base mode, processes as a hit.
+            // A Ball in the area being sucked in, or already hitting it won't affect it.
             if (gCurrentPinballGame->whiscashState <= WHISCASH_STATE_SITTING)
             {
                 *arg2 = lowerNibble;
@@ -208,7 +208,7 @@ void sub_15054(struct Vector16* arg0, u16* arg1, u8* arg2)
             }
         }
 
-        if (gCurrentPinballGame->rubyPondContentsChanging == 0)
+        if (!gCurrentPinballGame->rubyPondContentsChanging)
             gCurrentPinballGame->unk170[ix] = 107;
 
         *arg1 = maskedResult;
@@ -341,7 +341,7 @@ void sub_153CC(s32 arg0, s16* arg1, u16* arg2)
             {
                 gCurrentPinballGame->scoreAddedInFrame = 2000;
                 gCurrentPinballGame->rubyPondChangeTimer = 0;
-                gCurrentPinballGame->rubyPondContentsChanging = 1;
+                gCurrentPinballGame->rubyPondContentsChanging = TRUE;
             }
             else
             {

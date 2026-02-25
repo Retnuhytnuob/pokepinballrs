@@ -133,7 +133,7 @@
 #define SE_UNKNOWN_0xB3             0xB3 // SE183 Pi~ Chu!
 #define SE_UNKNOWN_0xB4             0xB4 // ?? Duplicate of SE49
 #define SE_UNKNOWN_0xB5             0xB5 // No Sound
-#define SE_UNKNOWN_0xB6             0xB6 // SE66 *Puddle slap?*
+#define SE_RUBY_BUMPER_HIT          0xB6 // SE66 *Puddle slap* (Hit lotad/chinchou/whiscash)
 #define SE_UNKNOWN_0xB7             0xB7 // SE67 *Spring Gate Bounce*
 #define SE_UNKNOWN_0xB8             0xB8 // SE68 *Slap*
 #define SE_UNKNOWN_0xB9             0xB9 // SE69 *Fall into water*
@@ -162,8 +162,8 @@
 #define SE_UNKNOWN_0xD0             0xD0 // SE83 *Chirp*
 #define SE_UNKNOWN_0xD1             0xD1 // SE84 *Flat board hit ground*
 #define SE_UNKNOWN_0xD2             0xD2 // SE85 Shroomish hit; Duplicate of SE66
-#define SE_UNKNOWN_0xD3             0xD3 // SE86 *Wave shot*
-#define SE_UNKNOWN_0xD4             0xD4 // SE87 *Swamp frog bubbling*
+#define SE_WHISCASH_EMERGE_SPLASH   0xD3 // SE86 *Wave shot*
+#define SE_WHISCASH_LEAVE_BURBLE    0xD4 // SE87 *Swamp frog bubbling*
 #define SE_UNKNOWN_0xD5             0xD5 // SE88 *Smaller puddle slap*
 #define SE_UNKNOWN_0xD6             0xD6 // SE89 *Juicy slash*
 #define SE_UNKNOWN_0xD7             0xD7 // SE90 *Explosive collapse*
@@ -283,6 +283,6 @@
 #define SE_UNKNOWN_0x149            0x149 // SE176 *Double Step*
 #define SE_HIGH_SCORE_EARNED        0x14A // SE178 High Score Earned
 #define SE_UNKNOWN_0x14B            0x14B // SE179 Duplicate of 36
-#define SE_UNKNOWN_0x14C            0x14C // SE177 *rumble*
+#define SE_WHISCASH_EARTHQUAKE      0x14C // SE177 *rumble*
 
 #endif // GUARD_CONSTANTS_BG_MUSIC_H

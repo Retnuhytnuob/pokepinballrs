@@ -3895,7 +3895,7 @@ gDirectSound_086885EC:: @ 0x086885EC
 .include "sound/songs/se_unk_b2.s"
 .include "sound/songs/se_unk_b3.s"
 .include "sound/songs/se_unk_b4.s"
-.include "sound/songs/se_unk_b6.s"
+.include "sound/songs/se_ruby_bumper_hit.s"
 .include "sound/songs/se_unk_b7.s"
 .include "sound/songs/se_unk_b8.s"
 .include "sound/songs/se_unk_b9.s"
@@ -3924,8 +3924,8 @@ gDirectSound_086885EC:: @ 0x086885EC
 .include "sound/songs/se_unk_d0.s"
 .include "sound/songs/se_unk_d1.s"
 .include "sound/songs/se_unk_d2.s"
-.include "sound/songs/se_unk_d3.s"
-.include "sound/songs/se_unk_d4.s"
+.include "sound/songs/se_whiscash_emerge_splash.s"
+.include "sound/songs/se_whiscash_leave_burble.s"
 .include "sound/songs/se_unk_d5.s"
 .include "sound/songs/se_unk_d6.s"
 .include "sound/songs/se_unk_d7.s"
@@ -4020,7 +4020,7 @@ gDirectSound_086885EC:: @ 0x086885EC
 .include "sound/songs/se_unk_149.s"
 .include "sound/songs/se_high_score_earned.s"
 .include "sound/songs/se_unk_14b.s"
-.include "sound/songs/se_unk_14c.s"
+.include "sound/songs/se_whiscash_earthquake.s"
 
 @ This is not sound data below. It's some kind of save file descriptor (SRAM_F_V102).
 .incbin "baserom.gba", 0x6A369C, 0x6A3700 - 0x6A369C

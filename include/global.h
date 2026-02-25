@@ -247,7 +247,7 @@ struct PinballGame
     /*0x12D*/ u8 filler12D;
     /*0x12E*/ s16 totalWeight;       // Added weight of all possible mons in area
     /*0x130*/ s16 speciesWeights[25]; // Weight of each species
-    /*0x162*/ s8 unk162;
+    /*0x162*/ s8 forcePondToWhiscash;
     /*0x163*/ s8 unk163;
     /*0x164*/ s8 unk164;
     /*0x165*/ s8 unk165;
@@ -386,7 +386,7 @@ struct PinballGame
     /*0x2A4*/ s8 shouldProcessWhiscash;
     /*0x2A5*/ s8 whiscashFrameIx;
     /*0x2A6*/ u16 whiscashStateTimer;
-    /*0x2A8*/ u16 unk2A8;
+    /*0x2A8*/ u16 pondSwitchesSinceLastWhiscash;
     /*0x2AA*/ u16 unk2AA;
     /*0x2AC*/ s16 unk2AC;
     /*0x2AE*/ u8 filler2AE[0x2];
