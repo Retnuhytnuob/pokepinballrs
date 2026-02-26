@@ -68,7 +68,7 @@ void ConvertGbaToPng(char *inputPath, char *outputPath, struct GbaToPngOptions *
             image.tilemap.size = fileSize;
         }
 
-        ReadTileImage(inputPath, options->width, options->metatileWidth, options->metatileHeight, &image, !image.hasPalette, options->oamSprite);
+        ReadTileImage(inputPath, options->width, options->metatileWidth, options->metatileHeight, &image, !image.hasPalette, options->oamSprite, options->oamSequenceFilePath);
         if (image.paletteMap != NULL && image.bitDepth == 4)
         {
            Convert4BppImageWithPaletteMap(&image);
@@ -97,7 +97,7 @@ void ConvertPngToGba(char *inputPath, char *outputPath, struct PngToGbaOptions *
     ReadPng(inputPath, &image);
 
     if (options->isTiled)
-        WriteTileImage(outputPath, options->numTilesMode, options->numTiles, options->metatileWidth, options->metatileHeight, &image, !image.hasPalette, options->oamSprite);
+        WriteTileImage(outputPath, options->numTilesMode, options->numTiles, options->metatileWidth, options->metatileHeight, &image, !image.hasPalette, options->oamSprite, options->oamSequenceFilePath);
     else
         WritePlainImage(outputPath, options->dataWidth, &image, !image.hasPalette);
 
@@ -120,6 +120,7 @@ void HandleGbaToPngCommand(char *inputPath, char *outputPath, int argc, char **a
     options.isTiled = true;
     options.dataWidth = 1;
     options.oamSprite = false;
+    options.oamSequenceFilePath = NULL;
 
     for (int i = 3; i < argc; i++)
     {
@@ -189,6 +190,27 @@ void HandleGbaToPngCommand(char *inputPath, char *outputPath, int argc, char **a
         else if (strcmp(option, "-oam") == 0) {
             options.oamSprite = 1;
         }
+        else if (strcmp(option, "-oam-seq-file") == 0) {
+            if (i + 1 >= argc)
+                FATAL_ERROR("No oam sequence file path following \"-oam-seq-file\".\n");
+
+            i++;
+            options.oamSequenceFilePath = argv[i];
+        }
+        else if (strcmp(option, "-oam-shape") == 0 || strcmp(option, "-oamshape") == 0) {
+            if (i + 1 >= argc)
+                FATAL_ERROR("No oam shape file path following \"-oam-shape\".\n");
+
+            i++;
+            options.oamSequenceFilePath = argv[i];
+        }
+        else if (strcmp(option, "-oam-shape") == 0 || strcmp(option, "-oamshape") == 0) {
+            if (i + 1 >= argc)
+                FATAL_ERROR("No oam shape file path following \"-oam-shape\".\n");
+
+            i++;
+            options.oamSequenceFilePath = argv[i];
+        }
         else if (strcmp(option, "-tilemap") == 0)
         {
             if (i + 1 >= argc)
@@ -248,6 +270,7 @@ void HandlePngToGbaCommand(char *inputPath, char *outputPath, int argc, char **a
     options.isTiled = true;
     options.dataWidth = 1;
     options.oamSprite = false;
+    options.oamSequenceFilePath = NULL;
 
     for (int i = 3; i < argc; i++)
     {
@@ -300,6 +323,13 @@ void HandlePngToGbaCommand(char *inputPath, char *outputPath, int argc, char **a
         }
         else if (strcmp(option, "-oam") == 0) {
             options.oamSprite = 1;
+        }
+        else if (strcmp(option, "-oam-seq-file") == 0) {
+            if (i + 1 >= argc)
+                FATAL_ERROR("No oam sequence file path following \"-oam-seq-file\".\n");
+
+            i++;
+            options.oamSequenceFilePath = argv[i];
         }
         else if (strcmp(option, "-plain") == 0)
         {
