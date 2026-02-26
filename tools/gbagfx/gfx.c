@@ -10,179 +10,6 @@
 #include "util.h"
 #include "oam_slices/oam_slicer.h"
 
-static struct OamOverrideSegment *g_oam_sequence = NULL;
-static int g_oam_sequence_count = 0;
-static int g_oam_tilecount = 0;
-static int g_oam_png_tiles = 0;
-
-static void clear_oam_sequence(void) {
-	if (g_oam_sequence) {
-		free(g_oam_sequence);
-		g_oam_sequence = NULL;
-		g_oam_sequence_count = 0;
-		g_oam_tilecount = 0;
-		g_oam_png_tiles = 0;
-	}
-}
-
-// Load oam sequence file.
-// JSON matching the schema provided by the user.
-// Returns number of segments, 0 if none, or -1 on IO/error.
-static int load_oam_sequence_file(char *path, struct OamOverrideSegment **outSeq) {
-	if (path == NULL) return 0;
-	int fileSize;
-	unsigned char *buf = ReadWholeFile(path, &fileSize);
-	if (buf == NULL) return -1;
-
-	// skip leading whitespace
-	char *p = (char*)buf;
-	char *end = (char*)buf + fileSize;
-	while (p < end && (*p == ' ' || *p == '\t' || *p == '\r' || *p == '\n')) ++p;
-
-	// If JSON (starts with '{'), parse JSON-ish format for our schema
-	if (p < end && *p == '{') {
-		// Minimal JSON parsing for expected keys: pngsize, tilecount, pieces
-		int tilecount = -1;
-
-		// find "tilecount"
-		char *tok = strstr(p, "\"tilecount\"");
-		if (tok) {
-			char *col = strchr(tok, ':');
-			if (col) tilecount = atoi(col + 1);
-		}
-
-		// find "pngsize"
-		tok = strstr(p, "\"pngsize\"");
-		int png_w = -1, png_h = -1;
-		if (tok) {
-			char *col = strchr(tok, ':');
-			if (col) {
-				char *quote1 = strchr(col, '"');
-				if (quote1) {
-					char *quote2 = strchr(quote1 + 1, '"');
-					if (quote2) {
-						int a, b;
-						if (sscanf(quote1 + 1, "%d x %d", &a, &b) == 2 || sscanf(quote1 + 1, "%dx%d", &a, &b) == 2) {
-							png_w = a;
-							png_h = b;
-							g_oam_png_tiles = png_w * png_h;
-						}
-					}
-				}
-			}
-		}
-
-		// find pieces array
-		tok = strstr(p, "\"pieces\"");
-		if (!tok) {
-			free(buf);
-			*outSeq = NULL;
-			return -1;
-		}
-
-		char *arrstart = strchr(tok, '[');
-		if (!arrstart) { free(buf); *outSeq = NULL; return -1; }
-
-		// allocate temporary list of segments up to a reasonable bound (count braces)
-		int maxSegments = 0;
-		for (char *q = arrstart; q < end; ++q) if (*q == '{') ++maxSegments;
-		if (maxSegments == 0) { free(buf); *outSeq = NULL; return 0; }
-
-		struct OamOverrideSegment *arr = malloc(sizeof(struct OamOverrideSegment) * maxSegments);
-		int idx = 0;
-
-		char *q = arrstart;
-		while (q < end) {
-			char *obj = strchr(q, '{');
-			if (!obj) break;
-			char *objend = strchr(obj, '}');
-			if (!objend) break;
-
-			// find pos
-			int offX = 0, offY = 0, w = 0, h = 0;
-			int spacer = 0;
-			char *posTok = strstr(obj, "\"pos\"");
-			if (posTok && posTok < objend) {
-				char *col = strchr(posTok, ':');
-				if (col) {
-					char *q1 = strchr(col, '"');
-					if (q1 && q1 < objend) {
-						char *q2 = strchr(q1 + 1, '"');
-						if (q2 && q2 < objend) {
-							sscanf(q1 + 1, "%d,%d", &offX, &offY);
-						}
-					}
-				}
-			}
-
-			// find size
-			char *sizeTok = strstr(obj, "\"size\"");
-			if (sizeTok && sizeTok < objend) {
-				char *col = strchr(sizeTok, ':');
-				if (col) {
-					char *q1 = strchr(col, '"');
-					if (q1 && q1 < objend) {
-						char *q2 = strchr(q1 + 1, '"');
-						if (q2 && q2 < objend) {
-							if (sscanf(q1 + 1, "%d x %d", &w, &h) != 2) {
-								sscanf(q1 + 1, "%dx%d", &w, &h);
-							}
-						}
-					}
-				}
-			}
-
-			// find spacer (optional)
-			char *spTok = strstr(obj, "\"spacer\"");
-			if (spTok && spTok < objend) {
-				char *col = strchr(spTok, ':');
-				if (col) {
-					if (strstr(col, "true") != NULL) spacer = 1;
-					else spacer = atoi(col + 1);
-				}
-			}
-
-			// validate non-spacer shapes
-			if (!spacer) {
-				if (!is_valid_oam_shape(w, h)) {
-					free(arr);
-					free(buf);
-					*outSeq = NULL;
-					return -1;
-				}
-			}
-
-			arr[idx].offX = (unsigned short)offX;
-			arr[idx].offY = (unsigned short)offY;
-			arr[idx].width = (unsigned short)w;
-			arr[idx].height = (unsigned short)h;
-			arr[idx].spacer = spacer ? true : false;
-			++idx;
-
-			q = objend + 1;
-		}
-
-		// compute tilecount if missing: sum of non-spacer w*h
-		if (tilecount < 0) {
-			int sum = 0;
-			for (int i = 0; i < idx; ++i) if (!arr[i].spacer) sum += arr[i].width * arr[i].height;
-			tilecount = sum;
-		}
-
-		// store computed tilecount globally for validation
-		g_oam_tilecount = tilecount;
-
-		free(buf);
-		if (idx == 0) { free(arr); *outSeq = NULL; return 0; }
-		*outSeq = arr;
-		return idx;
-	}
-
-	free(buf);
-	*outSeq = NULL;
-	return -1;
-}
-
 #define GET_GBA_PAL_RED(x)   (((x) >>  0) & 0x1F)
 #define GET_GBA_PAL_GREEN(x) (((x) >>  5) & 0x1F)
 #define GET_GBA_PAL_BLUE(x)  (((x) >> 10) & 0x1F)
@@ -253,7 +80,7 @@ static void ConvertFromTiles1Bpp(unsigned char *src, unsigned char *dest, int nu
 	}
 }
 
-static void ConvertFromTiles4Bpp(unsigned char *src, unsigned char *dest, int numTiles, int metatilesWide, int metatileWidth, int metatileHeight, bool invertColors, bool oamMap, int tilesHeight)
+static void ConvertFromTiles4Bpp(unsigned char *src, unsigned char *dest, int numTiles, int metatilesWide, int metatileWidth, int metatileHeight, bool invertColors, bool oamMap, int tilesHeight, OamSequence *oamSeq)
 {
 	int subTileX = 0;
 	int subTileY = 0;
@@ -267,7 +94,10 @@ static void ConvertFromTiles4Bpp(unsigned char *src, unsigned char *dest, int nu
 
 	if (oamMap)
 	{
-		tileCount = getOamTileIndexEx(metatileWidth, metatileHeight, tileMappingCoord, g_oam_sequence, g_oam_sequence_count, &oamSegments);
+		if (oamSeq)
+			tileCount = getOamTileIndexEx(metatileWidth, metatileHeight, tileMappingCoord, oamSeq->segments, oamSeq->numSegments, &oamSegments);
+		else
+			tileCount = getOamTileIndexEx(metatileWidth, metatileHeight, tileMappingCoord, NULL, 0, &oamSegments);
 	}
 
 	/* If using OAM mapping, start placement at the first mapped coordinate so
@@ -430,7 +260,7 @@ void Convert4BppImageWithPaletteMap(struct Image *image)
 	image->bitDepth = 8;
 }
 
-static void ConvertToTiles4Bpp(unsigned char *src, unsigned char *dest, int numTiles, int metatilesWide, int metatileWidth, int metatileHeight, int tilesHeight, bool invertColors, bool oamMap)
+static void ConvertToTiles4Bpp(unsigned char *src, unsigned char *dest, int numTiles, int metatilesWide, int metatileWidth, int metatileHeight, int tilesHeight, bool invertColors, bool oamMap, OamSequence *oamSeq)
 {
 	int subTileX = 0;
 	int subTileY = 0;
@@ -467,7 +297,10 @@ static void ConvertToTiles4Bpp(unsigned char *src, unsigned char *dest, int numT
 		struct OamSegment *segments = NULL;
 		TileCoord dummy[MAX_OAM_TILE_SIDE_LENGTH_SQUARED];
 		// getOamTileIndexEx returns the compressed mapping for one metatile and the segments list
-		getOamTileIndexEx(metatileWidth, metatileHeight, dummy, g_oam_sequence, g_oam_sequence_count, &segments);
+		if (oamSeq)
+			getOamTileIndexEx(metatileWidth, metatileHeight, dummy, oamSeq->segments, oamSeq->numSegments, &segments);
+		else
+			getOamTileIndexEx(metatileWidth, metatileHeight, dummy, NULL, 0, &segments);
 
 		int metatilesHigh = tilesHeight / metatileHeight;
 		int totalTiles = numTiles;
@@ -728,25 +561,24 @@ void ReadTileImage(char *path, int tilesWidth, int metatileWidth, int metatileHe
     }
 
 	// load custom oam sequence if provided (needed for validation)
-	clear_oam_sequence();
+	OamSequence *oamSeq = NULL;
 	if (oamSequenceFilePath != NULL) {
-		int cnt = load_oam_sequence_file(oamSequenceFilePath, &g_oam_sequence);
+		int cnt = oam_sequence_load_from_file(oamSequenceFilePath, &oamSeq);
 		if (cnt < 0)
 			FATAL_ERROR("Failed to read oam sequence file: %s\n", oamSequenceFilePath);
-		g_oam_sequence_count = cnt;
 	}
 
 	int tilesHeight = (numTiles + tilesWidth - 1) / tilesWidth;
 
 	// If an OAM shape is provided, validate by per-metatile tilecount
-	if (g_oam_tilecount > 0) {
-		if (numTiles % g_oam_tilecount != 0)
-			FATAL_ERROR("The number of tiles (%d) is not a multiple of the OAM shape tile count (%d)\n", numTiles, g_oam_tilecount);
+	if (oamSeq && oamSeq->tilecount > 0) {
+		if (numTiles % oamSeq->tilecount != 0)
+			FATAL_ERROR("The number of tiles (%d) is not a multiple of the OAM shape tile count (%d)\n", numTiles, oamSeq->tilecount);
 
 		if (tilesWidth % metatileWidth != 0)
 			FATAL_ERROR("The width in tiles (%d) isn't a multiple of the specified metatile width (%d)\n", tilesWidth, metatileWidth);
 
-		int totalMetatiles = numTiles / g_oam_tilecount;
+		int totalMetatiles = numTiles / oamSeq->tilecount;
 		int metatilesWide = tilesWidth / metatileWidth;
 		if (totalMetatiles % metatilesWide != 0)
 			FATAL_ERROR("Tile data contains %d metatiles which is not divisible by metatiles-wide (%d)\n", totalMetatiles, metatilesWide);
@@ -775,7 +607,7 @@ void ReadTileImage(char *path, int tilesWidth, int metatileWidth, int metatileHe
 		ConvertFromTiles1Bpp(buffer, image->pixels, numTiles, metatilesWide, metatileWidth, metatileHeight, invertColors);
 		break;
 	case 4:
-		ConvertFromTiles4Bpp(buffer, image->pixels, numTiles, metatilesWide, metatileWidth, metatileHeight, invertColors, oamMap, tilesHeight);
+		ConvertFromTiles4Bpp(buffer, image->pixels, numTiles, metatilesWide, metatileWidth, metatileHeight, invertColors, oamMap, tilesHeight, oamSeq);
 		break;
 	case 8:
 		ConvertFromTiles8Bpp(buffer, image->pixels, numTiles, metatilesWide, metatileWidth, metatileHeight, invertColors);
@@ -783,6 +615,7 @@ void ReadTileImage(char *path, int tilesWidth, int metatileWidth, int metatileHe
 	}
 
 	free(buffer);
+	if (oamSeq) oam_sequence_free(oamSeq);
 }
 
 void WriteTileImage(char *path, enum NumTilesMode numTilesMode, int numTiles, int metatileWidth, int metatileHeight,  struct Image *image, bool invertColors, bool oamMap, char *oamSequenceFilePath)
@@ -799,34 +632,33 @@ void WriteTileImage(char *path, enum NumTilesMode numTilesMode, int numTiles, in
 	int tilesHeight = image->height / 8;
 
 	// load sequence if provided (so we can validate using per-metatile tilecount)
-	clear_oam_sequence();
+	OamSequence *oamSeq = NULL;
 	if (oamSequenceFilePath != NULL) {
-		int cnt = load_oam_sequence_file(oamSequenceFilePath, &g_oam_sequence);
+		int cnt = oam_sequence_load_from_file(oamSequenceFilePath, &oamSeq);
 		if (cnt < 0)
 			FATAL_ERROR("Failed to read oam sequence file: %s\n", oamSequenceFilePath);
-		g_oam_sequence_count = cnt;
 	}
 
 	int maxNumTiles = tilesWidth * tilesHeight;
-	if (g_oam_png_tiles > 0) {
-		if (maxNumTiles % g_oam_png_tiles != 0)
-			FATAL_ERROR("The image contains %d tiles which is not a multiple of the OAM shape pngsize (%d)\n", maxNumTiles, g_oam_png_tiles);
+	if (oamSeq && oamSeq->png_tiles > 0) {
+		if (maxNumTiles % oamSeq->png_tiles != 0)
+			FATAL_ERROR("The image contains %d tiles which is not a multiple of the OAM shape pngsize (%d)\n", maxNumTiles, oamSeq->png_tiles);
 
 		if (tilesWidth % metatileWidth != 0)
 			FATAL_ERROR("The width in tiles (%d) isn't a multiple of the specified metatile width (%d)\n", tilesWidth, metatileWidth);
 
-		int totalMetatiles = maxNumTiles / g_oam_png_tiles;
+		int totalMetatiles = maxNumTiles / oamSeq->png_tiles;
 		int metatilesWide = tilesWidth / metatileWidth;
 		if (totalMetatiles % metatilesWide != 0)
 			FATAL_ERROR("Image supplies %d metatiles which is not divisible by metatiles-wide (%d)\n", totalMetatiles, metatilesWide);
-	} else if (g_oam_tilecount > 0) {
-		if (maxNumTiles % g_oam_tilecount != 0)
-			FATAL_ERROR("The image contains %d tiles which is not a multiple of the OAM shape tile count (%d)\n", maxNumTiles, g_oam_tilecount);
+	} else if (oamSeq && oamSeq->tilecount > 0) {
+		if (maxNumTiles % oamSeq->tilecount != 0)
+			FATAL_ERROR("The image contains %d tiles which is not a multiple of the OAM shape tile count (%d)\n", maxNumTiles, oamSeq->tilecount);
 
 		if (tilesWidth % metatileWidth != 0)
 			FATAL_ERROR("The width in tiles (%d) isn't a multiple of the specified metatile width (%d)\n", tilesWidth, metatileWidth);
 
-		int totalMetatiles = maxNumTiles / g_oam_tilecount;
+		int totalMetatiles = maxNumTiles / oamSeq->tilecount;
 		int metatilesWide = tilesWidth / metatileWidth;
 		if (totalMetatiles % metatilesWide != 0)
 			FATAL_ERROR("Image supplies %d metatiles which is not divisible by metatiles-wide (%d)\n", totalMetatiles, metatilesWide);
@@ -848,9 +680,10 @@ void WriteTileImage(char *path, enum NumTilesMode numTilesMode, int numTiles, in
 	int bufferSize = numTiles * tileSize;
 	int maxBufferSize = maxNumTiles * tileSize;
 
-	if (g_oam_png_tiles > 0 && g_oam_tilecount > 0) {
-		bufferSize = numTiles * tileSize / g_oam_png_tiles * g_oam_tilecount ;
-		maxBufferSize = maxBufferSize / g_oam_png_tiles * g_oam_tilecount ;
+	// Caused by differences in the input and output size, due to 'spacer' tiles.
+	if (oamSeq && oamSeq->png_tiles > 0 && oamSeq->tilecount > 0) {
+		bufferSize = numTiles * tileSize / oamSeq->png_tiles * oamSeq->tilecount ;
+		maxBufferSize = maxBufferSize / oamSeq->png_tiles * oamSeq->tilecount ;
 	}
 
 	unsigned char *buffer = malloc(maxBufferSize);
@@ -860,21 +693,12 @@ void WriteTileImage(char *path, enum NumTilesMode numTilesMode, int numTiles, in
 
 	int metatilesWide = tilesWidth / metatileWidth;
 
-	// load sequence if provided
-	clear_oam_sequence();
-	if (oamSequenceFilePath != NULL) {
-		int cnt = load_oam_sequence_file(oamSequenceFilePath, &g_oam_sequence);
-		if (cnt < 0)
-			FATAL_ERROR("Failed to read oam sequence file: %s\n", oamSequenceFilePath);
-		g_oam_sequence_count = cnt;
-	}
-
     switch (image->bitDepth) {
 	case 1:
 		ConvertToTiles1Bpp(image->pixels, buffer, maxNumTiles, metatilesWide, metatileWidth, metatileHeight, invertColors);
 		break;
 	case 4:
-		ConvertToTiles4Bpp(image->pixels, buffer, maxNumTiles, metatilesWide, metatileWidth, metatileHeight, tilesHeight, invertColors, oamMap);
+		ConvertToTiles4Bpp(image->pixels, buffer, maxNumTiles, metatilesWide, metatileWidth, metatileHeight, tilesHeight, invertColors, oamMap, oamSeq);
 		break;
 	case 8:
 		ConvertToTiles8Bpp(image->pixels, buffer, maxNumTiles, metatilesWide, metatileWidth, metatileHeight, invertColors);
@@ -903,6 +727,8 @@ void WriteTileImage(char *path, enum NumTilesMode numTilesMode, int numTiles, in
 	WriteWholeFile(path, buffer, zeroPadded ? bufferSize : maxBufferSize);
 
 	free(buffer);
+
+    if (oamSeq) oam_sequence_free(oamSeq);
 }
 
 void ReadPlainImage(char *path, int dataWidth, struct Image *image, bool invertColors)

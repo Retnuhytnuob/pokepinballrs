@@ -47,6 +47,22 @@ typedef struct OamSegment {
     bool spacer; // indicates this segment represents a spacer (no tile data)
 } OamSegment;
 
+// Represents a parsed OAM sequence file. Contains an array of override
+// segments (as declared above), the number of segments, and metadata
+// parsed from the file (tilecount and pngsize in tiles).
+typedef struct OamSequence {
+    struct OamOverrideSegment *segments;
+    int numSegments;
+    int tilecount; // sum of non-spacer tiles (or -1 if not provided)
+    int png_tiles; // pngsize in tiles (w*h) if provided, 0 otherwise
+} OamSequence;
+
+// Load an OAM sequence from a JSON file. Returns number of segments (>0),
+// 0 if none, or -1 on IO/error. On success *outSeq will be a heap-allocated
+// OamSequence that must be freed with oam_sequence_free().
+int oam_sequence_load_from_file(const char *path, OamSequence **outSeq);
+void oam_sequence_free(OamSequence *seq);
+
 void print_oam_segments(struct OamSegment *segList);
 void free_oam_segments(struct OamSegment *segList);
 int getOamTileIndex(int width, int height, TileCoord *tileCoordinates);

@@ -1,9 +1,172 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 #include "../gfx.h"
 #include "oam_slicer.h"
+#include "../util.h"
 
+
+// Load oam sequence file.
+// JSON matching the schema provided by the user.
+// Returns number of segments, 0 if none, or -1 on IO/error.
+int oam_sequence_load_from_file(const char *path, OamSequence **outSeq) {
+    if (path == NULL) return 0;
+    int fileSize;
+    unsigned char *buf = ReadWholeFile((char*)path, &fileSize);
+    if (buf == NULL) return -1;
+
+    // skip leading whitespace
+    char *p = (char*)buf;
+    char *end = (char*)buf + fileSize;
+    while (p < end && (*p == ' ' || *p == '\t' || *p == '\r' || *p == '\n')) ++p;
+
+    // If JSON (starts with '{'), parse JSON-ish format for our schema
+    if (p < end && *p == '{') {
+        int tilecount = -1;
+
+        // find "tilecount"
+        char *tok = strstr(p, "\"tilecount\"");
+        if (tok) {
+            char *col = strchr(tok, ':');
+            if (col) tilecount = atoi(col + 1);
+        }
+
+        // find "pngsize"
+        tok = strstr(p, "\"pngsize\"");
+        int png_w = -1, png_h = -1;
+        int png_tiles = 0;
+        if (tok) {
+            char *col = strchr(tok, ':');
+            if (col) {
+                char *quote1 = strchr(col, '"');
+                if (quote1) {
+                    char *quote2 = strchr(quote1 + 1, '"');
+                    if (quote2) {
+                        int a, b;
+                        if (sscanf(quote1 + 1, "%d x %d", &a, &b) == 2 || sscanf(quote1 + 1, "%dx%d", &a, &b) == 2) {
+                            png_w = a;
+                            png_h = b;
+                            png_tiles = png_w * png_h;
+                        }
+                    }
+                }
+            }
+        }
+
+        // find pieces array
+        tok = strstr(p, "\"pieces\"");
+        if (!tok) {
+            free(buf);
+            *outSeq = NULL;
+            return -1;
+        }
+
+        char *arrstart = strchr(tok, '[');
+        if (!arrstart) { free(buf); *outSeq = NULL; return -1; }
+
+        int maxSegments = 0;
+        for (char *q = arrstart; q < end; ++q) if (*q == '{') ++maxSegments;
+        if (maxSegments == 0) { free(buf); *outSeq = NULL; return 0; }
+
+        struct OamOverrideSegment *arr = malloc(sizeof(struct OamOverrideSegment) * maxSegments);
+        int idx = 0;
+
+        char *q = arrstart;
+        while (q < end) {
+            char *obj = strchr(q, '{');
+            if (!obj) break;
+            char *objend = strchr(obj, '}');
+            if (!objend) break;
+
+            int offX = 0, offY = 0, w = 0, h = 0;
+            int spacer = 0;
+            char *posTok = strstr(obj, "\"pos\"");
+            if (posTok && posTok < objend) {
+                char *col = strchr(posTok, ':');
+                if (col) {
+                    char *q1 = strchr(col, '"');
+                    if (q1 && q1 < objend) {
+                        char *q2 = strchr(q1 + 1, '"');
+                        if (q2 && q2 < objend) {
+                            sscanf(q1 + 1, "%d,%d", &offX, &offY);
+                        }
+                    }
+                }
+            }
+
+            char *sizeTok = strstr(obj, "\"size\"");
+            if (sizeTok && sizeTok < objend) {
+                char *col = strchr(sizeTok, ':');
+                if (col) {
+                    char *q1 = strchr(col, '"');
+                    if (q1 && q1 < objend) {
+                        char *q2 = strchr(q1 + 1, '"');
+                        if (q2 && q2 < objend) {
+                            if (sscanf(q1 + 1, "%d x %d", &w, &h) != 2) {
+                                sscanf(q1 + 1, "%dx%d", &w, &h);
+                            }
+                        }
+                    }
+                }
+            }
+
+            char *spTok = strstr(obj, "\"spacer\"");
+            if (spTok && spTok < objend) {
+                char *col = strchr(spTok, ':');
+                if (col) {
+                    if (strstr(col, "true") != NULL) spacer = 1;
+                    else spacer = atoi(col + 1);
+                }
+            }
+
+            if (!spacer) {
+                if (!is_valid_oam_shape(w, h)) {
+                    free(arr);
+                    free(buf);
+                    *outSeq = NULL;
+                    return -1;
+                }
+            }
+
+            arr[idx].offX = (unsigned short)offX;
+            arr[idx].offY = (unsigned short)offY;
+            arr[idx].width = (unsigned short)w;
+            arr[idx].height = (unsigned short)h;
+            arr[idx].spacer = spacer ? true : false;
+            ++idx;
+
+            q = objend + 1;
+        }
+
+        if (tilecount < 0) {
+            int sum = 0;
+            for (int i = 0; i < idx; ++i) if (!arr[i].spacer) sum += arr[i].width * arr[i].height;
+            tilecount = sum;
+        }
+
+        OamSequence *seq = malloc(sizeof(OamSequence));
+        seq->segments = arr;
+        seq->numSegments = idx;
+        seq->tilecount = tilecount;
+        seq->png_tiles = png_tiles;
+
+        free(buf);
+        if (idx == 0) { free(arr); free(seq); *outSeq = NULL; return 0; }
+        *outSeq = seq;
+        return idx;
+    }
+
+    free(buf);
+    *outSeq = NULL;
+    return -1;
+}
+
+void oam_sequence_free(OamSequence *seq) {
+    if (!seq) return;
+    if (seq->segments) free(seq->segments);
+    free(seq);
+}
 
 // Define the available OAM shapes.
 // Ordered by the width, then height.
