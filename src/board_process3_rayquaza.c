@@ -258,7 +258,7 @@ void sub_3EDF0(void)
             m4aSongNumStart(SE_RAYQUAZA_HIT);
             gCurrentPinballGame->scoreAddedInFrame = 1000000;
             gCurrentPinballGame->bonusModeHitCount++;
-            playRumbleType(7);
+            PlayRumble(7);
             if (gCurrentPinballGame->bonusModeHitCount >= gCurrentPinballGame->legendaryHitsRequired && gCurrentPinballGame->unk3DC != 6)
                 gCurrentPinballGame->unk3DC = 9;
         }
@@ -1090,14 +1090,14 @@ void sub_40288(void)
                 yy = tempVector.y * tempVector.y;
                 squaredMagnitude = xx + yy;
 
-                playRumbleType(8);
+                PlayRumble(8);
                 if (gCurrentPinballGame->unk441[0] < 3 && gCurrentPinballGame->unk441[1] < 3 &&
                     gCurrentPinballGame->unk388 == 0 && squaredMagnitude < 200)
                 {
                     gMain.spriteGroups[36].available = 1;
                     gCurrentPinballGame->unk486 = 600;
                     m4aSongNumStart(SE_UNKNOWN_0x12A);
-                    playRumbleType(9);
+                    PlayRumble(9);
                 }
             }
         }
@@ -1286,7 +1286,7 @@ void sub_40288(void)
                     gCurrentPinballGame->unk520.x = gCurrentPinballGame->unk45C[i].x;
                     gCurrentPinballGame->unk520.y = gCurrentPinballGame->unk45C[i].y;
                     m4aSongNumStart(SE_UNKNOWN_0x12B);
-                    playRumbleType(13);
+                    PlayRumble(13);
                 }
             }
 
@@ -1362,7 +1362,7 @@ void sub_40288(void)
                     gCurrentPinballGame->ball->velocity.x = 0;
                     gCurrentPinballGame->unk441[i] = 0;
                     gCurrentPinballGame->unk5FA = 0;
-                    playRumbleType(8);
+                    PlayRumble(8);
                 }
 
                 gCurrentPinballGame->unk458[i]++;
@@ -1687,7 +1687,7 @@ void sub_417F8(void)
             if (gCurrentPinballGame->unk441[0] < 3 && gCurrentPinballGame->unk441[1] < 3 && gCurrentPinballGame->unk388 == 0)
             {
                 gCurrentPinballGame->ball->velocity.x += 500;
-                playRumbleType(13);
+                PlayRumble(13);
             }
         }
 
@@ -1716,7 +1716,7 @@ void sub_417F8(void)
             if (gCurrentPinballGame->unk441[0] < 3 && gCurrentPinballGame->unk441[1] < 3 && gCurrentPinballGame->unk388 == 0)
             {
                 gCurrentPinballGame->ball->velocity.x -= 500;
-                playRumbleType(13);
+                PlayRumble(13);
             }
         }
 

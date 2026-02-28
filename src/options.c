@@ -284,7 +284,7 @@ void Options_HandleInput(void)
                 if (gGameBoyPlayerEnabled == TRUE)
                 {
                     m4aSongNumStart(SE_MENU_SELECT);
-                    playRumbleType(11);
+                    PlayRumble(11);
                     if (gOptionsData.unk2E == 0)
                         gOptionsData.unk2E = 1;
 

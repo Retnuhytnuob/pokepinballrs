@@ -442,7 +442,7 @@ void DuskullPhase_ProcessEntityLogic(void) {
             gCurrentPinballGame->scoreAddedInFrame = 100000;
             gCurrentPinballGame->bonusModeHitCount++; // Number hit
             m4aSongNumStart(SE_DUSKULL_DEATH_CRY); //Duskull Death cry
-            playRumbleType(7);
+            PlayRumble(7);
             break;
         case DUSKULL_ENTITY_STATE_DYING:
             if (DuskullFramesetData[gCurrentPinballGame->minionFramesetIx[i]][1] > gCurrentPinballGame->minionStateTimer[i])
@@ -681,7 +681,7 @@ void DusclopsPhase_ProcessEntityLogicAndGraphics(void)
                 gCurrentPinballGame->unk129 = 0;
                 gCurrentPinballGame->unk128 = 1;
                 m4aSongNumStart(SE_DUSCLOPS_MOVE);
-                playRumbleType(8);
+                PlayRumble(8);
             }
 
             if (gCurrentPinballGame->unk3E2 == DUSCLOPS_FRAME_INTRO_FOOTSTEP_RIGHT)
@@ -689,7 +689,7 @@ void DusclopsPhase_ProcessEntityLogicAndGraphics(void)
                 gCurrentPinballGame->unk129 = 1;
                 gCurrentPinballGame->unk128 = 1;
                 m4aSongNumStart(SE_DUSCLOPS_MOVE);
-                playRumbleType(8);
+                PlayRumble(8);
 
             }
         }
@@ -781,7 +781,7 @@ void DusclopsPhase_ProcessEntityLogicAndGraphics(void)
                 gCurrentPinballGame->unk129 = 0;
                 gCurrentPinballGame->unk128 = 1;
                 m4aSongNumStart(SE_DUSCLOPS_MOVE);
-                playRumbleType(8);
+                PlayRumble(8);
             }
 
             if (gCurrentPinballGame->unk3E2 == DUSCLOPS_FRAME_RIGHT_FOOT_LANDS)
@@ -789,7 +789,7 @@ void DusclopsPhase_ProcessEntityLogicAndGraphics(void)
                 gCurrentPinballGame->unk129 = 1;
                 gCurrentPinballGame->unk128 = 1;
                 m4aSongNumStart(SE_DUSCLOPS_MOVE);
-                playRumbleType(8);
+                PlayRumble(8);
             }
         }
 
@@ -844,7 +844,7 @@ void DusclopsPhase_ProcessEntityLogicAndGraphics(void)
 
         m4aSongNumStart(SE_DUSCLOPS_HIT); //Dusclops hit
         gCurrentPinballGame->boardEntityCollisionMode = DUSCLOPS_ENTITY_COLLISION_MODE_NONE;
-        playRumbleType(7);
+        PlayRumble(7);
         break;
     }
     case DUSCLOPS_ENTITY_STATE_HIT_STUN:
@@ -896,7 +896,7 @@ void DusclopsPhase_ProcessEntityLogicAndGraphics(void)
         gCurrentPinballGame->unk5AC = Sqrt(gCurrentPinballGame->unk5AC * 4) / 2;
         gCurrentPinballGame->unk5B0 = ArcTan2(-tempVector.x, tempVector.y);
 
-        playRumbleType(13);
+        PlayRumble(13);
         break;
     }
     case DUSCLOPS_ENTITY_STATE_ABSORBED_BALL:
@@ -914,7 +914,7 @@ void DusclopsPhase_ProcessEntityLogicAndGraphics(void)
                 gCurrentPinballGame->ball->velocity.y = 300;
                 gCurrentPinballGame->ball->unk0 = 0;
                 m4aSongNumStart(SE_DUSCLOPS_BALL_LAUNCH); //Dusclops launch ball
-                playRumbleType(8);
+                PlayRumble(8);
             }
 
             if (gCurrentPinballGame->unk3E2 == DUSCLOPS_FRAME_ABSOLB_LAUNCH)

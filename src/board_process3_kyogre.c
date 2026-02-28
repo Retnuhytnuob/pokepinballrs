@@ -262,7 +262,7 @@ void sub_38A20(void)
             if (gCurrentPinballGame->unk452 == 4)
             {
                 MPlayStart(&gMPlayInfo_SE1, &se_unk_10a);
-                playRumbleType(7);
+                PlayRumble(7);
                 gCurrentPinballGame->scoreAddedInFrame = 500000;
                 gCurrentPinballGame->bonusModeHitCount++;
                 if (gCurrentPinballGame->bonusModeHitCount >= gCurrentPinballGame->legendaryHitsRequired &&
@@ -606,7 +606,7 @@ void sub_38A20(void)
             gCurrentPinballGame->unk3DC = 12;
             gCurrentPinballGame->boardEntityCollisionMode = 2;
             MPlayStart(&gMPlayInfo_SE1, &se_unk_10b);
-            playRumbleType(8);
+            PlayRumble(8);
         }
         break;
     case 12:
@@ -645,7 +645,7 @@ void sub_38A20(void)
             if (gCurrentPinballGame->unk3E2 == 72)
             {
                 MPlayStart(&gMPlayInfo_SE1, &se_unk_10c);
-                playRumbleType(8);
+                PlayRumble(8);
             }
         }
         break;
@@ -1048,7 +1048,7 @@ void sub_39A40(void)
                         gCurrentPinballGame->unk452 == 0 && squaredMagnitude < 400)
                     {
                         m4aSongNumStart(SE_UNKNOWN_0x113);
-                        playRumbleType(12);
+                        PlayRumble(12);
                         gCurrentPinballGame->unk1F = 1;
                         gCurrentPinballGame->unk458[i] = 0;
                         gCurrentPinballGame->unk441[i] = 3;
@@ -1096,7 +1096,7 @@ void sub_39A40(void)
                 {
                     gCurrentPinballGame->unk458[i]++;
                     if (gCurrentPinballGame->unk458[i] % 9 == 0)
-                        playRumbleType(12);
+                        PlayRumble(12);
                 }
                 else
                 {
@@ -1259,7 +1259,7 @@ void sub_39A40(void)
                 gCurrentPinballGame->unk448 = 0;
                 gCurrentPinballGame->unk454 = 0;
                 if (!gMain.spriteGroups[16].available)
-                    playRumbleType(8);
+                    PlayRumble(8);
 
                 gMain.spriteGroups[16].available = 1;
             }

@@ -769,7 +769,7 @@ void sub_153CC(s32 arg0, s16* arg1, u16* arg2)
         *arg1 = 1;
         gCurrentPinballGame->scoreAddedInFrame = 5000;
         m4aSongNumStart(SE_UNKNOWN_0xB7);
-        playRumbleType(7);
+        PlayRumble(7);
         return;
     case 13:
         if (gCurrentPinballGame->unk2D8 == 0)
@@ -790,7 +790,7 @@ void sub_153CC(s32 arg0, s16* arg1, u16* arg2)
 
         m4aSongNumStart(SE_UNKNOWN_0xB7);
         gCurrentPinballGame->scoreAddedInFrame = 5000;
-        playRumbleType(7);
+        PlayRumble(7);
         return;
     case 14:
         if ((gCurrentPinballGame->unk13 > 2) && (gCurrentPinballGame->unk13 != 5))
@@ -807,7 +807,7 @@ void sub_153CC(s32 arg0, s16* arg1, u16* arg2)
 
                     m4aSongNumStart(SE_UNKNOWN_0xB7);
                     gCurrentPinballGame->scoreAddedInFrame = 5000;
-                    playRumbleType(7);
+                    PlayRumble(7);
                     return;
                 }
                 else if (gCurrentPinballGame->unk2DA == 3)
@@ -819,7 +819,7 @@ void sub_153CC(s32 arg0, s16* arg1, u16* arg2)
 
                     m4aSongNumStart(SE_UNKNOWN_0xB7);
                     gCurrentPinballGame->unk2D9 = 1;
-                    playRumbleType(7);
+                    PlayRumble(7);
                     return;
                 }
             }
@@ -835,7 +835,7 @@ void sub_153CC(s32 arg0, s16* arg1, u16* arg2)
 
             m4aSongNumStart(SE_UNKNOWN_0xB7);
             gCurrentPinballGame->scoreAddedInFrame = 5000;
-            playRumbleType(7);
+            PlayRumble(7);
         }
 
         break;
@@ -1059,7 +1059,7 @@ void sub_1642C(u8 arg0, u16* arg1, u16* arg2)
 
                         gCurrentPinballGame->unk36E[1] = 0;
                         gCurrentPinballGame->unk36A[1] = 1;
-                        playRumbleType(7);
+                        PlayRumble(7);
 
                         gCurrentPinballGame->ball->velocity.x /= 2;
                         gCurrentPinballGame->ball->velocity.y /= 2;
@@ -1082,7 +1082,7 @@ void sub_1642C(u8 arg0, u16* arg1, u16* arg2)
                         gCurrentPinballGame->unk36E[0] = 0;
                         gCurrentPinballGame->unk36A[0] = 1;
 
-                        playRumbleType(7);
+                        PlayRumble(7);
 
                         gCurrentPinballGame->ball->velocity.x /= 2;
                         gCurrentPinballGame->ball->velocity.y /= 2;

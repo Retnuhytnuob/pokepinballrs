@@ -152,7 +152,7 @@ void sub_1198(void)
     gIntrTable[1] = Timer3Intr;
 }
 
-void playRumbleType(int arg0)
+void PlayRumble(int arg0)
 {
     if (gMain_saveData.rumbleEnabled)
     {

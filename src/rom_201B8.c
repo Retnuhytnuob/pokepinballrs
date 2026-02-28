@@ -393,7 +393,7 @@ void sub_1D5D8(void)
         var1 = gUnknown_086AD7C0[gCurrentPinballGame->unk2FD][0];
         var0 = gUnknown_086AD7C0[gCurrentPinballGame->unk2FD][2];
         m4aSongNumStart(SE_UNKNOWN_0xCF);
-        playRumbleType(7);
+        PlayRumble(7);
         gCurrentPinballGame->scoreAddedInFrame = 50000;
         break;
     case 2:
@@ -422,7 +422,7 @@ void sub_1D5D8(void)
         var1 = gUnknown_086AD7C0[gCurrentPinballGame->unk2FD][0];
         var0 = gUnknown_086AD7C0[gCurrentPinballGame->unk2FD][2];
         m4aSongNumStart(SE_UNKNOWN_0xCF);
-        playRumbleType(7);
+        PlayRumble(7);
         gCurrentPinballGame->scoreAddedInFrame = 100000;
         break;
     case 4:
@@ -670,7 +670,7 @@ void RubyPond_EntityLogic(void)
             gCurrentPinballGame->ball->oamPriority = 0;
             gCurrentPinballGame->scoreAddedInFrame = 5000;
             m4aSongNumStart(SE_WHISCASH_CATCH_BALL);
-            playRumbleType(7);
+            PlayRumble(7);
             break;
         case WHISCASH_STATE_ABSORBING:
             if (gWhiscashFramesetData[gCurrentPinballGame->whiscashFrameIx][1] > gCurrentPinballGame->whiscashStateTimer)
@@ -797,7 +797,7 @@ void RubyPond_EntityLogic(void)
             gCurrentPinballGame->whiscashState = WHISCASH_STATE_ANGRY;
             gCurrentPinballGame->scoreAddedInFrame = 10;
             m4aSongNumStart(SE_RUBY_BUMPER_HIT);
-            playRumbleType(7);
+            PlayRumble(7);
             if (gCurrentPinballGame->unk724)
                 gCurrentPinballGame->unk724 = 1;
             break;
@@ -831,7 +831,7 @@ void RubyPond_EntityLogic(void)
                     MPlayStart(&gMPlayInfo_SE3, &se_whiscash_splashdown);
 
                 if (gCurrentPinballGame->whiscashStateTimer % 10 == 0)
-                    playRumbleType(12);
+                    PlayRumble(12);
             }
             break;
         case WHISCASH_STATE_LEAVING: //Early Exit (mode started)
@@ -1067,7 +1067,7 @@ void RubyPondTriBumperHandleHitAndDraw(void)
         {
             gCurrentPinballGame->scoreAddedInFrame = 500;
             m4aSongNumStart(SE_RUBY_BUMPER_HIT);
-            playRumbleType(7);
+            PlayRumble(7);
             if (gCurrentPinballGame->unk13 == 4 && gCurrentPinballGame->unk17 == 5 && gCurrentPinballGame->hatchTilesBumperAcknowledged < 6)
             {
                 if (gCurrentPinballGame->hatchTilesBumperAcknowledged == 0)
@@ -1784,7 +1784,7 @@ void sub_1FF0C(void)
         gCurrentPinballGame->unk2E3[0] = 0;
         gCurrentPinballGame->unk2E3[1] = 0;
         gCurrentPinballGame->unk2E2 = 0;
-        playRumbleType(7);
+        PlayRumble(7);
         m4aSongNumStart(SE_UNKNOWN_0xB7);
         gCurrentPinballGame->scoreAddedInFrame = 3000;
         gCurrentPinballGame->unk2E5[0] = 0;
@@ -2035,7 +2035,7 @@ void sub_203CC(void)
                 gCurrentPinballGame->scoreAddedInFrame = 4000;
             }
 
-            playRumbleType(11);
+            PlayRumble(11);
         }
 
         if (gCurrentPinballGame->unk61E >= 100)
