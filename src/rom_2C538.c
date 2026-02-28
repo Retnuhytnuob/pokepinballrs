@@ -128,7 +128,7 @@ void sub_2C538(void)
                 gCurrentPinballGame->ball->unk6 = 0;
                 gMain.spriteGroups[68].available = 1;
                 gCurrentPinballGame->unk302 = 6;
-                playRumbleType(8);
+                PlayRumble(8);
             }
         }
     }

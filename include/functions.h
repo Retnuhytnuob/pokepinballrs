@@ -10,7 +10,7 @@ void sub_10C0(void);
 void sub_111C(void);
 int sub_1170(void);
 void sub_1198(void);
-void playRumbleType(int arg0);
+void PlayRumble(int arg0);
 void sub_11E4(int arg0);
 void sub_11F0(int arg0);
 void sub_11FC(void);

@@ -293,7 +293,7 @@ void sub_43500(void)
             {
                 MPlayStart(&gMPlayInfo_SE1, &se_unk_13c);
                 gCurrentPinballGame->scoreAddedInFrame = 5000;
-                playRumbleType(8);
+                PlayRumble(8);
             }
 
             switch (gCurrentPinballGame->minionState[i])
@@ -561,7 +561,7 @@ void sub_4387C(void)
                     }
                 }
 
-                playRumbleType(7);
+                PlayRumble(7);
                 gCurrentPinballGame->unk54F[i] = 0;
                 gCurrentPinballGame->scoreAddedInFrame = 3000;
                 break;
@@ -1024,7 +1024,7 @@ void sub_44F3C(void)
             gCurrentPinballGame->ball->velocity.x = -0x60;
             gCurrentPinballGame->ball->velocity.y = 0x54;
             gCurrentPinballGame->ball->oamPriority = 3;
-            playRumbleType(7);
+            PlayRumble(7);
         }
 
         if (gCurrentPinballGame->unk591 == 2)
@@ -1143,7 +1143,7 @@ void sub_45164(void)
                     gCurrentPinballGame->unk24 = 0;
                     gCurrentPinballGame->unk7E = 0;
                     m4aSongNumStart(SE_UNKNOWN_0xE5);
-                    playRumbleType(7);
+                    PlayRumble(7);
                 }
 
                 gCurrentPinballGame->ball->positionQ1.x = gCurrentPinballGame->ball->positionQ0.x * 2;
@@ -1278,7 +1278,7 @@ void sub_455D0(void)
                 {
                     gCurrentPinballGame->unk533[i]++;
                     MPlayStart(&gMPlayInfo_SE1, &se_unk_13d);
-                    playRumbleType(7);
+                    PlayRumble(7);
                     if (gCurrentPinballGame->unk533[i] < 3)
                     {
                         gCurrentPinballGame->ball->positionQ8.y = 0x6500;
@@ -1349,7 +1349,7 @@ void sub_455D0(void)
                         gCurrentPinballGame->ball->velocity.y = -gCurrentPinballGame->ball->velocity.y / 3;
                         gCurrentPinballGame->ball->velocity.x = 0;
                         if (gCurrentPinballGame->unk533[i] == 1)
-                            playRumbleType(7);
+                            PlayRumble(7);
                     }
                     else
                     {

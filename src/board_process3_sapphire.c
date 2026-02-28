@@ -263,7 +263,7 @@ void sub_32B74(void)
     gCurrentPinballGame->scoreAddedInFrame = 50000;
 
     m4aSongNumStart(SE_UNKNOWN_0xD5);
-    playRumbleType(8);
+    PlayRumble(8);
 }
 
 void sub_32BE4(void)
@@ -345,7 +345,7 @@ void sub_32BE4(void)
         gCurrentPinballGame->ball->unk6 = 0;
         gCurrentPinballGame->ball->velocity.x = -0x66;
         gCurrentPinballGame->ball->velocity.y = 0xC8;
-        playRumbleType(7);
+        PlayRumble(7);
         gCurrentPinballGame->ball->unk6 = 0;
         gCurrentPinballGame->ball->positionQ0.x = 0xAB;
         gCurrentPinballGame->ball->positionQ0.y = 0xD4;

@@ -2045,7 +2045,7 @@ void sub_24408(void)
                     gCurrentPinballGame->ball->velocity.y = -(Sin(angle2) * 160) / 20000;
                 }
 
-                playRumbleType(7);
+                PlayRumble(7);
             }
         }
         break;

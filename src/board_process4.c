@@ -127,7 +127,7 @@ void sub_195C4(void)
                 gCurrentPinballGame->unk1334[0].velocity.x = gCurrentPinballGame->unk60.x;
                 gCurrentPinballGame->unk1334[0].velocity.y = gCurrentPinballGame->unk60.y;
                 gCurrentPinballGame->unk5C = 0;
-                playRumbleType(7);
+                PlayRumble(7);
             }
             flipper->unk2 = flipper->position / 2 + 1;
             flipper->position += 4;
@@ -144,7 +144,7 @@ void sub_195C4(void)
                 gCurrentPinballGame->unk1334[0].velocity.x = gCurrentPinballGame->unk60.x;
                 gCurrentPinballGame->unk1334[0].velocity.y = gCurrentPinballGame->unk60.y;
                 gCurrentPinballGame->unk5C = 0;
-                playRumbleType(7);
+                PlayRumble(7);
             }
             flipper->position -= 2;
         }
@@ -243,7 +243,7 @@ void sub_19894(void)
                 gCurrentPinballGame->unk1334[0].velocity.x = gCurrentPinballGame->unk60.x;
                 gCurrentPinballGame->unk1334[0].velocity.y = gCurrentPinballGame->unk60.y;
                 gCurrentPinballGame->unk5C = 0;
-                playRumbleType(7);
+                PlayRumble(7);
             }
             flipper->unk2 = flipper->position / 2 + 1;
             flipper->position += 4;
@@ -260,7 +260,7 @@ void sub_19894(void)
                 gCurrentPinballGame->unk1334[0].velocity.x = gCurrentPinballGame->unk60.x;
                 gCurrentPinballGame->unk1334[0].velocity.y = gCurrentPinballGame->unk60.y;
                 gCurrentPinballGame->unk5C = 0;
-                playRumbleType(7);
+                PlayRumble(7);
             }
             flipper->position -= 2;
         }

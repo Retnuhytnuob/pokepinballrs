@@ -415,7 +415,7 @@ void sub_478D8(void)
                 {
                     gCurrentPinballGame->unk5FA = 0;
                     m4aSongNumStart(SE_UNKNOWN_0x96);
-                    playRumbleType(6);
+                    PlayRumble(6);
                 }
 
                 gCurrentPinballGame->ball->positionQ8.x = (gCurrentPinballGame->unk110 / 100 + 86) << 8;
