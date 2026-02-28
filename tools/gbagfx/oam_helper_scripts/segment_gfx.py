@@ -85,6 +85,7 @@ def parse_params_line(line: str, workdir: Path) -> tuple[List[str], Dict[str, An
       -mh -> -mheight
       -mw -> -mwidth
       -p  -> -palette
+      -s  -> -oamshape
 
     Also accepts the long form.
     Outputs:
@@ -108,6 +109,8 @@ def parse_params_line(line: str, workdir: Path) -> tuple[List[str], Dict[str, An
 
         "-p": "-palette",
         "-palette": "-palette",
+        "-s": "-oamshape",
+        "-oamshape": "-oamshape",
     }
 
     int_flags = {"-width", "-mheight", "-mwidth"}
@@ -168,6 +171,18 @@ def parse_params_line(line: str, workdir: Path) -> tuple[List[str], Dict[str, An
 
             out_args.extend(["-palette", palette_value])
             json_fields["palette"] = palette_value
+            continue
+            
+        if long_flag == "-oamshape":
+            shape_file: str = None
+            if i + 1 < len(tokens) and tokens[i + 1] not in flag_map:
+                shape_file = tokens[i + 1]
+                i += 2
+            else:
+                raise ParamParseError(f"Missing value after {t}")
+            
+            out_args.extend([long_flag, shape_file])
+            json_fields["oamshape"] = shape_file
             continue
 
         raise ParamParseError(f"Unhandled flag: {t}")
@@ -402,7 +417,7 @@ def main() -> None:
     print(f"Base:    {base_name}")
     print(f"Input:   {base_4bpp.name}")
     print(f"JSON:    {json_path.name}")
-    print("Parameter Shorthand:\n -o (-oam), -mh (-mheight), -mw (-mwidth), -w (-width), -p (-palette)")
+    print("Parameter Shorthand:\n -o (-oam), -mh (-mheight), -mw (-mwidth), -w (-width), -p (-palette), -s (-oamshape)")
     print("Tip: Press Enter at skip_count to use the suggested next base.")
     print("     Use -p without a file to see available options.\n")
 
