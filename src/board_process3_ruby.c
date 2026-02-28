@@ -75,7 +75,7 @@ void RubyBoardProcess_3B_19B10(void)
     sub_19B90();
     sub_19E10();
 
-    if (gMain.unkF == 0)
+    if (gMain.modeChangeFlags == MODE_CHANGE_NONE)
     {
         sub_19F70();
     }
@@ -287,7 +287,7 @@ void sub_19E10(void)
     {
         sub_225F0();
     }
-    sub_472E4();
+    BonusStage_HandleModeChangeFlags();
 
     if (gCurrentPinballGame->unk1328 != 0)
     {

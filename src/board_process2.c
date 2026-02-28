@@ -96,7 +96,7 @@ void MainBoardProcess_2B_4D960(void)
     int var4;
 
     var0 = 0x1000;
-    if (gMain.unkF == 0)
+    if (gMain.modeChangeFlags == MODE_CHANGE_NONE)
         sub_4E2F8();
 
     if (gCurrentPinballGame->unk5FB)
@@ -185,7 +185,7 @@ void BonusBoardProcess_2B_4DBFC(void)
     int var4;
 
     var0 = 0x1000;
-    if ((gMain.unkF & ~0x40) == 0)
+    if ((gMain.modeChangeFlags & ~MODE_CHANGE_EXPIRED_BONUS) == 0)
         sub_4E468();
 
     if (gCurrentPinballGame->unk5FB)
@@ -302,7 +302,7 @@ void sub_4DFA0(void)
                 {
                     gCurrentPinballGame->unk128 = 4;
                     m4aSongNumStart(SE_TILT_TRIGGERED);
-                    sub_11B0(8);
+                    PlayRumble(8);
                 }
             }
         }
@@ -314,7 +314,7 @@ void sub_4DFA0(void)
             {
                 gCurrentPinballGame->unk128 = 4;
                 m4aSongNumStart(SE_TILT_TRIGGERED);
-                sub_11B0(8);
+                PlayRumble(8);
             }
         }
 
@@ -325,7 +325,7 @@ void sub_4DFA0(void)
             {
                 gCurrentPinballGame->unk128 = 4;
                 m4aSongNumStart(SE_TILT_TRIGGERED);
-                sub_11B0(8);
+                PlayRumble(8);
             }
         }
     }
@@ -428,7 +428,7 @@ void sub_4E2F8(void)
         gCurrentPinballGame->unk163 = 3;
         if (gCurrentPinballGame->unk20)
         {
-            sub_11B0(7);
+            PlayRumble(7);
             gCurrentPinballGame->ball->velocity.y = -590;
             gCurrentPinballGame->ball->velocity.x = 0;
             m4aSongNumStart(SE_UNKNOWN_0xCD);
@@ -489,10 +489,10 @@ void sub_4E468(void)
     {
         unk1334->velocity.x = 0;
         gCurrentPinballGame->ball->velocity.y = 0;
-        if (gMain.unkF & 0x40)
+        if (gMain.modeChangeFlags & MODE_CHANGE_EXPIRED_BONUS)
         {
-            gCurrentPinballGame->unk386 = 1;
-            gMain.unkF = 0x80;
+            gCurrentPinballGame->returnToMainBoardFlag = 1;
+            gMain.modeChangeFlags = MODE_CHANGE_BONUS_BANNER;
             gCurrentPinballGame->ball->positionQ0.y = gUnknown_02031520.unk14.unk2A - 10;
         }
         else

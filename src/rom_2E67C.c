@@ -942,7 +942,7 @@ void sub_2E6AC(void)
                 gCurrentPinballGame->ball->velocity.y = 0;
                 gCurrentPinballGame->ball->unk6 = 0;
                 m4aSongNumStart(SE_UNKNOWN_0xE2);
-                sub_11B0(7);
+                PlayRumble(7);
                 gCurrentPinballGame->scoreAddedInFrame = 100000;
             }
 
@@ -1128,7 +1128,7 @@ void sub_2E6AC(void)
                     gCurrentPinballGame->ball->oamPriority = 3;
                     gCurrentPinballGame->unk24 = 0;
                     m4aSongNumStart(SE_UNKNOWN_0xE5);
-                    sub_11B0(7);
+                    PlayRumble(7);
                 }
 
                 gCurrentPinballGame->ball->positionQ1.x = gCurrentPinballGame->ball->positionQ0.x * 2;
@@ -1529,7 +1529,7 @@ void sub_2F79C(void)
         {
             m4aSongNumStart(SE_UNKNOWN_0xE8);
             gCurrentPinballGame->scoreAddedInFrame = 10;
-            sub_11B0(13);
+            PlayRumble(13);
         }
 
         mosaicVal = gUnknown_08137CD6[gCurrentPinballGame->unk368 / 3];
@@ -1701,7 +1701,7 @@ void sub_30178(void)
         {
             gCurrentPinballGame->scoreAddedInFrame = 500;
             m4aSongNumStart(SE_UNKNOWN_0xB6);
-            sub_11B0(7);
+            PlayRumble(7);
             if (gCurrentPinballGame->unk13 == 4 && gCurrentPinballGame->unk17 == 5)
             {
                 if (gCurrentPinballGame->unk625 < 6)
@@ -1717,7 +1717,7 @@ void sub_30178(void)
                     {
                         if (gCurrentPinballGame->unk6C6 == 0)
                         {
-                            gMain.unkF |= 0x1;
+                            gMain.modeChangeFlags |= MODE_CHANGE_BANNER;
                             gCurrentPinballGame->unkEA = 50;
                             gCurrentPinballGame->unkEC = 600;
                             gCurrentPinballGame->unkE8 = 0xEC;

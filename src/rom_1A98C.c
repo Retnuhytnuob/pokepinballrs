@@ -18,7 +18,7 @@ void sub_22D54(void);
 
 void sub_1A98C(void)
 {
-    if (gMain.unkF != 0)
+    if (gMain.modeChangeFlags != MODE_CHANGE_NONE)
         return;
 
     switch (gCurrentPinballGame->unk25)
@@ -77,7 +77,7 @@ void sub_1AA38(void)
     m4aSongNumStart(SE_UNKNOWN_0xCE);
     gCurrentPinballGame->scoreAddedInFrame = 50000;
 
-    sub_11B0(8);
+    PlayRumble(8);
 }
 
 /*
@@ -88,7 +88,7 @@ void sub_1AA38(void)
 * When this function is nulled out at sub_1A9E8, the banner *doesn't* show, and
 * the ball bounces off the sharpedo. However, the grid still shows a picked mon,
 * and the mode otherwise works mostly normally, with the exception of affecting
-* the 'tilt' behavior, and the colision with the cyndaquil pushback.
+* the 'tilt' behavior, and the collision with the cyndaquil pushback.
 */
 void sub_1AAA0(void)
 {
@@ -199,7 +199,7 @@ void sub_1AAA0(void)
             if (gCurrentPinballGame->unk28 == 18)
             {
                 m4aSongNumStart(194);
-                sub_11B0(7);
+                PlayRumble(7);
             }
         }
         else if (gCurrentPinballGame->unk28 > 12)
@@ -248,7 +248,7 @@ void sub_1AD84(void)
     {
         gCurrentPinballGame->unk2DA = 4;
         m4aSongNumStart(SE_UNKNOWN_0xB7);
-        sub_11B0(7);
+        PlayRumble(7);
         gCurrentPinballGame->unk28 = 500;
     }
     else if (gCurrentPinballGame->unk2D0 !=0)
@@ -409,7 +409,7 @@ void sub_1B140(s16 arg0)
 {
     int var_r7 = 0;
 
-    if (gMain.unkF == 0 && gCurrentPinballGame->unk1BA != 0)
+    if (gMain.modeChangeFlags == MODE_CHANGE_NONE && gCurrentPinballGame->unk1BA != 0)
         gCurrentPinballGame->unk1BA--;
 
     if (arg0 == 0)
@@ -761,7 +761,7 @@ void sub_1B140(s16 arg0)
             {
                 m4aMPlayAllStop();
 
-                gMain.unkF |= 1;
+                gMain.modeChangeFlags |= MODE_CHANGE_BANNER;
                 gCurrentPinballGame->unkEA = 0;
                 gCurrentPinballGame->unkEC = 120;
                 gCurrentPinballGame->unkE8 = 0;
@@ -1180,7 +1180,7 @@ void sub_1C560(void)
     gCurrentPinballGame->unk5F3 = 0;
     gCurrentPinballGame->scoreAddedInFrame = 10000;
     gCurrentPinballGame->unk5F7 = 1;
-    sub_11B0(8);
+    PlayRumble(8);
 }
 
 void sub_1C5AC(void)

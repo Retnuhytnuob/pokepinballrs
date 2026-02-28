@@ -317,7 +317,7 @@ static void sub_4A270(void)
 
 void sub_4A518(void)
 {
-    gMain.unkF = 0;
+    gMain.modeChangeFlags = MODE_CHANGE_NONE;
     gMain.unk10 = 0;
     gMain.fieldFrameCount = 0;
     gMain.unk11 = 0;
@@ -566,7 +566,7 @@ void PinballGame_State1_4AAD8(void)
                 sub_3E5D0();
             }
 
-            if (gMain.unkF & 0x2)
+            if (gMain.modeChangeFlags & MODE_CHANGE_PAUSE)
                 DmaCopy16(3, gCurrentPinballGame->unk111A, (void *)OBJ_PLTT, OBJ_PLTT_SIZE);
 
             gCurrentPinballGame->unk1D = 2;
@@ -600,13 +600,13 @@ void sub_4ABEC(void)
 
     UpdateButtonActionsFromJoy();
     CurrentBoardProcPairs_020028D8[1].unk4();
-    if (gMain.unkE == 0 && !(gMain.unkF & 0x2))
+    if (gMain.unkE == 0 && !(gMain.modeChangeFlags & MODE_CHANGE_PAUSE))
     {
         CurrentBoardProcPairs_020028D8[2].unk4();
         CurrentBoardProcPairs_020028D8[0].unk4();
         CurrentBoardProcPairs_020028D8[3].unk4();
         CurrentBoardProcPairs_020028D8[4].unk4();
-        if (gMain.unkF)
+        if (gMain.modeChangeFlags)
         {
             if (!gCurrentPinballGame->unk1F)
             {
@@ -656,13 +656,13 @@ void sub_4ACF0(void)
 
     sub_4B334();
     CurrentBoardProcPairs_020028D8[1].unk4();
-    if (!(gMain.unkF & 0x2))
+    if (!(gMain.modeChangeFlags & MODE_CHANGE_PAUSE))
     {
         CurrentBoardProcPairs_020028D8[2].unk4();
         CurrentBoardProcPairs_020028D8[0].unk4();
         CurrentBoardProcPairs_020028D8[3].unk4();
         CurrentBoardProcPairs_020028D8[4].unk4();
-        if (gMain.unkF)
+        if (gMain.modeChangeFlags)
         {
             if (!gCurrentPinballGame->unk1F)
             {
@@ -724,14 +724,14 @@ void sub_4AE8C(void)
 
     UpdateButtonActionsFromJoy();
     CurrentBoardProcPairs_020028D8[1].unk4();
-    if (gMain.unkF & 0x2)
+    if (gMain.modeChangeFlags & MODE_CHANGE_PAUSE)
         return;
 
     CurrentBoardProcPairs_020028D8[0].unk4();
     CurrentBoardProcPairs_020028D8[2].unk4();
     CurrentBoardProcPairs_020028D8[3].unk4();
     CurrentBoardProcPairs_020028D8[4].unk4();
-    if (gMain.unkF & ~0x40)
+    if (gMain.modeChangeFlags & ~MODE_CHANGE_EXPIRED_BONUS)
     {
         if (!gCurrentPinballGame->unk1F)
         {
@@ -789,13 +789,13 @@ void sub_4B000(void)
     s16 i;
 
     sub_4B334();
-    if (!(gMain.unkF & 0x2))
+    if (!(gMain.modeChangeFlags & MODE_CHANGE_PAUSE))
     {
         CurrentBoardProcPairs_020028D8[0].unk4();
         CurrentBoardProcPairs_020028D8[2].unk4();
         CurrentBoardProcPairs_020028D8[3].unk4();
         CurrentBoardProcPairs_020028D8[4].unk4();
-        if (gMain.unkF & ~0x40)
+        if (gMain.modeChangeFlags & ~MODE_CHANGE_EXPIRED_BONUS)
         {
             if (!gCurrentPinballGame->unk1F)
             {
@@ -909,7 +909,7 @@ void UpdateButtonActionsFromJoy(void)
         gCurrentPinballGame->releasedButtonActions[i] = 0;
     }
 
-    if (gMain.unkF)
+    if (gMain.modeChangeFlags)
         return;
 
     for (i =  0; i < 5; i++)
@@ -942,7 +942,7 @@ void sub_4B334(void)
         gCurrentPinballGame->releasedButtonActions[i] = 0;
     }
 
-    if (gMain.unkF)
+    if (gMain.modeChangeFlags)
         return;
 
     if (gUnknown_02031510 < 60 * 60)
@@ -991,7 +991,7 @@ void sub_4B408(s16 arg0)
     gCurrentPinballGame->field = gMain.selectedField;
     gCurrentPinballGame->unk10FE = gMain.unk5;
     gCurrentPinballGame->unk10FF = gMain.unk6;
-    gCurrentPinballGame->unk1101 = gMain.unkF;
+    gCurrentPinballGame->unk1101 = gMain.modeChangeFlags;
     gCurrentPinballGame->unk1102 = gMain.unk10;
     gCurrentPinballGame->unk1103 = gMain.unk11;
     gCurrentPinballGame->unk1320 = gMain.unk12;
@@ -1054,7 +1054,7 @@ void sub_4B678(u16 arg0)
         gMain.selectedField = gCurrentPinballGame->field;
         gMain.unk5 = gCurrentPinballGame->unk10FE;
         gMain.unk6 = gCurrentPinballGame->unk10FF;
-        gMain.unkF = gCurrentPinballGame->unk1101;
+        gMain.modeChangeFlags = gCurrentPinballGame->unk1101;
         gMain.unk10 = gCurrentPinballGame->unk1102;
         gMain.unk11 = gCurrentPinballGame->unk1103;
         gMain.unk12 = gCurrentPinballGame->unk1320;

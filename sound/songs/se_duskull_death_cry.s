@@ -1,24 +1,24 @@
 	.include "sound/MPlayDef.s"
 
-	.equ	se_unk_f2_grp, gUnknown_08531D4C
-	.equ	se_unk_f2_pri, 5
-	.equ	se_unk_f2_rev, reverb_set+50
-	.equ	se_unk_f2_mvl, 127
-	.equ	se_unk_f2_key, 0
-	.equ	se_unk_f2_tbs, 1
-	.equ	se_unk_f2_exg, 0
-	.equ	se_unk_f2_cmp, 1
+	.equ	se_duskull_death_cry_grp, gUnknown_08531D4C
+	.equ	se_duskull_death_cry_pri, 5
+	.equ	se_duskull_death_cry_rev, reverb_set+50
+	.equ	se_duskull_death_cry_mvl, 127
+	.equ	se_duskull_death_cry_key, 0
+	.equ	se_duskull_death_cry_tbs, 1
+	.equ	se_duskull_death_cry_exg, 0
+	.equ	se_duskull_death_cry_cmp, 1
 
 	.section .rodata
-	.global	se_unk_f2
+	.global	se_duskull_death_cry
 	.align	2
 
 @*********************** Track 01 ***********************@
 
-se_unk_f2_0:  @ 0x086A1594
-	.byte		VOL   , 110*se_unk_f2_mvl/mxv
-	.byte	KEYSH , se_unk_f2_key+0
-	.byte	TEMPO , 150*se_unk_f2_tbs/2
+se_duskull_death_cry_0:  @ 0x086A1594
+	.byte		VOL   , 110*se_duskull_death_cry_mvl/mxv
+	.byte	KEYSH , se_duskull_death_cry_key+0
+	.byte	TEMPO , 150*se_duskull_death_cry_tbs/2
 	.byte		VOICE , 61
 	.byte		BENDR , 44
 	.byte		PAN   , c_v+0
@@ -87,26 +87,26 @@ se_unk_f2_0:  @ 0x086A1594
 
 @*********************** Track 02 ***********************@
 
-se_unk_f2_1:  @ 0x086A15E8
-	.byte	KEYSH , se_unk_f2_key+0
+se_duskull_death_cry_1:  @ 0x086A15E8
+	.byte	KEYSH , se_duskull_death_cry_key+0
 	.byte		VOICE , 66
 	.byte		BENDR , 44
 	.byte		PAN   , c_v+1
-	.byte		VOL   , 110*se_unk_f2_mvl/mxv
+	.byte		VOL   , 110*se_duskull_death_cry_mvl/mxv
 	.byte		N48   , Dn3 , v020
 	.byte	W24
 	.byte	W03
-	.byte		VOL   , 103*se_unk_f2_mvl/mxv
+	.byte		VOL   , 103*se_duskull_death_cry_mvl/mxv
 	.byte	W04
-	.byte		        96*se_unk_f2_mvl/mxv
+	.byte		        96*se_duskull_death_cry_mvl/mxv
 	.byte	W03
-	.byte		        83*se_unk_f2_mvl/mxv
+	.byte		        83*se_duskull_death_cry_mvl/mxv
 	.byte	W04
-	.byte		        67*se_unk_f2_mvl/mxv
+	.byte		        67*se_duskull_death_cry_mvl/mxv
 	.byte	W04
-	.byte		        49*se_unk_f2_mvl/mxv
+	.byte		        49*se_duskull_death_cry_mvl/mxv
 	.byte	W03
-	.byte		        23*se_unk_f2_mvl/mxv
+	.byte		        23*se_duskull_death_cry_mvl/mxv
 	.byte	W03
 	.byte	FINE
 
@@ -114,14 +114,14 @@ se_unk_f2_1:  @ 0x086A15E8
 
 	.align	2
 
-se_unk_f2:  @ 0x086A1608
+se_duskull_death_cry:  @ 0x086A1608
 	.byte	2	@ NumTrks
 	.byte	0	@ NumBlks
-	.byte	se_unk_f2_pri	@ Priority
-	.byte	se_unk_f2_rev	@ Reverb
+	.byte	se_duskull_death_cry_pri	@ Priority
+	.byte	se_duskull_death_cry_rev	@ Reverb
 
-	.word	se_unk_f2_grp
+	.word	se_duskull_death_cry_grp
 
-	.word	se_unk_f2_0
-	.word	se_unk_f2_1
+	.word	se_duskull_death_cry_0
+	.word	se_duskull_death_cry_1
 @ 0x086A1618

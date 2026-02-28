@@ -192,8 +192,8 @@
 #define SE_UNKNOWN_0xEE             0xEE // No Sound
 #define SE_UNKNOWN_0xEF             0xEF // No Sound
 #define SE_UNKNOWN_0xF0             0xF0 // No Sound
-#define SE_UNKNOWN_0xF1             0xF1 // SE109 Dusclops stage start, and Duskull hit (same as 119)
-#define SE_UNKNOWN_0xF2             0xF2 // SE110 Duskull death cry
+#define SE_DUSKULL_APPEAR             0xF1 // SE109 Dusclops stage start, and Duskull hit (same as 119)
+#define SE_DUSKULL_DEATH_CRY        0xF2 // SE110 Duskull death cry
 #define SE_DUSCLOPS_DEPART_INCOMPLETE  0xF3 // SE111 Duskull leaves, unhit
 #define SE_DUSCLOPS_MOVE            0xF4 // SE112 Dusclops entry, footsteps
 #define SE_DUSCLOPS_APPEAR          0xF5 // SE113 Dusclops appears
