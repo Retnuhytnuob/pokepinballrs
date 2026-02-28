@@ -169,38 +169,18 @@
           "width":4
         },
         {
-          "segfile":"intro_sprite_linoone1",
-          "oam":true,
-          "mwidth":3,
-          "mheight":2,
-          "width":3
+          "segfile": "intro_sprite_linoone",
+          "oam": true,
+          "mwidth": 3,
+          "mheight": 3,
+          "oamshape": "linoone_shape.json"
         },
         {
-          "segfile":"intro_sprite_linoone1_arm",
-          "width":2
-        },
-        {
-          "segfile":"intro_sprite_linoone2",
-          "oam":true,
-          "mwidth":3,
-          "mheight":2,
-          "width":3
-        },
-        {
-          "segfile":"intro_sprite_linoone2_arm",
-          "width":2
-        },
-        {
-          "segfile":"intro_sprite_sharpedo_top_fin",
-          "width":1
-        },
-        {
-          "segfile":"intro_sprite_sharpedo_body",
-          "width":4
-        },
-        {
-          "segfile":"intro_sprite_sharpedo_side_fin",
-          "width":1
+          "segfile": "intro_sprite_sharpedo",
+          "oam": true,
+          "mwidth": 5,
+          "mheight": 6,
+          "oamshape": "sharpedo_shape.json"
         },
         {
           "segfile":"intro_sprite_chinchou",
