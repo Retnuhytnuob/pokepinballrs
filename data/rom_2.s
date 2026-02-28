@@ -1,4 +1,4 @@
-    .section .rodata
+﻿    .section .rodata
 #include "constants/areas.h"
 #include "constants/fields.h"
 #include "constants/species.h"
@@ -11471,3 +11471,4 @@ gSaveFileSignature:: @ 0x086BBA6C
 	.incbin "baserom.gba", 0x6BBA76, 0x564 @ 0x6BBA6C + 0xA, 0x6BBFD0 - 0x6BBA6C
 
 @ rom end 0x6BBFD0
+
