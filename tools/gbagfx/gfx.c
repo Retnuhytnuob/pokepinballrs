@@ -566,6 +566,13 @@ void ReadTileImage(char *path, int tilesWidth, int metatileWidth, int metatileHe
 		int cnt = oam_sequence_load_from_file(oamSequenceFilePath, &oamSeq);
 		if (cnt < 0)
 			FATAL_ERROR("Failed to read oam sequence file: %s\n", oamSequenceFilePath);
+		metatileHeight = oamSeq->png_height;
+		metatileWidth = oamSeq->png_width;
+
+		//Allow passing this in; default it otherwise
+		if (tilesWidth == 1){
+			tilesWidth = metatileWidth;
+		}
 	}
 
 	int tilesHeight = (numTiles + tilesWidth - 1) / tilesWidth;
@@ -637,6 +644,8 @@ void WriteTileImage(char *path, enum NumTilesMode numTilesMode, int numTiles, in
 		int cnt = oam_sequence_load_from_file(oamSequenceFilePath, &oamSeq);
 		if (cnt < 0)
 			FATAL_ERROR("Failed to read oam sequence file: %s\n", oamSequenceFilePath);
+		metatileHeight = oamSeq->png_height;
+		metatileWidth = oamSeq->png_width;
 	}
 
 	int maxNumTiles = tilesWidth * tilesHeight;

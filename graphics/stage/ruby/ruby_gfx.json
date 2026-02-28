@@ -18,9 +18,6 @@
     },
     {
       "gfx_filename": "sharpedo",
-      "oam": true,
-      "mwidth": 5,
-      "mheight": 6,
       "oamshape": "sharpedo_shape.json"
     },
     {
@@ -170,16 +167,10 @@
         },
         {
           "segfile": "intro_sprite_linoone",
-          "oam": true,
-          "mwidth": 3,
-          "mheight": 3,
           "oamshape": "linoone_shape.json"
         },
         {
           "segfile": "intro_sprite_sharpedo",
-          "oam": true,
-          "mwidth": 5,
-          "mheight": 6,
           "oamshape": "sharpedo_shape.json"
         },
         {

@@ -195,6 +195,7 @@ void HandleGbaToPngCommand(char *inputPath, char *outputPath, int argc, char **a
                 FATAL_ERROR("No oam shape file path following \"-oam-shape\".\n");
 
             i++;
+            options.oamSprite = 1;
             options.oamSequenceFilePath = argv[i];
         }
         else if (strcmp(option, "-tilemap") == 0)
@@ -230,7 +231,7 @@ void HandleGbaToPngCommand(char *inputPath, char *outputPath, int argc, char **a
         }
     }
 
-    if (options.oamSprite){
+    if (options.oamSprite && options.oamSequenceFilePath == NULL){
         if (options.metatileHeight == 1 && options.metatileWidth == 1){
             FATAL_ERROR("Must specify metatile dimensions when using oam chunk mapping.\n");
         }
@@ -315,6 +316,7 @@ void HandlePngToGbaCommand(char *inputPath, char *outputPath, int argc, char **a
                 FATAL_ERROR("No oam sequence file path following \"-oamshape\".\n");
 
             i++;
+            options.oamSprite = 1;
             options.oamSequenceFilePath = argv[i];
         }
         else if (strcmp(option, "-plain") == 0)
@@ -339,7 +341,7 @@ void HandlePngToGbaCommand(char *inputPath, char *outputPath, int argc, char **a
         }
     }
 
-    if (options.oamSprite){
+    if (options.oamSprite && options.oamSequenceFilePath == NULL){
         if (options.metatileHeight == 1 && options.metatileWidth == 1){
             FATAL_ERROR("Must specify metatile dimensions when using oam mapping.\n");
         }

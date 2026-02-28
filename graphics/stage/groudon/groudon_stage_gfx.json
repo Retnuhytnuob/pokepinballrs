@@ -84,9 +84,6 @@
         },
         {
           "segfile": "intro_sprite_boulders",
-          "oam": true,
-          "mwidth": 5,
-          "mheight": 5,
           "oamshape": "boulder_shape.json"
         },
         {
@@ -95,9 +92,6 @@
         },
         {
           "segfile": "intro_sprite_crystals",
-          "oam": true,
-          "mwidth": 3,
-          "mheight": 3,
           "oamshape": "crystal_shape.json"
         },
         {
@@ -114,9 +108,6 @@
         },
         {
           "segfile": "intro_sprite_head_1",
-          "oam": true,
-          "mwidth": 4,
-          "mheight": 4,
           "oamshape": "groudon_head_shape.json"
         },
         {
@@ -133,9 +124,6 @@
         },
         {
           "segfile": "intro_sprite_head_2",
-          "oam": true,
-          "mwidth": 4,
-          "mheight": 4,
           "oamshape": "groudon_head_shape.json"
         },
         {
@@ -176,9 +164,6 @@
         },
         {
           "segfile": "intro_sprite_face_turn",
-          "oam": true,
-          "mwidth": 4,
-          "mheight": 4,
           "oamshape": "groudon_head_shape.json"
         },
         {
@@ -191,9 +176,6 @@
         },
         {
           "segfile": "intro_sprite_face_yell",
-          "oam": true,
-          "mwidth": 4,
-          "mheight": 4,
           "oamshape": "groudon_head_shape.json"
         },
         {
@@ -236,11 +218,7 @@
     },
     {
       "gfx_filename": "boulders",
-      "oam": true,
-      "oamshape": "boulder_shape.json",
-      "mwidth": 5,
-      "mheight": 5,
-      "width": 10
+      "oamshape": "boulder_shape.json"
     }
   ]
 }

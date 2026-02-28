@@ -55,6 +55,8 @@ typedef struct OamSequence {
     int numSegments;
     int tilecount; // sum of non-spacer tiles (or -1 if not provided)
     int png_tiles; // pngsize in tiles (w*h) if provided, 0 otherwise
+    int png_height;
+    int png_width;
 } OamSequence;
 
 // Load an OAM sequence from a JSON file. Returns number of segments (>0),

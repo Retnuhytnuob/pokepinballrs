@@ -150,6 +150,8 @@ int oam_sequence_load_from_file(const char *path, OamSequence **outSeq) {
         seq->numSegments = idx;
         seq->tilecount = tilecount;
         seq->png_tiles = png_tiles;
+        seq->png_width = png_w;
+        seq->png_height = png_h;
 
         free(buf);
         if (idx == 0) { free(arr); free(seq); *outSeq = NULL; return 0; }
