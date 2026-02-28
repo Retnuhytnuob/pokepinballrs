@@ -190,21 +190,7 @@ void HandleGbaToPngCommand(char *inputPath, char *outputPath, int argc, char **a
         else if (strcmp(option, "-oam") == 0) {
             options.oamSprite = 1;
         }
-        else if (strcmp(option, "-oam-seq-file") == 0) {
-            if (i + 1 >= argc)
-                FATAL_ERROR("No oam sequence file path following \"-oam-seq-file\".\n");
-
-            i++;
-            options.oamSequenceFilePath = argv[i];
-        }
-        else if (strcmp(option, "-oam-shape") == 0 || strcmp(option, "-oamshape") == 0) {
-            if (i + 1 >= argc)
-                FATAL_ERROR("No oam shape file path following \"-oam-shape\".\n");
-
-            i++;
-            options.oamSequenceFilePath = argv[i];
-        }
-        else if (strcmp(option, "-oam-shape") == 0 || strcmp(option, "-oamshape") == 0) {
+        else if (strcmp(option, "-oamshape") == 0) {
             if (i + 1 >= argc)
                 FATAL_ERROR("No oam shape file path following \"-oam-shape\".\n");
 
@@ -324,9 +310,9 @@ void HandlePngToGbaCommand(char *inputPath, char *outputPath, int argc, char **a
         else if (strcmp(option, "-oam") == 0) {
             options.oamSprite = 1;
         }
-        else if (strcmp(option, "-oam-seq-file") == 0) {
+        else if (strcmp(option, "-oamshape") == 0) {
             if (i + 1 >= argc)
-                FATAL_ERROR("No oam sequence file path following \"-oam-seq-file\".\n");
+                FATAL_ERROR("No oam sequence file path following \"-oamshape\".\n");
 
             i++;
             options.oamSequenceFilePath = argv[i];

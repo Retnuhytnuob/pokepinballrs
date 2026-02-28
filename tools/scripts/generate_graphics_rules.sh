@@ -63,7 +63,7 @@ emit_rules() {
                     flags="$flags -oam"
                 fi
                 if [ -n "$seg_oamshape" ] && [ "$seg_oamshape" != "null" ]; then
-                    flags="$flags -oam-seq-file $dir/$seg_oamshape"
+                    flags="$flags -oamshape $dir/$seg_oamshape"
                 fi
                 printf '\t$(GFX) %s %s%s; \\\n' "$seg_png" "$seg_4bpp" "$flags"
             done
@@ -94,7 +94,7 @@ emit_rules() {
                 flags="$flags -oam"
             fi
             if [ -n "$oamshape" ] && [ "$oamshape" != "null" ]; then
-                flags="$flags -oam-seq-file $dir/$oamshape"
+                flags="$flags -oamshape $dir/$oamshape"
             fi
 
             # Skip if no special flags and no alignment — the generic
