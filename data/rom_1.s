@@ -1291,7 +1291,8 @@ gUnknown_0849F1CC:: @ 0x0849F1CC
 	.incbin "baserom.gba", 0x49F1CC, 0x2020
 
 gUnknown_084A11EC:: @ 0x084A11EC
-	.incbin "baserom.gba", 0x4A11EC, 0x5D00
+	.incbin "graphics/stage/groudon/boulders.4bpp";
+	@.incbin "baserom.gba", 0x4A11EC, 0x5D00
 
 gUnknown_084A6EEC:: @ 0x084A6EEC
 	.incbin "baserom.gba", 0x4A6EEC, 0x1680
