@@ -18,8 +18,10 @@
     },
     {
       "gfx_filename": "sharpedo",
-      "mwidth":19,
-      "mheight":3
+      "oam": true,
+      "mwidth": 5,
+      "mheight": 6,
+      "oamshape": "sharpedo_shape.json"
     },
     {
       "gfx_filename": "shop",
