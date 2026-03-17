@@ -1841,7 +1841,7 @@ gUnknown_08532808:: @ 0x08532808
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound_no_resample 60, 0, gDirectSound_0853854C, 255, 89, 0, 89
 
-gUnknown_08532D6C:: @ 0x08532D6C
+gPokemonCryToneBank0:: @ 0x08532D6C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -1970,7 +1970,7 @@ gUnknown_08532D6C:: @ 0x08532D6C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound_compressed gDirectSound_085DDBE4
 
-gUnknown_08533360:: @ 0x08533360
+gPokemonCryToneBank1:: @ 0x08533360
 	voice_directsound_compressed gDirectSound_085DE840
 	voice_directsound_compressed gDirectSound_085DFB48
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -2100,7 +2100,7 @@ gUnknown_08533360:: @ 0x08533360
 	voice_directsound_compressed gDirectSound_0860173C
 	voice_directsound_compressed gDirectSound_08602398
 
-gUnknown_08533960:: @ 0x08533960
+gPokemonCryToneBank2:: @ 0x08533960
 	voice_directsound_compressed gDirectSound_086038A0
 	voice_directsound_compressed gDirectSound_08604338
 	voice_directsound_compressed gDirectSound_08604F68
@@ -2230,7 +2230,7 @@ gUnknown_08533960:: @ 0x08533960
 	voice_directsound_compressed gDirectSound_08683470
 	voice_directsound_compressed gDirectSound_08683C94
 
-gUnknown_08533F60:: @ 0x08533F60
+gPokemonCryToneBank3:: @ 0x08533F60
 	voice_directsound_compressed gDirectSound_08684D9C
 	voice_directsound_compressed gDirectSound_08686394
 	voice_directsound_compressed gDirectSound_08687118
@@ -3873,7 +3873,7 @@ gDirectSound_086885EC:: @ 0x086885EC
 .include "sound/songs/se_unk_9c.s"
 .include "sound/songs/se_unk_9d.s"
 .include "sound/songs/se_unk_9e.s"
-.include "sound/songs/se_unk_9f.s"
+.include "sound/songs/se_warp.s"
 .include "sound/songs/se_unk_a0.s"
 .include "sound/songs/se_unk_a1.s"
 .include "sound/songs/se_unk_a2.s"
@@ -3895,7 +3895,7 @@ gDirectSound_086885EC:: @ 0x086885EC
 .include "sound/songs/se_unk_b2.s"
 .include "sound/songs/se_unk_b3.s"
 .include "sound/songs/se_unk_b4.s"
-.include "sound/songs/se_unk_b6.s"
+.include "sound/songs/se_ruby_bumper_hit.s"
 .include "sound/songs/se_unk_b7.s"
 .include "sound/songs/se_unk_b8.s"
 .include "sound/songs/se_unk_b9.s"
@@ -3913,8 +3913,8 @@ gDirectSound_086885EC:: @ 0x086885EC
 .include "sound/songs/se_unk_c5.s"
 .include "sound/songs/se_unk_c6.s"
 .include "sound/songs/se_unk_c7.s"
-.include "sound/songs/se_unk_c8.s"
-.include "sound/songs/se_unk_c9.s"
+.include "sound/songs/se_ruby_bumper_emerges.s"
+.include "sound/songs/se_ruby_bumper_leaves.s"
 .include "sound/songs/se_unk_ca.s"
 .include "sound/songs/se_unk_cb.s"
 .include "sound/songs/se_unk_cc.s"
@@ -3924,11 +3924,11 @@ gDirectSound_086885EC:: @ 0x086885EC
 .include "sound/songs/se_unk_d0.s"
 .include "sound/songs/se_unk_d1.s"
 .include "sound/songs/se_unk_d2.s"
-.include "sound/songs/se_unk_d3.s"
-.include "sound/songs/se_unk_d4.s"
-.include "sound/songs/se_unk_d5.s"
-.include "sound/songs/se_unk_d6.s"
-.include "sound/songs/se_unk_d7.s"
+.include "sound/songs/se_whiscash_emerge_splash.s"
+.include "sound/songs/se_whiscash_leave_burble.s"
+.include "sound/songs/se_whiscash_catch_ball.s"
+.include "sound/songs/se_whiscash_spit_ball.s"
+.include "sound/songs/se_whiscash_splashdown.s"
 .include "sound/songs/se_unk_d8.s"
 .include "sound/songs/se_unk_dc.s"
 .include "sound/songs/se_unk_dd.s"
@@ -3947,8 +3947,8 @@ gDirectSound_086885EC:: @ 0x086885EC
 .include "sound/songs/se_unk_ea.s"
 .include "sound/songs/se_unk_eb.s"
 .include "sound/songs/se_unk_ec.s"
-.include "sound/songs/se_unk_f1.s"
-.include "sound/songs/se_unk_f2.s"
+.include "sound/songs/se_duskull_appear.s"
+.include "sound/songs/se_duskull_death_cry.s"
 .include "sound/songs/se_dusclops_depart_incomplete.s"
 .include "sound/songs/se_dusclops_move.s"
 .include "sound/songs/se_dusclops_appear.s"
@@ -4020,7 +4020,7 @@ gDirectSound_086885EC:: @ 0x086885EC
 .include "sound/songs/se_unk_149.s"
 .include "sound/songs/se_high_score_earned.s"
 .include "sound/songs/se_unk_14b.s"
-.include "sound/songs/se_unk_14c.s"
+.include "sound/songs/se_whiscash_earthquake.s"
 
 @ This is not sound data below. It's some kind of save file descriptor (SRAM_F_V102).
 .incbin "baserom.gba", 0x6A369C, 0x6A3700 - 0x6A369C
