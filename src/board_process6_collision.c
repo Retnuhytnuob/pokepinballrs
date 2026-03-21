@@ -338,7 +338,6 @@ void ComputeFlipperBounce(struct Vector16* arg0, struct Vector16* arg1, s16 arg2
     }
 }
 
-
 void ComputeWallReflection(u16 arg0, struct Vector16 *arg1, struct Vector16 *arg2)
 {
     u16 angleOfFlippedArg1;
@@ -742,7 +741,6 @@ u16 CheckFlipperCollision(struct Vector16* arg0, u16* arg1)
     return res;
 }
 
-
 u16 CheckCatchTargetCollision(struct Vector16 *arg0, u16 *arg1)
 {
     struct Vector16 vec1;
@@ -831,7 +829,6 @@ u16 CheckCatchTargetCollision(struct Vector16 *arg0, u16 *arg1)
 
     return res;
 }
-
 
 void ProcessBonusTrapPhysics(void)
 {

@@ -6,7 +6,6 @@
 
 extern void RenderBannerSlideAnimation(void);
 
-
 void ProcessBannerCameraTransition(void)
 {
     if ((gMain.modeChangeFlags & MODE_CHANGE_BANNER) != 0)
