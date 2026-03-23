@@ -158,6 +158,10 @@
     {
       "gfx_filename": "pokeball_master",
       "mwidth":2 
+    },
+    {
+      "gfx_filename": "ball_open_to_catch",
+      "oamshape": "ball_open_to_catch.json"
     }
   ]
 }
