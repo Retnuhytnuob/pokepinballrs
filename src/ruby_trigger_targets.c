@@ -269,7 +269,7 @@ void UpdateGulpinBossState(void)
                 {
                     gCurrentPinballGame->gulpinCurrentLevel = 3;
                     gCurrentPinballGame->gulpinAnimFrameIndex = 35;
-                    RequestBoardStateTransition(7);
+                    RequestBoardStateTransition(MAIN_BOARD_STATE_TRAVEL_MODE);
                 }
 
                 if (gCurrentPinballGame->gulpinAnimFrameIndex == 32)

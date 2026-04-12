@@ -248,7 +248,7 @@ void UpdateSapphireEvolutionShopSequence(void)
         m4aSongNumStart(SE_UNKNOWN_0xC3);
 
         if (gCurrentPinballGame->evoArrowProgress > 2 && gCurrentPinballGame->evolvablePartySize > 0) {
-            RequestBoardStateTransition(6);
+            RequestBoardStateTransition(MAIN_BOARD_STATE_EVO_MODE);
         }
     }
 }
@@ -256,7 +256,7 @@ void UpdateSapphireEvolutionShopSequence(void)
 void InitSapphireWailmerCatch(void)
 {
     if (gCurrentPinballGame->catchArrowProgress > 1)
-        RequestBoardStateTransition(4);
+        RequestBoardStateTransition(MAIN_BOARD_STATE_CATCH_EM_MODE);
 
     gCurrentPinballGame->modeAnimTimer = 100;
     gCurrentPinballGame->catchHoleAnimFrame = 2;

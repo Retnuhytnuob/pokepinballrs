@@ -122,7 +122,7 @@ void PinballGame_State0_49ED4(void)
         if (gMain.selectedField == FIELD_RUBY)
             SetBoardCollisionConfig(1);
 
-        LoadPortraitGraphics(0, 0);
+        LoadPortraitGraphics(CENTER_SCREEN_STATE_CURRENT_LOCATION, CENTER_SCREEN_MAIN_SLOT);
         gCurrentPinballGame->portraitDisplayState = 0;
         break;
     case 3:

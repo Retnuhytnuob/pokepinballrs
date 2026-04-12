@@ -2,6 +2,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "constants/bg_music.h"
+#include "constants/main_board.h"
 
 extern const u8 gRubyTravelVolbeat_Gfx[][0x480];
 extern const u8 gSapphireTravelIllumise_Gfx[][0x480];
@@ -626,7 +627,7 @@ void RunEvolutionCutscene(void)
             gMain.fieldSpriteGroups[28]->available = 0;
             gMain.fieldSpriteGroups[15]->available = 0;
             gCurrentPinballGame->currentSpecies = gCurrentPinballGame->postEvoSpecies;
-            LoadPortraitGraphics(3, 0);
+            LoadPortraitGraphics(CENTER_SCREEN_STATE_3, CENTER_SCREEN_MAIN_SLOT);
             gCurrentPinballGame->activePortraitType = 17;
             DmaCopy16(3, gHatchFinalTilesGfx, (void *)0x06015800, 0x1800);
             DmaCopy16(3, gHatchFinalPalette, (void *)0x050003C0, 0x20);
@@ -774,7 +775,7 @@ void RunTravelEventCutscene(void)
                 {
                     gCurrentPinballGame->area =  gAreaRouletteTable[gMain.selectedField][gCurrentPinballGame->areaRouletteSlotIndex];
                     gCurrentPinballGame->rouletteAreaIndex[0] = gAreaToSpeciesTable[gCurrentPinballGame->area];
-                    LoadPortraitGraphics(0, 0);
+                    LoadPortraitGraphics(CENTER_SCREEN_STATE_CURRENT_LOCATION, CENTER_SCREEN_MAIN_SLOT);
                 }
 
                 if (gCurrentPinballGame->travelAnimKeyframeIndex == 11)

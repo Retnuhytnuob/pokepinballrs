@@ -82,7 +82,7 @@ void UpdateShopEntryAnimation(s16 arg0)
             gCurrentPinballGame->shopSlideDirection = 0;
             gCurrentPinballGame->shopSelectedItemId = gShopCursorToItemMap[gCurrentPinballGame->shopItemCursor];
 
-            LoadPortraitGraphics(6, 0);
+            LoadPortraitGraphics(CENTER_SCREEN_STATE_6, CENTER_SCREEN_MAIN_SLOT);
             RenderEvolutionUI(1);
 
             gMain.fieldSpriteGroups[7]->available = 1;
@@ -124,21 +124,21 @@ void UpdateShopEntryAnimation(s16 arg0)
                         if (gCurrentPinballGame->shopItemCursor == 3)
                         {
                             if (gCurrentPinballGame->ballUpgradeType <= BALL_UPGRADE_TYPE_ULTRA_BALL)
-                                gCurrentPinballGame->shopSelectedItemId = gCurrentPinballGame->ballUpgradeType + 10;
+                                gCurrentPinballGame->shopSelectedItemId = gCurrentPinballGame->ballUpgradeType + PRIZE_BALL_UPGRADE_A;
                             else
-                                gCurrentPinballGame->shopSelectedItemId = 12;
+                                gCurrentPinballGame->shopSelectedItemId = PRIZE_BALL_UPGRADE_C;
                         }
                         else if (gCurrentPinballGame->shopItemCursor == 6)
                         {
                             if (gMain.selectedField == FIELD_RUBY)
-                                gCurrentPinballGame->shopSelectedItemId = 22;
+                                gCurrentPinballGame->shopSelectedItemId = PRIZE_WISCASH_ACTIVE_SPHEAL_OPPORTUNITY;
                             else
-                                gCurrentPinballGame->shopSelectedItemId = 23;
+                                gCurrentPinballGame->shopSelectedItemId = PRIZE_PELIPPER_ACTIVE_SPHEAL_OPPORTUNITY;
                         }
                         else
                             gCurrentPinballGame->shopSelectedItemId = gShopCursorToItemMap[gCurrentPinballGame->shopItemCursor];
 
-                        LoadPortraitGraphics(6, 0);
+                        LoadPortraitGraphics(CENTER_SCREEN_STATE_6, CENTER_SCREEN_MAIN_SLOT);
                         var_r7 = 1;
                     }
                 }
@@ -223,7 +223,7 @@ void UpdateShopEntryAnimation(s16 arg0)
                 if (gCurrentPinballGame->coins >= var_r3)
                 {
                     gCurrentPinballGame->shopPurchaseConfirmed = 1;
-                    gCurrentPinballGame->rouletteOutcomeId = gCurrentPinballGame->shopSelectedItemId;
+                    gCurrentPinballGame->prizeId = gCurrentPinballGame->shopSelectedItemId;
                     gCurrentPinballGame->coins -= var_r3;
 
                     m4aMPlayAllStop();
@@ -333,9 +333,9 @@ void UpdateShopEntryAnimation(s16 arg0)
                     gCurrentPinballGame->modeAnimTimer = 24;
 
                 if (gCurrentPinballGame->boardState == 2)
-                    LoadPortraitGraphics(1, 0);
+                    LoadPortraitGraphics(CENTER_SCREEN_STATE_1, CENTER_SCREEN_MAIN_SLOT);
                 else
-                    LoadPortraitGraphics(0, 0);
+                    LoadPortraitGraphics(CENTER_SCREEN_STATE_CURRENT_LOCATION, CENTER_SCREEN_MAIN_SLOT);
 
                 gCurrentPinballGame->portraitDisplayState = 0;
                 gCurrentPinballGame->creatureOamPriority = 3;

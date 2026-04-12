@@ -2,6 +2,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "constants/bg_music.h"
+#include "constants/main_board.h"
 
 
 extern s16 gGameOverLetterXOffsets[];
@@ -274,7 +275,7 @@ void EndOfBallSequence(void)
             }
             else
             {
-                RequestBoardStateTransition(1);
+                RequestBoardStateTransition(MAIN_BOARD_STATE_DEFAULT);
             }
 
             gCurrentPinballGame->activePortraitType = 0;

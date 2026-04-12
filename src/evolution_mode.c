@@ -2,6 +2,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "constants/bg_music.h"
+#include "constants/main_board.h"
 
 extern struct SongHeader se_evo_item_appear;
 extern struct SongHeader se_evo_item_finish_appear;
@@ -18,7 +19,7 @@ void CleanupEvolutionModeState(void)
 {
     s16 i;
 
-    LoadPortraitGraphics(0, 0);
+    LoadPortraitGraphics(CENTER_SCREEN_STATE_CURRENT_LOCATION, CENTER_SCREEN_MAIN_SLOT);
     gCurrentPinballGame->portraitDisplayState = 0;
     for (i = 0; i < 3; i++)
     {
@@ -72,7 +73,7 @@ void InitEvolutionMode(void)
     gCurrentPinballGame->evoItemsCaught = 0;
     gCurrentPinballGame->evoModeResetFlag = 0;
     gCurrentPinballGame->evoItemAppearTimer = 0;
-    LoadPortraitGraphics(3, 0);
+    LoadPortraitGraphics(CENTER_SCREEN_STATE_3, CENTER_SCREEN_MAIN_SLOT);
 }
 
 void UpdateEvolutionMode(void)
@@ -229,7 +230,7 @@ void UpdateEvolutionMode(void)
 
                     if (gCurrentPinballGame->stageTimer == 270)
                     {
-                        LoadPortraitGraphics(0, 0);
+                        LoadPortraitGraphics(CENTER_SCREEN_STATE_CURRENT_LOCATION, CENTER_SCREEN_MAIN_SLOT);
                         gCurrentPinballGame->portraitDisplayState = 0;
                     }
 
@@ -352,9 +353,9 @@ void UpdateEvolutionMode(void)
         else
         {
             if (gCurrentPinballGame->catchLights[2] == 1)
-                RequestBoardStateTransition(3);
+                RequestBoardStateTransition(MAIN_BOARD_STATE_BOSS_HOLE_ACTIVE);
             else
-                RequestBoardStateTransition(1);
+                RequestBoardStateTransition(MAIN_BOARD_STATE_DEFAULT);
 
             gCurrentPinballGame->boardSubState = 0;
         }

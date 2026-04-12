@@ -2,6 +2,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "constants/bg_music.h"
+#include "constants/main_board.h"
 
 extern struct SongHeader se_roulette_tick;
 extern struct SongHeader se_unk_9a;
@@ -120,8 +121,8 @@ void InitRouletteWheel(void)
     gCurrentPinballGame->rouletteSlotCursor = 1;
     gCurrentPinballGame->modeOutcomeValues[0] = gCurrentPinballGame->rouletteSlotValues[0];
     gCurrentPinballGame->modeOutcomeValues[1] = gCurrentPinballGame->rouletteSlotValues[1];
-    LoadPortraitGraphics(2, 0);
-    LoadPortraitGraphics(2, 1);
+    LoadPortraitGraphics(CENTER_SCREEN_STATE_ROULETTE_WHEEL, CENTER_SCREEN_MAIN_SLOT);
+    LoadPortraitGraphics(CENTER_SCREEN_STATE_ROULETTE_WHEEL, CENTER_SCREEN_ALT_SLOT);
 }
 
 void RunRouletteWheel(void)
@@ -203,8 +204,8 @@ void RunRouletteWheel(void)
     if (gCurrentPinballGame->rouletteFrameIndex == 0)
     {
         gCurrentPinballGame->modeOutcomeValues[0] = gCurrentPinballGame->modeOutcomeValues[1];
-        LoadPortraitGraphics(2, 0);
-        gCurrentPinballGame->rouletteOutcomeId = gCurrentPinballGame->modeOutcomeValues[0];
+        LoadPortraitGraphics(CENTER_SCREEN_STATE_ROULETTE_WHEEL, CENTER_SCREEN_MAIN_SLOT);
+        gCurrentPinballGame->prizeId = gCurrentPinballGame->modeOutcomeValues[0];
     }
 
     if (gCurrentPinballGame->rouletteFrameIndex == 1)
@@ -215,11 +216,15 @@ void RunRouletteWheel(void)
             gCurrentPinballGame->rouletteSlotCursor = 0;
 
         gCurrentPinballGame->modeOutcomeValues[1] = gCurrentPinballGame->rouletteSlotValues[gCurrentPinballGame->rouletteSlotCursor];
-        LoadPortraitGraphics(2, 1);
+        LoadPortraitGraphics(CENTER_SCREEN_STATE_ROULETTE_WHEEL, CENTER_SCREEN_ALT_SLOT);
         MPlayStart(&gMPlayInfo_SE1, &se_roulette_tick);
     }
 }
 
+
+/*
+    Used for both the prizes given by roulette outcome, and by shop purchases.
+*/
 void ProcessRouletteOutcome(void)
 {
     if (gCurrentPinballGame->outcomeFrameCounter < 180)
@@ -227,7 +232,7 @@ void ProcessRouletteOutcome(void)
         if (gCurrentPinballGame->outcomeFrameCounter == 4)
             m4aSongNumStart(MUS_UNKNOWN_0x14);
 
-        if (gCurrentPinballGame->rouletteOutcomeId == 3)
+        if (gCurrentPinballGame->prizeId == PRIZE_PICHU_SAVER)
         {
             if (gCurrentPinballGame->outcomeFrameCounter == 120)
                 m4aSongNumStart(SE_UNKNOWN_0xB2);
@@ -235,17 +240,17 @@ void ProcessRouletteOutcome(void)
 
         gCurrentPinballGame->outcomeFrameCounter++;
         if (gCurrentPinballGame->outcomeFrameCounter < 80)
-            LoadPortraitGraphics(8, 0);
+            LoadPortraitGraphics(CENTER_SCREEN_STATE_ROULETTE_OUTCOME, CENTER_SCREEN_MAIN_SLOT);
     }
 
-    switch (gCurrentPinballGame->rouletteOutcomeId)
+    switch (gCurrentPinballGame->prizeId)
     {
-    case 0:
-    case 1:
-    case 2:
-        gCurrentPinballGame->saverTimeRemaining = (gCurrentPinballGame->rouletteOutcomeId + 1) * 1800;
+    case PRIZE_30_SEC_BALL_SAVER:
+    case PRIZE_60_SEC_BALL_SAVER:
+    case PRIZE_90_SEC_BALL_SAVER:
+        gCurrentPinballGame->saverTimeRemaining = (gCurrentPinballGame->prizeId + 1) * 1800;
         break;
-    case 3:
+    case PRIZE_PICHU_SAVER:
         if (gCurrentPinballGame->ballCatchState == 3)
         {
             if (gCurrentPinballGame->outcomeFrameCounter > 124)
@@ -304,49 +309,49 @@ void ProcessRouletteOutcome(void)
             }
         }
         break;
-    case 4:
+    case PRIZE_EXTRA_BALL:
         if (gCurrentPinballGame->outcomeFrameCounter == 130)
             gCurrentPinballGame->oneUpAnimTimer = 90;
         break;
-    case 5:
+    case PRIZE_SMALL_POINT_BONUS:
         if (gCurrentPinballGame->outcomeFrameCounter == 95)
         {
             gCurrentPinballGame->outcomeFrameCounter = 12;
-            gCurrentPinballGame->rouletteOutcomeId = (gMain.systemFrameCount % 3) + 33;
+            gCurrentPinballGame->prizeId = (gMain.systemFrameCount % 3) + PRIZE_100_POINTS;
         }
         break;
-    case 6:
+    case PRIZE_BIG_POINT_BONUS:
         if (gCurrentPinballGame->outcomeFrameCounter == 95)
         {
             gCurrentPinballGame->outcomeFrameCounter = 12;
             if (gCurrentPinballGame->rouletteLevel < 6)
-                gCurrentPinballGame->rouletteOutcomeId = (gMain.systemFrameCount % 3) + 24;
+                gCurrentPinballGame->prizeId = (gMain.systemFrameCount % 3) + PRIZE_1M_POINTS;
             else if ((s32) gCurrentPinballGame->rouletteLevel <= 0xA)
-                gCurrentPinballGame->rouletteOutcomeId = (gMain.systemFrameCount % 5) + 24;
+                gCurrentPinballGame->prizeId = (gMain.systemFrameCount % 5) + PRIZE_1M_POINTS;
             else if (gCurrentPinballGame->rouletteLevel % 5 == 0)
-                gCurrentPinballGame->rouletteOutcomeId = (gMain.systemFrameCount % 5) + 28;
+                gCurrentPinballGame->prizeId = (gMain.systemFrameCount % 5) + PRIZE_5M_POINTS;
             else
-                gCurrentPinballGame->rouletteOutcomeId = (gMain.systemFrameCount % 7) + 24;
+                gCurrentPinballGame->prizeId = (gMain.systemFrameCount % 7) + PRIZE_1M_POINTS;
         }
         break;
-    case 7:
+    case PRIZE_RANDOM_BONUS_MULTIPLIER:
         if (gCurrentPinballGame->outcomeFrameCounter == 95)
         {
             gCurrentPinballGame->outcomeFrameCounter = 12;
             if (gCurrentPinballGame->rouletteLevel < 10)
-                gCurrentPinballGame->rouletteOutcomeId = (gMain.systemFrameCount % 3) + 36;
+                gCurrentPinballGame->prizeId = (gMain.systemFrameCount % 3) + PRIZE_BONUS_MULT_PLUS_1;
             else
-                gCurrentPinballGame->rouletteOutcomeId = (gMain.systemFrameCount % 5) + 36;
+                gCurrentPinballGame->prizeId = (gMain.systemFrameCount % 5) + PRIZE_BONUS_MULT_PLUS_1;
         }
         break;
-    case 8:
+    case PRIZE_START_CATCH_MODE:
         if (gCurrentPinballGame->outcomeFrameCounter == 150)
         {
-            RequestBoardStateTransition(4);
+            RequestBoardStateTransition(MAIN_BOARD_STATE_CATCH_EM_MODE);
             gCurrentPinballGame->modeAnimTimer = 100;
         }
         break;
-    case 9:
+    case PRIZE_START_EVO_MODE:
         if (gCurrentPinballGame->evolvablePartySize > 0)
         {
             if (gCurrentPinballGame->outcomeFrameCounter == 149)
@@ -368,13 +373,14 @@ void ProcessRouletteOutcome(void)
             {
                 gCurrentPinballGame->shopDoorTargetFrame = 0;
                 gCurrentPinballGame->evolutionShopActive = 0;
-                RequestBoardStateTransition(6);
+                RequestBoardStateTransition(MAIN_BOARD_STATE_EVO_MODE);
             }
         }
         break;
-    case 10:
-    case 11:
-    case 12:
+    case PRIZE_BALL_UPGRADE_A:
+    case PRIZE_BALL_UPGRADE_B:
+    case PRIZE_BALL_UPGRADE_C:
+        //Note: all 3 ball upgrades are equivalent, upgrade 1 level
         if (gCurrentPinballGame->outcomeFrameCounter == 130)
         {
             if (gCurrentPinballGame->ballUpgradeType < BALL_UPGRADE_TYPE_MASTER_BALL)
@@ -385,7 +391,7 @@ void ProcessRouletteOutcome(void)
             DmaCopy16(3, gBallPalettes[gCurrentPinballGame->ballUpgradeType], (void *)0x05000220, 0x20);
         }
         break;
-    case 13:
+    case PRIZE_BALL_UPGRADE_TO_MASTER:
         if (gCurrentPinballGame->outcomeFrameCounter == 130)
         {
             gCurrentPinballGame->ballUpgradeType = BALL_UPGRADE_TYPE_MASTER_BALL;
@@ -394,32 +400,32 @@ void ProcessRouletteOutcome(void)
             DmaCopy16(3, gBallPalettes[gCurrentPinballGame->ballUpgradeType], (void *)0x05000220, 0x20);
         }
         break;
-    case 17:
-    case 18:
-    case 19:
+    case PRIZE_10_COINS:
+    case PRIZE_30_COINS:
+    case PRIZE_50_COINS:
         if (gCurrentPinballGame->outcomeFrameCounter == 130)
         {
             gCurrentPinballGame->coinRewardLevel = 1;
-            gCurrentPinballGame->coinRewardAmount = (gCurrentPinballGame->rouletteOutcomeId - 17) * 20 + 10;
+            gCurrentPinballGame->coinRewardAmount = (gCurrentPinballGame->prizeId - 17) * 20 + 10;
             gCurrentPinballGame->coinRewardTimer = 0;
         }
 
         if (gCurrentPinballGame->outcomeFrameCounter == 140)
             gCurrentPinballGame->outcomeFrameCounter = 139;
         break;
-    case 20:
+    case PRIZE_30_SEC_EXTRA_BONUS_STAGE_TIME:
         if (gCurrentPinballGame->outcomeFrameCounter == 130)
             gCurrentPinballGame->timerBonus = 1800;
         break;
-    case 21:
+    case PRIZE_JIRACHI_CATCH_MODE:
         if (gCurrentPinballGame->outcomeFrameCounter == 150)
         {
             gCurrentPinballGame->modeAnimTimer = 100;
             gCurrentPinballGame->jirachiActivationFlags = 15;
-            RequestBoardStateTransition(8);
+            RequestBoardStateTransition(MAIN_BOARD_STATE_JIRACHI_CATCH_MODE);
         }
         break;
-    case 22:
+    case PRIZE_WISCASH_ACTIVE_SPHEAL_OPPORTUNITY:
         if (gCurrentPinballGame->outcomeFrameCounter == 150 && gCurrentPinballGame->shouldProcessWhiscash == 0)
         {
             gCurrentPinballGame->rubyPondChangeTimer = 0;
@@ -427,7 +433,7 @@ void ProcessRouletteOutcome(void)
             gCurrentPinballGame->forcePondToWhiscash = TRUE;
         }
         break;
-    case 23:
+    case PRIZE_PELIPPER_ACTIVE_SPHEAL_OPPORTUNITY:
         if (gCurrentPinballGame->outcomeFrameCounter == 150)
         {
             gCurrentPinballGame->bumperHitsSinceReset = 100;
@@ -435,62 +441,64 @@ void ProcessRouletteOutcome(void)
             gCurrentPinballGame->pelipperState = 1;
         }
         break;
-    case 24:
-    case 25:
-    case 26:
-    case 27:
-    case 28:
-    case 29:
-    case 30:
-    case 31:
-    case 32:
+    case PRIZE_1M_POINTS:
+    case PRIZE_2M_POINTS:
+    case PRIZE_3M_POINTS:
+    case PRIZE_4M_POINTS:
+    case PRIZE_5M_POINTS:
+    case PRIZE_6M_POINTS:
+    case PRIZE_7M_POINTS:
+    case PRIZE_8M_POINTS:
+    case PRIZE_9M_POINTS:
         if (gCurrentPinballGame->scoreCounterAnimationEnabled)
             gCurrentPinballGame->outcomeFrameCounter = 81;
 
         if (gCurrentPinballGame->outcomeFrameCounter == 70)
         {
             gCurrentPinballGame->scoreCounterAnimationEnabled = TRUE;
-            gCurrentPinballGame->scoreAddedInFrame = (gCurrentPinballGame->rouletteOutcomeId - 23) * 1000000;
+            gCurrentPinballGame->scoreAddedInFrame = (gCurrentPinballGame->prizeId - 23) * 1000000;
         }
         break;
-    case 33:
+    case PRIZE_100_POINTS:
         if (gCurrentPinballGame->outcomeFrameCounter == 70)
         {
             m4aSongNumStart(SE_BONUS_SCORE_TALLIED);
             gCurrentPinballGame->scoreAddedInFrame = 100;
         }
         break;
-    case 34:
+    case PRIZE_500_POINTS:
         if (gCurrentPinballGame->outcomeFrameCounter == 70) {
             m4aSongNumStart(SE_BONUS_SCORE_TALLIED);
             gCurrentPinballGame->scoreAddedInFrame = 500;
         }
         break;
-    case 35:
+    case PRIZE_900_POINTS:
         if (gCurrentPinballGame->outcomeFrameCounter == 70) {
             m4aSongNumStart(SE_BONUS_SCORE_TALLIED);
             gCurrentPinballGame->scoreAddedInFrame = 900;
         }
         break;
-    case 36:
-    case 37:
-    case 38:
-    case 39:
-    case 40:
+    case PRIZE_BONUS_MULT_PLUS_1:
+    case PRIZE_BONUS_MULT_PLUS_2:
+    case PRIZE_BONUS_MULT_PLUS_3:
+    case PRIZE_BONUS_MULT_PLUS_4:
+    case PRIZE_BONUS_MULT_PLUS_5:
         if (gCurrentPinballGame->outcomeFrameCounter == 70)
         {
-            gCurrentPinballGame->progressLevel += gCurrentPinballGame->rouletteOutcomeId + 221;
+            gCurrentPinballGame->progressLevel += gCurrentPinballGame->prizeId - 35;
             if (gCurrentPinballGame->progressLevel > 99)
                 gCurrentPinballGame->progressLevel = 99;
         }
         break;
-    case 41:
-    case 42:
-    case 43:
-    case 44:
-    case 45:
+    case PRIZE_START_BONUS_MODE_A:
+    case PRIZE_START_BONUS_MODE_B:
+    case PRIZE_START_BONUS_MODE_C:
+    case PRIZE_START_BONUS_MODE_D:
+    case PRIZE_START_BONUS_MODE_E:
+        // Note: all start the currently available mode.
+        // This controls Dusclops/Kecleon/Kyogre/Groudon/Rayquaza
         if (gCurrentPinballGame->outcomeFrameCounter == 150)
-            RequestBoardStateTransition(3);
+            RequestBoardStateTransition(MAIN_BOARD_STATE_BOSS_HOLE_ACTIVE);
         break;
     }
 }
@@ -1148,7 +1156,7 @@ void RunBallCaptureSequence(void)
 
         if (gCurrentPinballGame->captureSequenceFrame == 270 && gMain.selectedField < MAIN_FIELD_COUNT)
         {
-            LoadPortraitGraphics(0, 0);
+            LoadPortraitGraphics(CENTER_SCREEN_STATE_CURRENT_LOCATION, CENTER_SCREEN_MAIN_SLOT);
             gCurrentPinballGame->portraitDisplayState = 0;
         }
 

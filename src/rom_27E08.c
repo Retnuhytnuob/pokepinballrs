@@ -2,6 +2,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "constants/bg_music.h"
+#include "constants/main_board.h"
 
 extern const s16 gEggHatchAnimData[28][3];
 extern const u8 gCatchSpriteFrameBuffer[][0x120];
@@ -61,7 +62,7 @@ void ResetCatchState(s16 resetHoleIndicators)
     {
         if ((gCurrentPinballGame->jirachiActivationFlags & 0xF) == 0)
         {
-            LoadPortraitGraphics(0, 0);
+            LoadPortraitGraphics(CENTER_SCREEN_STATE_CURRENT_LOCATION, CENTER_SCREEN_MAIN_SLOT);
             gCurrentPinballGame->portraitDisplayState = 0;
         }
     }
@@ -94,7 +95,7 @@ void UpdateCatchTrigger(void)
                 ShowBonusTrapSprite();
                 gCurrentPinballGame->trapAnimState = 2;
                 gCurrentPinballGame->portraitCycleFrame = 0;
-                LoadPortraitGraphics(1, 0);
+                LoadPortraitGraphics(CENTER_SCREEN_STATE_1, CENTER_SCREEN_MAIN_SLOT);
                 gCurrentPinballGame->boardSubState++;
             }
         }
@@ -102,7 +103,7 @@ void UpdateCatchTrigger(void)
     case 2:
         AnimateBonusTrapSprite();
         if (gCurrentPinballGame->ballCatchState == 0)
-            LoadPortraitGraphics(1, 0);
+            LoadPortraitGraphics(CENTER_SCREEN_STATE_1, CENTER_SCREEN_MAIN_SLOT);
 
         if (gCurrentPinballGame->ballCatchState == 4)
             gCurrentPinballGame->boardSubState++;
@@ -129,7 +130,7 @@ void UpdateCatchTrigger(void)
         }
         else if (gCurrentPinballGame->modeAnimTimer == 24)
         {
-            LoadPortraitGraphics(0, 0);
+            LoadPortraitGraphics(CENTER_SCREEN_STATE_CURRENT_LOCATION, CENTER_SCREEN_MAIN_SLOT);
         }
         else if (gCurrentPinballGame->modeAnimTimer == 0)
         {
@@ -162,7 +163,7 @@ void UpdateCatchTrigger(void)
         if (gCurrentPinballGame->stageTimer)
             gCurrentPinballGame->stageTimer--;
         else
-            RequestBoardStateTransition(1);
+            RequestBoardStateTransition(MAIN_BOARD_STATE_DEFAULT);
         break;
     }
 }
@@ -171,7 +172,7 @@ void FullCatchStateCleanup(void)
 {
     gCurrentPinballGame->trapAnimState = 0;
     gCurrentPinballGame->bonusTrapEnabled = 0;
-    LoadPortraitGraphics(0, 0);
+    LoadPortraitGraphics(CENTER_SCREEN_STATE_CURRENT_LOCATION, CENTER_SCREEN_MAIN_SLOT);
     gCurrentPinballGame->portraitDisplayState = 0;
     gCurrentPinballGame->evoItemCount = 0;
     gCurrentPinballGame->evoBlinkTimer = 0;
@@ -234,7 +235,7 @@ void InitBonusStageSelect(void)
         gCurrentPinballGame->boardSubState = 0;
         gCurrentPinballGame->stageTimer = 0;
         gCurrentPinballGame->portraitCycleFrame = 0;
-        LoadPortraitGraphics(7, 0);
+        LoadPortraitGraphics(CENTER_SCREEN_STATE_CONFIRMATION_PROMPT, CENTER_SCREEN_MAIN_SLOT);
     }
 }
 
@@ -285,7 +286,7 @@ void UpdateBonusStageSelect(void)
         break;
     case 2:
         AnimateBonusTrapSprite();
-        LoadPortraitGraphics(7, 0);
+        LoadPortraitGraphics(CENTER_SCREEN_STATE_CONFIRMATION_PROMPT, CENTER_SCREEN_MAIN_SLOT);
         if (gCurrentPinballGame->ballCatchState == 4)
             gCurrentPinballGame->boardSubState++;
         break;
@@ -294,7 +295,7 @@ void UpdateBonusStageSelect(void)
         gCurrentPinballGame->stageTimer = 0;
         gCurrentPinballGame->portraitCycleFrame = 0;
         gCurrentPinballGame->modeOutcomeValues[0] = 46;
-        LoadPortraitGraphics(7, 0);
+        LoadPortraitGraphics(CENTER_SCREEN_STATE_CONFIRMATION_PROMPT, CENTER_SCREEN_MAIN_SLOT);
         break;
     case 4:
         if (gCurrentPinballGame->modeAnimTimer == 145)
@@ -316,7 +317,7 @@ void UpdateBonusStageSelect(void)
             }
 
             gCurrentPinballGame->modeOutcomeValues[0] = 46;
-            LoadPortraitGraphics(7, 0);
+            LoadPortraitGraphics(CENTER_SCREEN_STATE_CONFIRMATION_PROMPT, CENTER_SCREEN_MAIN_SLOT);
         }
 
         if (gCurrentPinballGame->modeAnimTimer == 130)
@@ -362,7 +363,7 @@ void UpdateBonusStageSelect(void)
         gCurrentPinballGame->boardSubState++;
         break;
     case 8:
-        RequestBoardStateTransition(1);
+        RequestBoardStateTransition(MAIN_BOARD_STATE_DEFAULT);
         break;
     }
 }
@@ -995,7 +996,7 @@ void LoadPokemonNameGraphics(void)
     int index;
 
     gCurrentPinballGame->nameSpacingOffset = 0;
-    LoadPortraitGraphics(9, 0);
+    LoadPortraitGraphics(CENTER_SCREEN_STATE_9, CENTER_SCREEN_MAIN_SLOT);
     gCurrentPinballGame->activePortraitType = 14;
     gMain.fieldSpriteGroups[4]->available = 1;
     for (i = 0; i < 10; i++)
@@ -1046,7 +1047,7 @@ void InitEvolutionSuccessDisplay(void)
     gCurrentPinballGame->nameSpacingOffset = 0;
     gCurrentPinballGame->creatureOamPriority = 0;
     gCurrentPinballGame->nameRevealAnimFrame = 0;
-    LoadPortraitGraphics(3, 0);
+    LoadPortraitGraphics(CENTER_SCREEN_STATE_3, CENTER_SCREEN_MAIN_SLOT);
     gCurrentPinballGame->activePortraitType = 13;
     gMain.fieldSpriteGroups[4]->available = 1;
     for (i = 0; i < 10; i++)
@@ -1357,7 +1358,7 @@ void UpdateEggModeAnimation(void)
                 m4aSongNumStart(MUS_EGG_MODE_START);
 
             if (gCurrentPinballGame->eggAnimFrameIndex == 29)
-                RequestBoardStateTransition(5);
+                RequestBoardStateTransition(MAIN_BOARD_STATE_EGG_HATCH_MODE);
 
             if (gCurrentPinballGame->eggAnimFrameIndex == 28)
                 m4aSongNumStart(SE_HATCH_FLOURISH);
@@ -1567,7 +1568,7 @@ void CleanupEggModeState(void)
         gCurrentPinballGame->sapphirerubyEggDeliveryState = 1;
 
     gCurrentPinballGame->creatureHitCount = 0;
-    LoadPortraitGraphics(0, 0);
+    LoadPortraitGraphics(CENTER_SCREEN_STATE_CURRENT_LOCATION, CENTER_SCREEN_MAIN_SLOT);
     gCurrentPinballGame->portraitDisplayState = 0;
     for (i = 0; i < 3; i++)
     {
@@ -1998,9 +1999,9 @@ void UpdateEggMode(void)
         else
         {
             if (gCurrentPinballGame->catchLights[2] == 1)
-                RequestBoardStateTransition(3);
+                RequestBoardStateTransition(MAIN_BOARD_STATE_BOSS_HOLE_ACTIVE);
             else
-                RequestBoardStateTransition(1);
+                RequestBoardStateTransition(MAIN_BOARD_STATE_DEFAULT);
 
             gCurrentPinballGame->boardSubState = 0;
         }

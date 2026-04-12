@@ -2,6 +2,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "constants/bg_music.h"
+#include "constants/main_board.h"
 
 extern u8 gCatchSpriteFrameBuffer[];
 
@@ -42,7 +43,8 @@ void CleanupCatchEmState(void)
     gMain.fieldSpriteGroups[18]->available = 0;
     gMain.fieldSpriteGroups[12]->available = 0;
     gCurrentPinballGame->jirachiCollisionEnabled = 0;
-    LoadPortraitGraphics(0, 0);
+    LoadPortraitGraphics(CENTER_SCREEN_STATE_CURRENT_LOCATION,
+        CENTER_SCREEN_MAIN_SLOT);
     gCurrentPinballGame->portraitDisplayState = 0;
     ResetEventState();
     for (i = 0; i < 6; i++)
@@ -134,7 +136,8 @@ void UpdateCatchEmMode(void)
         gCurrentPinballGame->boardSubState++;
         break;
     case 3:
-        LoadPortraitGraphics(3, 0);
+        LoadPortraitGraphics(CENTER_SCREEN_STATE_3,
+            CENTER_SCREEN_MAIN_SLOT);
         gCurrentPinballGame->hatchTileRevealState = HATCH_TILE_REVEAL_NONE;
         gCurrentPinballGame->hatchRevealPhase = 0;
         gCurrentPinballGame->boardSubState++;
@@ -287,9 +290,9 @@ void UpdateCatchEmMode(void)
         else
         {
             if (gCurrentPinballGame->catchLights[2] == 1)
-                RequestBoardStateTransition(3);
+                RequestBoardStateTransition(MAIN_BOARD_STATE_BOSS_HOLE_ACTIVE);
             else
-                RequestBoardStateTransition(1);
+                RequestBoardStateTransition(MAIN_BOARD_STATE_DEFAULT);
 
             gCurrentPinballGame->boardSubState = 0;
         }
@@ -548,9 +551,9 @@ void UpdateJirachiBonus(void)
         else
         {
             if (gCurrentPinballGame->catchLights[2] == 1)
-                RequestBoardStateTransition(3);
+                RequestBoardStateTransition(MAIN_BOARD_STATE_BOSS_HOLE_ACTIVE);
             else
-                RequestBoardStateTransition(1);
+                RequestBoardStateTransition(MAIN_BOARD_STATE_DEFAULT);
 
             gCurrentPinballGame->boardSubState = 0;
         }

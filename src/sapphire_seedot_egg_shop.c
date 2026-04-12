@@ -2,6 +2,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "constants/bg_music.h"
+#include "constants/sapphire_states.h"
 
 extern const u16 gHatchCaveOamFramesets[40][2][3];
 extern const u16 gSeedotBasketBounceFrames[];
@@ -123,7 +124,7 @@ void UpdateSapphireEggHatchAnimation(void)
                 m4aSongNumStart(MUS_EGG_MODE_START);
 
             if (gCurrentPinballGame->eggAnimFrameIndex == 29)
-                RequestBoardStateTransition(5);
+                RequestBoardStateTransition(MAIN_BOARD_STATE_EGG_HATCH_MODE);
 
             if (gCurrentPinballGame->eggAnimFrameIndex == 28)
                 m4aSongNumStart(SE_HATCH_FLOURISH);
@@ -264,7 +265,7 @@ void UpdateSapphireSeedotCollection(void)
                 gCurrentPinballGame->seedotState[i] = 2;
                 gCurrentPinballGame->seedotAnimTimer[i] = 0;
                 if (i == 2)
-                    RequestBoardStateTransition(7);
+                    RequestBoardStateTransition(MAIN_BOARD_STATE_TRAVEL_MODE);
             }
             break;
         case 2:

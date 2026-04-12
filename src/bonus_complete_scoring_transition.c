@@ -2,6 +2,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "constants/bg_music.h"
+#include "constants/main_board.h"
 
 extern struct SpriteGroup gMain_spriteGroups_12;
 extern struct SpriteGroup gMain_spriteGroups_14;
@@ -263,7 +264,8 @@ void TransitionFromBonusToMainBoard(void)
     gCurrentPinballGame->boardTransitionPhase = 0;
     gCurrentPinballGame->boardEntityActive = 0;
     gCurrentPinballGame->cameraYAdjust = 0;
-    LoadPortraitGraphics(0, 0);
+    LoadPortraitGraphics(CENTER_SCREEN_STATE_CURRENT_LOCATION,
+        CENTER_SCREEN_MAIN_SLOT);
     gCurrentPinballGame->portraitDisplayState = 0;
     if (gCurrentPinballGame->allHolesLit)
         gCurrentPinballGame->allHolesLitDelayTimer = 120;

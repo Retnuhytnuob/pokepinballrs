@@ -2,6 +2,7 @@
 #include "main.h"
 #include "m4a.h"
 #include "constants/bg_music.h"
+#include "constants/main_board.h"
 
 extern const void (*gBoardStateInitFuncs[])(void);
 extern const void (*gBoardStateUpdateFuncs[])(void);
@@ -89,7 +90,7 @@ void UpdateFieldIdle(void)
         }
         else
         {
-            RequestBoardStateTransition(2);
+            RequestBoardStateTransition(MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE);
         }
     }
 }
