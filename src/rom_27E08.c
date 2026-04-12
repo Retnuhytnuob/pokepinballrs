@@ -58,7 +58,7 @@ void ResetCatchState(s16 resetHoleIndicators)
 
     gCurrentPinballGame->trapAnimState = 0;
     gCurrentPinballGame->bonusTrapEnabled = 0;
-    if (gCurrentPinballGame->boardTransitionPhase != 2 || gCurrentPinballGame->nextBoardState < 3)
+    if (gCurrentPinballGame->boardTransitionPhase != 2 || gCurrentPinballGame->nextBoardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
     {
         if ((gCurrentPinballGame->jirachiActivationFlags & 0xF) == 0)
         {
@@ -67,7 +67,7 @@ void ResetCatchState(s16 resetHoleIndicators)
         }
     }
 
-    if (gCurrentPinballGame->nextBoardState == 6 && gCurrentPinballGame->boardTransitionPhase == 2)
+    if (gCurrentPinballGame->nextBoardState == MAIN_BOARD_STATE_EVO_MODE && gCurrentPinballGame->boardTransitionPhase == 2)
         gCurrentPinballGame->shopDoorTargetFrame = 0;
 }
 

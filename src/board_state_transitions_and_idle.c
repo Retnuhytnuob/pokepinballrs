@@ -97,13 +97,14 @@ void UpdateFieldIdle(void)
 
 void HandleBoardStateTransitionTeardown(void)
 {
-    if (gCurrentPinballGame->boardState == 2 && gCurrentPinballGame->nextBoardState > 2)
+    if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE && 
+        gCurrentPinballGame->nextBoardState > MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
         ResetCatchState(0);
 
-    if (gCurrentPinballGame->boardState > 2)
+    if (gCurrentPinballGame->boardState > MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
         return;
 
-    if (gCurrentPinballGame->nextBoardState == 3)
+    if (gCurrentPinballGame->nextBoardState == MAIN_BOARD_STATE_BOSS_HOLE_ACTIVE)
     {
         gCurrentPinballGame->arrowProgressPreserved = gCurrentPinballGame->evoArrowProgress;
         gCurrentPinballGame->catchModeArrows = gCurrentPinballGame->catchArrowProgress;
@@ -111,21 +112,21 @@ void HandleBoardStateTransitionTeardown(void)
         gCurrentPinballGame->catchArrowProgress = 0;
     }
 
-    if (gCurrentPinballGame->nextBoardState == 4)
+    if (gCurrentPinballGame->nextBoardState == MAIN_BOARD_STATE_CATCH_EM_MODE)
     {
         gCurrentPinballGame->arrowProgressPreserved = gCurrentPinballGame->evoArrowProgress;
         gCurrentPinballGame->catchModeArrows = gCurrentPinballGame->catchArrowProgress;
         gCurrentPinballGame->evoArrowProgress = 0;
         gCurrentPinballGame->catchArrowProgress = 0;
     }
-    else if (gCurrentPinballGame->nextBoardState == 6)
+    else if (gCurrentPinballGame->nextBoardState == MAIN_BOARD_STATE_EVO_MODE)
     {
         gCurrentPinballGame->catchModeArrows = gCurrentPinballGame->catchArrowProgress;
         gCurrentPinballGame->arrowProgressPreserved = 0;
         gCurrentPinballGame->evoArrowProgress = 0;
         gCurrentPinballGame->catchArrowProgress = 0;
     }
-    else if (gCurrentPinballGame->nextBoardState > 3)
+    else if (gCurrentPinballGame->nextBoardState >= MAIN_BOARD_STATE_ACTIVITY_BASE)
     {
         gCurrentPinballGame->arrowProgressPreserved = gCurrentPinballGame->evoArrowProgress;
         gCurrentPinballGame->catchModeArrows = gCurrentPinballGame->catchArrowProgress;
