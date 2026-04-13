@@ -13,7 +13,7 @@ void RequestBoardStateTransition(u8 arg0)
 {
     gCurrentPinballGame->boardTransitionPhase = 2;
     gCurrentPinballGame->nextBoardState = arg0;
-    if (gCurrentPinballGame->boardState == 2)
+    if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
         gMain.fieldSpriteGroups[13]->available = 0;
 }
 

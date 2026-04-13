@@ -189,9 +189,9 @@ void UpdateSapphireSeedotCollection(void)
 
     if (gCurrentPinballGame->seedotCollisionTrigger)
     {
-        if (gCurrentPinballGame->boardState != 7)
+        if (gCurrentPinballGame->boardState != MAIN_BOARD_STATE_TRAVEL_MODE)
         {
-            if (gCurrentPinballGame->boardState < 3)
+            if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
             {
                 if (gCurrentPinballGame->seedotCount < 3)
                 {
@@ -495,7 +495,8 @@ void UpdateSapphireShopSignAnimation(void)
         }
         else
         {
-            if (gCurrentPinballGame->boardState != 6 && gCurrentPinballGame->evolutionShopActive == 1)
+            if (gCurrentPinballGame->boardState != MAIN_BOARD_STATE_EVO_MODE
+                && gCurrentPinballGame->evolutionShopActive == 1)
             {
                 gCurrentPinballGame->shopTransitionActive = 1;
                 gCurrentPinballGame->shopAnimTimer = 0;
@@ -573,7 +574,7 @@ void UpdateSapphireEggMachine(void)
     case 0:
         if (gCurrentPinballGame->hatchMachineNewHit)
         {
-            if (gCurrentPinballGame->boardState < 3)
+            if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
             {
                 if (gCurrentPinballGame->sapphireHatchMachineFrameIx < 3)
                 {

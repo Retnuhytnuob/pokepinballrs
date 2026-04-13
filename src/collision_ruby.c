@@ -404,7 +404,8 @@ void ProcessRubyCollisionEvent(s32 arg0, s16* arg1, u16* arg2)
         {
             if (gCurrentPinballGame->ballCollisionZone == 8)
             {
-                if (gCurrentPinballGame->boardState <= 2 && gCurrentPinballGame->evoArrowProgress <= 2)
+                if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE
+                    && gCurrentPinballGame->evoArrowProgress <= 2)
                 {
                     if (gCurrentPinballGame->evoArrowProgress == 0)
                         gCurrentPinballGame->scoreAddedInFrame = 2000;
@@ -524,7 +525,8 @@ void ProcessRubyCollisionEvent(s32 arg0, s16* arg1, u16* arg2)
 
             if (gCurrentPinballGame->ballCollisionZone == 9)
             {
-                if (gCurrentPinballGame->boardState <= 2 && gCurrentPinballGame->catchArrowProgress <= 2)
+                if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE
+                    && gCurrentPinballGame->catchArrowProgress <= 2)
                 {
                     if (gCurrentPinballGame->catchArrowProgress == 0)
                         gCurrentPinballGame->scoreAddedInFrame = 2000;
@@ -669,7 +671,8 @@ void ProcessRubyCollisionEvent(s32 arg0, s16* arg1, u16* arg2)
                 *arg2 = 0xB000;
                 *arg1 = 1;
 
-                if (gCurrentPinballGame->boardState <= 2 && gCurrentPinballGame->shopDoorOpenLevel <= 2)
+                if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE
+                    && gCurrentPinballGame->shopDoorOpenLevel <= 2)
                 {
                     gCurrentPinballGame->shopDoorOpenLevel = 3;
                     gCurrentPinballGame->shopDoorAnimDelay = 5;
@@ -790,7 +793,8 @@ void ProcessRubyCollisionEvent(s32 arg0, s16* arg1, u16* arg2)
         PlayRumble(7);
         return;
     case 14:
-        if ((gCurrentPinballGame->boardState > 2) && (gCurrentPinballGame->boardState != 5))
+        if (gCurrentPinballGame->boardState > MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE
+            && gCurrentPinballGame->boardState != MAIN_BOARD_STATE_EGG_HATCH_MODE)
         {
             if (gCurrentPinballGame->eggCaveExitDelayTimer == 0)
             {

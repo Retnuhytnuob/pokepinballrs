@@ -2,6 +2,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "constants/bg_music.h"
+#include "constants/sapphire_states.h"
 
 extern const u8 *gBumperHitCounterTilePtrs[][2];
 extern const u8 *gHatchMachineDrawSegment[][3][2];
@@ -389,7 +390,7 @@ void DrawSapphireEvoArrowProgress(void)
     const u8 **src;
     const u8 **dest;
 
-    if (gCurrentPinballGame->boardState < 3)
+    if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
     {
         if (gCurrentPinballGame->evoArrowProgress == 0)
         {
@@ -457,7 +458,7 @@ void DrawSapphireCatchArrowProgress(void)
     const u8 **src;
     const u8 **dest;
 
-    if (gCurrentPinballGame->boardState < 3)
+    if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
     {
         if (gCurrentPinballGame->catchArrowProgress == 0)
         {
@@ -528,7 +529,8 @@ void AnimateSapphireCatchArrowPaletteFlash(void)
 
     index = 0;
     gCurrentPinballGame->catchProgressFlashing = 0;
-    if (gCurrentPinballGame->catchArrowProgress > 1 && gCurrentPinballGame->boardState < 3)
+    if (gCurrentPinballGame->catchArrowProgress > 1
+        && gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
         gCurrentPinballGame->catchProgressFlashing = 1;
 
     if (gCurrentPinballGame->catchProgressFlashing > 0)
@@ -567,7 +569,7 @@ void AnimateSapphireRouletteSlot(void)
     index = 0;
     if (gCurrentPinballGame->shopShockWallAnimState == 3)
         gCurrentPinballGame->rouletteSlotActive = 1;
-    else if (gCurrentPinballGame->boardState)
+    else if (gCurrentPinballGame->boardState != MAIN_BOARD_STATE_AREA_ROULETTE)
         gCurrentPinballGame->rouletteSlotActive = 0;
 
     if (gCurrentPinballGame->rouletteSlotActive > 0)

@@ -505,7 +505,9 @@ void UpdateEvolutionShopSprite(void)
                 gCurrentPinballGame->evolutionShopActive = 1;
             }
         }
-        else if (gCurrentPinballGame->boardState != 6 && gCurrentPinballGame->evolutionShopActive == 1 && gCurrentPinballGame->ballCatchState != 4)
+        else if (gCurrentPinballGame->boardState != MAIN_BOARD_STATE_EVO_MODE
+            && gCurrentPinballGame->evolutionShopActive == 1
+            && gCurrentPinballGame->ballCatchState != 4)
         {
             gCurrentPinballGame->shopTransitionActive = 1;
             gCurrentPinballGame->shopAnimTimer = 0;
@@ -1515,7 +1517,7 @@ void UpdateHatchCave(void)
         gCurrentPinballGame->cyndaquilCaveSpriteY = gCyndaquilCavePositions[gCurrentPinballGame->eggCaveState].y - gCurrentPinballGame->eggCaveLiftTimer / 3;
         group->baseX = gCurrentPinballGame->cyndaquilCaveSpriteX - gCurrentPinballGame->cameraXOffset;
         group->baseY = gCurrentPinballGame->cyndaquilCaveSpriteY - gCurrentPinballGame->cameraYOffset;
-        if (gCurrentPinballGame->boardState < 3)
+        if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
         {
             if (gCurrentPinballGame->eggCaveState == 3 && gCurrentPinballGame->rubyEggDeliveryState != 2)
                 gCurrentPinballGame->catchArrowPaletteActive = 1;

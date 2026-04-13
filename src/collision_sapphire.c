@@ -2,6 +2,7 @@
 #include "main.h"
 #include "m4a.h"
 #include "constants/bg_music.h"
+#include "constants/sapphire_states.h"
 
 extern u16 gSapphireTargetBumperIndexMap[];
 
@@ -212,7 +213,8 @@ void ProcessSapphireCollisionEvent(u8 arg0, u16* arg1, u16* arg2)
             {
                 if (gCurrentPinballGame->ball->positionQ0.x < 74)
                 {
-                    if (gCurrentPinballGame->boardState < 3 && gCurrentPinballGame->sapphireBumperState[1] < 3)
+                    if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE
+                        && gCurrentPinballGame->sapphireBumperState[1] < 3)
                     {
                         if (gCurrentPinballGame->sapphireBumperState[1] == 1)
                             gCurrentPinballGame->sapphireBumperAnimKeyframe[1] = 6;
@@ -234,7 +236,8 @@ void ProcessSapphireCollisionEvent(u8 arg0, u16* arg1, u16* arg2)
                 }
                 else if (gCurrentPinballGame->ball->positionQ0.x < 116)
                 {
-                    if (gCurrentPinballGame->boardState < 3 && gCurrentPinballGame->sapphireBumperState[0] < 3)
+                    if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE
+                        && gCurrentPinballGame->sapphireBumperState[0] < 3)
                     {
                         if (gCurrentPinballGame->sapphireBumperState[0] == 1)
                             gCurrentPinballGame->sapphireBumperAnimKeyframe[0] = 6;
@@ -363,7 +366,8 @@ void ProcessSapphireCollisionEvent(u8 arg0, u16* arg1, u16* arg2)
             {
                 if (gCurrentPinballGame->ballCollisionZone == 8)
                 {
-                    if (gCurrentPinballGame->boardState < 3 && gCurrentPinballGame->evoArrowProgress < 3)
+                    if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE
+                        && gCurrentPinballGame->evoArrowProgress < 3)
                     {
                         if (gCurrentPinballGame->evoArrowProgress == 0)
                             gCurrentPinballGame->scoreAddedInFrame = 2000;
@@ -430,7 +434,8 @@ void ProcessSapphireCollisionEvent(u8 arg0, u16* arg1, u16* arg2)
             {
                 if (gCurrentPinballGame->ballCollisionZone == 9)
                 {
-                    if (gCurrentPinballGame->boardState <= 2 && gCurrentPinballGame->catchArrowProgress < 3)
+                    if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE
+                        && gCurrentPinballGame->catchArrowProgress < 3)
                     {
                         if (gCurrentPinballGame->catchArrowProgress == 0)
                             gCurrentPinballGame->scoreAddedInFrame = 2000;

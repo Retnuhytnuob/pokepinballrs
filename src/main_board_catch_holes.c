@@ -332,7 +332,7 @@ void UpdateShopEntryAnimation(s16 arg0)
                 else
                     gCurrentPinballGame->modeAnimTimer = 24;
 
-                if (gCurrentPinballGame->boardState == 2)
+                if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
                     LoadPortraitGraphics(CENTER_SCREEN_STATE_1, CENTER_SCREEN_MAIN_SLOT);
                 else
                     LoadPortraitGraphics(CENTER_SCREEN_STATE_CURRENT_LOCATION, CENTER_SCREEN_MAIN_SLOT);

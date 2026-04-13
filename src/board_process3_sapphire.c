@@ -64,9 +64,9 @@ void UpdateSapphireBoardEntityRendering(void)
         UpdateSapphireEggMachine();
     }
 
-    if (gCurrentPinballGame->boardState < 3)
+    if (gCurrentPinballGame->boardState < MAIN_BOARD_STATE_BOSS_HOLE_ACTIVE)
     {
-        if (gCurrentPinballGame->sapphireHatchMachineFrameIx == 3 && 
+        if (gCurrentPinballGame->sapphireHatchMachineFrameIx == 3 &&
             gCurrentPinballGame->sapphireHatchMachineState == 0)
         {
             gCurrentPinballGame->catchArrowPaletteActive = 1;

@@ -164,14 +164,14 @@ void SelectRubyShopDoorState(void)
 {
     if (gCurrentPinballGame->ballCatchState != 3)
     {
-        if (gCurrentPinballGame->boardState < 3)
+        if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
         {
             if (gCurrentPinballGame->evolutionShopActive == 0)
                 gCurrentPinballGame->shopDoorTargetFrame = gCurrentPinballGame->shopDoorOpenLevel & 0xF;
             else
                 gCurrentPinballGame->shopDoorTargetFrame = 3;
         }
-        else if (gCurrentPinballGame->boardState != 6)
+        else if (gCurrentPinballGame->boardState != MAIN_BOARD_STATE_EVO_MODE)
         {
             gCurrentPinballGame->shopDoorTargetFrame = 0;
         }
@@ -287,7 +287,7 @@ void RubyPond_EntityLogic(void)
     if (gCurrentPinballGame->shouldProcessWhiscash)
     {
         // If board is currently in one of the modes (catch/etc) force reset to the 3 chinchou
-        if (gCurrentPinballGame->boardState > 2)
+        if (gCurrentPinballGame->boardState > MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
             gCurrentPinballGame->rubyPondContentsChanging = TRUE;
 
         // Don't immediately force change state if Wishcash is actively doing something
@@ -549,7 +549,7 @@ void RubyPond_EntityLogic(void)
                     // of pond states first.
                     gCurrentPinballGame->pondSwitchesSinceLastWhiscash++;
                     if (gCurrentPinballGame->pondSwitchesSinceLastWhiscash < MIN_POND_SWITCHES_BEFORE_WHISCASH_AVAILABLE ||
-                        gCurrentPinballGame->boardState > 2)
+                        gCurrentPinballGame->boardState > MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
                     {
                         frameDecidedNextPondState = (gMain.systemFrameCount % 5) + 1;
                         if (gCurrentPinballGame->rubyPondState == frameDecidedNextPondState)
@@ -731,7 +731,8 @@ void RubyPondTriBumperHandleHitAndDraw(void)
             gCurrentPinballGame->scoreAddedInFrame = 500;
             m4aSongNumStart(SE_RUBY_BUMPER_HIT);
             PlayRumble(7);
-            if (gCurrentPinballGame->boardState == 4 && gCurrentPinballGame->boardSubState == 5 && gCurrentPinballGame->hatchTilesBumperAcknowledged < 6)
+            if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_CATCH_EM_MODE
+                && gCurrentPinballGame->boardSubState == 5 && gCurrentPinballGame->hatchTilesBumperAcknowledged < 6)
             {
                 if (gCurrentPinballGame->hatchTilesBumperAcknowledged == 0)
                     gCurrentPinballGame->hatchTilesBumperAcknowledged = 1;

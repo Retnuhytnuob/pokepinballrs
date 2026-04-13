@@ -2,6 +2,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "constants/bg_music.h"
+#include "constants/ruby_states.h"
 
 extern const u8 *gRubyBallPowerUpLightTilePointers[][3];
 extern const u16 gBallShadowTileIndices[];
@@ -305,7 +306,7 @@ void AnimateRubyRouletteSlot(void)
     index = 0;
     if (gCurrentPinballGame->shopDoorTargetFrame > 2)
         gCurrentPinballGame->rouletteSlotActive = 1;
-    else if (gCurrentPinballGame->boardState)
+    else if (gCurrentPinballGame->boardState != MAIN_BOARD_STATE_AREA_ROULETTE)
         gCurrentPinballGame->rouletteSlotActive = 0;
 
     if (gCurrentPinballGame->rouletteSlotActive > 0)
@@ -336,7 +337,8 @@ void AnimateRubyCatchProgressArrow(void)
 
     index = 0;
     gCurrentPinballGame->catchProgressFlashing = 0;
-    if (gCurrentPinballGame->catchArrowProgress > 1 && gCurrentPinballGame->boardState < 3)
+    if (gCurrentPinballGame->catchArrowProgress > 1
+        && gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
         gCurrentPinballGame->catchProgressFlashing = 1;
 
     if (gCurrentPinballGame->catchProgressFlashing > 0)
@@ -507,7 +509,7 @@ void DrawRubyEvoArrowProgress(void)
     const u8 **src;
     const u8 **dest;
 
-    if (gCurrentPinballGame->boardState < 3)
+    if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
     {
         if (gCurrentPinballGame->evoArrowProgress == 0)
         {
@@ -576,7 +578,7 @@ void DrawRubyCatchArrowProgress(void)
     const u8 **src;
     const u8 **dest;
 
-    if (gCurrentPinballGame->boardState < 3)
+    if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
     {
         if (gCurrentPinballGame->catchArrowProgress == 0)
         {

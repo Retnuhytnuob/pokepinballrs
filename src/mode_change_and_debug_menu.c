@@ -257,7 +257,7 @@ void EndOfBallSequence(void)
             InitBallState(0);
             SetBoardCollisionConfig(0);
             gCurrentPinballGame->boardCollisionConfigChanged = 0;
-            if (gCurrentPinballGame->boardState == 3)
+            if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_BOSS_HOLE_ACTIVE)
             {
                 var0 = gCurrentPinballGame->numCompletedBonusStages % 5;
                 switch (var0)

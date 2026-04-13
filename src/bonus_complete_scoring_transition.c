@@ -260,7 +260,7 @@ void TransitionFromBonusToMainBoard(void)
 
     gMain.subState = 0;
     gCurrentPinballGame->prevBoardState = 3;
-    gCurrentPinballGame->boardState = 1;
+    gCurrentPinballGame->boardState = MAIN_BOARD_STATE_DEFAULT;
     gCurrentPinballGame->boardTransitionPhase = 0;
     gCurrentPinballGame->boardEntityActive = 0;
     gCurrentPinballGame->cameraYAdjust = 0;

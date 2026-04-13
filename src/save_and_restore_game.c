@@ -2,6 +2,8 @@
 #include "agb_sram.h"
 #include "main.h"
 #include "m4a.h"
+#include "constants/main_board.h"
+#include "constants/groudon_states.h"
 
 extern u8 gBoardGfxBuffer[];
 extern u8 gBoardBGTileBufferAlt[];
@@ -230,7 +232,7 @@ void RestoreGameState(u16 arg0)
     DmaCopy16(3, gBG0TilemapBuffer, (void *)0x6002000, 0x1000);
     if (gMain.scoreOverlayActive)
     {
-        if (gCurrentPinballGame->boardState == 6)
+        if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_EVO_MODE)
         {
             for (j = 0; j <= gCurrentPinballGame->cutsceneTilemapColumn; j++)
             {
@@ -540,7 +542,7 @@ void RestoreMainFieldDynamicGraphics(void)
         }
     }
 
-    if (gCurrentPinballGame->boardState == 4)
+    if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_CATCH_EM_MODE)
     {
         switch (gCurrentPinballGame->boardSubState)
         {
@@ -571,7 +573,7 @@ void RestoreMainFieldDynamicGraphics(void)
         }
     }
 
-    if (gCurrentPinballGame->boardState == 8)
+    if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_JIRACHI_CATCH_MODE)
     {
         switch (gCurrentPinballGame->boardSubState)
         {
@@ -682,7 +684,7 @@ void RestoreKyogreBonusGraphics(void)
 
 void RestoreGroudonBonusGraphics(void)
 {
-    if (gCurrentPinballGame->boardState < 2)
+    if (gCurrentPinballGame->boardState <= GROUDON_BOARD_STATE_BATTLE_PHASE)
     {
         DmaCopy16(3, gGroudonBoardBackgroundGfx, (void *)0x6015800, 0x2000);
     }

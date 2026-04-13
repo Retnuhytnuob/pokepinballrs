@@ -1,5 +1,6 @@
 #include "global.h"
 #include "main.h"
+#include "constants/groudon_states.h"
 
 s16 CollisionCheck_Groudon(struct Vector16 *arg0, u16 *arg1)
 {
@@ -184,7 +185,7 @@ void ProcessGroudonCollisionEvent(u8 arg0, u16 *arg1, u16 *arg2)
     case 3:
         break;
     case 4:
-        gCurrentPinballGame->bossEntityState = 6;
+        gCurrentPinballGame->bossEntityState = GROUDON_ENTITY_STATE_SUFFICIENT_HITS;
         gCurrentPinballGame->ballFrozenState = 1;
         break;
     case 5:

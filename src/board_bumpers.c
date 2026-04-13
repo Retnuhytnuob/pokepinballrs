@@ -111,7 +111,7 @@ void UpdateSapphireBumperLogic(void)
                 gCurrentPinballGame->sapphireBumperAnimSubTimer[i] = 0;
                 if (gCurrentPinballGame->sapphireBumperAnimKeyframe[i] > 17)
                 {
-                    if (gCurrentPinballGame->boardState == 6)
+                    if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_EVO_MODE)
                     {
                         gCurrentPinballGame->sapphireBumperAnimKeyframe[i] = 0;
                         gCurrentPinballGame->sapphireBumperState[i] = 0;
@@ -173,9 +173,9 @@ void UpdateSapphireBumperLogic(void)
         gCurrentPinballGame->shopBumperHitTimer--;
     }
 
-    if (gCurrentPinballGame->boardState > 2)
+    if (gCurrentPinballGame->boardState > MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
     {
-        if (gCurrentPinballGame->boardState != 6)
+        if (gCurrentPinballGame->boardState != MAIN_BOARD_STATE_EVO_MODE)
         {
             for (i = 0; i < 2; i++)
             {
@@ -338,7 +338,8 @@ void HandleRubyBumperHit(void)
             gCurrentPinballGame->scoreAddedInFrame = 500;
             m4aSongNumStart(SE_RUBY_BUMPER_HIT);
             PlayRumble(7);
-            if (gCurrentPinballGame->boardState == 4 && gCurrentPinballGame->boardSubState == 5)
+            if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_CATCH_EM_MODE
+                && gCurrentPinballGame->boardSubState == 5)
             {
                 if (gCurrentPinballGame->hatchTilesBumperAcknowledged < 6)
                 {

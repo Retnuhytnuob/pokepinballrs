@@ -418,7 +418,8 @@ void ProcessMainBoardBallDrainAndLaunch(void)
 {
     struct BallState *ballStates;
 
-    if (gCurrentPinballGame->boardState && gCurrentPinballGame->newButtonActions[1] && gCurrentPinballGame->ballInLaunchChute)
+    if (gCurrentPinballGame->boardState != MAIN_BOARD_STATE_AREA_ROULETTE
+        && gCurrentPinballGame->newButtonActions[1] && gCurrentPinballGame->ballInLaunchChute)
     {
         gCurrentPinballGame->launcherCharging = 1;
         gCurrentPinballGame->spoinkEntityState = 1;
@@ -521,15 +522,15 @@ void ResetBoardStateOnDeath(void)
 {
     gCurrentPinballGame->stageTimer = 10199;
 
-    if (gCurrentPinballGame->boardState == 2)
+    if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
         gCurrentPinballGame->boardSubState = 5;
-    if (gCurrentPinballGame->boardState == 7)
+    if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_TRAVEL_MODE)
         gCurrentPinballGame->boardSubState = 6;
-    if (gCurrentPinballGame->boardState == 4)
+    if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_CATCH_EM_MODE)
         gCurrentPinballGame->boardSubState = 10;
-    if (gCurrentPinballGame->boardState == 5)
+    if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_EGG_HATCH_MODE)
         gCurrentPinballGame->boardSubState = 6;
-    if (gCurrentPinballGame->boardState == 6)
+    if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_EVO_MODE)
         gCurrentPinballGame->boardSubState = 8;
 
     gCurrentPinballGame->allHolesLit = 0;

@@ -538,7 +538,9 @@ void RunBallCaptureSequence(void)
     case 0:
         gMain.blendControl = 0xCE;
 
-        if (gMain.selectedField < MAIN_FIELD_COUNT && (gCurrentPinballGame->boardState == 4 || gCurrentPinballGame->boardState == 8))
+        if (gMain.selectedField < MAIN_FIELD_COUNT
+            && (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_CATCH_EM_MODE
+                || gCurrentPinballGame->boardState == MAIN_BOARD_STATE_JIRACHI_CATCH_MODE))
             gCurrentPinballGame->boardModeType = 1;
 
         gCurrentPinballGame->ballFrozenState = 1;
@@ -564,7 +566,7 @@ void RunBallCaptureSequence(void)
         break;
 
     case 1:
-        if (gCurrentPinballGame->boardState == 4)
+        if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_CATCH_EM_MODE)
         {
             gCurrentPinballGame->evoBlinkTimer = 0;
             gCurrentPinballGame->catchLights[0] = 2;
@@ -640,8 +642,10 @@ void RunBallCaptureSequence(void)
         {
             if (gMain.selectedField <= 3 &&
                 (
-                    (gCurrentPinballGame->boardState == 4 && gCurrentPinballGame->boardSubState == 9) ||
-                    (gCurrentPinballGame->boardState == 8 && gCurrentPinballGame->boardSubState == 3)
+                    (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_CATCH_EM_MODE
+                        && gCurrentPinballGame->boardSubState == 9)
+                    || (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_JIRACHI_CATCH_MODE
+                        && gCurrentPinballGame->boardSubState == 3)
                 ))
             {
                 DmaCopy16(3, &gCatchSequencePalB, 0x050003A0, 0x20);
@@ -664,7 +668,7 @@ void RunBallCaptureSequence(void)
             spriteGroup->baseX = gCurrentPinballGame->ball->screenPosition.x;
             spriteGroup->baseY = gCurrentPinballGame->ball->screenPosition.y;
 
-            if (gCurrentPinballGame->boardState == 5)
+            if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_EGG_HATCH_MODE)
             {
                 for (i = 0; i <= 15; i++)
                 {
@@ -716,8 +720,11 @@ void RunBallCaptureSequence(void)
         {
             gCurrentPinballGame->legendaryFlashState = 0;
         }
-        else if ((gCurrentPinballGame->boardState == 4 && gCurrentPinballGame->boardSubState == 9) ||
-                 (gCurrentPinballGame->boardState == 8 && gCurrentPinballGame->boardSubState == 3))
+        else if (
+            (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_CATCH_EM_MODE
+             && gCurrentPinballGame->boardSubState == 9)
+            || (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_JIRACHI_CATCH_MODE
+                 && gCurrentPinballGame->boardSubState == 3))
         {
             DmaCopy16(3, &gCatchSpritePalettes, 0x050003A0, 0x20);
         }
@@ -796,7 +803,7 @@ void RunBallCaptureSequence(void)
             spriteGroup->baseY = gCurrentPinballGame->ball->screenPosition.y;
             temp_r3 = gCaptureShakeOffsets[gCurrentPinballGame->captureSequenceTimer - 17] + 7;
 
-            if (gCurrentPinballGame->boardState == 5)
+            if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_EGG_HATCH_MODE)
             {
                 for (i = 0; i <= 15; i++)
                 {
@@ -834,16 +841,22 @@ void RunBallCaptureSequence(void)
 
             if (gMain.selectedField > 3)
                 gCurrentPinballGame->legendaryFlashState = 1;
-            else if ((gCurrentPinballGame->boardState == 4 && gCurrentPinballGame->boardSubState == 9) ||
-                    (gCurrentPinballGame->boardState == 8 && gCurrentPinballGame->boardSubState == 3))
+            else if (
+                (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_CATCH_EM_MODE
+                 && gCurrentPinballGame->boardSubState == 9)
+                || (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_JIRACHI_CATCH_MODE
+                    && gCurrentPinballGame->boardSubState == 3))
                 DmaCopy16(3, &gCatchSequencePalA, 0x050003A0, 0x20);
         }
         else if (gCurrentPinballGame->captureSequenceTimer == 19 || gCurrentPinballGame->captureSequenceTimer == 22)
         {
             if (gMain.selectedField > 3)
                 gCurrentPinballGame->legendaryFlashState = 3;
-            else if ((gCurrentPinballGame->boardState == 4 && gCurrentPinballGame->boardSubState == 9) ||
-                    (gCurrentPinballGame->boardState == 8 && gCurrentPinballGame->boardSubState == 3))
+            else if (
+                (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_CATCH_EM_MODE
+                    && gCurrentPinballGame->boardSubState == 9)
+                || (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_JIRACHI_CATCH_MODE
+                    && gCurrentPinballGame->boardSubState == 3))
                 DmaCopy16(3, &gCatchSequencePalC, 0x050003A0, 0x20);
         }
 
@@ -853,14 +866,16 @@ void RunBallCaptureSequence(void)
                 gCurrentPinballGame->legendaryFlashState = 10;
             else
             {
-                if (gCurrentPinballGame->boardState == 4 && gCurrentPinballGame->boardSubState == 9)
+                if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_CATCH_EM_MODE
+                    && gCurrentPinballGame->boardSubState == 9)
                 {
                     CleanupCaughtPokemonSprite();
                     gCurrentPinballGame->jirachiCollisionEnabled = 0;
                     m4aMPlayAllStop();
                 }
 
-                if (gCurrentPinballGame->boardState == 8 && gCurrentPinballGame->boardSubState == 3)
+                if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_JIRACHI_CATCH_MODE
+                    && gCurrentPinballGame->boardSubState == 3)
                 {
                     CleanupJirachiSprites();
                     gCurrentPinballGame->jirachiCollisionEnabled = 0;
@@ -892,7 +907,7 @@ void RunBallCaptureSequence(void)
 
             temp_r3 = gCaptureShakeOffsets[gCurrentPinballGame->captureSequenceTimer - 17] + 7;
 
-            if (gCurrentPinballGame->boardState == 5)
+            if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_EGG_HATCH_MODE)
             {
                 for (i = 0; i <= 15; i++)
                 {
@@ -996,7 +1011,8 @@ void RunBallCaptureSequence(void)
             }
         }
 
-        if (gCurrentPinballGame->boardState == 5 || gCurrentPinballGame->boardState == 8)
+        if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_EGG_HATCH_MODE
+            || gCurrentPinballGame->boardState == MAIN_BOARD_STATE_JIRACHI_CATCH_MODE)
         {
             gCurrentPinballGame->ball->velocity.y += 16;
             gCurrentPinballGame->ball->positionQ8.y += gCurrentPinballGame->ball->velocity.y;
@@ -1203,17 +1219,18 @@ void RunBallCaptureSequence(void)
                 }
             }
         }
-        
-        if (gCurrentPinballGame->scoreCounterAnimationEnabled) 
+
+        if (gCurrentPinballGame->scoreCounterAnimationEnabled)
             gCurrentPinballGame->captureSequenceFrame = 181;
 
         if (gCurrentPinballGame->captureSequenceFrame == 180)
         {
-            if (gCurrentPinballGame->boardState == 4 || gCurrentPinballGame->boardState == 8)
+            if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_CATCH_EM_MODE
+                || gCurrentPinballGame->boardState == MAIN_BOARD_STATE_JIRACHI_CATCH_MODE)
             {
                 gCurrentPinballGame->scoreCounterAnimationEnabled = TRUE;
-                
-                switch (gCurrentPinballGame->currentSpecies) 
+
+                switch (gCurrentPinballGame->currentSpecies)
                 {
                 case 59:
                 case 114:
@@ -1238,7 +1255,7 @@ void RunBallCaptureSequence(void)
                 }
             }
 
-            if (gCurrentPinballGame->boardState == 5)
+            if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_EGG_HATCH_MODE)
             {
                 gCurrentPinballGame->scoreCounterAnimationEnabled = TRUE;
             
@@ -1308,13 +1325,13 @@ void RunBallCaptureSequence(void)
             if (gCurrentPinballGame->bonusCatchCount <= 98)
                 gCurrentPinballGame->bonusCatchCount++;
 
-            if (gCurrentPinballGame->boardState == 4)
+            if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_CATCH_EM_MODE)
                 gCurrentPinballGame->boardSubState = 10;
 
-            if (gCurrentPinballGame->boardState == 8)
+            if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_JIRACHI_CATCH_MODE)
                 gCurrentPinballGame->boardSubState = 5;
 
-            if (gCurrentPinballGame->boardState == 5)
+            if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_EGG_HATCH_MODE)
                 gCurrentPinballGame->boardSubState = 6;
 
         }
@@ -1324,7 +1341,7 @@ void RunBallCaptureSequence(void)
             gCurrentPinballGame->ball->velocity.y = 0;
             gCurrentPinballGame->ball->velocity.x = 0;
             gCurrentPinballGame->portraitDisplayState = 3;
-            gCurrentPinballGame->boardState = 4;
+            gCurrentPinballGame->boardState = MAIN_BOARD_STATE_CATCH_EM_MODE;
             gCurrentPinballGame->caughtMonCount++;
 
             if (gCurrentPinballGame->caughtMonCount == 15)
