@@ -33,9 +33,9 @@ void LoadPortraitGraphics(s16 displayMode, s16 picIx)
     // Show the 
     case CENTER_SCREEN_STATE_CURRENT_LOCATION:
         gCurrentPinballGame->creatureOamPriority = 3;
-        gCurrentPinballGame->portraitGfxIndex[picIx] = gCurrentPinballGame->rouletteAreaIndex[picIx];
+        gCurrentPinballGame->portraitGfxIndex[picIx] = gCurrentPinballGame->roulettePortraitIndexes[picIx];
         DmaCopy16(3, gPortraitGenericGraphics[gCurrentPinballGame->portraitGfxIndex[picIx]], (void *)0x06010CA0 + picIx * 0x300, 0x300);
-        index = gCurrentPinballGame->rouletteAreaIndex[picIx] * 0x10;
+        index = gCurrentPinballGame->roulettePortraitIndexes[picIx] * 0x10;
         DmaCopy16(3, &gPortraitGenericPalettes[index], (void *)0x05000200 + gPortraitPaletteSlots[picIx] * 0x20, 0x20);
         break;
     case CENTER_SCREEN_STATE_1:
