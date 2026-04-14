@@ -1,56 +1,5 @@
 .section .rodata
 
-
-gScaleTable:: @ 0x0852D928
-	.incbin "baserom.gba", 0x52D928, 0xB4
-
-gFreqTable:: @ 0x0852D9DC
-	.incbin "baserom.gba", 0x52D9DC, 0x30
-
-gPcmSamplesPerVBlankTable:: @ 0x0852DA0C
-	.incbin "baserom.gba", 0x52DA0C, 0x18
-
-gCgbScaleTable:: @ 0x0852DA24
-	.incbin "baserom.gba", 0x52DA24, 0x84
-
-gCgbFreqTable:: @ 0x0852DAA8
-	.incbin "baserom.gba", 0x52DAA8, 0x18
-
-gNoiseTable:: @ 0x0852DAC0
-	.incbin "baserom.gba", 0x52DAC0, 0x3C
-
-gCgb3Vol:: @ 0x0852DAFC
-	.incbin "baserom.gba", 0x52DAFC, 0x10
-
-gClockTable:: @ 0x0852DB0C
-	.incbin "baserom.gba", 0x52DB0C, 0x34
-
-gPokemonCrySongTemplate:: @ 0x0852DB40
-    .byte 1, 0, 0xFF, 0
-    .4byte voicegroup_base_gUnknown_0852DBAC
-	.4byte 0x0, 0x0
-    .byte 0x00, 0xC8, 0x40, 0xB2, 0x00, 0x00, 0x00, 0x00
-	.byte 0xC8, 0x50, 0xBD, 0x00, 0xBE, 0x7F, 0xCD, 0x0D
-	.byte 0x00, 0x00, 0x00, 0x00, 0xCD, 0x07, 0x00, 0xBF
-	.byte 0x40, 0xCF, 0x3C, 0x7F, 0xCD, 0x0C, 0x3C, 0x00
-	.byte 0xCE, 0xB1, 0x00, 0x00
-
-gXcmdTable:: @ 0x0852DB74
-	.4byte ply_xxx
-	.4byte ply_xwave
-	.4byte ply_xtype
-	.4byte ply_xxx
-	.4byte ply_xatta
-	.4byte ply_xdeca
-	.4byte ply_xsust
-	.4byte ply_xrele
-	.4byte ply_xiecv
-	.4byte ply_xiecl
-	.4byte ply_xleng
-	.4byte ply_xswee
-	.4byte ply_xwait
-	.4byte ply_xcmd_0D
-
 .include "asm/macros/m4a.inc"
 .include "asm/macros/music_voice.inc"
 
@@ -1719,7 +1668,7 @@ gUnknown_08532310:: @ 0x08532310
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound_compressed gDirectSound_0858E078
-	voice_directsound_compressed gDirectSound_08595C7C
+	voice_directsound_compressed gDirectSound_pika_08595C7C
 	voice_directsound_compressed gDirectSound_08597170
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound_compressed gDirectSound_0859BD58
@@ -2840,8 +2789,8 @@ gDirectSound_0858E078:: @ 0x0858E078
 	.incbin "sound/direct_sound_samples/cries/gDirectSound_0858E078.bin"
 
 	.align 2
-gDirectSound_08595C7C:: @ 0x08595C7C
-	.incbin "sound/direct_sound_samples/cries/gDirectSound_08595C7C.bin"
+gDirectSound_pika_08595C7C:: @ 0x08595C7C
+	.incbin "sound/direct_sound_samples/cries/gDirectSound_pika_08595C7C.bin"
 
 	.align 2
 gDirectSound_08597170:: @ 0x08597170
@@ -3825,48 +3774,48 @@ gDirectSound_086885EC:: @ 0x086885EC
 .include "sound/songs/se_score_entry_a_b_move.s"
 .include "sound/songs/se_score_entry_letter_change.s"
 .include "sound/songs/se_unk_6c.s"
-.include "sound/songs/se_unk_6d.s"
+.include "sound/songs/se_dex_info_field_select_move.s"
 .include "sound/songs/se_unk_6e.s"
 .include "sound/songs/se_unk_6f.s"
 .include "sound/songs/se_unk_71.s"
 .include "sound/songs/se_flipper_pressed.s"
 .include "sound/songs/se_slingshot_hit.s"
 .include "sound/songs/se_pokemon_catch_hit.s"
-.include "sound/songs/se_unk_75.s"
+.include "sound/songs/se_pichu_in_position_chirp.s"
 .include "sound/songs/se_trigger_button_hit.s"
 .include "sound/songs/se_wall_hit.s"
 .include "sound/songs/se_tilt_triggered.s"
-.include "sound/songs/se_unk_79.s"
-.include "sound/songs/se_unk_7a.s"
+.include "sound/songs/se_pika_spinner_clack.s"
+.include "sound/songs/se_pika_full_charge_1_up.s"
 .include "sound/songs/se_unk_7b.s"
-.include "sound/songs/se_unk_7c.s"
+.include "sound/songs/se_kickback_thunderwave.s"
 .include "sound/songs/se_unk_7d.s"
-.include "sound/songs/se_unk_7e.s"
+.include "sound/songs/se_coin_collected.s"
 .include "sound/songs/se_unk_7f.s"
-.include "sound/songs/se_unk_80.s"
-.include "sound/songs/se_unk_81.s"
+.include "sound/songs/se_center_hole_eject.s"
+.include "sound/songs/se_roulette_tick.s"
 .include "sound/songs/se_evo_selection_move.s"
 .include "sound/songs/se_evo_selection_confirm.s"
-.include "sound/songs/se_unk_84.s"
-.include "sound/songs/se_unk_85.s"
-.include "sound/songs/se_unk_86.s"
-.include "sound/songs/se_unk_87.s"
+.include "sound/songs/se_evo_item_appear.s"
+.include "sound/songs/se_evo_item_finish_appear.s"
+.include "sound/songs/se_evo_item_collected.s"
+.include "sound/songs/se_ball_upgrade.s"
 .include "sound/songs/se_unk_88.s"
 .include "sound/songs/se_unk_89.s"
 .include "sound/songs/se_failure.s"
-.include "sound/songs/se_unk_8b.s"
-.include "sound/songs/se_unk_8c.s"
-.include "sound/songs/se_unk_8d.s"
-.include "sound/songs/se_unk_8e.s"
-.include "sound/songs/se_unk_8f.s"
-.include "sound/songs/se_unk_91.s"
-.include "sound/songs/se_unk_92.s"
-.include "sound/songs/se_unk_93.s"
-.include "sound/songs/se_unk_94.s"
-.include "sound/songs/se_unk_95.s"
-.include "sound/songs/se_unk_96.s"
-.include "sound/songs/se_unk_97.s"
-.include "sound/songs/se_unk_98.s"
+.include "sound/songs/se_catch_evo_banner.s"
+.include "sound/songs/se_catch_tile_reveal.s"
+.include "sound/songs/se_catch_all_reveal_lightning.s"
+.include "sound/songs/se_catch_all_reveal_shatter.s"
+.include "sound/songs/se_shop_list_reveal.s"
+.include "sound/songs/se_bonus_score_tallied.s"
+.include "sound/songs/se_hatch_flourish.s"
+.include "sound/songs/se_area_roulette_selected.s"
+.include "sound/songs/se_ball_saved.s"
+.include "sound/songs/se_lati_delivery.s"
+.include "sound/songs/se_saver_plunger_drop.s"
+.include "sound/songs/se_travel_painter_flight.s"
+.include "sound/songs/se_travel_painter_paints.s"
 .include "sound/songs/se_unk_99.s"
 .include "sound/songs/se_unk_9a.s"
 .include "sound/songs/se_unk_9b.s"
@@ -3891,9 +3840,9 @@ gDirectSound_086885EC:: @ 0x086885EC
 .include "sound/songs/se_pika_charge_ti.s"
 .include "sound/songs/se_pika_charge_high_do.s"
 .include "sound/songs/se_unk_b0.s"
-.include "sound/songs/se_unk_b1.s"
+.include "sound/songs/se_pikachu_kickback.s"
 .include "sound/songs/se_unk_b2.s"
-.include "sound/songs/se_unk_b3.s"
+.include "sound/songs/se_pichu_kickback.s"
 .include "sound/songs/se_unk_b4.s"
 .include "sound/songs/se_ruby_bumper_hit.s"
 .include "sound/songs/se_unk_b7.s"
@@ -4011,7 +3960,7 @@ gDirectSound_086885EC:: @ 0x086885EC
 .include "sound/songs/se_unk_13e.s"
 .include "sound/songs/se_unk_13f.s"
 .include "sound/songs/se_unk_140.s"
-.include "sound/songs/se_unk_142.s"
+.include "sound/songs/se_pika_no_kickback.s"
 .include "sound/songs/se_jirachi_move.s"
 .include "sound/songs/se_jirachi_hit.s"
 .include "sound/songs/se_unk_146.s"
@@ -4021,6 +3970,3 @@ gDirectSound_086885EC:: @ 0x086885EC
 .include "sound/songs/se_high_score_earned.s"
 .include "sound/songs/se_unk_14b.s"
 .include "sound/songs/se_whiscash_earthquake.s"
-
-@ This is not sound data below. It's some kind of save file descriptor (SRAM_F_V102).
-.incbin "baserom.gba", 0x6A369C, 0x6A3700 - 0x6A369C
