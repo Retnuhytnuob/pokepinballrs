@@ -121,7 +121,7 @@ void RenderBannerSlideAnimation(void)
     spriteGroup = gMain.fieldSpriteGroups[11];
     frameCount = ((gMain.systemFrameCount & 7) / 4);
 
-    if (spriteGroup->available != 0)
+    if (spriteGroup->active != 0)
     {
         spriteGroup->baseX = 0;
         spriteGroup->baseY = 200;
@@ -153,7 +153,7 @@ void RenderBannerSlideAnimation(void)
                 {
                     spriteGroup->baseX = -110;
                     spriteGroup->baseY = 44;
-                    gMain.fieldSpriteGroups[11]->available = 0; // direct index required here
+                    gMain.fieldSpriteGroups[11]->active = 0; // direct index required here
                     gCurrentPinballGame->bannerGfxIndex = 0;
                     gCurrentPinballGame->activePortraitType = 0;
                 }
@@ -280,7 +280,7 @@ void RenderBannerSlideAnimation(void)
                 }
                 if (gCurrentPinballGame->bannerSlideTimer == 0x1E)
                 {
-                    gMain.fieldSpriteGroups[11]->available = 0;
+                    gMain.fieldSpriteGroups[11]->active = 0;
                     gCurrentPinballGame->bannerGfxIndex = 0;
                     gCurrentPinballGame->activePortraitType = 0;
                     if ((gCurrentPinballGame->ballCatchState != TRAP_EVO_SHOP_HOLE || gCurrentPinballGame->evolutionShopActive != 1) &&
@@ -321,6 +321,6 @@ void RenderBannerSlideAnimation(void)
         }
         return;
     }
-    spriteGroup->available = 1;
+    spriteGroup->active = 1;
     return;
 }

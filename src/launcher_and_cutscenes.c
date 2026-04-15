@@ -44,7 +44,7 @@ void AnimateOneUpSprite(void)
 
     var0 = 0;
     group = gMain.fieldSpriteGroups[50];
-    if (group->available)
+    if (group->active)
     {
         group->baseX = 202;
         if (gCurrentPinballGame->oneUpAnimTimer > 48)
@@ -132,7 +132,7 @@ void AnimateOneUpSprite(void)
     {
         if (gCurrentPinballGame->oneUpAnimTimer == 90)
         {
-            group->available = 1;
+            group->active = 1;
             DmaCopy16(3, gOneUpSpritePalette, (void *)0x05000380, 0x20);
         }
 
@@ -148,7 +148,7 @@ void AnimateOneUpSprite(void)
 
         gCurrentPinballGame->oneUpAnimTimer--;
         if (gCurrentPinballGame->oneUpAnimTimer == 0)
-            group->available = 0;
+            group->active = 0;
     }
 }
 
@@ -159,7 +159,7 @@ void AnimateBannerSlide(void)
     struct OamDataSimple *oamSimple;
 
     group = gMain.fieldSpriteGroups[10];
-    if (group->available)
+    if (group->active)
     {
         group->baseX = gCurrentPinballGame->bannerSlideX;
         group->baseY = 44;
@@ -174,11 +174,11 @@ void AnimateBannerSlide(void)
     if (gCurrentPinballGame->bannerDisplayDuration > 0)
     {
         if (gCurrentPinballGame->bannerDisplayDuration == 120)
-            gMain.fieldSpriteGroups[10]->available = 1;
+            gMain.fieldSpriteGroups[10]->active = 1;
 
         gCurrentPinballGame->bannerSlideX = 270 - ((120 - gCurrentPinballGame->bannerDisplayDuration) * 3);
         if (gCurrentPinballGame->bannerDisplayDuration == 1)
-            gMain.fieldSpriteGroups[10]->available = 0;
+            gMain.fieldSpriteGroups[10]->active = 0;
     }
 }
 
@@ -277,7 +277,7 @@ void DrawSpoinkSprite(void)
     s16 index;
 
     group = gMain.fieldSpriteGroups[44];
-    if (group->available)
+    if (group->active)
     {
         if (gCurrentPinballGame->spoinkAnimFrameIx == 0)
             index = (gCurrentPinballGame->globalAnimFrameCounter % 30) / 15;
@@ -323,12 +323,12 @@ void RunEvolutionCutscene(void)
             gCurrentPinballGame->activePortraitType = 16;
             DmaCopy16(3, gBoardActionTilesGfx, (void *)0x06015800, 0x2400);
             DmaCopy16(3, gBoardActionObjPal, (void *)0x050003C0, 0x20);
-            gMain.fieldSpriteGroups[24]->available = 1;
-            gMain.fieldSpriteGroups[25]->available = 1;
-            gMain.fieldSpriteGroups[26]->available = 1;
-            gMain.fieldSpriteGroups[27]->available = 1;
-            gMain.fieldSpriteGroups[28]->available = 1;
-            gMain.fieldSpriteGroups[15]->available = 1;
+            gMain.fieldSpriteGroups[24]->active = 1;
+            gMain.fieldSpriteGroups[25]->active = 1;
+            gMain.fieldSpriteGroups[26]->active = 1;
+            gMain.fieldSpriteGroups[27]->active = 1;
+            gMain.fieldSpriteGroups[28]->active = 1;
+            gMain.fieldSpriteGroups[15]->active = 1;
         }
 
         if (gCurrentPinballGame->scrollEffectY < 236)
@@ -620,12 +620,12 @@ void RunEvolutionCutscene(void)
 
         if (gCurrentPinballGame->stageTimer == 360)
         {
-            gMain.fieldSpriteGroups[24]->available = 0;
-            gMain.fieldSpriteGroups[25]->available = 0;
-            gMain.fieldSpriteGroups[26]->available = 0;
-            gMain.fieldSpriteGroups[27]->available = 0;
-            gMain.fieldSpriteGroups[28]->available = 0;
-            gMain.fieldSpriteGroups[15]->available = 0;
+            gMain.fieldSpriteGroups[24]->active = 0;
+            gMain.fieldSpriteGroups[25]->active = 0;
+            gMain.fieldSpriteGroups[26]->active = 0;
+            gMain.fieldSpriteGroups[27]->active = 0;
+            gMain.fieldSpriteGroups[28]->active = 0;
+            gMain.fieldSpriteGroups[15]->active = 0;
             gCurrentPinballGame->currentSpecies = gCurrentPinballGame->postEvoSpecies;
             LoadPortraitGraphics(CENTER_SCREEN_STATE_3, CENTER_SCREEN_MAIN_SLOT);
             gCurrentPinballGame->activePortraitType = 17;
@@ -654,7 +654,7 @@ void RunEvolutionCutscene(void)
             {
                 gCurrentPinballGame->revealAnimFrameCounter = 0;
                 gCurrentPinballGame->revealFramesetIndex = 0;
-                gMain.fieldSpriteGroups[37]->available = 1;
+                gMain.fieldSpriteGroups[37]->active = 1;
             }
         }
         else
@@ -670,7 +670,7 @@ void RunEvolutionCutscene(void)
                 gCurrentPinballGame->revealFramesetIndex++;
                 if (gCurrentPinballGame->revealFramesetIndex > 10)
                 {
-                    gMain.fieldSpriteGroups[37]->available = 0;
+                    gMain.fieldSpriteGroups[37]->active = 0;
                     gCurrentPinballGame->revealFramesetIndex = 10;
                     gCurrentPinballGame->stageTimer = 0;
                     gCurrentPinballGame->boardSubState++;
@@ -712,7 +712,7 @@ void RunTravelEventCutscene(void)
     index = 0;
     if (gCurrentPinballGame->stageTimer == 0)
     {
-        gMain.fieldSpriteGroups[16]->available = 1;
+        gMain.fieldSpriteGroups[16]->active = 1;
         gCurrentPinballGame->travelPainterPosX = 1400;
         gCurrentPinballGame->travelPainterPosY = -600;
         gCurrentPinballGame->activePortraitType = 21;
@@ -856,7 +856,7 @@ void RunTravelEventCutscene(void)
 
     if (gCurrentPinballGame->stageTimer == 489)
     {
-        gMain.fieldSpriteGroups[16]->available = 0;
+        gMain.fieldSpriteGroups[16]->active = 0;
         gCurrentPinballGame->activePortraitType = 0;
     }
 }

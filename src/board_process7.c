@@ -53,7 +53,7 @@ void MainBoardProcess_7B_12524(void)
 
     spriteGroup = gMain.fieldSpriteGroups[0];
 
-    if (spriteGroup->available)
+    if (spriteGroup->active)
     {
         SetMatrixScale(currentBallState->scale, currentBallState->scale, 0);
 
@@ -95,7 +95,7 @@ void MainBoardProcess_7B_12524(void)
 
     spriteGroup = gMain.fieldSpriteGroups[49];
 
-    if (spriteGroup->available)
+    if (spriteGroup->active)
     {
         SetMatrixScale(currentBallState->scale, currentBallState->scale, 0);
 
@@ -149,7 +149,7 @@ void MainBoardProcess_7B_12524(void)
         {
             spriteGroup = gMain.fieldSpriteGroups[i + 1];
 
-            if (spriteGroup->available)
+            if (spriteGroup->active)
             {
                 oam = &spriteGroup->oam[0];
                 oamData = &gOamBuffer[oam->oamId];
@@ -169,10 +169,10 @@ void MainBoardProcess_7B_12524(void)
             }
         }
 
-        gMain.fieldSpriteGroups[1]->available = 1;
-        gMain.fieldSpriteGroups[2]->available = 1;
-        gMain.fieldSpriteGroups[49]->available = 1;
-        gMain.fieldSpriteGroups[0]->available = 0;
+        gMain.fieldSpriteGroups[1]->active = 1;
+        gMain.fieldSpriteGroups[2]->active = 1;
+        gMain.fieldSpriteGroups[49]->active = 1;
+        gMain.fieldSpriteGroups[0]->active = 0;
     }
     else
     {
@@ -180,7 +180,7 @@ void MainBoardProcess_7B_12524(void)
         {
             spriteGroup = gMain.fieldSpriteGroups[i + 1];
 
-            if (spriteGroup->available)
+            if (spriteGroup->active)
             {
                 oam = &spriteGroup->oam[0];
                 oamData = &gOamBuffer[oam->oamId];
@@ -191,15 +191,15 @@ void MainBoardProcess_7B_12524(void)
             }
         }
 
-        gMain.fieldSpriteGroups[1]->available = 0;
-        gMain.fieldSpriteGroups[2]->available = 0;
-        gMain.fieldSpriteGroups[49]->available = 0;
-        gMain.fieldSpriteGroups[0]->available = 1;
+        gMain.fieldSpriteGroups[1]->active = 0;
+        gMain.fieldSpriteGroups[2]->active = 0;
+        gMain.fieldSpriteGroups[49]->active = 0;
+        gMain.fieldSpriteGroups[0]->active = 1;
     }
 
     spriteGroup = gMain.fieldSpriteGroups[43];
 
-    if (spriteGroup->available)
+    if (spriteGroup->active)
     {
         s8 newIx;
         if (gCurrentPinballGame->ballShadowTimer < 59)
@@ -224,7 +224,7 @@ void MainBoardProcess_7B_12524(void)
         gOamBuffer[oam->oamId].priority = currentBallState->oamPriority;
 
         if (gCurrentPinballGame->ballShadowTimer < 14)
-            gMain.fieldSpriteGroups[43]->available = 0;
+            gMain.fieldSpriteGroups[43]->active = 0;
     }
 }
 
@@ -304,7 +304,7 @@ void BonusBoardProcess_7B_12BF8()
     if (gCurrentPinballGame->ballRespawnState)
     {
         spriteGroup = gMain.fieldSpriteGroups[1];
-        if (spriteGroup->available)
+        if (spriteGroup->active)
         {
             spriteGroup->baseX = primaryBall->screenPosition.x - 8;
             spriteGroup->baseY = primaryBall->screenPosition.y - 8;
@@ -324,7 +324,7 @@ void BonusBoardProcess_7B_12BF8()
             }
 
             if (gCurrentPinballGame->ballRespawnTimer == 150)
-                spriteGroup->available = TRUE;
+                spriteGroup->active = TRUE;
 
             if (gCurrentPinballGame->ballRespawnTimer == 154)
                 m4aSongNumStart(SE_UNKNOWN_0xF9);
@@ -354,7 +354,7 @@ void BonusBoardProcess_7B_12BF8()
                     gCurrentPinballGame->boardModeType = 2;
 
                 gCurrentPinballGame->ballRespawnState = 0;
-                spriteGroup->available = FALSE;
+                spriteGroup->active = FALSE;
                 gCurrentPinballGame->ballFrozenState = 0;
                 DmaCopy16(3, &gBallPalettes[gCurrentPinballGame->ballUpgradeType], (void *)PLTT + 0x220, 0x20);
             }
@@ -370,7 +370,7 @@ void BonusBoardProcess_7B_12BF8()
             }
 
             if (gCurrentPinballGame->ballRespawnTimer == 5)
-                spriteGroup->available = TRUE;
+                spriteGroup->active = TRUE;
 
             if (gCurrentPinballGame->ballRespawnTimer > 4)
             {
@@ -391,7 +391,7 @@ void BonusBoardProcess_7B_12BF8()
             if (gCurrentPinballGame->ballRespawnTimer > 67)
             {
                 gCurrentPinballGame->ballRespawnState = 0;
-                spriteGroup->available = FALSE;
+                spriteGroup->active = FALSE;
                 DmaCopy16(3, &gBallPalettes[gCurrentPinballGame->ballUpgradeType], (void *)PLTT + 0x220, 0x20);
             }
         }
@@ -433,7 +433,7 @@ void BonusBoardProcess_7B_12BF8()
             for (i = 0; i < 2; i++)
             {
                 spriteGroup = gMain.fieldSpriteGroups[i + 6];
-                if (spriteGroup->available)
+                if (spriteGroup->active)
                 {
                     oam = &spriteGroup->oam[0];
                     oamData = &gOamBuffer[oam->oamId];
@@ -465,15 +465,15 @@ void BonusBoardProcess_7B_12BF8()
                     }
                 }
             }
-            gMain.fieldSpriteGroups[6]->available = TRUE;
-            gMain.fieldSpriteGroups[7]->available = TRUE;
+            gMain.fieldSpriteGroups[6]->active = TRUE;
+            gMain.fieldSpriteGroups[7]->active = TRUE;
         }
         else
         {
             for (i = 0; i < 2; i++)
             {
                 spriteGroup = gMain.fieldSpriteGroups[i + 6];
-                if (spriteGroup->available)
+                if (spriteGroup->active)
                 {
                     oam = &spriteGroup->oam[0];
                     oamData = &gOamBuffer[oam->oamId];
@@ -483,8 +483,8 @@ void BonusBoardProcess_7B_12BF8()
                     oamData->y = 200;
                 }
             }
-            gMain.fieldSpriteGroups[6]->available = FALSE;
-            gMain.fieldSpriteGroups[7]->available = FALSE;
+            gMain.fieldSpriteGroups[6]->active = FALSE;
+            gMain.fieldSpriteGroups[7]->active = FALSE;
         }
     }
 }

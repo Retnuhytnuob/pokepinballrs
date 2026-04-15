@@ -521,11 +521,11 @@ void IntroScene1_RenderTitleSprite(void)
     struct SpriteGroup *puVar4;
     const struct SpriteSet *puVar6;
 
-    puVar4 = &gMain.spriteGroups[4 + gIntroSpriteEntities[0].animFrame];
-    puVar4->available = gIntroSpriteEntities[0].visible;
+    puVar4 = &gMain.spriteGroups[SG_4 + gIntroSpriteEntities[0].animFrame];
+    puVar4->active = gIntroSpriteEntities[0].visible;
     LoadSpriteSets(gIntroScene1_SpriteSets, 0x31, gMain.spriteGroups);
 
-    if (puVar4->available == 1)
+    if (puVar4->active == 1)
     {
         puVar4->baseX = gIntroSpriteEntities[0].posX;
         puVar4->baseY = gIntroSpriteEntities[0].posY;
@@ -539,7 +539,7 @@ void IntroScene1_RenderTitleSprite(void)
         }
     }
 
-    puVar4->available = FALSE;
+    puVar4->active = FALSE;
 }
 
 void IntroScene1_RenderScaledTitle(void)
@@ -548,11 +548,11 @@ void IntroScene1_RenderScaledTitle(void)
     struct SpriteGroup *puVar4;
     struct OamDataSimple *puVar2;
 
-    puVar4 = &gMain.spriteGroups[0x28];
-    puVar4->available = gIntroSpriteEntities[0].visible;
+    puVar4 = &gMain.spriteGroups[SG_40];
+    puVar4->active = gIntroSpriteEntities[0].visible;
     LoadSpriteSets(gIntroScene1_SpriteSets, 0x31, gMain.spriteGroups);
 
-    if (puVar4->available == 1)
+    if (puVar4->active == 1)
     {
         SetMatrixScale(gIntroScaleX, gIntroScaleY, 0);
         puVar4->baseX = gIntroSpriteEntities[0].posX;
@@ -568,7 +568,7 @@ void IntroScene1_RenderScaledTitle(void)
             gOamBuffer[puVar2->oamId].matrixNum = 0;
         }
     }
-    puVar4->available = FALSE;
+    puVar4->active = FALSE;
 }
 
 void IntroScene1_RenderAllSprites(void)
@@ -587,17 +587,17 @@ void IntroScene1_RenderAllSprites(void)
     REG_BLDALPHA = gMain.blendAlpha;
 
     puVar1 = &gMain.spriteGroups[gIntroSpriteEntities[1].animFrame];
-    mainSg3 = &gMain.spriteGroups[3];
-    mainSg2 = &gMain.spriteGroups[2];
+    mainSg3 = &gMain.spriteGroups[SG_3];
+    mainSg2 = &gMain.spriteGroups[SG_2];
     otherSg = &gMain_spriteGroups_48;
 
-    puVar1->available = gIntroSpriteEntities[1].visible;
-    mainSg3->available = gIntroSpriteEntities[2].visible;
-    mainSg2->available = gIntroSpriteEntities[3].visible;
-    otherSg->available = gIntroSpriteEntities[4].visible;
+    puVar1->active = gIntroSpriteEntities[1].visible;
+    mainSg3->active = gIntroSpriteEntities[2].visible;
+    mainSg2->active = gIntroSpriteEntities[3].visible;
+    otherSg->active = gIntroSpriteEntities[4].visible;
     LoadSpriteSets(gIntroScene1_SpriteSets, 0x31, gMain.spriteGroups);
 
-    if (puVar1->available == 1)
+    if (puVar1->active == 1)
     {
         puVar1->baseX = gIntroSpriteEntities[1].posX;
         puVar1->baseY = gIntroSpriteEntities[1].posY;
@@ -613,7 +613,7 @@ void IntroScene1_RenderAllSprites(void)
             gOamBuffer[puVar5->oamId].y = puVar1->oam[i].yOffset + puVar1->baseY;
         }
     }
-    if (mainSg3->available == 1)
+    if (mainSg3->active == 1)
     {
         mainSg3->baseX = gIntroSpriteEntities[2].posX;
         mainSg3->baseY = gIntroSpriteEntities[2].posY;
@@ -627,7 +627,7 @@ void IntroScene1_RenderAllSprites(void)
             gOamBuffer[puVar5->oamId].y = mainSg3->oam[i].yOffset + mainSg3->baseY;
         }
     }
-    if (mainSg2->available == 1)
+    if (mainSg2->active == 1)
     {
         mainSg2->baseX = gIntroSpriteEntities[3].posX;
         mainSg2->baseY = gIntroSpriteEntities[3].posY;
@@ -641,7 +641,7 @@ void IntroScene1_RenderAllSprites(void)
             gOamBuffer[puVar5->oamId].y = mainSg2->oam[i].yOffset + mainSg2->baseY;
         }
     }
-    if (otherSg->available == 1)
+    if (otherSg->active == 1)
     {
         otherSg->baseX = gIntroSpriteEntities[4].posX;
         otherSg->baseY = gIntroSpriteEntities[4].posY;
@@ -655,10 +655,10 @@ void IntroScene1_RenderAllSprites(void)
         }
     }
 
-    puVar1->available = FALSE;
-    mainSg3->available = FALSE;
-    mainSg2->available = FALSE;
-    otherSg->available = FALSE; // TODO Possible Bug?
+    puVar1->active = FALSE;
+    mainSg3->active = FALSE;
+    mainSg2->active = FALSE;
+    otherSg->active = FALSE; // TODO Possible Bug?
 }
 
 void IntroScene1_ClearGraphics(void)
@@ -946,11 +946,11 @@ void IntroScene3_RenderPokeball(void)
     REG_BLDCNT = gMain.blendControl;
     REG_BLDALPHA = gMain.blendAlpha;
 
-    puVar4 = &gMain.spriteGroups[0];
-    puVar4->available = TRUE;
+    puVar4 = &gMain.spriteGroups[SG_0];
+    puVar4->active = TRUE;
     LoadSpriteSets(gIntroScene3_SpriteSets, 0x1, puVar4);
 
-    if (puVar4->available == 1)
+    if (puVar4->active == 1)
     {
         puVar4->baseX = gIntroSpriteEntities[0].posX;
         puVar4->baseY = gIntroSpriteEntities[0].posY;
@@ -963,7 +963,7 @@ void IntroScene3_RenderPokeball(void)
             gOamBuffer[puVar2->oamId].y = puVar2->yOffset + puVar4->baseY;
         }
     }
-    puVar4->available = FALSE;
+    puVar4->active = FALSE;
 }
 
 void IntroScene3_ClearGraphics(void)
@@ -1262,16 +1262,16 @@ void IntroScene5_RenderAllSprites(void)
     REG_BLDCNT = gMain.blendControl;
     REG_BLDALPHA = gMain.blendAlpha;
 
-    mainSg1 = &gMain.spriteGroups[1];
-    mainSg0 = &gMain.spriteGroups[0];
-    mainSg2 = &gMain.spriteGroups[2];
+    mainSg1 = &gMain.spriteGroups[SG_1];
+    mainSg0 = &gMain.spriteGroups[SG_0];
+    mainSg2 = &gMain.spriteGroups[SG_2];
 
-    mainSg1->available = TRUE;
-    mainSg0->available = TRUE;
-    mainSg2->available = TRUE;
+    mainSg1->active = TRUE;
+    mainSg0->active = TRUE;
+    mainSg2->active = TRUE;
     LoadSpriteSets(gIntroScene5_SpriteSets, 3, gMain.spriteGroups);
 
-    if (mainSg1->available == 1)
+    if (mainSg1->active == 1)
     {
         mainSg1->baseX = gIntroSpriteEntities[0].posX;
         mainSg1->baseY = gIntroSpriteEntities[0].posY;
@@ -1285,7 +1285,7 @@ void IntroScene5_RenderAllSprites(void)
         }
     }
 
-    if (mainSg0->available == 1)
+    if (mainSg0->active == 1)
     {
         mainSg0->baseX = gIntroSpriteEntities[1].posX;
         mainSg0->baseY = gIntroSpriteEntities[1].posY;
@@ -1299,7 +1299,7 @@ void IntroScene5_RenderAllSprites(void)
         }
     }
 
-    if (mainSg2->available == 1)
+    if (mainSg2->active == 1)
     {
         mainSg2->baseX = gIntroSpriteEntities[2].posX;
         mainSg2->baseY = gIntroSpriteEntities[2].posY;
@@ -1312,9 +1312,9 @@ void IntroScene5_RenderAllSprites(void)
         }
     }
 
-    mainSg1->available = FALSE;
-    mainSg0->available = FALSE;
-    mainSg2->available = FALSE;
+    mainSg1->active = FALSE;
+    mainSg0->active = FALSE;
+    mainSg2->active = FALSE;
 }
 
 void IntroScene5_ClearGraphics(void)
@@ -1495,26 +1495,26 @@ void IntroScene6_RenderStarSprites(void)
     s32 i;
     s32 j;
     const struct SpriteSet *p;
-    struct SpriteGroup *spriteGroups[6];
+    struct SpriteGroup *spriteGroups[SG_6];
 
-    spriteGroups[0] = &gMain.spriteGroups[6 * gIntroSpriteEntities[0].animFrame];
-    spriteGroups[1] = &gMain.spriteGroups[6 * gIntroSpriteEntities[1].animFrame + 1];
-    spriteGroups[2] = &gMain.spriteGroups[6 * gIntroSpriteEntities[2].animFrame + 2];
-    spriteGroups[3] = &gMain.spriteGroups[6 * gIntroSpriteEntities[3].animFrame + 3];
-    spriteGroups[4] = &gMain.spriteGroups[6 * gIntroSpriteEntities[4].animFrame + 4];
-    spriteGroups[5] = &gMain.spriteGroups[6 * gIntroSpriteEntities[5].animFrame + 5];
+    spriteGroups[SG_0] = &gMain.spriteGroups[SG_6 * gIntroSpriteEntities[0].animFrame];
+    spriteGroups[SG_1] = &gMain.spriteGroups[SG_6 * gIntroSpriteEntities[1].animFrame + 1];
+    spriteGroups[SG_2] = &gMain.spriteGroups[SG_6 * gIntroSpriteEntities[2].animFrame + 2];
+    spriteGroups[SG_3] = &gMain.spriteGroups[SG_6 * gIntroSpriteEntities[3].animFrame + 3];
+    spriteGroups[SG_4] = &gMain.spriteGroups[SG_6 * gIntroSpriteEntities[4].animFrame + 4];
+    spriteGroups[SG_5] = &gMain.spriteGroups[SG_6 * gIntroSpriteEntities[5].animFrame + 5];
 
-    spriteGroups[0]->available = gIntroSpriteEntities[0].visible;
-    spriteGroups[1]->available = gIntroSpriteEntities[1].visible;
-    spriteGroups[2]->available = gIntroSpriteEntities[2].visible;
-    spriteGroups[3]->available = gIntroSpriteEntities[3].visible;
-    spriteGroups[4]->available = gIntroSpriteEntities[4].visible;
-    spriteGroups[5]->available = gIntroSpriteEntities[5].visible;
+    spriteGroups[SG_0]->active = gIntroSpriteEntities[0].visible;
+    spriteGroups[SG_1]->active = gIntroSpriteEntities[1].visible;
+    spriteGroups[SG_2]->active = gIntroSpriteEntities[2].visible;
+    spriteGroups[SG_3]->active = gIntroSpriteEntities[3].visible;
+    spriteGroups[SG_4]->active = gIntroSpriteEntities[4].visible;
+    spriteGroups[SG_5]->active = gIntroSpriteEntities[5].visible;
 
-    LoadSpriteSets(gIntroScene6_SpriteSets, 0x12, &gMain.spriteGroups[0]);
+    LoadSpriteSets(gIntroScene6_SpriteSets, 0x12, &gMain.spriteGroups[SG_0]);
     for (i = 0; i < 6; i++)
     {
-        if (spriteGroups[i]->available != 1)
+        if (spriteGroups[i]->active != 1)
             continue;
 
         gIntroSpriteEntities[i].posX += gIntroScene6_EntityMovement[i].velocityX;
@@ -1541,12 +1541,12 @@ void IntroScene6_RenderStarSprites(void)
             gIntroSpriteEntities[i].visible = 0;
     }
 
-    spriteGroups[0]->available = 0;
-    spriteGroups[1]->available = 0;
-    spriteGroups[2]->available = 0;
-    spriteGroups[3]->available = 0;
-    spriteGroups[4]->available = 0;
-    spriteGroups[5]->available = 0;
+    spriteGroups[SG_0]->active = 0;
+    spriteGroups[SG_1]->active = 0;
+    spriteGroups[SG_2]->active = 0;
+    spriteGroups[SG_3]->active = 0;
+    spriteGroups[SG_4]->active = 0;
+    spriteGroups[SG_5]->active = 0;
 }
 
 void IntroScene6_AdvanceIndex(void)
@@ -1805,10 +1805,10 @@ void IntroScene7_RenderWailmer(void)
     struct SpriteGroup *spriteGroup;
     struct OamDataSimple *oamData;
 
-    spriteGroup = &gMain.spriteGroups[0];
-    spriteGroup->available = TRUE;
+    spriteGroup = &gMain.spriteGroups[SG_0];
+    spriteGroup->active = TRUE;
     LoadSpriteSets(gIntroScene7_SpriteSets, 0x1, gMain.spriteGroups);
-    if (spriteGroup->available == 1)
+    if (spriteGroup->active == 1)
     {
         SetMatrixScale(gIntroWailmerScaleX, gIntroWailmerScaleY, 0);
         spriteGroup->baseX = gIntroSpriteEntities[0].posX;
@@ -1824,7 +1824,7 @@ void IntroScene7_RenderWailmer(void)
         }
     }
 
-    spriteGroup->available = FALSE;
+    spriteGroup->active = FALSE;
 }
 
 void IntroScene7_ClearGraphics(void)
@@ -1976,7 +1976,7 @@ void IntroScene8a_RenderAllSprites(void)
 {
     struct SpriteGroup *sg0;
     struct SpriteGroup *sg1;
-    struct SpriteGroup *spriteGroups[5];
+    struct SpriteGroup *spriteGroups[SG_5];
     struct OamDataSimple *oamData;
     const struct SpriteSet *p;
     s32 i;
@@ -1985,28 +1985,28 @@ void IntroScene8a_RenderAllSprites(void)
     s8 cVar2;
 
 
-    sg0 = &gMain.spriteGroups[0];
-    sg1 = &gMain.spriteGroups[1];
+    sg0 = &gMain.spriteGroups[SG_0];
+    sg1 = &gMain.spriteGroups[SG_1];
 
-    spriteGroups[0] = &gMain.spriteGroups[(5 * gIntroSpriteEntities[2].animFrame) + 2];
-    spriteGroups[1] = &gMain.spriteGroups[(5 * gIntroSpriteEntities[3].animFrame) + 3];
-    spriteGroups[2] = &gMain.spriteGroups[(5 * gIntroSpriteEntities[4].animFrame) + 4];
-    spriteGroups[3] = &gMain.spriteGroups[(5 * gIntroSpriteEntities[5].animFrame) + 5];
-    spriteGroups[4] = &gMain.spriteGroups[(5 * gIntroSpriteEntities[6].animFrame) + 6];
+    spriteGroups[SG_0] = &gMain.spriteGroups[(5 * gIntroSpriteEntities[2].animFrame) + SG_2];
+    spriteGroups[SG_1] = &gMain.spriteGroups[(5 * gIntroSpriteEntities[3].animFrame) + SG_3];
+    spriteGroups[SG_2] = &gMain.spriteGroups[(5 * gIntroSpriteEntities[4].animFrame) + SG_4];
+    spriteGroups[SG_3] = &gMain.spriteGroups[(5 * gIntroSpriteEntities[5].animFrame) + SG_5];
+    spriteGroups[SG_4] = &gMain.spriteGroups[(5 * gIntroSpriteEntities[6].animFrame) + SG_6];
 
 
-    sg0->available = gIntroSpriteEntities[0].visible;
-    sg1->available = 1;
+    sg0->active = gIntroSpriteEntities[0].visible;
+    sg1->active = 1;
 
-    spriteGroups[0]->available = gIntroSpriteEntities[2].visible;
-    spriteGroups[1]->available = gIntroSpriteEntities[3].visible;
-    spriteGroups[2]->available = gIntroSpriteEntities[4].visible;
-    spriteGroups[3]->available = gIntroSpriteEntities[5].visible;
-    spriteGroups[4]->available = gIntroSpriteEntities[6].visible;
+    spriteGroups[SG_0]->active = gIntroSpriteEntities[2].visible;
+    spriteGroups[SG_1]->active = gIntroSpriteEntities[3].visible;
+    spriteGroups[SG_2]->active = gIntroSpriteEntities[4].visible;
+    spriteGroups[SG_3]->active = gIntroSpriteEntities[5].visible;
+    spriteGroups[SG_4]->active = gIntroSpriteEntities[6].visible;
 
     LoadSpriteSets(gIntroScene8a_SpriteSets, 0x11, gMain.spriteGroups);
 
-    if (sg0->available == 1)
+    if (sg0->active == 1)
     {
         sg0->baseX = gIntroSpriteEntities[0].posX;
         sg0->baseY = gIntroSpriteEntities[0].posY;
@@ -2018,7 +2018,7 @@ void IntroScene8a_RenderAllSprites(void)
 
     for (i = 0; i < 5; i++)
     {
-        if (spriteGroups[i]->available == 1)
+        if (spriteGroups[i]->active == 1)
         {
             gIntroAnimStep++;
             if (gIntroAnimStep > 5)
@@ -2060,7 +2060,7 @@ void IntroScene8a_RenderAllSprites(void)
         }
     }
 
-    if (sg1->available == 1)
+    if (sg1->active == 1)
     {
         sg1->baseX = gIntroSpriteEntities[1].posX;
         sg1->baseY = gIntroSpriteEntities[1].posY;
@@ -2075,14 +2075,14 @@ void IntroScene8a_RenderAllSprites(void)
 
     }
 
-    sg1->available = 0;
-    sg0->available = 0;
+    sg1->active = 0;
+    sg0->active = 0;
 
-    spriteGroups[0]->available = 0;
-    spriteGroups[1]->available = 0;
-    spriteGroups[2]->available = 0;
-    spriteGroups[3]->available = 0;
-    spriteGroups[4]->available = 0;
+    spriteGroups[SG_0]->active = 0;
+    spriteGroups[SG_1]->active = 0;
+    spriteGroups[SG_2]->active = 0;
+    spriteGroups[SG_3]->active = 0;
+    spriteGroups[SG_4]->active = 0;
 }
 void IntroScene8a_ClearAndResetOAM(void)
 {
@@ -2093,7 +2093,7 @@ void IntroScene8a_ClearAndResetOAM(void)
     DmaFill32(3, 0, OAM, 0x400);
     for (i = 0; i < 20; i++)
     {
-        gMain.spriteGroups[i].available = 0;
+        gMain.spriteGroups[i].active = 0;
         gMain.spriteGroups[i].baseX = 0;
         gMain.spriteGroups[i].baseY = 0;
         for (j = 0; j < 0x16; j++)
@@ -2278,11 +2278,11 @@ void IntroScene8b_RenderBallAndCloud(void)
     struct OamDataSimple *oamData;
 
     spriteGroup0 = &gMain.spriteGroups[gIntroSpriteEntities[0].animFrame];
-    spriteGroup1 = &gMain.spriteGroups[0];
-    spriteGroup0->available = gIntroSpriteEntities[0].visible;
-    spriteGroup1->available = gIntroSpriteEntities[1].visible;
+    spriteGroup1 = &gMain.spriteGroups[SG_0];
+    spriteGroup0->active = gIntroSpriteEntities[0].visible;
+    spriteGroup1->active = gIntroSpriteEntities[1].visible;
     LoadSpriteSets(gIntroScene8b_SpriteSets, 11, gMain.spriteGroups);
-    if (spriteGroup0->available == 1)
+    if (spriteGroup0->active == 1)
     {
         SetMatrixScale(gIntroWailmerScaleX, gIntroWailmerScaleY, 0);
         spriteGroup0->baseX = gIntroSpriteEntities[0].posX;
@@ -2294,7 +2294,7 @@ void IntroScene8b_RenderBallAndCloud(void)
         gOamBuffer[oamData->oamId].matrixNum = 0;
     }
 
-    if (spriteGroup1->available == 1)
+    if (spriteGroup1->active == 1)
     {
         spriteGroup1->baseX = gIntroSpriteEntities[1].posX;
         spriteGroup1->baseY = gIntroSpriteEntities[1].posY;
@@ -2306,6 +2306,6 @@ void IntroScene8b_RenderBallAndCloud(void)
         }
     }
 
-    spriteGroup0->available = FALSE;
-    spriteGroup1->available = FALSE;
+    spriteGroup0->active = FALSE;
+    spriteGroup1->active = FALSE;
 }

@@ -40,8 +40,8 @@ void FadeToMainBoard(void)
         {
             gCurrentPinballGame->stageTimer = 0;
             gCurrentPinballGame->boardSubState = 0;
-            gMain.spriteGroups[6].available = 0;
-            gMain.spriteGroups[5].available = 0;
+            gMain.spriteGroups[SG_6].active = 0;
+            gMain.spriteGroups[SG_5].active = 0;
             if (gMain.tempField != gMain.selectedField)
             {
                 TransitionFromBonusToMainBoard();
@@ -68,7 +68,7 @@ void ProcessBonusBannerAndScoring(void)
 
     var0 = 8;
     var1 = 0;
-    group = &gMain.spriteGroups[6];
+    group = &gMain.spriteGroups[SG_6];
     if (gCurrentPinballGame->bannerSlideYOffset > 0)
     {
         gCurrentPinballGame->bannerSlideYOffset -= 6;
@@ -107,7 +107,7 @@ void ProcessBonusBannerAndScoring(void)
 
     DmaCopy16(3, gBoardConfig.fieldLayout.objPaletteSets[0] + var0 * 0x20, (void *)0x05000300, 0x20);
 
-    if (group->available)
+    if (group->active)
     {
         group->baseX = 120;
         group->baseY = gCurrentPinballGame->bannerSlideYOffset + 50;
@@ -118,7 +118,7 @@ void ProcessBonusBannerAndScoring(void)
             gOamBuffer[oamSimple->oamId].y = oamSimple->yOffset + group->baseY;
         }
 
-        group = &gMain.spriteGroups[5];
+        group = &gMain.spriteGroups[SG_5];
         group->baseX = 120;
         group->baseY = gCurrentPinballGame->bannerSlideYOffset + 50;
         for (i = 0; i < 18; i++)
@@ -195,7 +195,7 @@ void RenderBonusStageOverlaySprites(void)
     case 0:
     case 1:
     case 8:
-        if (!group->available)
+        if (!group->active)
             break;
 
         group->baseX = 240;
@@ -209,7 +209,7 @@ void RenderBonusStageOverlaySprites(void)
         if (gCurrentPinballGame->bossAnimLoopCount <= 0)
             break;
 
-        if (!group->available)
+        if (!group->active)
             break;
 
         group->baseX = 240;
@@ -228,7 +228,7 @@ void RenderBonusStageOverlaySprites(void)
     }
 
     group = &gMain_spriteGroups_12;
-    if (!group->available)
+    if (!group->active)
         return;
 
     group->baseX = 240;

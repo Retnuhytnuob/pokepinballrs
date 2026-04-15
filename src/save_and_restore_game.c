@@ -92,7 +92,7 @@ void SaveGameStateSnapshot(s16 arg0)
     }
 
     for (i = 0; i < 100; i++)
-        gCurrentPinballGame->savedSpriteAvailability[gMain.isBonusField][i] = gMain.spriteGroups[i].available;
+        gCurrentPinballGame->savedSpriteAvailability[gMain.isBonusField][i] = gMain.spriteGroups[i].active;
 
     DmaCopy16(3, (void *)OBJ_PLTT, gCurrentPinballGame->savedObjPalette[gMain.isBonusField], OBJ_PLTT_SIZE);
     DmaCopy16(3, (void *)BG_PLTT, gCurrentPinballGame->savedBgPalette[gMain.isBonusField], BG_PLTT_SIZE);
@@ -286,7 +286,7 @@ void RestoreGameState(u16 arg0)
     }
 
     for (i = 0; i < 100; i++)
-        gMain.spriteGroups[i].available = gCurrentPinballGame->savedSpriteAvailability[gMain.isBonusField][i];
+        gMain.spriteGroups[i].active = gCurrentPinballGame->savedSpriteAvailability[gMain.isBonusField][i];
 
     if (arg0 == 1)
     {

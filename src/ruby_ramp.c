@@ -86,8 +86,8 @@ void UpdateRubyRampPrizeGate(void)
         break;
     }
 
-    group = &gMain.spriteGroups[68];
-    if (group->available)
+    group = &gMain.spriteGroups[SG_68];
+    if (group->active)
     {
         if (gCurrentPinballGame->rampGateState < 3)
         {
@@ -104,7 +104,7 @@ void UpdateRubyRampPrizeGate(void)
         {
             gCurrentPinballGame->rampPrizeVisibilityTimer--;
             if (gCurrentPinballGame->rampPrizeVisibilityTimer == 0)
-                gMain.spriteGroups[68].available = 0;
+                gMain.spriteGroups[SG_68].active = 0;
         }
 
         oamSimple = &group->oam[0];
@@ -126,15 +126,15 @@ void UpdateRubyRampPrizeGate(void)
                 gCurrentPinballGame->ball->velocity.x = -600;
                 gCurrentPinballGame->ball->velocity.y = -300;
                 gCurrentPinballGame->ball->spinSpeed = 0;
-                gMain.spriteGroups[68].available = 1;
+                gMain.spriteGroups[SG_68].active = 1;
                 gCurrentPinballGame->rampPrizeVisibilityTimer = 6;
                 PlayRumble(8);
             }
         }
     }
 
-    group = &gMain.spriteGroups[58];
-    if (group->available)
+    group = &gMain.spriteGroups[SG_58];
+    if (group->active)
     {
         group->baseX = 184 - gCurrentPinballGame->cameraXOffset;
         group->baseY = 277 - gCurrentPinballGame->cameraYOffset;
@@ -154,8 +154,8 @@ void DrawRubyNuzleafPlatformSprite(void)
     struct SpriteGroup *group;
     s16 index;
 
-    group = &gMain.spriteGroups[66];
-    if (group->available)
+    group = &gMain.spriteGroups[SG_66];
+    if (group->active)
     {
         if (gCurrentPinballGame->rampPrizeType)
             group->baseY = (gCurrentPinballGame->globalAnimFrameCounter % 32) / 8 - (gCurrentPinballGame->cameraYOffset - 52);

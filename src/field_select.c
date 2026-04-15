@@ -306,17 +306,17 @@ static void RenderFieldSelectSprites(void)
     REG_BLDCNT = gMain.blendControl;
     REG_BLDALPHA = gMain.blendAlpha;
 
-    r6 = &gMain.spriteGroups[0];
-    r9 = &gMain.spriteGroups[1];
+    r6 = &gMain.spriteGroups[SG_0];
+    r9 = &gMain.spriteGroups[SG_1];
     sp0 = &gMain.spriteGroups[gFieldSelectData.rubyFieldSpriteId];
     r10 = &gMain.spriteGroups[gFieldSelectData.sapphireFieldSpriteId];
-    r8 = &gMain.spriteGroups[12 + gFieldSelectData.ballSpeed * 2 + gFieldSelectData.speedBlinkToggle];
+    r8 = &gMain.spriteGroups[SG_12 + gFieldSelectData.ballSpeed * 2 + gFieldSelectData.speedBlinkToggle];
 
-    r6->available = gFieldSelectData.rubyHighlightVisible;
-    r9->available = gFieldSelectData.sapphireHighlightVisible;
-    sp0->available = TRUE;
-    r10->available = TRUE;
-    r8->available = gFieldSelectData.ballSpeedVisible;
+    r6->active = gFieldSelectData.rubyHighlightVisible;
+    r9->active = gFieldSelectData.sapphireHighlightVisible;
+    sp0->active = TRUE;
+    r10->active = TRUE;
+    r8->active = gFieldSelectData.ballSpeedVisible;
 
     LoadSpriteSets(gFieldSelectSpriteSets, 16, r6);
 
@@ -362,7 +362,7 @@ static void RenderFieldSelectSprites(void)
         gOamBuffer[r10->oam[i].oamId].y = r10->oam[i].yOffset + r10->baseY;
     }
 
-    if (r8->available == 1)
+    if (r8->active == 1)
     {
         r8->baseX = gFieldSelectBallSpeedPositions[gFieldSelectData.selectedField].x;
         r8->baseY = gFieldSelectBallSpeedPositions[gFieldSelectData.selectedField].y;
@@ -374,7 +374,7 @@ static void RenderFieldSelectSprites(void)
         }
     }
 
-    sp0->available = FALSE;
-    r10->available = FALSE;
-    r8->available = FALSE;
+    sp0->active = FALSE;
+    r10->active = FALSE;
+    r8->active = FALSE;
 }

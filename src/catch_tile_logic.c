@@ -30,7 +30,7 @@ void DisableHatchTileDisplay(void)
     struct OamDataSimple *oamSimple;
 
     group = gMain.fieldSpriteGroups[18];
-    if (group->available)
+    if (group->active)
     {
         for (i = 0; i < 6; i++)
         {
@@ -39,9 +39,9 @@ void DisableHatchTileDisplay(void)
             gOamBuffer[oamSimple->oamId].y = 180;
         }
     }
-    gMain.fieldSpriteGroups[18]->available = 0;
+    gMain.fieldSpriteGroups[18]->active = 0;
     group = gMain.fieldSpriteGroups[12];
-    if (group->available)
+    if (group->active)
     {
         for (i = 0; i < 6; i++)
         {
@@ -50,7 +50,7 @@ void DisableHatchTileDisplay(void)
             gOamBuffer[oamSimple->oamId].y = 180;
         }
     }
-    gMain.fieldSpriteGroups[12]->available = 0;
+    gMain.fieldSpriteGroups[12]->active = 0;
     gCurrentPinballGame->activePortraitType = 0;
 }
 
@@ -64,7 +64,7 @@ void RevealSequentialHatchTiles(void)
     int var1;
 
     var1 = 1;
-    gMain.fieldSpriteGroups[18]->available = 1;
+    gMain.fieldSpriteGroups[18]->active = 1;
     if (gCurrentPinballGame->hatchFrameId > 0)
         UpdateSequentialTileParticles();
 
@@ -108,7 +108,7 @@ void RevealSequentialHatchTiles(void)
                     var0 = gMain.systemFrameCount % 6;
                     gCurrentPinballGame->hatchTilesRemaining = 5;
                     gCurrentPinballGame->boardSubState++;
-                    gMain.fieldSpriteGroups[18]->available = 0;
+                    gMain.fieldSpriteGroups[18]->active = 0;
                 }
                 else if (gCurrentPinballGame->hatchTilesRemaining == 0)
                 {
@@ -198,7 +198,7 @@ void RevealAllHatchTilesAtOnce(void)
         gCurrentPinballGame->activePortraitType = 5;
         DmaCopy16(3, gHatchStartTilesGfx, (void *)0x06015800, 0x2000);
         DmaCopy16(3, gHatchStartPalette, (void *)0x050003C0, 0x20);
-        gMain.fieldSpriteGroups[35]->available = 1;
+        gMain.fieldSpriteGroups[35]->active = 1;
         m4aSongNumStart(SE_CATCH_ALL_REVEAL_LIGHTNING);
         gCurrentPinballGame->hatchRevealPhase++;
         gCurrentPinballGame->revealAnimFrameCounter = 0;
@@ -217,7 +217,7 @@ void RevealAllHatchTilesAtOnce(void)
             {
                 gCurrentPinballGame->revealFramesetIndex = 7;
                 gCurrentPinballGame->hatchRevealPhase++;
-                gMain.fieldSpriteGroups[35]->available = 0;
+                gMain.fieldSpriteGroups[35]->active = 0;
             }
         }
 
@@ -244,7 +244,7 @@ void RevealAllHatchTilesAtOnce(void)
         gCurrentPinballGame->activePortraitType = 6;
         DmaCopy16(3, gHatchStage2TilesGfx, (void *)0x06015800, 0x800);
         DmaCopy16(3, gHatchStage2Palette, (void *)0x050003C0, 0x20);
-        gMain.fieldSpriteGroups[36]->available = 1;
+        gMain.fieldSpriteGroups[36]->active = 1;
         gCurrentPinballGame->hatchRevealPhase++;
         gCurrentPinballGame->revealAnimFrameCounter = 0;
         gCurrentPinballGame->startButtonDisabled = 1;
@@ -257,7 +257,7 @@ void RevealAllHatchTilesAtOnce(void)
         }
         else
         {
-            gMain.fieldSpriteGroups[36]->available = 0;
+            gMain.fieldSpriteGroups[36]->active = 0;
             gCurrentPinballGame->hatchRevealPhase++;
             gCurrentPinballGame->revealAnimFrameCounter = 0;
             gCurrentPinballGame->revealFramesetIndex = 0;
@@ -329,7 +329,7 @@ void RevealAllHatchTilesAtOnce(void)
         gCurrentPinballGame->activePortraitType = 8;
         DmaCopy16(3, gHatchFinalTilesGfx, (void *)0x06015800, 0x1800);
         DmaCopy16(3, gHatchFinalPalette, (void *)0x050003C0, 0x20);
-        gMain.fieldSpriteGroups[37]->available = 1;
+        gMain.fieldSpriteGroups[37]->active = 1;
         gCurrentPinballGame->hatchRevealPhase++;
         gCurrentPinballGame->startButtonDisabled = 0;
         break;
@@ -345,13 +345,13 @@ void RevealAllHatchTilesAtOnce(void)
             if (gCurrentPinballGame->revealFramesetIndex > 10)
             {
                 gCurrentPinballGame->boardSubState++;
-                gMain.fieldSpriteGroups[37]->available = 0;
+                gMain.fieldSpriteGroups[37]->active = 0;
                 gCurrentPinballGame->hatchTilesBoardAcknowledged = 0;
                 gCurrentPinballGame->hatchSequentialTilesRevealed = 0;
                 gCurrentPinballGame->hatchTilesBumperAcknowledged = 0;
                 gMain.blendControl = 0xCE;
                 gMain.blendBrightness = 0;
-                gMain.fieldSpriteGroups[37]->available = 0;
+                gMain.fieldSpriteGroups[37]->active = 0;
                 gCurrentPinballGame->revealFramesetIndex = 10;
                 gCurrentPinballGame->activePortraitType = 0;
             }

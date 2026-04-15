@@ -27,9 +27,9 @@ void InitRouletteWheel(void)
 {
     s16 i;
 
-    gMain.fieldSpriteGroups[23]->available = 1;
-    gMain.fieldSpriteGroups[20]->available = 1;
-    gMain.fieldSpriteGroups[21]->available = 1;
+    gMain.fieldSpriteGroups[23]->active = 1;
+    gMain.fieldSpriteGroups[20]->active = 1;
+    gMain.fieldSpriteGroups[21]->active = 1;
     gMain.blendControl = 0x1C10;
     gMain.blendAlpha = BLDALPHA_BLEND(0, 16);
     gCurrentPinballGame->rouletteStopRequested = 0;
@@ -190,9 +190,9 @@ void RunRouletteWheel(void)
         if (gCurrentPinballGame->rouletteFrameIndex == 0)
         {
             gCurrentPinballGame->modeAnimTimer = 140;
-            gMain.fieldSpriteGroups[23]->available = 0;
-            gMain.fieldSpriteGroups[20]->available = 0;
-            gMain.fieldSpriteGroups[21]->available = 0;
+            gMain.fieldSpriteGroups[23]->active = 0;
+            gMain.fieldSpriteGroups[20]->active = 0;
+            gMain.fieldSpriteGroups[21]->active = 0;
             gCurrentPinballGame->rouletteSubOffset = 0;
             gCurrentPinballGame->portraitDisplayState = 0;
             m4aMPlayStop(&gMPlayInfo_BGM);
@@ -273,7 +273,7 @@ void ProcessRouletteOutcome(void)
                 gCurrentPinballGame->fullChargeIndicatorBlinkTimer = 60;
                 DmaCopy16(3, gPikachuSaverTilesGfx, (void *)0x06010600, 0x180);
                 gCurrentPinballGame->outLanePikaPosition = 2;
-                gMain.fieldSpriteGroups[41]->available = 0;
+                gMain.fieldSpriteGroups[41]->active = 0;
                 gCurrentPinballGame->pichuEntranceTimer = 1;
             }
         }
@@ -663,7 +663,7 @@ void RunBallCaptureSequence(void)
 
         spriteGroup = gMain.fieldSpriteGroups[3];
 
-        if (spriteGroup->available != 0)
+        if (spriteGroup->active != 0)
         {
             spriteGroup->baseX = gCurrentPinballGame->ball->screenPosition.x;
             spriteGroup->baseY = gCurrentPinballGame->ball->screenPosition.y;
@@ -699,10 +699,10 @@ void RunBallCaptureSequence(void)
             }
         }
 
-        gMain.fieldSpriteGroups[3]->available = 1;
+        gMain.fieldSpriteGroups[3]->active = 1;
 
         if (gCurrentPinballGame->captureSequenceTimer == 10 && gCurrentPinballGame->captureSequenceFrame == 3)
-            gMain.fieldSpriteGroups[3]->available = 0;
+            gMain.fieldSpriteGroups[3]->active = 0;
         break;
     case 11:
         //TODO: fakematch; unused i. Here for the +4 to parse correctly;
@@ -796,7 +796,7 @@ void RunBallCaptureSequence(void)
     case 28:
         spriteGroup = gMain.fieldSpriteGroups[3];
 
-        if (spriteGroup->available != 0)
+        if (spriteGroup->active != 0)
         {
             gCurrentPinballGame->ball->ballHidden = 1;
             spriteGroup->baseX = gCurrentPinballGame->ball->screenPosition.x;
@@ -833,7 +833,7 @@ void RunBallCaptureSequence(void)
                 }
             }
         }
-        gMain.fieldSpriteGroups[3]->available = 1;
+        gMain.fieldSpriteGroups[3]->active = 1;
 
         if (gCurrentPinballGame->captureSequenceTimer == 18 || gCurrentPinballGame->captureSequenceTimer == 20 || gCurrentPinballGame->captureSequenceTimer == 21)
         {
@@ -900,7 +900,7 @@ void RunBallCaptureSequence(void)
     case 26:
         spriteGroup = gMain.fieldSpriteGroups[3];
 
-        if (spriteGroup->available != 0)
+        if (spriteGroup->active != 0)
         {
             spriteGroup->baseX = gCurrentPinballGame->ball->screenPosition.x;
             spriteGroup->baseY = gCurrentPinballGame->ball->screenPosition.y;
@@ -946,7 +946,7 @@ void RunBallCaptureSequence(void)
 
         spriteGroup = gMain.fieldSpriteGroups[3];
 
-        if (spriteGroup->available != 0)
+        if (spriteGroup->active != 0)
         {
             for (i = 0; i <= 21; i++)
             {
@@ -955,7 +955,7 @@ void RunBallCaptureSequence(void)
             }
         }
 
-        gMain.fieldSpriteGroups[3]->available = 0;
+        gMain.fieldSpriteGroups[3]->active = 0;
         gCurrentPinballGame->ball->ballHidden = 0;
         gCurrentPinballGame->ball->velocity.y = -256;
         gCurrentPinballGame->ball->velocity.x = 40;

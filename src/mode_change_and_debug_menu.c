@@ -128,7 +128,7 @@ void GameOverAnimation(void)
     u16 var0;
 
     group = gMain.fieldSpriteGroups[42];
-    if (group->available)
+    if (group->active)
     {
         group->baseX = 63;
         group->baseY = 52;
@@ -155,7 +155,7 @@ void GameOverAnimation(void)
     if (gMain.animationTimer == 3600)
     {
         DmaCopy16(3, gMainBoardGameOverText_Gfx, (void *)0x06015800, 0x400);
-        gMain.fieldSpriteGroups[42]->available = 1;
+        gMain.fieldSpriteGroups[42]->active = 1;
         for (i = 0; i < 8; i++)
         {
             gGameOverLetterYOffsets[i] = 0xE0C0;
@@ -201,10 +201,10 @@ void EndOfBallSequence(void)
         if (gMain.animationTimer == 199)
         {
             gCurrentPinballGame->bonusSummarySlideY = 128;
-            gMain.spriteGroups[9].available = 1;
-            gMain.spriteGroups[6].available = 1;
-            gMain.spriteGroups[7].available = 1;
-            gMain.spriteGroups[8].available = 1;
+            gMain.spriteGroups[SG_9].active = 1;
+            gMain.spriteGroups[SG_6].active = 1;
+            gMain.spriteGroups[SG_7].active = 1;
+            gMain.spriteGroups[SG_8].active = 1;
             DmaCopy16(3, gMainBoardEndOfBall_Gfx, (void *)0x6015800, 0x2800);
             if (gMain.selectedField == FIELD_RUBY)
             {
@@ -222,10 +222,10 @@ void EndOfBallSequence(void)
         }
         else if (gMain.animationTimer == 1)
         {
-            gMain.spriteGroups[9].available = 0;
-            gMain.spriteGroups[6].available = 0;
-            gMain.spriteGroups[7].available = 0;
-            gMain.spriteGroups[8].available = 0;
+            gMain.spriteGroups[SG_9].active = 0;
+            gMain.spriteGroups[SG_6].active = 0;
+            gMain.spriteGroups[SG_7].active = 0;
+            gMain.spriteGroups[SG_8].active = 0;
         }
     }
     else
@@ -289,8 +289,8 @@ void BallSaverAnimation(void)
 
     if (gMain.animationTimer)
     {
-        group = &gMain.spriteGroups[5];
-        if (group->available)
+        group = &gMain.spriteGroups[SG_5];
+        if (group->active)
         {
             group->baseX = 88;
             group->baseY = 20 + gCurrentPinballGame->ballSaverSlideY;
@@ -304,8 +304,8 @@ void BallSaverAnimation(void)
             }
         }
 
-        group = &gMain.spriteGroups[4];
-        if (group->available)
+        group = &gMain.spriteGroups[SG_4];
+        if (group->active)
         {
             group->baseX = 24 + gCurrentPinballGame->ballSaverPosX / 100;
             group->baseY = gCurrentPinballGame->ballSaverSlideY + 20 + gCurrentPinballGame->ballSaverPosY / 100;
@@ -317,8 +317,8 @@ void BallSaverAnimation(void)
             gOamBuffer[oamSimple->oamId].matrixNum = 4;
         }
 
-        group = &gMain.spriteGroups[3];
-        if (group->available)
+        group = &gMain.spriteGroups[SG_3];
+        if (group->active)
         {
             group->baseX = 56 + gCurrentPinballGame->ballSaverPosX / 100;
             group->baseY = gCurrentPinballGame->ballSaverSlideY + 52 + gCurrentPinballGame->ballSaverPosY / 100;
@@ -354,7 +354,7 @@ void BallSaverAnimation(void)
         {
             mat4Scale = 0x100;
             if (gMain.animationTimer < 30)
-                gMain.spriteGroups[4].available = 0;
+                gMain.spriteGroups[SG_4].active = 0;
         }
 
         if (gMain.animationTimer < 31)
@@ -366,7 +366,7 @@ void BallSaverAnimation(void)
             else
             {
                 mat3Scale = 8;
-                gMain.spriteGroups[5].available = 0;
+                gMain.spriteGroups[SG_5].active = 0;
             }
         }
         else
@@ -400,7 +400,7 @@ void BallSaverAnimation(void)
                 gCurrentPinballGame->ballSaverBallVelY += 6;
                 gCurrentPinballGame->ballSaverBallPosX += gCurrentPinballGame->ballSaverBallVelX;
                 gCurrentPinballGame->ballSaverBallPosY += gCurrentPinballGame->ballSaverBallVelY;
-                gMain.spriteGroups[3].available = 0;
+                gMain.spriteGroups[SG_3].active = 0;
                 if (gMain.animationTimer == 32)
                 {
                     gCurrentPinballGame->boardEntityActive = 0;
@@ -450,9 +450,9 @@ void BallSaverAnimation(void)
             gCurrentPinballGame->ballSaverVelX = 0;
             gCurrentPinballGame->ballSaverVelY = 0;
             gCurrentPinballGame->ballSaverSlideY = 100;
-            gMain.spriteGroups[5].available = 1;
-            gMain.spriteGroups[4].available = 1;
-            gMain.spriteGroups[3].available = 1;
+            gMain.spriteGroups[SG_5].active = 1;
+            gMain.spriteGroups[SG_4].active = 1;
+            gMain.spriteGroups[SG_3].active = 1;
             if (gMain.selectedField == FIELD_RUBY)
             {
                 DmaCopy16(3, gMainBoardBallSave_Gfx, (void *)0x06015800, 0x2400);
@@ -474,8 +474,8 @@ void BallSaverAnimation(void)
         }
         else if (gMain.animationTimer == 0)
         {
-            gMain.spriteGroups[5].available = 0;
-            gMain.spriteGroups[4].available = 0;
+            gMain.spriteGroups[SG_5].active = 0;
+            gMain.spriteGroups[SG_4].active = 0;
         }
     }
     else
@@ -1024,8 +1024,8 @@ void EndOfBallBonusSummary(void)
     if (gCurrentPinballGame->bonusSummaryTimer)
         gCurrentPinballGame->bonusSummaryTimer--;
 
-    group = &gMain.spriteGroups[9];
-    if (group->available)
+    group = &gMain.spriteGroups[SG_9];
+    if (group->active)
     {
         group->baseX = 120;
         group->baseY = gCurrentPinballGame->bonusSummarySlideY + 38;
@@ -1038,7 +1038,7 @@ void EndOfBallBonusSummary(void)
 
         for (i = 0; i < 3; i++)
         {
-            group = &gMain.spriteGroups[6 + i];
+            group = &gMain.spriteGroups[SG_6 + i];
             group->baseX = 104;
             group->baseY = 64 + i * 16 + gCurrentPinballGame->bonusSummarySlideY + sp10;
             for (j = 0; j < 5; j++)

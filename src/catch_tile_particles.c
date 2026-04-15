@@ -23,7 +23,7 @@ void InitSequentialTileParticles(void)
     }
 
     gCurrentPinballGame->particleAnimTimer = 0;
-    gMain.fieldSpriteGroups[12]->available = 1;
+    gMain.fieldSpriteGroups[12]->active = 1;
 }
 
 void UpdateSequentialTileParticles(void)
@@ -37,7 +37,7 @@ void UpdateSequentialTileParticles(void)
     struct Vector16 tempVector;
 
     group = gMain.fieldSpriteGroups[12];
-    if (group->available)
+    if (group->active)
     {
         for (i = 0; i < 6; i++)
         {
@@ -72,7 +72,7 @@ void UpdateSequentialTileParticles(void)
     else
     {
         gCurrentPinballGame->hatchSequentialTileRevealFrameAnimTimer = 0x7100;
-        gMain.fieldSpriteGroups[12]->available = 0;
+        gMain.fieldSpriteGroups[12]->active = 0;
     }
 }
 
@@ -97,7 +97,7 @@ void InitBurstTileParticles(void)
     gCurrentPinballGame->tileParticlePos[4].y = -4400;
     gCurrentPinballGame->tileParticleGravity[4] = 3;
     gCurrentPinballGame->particleAnimTimer = 0;
-    gMain.fieldSpriteGroups[12]->available = 1;
+    gMain.fieldSpriteGroups[12]->active = 1;
 }
 
 void UpdateBurstTileParticles(void)
@@ -112,7 +112,7 @@ void UpdateBurstTileParticles(void)
     s16 scale;
 
     group = gMain.fieldSpriteGroups[12];
-    if (group->available)
+    if (group->active)
     {
         for (i = 0; i < 6; i++)
         {
@@ -173,6 +173,6 @@ void UpdateBurstTileParticles(void)
     else
     {
         gCurrentPinballGame->hatchSequentialTileRevealFrameAnimTimer = 0x7100;
-        gMain.fieldSpriteGroups[12]->available = 0;
+        gMain.fieldSpriteGroups[12]->active = 0;
     }
 }

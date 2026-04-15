@@ -40,8 +40,8 @@ void CleanupCatchEmState(void)
 
     gCurrentPinballGame->creatureHitCount = 0;
     gCurrentPinballGame->captureFlashTimer = 0;
-    gMain.fieldSpriteGroups[18]->available = 0;
-    gMain.fieldSpriteGroups[12]->available = 0;
+    gMain.fieldSpriteGroups[18]->active = 0;
+    gMain.fieldSpriteGroups[12]->active = 0;
     gCurrentPinballGame->jirachiCollisionEnabled = 0;
     LoadPortraitGraphics(CENTER_SCREEN_STATE_CURRENT_LOCATION,
         CENTER_SCREEN_MAIN_SLOT);
@@ -440,7 +440,7 @@ void UpdateJirachiBonus(void)
         gCurrentPinballGame->catchLights[1] = 2;
         gCurrentPinballGame->catchLights[2] = 2;
         gCurrentPinballGame->jirachiCollisionEnabled = 1;
-        gMain.fieldSpriteGroups[33]->available = 1;
+        gMain.fieldSpriteGroups[33]->active = 1;
         DmaCopy16(3, gCatchSpriteGfxBuffer, (void *)0x06010CA0, 0x480);
         gCurrentPinballGame->modeAnimTimer = 40;
         gCurrentPinballGame->jirachiLogicX = 900;
@@ -607,7 +607,7 @@ void DrawCaughtPokemonSprite(void)
 
     index = (gMain.fieldFrameCount % 50) / 25;
     group = gMain.fieldSpriteGroups[33];
-    if (!group->available)
+    if (!group->active)
         return;
 
     gCurrentPinballGame->jirachiCenterX = 96;
@@ -657,7 +657,7 @@ void CleanupCaughtPokemonSprite(void)
     struct OamDataSimple *oamSimple;
 
     group = gMain.fieldSpriteGroups[33];
-    if (group->available)
+    if (group->active)
     {
         for (i = 0; i < 4; i++)
         {
@@ -667,7 +667,7 @@ void CleanupCaughtPokemonSprite(void)
         }
     }
 
-    gMain.fieldSpriteGroups[33]->available = 0;
+    gMain.fieldSpriteGroups[33]->active = 0;
 }
 
 void DrawJirachiSprites(void)
@@ -683,7 +683,7 @@ void DrawJirachiSprites(void)
 
     index = (gMain.fieldFrameCount % 50) / 25;
     group = gMain.fieldSpriteGroups[33];
-    if (group->available)
+    if (group->active)
     {
         gCurrentPinballGame->jirachiCenterX = gCurrentPinballGame->jirachiDisplayX / 10 + 96;
         gCurrentPinballGame->jirachiCenterY = gCurrentPinballGame->jirachiDisplayY / 10 + 288;
@@ -750,7 +750,7 @@ void DrawJirachiSprites(void)
     {
 
         group = gMain.fieldSpriteGroups[45 + j];
-        if (group->available)
+        if (group->active)
         {
             group->baseX = gCurrentPinballGame->jirachiStarTagPos[j].x - gCurrentPinballGame->cameraXOffset;
             group->baseY = gCurrentPinballGame->jirachiStarTagPos[j].y - gCurrentPinballGame->cameraYOffset;
@@ -781,7 +781,7 @@ void DrawJirachiSprites(void)
                 gCurrentPinballGame->jirachiTagTimer[j] = 40;
                 gCurrentPinballGame->jirachiStarTagPos[j].x = gCurrentPinballGame->jirachiCenterX;
                 gCurrentPinballGame->jirachiStarTagPos[j].y = gCurrentPinballGame->jirachiCenterY + 16;
-                gMain.fieldSpriteGroups[45 + j]->available = 1;
+                gMain.fieldSpriteGroups[45 + j]->active = 1;
             }
         }
 
@@ -789,7 +789,7 @@ void DrawJirachiSprites(void)
         {
             gCurrentPinballGame->jirachiTagTimer[j]--;
             if (gCurrentPinballGame->jirachiTagTimer[j] == 0)
-                gMain.fieldSpriteGroups[45 + j]->available = 0;
+                gMain.fieldSpriteGroups[45 + j]->active = 0;
         }
     }
 }
@@ -801,7 +801,7 @@ void CleanupJirachiSprites(void)
     struct OamDataSimple *oamSimple;
 
     group = gMain.fieldSpriteGroups[33];
-    if (group->available)
+    if (group->active)
     {
         for (i = 0; i < 4; i++)
         {
@@ -811,9 +811,9 @@ void CleanupJirachiSprites(void)
         }
     }
 
-    gMain.fieldSpriteGroups[33]->available = 0;
+    gMain.fieldSpriteGroups[33]->active = 0;
     for (i = 0; i < 4; i++)
-        gMain.fieldSpriteGroups[45 + i]->available = 0;
+        gMain.fieldSpriteGroups[45 + i]->active = 0;
 }
 
 //draw_catch_tiles
@@ -866,7 +866,7 @@ void PlayEggCrackAnimation(void)
     if (gCurrentPinballGame->hatchFrameId == 2 && gCurrentPinballGame->hatchSequentialTileRevealFrameAnimTimer > 3)
     {
         gCurrentPinballGame->portraitDisplayState = 3;
-        gMain.fieldSpriteGroups[33]->available = 1;
+        gMain.fieldSpriteGroups[33]->active = 1;
     }
 
     if (gCurrentPinballGame->hatchFrameId > 2)
@@ -877,7 +877,7 @@ void PlayEggCrackAnimation(void)
     }
 
     group = gMain.fieldSpriteGroups[18];
-    if (group->available)
+    if (group->active)
     {
         group->baseX = 96 - gCurrentPinballGame->cameraXOffset;
         group->baseY = 296 - gCurrentPinballGame->cameraYOffset;
@@ -897,11 +897,11 @@ void PlayEggCrackAnimation(void)
         }
     }
 
-    gMain.fieldSpriteGroups[18]->available = 1;
+    gMain.fieldSpriteGroups[18]->active = 1;
     if (gCurrentPinballGame->hatchFrameId > 6)
     {
         gCurrentPinballGame->boardSubState++;
-        gMain.fieldSpriteGroups[18]->available = 0;
+        gMain.fieldSpriteGroups[18]->active = 0;
         gCurrentPinballGame->activePortraitType = 0;
     }
 }
