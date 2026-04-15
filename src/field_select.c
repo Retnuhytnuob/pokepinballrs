@@ -362,7 +362,7 @@ static void RenderFieldSelectSprites(void)
         gOamBuffer[r10->oam[i].oamId].y = r10->oam[i].yOffset + r10->baseY;
     }
 
-    if (r8->active == 1)
+    if (r8->active == TRUE)
     {
         r8->baseX = gFieldSelectBallSpeedPositions[gFieldSelectData.selectedField].x;
         r8->baseY = gFieldSelectBallSpeedPositions[gFieldSelectData.selectedField].y;

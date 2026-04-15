@@ -235,7 +235,7 @@ void RenderBonusFieldSelectSprites(void)
     LoadSpriteSets(gBonusFieldSelectSpriteSets, 16, gMain_spriteGroups);
     for (i = 0; i < 6; i++)
     {
-        if (sgptrs[i]->active == 1)
+        if (sgptrs[i]->active == TRUE)
         {
             sgptrs[i]->baseX = gBonusFieldStageIconPositions[i].x;
             sgptrs[i]->baseY = gBonusFieldStageIconPositions[i].y;
@@ -258,7 +258,7 @@ void RenderBonusFieldSelectSprites(void)
         gOamBuffer[simple->oamId].x = simple->xOffset + r10->baseX;
         gOamBuffer[simple->oamId].y = simple->yOffset + r10->baseY;
     }
-    if (r8->active == 1)
+    if (r8->active == TRUE)
     {
         r8->baseX = gBonusFieldSpeedIndicatorPositions[gSelectedBonusField].x;
         r8->baseY = gBonusFieldSpeedIndicatorPositions[gSelectedBonusField].y;

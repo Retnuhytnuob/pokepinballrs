@@ -1012,7 +1012,7 @@ void DusclopsPhase_ProcessEntityLogicAndGraphics(void)
     gCurrentPinballGame->bossCollisionY = ((gCurrentPinballGame->bossPositionY / 10) * 2) + 16;
 
     // Draw dusclops
-    if(spriteGroup->active != 0)
+    if(spriteGroup->active)
     {
         struct OamDataSimple *new_var;
         spriteGroup->baseX = (-gCurrentPinballGame->cameraXOffset) + (gCurrentPinballGame->bossPositionX / 10);
@@ -1036,7 +1036,7 @@ void DusclopsPhase_ProcessEntityLogicAndGraphics(void)
 
     // Blend appearance Lines
     spriteGroup = &gMain.spriteGroups[12];
-    if (spriteGroup->active != 0)
+    if (spriteGroup->active)
     {
         if (gCurrentPinballGame->returnToMainBoardFlag == 0)
         {
@@ -1070,7 +1070,7 @@ void DusclopsPhase_ProcessEntityLogicAndGraphics(void)
     // Draw ball capture vortex
     spriteGroup = &gMain.spriteGroups[13];
 
-    if (spriteGroup->active != 0)
+    if (spriteGroup->active)
     {
         s32 offX = 16;
         s32 offY = 20;

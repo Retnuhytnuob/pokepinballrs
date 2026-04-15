@@ -512,7 +512,7 @@ void UpdateEReaderSprites(void)
     puVar5->active = TRUE;
     LoadSpriteSets(gCatchHatchSpriteSets, 13, gMain_spriteGroups);
 
-    if (puVar9->active == 1)
+    if (puVar9->active == TRUE)
     {
         if (gEReaderStatusSpriteIndex == 0)
         {
@@ -563,7 +563,7 @@ void UpdateEReaderSpritesViaOam(void) {
     puVar5->active = TRUE;
     LoadSpriteSetsWithCpuCopy(gCatchHatchSpriteSets, 13, gMain_spriteGroups);
 
-    if (puVar9->active == 1)
+    if (puVar9->active == TRUE)
     {
         if (gEReaderStatusSpriteIndex == 0)
         {

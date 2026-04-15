@@ -121,7 +121,7 @@ void RenderBannerSlideAnimation(void)
     spriteGroup = gMain.fieldSpriteGroups[11];
     frameCount = ((gMain.systemFrameCount & 7) / 4);
 
-    if (spriteGroup->active != 0)
+    if (spriteGroup->active)
     {
         spriteGroup->baseX = 0;
         spriteGroup->baseY = 200;

@@ -525,7 +525,7 @@ void IntroScene1_RenderTitleSprite(void)
     puVar4->active = gIntroSpriteEntities[0].visible;
     LoadSpriteSets(gIntroScene1_SpriteSets, 0x31, gMain.spriteGroups);
 
-    if (puVar4->active == 1)
+    if (puVar4->active == TRUE)
     {
         puVar4->baseX = gIntroSpriteEntities[0].posX;
         puVar4->baseY = gIntroSpriteEntities[0].posY;
@@ -552,7 +552,7 @@ void IntroScene1_RenderScaledTitle(void)
     puVar4->active = gIntroSpriteEntities[0].visible;
     LoadSpriteSets(gIntroScene1_SpriteSets, 0x31, gMain.spriteGroups);
 
-    if (puVar4->active == 1)
+    if (puVar4->active == TRUE)
     {
         SetMatrixScale(gIntroScaleX, gIntroScaleY, 0);
         puVar4->baseX = gIntroSpriteEntities[0].posX;
@@ -597,7 +597,7 @@ void IntroScene1_RenderAllSprites(void)
     otherSg->active = gIntroSpriteEntities[4].visible;
     LoadSpriteSets(gIntroScene1_SpriteSets, 0x31, gMain.spriteGroups);
 
-    if (puVar1->active == 1)
+    if (puVar1->active == TRUE)
     {
         puVar1->baseX = gIntroSpriteEntities[1].posX;
         puVar1->baseY = gIntroSpriteEntities[1].posY;
@@ -613,7 +613,7 @@ void IntroScene1_RenderAllSprites(void)
             gOamBuffer[puVar5->oamId].y = puVar1->oam[i].yOffset + puVar1->baseY;
         }
     }
-    if (mainSg3->active == 1)
+    if (mainSg3->active == TRUE)
     {
         mainSg3->baseX = gIntroSpriteEntities[2].posX;
         mainSg3->baseY = gIntroSpriteEntities[2].posY;
@@ -627,7 +627,7 @@ void IntroScene1_RenderAllSprites(void)
             gOamBuffer[puVar5->oamId].y = mainSg3->oam[i].yOffset + mainSg3->baseY;
         }
     }
-    if (mainSg2->active == 1)
+    if (mainSg2->active == TRUE)
     {
         mainSg2->baseX = gIntroSpriteEntities[3].posX;
         mainSg2->baseY = gIntroSpriteEntities[3].posY;
@@ -641,7 +641,7 @@ void IntroScene1_RenderAllSprites(void)
             gOamBuffer[puVar5->oamId].y = mainSg2->oam[i].yOffset + mainSg2->baseY;
         }
     }
-    if (otherSg->active == 1)
+    if (otherSg->active == TRUE)
     {
         otherSg->baseX = gIntroSpriteEntities[4].posX;
         otherSg->baseY = gIntroSpriteEntities[4].posY;
@@ -950,7 +950,7 @@ void IntroScene3_RenderPokeball(void)
     puVar4->active = TRUE;
     LoadSpriteSets(gIntroScene3_SpriteSets, 0x1, puVar4);
 
-    if (puVar4->active == 1)
+    if (puVar4->active == TRUE)
     {
         puVar4->baseX = gIntroSpriteEntities[0].posX;
         puVar4->baseY = gIntroSpriteEntities[0].posY;
@@ -1271,7 +1271,7 @@ void IntroScene5_RenderAllSprites(void)
     mainSg2->active = TRUE;
     LoadSpriteSets(gIntroScene5_SpriteSets, 3, gMain.spriteGroups);
 
-    if (mainSg1->active == 1)
+    if (mainSg1->active == TRUE)
     {
         mainSg1->baseX = gIntroSpriteEntities[0].posX;
         mainSg1->baseY = gIntroSpriteEntities[0].posY;
@@ -1285,7 +1285,7 @@ void IntroScene5_RenderAllSprites(void)
         }
     }
 
-    if (mainSg0->active == 1)
+    if (mainSg0->active == TRUE)
     {
         mainSg0->baseX = gIntroSpriteEntities[1].posX;
         mainSg0->baseY = gIntroSpriteEntities[1].posY;
@@ -1299,7 +1299,7 @@ void IntroScene5_RenderAllSprites(void)
         }
     }
 
-    if (mainSg2->active == 1)
+    if (mainSg2->active == TRUE)
     {
         mainSg2->baseX = gIntroSpriteEntities[2].posX;
         mainSg2->baseY = gIntroSpriteEntities[2].posY;
@@ -1514,7 +1514,7 @@ void IntroScene6_RenderStarSprites(void)
     LoadSpriteSets(gIntroScene6_SpriteSets, 0x12, &gMain.spriteGroups[0]);
     for (i = 0; i < 6; i++)
     {
-        if (spriteGroups[i]->active != 1)
+        if (spriteGroups[i]->active != TRUE)
             continue;
 
         gIntroSpriteEntities[i].posX += gIntroScene6_EntityMovement[i].velocityX;
@@ -1808,7 +1808,7 @@ void IntroScene7_RenderWailmer(void)
     spriteGroup = &gMain.spriteGroups[0];
     spriteGroup->active = TRUE;
     LoadSpriteSets(gIntroScene7_SpriteSets, 0x1, gMain.spriteGroups);
-    if (spriteGroup->active == 1)
+    if (spriteGroup->active == TRUE)
     {
         SetMatrixScale(gIntroWailmerScaleX, gIntroWailmerScaleY, 0);
         spriteGroup->baseX = gIntroSpriteEntities[0].posX;
@@ -2006,7 +2006,7 @@ void IntroScene8a_RenderAllSprites(void)
 
     LoadSpriteSets(gIntroScene8a_SpriteSets, 0x11, gMain.spriteGroups);
 
-    if (sg0->active == 1)
+    if (sg0->active == TRUE)
     {
         sg0->baseX = gIntroSpriteEntities[0].posX;
         sg0->baseY = gIntroSpriteEntities[0].posY;
@@ -2018,7 +2018,7 @@ void IntroScene8a_RenderAllSprites(void)
 
     for (i = 0; i < 5; i++)
     {
-        if (spriteGroups[i]->active == 1)
+        if (spriteGroups[i]->active == TRUE)
         {
             gIntroAnimStep++;
             if (gIntroAnimStep > 5)
@@ -2060,7 +2060,7 @@ void IntroScene8a_RenderAllSprites(void)
         }
     }
 
-    if (sg1->active == 1)
+    if (sg1->active == TRUE)
     {
         sg1->baseX = gIntroSpriteEntities[1].posX;
         sg1->baseY = gIntroSpriteEntities[1].posY;
@@ -2282,7 +2282,7 @@ void IntroScene8b_RenderBallAndCloud(void)
     spriteGroup0->active = gIntroSpriteEntities[0].visible;
     spriteGroup1->active = gIntroSpriteEntities[1].visible;
     LoadSpriteSets(gIntroScene8b_SpriteSets, 11, gMain.spriteGroups);
-    if (spriteGroup0->active == 1)
+    if (spriteGroup0->active == TRUE)
     {
         SetMatrixScale(gIntroWailmerScaleX, gIntroWailmerScaleY, 0);
         spriteGroup0->baseX = gIntroSpriteEntities[0].posX;
@@ -2294,7 +2294,7 @@ void IntroScene8b_RenderBallAndCloud(void)
         gOamBuffer[oamData->oamId].matrixNum = 0;
     }
 
-    if (spriteGroup1->active == 1)
+    if (spriteGroup1->active == TRUE)
     {
         spriteGroup1->baseX = gIntroSpriteEntities[1].posX;
         spriteGroup1->baseY = gIntroSpriteEntities[1].posY;

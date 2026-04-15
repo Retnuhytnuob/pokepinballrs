@@ -1002,7 +1002,7 @@ void RenderHighScoreSprites(void)
         spriteGroup4->active = var1_02002858->collisionCooldownTimer;
         LoadSpriteSets(gHighScoreScreenSpriteSets, 9, spriteGroups);
         RenderHighScoreSprites_HELPER(220, spriteGroup1, spriteGroup4, spriteGroup3);
-        if (spriteGroup4->active == 1)
+        if (spriteGroup4->active == TRUE)
         {
             spriteGroup4->baseX = 84;
             spriteGroup4->baseY = 150;
@@ -1014,7 +1014,7 @@ void RenderHighScoreSprites(void)
                 gOamBuffer[oamData->oamId].y = oamData->yOffset + spriteGroup4->baseY;
             }
         }
-        if (spriteGroup3->active == 1)
+        if (spriteGroup3->active == TRUE)
         {
             switch ((s8)gDialogType)
             {
@@ -1045,7 +1045,7 @@ void RenderHighScoreSprites(void)
         spriteGroup4->active = var1_02002858->collisionCooldownTimer;
         LoadSpriteSets(gHighScoreScreenSpriteSets, 2, gMain_spriteGroups);
         RenderHighScoreSprites_HELPER(4, spriteGroup2, spriteGroup4, spriteGroup3);
-        if (spriteGroup4->active == 1)
+        if (spriteGroup4->active == TRUE)
     {
         spriteGroup4->baseX = 84;
         spriteGroup4->baseY = 150;
@@ -1057,7 +1057,7 @@ void RenderHighScoreSprites(void)
             gOamBuffer[oamData->oamId].y = oamData->yOffset + spriteGroup4->baseY;
         }
     }
-    if (spriteGroup3->active == 1)
+    if (spriteGroup3->active == TRUE)
     {
         switch ((s8)gDialogType)
         {
@@ -1606,7 +1606,7 @@ void RenderCompletionBanner(void)
     spriteGroup = &gMain_spriteGroups[gCompletionBannerFrame];
     spriteGroup->active = gCompletionBannerVisible;
     LoadSpriteSets(gCompletionBannerSpriteSets, 5, gMain_spriteGroups);
-    if (spriteGroup->active == 1)
+    if (spriteGroup->active == TRUE)
     {
         spriteGroup->baseX = 120;
         spriteGroup->baseY = gCompletionBannerY;

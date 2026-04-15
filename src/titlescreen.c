@@ -744,7 +744,7 @@ void RenderTitleMenuNoSavedGame(void)
 
     LoadSpriteSets((const struct SpriteSet *const *)gTitleNoSaveMenuSpriteSets, 7, gMain.spriteGroups);
 
-    if (menuSpriteGroup->active == 1)
+    if (menuSpriteGroup->active == TRUE)
     {
         menuSpriteGroup->baseX = 0x78;
         menuSpriteGroup->baseY = 0x66;
@@ -761,7 +761,7 @@ void RenderTitleMenuNoSavedGame(void)
         }
     }
 
-    if (r9->active == 1)
+    if (r9->active == TRUE)
     {
         struct OamDataSimple *r5;
 
@@ -774,7 +774,7 @@ void RenderTitleMenuNoSavedGame(void)
         gOamBuffer[r5->oamId].y = r5->yOffset + r9->baseY;
     }
 
-    if (r8->active == 1)
+    if (r8->active == TRUE)
     {
         struct OamDataSimple *r5;
 
@@ -815,7 +815,7 @@ void RenderTitleMenuSavedGame(void)
 
     LoadSpriteSets((const struct SpriteSet *const *)gTitleSavedMenuSpriteSets, 7, gMain.spriteGroups);
 
-    if (r10->active == 1)
+    if (r10->active == TRUE)
     {
         r10->baseX = 0x78;
         r10->baseY = 0x66;
@@ -832,7 +832,7 @@ void RenderTitleMenuSavedGame(void)
         }
     }
 
-    if (r9->active == 1)
+    if (r9->active == TRUE)
     {
         struct OamDataSimple *r5;
 
@@ -845,7 +845,7 @@ void RenderTitleMenuSavedGame(void)
         gOamBuffer[r5->oamId].y = r5->yOffset + r9->baseY;
     }
 
-    if (r8->active == 1)
+    if (r8->active == TRUE)
     {
         struct OamDataSimple *r5;
 

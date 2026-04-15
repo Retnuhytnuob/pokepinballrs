@@ -663,7 +663,7 @@ void RunBallCaptureSequence(void)
 
         spriteGroup = gMain.fieldSpriteGroups[3];
 
-        if (spriteGroup->active != 0)
+        if (spriteGroup->active)
         {
             spriteGroup->baseX = gCurrentPinballGame->ball->screenPosition.x;
             spriteGroup->baseY = gCurrentPinballGame->ball->screenPosition.y;
@@ -796,7 +796,7 @@ void RunBallCaptureSequence(void)
     case 28:
         spriteGroup = gMain.fieldSpriteGroups[3];
 
-        if (spriteGroup->active != 0)
+        if (spriteGroup->active)
         {
             gCurrentPinballGame->ball->ballHidden = 1;
             spriteGroup->baseX = gCurrentPinballGame->ball->screenPosition.x;
@@ -900,7 +900,7 @@ void RunBallCaptureSequence(void)
     case 26:
         spriteGroup = gMain.fieldSpriteGroups[3];
 
-        if (spriteGroup->active != 0)
+        if (spriteGroup->active)
         {
             spriteGroup->baseX = gCurrentPinballGame->ball->screenPosition.x;
             spriteGroup->baseY = gCurrentPinballGame->ball->screenPosition.y;
@@ -946,7 +946,7 @@ void RunBallCaptureSequence(void)
 
         spriteGroup = gMain.fieldSpriteGroups[3];
 
-        if (spriteGroup->active != 0)
+        if (spriteGroup->active)
         {
             for (i = 0; i <= 21; i++)
             {
