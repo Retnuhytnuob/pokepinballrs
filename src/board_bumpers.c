@@ -339,7 +339,7 @@ void HandleRubyBumperHit(void)
             m4aSongNumStart(SE_RUBY_BUMPER_HIT);
             PlayRumble(7);
             if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_CATCH_EM_MODE
-                && gCurrentPinballGame->boardSubState == 5)
+                && gCurrentPinballGame->boardSubState == CATCH_EM_SUBSTATE_5)
             {
                 if (gCurrentPinballGame->hatchTilesBumperAcknowledged < 6)
                 {

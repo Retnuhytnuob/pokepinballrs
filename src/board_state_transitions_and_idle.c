@@ -11,7 +11,7 @@ extern void HandleBoardStateTransitionTeardown(void);
 
 void RequestBoardStateTransition(u8 arg0)
 {
-    gCurrentPinballGame->boardTransitionPhase = 2;
+    gCurrentPinballGame->boardTransitionPhase = BOARD_STATE_DISPATCHER_STATE_CHANGING;
     gCurrentPinballGame->nextBoardState = arg0;
     if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
         gMain.fieldSpriteGroups[13]->active = FALSE;
@@ -21,18 +21,18 @@ void BoardStateDispatcher(void)
 {
     switch (gCurrentPinballGame->boardTransitionPhase)
     {
-        case 0:
+        case BOARD_STATE_DISPATCHER_STATE_INIT:
             gBoardStateInitFuncs[gCurrentPinballGame->boardState]();
             gCurrentPinballGame->boardTransitionPhase++;
             break;
-        case 1:
+        case BOARD_STATE_DISPATCHER_STATE_RUNNING:
             gBoardStateUpdateFuncs[gCurrentPinballGame->boardState]();
             break;
-        case 2:
+        case BOARD_STATE_DISPATCHER_STATE_CHANGING:
             HandleBoardStateTransitionTeardown();
             gCurrentPinballGame->prevBoardState = gCurrentPinballGame->boardState;
             gCurrentPinballGame->boardState = gCurrentPinballGame->nextBoardState;
-            gCurrentPinballGame->boardTransitionPhase = 0;
+            gCurrentPinballGame->boardTransitionPhase = BOARD_STATE_DISPATCHER_STATE_INIT;
             break;
     }
 }
@@ -42,7 +42,7 @@ void InitFieldIdle(void)
     s16 num1;
     u8 num2;
 
-    if (gCurrentPinballGame->prevBoardState > 0)
+    if (gCurrentPinballGame->prevBoardState >= MAIN_BOARD_STATE_DEFAULT)
     {
         if (gMain.selectedField == FIELD_RUBY)
         {
@@ -71,7 +71,7 @@ void InitFieldIdle(void)
     }
 
     num2 = gCurrentPinballGame->prevBoardState - 1;
-    if (num2 > 1)
+    if (num2 > MAIN_BOARD_STATE_DEFAULT)
     {
         gCurrentPinballGame->evoArrowProgress = gCurrentPinballGame->arrowProgressPreserved;
         gCurrentPinballGame->catchArrowProgress = gCurrentPinballGame->catchModeArrows;

@@ -732,7 +732,8 @@ void RubyPondTriBumperHandleHitAndDraw(void)
             m4aSongNumStart(SE_RUBY_BUMPER_HIT);
             PlayRumble(7);
             if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_CATCH_EM_MODE
-                && gCurrentPinballGame->boardSubState == 5 && gCurrentPinballGame->hatchTilesBumperAcknowledged < 6)
+                && gCurrentPinballGame->boardSubState == CATCH_EM_SUBSTATE_5
+                && gCurrentPinballGame->hatchTilesBumperAcknowledged < 6)
             {
                 if (gCurrentPinballGame->hatchTilesBumperAcknowledged == 0)
                     gCurrentPinballGame->hatchTilesBumperAcknowledged = 1;

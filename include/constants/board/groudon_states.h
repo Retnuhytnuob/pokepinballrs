@@ -1,5 +1,6 @@
 #ifndef GUARD_CONSTANTS_GROUDON_STATES_H
 #define GUARD_CONSTANTS_GROUDON_STATES_H
+#include "bonus_board.h"
 
 enum GroudonBoardState{
     GROUDON_BOARD_STATE_INTRO = 0,

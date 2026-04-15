@@ -19,12 +19,12 @@ void FadeToMainBoard(void)
     gCurrentPinballGame->startButtonDisabled = 1;
     switch (gCurrentPinballGame->boardSubState)
     {
-    case 0:
+    case BONUS_BOARD_SUBSTATE_0:
         gCurrentPinballGame->stageTimer = 65;
-        gCurrentPinballGame->boardSubState = 1;
+        gCurrentPinballGame->boardSubState = BONUS_BOARD_SUBSTATE_1;
         gMain.blendControl = 0x9F;
         break;
-    case 1:
+    case BONUS_BOARD_SUBSTATE_1:
         if (gCurrentPinballGame->stageTimer)
         {
             gCurrentPinballGame->stageTimer--;
@@ -33,7 +33,7 @@ void FadeToMainBoard(void)
                 gCurrentPinballGame->boardSubState++;
         }
         break;
-    case 2:
+    case BONUS_BOARD_SUBSTATE_2:
         if (gCurrentPinballGame->stageTimer < 30)
         {
             gCurrentPinballGame->stageTimer++;
@@ -41,7 +41,7 @@ void FadeToMainBoard(void)
         else
         {
             gCurrentPinballGame->stageTimer = 0;
-            gCurrentPinballGame->boardSubState = 0;
+            gCurrentPinballGame->boardSubState = DEFAULT_MODE_SUBSTATE_0;
             gMain.spriteGroups[6].active = FALSE;
             gMain.spriteGroups[5].active = FALSE;
             if (gMain.tempField != gMain.selectedField)
@@ -265,7 +265,7 @@ void TransitionFromBonusToMainBoard(void)
     gMain.subState = 0;
     gCurrentPinballGame->prevBoardState = 3;
     gCurrentPinballGame->boardState = MAIN_BOARD_STATE_DEFAULT;
-    gCurrentPinballGame->boardTransitionPhase = 0;
+    gCurrentPinballGame->boardTransitionPhase = BOARD_STATE_DISPATCHER_STATE_INIT;
     gCurrentPinballGame->boardEntityActive = 0;
     gCurrentPinballGame->cameraYAdjust = 0;
     LoadPortraitGraphics(CENTER_SCREEN_STATE_CURRENT_LOCATION,

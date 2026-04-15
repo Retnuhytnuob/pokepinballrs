@@ -1,6 +1,7 @@
 #include "global.h"
 #include "main.h"
 #include "constants/board/center_screen_states.h"
+#include "constants/board/main_board.h"
 
 extern const u16 gPortraitGenericPalettes[];
 extern const u16 gPortraitPaletteSlots[2];
@@ -110,7 +111,7 @@ void LoadPortraitGraphics(s16 displayMode, s16 picIx)
             0x300);
         break;
     case CENTER_SCREEN_STATE_TRAVEL_RAMP_INDICATOR:
-        if (gCurrentPinballGame->boardSubState == 2)
+        if (gCurrentPinballGame->boardSubState == TRAVEL_SUBSTATE_2)
         {
             gCurrentPinballGame->portraitGfxIndex[picIx] = gShopItemData[15][(gCurrentPinballGame->portraitCycleFrame % 48) / 24];
             DmaCopy16(3, gPortraitAnimFrameGraphics[gCurrentPinballGame->portraitGfxIndex[picIx]], (void *)0x06010CA0 + picIx * 0x300, 0x300);

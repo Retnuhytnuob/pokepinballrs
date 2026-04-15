@@ -58,7 +58,8 @@ void ResetCatchState(s16 resetHoleIndicators)
 
     gCurrentPinballGame->trapAnimState = 0;
     gCurrentPinballGame->bonusTrapEnabled = 0;
-    if (gCurrentPinballGame->boardTransitionPhase != 2 || gCurrentPinballGame->nextBoardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
+    if (gCurrentPinballGame->boardTransitionPhase != BOARD_STATE_DISPATCHER_STATE_CHANGING 
+        || gCurrentPinballGame->nextBoardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
     {
         if ((gCurrentPinballGame->jirachiActivationFlags & 0xF) == 0)
         {
@@ -73,7 +74,7 @@ void ResetCatchState(s16 resetHoleIndicators)
 
 void InitCatchTrigger(void)
 {
-    gCurrentPinballGame->boardSubState = 1;
+    gCurrentPinballGame->boardSubState = BONUS_HOLE_SUBSTATE_1;
     gCurrentPinballGame->stageTimer = 0;
     gCurrentPinballGame->prizeSelected = 0;
 }
@@ -82,7 +83,7 @@ void UpdateCatchTrigger(void)
 {
     switch (gCurrentPinballGame->boardSubState)
     {
-    case 1:
+    case BONUS_HOLE_SUBSTATE_1:
         if (gCurrentPinballGame->stageTimer < 9)
         {
             gCurrentPinballGame->stageTimer++;
@@ -100,7 +101,7 @@ void UpdateCatchTrigger(void)
             }
         }
         break;
-    case 2:
+    case BONUS_HOLE_SUBSTATE_2:
         AnimateBonusTrapSprite();
         if (gCurrentPinballGame->ballCatchState == 0)
             LoadPortraitGraphics(CENTER_SCREEN_STATE_SLOT_START_CARD, CENTER_SCREEN_MAIN_SLOT);
@@ -108,7 +109,7 @@ void UpdateCatchTrigger(void)
         if (gCurrentPinballGame->ballCatchState == 4)
             gCurrentPinballGame->boardSubState++;
         break;
-    case 3:
+    case BONUS_HOLE_SUBSTATE_3:
         gCurrentPinballGame->allHolesLit = 0;
         gCurrentPinballGame->holeIndicators[0] = 0;
         gCurrentPinballGame->holeIndicators[1] = gCurrentPinballGame->holeIndicators[0];
@@ -119,7 +120,7 @@ void UpdateCatchTrigger(void)
         if (gCurrentPinballGame->catchTriggerCompletionCount < 99)
             gCurrentPinballGame->catchTriggerCompletionCount++;
         break;
-    case 4:
+    case BONUS_HOLE_SUBSTATE_4:
         if (gCurrentPinballGame->modeAnimTimer == 148)
         {
             gCurrentPinballGame->modeAnimTimer++;
@@ -150,16 +151,16 @@ void UpdateCatchTrigger(void)
 
         gCurrentPinballGame->stageTimer = 0;
         break;
-    case 5:
+    case BONUS_HOLE_SUBSTATE_5:
         AnimateBonusTrapSprite();
         gMain.fieldSpriteGroups[13]->active = FALSE;
         gCurrentPinballGame->boardSubState++;
         break;
-    case 6:
+    case BONUS_HOLE_SUBSTATE_6:
         ResetCatchState(1);
         gCurrentPinballGame->boardSubState++;
         break;
-    case 7:
+    case BONUS_HOLE_SUBSTATE_7:
         if (gCurrentPinballGame->stageTimer)
             gCurrentPinballGame->stageTimer--;
         else
@@ -224,15 +225,16 @@ void InitBonusStageSelect(void)
         }
     }
 
-    if (gCurrentPinballGame->ballCatchState == 4 && gCurrentPinballGame->prevBoardState == 2)
+    if (gCurrentPinballGame->ballCatchState == 4
+        && gCurrentPinballGame->prevBoardState == MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
     {
         gCurrentPinballGame->modeAnimTimer = 150;
-        gCurrentPinballGame->boardSubState = 3;
+        gCurrentPinballGame->boardSubState = BOSS_HOLE_SUBSTATE_3;
         gCurrentPinballGame->stageTimer = 0;
     }
     else
     {
-        gCurrentPinballGame->boardSubState = 0;
+        gCurrentPinballGame->boardSubState = BOSS_HOLE_SUBSTATE_0;
         gCurrentPinballGame->stageTimer = 0;
         gCurrentPinballGame->portraitCycleFrame = 0;
         LoadPortraitGraphics(CENTER_SCREEN_STATE_CONFIRMATION_PROMPT, CENTER_SCREEN_MAIN_SLOT);
@@ -243,7 +245,7 @@ void UpdateBonusStageSelect(void)
 {
     switch (gCurrentPinballGame->boardSubState)
     {
-    case 0:
+    case BOSS_HOLE_SUBSTATE_0:
         if (gCurrentPinballGame->stageTimer < 60)
         {
             gCurrentPinballGame->stageTimer++;
@@ -254,7 +256,7 @@ void UpdateBonusStageSelect(void)
             gCurrentPinballGame->boardSubState++;
         }
         break;
-    case 1:
+    case BOSS_HOLE_SUBSTATE_1:
         if (gCurrentPinballGame->stageTimer < 9)
         {
             gCurrentPinballGame->stageTimer++;
@@ -284,20 +286,20 @@ void UpdateBonusStageSelect(void)
             }
         }
         break;
-    case 2:
+    case BOSS_HOLE_SUBSTATE_2:
         AnimateBonusTrapSprite();
         LoadPortraitGraphics(CENTER_SCREEN_STATE_CONFIRMATION_PROMPT, CENTER_SCREEN_MAIN_SLOT);
         if (gCurrentPinballGame->ballCatchState == 4)
             gCurrentPinballGame->boardSubState++;
         break;
-    case 3:
+    case BOSS_HOLE_SUBSTATE_3:
         gCurrentPinballGame->boardSubState++;
         gCurrentPinballGame->stageTimer = 0;
         gCurrentPinballGame->portraitCycleFrame = 0;
         gCurrentPinballGame->modeOutcomeValues[0] = 46;
         LoadPortraitGraphics(CENTER_SCREEN_STATE_CONFIRMATION_PROMPT, CENTER_SCREEN_MAIN_SLOT);
         break;
-    case 4:
+    case BOSS_HOLE_SUBSTATE_4:
         if (gCurrentPinballGame->modeAnimTimer == 145)
         {
             gCurrentPinballGame->modeAnimTimer++;
@@ -311,7 +313,7 @@ void UpdateBonusStageSelect(void)
                 m4aMPlayAllStop();
                 m4aSongNumStart(SE_MENU_CANCEL);
                 gCurrentPinballGame->modeAnimTimer = 60;
-                gCurrentPinballGame->boardSubState = 6;
+                gCurrentPinballGame->boardSubState = BOSS_HOLE_SUBSTATE_6;
                 if (gCurrentPinballGame->allHolesLit)
                     gCurrentPinballGame->allHolesLitDelayTimer = 120;
             }
@@ -339,7 +341,7 @@ void UpdateBonusStageSelect(void)
                 gCurrentPinballGame->boardSubState++;
         }
         break;
-    case 5:
+    case BOSS_HOLE_SUBSTATE_5:
         if (gCurrentPinballGame->stageTimer < 30)
         {
             gCurrentPinballGame->stageTimer++;
@@ -347,22 +349,22 @@ void UpdateBonusStageSelect(void)
         else
         {
             gCurrentPinballGame->stageTimer = 0;
-            gCurrentPinballGame->boardSubState = 0;
+            gCurrentPinballGame->boardSubState = BOSS_HOLE_SUBSTATE_0;
             gCurrentPinballGame->bonusReturnState = 0;
             TransitionToBonusField();
         }
         break;
-    case 6:
+    case BOSS_HOLE_SUBSTATE_6:
         AnimateBonusTrapSprite();
         gMain.fieldSpriteGroups[13]->active = FALSE;
         gCurrentPinballGame->boardSubState++;
         gCurrentPinballGame->stageTimer = 0;
         break;
-    case 7:
+    case BOSS_HOLE_SUBSTATE_7:
         FullCatchStateCleanup();
         gCurrentPinballGame->boardSubState++;
         break;
-    case 8:
+    case BOSS_HOLE_SUBSTATE_8:
         RequestBoardStateTransition(MAIN_BOARD_STATE_DEFAULT);
         break;
     }
@@ -1583,7 +1585,7 @@ void CleanupEggModeState(void)
 
 void InitEggMode(void)
 {
-    gCurrentPinballGame->boardSubState = 0;
+    gCurrentPinballGame->boardSubState = EGG_HATCH_SUBSTATE_0;
     gCurrentPinballGame->stageTimer = 0;
     gCurrentPinballGame->saverTimeRemaining = 1800;
     gCurrentPinballGame->creatureHitCount = 0;
@@ -1629,12 +1631,12 @@ void UpdateEggMode(void)
     priority = 1;
     switch (gCurrentPinballGame->boardSubState)
     {
-    case 0:
+    case EGG_HATCH_SUBSTATE_0:
         gCurrentPinballGame->portraitDisplayState = 3;
         gMain.fieldSpriteGroups[41]->active = TRUE;
         gCurrentPinballGame->boardSubState++;
         break;
-    case 1:
+    case EGG_HATCH_SUBSTATE_1:
         if (gEggHatchAnimData[gCurrentPinballGame->creatureWaypointIndex][1] > gCurrentPinballGame->waypointSubTimer)
         {
             gCurrentPinballGame->waypointSubTimer++;
@@ -1648,7 +1650,7 @@ void UpdateEggMode(void)
                 if (gCurrentPinballGame->creatureWaypointIndex > 13)
                 {
                     gCurrentPinballGame->creatureWaypointIndex = 0;
-                    gCurrentPinballGame->boardSubState = 3;
+                    gCurrentPinballGame->boardSubState = EGG_HATCH_SUBSTATE_3;
                     gCurrentPinballGame->walkMonXVelocity = 0;
                     gCurrentPinballGame->walkMonYVelocity = 0;
                 }
@@ -1682,7 +1684,7 @@ void UpdateEggMode(void)
                 {
                     gCurrentPinballGame->waypointSubTimer = 0;
                     gCurrentPinballGame->creatureWaypointIndex = 10;
-                    gCurrentPinballGame->boardSubState = 2;
+                    gCurrentPinballGame->boardSubState = EGG_HATCH_SUBSTATE_2;
                     gCurrentPinballGame->walkMonXVelocity = 0;
                     gCurrentPinballGame->walkMonYVelocity = 0;
                 }
@@ -1716,7 +1718,7 @@ void UpdateEggMode(void)
             gOamBuffer[oamSimple->oamId].priority = priority;
         }
         break;
-    case 2:
+    case EGG_HATCH_SUBSTATE_2:
         if (gCurrentPinballGame->waypointSubTimer < 240)
         {
             priority = 1;
@@ -1773,7 +1775,7 @@ void UpdateEggMode(void)
                 else
                 {
                     gCurrentPinballGame->creatureWaypointIndex = 3;
-                    gCurrentPinballGame->boardSubState = 3;
+                    gCurrentPinballGame->boardSubState = EGG_HATCH_SUBSTATE_3;
                     gCurrentPinballGame->walkMonXVelocity = 0;
                     gCurrentPinballGame->walkMonYVelocity = 0;
                 }
@@ -1807,7 +1809,7 @@ void UpdateEggMode(void)
             gOamBuffer[oamSimple->oamId].y = oamSimple->yOffset + group->baseY;
         }
         break;
-    case 3:
+    case EGG_HATCH_SUBSTATE_3:
         tempVec.x = gEggWalkPathWaypoints[gMain.selectedField][gCurrentPinballGame->creatureWaypointIndex].x - 120 - gCurrentPinballGame->walkMonXPos;
         tempVec.y = gEggWalkPathWaypoints[gMain.selectedField][gCurrentPinballGame->creatureWaypointIndex].y - 160 - gCurrentPinballGame->walkMonYPos;
         xx = tempVec.x * tempVec.x;
@@ -1847,7 +1849,7 @@ void UpdateEggMode(void)
                 m4aMPlayAllStop();
                 m4aSongNumStart(MUS_END_OF_BALL);
                 gCurrentPinballGame->stageTimer = 200;
-                gCurrentPinballGame->boardSubState = 6;
+                gCurrentPinballGame->boardSubState = EGG_HATCH_SUBSTATE_6;
             }
         }
 
@@ -1901,7 +1903,7 @@ void UpdateEggMode(void)
                 gCurrentPinballGame->creatureHitCooldown = 4;
                 gCurrentPinballGame->captureFlashTimer = 20;
                 if (gCurrentPinballGame->creatureHitCount > 1)
-                    gCurrentPinballGame->boardSubState = 4;
+                    gCurrentPinballGame->boardSubState = EGG_HATCH_SUBSTATE_4;
 
                 m4aSongNumStart(SE_PICHU_IN_POSITION_CHIRP);
                 angle2 = ArcTan2(-gCurrentPinballGame->ball->velocity.x, gCurrentPinballGame->ball->velocity.y);
@@ -1920,7 +1922,7 @@ void UpdateEggMode(void)
             }
         }
         break;
-    case 4:
+    case EGG_HATCH_SUBSTATE_4:
         gCurrentPinballGame->activePortraitType = 9;
         DmaCopy16(3, gCapturePalette, (void *)0x050003E0, 0x20);
         DmaCopy16(3, gCaptureScreenTilesGfx, (void *)0x06015800, 0x1C00);
@@ -1950,7 +1952,7 @@ void UpdateEggMode(void)
 
         gCurrentPinballGame->stageTimer = 0;
         break;
-    case 5:
+    case EGG_HATCH_SUBSTATE_5:
         if (gCurrentPinballGame->captureSequenceTimer < 17)
             priority = 2;
         else
@@ -1973,7 +1975,7 @@ void UpdateEggMode(void)
                 gMain.fieldSpriteGroups[41]->active = FALSE;
         }
         break;
-    case 6:
+    case EGG_HATCH_SUBSTATE_6:
         if (group->active)
         {
             group->baseX = 0;
@@ -1988,12 +1990,12 @@ void UpdateEggMode(void)
         gMain.fieldSpriteGroups[41]->active = FALSE;
         gCurrentPinballGame->boardSubState++;
         break;
-    case 7:
+    case EGG_HATCH_SUBSTATE_7:
         CleanupEggModeState();
         gCurrentPinballGame->boardSubState++;
         gCurrentPinballGame->eggHatchShockWallOverride = 0;
         break;
-    case 8:
+    case EGG_HATCH_SUBSTATE_8:
         if (gCurrentPinballGame->stageTimer)
         {
             gCurrentPinballGame->stageTimer--;
@@ -2005,7 +2007,7 @@ void UpdateEggMode(void)
             else
                 RequestBoardStateTransition(MAIN_BOARD_STATE_DEFAULT);
 
-            gCurrentPinballGame->boardSubState = 0;
+            gCurrentPinballGame->boardSubState = DEFAULT_MODE_SUBSTATE_0;
         }
         break;
     }

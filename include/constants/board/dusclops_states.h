@@ -1,5 +1,6 @@
 #ifndef GUARD_CONSTANTS_DUSCLOPS_STATES_H
 #define GUARD_CONSTANTS_DUSCLOPS_STATES_H
+#include "bonus_board.h"
 
 enum DusclopsBoardStates{
     DUSCLOPS_BOARD_STATE_0_INTRO = 0,
