@@ -169,10 +169,10 @@ void MainBoardProcess_7B_12524(void)
             }
         }
 
-        gMain.fieldSpriteGroups[1]->active = 1;
-        gMain.fieldSpriteGroups[2]->active = 1;
-        gMain.fieldSpriteGroups[49]->active = 1;
-        gMain.fieldSpriteGroups[0]->active = 0;
+        gMain.fieldSpriteGroups[1]->active = TRUE;
+        gMain.fieldSpriteGroups[2]->active = TRUE;
+        gMain.fieldSpriteGroups[49]->active = TRUE;
+        gMain.fieldSpriteGroups[0]->active = FALSE;
     }
     else
     {
@@ -191,10 +191,10 @@ void MainBoardProcess_7B_12524(void)
             }
         }
 
-        gMain.fieldSpriteGroups[1]->active = 0;
-        gMain.fieldSpriteGroups[2]->active = 0;
-        gMain.fieldSpriteGroups[49]->active = 0;
-        gMain.fieldSpriteGroups[0]->active = 1;
+        gMain.fieldSpriteGroups[1]->active = FALSE;
+        gMain.fieldSpriteGroups[2]->active = FALSE;
+        gMain.fieldSpriteGroups[49]->active = FALSE;
+        gMain.fieldSpriteGroups[0]->active = TRUE;
     }
 
     spriteGroup = gMain.fieldSpriteGroups[43];
@@ -224,7 +224,7 @@ void MainBoardProcess_7B_12524(void)
         gOamBuffer[oam->oamId].priority = currentBallState->oamPriority;
 
         if (gCurrentPinballGame->ballShadowTimer < 14)
-            gMain.fieldSpriteGroups[43]->active = 0;
+            gMain.fieldSpriteGroups[43]->active = FALSE;
     }
 }
 

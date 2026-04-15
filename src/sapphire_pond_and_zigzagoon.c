@@ -406,7 +406,7 @@ void UpdateZigzagoonEntity(void)
         gCurrentPinballGame->sapphireBumperAnimFrame = 0;
         gCurrentPinballGame->zigzagoonState = 3;
         gCurrentPinballGame->zigzagoonFxFrame = 0;
-        gMain.spriteGroups[27].active = 1;
+        gMain.spriteGroups[27].active = TRUE;
         gCurrentPinballGame->activePortraitType = 22;
         DmaCopy16(3, gSapphireBoardZigzagoonFx_Gfx, (void *)0x06015800, 0xC00);
         m4aSongNumStart(SE_UNKNOWN_0xEC);
@@ -437,7 +437,7 @@ void UpdateZigzagoonEntity(void)
         break;
     case 4:
         gCurrentPinballGame->activePortraitType = 0;
-        gMain.spriteGroups[27].active = 0;
+        gMain.spriteGroups[27].active = FALSE;
         gCurrentPinballGame->zigzagoonState = 0;
         break;
     }

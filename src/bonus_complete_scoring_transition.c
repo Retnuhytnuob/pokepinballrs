@@ -40,8 +40,8 @@ void FadeToMainBoard(void)
         {
             gCurrentPinballGame->stageTimer = 0;
             gCurrentPinballGame->boardSubState = 0;
-            gMain.spriteGroups[6].active = 0;
-            gMain.spriteGroups[5].active = 0;
+            gMain.spriteGroups[6].active = FALSE;
+            gMain.spriteGroups[5].active = FALSE;
             if (gMain.tempField != gMain.selectedField)
             {
                 TransitionFromBonusToMainBoard();

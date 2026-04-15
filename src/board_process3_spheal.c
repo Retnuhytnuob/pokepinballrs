@@ -201,10 +201,10 @@ void SphealBoardProcess_3B_43228(void)
         {
             gCurrentPinballGame->boardState = 3;
             gCurrentPinballGame->stageTimer = 0;
-            gMain.spriteGroups[7].active = 1;
-            gMain.spriteGroups[8].active = 1;
-            gMain.spriteGroups[9].active = 1;
-            gMain.spriteGroups[10].active = 1;
+            gMain.spriteGroups[7].active = TRUE;
+            gMain.spriteGroups[8].active = TRUE;
+            gMain.spriteGroups[9].active = TRUE;
+            gMain.spriteGroups[10].active = TRUE;
             DmaCopy16(3, gSphealResultsScreenGfx, (void *)0x06015800, 0x800);
             gCurrentPinballGame->bannerSlideYOffset = -126;
             gCurrentPinballGame->boardEntityActive = 1;
@@ -952,7 +952,7 @@ void UpdateSphealScoreAndDelivery(void)
     }
 
     if (gCurrentPinballGame->boardState == 1)
-        gMain.spriteGroups[11].active = 1;
+        gMain.spriteGroups[11].active = TRUE;
 
     if (gCurrentPinballGame->boardState < 2 && gMain.modeChangeFlags == MODE_CHANGE_NONE && gCurrentPinballGame->scoreCountdownTimer)
     {
@@ -1006,12 +1006,12 @@ void SphealBoard_WhiscashDeliversBall(void)
         gCurrentPinballGame->deliveryAnimTimer = 0;
         gCurrentPinballGame->deliveryAnimFrameIndex++;
         if (gCurrentPinballGame->deliveryAnimFrameIndex == 1)
-            gMain.spriteGroups[19].active = 1;
+            gMain.spriteGroups[19].active = TRUE;
 
         if (gCurrentPinballGame->deliveryAnimFrameIndex == 19)
         {
             gCurrentPinballGame->deliveryAnimFrameIndex = 18;
-            gMain.spriteGroups[19].active = 0;
+            gMain.spriteGroups[19].active = FALSE;
             gCurrentPinballGame->ballDeliveryActive = 0;
         }
 
@@ -1081,7 +1081,7 @@ void SphealBoard_PelipperDeliversBall(void)
             gCurrentPinballGame->pelipperFrameTimer = 0;
             gCurrentPinballGame->pelipperState = 8;
             gCurrentPinballGame->deliveryAnimFrameIndex = 13;
-            gMain.spriteGroups[20].active = 1;
+            gMain.spriteGroups[20].active = TRUE;
             gCurrentPinballGame->boardEntityActive = 1;
         }
     }
@@ -1099,7 +1099,7 @@ void SphealBoard_PelipperDeliversBall(void)
         }
         else
         {
-            gMain.spriteGroups[20].active = 0;
+            gMain.spriteGroups[20].active = FALSE;
         }
 
         if (gCurrentPinballGame->pelipperFrameTimer == 13)

@@ -152,7 +152,7 @@ void ClearSprites(void)
 
     for (i = 0; i < NUM_SPRITE_GROUPS; i++)
     {
-        gMain.spriteGroups[i].active = 0;
+        gMain.spriteGroups[i].active = FALSE;
         gMain.spriteGroups[i].baseX = 0;
         gMain.spriteGroups[i].baseY = 0;
         for (j = 0; j < MAX_SPRITES_IN_GROUP; j++)

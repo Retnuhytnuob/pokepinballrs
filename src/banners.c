@@ -153,7 +153,7 @@ void RenderBannerSlideAnimation(void)
                 {
                     spriteGroup->baseX = -110;
                     spriteGroup->baseY = 44;
-                    gMain.fieldSpriteGroups[11]->active = 0; // direct index required here
+                    gMain.fieldSpriteGroups[11]->active = FALSE; // direct index required here
                     gCurrentPinballGame->bannerGfxIndex = 0;
                     gCurrentPinballGame->activePortraitType = 0;
                 }
@@ -280,7 +280,7 @@ void RenderBannerSlideAnimation(void)
                 }
                 if (gCurrentPinballGame->bannerSlideTimer == 0x1E)
                 {
-                    gMain.fieldSpriteGroups[11]->active = 0;
+                    gMain.fieldSpriteGroups[11]->active = FALSE;
                     gCurrentPinballGame->bannerGfxIndex = 0;
                     gCurrentPinballGame->activePortraitType = 0;
                     if ((gCurrentPinballGame->ballCatchState != TRAP_EVO_SHOP_HOLE || gCurrentPinballGame->evolutionShopActive != 1) &&
@@ -321,6 +321,6 @@ void RenderBannerSlideAnimation(void)
         }
         return;
     }
-    spriteGroup->active = 1;
+    spriteGroup->active = TRUE;
     return;
 }

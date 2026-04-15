@@ -40,8 +40,8 @@ void CleanupCatchEmState(void)
 
     gCurrentPinballGame->creatureHitCount = 0;
     gCurrentPinballGame->captureFlashTimer = 0;
-    gMain.fieldSpriteGroups[18]->active = 0;
-    gMain.fieldSpriteGroups[12]->active = 0;
+    gMain.fieldSpriteGroups[18]->active = FALSE;
+    gMain.fieldSpriteGroups[12]->active = FALSE;
     gCurrentPinballGame->jirachiCollisionEnabled = 0;
     LoadPortraitGraphics(CENTER_SCREEN_STATE_CURRENT_LOCATION,
         CENTER_SCREEN_MAIN_SLOT);
@@ -440,7 +440,7 @@ void UpdateJirachiBonus(void)
         gCurrentPinballGame->catchLights[1] = 2;
         gCurrentPinballGame->catchLights[2] = 2;
         gCurrentPinballGame->jirachiCollisionEnabled = 1;
-        gMain.fieldSpriteGroups[33]->active = 1;
+        gMain.fieldSpriteGroups[33]->active = TRUE;
         DmaCopy16(3, gCatchSpriteGfxBuffer, (void *)0x06010CA0, 0x480);
         gCurrentPinballGame->modeAnimTimer = 40;
         gCurrentPinballGame->jirachiLogicX = 900;
@@ -667,7 +667,7 @@ void CleanupCaughtPokemonSprite(void)
         }
     }
 
-    gMain.fieldSpriteGroups[33]->active = 0;
+    gMain.fieldSpriteGroups[33]->active = FALSE;
 }
 
 void DrawJirachiSprites(void)
@@ -781,7 +781,7 @@ void DrawJirachiSprites(void)
                 gCurrentPinballGame->jirachiTagTimer[j] = 40;
                 gCurrentPinballGame->jirachiStarTagPos[j].x = gCurrentPinballGame->jirachiCenterX;
                 gCurrentPinballGame->jirachiStarTagPos[j].y = gCurrentPinballGame->jirachiCenterY + 16;
-                gMain.fieldSpriteGroups[45 + j]->active = 1;
+                gMain.fieldSpriteGroups[45 + j]->active = TRUE;
             }
         }
 
@@ -789,7 +789,7 @@ void DrawJirachiSprites(void)
         {
             gCurrentPinballGame->jirachiTagTimer[j]--;
             if (gCurrentPinballGame->jirachiTagTimer[j] == 0)
-                gMain.fieldSpriteGroups[45 + j]->active = 0;
+                gMain.fieldSpriteGroups[45 + j]->active = FALSE;
         }
     }
 }
@@ -811,9 +811,9 @@ void CleanupJirachiSprites(void)
         }
     }
 
-    gMain.fieldSpriteGroups[33]->active = 0;
+    gMain.fieldSpriteGroups[33]->active = FALSE;
     for (i = 0; i < 4; i++)
-        gMain.fieldSpriteGroups[45 + i]->active = 0;
+        gMain.fieldSpriteGroups[45 + i]->active = FALSE;
 }
 
 //draw_catch_tiles
@@ -866,7 +866,7 @@ void PlayEggCrackAnimation(void)
     if (gCurrentPinballGame->hatchFrameId == 2 && gCurrentPinballGame->hatchSequentialTileRevealFrameAnimTimer > 3)
     {
         gCurrentPinballGame->portraitDisplayState = 3;
-        gMain.fieldSpriteGroups[33]->active = 1;
+        gMain.fieldSpriteGroups[33]->active = TRUE;
     }
 
     if (gCurrentPinballGame->hatchFrameId > 2)
@@ -897,11 +897,11 @@ void PlayEggCrackAnimation(void)
         }
     }
 
-    gMain.fieldSpriteGroups[18]->active = 1;
+    gMain.fieldSpriteGroups[18]->active = TRUE;
     if (gCurrentPinballGame->hatchFrameId > 6)
     {
         gCurrentPinballGame->boardSubState++;
-        gMain.fieldSpriteGroups[18]->active = 0;
+        gMain.fieldSpriteGroups[18]->active = FALSE;
         gCurrentPinballGame->activePortraitType = 0;
     }
 }

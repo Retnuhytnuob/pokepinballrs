@@ -103,7 +103,7 @@ void UpdateMainBoardFlipperPhysics(void)
             if (flipper->active == 0 && gCurrentPinballGame->ballCatchState == NOT_TRAPPED)
                 m4aSongNumStart(SE_FLIPPER_PRESSED);
 
-            flipper->active = 1;
+            flipper->active = TRUE;
             flipper->stallTicks = 0;
         }
         else
@@ -221,7 +221,7 @@ void UpdateBonusBoardFlipperPhysics(void)
             {
                 m4aSongNumStart(SE_FLIPPER_PRESSED);
             }
-            flipper->active = 1;
+            flipper->active = TRUE;
             flipper->stallTicks = 0;
         }
         else
@@ -229,7 +229,7 @@ void UpdateBonusBoardFlipperPhysics(void)
             if (flipper->position == 10)
             {
                 if (flipper->stallTicks > 2)
-                    flipper->active = 0;
+                    flipper->active = FALSE;
                 flipper->stallTicks++;
             }
         }

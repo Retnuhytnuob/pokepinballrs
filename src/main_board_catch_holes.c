@@ -85,10 +85,10 @@ void UpdateShopEntryAnimation(s16 arg0)
             LoadPortraitGraphics(CENTER_SCREEN_STATE_6, CENTER_SCREEN_MAIN_SLOT);
             RenderEvolutionUI(1);
 
-            gMain.fieldSpriteGroups[7]->active = 1;
-            gMain.fieldSpriteGroups[8]->active = 1;
-            gMain.fieldSpriteGroups[6]->active = 1;
-            gMain.fieldSpriteGroups[9]->active = 1;
+            gMain.fieldSpriteGroups[7]->active = TRUE;
+            gMain.fieldSpriteGroups[8]->active = TRUE;
+            gMain.fieldSpriteGroups[6]->active = TRUE;
+            gMain.fieldSpriteGroups[9]->active = TRUE;
 
             DmaCopy16(3, gShopEvoUI_Pals, OBJ_PLTT + 0x1C0, 0x20);
             DmaCopy16(3, gShopModeBG_Gfx, BG_VRAM + 0x2000, 0xC40);
@@ -341,10 +341,10 @@ void UpdateShopEntryAnimation(s16 arg0)
                 gCurrentPinballGame->creatureOamPriority = 3;
                 gCurrentPinballGame->shopPurchaseConfirmed = 0;
 
-                gMain.fieldSpriteGroups[7]->active = 0;
-                gMain.fieldSpriteGroups[8]->active = 0;
-                gMain.fieldSpriteGroups[6]->active = 0;
-                gMain.fieldSpriteGroups[9]->active = 0;
+                gMain.fieldSpriteGroups[7]->active = FALSE;
+                gMain.fieldSpriteGroups[8]->active = FALSE;
+                gMain.fieldSpriteGroups[6]->active = FALSE;
+                gMain.fieldSpriteGroups[9]->active = FALSE;
 
                 gCurrentPinballGame->activePortraitType = 0;
             }
@@ -421,9 +421,9 @@ void UpdateShopEntryAnimation(s16 arg0)
 
                 RenderEvolutionUI(var_r7);
 
-                gMain.fieldSpriteGroups[8]->active = 1;
-                gMain.fieldSpriteGroups[9]->active = 1;
-                gMain.fieldSpriteGroups[6]->active = 1;
+                gMain.fieldSpriteGroups[8]->active = TRUE;
+                gMain.fieldSpriteGroups[9]->active = TRUE;
+                gMain.fieldSpriteGroups[6]->active = TRUE;
 
                 DmaCopy16(3, &gShopEvoUI_Pals, PLTT + 0x3C0, 0x20);
 
@@ -753,9 +753,9 @@ void UpdateShopEntryAnimation(s16 arg0)
                 gCurrentPinballGame->portraitDisplayState = 0;
                 gCurrentPinballGame->creatureOamPriority = 3;
 
-                gMain.fieldSpriteGroups[8]->active = 0;
-                gMain.fieldSpriteGroups[6]->active = 0;
-                gMain.fieldSpriteGroups[9]->active = 0;
+                gMain.fieldSpriteGroups[8]->active = FALSE;
+                gMain.fieldSpriteGroups[6]->active = FALSE;
+                gMain.fieldSpriteGroups[9]->active = FALSE;
 
                 gCurrentPinballGame->evoBlinkTimer = 0;
                 gCurrentPinballGame->catchLights[0] = 4;
@@ -775,7 +775,7 @@ void UpdateShopEntryAnimation(s16 arg0)
 void InitCenterTrapMode(void)
 {
     gCurrentPinballGame->modeAnimTimer = 0x96;
-    gMain.fieldSpriteGroups[13]->active = 0;
+    gMain.fieldSpriteGroups[13]->active = FALSE;
     gCurrentPinballGame->bonusTrapEnabled = 0;
     gCurrentPinballGame->scoreAddedInFrame = 10000;
     gCurrentPinballGame->ballUpgradeTimerFrozen = 1;
@@ -856,7 +856,7 @@ void AnimateCenterTrapSequence(void)
 
 void TransitionToBonusField(void)
 {
-    gMain.fieldSpriteGroups[13]->active = 0;
+    gMain.fieldSpriteGroups[13]->active = FALSE;
     SaveGameStateSnapshot(0);
     gCurrentPinballGame->ball->velocity.x = 0;
     gCurrentPinballGame->ball->velocity.y = 0;

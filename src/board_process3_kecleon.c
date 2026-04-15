@@ -169,8 +169,8 @@ void KecleonBoardProcess_3B_35AA4(void)
         {
             gCurrentPinballGame->boardState = 3;
             gCurrentPinballGame->stageTimer = 0;
-            gMain.spriteGroups[6].active = 1;
-            gMain.spriteGroups[5].active = 1;
+            gMain.spriteGroups[6].active = TRUE;
+            gMain.spriteGroups[5].active = TRUE;
             DmaCopy16(3, gKecleonBonusClear_Gfx, (void *)0x6015800, 0x2000);
             gCurrentPinballGame->bannerSlideYOffset = 0x88;
             gMain.modeChangeFlags = MODE_CHANGE_BONUS_BANNER;

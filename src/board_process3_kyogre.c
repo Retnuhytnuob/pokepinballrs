@@ -151,8 +151,8 @@ void KyogreBoardProcess_3B_3869C(void)
         {
             gCurrentPinballGame->boardState = 3;
             gCurrentPinballGame->stageTimer = 0;
-            gMain.spriteGroups[6].active = 1;
-            gMain.spriteGroups[5].active = 1;
+            gMain.spriteGroups[6].active = TRUE;
+            gMain.spriteGroups[5].active = TRUE;
             DmaCopy16(3, gKyogreBonusClear_Gfx, (void *)0x06015800, 0x2000);
             gCurrentPinballGame->bannerSlideYOffset = 136;
             gMain.modeChangeFlags = MODE_CHANGE_BONUS_BANNER;
@@ -193,8 +193,8 @@ void KyogreBoardProcess_3B_3869C(void)
     case 4:
         gCurrentPinballGame->boardState = 5;
         gCurrentPinballGame->stageTimer = 140;
-        gMain.spriteGroups[6].active = 1;
-        gMain.spriteGroups[5].active = 1;
+        gMain.spriteGroups[6].active = TRUE;
+        gMain.spriteGroups[5].active = TRUE;
         DmaCopy16(3, gKyogreBonusClear_Gfx, (void *)0x06015800, 0x2000);
         gCurrentPinballGame->bannerSlideYOffset = 136;
         gMain.modeChangeFlags = MODE_CHANGE_BONUS_BANNER;
@@ -473,7 +473,7 @@ void UpdateKyogreEntityLogic(void)
 
             if (gCurrentPinballGame->shockwaveAlreadyHit == 0 && gCurrentPinballGame->bossFramesetIndex == 42)
             {
-                gMain.spriteGroups[24].active = 1;
+                gMain.spriteGroups[24].active = TRUE;
                 gCurrentPinballGame->shockwaveAnimTimer = 0;
                 MPlayStart(&gMPlayInfo_SE1, &se_unk_10e);
             }
@@ -490,8 +490,8 @@ void UpdateKyogreEntityLogic(void)
             // catch kyogre
             gCurrentPinballGame->bossEntityState = 10;
             gCurrentPinballGame->bossFramesetIndex = 0;
-            gMain.spriteGroups[10].active = 1;
-            gMain.spriteGroups[9].active = 1;
+            gMain.spriteGroups[10].active = TRUE;
+            gMain.spriteGroups[9].active = TRUE;
             gCurrentPinballGame->currentSpecies = SPECIES_KYOGRE;
             gCurrentPinballGame->bossAttackTimer = 0;
             gCurrentPinballGame->captureSequenceTimer = 0;
@@ -775,13 +775,13 @@ void RenderKyogreSprites(void)
         else
         {
             gCurrentPinballGame->shockwaveAnimTimer = 0;
-            gMain.spriteGroups[26].active = 0;
+            gMain.spriteGroups[26].active = FALSE;
         }
     }
     else
     {
         if (gCurrentPinballGame->bossEntityState == 11 && gCurrentPinballGame->bossFrameTimer == 218)
-            group->active = 1;
+            group->active = TRUE;
     }
 }
 
@@ -922,7 +922,7 @@ void UpdateKyogreFieldEntities(void)
             gCurrentPinballGame->whirlpoolTrapNextPhase = 7;
             break;
         case 7:
-            gMain.spriteGroups[16].active = 0;
+            gMain.spriteGroups[16].active = FALSE;
             break;
         }
 
@@ -1214,7 +1214,7 @@ void UpdateKyogreFieldEntities(void)
         {
             scale = 0x100;
             var6 = 0;
-            group->active = 0;
+            group->active = FALSE;
         }
 
         gCurrentPinballGame->shockwaveQuadrantOffset[0].x = 0x20 - scale / 8;
@@ -1261,12 +1261,12 @@ void UpdateKyogreFieldEntities(void)
                 if (!gMain.spriteGroups[16].active)
                     PlayRumble(8);
 
-                gMain.spriteGroups[16].active = 1;
+                gMain.spriteGroups[16].active = TRUE;
             }
         }
 
         if (gMain.modeChangeFlags & MODE_CHANGE_EXPIRED_BONUS_BANNER)
-            gMain.spriteGroups[24].active = 0;
+            gMain.spriteGroups[24].active = FALSE;
     }
 }
 
@@ -1348,6 +1348,6 @@ void AnimateKyogreBackground(void)
         }
 
         if (gCurrentPinballGame->stageTimer == 480)
-            gMain.spriteGroups[15].active = 0;
+            gMain.spriteGroups[15].active = FALSE;
     }
 }

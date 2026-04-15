@@ -152,7 +152,7 @@ void UpdateCatchTrigger(void)
         break;
     case 5:
         AnimateBonusTrapSprite();
-        gMain.fieldSpriteGroups[13]->active = 0;
+        gMain.fieldSpriteGroups[13]->active = FALSE;
         gCurrentPinballGame->boardSubState++;
         break;
     case 6:
@@ -354,7 +354,7 @@ void UpdateBonusStageSelect(void)
         break;
     case 6:
         AnimateBonusTrapSprite();
-        gMain.fieldSpriteGroups[13]->active = 0;
+        gMain.fieldSpriteGroups[13]->active = FALSE;
         gCurrentPinballGame->boardSubState++;
         gCurrentPinballGame->stageTimer = 0;
         break;
@@ -371,7 +371,7 @@ void UpdateBonusStageSelect(void)
 void ShowBonusTrapSprite(void)
 {
     DmaCopy16(3, gMainStageBonusTrap_Gfx[0], (void *)0x060113C0, 0x300);
-    gMain.fieldSpriteGroups[13]->active = 1;
+    gMain.fieldSpriteGroups[13]->active = TRUE;
     gCurrentPinballGame->bonusTrapEnabled = 1;
 }
 
@@ -519,7 +519,7 @@ void UpdateEvolutionShopSprite(void)
         index = gEvoShopAnimFrames[gCurrentPinballGame->evolutionShopActive][(gCurrentPinballGame->shopAnimTimer % 42) / 6];
         if (gCurrentPinballGame->shopAnimTimer == 0)
         {
-            group->active = 1;
+            group->active = TRUE;
             DmaCopy16(3, gShopPalette, (void *)0x05000240, 0x20);
         }
         else if (gCurrentPinballGame->shopAnimTimer == 37)
@@ -549,7 +549,7 @@ void UpdateEvolutionShopSprite(void)
         {
             LoadShopItemGraphics(gCurrentPinballGame->evolutionShopActive);
             gCurrentPinballGame->shopTransitionActive = 0;
-            gMain.spriteGroups[78].active = 0;
+            gMain.spriteGroups[78].active = FALSE;
         }
     }
 }
@@ -739,7 +739,7 @@ void AnimateCoinReward(void)
     {
         if (gCurrentPinballGame->coinRewardTimer == 0)
         {
-            group->active = 1;
+            group->active = TRUE;
             gCurrentPinballGame->coinsAwarded = 0;
             for (i = 0; i < 2; i++)
             {
@@ -826,7 +826,7 @@ void AnimateCoinReward(void)
         gCurrentPinballGame->coinRewardTimer++;
         if (gCurrentPinballGame->coinRewardTimer == ((gCurrentPinballGame->coinRewardAmount - 1) * 9) + 19)
         {
-            gMain.fieldSpriteGroups[39]->active = 0;
+            gMain.fieldSpriteGroups[39]->active = FALSE;
             gCurrentPinballGame->coinRewardAmount = 0;
             if (gCurrentPinballGame->ballCatchState == 4)
                 gCurrentPinballGame->outcomeFrameCounter = 170;
@@ -840,7 +840,7 @@ void InitTotodileEggDelivery(void)
     gCurrentPinballGame->eggDeliveryY = 2080;
     gCurrentPinballGame->totodileDeliveryFrame = 0;
     gCurrentPinballGame->totodileDeliveryTimer = 0;
-    gMain.spriteGroups[82].active = 1;
+    gMain.spriteGroups[82].active = TRUE;
     gCurrentPinballGame->eggAnimationPhase = 1;
     gCurrentPinballGame->portraitOffsetX = 240;
     gCurrentPinballGame->portraitOffsetY = 160;
@@ -871,7 +871,7 @@ void AnimateTotodileEggDelivery(void)
         if (gCurrentPinballGame->totodileDeliveryFrame == 41)
         {
             gCurrentPinballGame->totodileDeliveryFrame = 40;
-            group->active = 0;
+            group->active = FALSE;
             gCurrentPinballGame->rubyEggDeliveryState = 2;
             gCurrentPinballGame->activePortraitType = 0;
         }
@@ -923,7 +923,7 @@ void InitAerodactylEggDelivery(void)
     gCurrentPinballGame->eggDeliveryY = -40;
     gCurrentPinballGame->eggDeliveryVelX = -36;
     gCurrentPinballGame->eggDeliveryVelY = 60;
-    gMain.spriteGroups[12].active = 1;
+    gMain.spriteGroups[12].active = TRUE;
     gCurrentPinballGame->eggAnimationPhase = 1;
     gCurrentPinballGame->portraitOffsetX = gCurrentPinballGame->eggDeliveryX / 20 - gFlyingCreatureCameraOffsets[0].x;
     gCurrentPinballGame->portraitOffsetY = gCurrentPinballGame->eggDeliveryY / 20 - gFlyingCreatureCameraOffsets[0].y;
@@ -971,7 +971,7 @@ void AnimateAerodactylEggDelivery(void)
     }
     else
     {
-        group->active = 0;
+        group->active = FALSE;
         do {} while (0); // needed to match, there was probably some dead code
         gCurrentPinballGame->rubyEggDeliveryState = 2;
         gCurrentPinballGame->activePortraitType = 0;
@@ -1000,7 +1000,7 @@ void LoadPokemonNameGraphics(void)
     gCurrentPinballGame->nameSpacingOffset = 0;
     LoadPortraitGraphics(CENTER_SCREEN_STATE_9, CENTER_SCREEN_MAIN_SLOT);
     gCurrentPinballGame->activePortraitType = 14;
-    gMain.fieldSpriteGroups[4]->active = 1;
+    gMain.fieldSpriteGroups[4]->active = TRUE;
     for (i = 0; i < 10; i++)
     {
         if (gSpeciesInfo[gCurrentPinballGame->currentSpecies].name[i] == 0x20)
@@ -1035,7 +1035,7 @@ void UpdatePokemonNamePosition(void)
 
 void HidePokemonNameDisplay(void)
 {
-    gMain.fieldSpriteGroups[4]->active = 0;
+    gMain.fieldSpriteGroups[4]->active = FALSE;
     gCurrentPinballGame->activePortraitType = 0;
 }
 
@@ -1051,7 +1051,7 @@ void InitEvolutionSuccessDisplay(void)
     gCurrentPinballGame->nameRevealAnimFrame = 0;
     LoadPortraitGraphics(CENTER_SCREEN_STATE_3, CENTER_SCREEN_MAIN_SLOT);
     gCurrentPinballGame->activePortraitType = 13;
-    gMain.fieldSpriteGroups[4]->active = 1;
+    gMain.fieldSpriteGroups[4]->active = TRUE;
     for (i = 0; i < 10; i++)
     {
         if (gSpeciesInfo[gCurrentPinballGame->currentSpecies].name[i] == 0x20)
@@ -1066,7 +1066,7 @@ void InitEvolutionSuccessDisplay(void)
         }
     }
 
-    gMain.fieldSpriteGroups[5]->active = 1;
+    gMain.fieldSpriteGroups[5]->active = TRUE;
     for (i = 0; i < 10; i++)
     {
         if (gCaughtTextChars[i] == 0x20)
@@ -1252,8 +1252,8 @@ void AnimateEvolutionSuccessScreen(void)
             }
         }
 
-        gMain.fieldSpriteGroups[4]->active = 0;
-        gMain.fieldSpriteGroups[5]->active = 0;
+        gMain.fieldSpriteGroups[4]->active = FALSE;
+        gMain.fieldSpriteGroups[5]->active = FALSE;
         gCurrentPinballGame->activePortraitType = 0;
     }
 }
@@ -1631,7 +1631,7 @@ void UpdateEggMode(void)
     {
     case 0:
         gCurrentPinballGame->portraitDisplayState = 3;
-        gMain.fieldSpriteGroups[41]->active = 1;
+        gMain.fieldSpriteGroups[41]->active = TRUE;
         gCurrentPinballGame->boardSubState++;
         break;
     case 1:
@@ -1970,7 +1970,7 @@ void UpdateEggMode(void)
 
             DmaCopy16(3, gCatchAnimTileBuffer, (void *)0x060112A0, 0x120);
             if (gCurrentPinballGame->captureSequenceTimer == 23)
-                gMain.fieldSpriteGroups[41]->active = 0;
+                gMain.fieldSpriteGroups[41]->active = FALSE;
         }
         break;
     case 6:
@@ -1985,7 +1985,7 @@ void UpdateEggMode(void)
                 gOamBuffer[oamSimple->oamId].y = oamSimple->yOffset + group->baseY;
             }
         }
-        gMain.fieldSpriteGroups[41]->active = 0;
+        gMain.fieldSpriteGroups[41]->active = FALSE;
         gCurrentPinballGame->boardSubState++;
         break;
     case 7:

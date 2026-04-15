@@ -104,7 +104,7 @@ void UpdateRubyRampPrizeGate(void)
         {
             gCurrentPinballGame->rampPrizeVisibilityTimer--;
             if (gCurrentPinballGame->rampPrizeVisibilityTimer == 0)
-                gMain.spriteGroups[68].active = 0;
+                gMain.spriteGroups[68].active = FALSE;
         }
 
         oamSimple = &group->oam[0];
@@ -126,7 +126,7 @@ void UpdateRubyRampPrizeGate(void)
                 gCurrentPinballGame->ball->velocity.x = -600;
                 gCurrentPinballGame->ball->velocity.y = -300;
                 gCurrentPinballGame->ball->spinSpeed = 0;
-                gMain.spriteGroups[68].active = 1;
+                gMain.spriteGroups[68].active = TRUE;
                 gCurrentPinballGame->rampPrizeVisibilityTimer = 6;
                 PlayRumble(8);
             }

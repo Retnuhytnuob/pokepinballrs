@@ -38,7 +38,7 @@ void UpdateChikoritaAttackAnimation(void)
         }
         else
         {
-            group->active = 0;
+            group->active = FALSE;
             group->baseX = 176 - gCurrentPinballGame->cameraXOffset;
         }
     }
@@ -52,7 +52,7 @@ void UpdateChikoritaAttackAnimation(void)
         }
         else
         {
-            group->active = 0;
+            group->active = FALSE;
             group->baseX = 32 - gCurrentPinballGame->cameraXOffset;
         }
 
@@ -93,7 +93,7 @@ void UpdateChikoritaAttackAnimation(void)
             gCurrentPinballGame->chikoritaProjectileTimer++;
             if (gCurrentPinballGame->chikoritaProjectileTimer == 27)
             {
-                gMain.spriteGroups[14].active = 1;
+                gMain.spriteGroups[14].active = TRUE;
                 m4aSongNumStart(SE_UNKNOWN_0xC7);
                 if (gCurrentPinballGame->sideBumperBounceCount[1] > 0)
                 {
@@ -108,7 +108,7 @@ void UpdateChikoritaAttackAnimation(void)
 
             if (gCurrentPinballGame->chikoritaProjectileTimer == 100)
             {
-                gMain.spriteGroups[14].active = 1;
+                gMain.spriteGroups[14].active = TRUE;
                 m4aSongNumStart(SE_UNKNOWN_0xC7);
                 if (gCurrentPinballGame->sideBumperBounceCount[0] > 0)
                 {
@@ -128,7 +128,7 @@ void UpdateChikoritaAttackAnimation(void)
             gCurrentPinballGame->chikoritaProjectileY = 190;
             gCurrentPinballGame->chikoritaProjectileVelX = 100;
             gCurrentPinballGame->chikoritaProjectileUnused = 0;
-            group->active = 0;
+            group->active = FALSE;
         }
 
         group->baseX = (gCurrentPinballGame->chikoritaProjectileX / 20) + 71u - gCurrentPinballGame->cameraXOffset;
@@ -160,7 +160,7 @@ void AnimateChikoritaSprite(void)
             gCurrentPinballGame->chikoritaProjectileY = 0;
             gCurrentPinballGame->chikoritaProjectileVelX = 100;
             gCurrentPinballGame->chikoritaProjectileUnused = 0;
-            gMain.spriteGroups[13].active = 1;
+            gMain.spriteGroups[13].active = TRUE;
         }
 
         if (gCurrentPinballGame->chikoritaFlashTimer < 54)

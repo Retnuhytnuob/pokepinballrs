@@ -27,9 +27,9 @@ void InitRouletteWheel(void)
 {
     s16 i;
 
-    gMain.fieldSpriteGroups[23]->active = 1;
-    gMain.fieldSpriteGroups[20]->active = 1;
-    gMain.fieldSpriteGroups[21]->active = 1;
+    gMain.fieldSpriteGroups[23]->active = TRUE;
+    gMain.fieldSpriteGroups[20]->active = TRUE;
+    gMain.fieldSpriteGroups[21]->active = TRUE;
     gMain.blendControl = 0x1C10;
     gMain.blendAlpha = BLDALPHA_BLEND(0, 16);
     gCurrentPinballGame->rouletteStopRequested = 0;
@@ -190,9 +190,9 @@ void RunRouletteWheel(void)
         if (gCurrentPinballGame->rouletteFrameIndex == 0)
         {
             gCurrentPinballGame->modeAnimTimer = 140;
-            gMain.fieldSpriteGroups[23]->active = 0;
-            gMain.fieldSpriteGroups[20]->active = 0;
-            gMain.fieldSpriteGroups[21]->active = 0;
+            gMain.fieldSpriteGroups[23]->active = FALSE;
+            gMain.fieldSpriteGroups[20]->active = FALSE;
+            gMain.fieldSpriteGroups[21]->active = FALSE;
             gCurrentPinballGame->rouletteSubOffset = 0;
             gCurrentPinballGame->portraitDisplayState = 0;
             m4aMPlayStop(&gMPlayInfo_BGM);
@@ -273,7 +273,7 @@ void ProcessRouletteOutcome(void)
                 gCurrentPinballGame->fullChargeIndicatorBlinkTimer = 60;
                 DmaCopy16(3, gPikachuSaverTilesGfx, (void *)0x06010600, 0x180);
                 gCurrentPinballGame->outLanePikaPosition = 2;
-                gMain.fieldSpriteGroups[41]->active = 0;
+                gMain.fieldSpriteGroups[41]->active = FALSE;
                 gCurrentPinballGame->pichuEntranceTimer = 1;
             }
         }
@@ -699,10 +699,10 @@ void RunBallCaptureSequence(void)
             }
         }
 
-        gMain.fieldSpriteGroups[3]->active = 1;
+        gMain.fieldSpriteGroups[3]->active = TRUE;
 
         if (gCurrentPinballGame->captureSequenceTimer == 10 && gCurrentPinballGame->captureSequenceFrame == 3)
-            gMain.fieldSpriteGroups[3]->active = 0;
+            gMain.fieldSpriteGroups[3]->active = FALSE;
         break;
     case 11:
         //TODO: fakematch; unused i. Here for the +4 to parse correctly;
@@ -833,7 +833,7 @@ void RunBallCaptureSequence(void)
                 }
             }
         }
-        gMain.fieldSpriteGroups[3]->active = 1;
+        gMain.fieldSpriteGroups[3]->active = TRUE;
 
         if (gCurrentPinballGame->captureSequenceTimer == 18 || gCurrentPinballGame->captureSequenceTimer == 20 || gCurrentPinballGame->captureSequenceTimer == 21)
         {
@@ -955,7 +955,7 @@ void RunBallCaptureSequence(void)
             }
         }
 
-        gMain.fieldSpriteGroups[3]->active = 0;
+        gMain.fieldSpriteGroups[3]->active = FALSE;
         gCurrentPinballGame->ball->ballHidden = 0;
         gCurrentPinballGame->ball->velocity.y = -256;
         gCurrentPinballGame->ball->velocity.x = 40;

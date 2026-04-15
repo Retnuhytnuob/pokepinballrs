@@ -1541,12 +1541,12 @@ void IntroScene6_RenderStarSprites(void)
             gIntroSpriteEntities[i].visible = 0;
     }
 
-    spriteGroups[0]->active = 0;
-    spriteGroups[1]->active = 0;
-    spriteGroups[2]->active = 0;
-    spriteGroups[3]->active = 0;
-    spriteGroups[4]->active = 0;
-    spriteGroups[5]->active = 0;
+    spriteGroups[0]->active = FALSE;
+    spriteGroups[1]->active = FALSE;
+    spriteGroups[2]->active = FALSE;
+    spriteGroups[3]->active = FALSE;
+    spriteGroups[4]->active = FALSE;
+    spriteGroups[5]->active = FALSE;
 }
 
 void IntroScene6_AdvanceIndex(void)
@@ -1996,7 +1996,7 @@ void IntroScene8a_RenderAllSprites(void)
 
 
     sg0->active = gIntroSpriteEntities[0].visible;
-    sg1->active = 1;
+    sg1->active = TRUE;
 
     spriteGroups[0]->active = gIntroSpriteEntities[2].visible;
     spriteGroups[1]->active = gIntroSpriteEntities[3].visible;
@@ -2075,14 +2075,14 @@ void IntroScene8a_RenderAllSprites(void)
 
     }
 
-    sg1->active = 0;
-    sg0->active = 0;
+    sg1->active = FALSE;
+    sg0->active = FALSE;
 
-    spriteGroups[0]->active = 0;
-    spriteGroups[1]->active = 0;
-    spriteGroups[2]->active = 0;
-    spriteGroups[3]->active = 0;
-    spriteGroups[4]->active = 0;
+    spriteGroups[0]->active = FALSE;
+    spriteGroups[1]->active = FALSE;
+    spriteGroups[2]->active = FALSE;
+    spriteGroups[3]->active = FALSE;
+    spriteGroups[4]->active = FALSE;
 }
 void IntroScene8a_ClearAndResetOAM(void)
 {
@@ -2093,7 +2093,7 @@ void IntroScene8a_ClearAndResetOAM(void)
     DmaFill32(3, 0, OAM, 0x400);
     for (i = 0; i < 20; i++)
     {
-        gMain.spriteGroups[i].active = 0;
+        gMain.spriteGroups[i].active = FALSE;
         gMain.spriteGroups[i].baseX = 0;
         gMain.spriteGroups[i].baseY = 0;
         for (j = 0; j < 0x16; j++)

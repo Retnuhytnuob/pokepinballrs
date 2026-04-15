@@ -209,7 +209,7 @@ void UpdateKickbackLogic(void)
 
             if (gCurrentPinballGame->kickbackLaunchTimer == 100)
             {
-                gMain.fieldSpriteGroups[38]->active = 1;
+                gMain.fieldSpriteGroups[38]->active = TRUE;
 
                 if (gCurrentPinballGame->outLanePikaPosition == 2 && gCurrentPinballGame->outLaneSide == 2)
                 {
@@ -240,7 +240,7 @@ void UpdateKickbackLogic(void)
                 {
                     gCurrentPinballGame->kickbackFrameId = 25;
                     gCurrentPinballGame->kickbackFiring = 0;
-                    gMain.fieldSpriteGroups[38]->active = 0;
+                    gMain.fieldSpriteGroups[38]->active = FALSE;
                     gCurrentPinballGame->activePortraitType = 0;
 
                     outlaneChuteIx = gCurrentPinballGame->outLaneSide - 1;
@@ -340,7 +340,7 @@ void PichuArrivalSequence(void)
 
     if (gCurrentPinballGame->pichuEntranceTimer == 800)
     {
-        group->active = 1;
+        group->active = TRUE;
         if (gCurrentPinballGame->pichuWalkMode == 1)
         {
             //Start entrance
@@ -404,14 +404,14 @@ void PichuArrivalSequence(void)
                 {
                     DmaCopy16(3, gPikachuSaverTilesGfx, (void *)0x06010600, 0x180);
                     gCurrentPinballGame->outLanePikaPosition = 2;
-                    gMain.fieldSpriteGroups[41]->active = 0;
+                    gMain.fieldSpriteGroups[41]->active = FALSE;
                     gCurrentPinballGame->pichuEntranceTimer = 1;
                     m4aSongNumStart(SE_PICHU_IN_POSITION_CHIRP);
                 }
             }
             else if (gCurrentPinballGame->creatureWaypointIndex == 7)
             {
-                gMain.fieldSpriteGroups[41]->active = 0;
+                gMain.fieldSpriteGroups[41]->active = FALSE;
                 gCurrentPinballGame->pichuEntranceTimer = 1;
             }
         }

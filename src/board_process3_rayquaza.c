@@ -149,8 +149,8 @@ void RayquazaBoardProcess_3B_3EB2C(void)
     case 2:
         gCurrentPinballGame->boardState = 3;
         gCurrentPinballGame->stageTimer = 0;
-        gMain.spriteGroups[6].active = 1;
-        gMain.spriteGroups[5].active = 1;
+        gMain.spriteGroups[6].active = TRUE;
+        gMain.spriteGroups[5].active = TRUE;
         DmaCopy16(3, gRayquazaBonusClear_Gfx, (void *)0x06015800, 0x2000);
         gCurrentPinballGame->bannerSlideYOffset = 136;
         gMain.modeChangeFlags = MODE_CHANGE_BONUS_BANNER;
@@ -190,8 +190,8 @@ void RayquazaBoardProcess_3B_3EB2C(void)
     case 4:
         gCurrentPinballGame->boardState = 5;
         gCurrentPinballGame->stageTimer = 140;
-        gMain.spriteGroups[6].active = 1;
-        gMain.spriteGroups[5].active = 1;
+        gMain.spriteGroups[6].active = TRUE;
+        gMain.spriteGroups[5].active = TRUE;
         DmaCopy16(3, gRayquazaBonusClear_Gfx, (void *)0x06015800, 0x2000);
         gCurrentPinballGame->bannerSlideYOffset = 136;
         gMain.modeChangeFlags = MODE_CHANGE_BONUS_BANNER;
@@ -466,9 +466,9 @@ void UpdateRayquazaEntityLogic(void)
             {
                 if (gCurrentPinballGame->bossMovementPhase == 0)
                 {
-                    gMain.spriteGroups[17].active = 1;
-                    gMain.spriteGroups[18].active = 1;
-                    gMain.spriteGroups[19].active = 1;
+                    gMain.spriteGroups[17].active = TRUE;
+                    gMain.spriteGroups[18].active = TRUE;
+                    gMain.spriteGroups[19].active = TRUE;
                     gCurrentPinballGame->swoopAttackState = 1;
                 }
             }
@@ -491,15 +491,15 @@ void UpdateRayquazaEntityLogic(void)
             DmaCopy16(3, gRayquazaWindBoardGfx, (void *)0x06015800, 0x1C00);
             if (gCurrentPinballGame->windAttackCount & 1)
             {
-                gMain.spriteGroups[22].active = 1;
-                gMain.spriteGroups[24].active = 1;
-                gMain.spriteGroups[25].active = 1;
+                gMain.spriteGroups[22].active = TRUE;
+                gMain.spriteGroups[24].active = TRUE;
+                gMain.spriteGroups[25].active = TRUE;
             }
             else
             {
-                gMain.spriteGroups[23].active = 1;
-                gMain.spriteGroups[30].active = 1;
-                gMain.spriteGroups[31].active = 1;
+                gMain.spriteGroups[23].active = TRUE;
+                gMain.spriteGroups[30].active = TRUE;
+                gMain.spriteGroups[31].active = TRUE;
             }
 
             gCurrentPinballGame->windAttackCount++;
@@ -518,7 +518,7 @@ void UpdateRayquazaEntityLogic(void)
             if (gCurrentPinballGame->windEntityPosition.x < 4800)
                 gCurrentPinballGame->windEntityPosition.x += 140;
             else
-                gMain.spriteGroups[22].active = 0;
+                gMain.spriteGroups[22].active = FALSE;
 
             if (gCurrentPinballGame->windEntityPosition.x > 2400)
             {
@@ -533,7 +533,7 @@ void UpdateRayquazaEntityLogic(void)
             if (gCurrentPinballGame->windEntityPosition.x > -4800)
                 gCurrentPinballGame->windEntityPosition.x -= 140;
             else
-                gMain.spriteGroups[23].active = 0;
+                gMain.spriteGroups[23].active = FALSE;
 
             if (gCurrentPinballGame->windEntityPosition.x < -2400)
             {
@@ -562,8 +562,8 @@ void UpdateRayquazaEntityLogic(void)
             // Catch Rayquaza
             gCurrentPinballGame->bossEntityState = 14;
             gCurrentPinballGame->bossFramesetIndex = 0;
-            gMain.spriteGroups[10].active = 1;
-            gMain.spriteGroups[9].active = 1;
+            gMain.spriteGroups[10].active = TRUE;
+            gMain.spriteGroups[9].active = TRUE;
             gCurrentPinballGame->currentSpecies = SPECIES_RAYQUAZA;
             gCurrentPinballGame->bossAttackTimer = 0;
             gCurrentPinballGame->captureSequenceTimer = 0;
@@ -645,7 +645,7 @@ void UpdateRayquazaEntityLogic(void)
         gCurrentPinballGame->introFrameCounter = 0;
         gCurrentPinballGame->boardEntityActive = 1;
         gMain.modeChangeFlags = MODE_CHANGE_BONUS_BANNER;
-        gMain.spriteGroups[14].active = 1;
+        gMain.spriteGroups[14].active = TRUE;
         gCurrentPinballGame->minionLogicPosition[0].x = 0;
         gCurrentPinballGame->minionLogicPosition[0].y = -5000;
         gCurrentPinballGame->minionLogicPosition[1].x = 1400;
@@ -756,9 +756,9 @@ void RenderRayquazaSprites(void)
 
         if (gCurrentPinballGame->introFrameCounter == 671)
         {
-            group->active = 0;
-            gMain.spriteGroups[41].active = 1;
-            gMain.spriteGroups[45].active = 1;
+            group->active = FALSE;
+            gMain.spriteGroups[41].active = TRUE;
+            gMain.spriteGroups[45].active = TRUE;
         }
     }
     else
@@ -906,16 +906,16 @@ void RenderRayquazaSprites(void)
 
             if (gCurrentPinballGame->bossEntityState == 12)
             {
-                gMain.spriteGroups[43].active = 1;
-                gMain.spriteGroups[41].active = 0;
-                gMain.spriteGroups[45].active = 0;
-                gMain.spriteGroups[21].active = 0;
+                gMain.spriteGroups[43].active = TRUE;
+                gMain.spriteGroups[41].active = FALSE;
+                gMain.spriteGroups[45].active = FALSE;
+                gMain.spriteGroups[21].active = FALSE;
             }
 
             if (gCurrentPinballGame->captureSequenceTimer == 21)
             {
-                gMain.spriteGroups[45].active = 0;
-                gMain.spriteGroups[21].active = 0;
+                gMain.spriteGroups[45].active = FALSE;
+                gMain.spriteGroups[21].active = FALSE;
             }
         }
     }
@@ -1094,7 +1094,7 @@ void UpdateRayquazaMinionsAndEffects(void)
                 if (gCurrentPinballGame->orbEntityState[0] < 3 && gCurrentPinballGame->orbEntityState[1] < 3 &&
                     gCurrentPinballGame->ballRespawnState == 0 && squaredMagnitude < 200)
                 {
-                    gMain.spriteGroups[36].active = 1;
+                    gMain.spriteGroups[36].active = TRUE;
                     gCurrentPinballGame->ballGrabTimer = 600;
                     m4aSongNumStart(SE_UNKNOWN_0x12A);
                     PlayRumble(9);
@@ -1135,7 +1135,7 @@ void UpdateRayquazaMinionsAndEffects(void)
         }
 
         if (gCurrentPinballGame->swoopAttackState == 4)
-            gMain.spriteGroups[17].active = 0;
+            gMain.spriteGroups[17].active = FALSE;
     }
 
     group = &gMain.spriteGroups[18];
@@ -1157,7 +1157,7 @@ void UpdateRayquazaMinionsAndEffects(void)
         }
 
         if (gCurrentPinballGame->swoopAttackState == 4)
-            gMain.spriteGroups[18].active = 0;
+            gMain.spriteGroups[18].active = FALSE;
     }
 
     group = &gMain.spriteGroups[19];
@@ -1187,7 +1187,7 @@ void UpdateRayquazaMinionsAndEffects(void)
         }
 
         if (gCurrentPinballGame->swoopAttackState == 4)
-            gMain.spriteGroups[19].active = 0;
+            gMain.spriteGroups[19].active = FALSE;
     }
 
     group = &gMain.spriteGroups[22];
@@ -1395,10 +1395,10 @@ void UpdateRayquazaMinionsAndEffects(void)
             }
 
             if (gCurrentPinballGame->orbEntityState[i] == 0)
-                group->active = 0;
+                group->active = FALSE;
 
             if (gCurrentPinballGame->orbHitIndex && i == (gCurrentPinballGame->orbHitIndex - 1))
-                group->active = 0;
+                group->active = FALSE;
         }
     }
 
@@ -1427,7 +1427,7 @@ void UpdateRayquazaMinionsAndEffects(void)
         {
             gCurrentPinballGame->hitBurstAnimFrame++;
             if (gCurrentPinballGame->hitBurstAnimFrame == 25)
-                group->active = 0;
+                group->active = FALSE;
         }
     }
 
@@ -1435,7 +1435,7 @@ void UpdateRayquazaMinionsAndEffects(void)
     {
         gCurrentPinballGame->orbHitIndex = 0;
         gCurrentPinballGame->hitBurstAnimFrame = 0;
-        group->active = 1;
+        group->active = TRUE;
     }
 }
 
@@ -1502,7 +1502,7 @@ void UpdateWhirlwindGrabEntity(void)
 
     if (gCurrentPinballGame->ballGrabTimer == 0)
     {
-        gMain.spriteGroups[36].active = 0;
+        gMain.spriteGroups[36].active = FALSE;
         gCurrentPinballGame->ballGrabFlashTimer = 0;
         gCurrentPinballGame->ballGrabbed = 0;
     }
@@ -1680,10 +1680,10 @@ void RenderWindCloudSprites(void)
     {
         if (gCurrentPinballGame->windCloudSpawnTimer == 6)
         {
-            gMain.spriteGroups[24].active = 0;
-            gMain.spriteGroups[25].active = 0;
-            gMain.spriteGroups[26].active = 1;
-            gMain.spriteGroups[27].active = 1;
+            gMain.spriteGroups[24].active = FALSE;
+            gMain.spriteGroups[25].active = FALSE;
+            gMain.spriteGroups[26].active = TRUE;
+            gMain.spriteGroups[27].active = TRUE;
             if (gCurrentPinballGame->orbEntityState[0] < 3 && gCurrentPinballGame->orbEntityState[1] < 3 && gCurrentPinballGame->ballRespawnState == 0)
             {
                 gCurrentPinballGame->ball->velocity.x += 500;
@@ -1693,26 +1693,26 @@ void RenderWindCloudSprites(void)
 
         if (gCurrentPinballGame->windCloudSpawnTimer == 11)
         {
-            gMain.spriteGroups[26].active = 0;
-            gMain.spriteGroups[27].active = 0;
-            gMain.spriteGroups[28].active = 1;
-            gMain.spriteGroups[29].active = 1;
+            gMain.spriteGroups[26].active = FALSE;
+            gMain.spriteGroups[27].active = FALSE;
+            gMain.spriteGroups[28].active = TRUE;
+            gMain.spriteGroups[29].active = TRUE;
         }
 
         if (gCurrentPinballGame->windCloudSpawnTimer == 14)
         {
-            gMain.spriteGroups[28].active = 0;
-            gMain.spriteGroups[29].active = 0;
+            gMain.spriteGroups[28].active = FALSE;
+            gMain.spriteGroups[29].active = FALSE;
         }
     }
     else
     {
         if (gCurrentPinballGame->windCloudSpawnTimer == 6)
         {
-            gMain.spriteGroups[30].active = 0;
-            gMain.spriteGroups[31].active = 0;
-            gMain.spriteGroups[32].active = 1;
-            gMain.spriteGroups[33].active = 1;
+            gMain.spriteGroups[30].active = FALSE;
+            gMain.spriteGroups[31].active = FALSE;
+            gMain.spriteGroups[32].active = TRUE;
+            gMain.spriteGroups[33].active = TRUE;
             if (gCurrentPinballGame->orbEntityState[0] < 3 && gCurrentPinballGame->orbEntityState[1] < 3 && gCurrentPinballGame->ballRespawnState == 0)
             {
                 gCurrentPinballGame->ball->velocity.x -= 500;
@@ -1722,16 +1722,16 @@ void RenderWindCloudSprites(void)
 
         if (gCurrentPinballGame->windCloudSpawnTimer == 11)
         {
-            gMain.spriteGroups[32].active = 0;
-            gMain.spriteGroups[33].active = 0;
-            gMain.spriteGroups[34].active = 1;
-            gMain.spriteGroups[35].active = 1;
+            gMain.spriteGroups[32].active = FALSE;
+            gMain.spriteGroups[33].active = FALSE;
+            gMain.spriteGroups[34].active = TRUE;
+            gMain.spriteGroups[35].active = TRUE;
         }
 
         if (gCurrentPinballGame->windCloudSpawnTimer == 14)
         {
-            gMain.spriteGroups[34].active = 0;
-            gMain.spriteGroups[35].active = 0;
+            gMain.spriteGroups[34].active = FALSE;
+            gMain.spriteGroups[35].active = FALSE;
         }
     }
 
@@ -1741,7 +1741,7 @@ void RenderWindCloudSprites(void)
         {
             gCurrentPinballGame->orbAnimTimer[0] = 0;
             gCurrentPinballGame->orbEntityState[0] = 1;
-            gMain.spriteGroups[15].active = 1;
+            gMain.spriteGroups[15].active = TRUE;
             rand = Random() % 8;
             var0 = ((gMain.systemFrameCount % 240) << 0x10) / 240;
             gCurrentPinballGame->orbOrbitCenter[0].x = gRayquazaMinionOrbitWaypoints[rand].x;
@@ -1758,7 +1758,7 @@ void RenderWindCloudSprites(void)
         {
             gCurrentPinballGame->orbAnimTimer[1] = 0;
             gCurrentPinballGame->orbEntityState[1] = 1;
-            gMain.spriteGroups[16].active = 1;
+            gMain.spriteGroups[16].active = TRUE;
             rand = (Random() % 8 + 8) % 32; // Force 8 to be added to r1
             var0 = (((gMain.systemFrameCount + 120) % 240) << 0x10) / 240;
             gCurrentPinballGame->orbOrbitCenter[1].x = gRayquazaMinionOrbitWaypoints[rand].x;
@@ -1954,9 +1954,9 @@ void UpdateRayquazaIntroSequence(void)
 
             if (gCurrentPinballGame->introFrameCounter == 660)
             {
-                gMain.spriteGroups[11].active = 0;
-                gMain.spriteGroups[12].active = 0;
-                gMain.spriteGroups[13].active = 0;
+                gMain.spriteGroups[11].active = FALSE;
+                gMain.spriteGroups[12].active = FALSE;
+                gMain.spriteGroups[13].active = FALSE;
             }
 
             group = &gMain.spriteGroups[14];
@@ -1983,7 +1983,7 @@ void UpdateRayquazaIntroSequence(void)
 
             if (gCurrentPinballGame->introFrameCounter == 150)
             {
-                gMain.spriteGroups[14].active = 1;
+                gMain.spriteGroups[14].active = TRUE;
                 gCurrentPinballGame->orbCollisionPosition.x = 1600;
                 gCurrentPinballGame->orbCollisionPosition.y = -100;
                 gCurrentPinballGame->orbLogicPosition.x = -21;
@@ -2003,7 +2003,7 @@ void UpdateRayquazaIntroSequence(void)
             }
 
             if (gCurrentPinballGame->introFrameCounter == 350)
-                gMain.spriteGroups[14].active = 0;
+                gMain.spriteGroups[14].active = FALSE;
         }
     }
 

@@ -740,7 +740,7 @@ void UpdateSapphireEggMachine(void)
                 gCurrentPinballGame->splashEffectFrameIndex[i]++;
                 if (gCurrentPinballGame->splashEffectFrameIndex[i] == 6)
                 {
-                    group->active = 0;
+                    group->active = FALSE;
                     gCurrentPinballGame->splashEffectFrameIndex[i] = 5;
                 }
             }

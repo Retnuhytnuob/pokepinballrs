@@ -56,11 +56,11 @@ void UpdateAreaRoulette(void)
         gCurrentPinballGame->rouletteSubOffset = 0;
         gCurrentPinballGame->cameraScrollTarget = 0;
         gCurrentPinballGame->cameraScrollEnabled = 1;
-        gMain.fieldSpriteGroups[20]->active = 1;
-        gMain.fieldSpriteGroups[21]->active = 1;
-        gMain.fieldSpriteGroups[23]->active = 1;
-        gMain.fieldSpriteGroups[22]->active = 1;
-        gMain.fieldSpriteGroups[19]->active = 1;
+        gMain.fieldSpriteGroups[20]->active = TRUE;
+        gMain.fieldSpriteGroups[21]->active = TRUE;
+        gMain.fieldSpriteGroups[23]->active = TRUE;
+        gMain.fieldSpriteGroups[22]->active = TRUE;
+        gMain.fieldSpriteGroups[19]->active = TRUE;
         gCurrentPinballGame->rouletteFrameIndex = 30;
         gCurrentPinballGame->rouletteRotationPeriod = 30;
         gCurrentPinballGame->rouletteSpinSpeed = 0;
@@ -182,10 +182,10 @@ void UpdateAreaRoulette(void)
             {
                 gCurrentPinballGame->stageTimer = 0;
                 gCurrentPinballGame->boardSubState++;
-                gMain.fieldSpriteGroups[23]->active = 0;
-                gMain.fieldSpriteGroups[20]->active = 0;
-                gMain.fieldSpriteGroups[21]->active = 0;
-                gMain.fieldSpriteGroups[34]->active = 1;
+                gMain.fieldSpriteGroups[23]->active = FALSE;
+                gMain.fieldSpriteGroups[20]->active = FALSE;
+                gMain.fieldSpriteGroups[21]->active = FALSE;
+                gMain.fieldSpriteGroups[34]->active = TRUE;
                 m4aSongNumStart(SE_AREA_ROULETTE_SELECTED);
             }
         }
@@ -258,7 +258,7 @@ void UpdateAreaRoulette(void)
             }
 
             if (gCurrentPinballGame->stageTimer == 0x1C) {
-                gMain.fieldSpriteGroups[34]->active = 0;
+                gMain.fieldSpriteGroups[34]->active = FALSE;
                 gCurrentPinballGame->activePortraitType = 0;
             }
         }
@@ -331,7 +331,7 @@ void CleanupTravelModeState(void)
     gCurrentPinballGame->seedotExitSequenceTimer = 0;
     LoadPortraitGraphics(CENTER_SCREEN_STATE_CURRENT_LOCATION, CENTER_SCREEN_MAIN_SLOT);
     gCurrentPinballGame->portraitDisplayState = 0;
-    gMain.fieldSpriteGroups[13]->active = 0;
+    gMain.fieldSpriteGroups[13]->active = FALSE;
     gCurrentPinballGame->trapAnimState = 0;
     gCurrentPinballGame->bonusTrapEnabled = 0;
     gCurrentPinballGame->prevTravelArrowTiles[0] = gCurrentPinballGame->travelArrowTiles[0] = 0;
@@ -514,7 +514,7 @@ void UpdateTravelMode(void)
         break;
     case 6:
         AnimateBonusTrapSprite();
-        gMain.fieldSpriteGroups[13]->active = 0;
+        gMain.fieldSpriteGroups[13]->active = FALSE;
         CleanupTravelModeState();
         gCurrentPinballGame->boardSubState++;
         break;
