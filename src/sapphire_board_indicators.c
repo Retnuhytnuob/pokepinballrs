@@ -2,7 +2,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "constants/bg_music.h"
-#include "constants/sapphire_states.h"
+#include "constants/board/sapphire_states.h"
 
 extern const u8 *gSapphirePSquareIndicator[][2];
 extern const u8 *gHatchMachineDrawSegment[][3][2];

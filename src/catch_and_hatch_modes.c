@@ -2,7 +2,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "constants/bg_music.h"
-#include "constants/main_board.h"
+#include "constants/board/main_board.h"
 
 extern u8 gCatchSpriteFrameBuffer[];
 
@@ -136,7 +136,7 @@ void UpdateCatchEmMode(void)
         gCurrentPinballGame->boardSubState++;
         break;
     case 3:
-        LoadPortraitGraphics(CENTER_SCREEN_STATE_3,
+        LoadPortraitGraphics(CENTER_SCREEN_STATE_POKEMON_DISPLAY,
             CENTER_SCREEN_MAIN_SLOT);
         gCurrentPinballGame->hatchTileRevealState = HATCH_TILE_REVEAL_NONE;
         gCurrentPinballGame->hatchRevealPhase = 0;

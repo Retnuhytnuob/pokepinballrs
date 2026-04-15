@@ -2,7 +2,7 @@
 #include "main.h"
 #include "m4a.h"
 #include "constants/bg_music.h"
-#include "constants/ruby_states.h"
+#include "constants/board/ruby_states.h"
 #include "functions_ruby.h"
 
 void InitSharpedoCatchMode(void);

@@ -2,7 +2,9 @@
 #include "m4a.h"
 #include "main.h"
 #include "constants/bg_music.h"
-#include "constants/main_board.h"
+#include "constants/board/main_board.h"
+#include "constants/board/groudon_states.h"
+#include "constants/board/dusclops_states.h"
 
 extern struct SpriteGroup gMain_spriteGroups_12;
 extern struct SpriteGroup gMain_spriteGroups_14;
@@ -79,7 +81,8 @@ void ProcessBonusBannerAndScoring(void)
     switch (gMain.selectedField)
     {
     case FIELD_DUSCLOPS:
-        if (gCurrentPinballGame->boardState == 5 && gCurrentPinballGame->stageTimer < 180)
+        if (gCurrentPinballGame->boardState == DUSCLOPS_BOARD_STATE_SCORE_PHASE 
+            && gCurrentPinballGame->stageTimer < 180)
             var0 = (gCurrentPinballGame->stageTimer % 24) / 12 + 8;
         var1 = 30000000;
         break;
@@ -94,7 +97,8 @@ void ProcessBonusBannerAndScoring(void)
         var1 = 50000000;
         break;
     case FIELD_GROUDON:
-        if (gCurrentPinballGame->boardState == 3 && gCurrentPinballGame->stageTimer < 180)
+        if (gCurrentPinballGame->boardState == GROUDON_BOARD_STATE_SUCCESS_SCORING 
+            && gCurrentPinballGame->stageTimer < 180)
             var0 = (gCurrentPinballGame->stageTimer % 24) / 12 + 8;
         var1 = 50000000;
         break;

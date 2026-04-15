@@ -3,7 +3,7 @@
 #include "constants/bg_music.h"
 #include "m4a.h"
 #include "constants/anglemath.h"
-#include "constants/main_board.h"
+#include "constants/board/main_board.h"
 
 extern u8 gCatchTargetCollisionBitmap[];
 extern u16 gFlipperCollisionAngles[][2];

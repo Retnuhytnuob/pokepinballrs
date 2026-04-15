@@ -4,7 +4,7 @@
 #include "main.h"
 #include "m4a.h"
 #include "constants/bg_music.h"
-#include "constants/ruby_states.h"
+#include "constants/board/ruby_states.h"
 
 void RubyBoardProcess_3A_19A20(void)
 {

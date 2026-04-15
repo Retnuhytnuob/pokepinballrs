@@ -2,7 +2,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "constants/bg_music.h"
-#include "constants/groudon_states.h"
+#include "constants/board/groudon_states.h"
 
 
 extern const u8 gGroudonBonusClear_Gfx[];

@@ -2,7 +2,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "constants/bg_music.h"
-#include "constants/main_board.h"
+#include "constants/board/main_board.h"
 
 extern const u8 gSapphireBoardShopShockWall_Gfx[][0x80];
 

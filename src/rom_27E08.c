@@ -2,7 +2,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "constants/bg_music.h"
-#include "constants/main_board.h"
+#include "constants/board/main_board.h"
 
 extern const s16 gEggHatchAnimData[28][3];
 extern const u8 gCatchSpriteFrameBuffer[][0x120];
@@ -75,7 +75,7 @@ void InitCatchTrigger(void)
 {
     gCurrentPinballGame->boardSubState = 1;
     gCurrentPinballGame->stageTimer = 0;
-    gCurrentPinballGame->shopPurchaseConfirmed = 0;
+    gCurrentPinballGame->prizeSelected = 0;
 }
 
 void UpdateCatchTrigger(void)
@@ -95,7 +95,7 @@ void UpdateCatchTrigger(void)
                 ShowBonusTrapSprite();
                 gCurrentPinballGame->trapAnimState = 2;
                 gCurrentPinballGame->portraitCycleFrame = 0;
-                LoadPortraitGraphics(CENTER_SCREEN_STATE_1, CENTER_SCREEN_MAIN_SLOT);
+                LoadPortraitGraphics(CENTER_SCREEN_STATE_SLOT_START_CARD, CENTER_SCREEN_MAIN_SLOT);
                 gCurrentPinballGame->boardSubState++;
             }
         }
@@ -103,7 +103,7 @@ void UpdateCatchTrigger(void)
     case 2:
         AnimateBonusTrapSprite();
         if (gCurrentPinballGame->ballCatchState == 0)
-            LoadPortraitGraphics(CENTER_SCREEN_STATE_1, CENTER_SCREEN_MAIN_SLOT);
+            LoadPortraitGraphics(CENTER_SCREEN_STATE_SLOT_START_CARD, CENTER_SCREEN_MAIN_SLOT);
 
         if (gCurrentPinballGame->ballCatchState == 4)
             gCurrentPinballGame->boardSubState++;
@@ -137,9 +137,9 @@ void UpdateCatchTrigger(void)
             gCurrentPinballGame->boardSubState++;
         }
 
-        if (gCurrentPinballGame->shopPurchaseConfirmed)
+        if (gCurrentPinballGame->prizeSelected)
         {
-            ProcessRouletteOutcome();
+            GivePrize();
             if (gCurrentPinballGame->outcomeFrameCounter < 180)
             {
                 gCurrentPinballGame->modeAnimTimer = 140;
@@ -998,7 +998,7 @@ void LoadPokemonNameGraphics(void)
     int index;
 
     gCurrentPinballGame->nameSpacingOffset = 0;
-    LoadPortraitGraphics(CENTER_SCREEN_STATE_9, CENTER_SCREEN_MAIN_SLOT);
+    LoadPortraitGraphics(CENTER_SCREEN_STATE_EVO_PREVIEW, CENTER_SCREEN_MAIN_SLOT);
     gCurrentPinballGame->activePortraitType = 14;
     gMain.fieldSpriteGroups[4]->active = TRUE;
     for (i = 0; i < 10; i++)
@@ -1049,7 +1049,7 @@ void InitEvolutionSuccessDisplay(void)
     gCurrentPinballGame->nameSpacingOffset = 0;
     gCurrentPinballGame->creatureOamPriority = 0;
     gCurrentPinballGame->nameRevealAnimFrame = 0;
-    LoadPortraitGraphics(CENTER_SCREEN_STATE_3, CENTER_SCREEN_MAIN_SLOT);
+    LoadPortraitGraphics(CENTER_SCREEN_STATE_POKEMON_DISPLAY, CENTER_SCREEN_MAIN_SLOT);
     gCurrentPinballGame->activePortraitType = 13;
     gMain.fieldSpriteGroups[4]->active = TRUE;
     for (i = 0; i < 10; i++)

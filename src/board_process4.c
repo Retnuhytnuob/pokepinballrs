@@ -4,7 +4,7 @@
 #include "main.h"
 #include "m4a.h"
 #include "constants/bg_music.h"
-#include "constants/main_board.h"
+#include "constants/board/main_board.h"
 
 void AllBoardProcess_4A_19304(void)
 {

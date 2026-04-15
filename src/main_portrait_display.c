@@ -1,6 +1,6 @@
 #include "global.h"
 #include "main.h"
-#include "constants/center_screen_states.h"
+#include "constants/board/center_screen_states.h"
 
 extern const u16 gPortraitGenericPalettes[];
 extern const u16 gPortraitPaletteSlots[2];
@@ -38,7 +38,7 @@ void LoadPortraitGraphics(s16 displayMode, s16 picIx)
         index = gCurrentPinballGame->roulettePortraitIndexes[picIx] * 0x10;
         DmaCopy16(3, &gPortraitGenericPalettes[index], (void *)0x05000200 + gPortraitPaletteSlots[picIx] * 0x20, 0x20);
         break;
-    case CENTER_SCREEN_STATE_1:
+    case CENTER_SCREEN_STATE_SLOT_START_CARD:
         ptr = gPortraitIdleCycleData;
         gCurrentPinballGame->portraitGfxIndex[picIx] = ptr[(gCurrentPinballGame->portraitCycleFrame % 48) / 24];
         index = ptr[2] * 0x10;
@@ -52,7 +52,7 @@ void LoadPortraitGraphics(s16 displayMode, s16 picIx)
         DmaCopy16(3, gPortraitAnimFrameGraphics[gCurrentPinballGame->portraitGfxIndex[picIx]], (void *)0x06010CA0 + picIx * 0x300, 0x300);
         DmaCopy16(3, &gPortraitAnimPalettes[index], (void *)0x05000200 + gPortraitPaletteSlots[picIx] * 0x20, 0x20);
         break;
-    case CENTER_SCREEN_STATE_3:
+    case CENTER_SCREEN_STATE_POKEMON_DISPLAY:
         gCurrentPinballGame->portraitGfxIndex[picIx] = gCurrentPinballGame->currentSpecies;
         DmaCopy16(
             3,
@@ -66,7 +66,7 @@ void LoadPortraitGraphics(s16 displayMode, s16 picIx)
             0x20);
         DmaCopy16(3, gMonPortraitGroupPals[0] + 15 * 0x20, (void *)0x050003E0, 0x20);
         break;
-    case CENTER_SCREEN_STATE_9:
+    case CENTER_SCREEN_STATE_EVO_PREVIEW:
         if (gCurrentPinballGame->evoChainPosition > 0)
         {
             if (gMain_saveData.pokedexFlags[gCurrentPinballGame->evoTargetSpecies] == SPECIES_UNSEEN)
@@ -109,7 +109,7 @@ void LoadPortraitGraphics(s16 displayMode, s16 picIx)
             (void *)0x06010CA0 + picIx * 0x18,
             0x300);
         break;
-    case CENTER_SCREEN_STATE_4:
+    case CENTER_SCREEN_STATE_TRAVEL_RAMP_INDICATOR:
         if (gCurrentPinballGame->boardSubState == 2)
         {
             gCurrentPinballGame->portraitGfxIndex[picIx] = gShopItemData[15][(gCurrentPinballGame->portraitCycleFrame % 48) / 24];
@@ -126,7 +126,7 @@ void LoadPortraitGraphics(s16 displayMode, s16 picIx)
         }
         DmaCopy16(3, &gPortraitAnimPalettes[index], (void *)0x05000200 + gPortraitPaletteSlots[picIx] * 0x20, 0x20);
         break;
-    case CENTER_SCREEN_STATE_6:
+    case CENTER_SCREEN_STATE_SHOP_SELECTOR:
         ptr = gShopItemData[gCurrentPinballGame->shopSelectedItemId];
         gCurrentPinballGame->portraitGfxIndex[picIx] = ptr[0];
         index = ptr[2] * 16;

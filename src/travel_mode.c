@@ -2,7 +2,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "constants/bg_music.h"
-#include "constants/ruby_states.h"
+#include "constants/board/ruby_states.h"
 
 extern const s16 gAreaRouletteTable[][7];
 extern const s16 gAreaPortraitIndexes[];
@@ -374,7 +374,7 @@ void UpdateTravelMode(void)
         gCurrentPinballGame->travelRouletteSlotHitType = 0;
         break;
     case 1:
-        LoadPortraitGraphics(CENTER_SCREEN_STATE_4, CENTER_SCREEN_MAIN_SLOT);
+        LoadPortraitGraphics(CENTER_SCREEN_STATE_TRAVEL_RAMP_INDICATOR, CENTER_SCREEN_MAIN_SLOT);
         if (gCurrentPinballGame->stageTimer == 35)
             m4aSongNumStart(MUS_TRAVEL_MODE);
 

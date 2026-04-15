@@ -3,7 +3,7 @@
 #include "m4a.h"
 #include "constants/ereader.h"
 #include "constants/fields.h"
-#include "constants/ruby_states.h"
+#include "constants/board/ruby_states.h"
 
 extern struct PinballGame gPinballGameState;
 

@@ -2,7 +2,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "constants/bg_music.h"
-#include "constants/ruby_states.h"
+#include "constants/board/ruby_states.h"
 
 extern const u8 gSideBumperGfx[][0x100];
 extern const s16 gSideBumperGfxFrameIndices[][2];

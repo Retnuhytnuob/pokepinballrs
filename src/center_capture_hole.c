@@ -2,7 +2,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "constants/bg_music.h"
-#include "constants/main_board.h"
+#include "constants/board/main_board.h"
 
 extern struct SongHeader se_roulette_tick;
 extern struct SongHeader se_unk_9a;
@@ -196,7 +196,7 @@ void RunRouletteWheel(void)
             gCurrentPinballGame->rouletteSubOffset = 0;
             gCurrentPinballGame->portraitDisplayState = 0;
             m4aMPlayStop(&gMPlayInfo_BGM);
-            gCurrentPinballGame->shopPurchaseConfirmed = 1;
+            gCurrentPinballGame->prizeSelected = 1;
             gCurrentPinballGame->outcomeFrameCounter = 0;
         }
     }
@@ -225,7 +225,7 @@ void RunRouletteWheel(void)
 /*
     Used for both the prizes given by roulette outcome, and by shop purchases.
 */
-void ProcessRouletteOutcome(void)
+void GivePrize(void)
 {
     if (gCurrentPinballGame->outcomeFrameCounter < 180)
     {

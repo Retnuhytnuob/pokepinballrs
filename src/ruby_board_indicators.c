@@ -2,7 +2,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "constants/bg_music.h"
-#include "constants/ruby_states.h"
+#include "constants/board/ruby_states.h"
 
 extern const u8 *gRubyBallPowerUpLightTilePointers[][3];
 extern const u16 gBallShadowTileIndices[];

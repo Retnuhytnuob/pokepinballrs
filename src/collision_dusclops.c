@@ -1,6 +1,6 @@
 #include "global.h"
 #include "main.h"
-#include "constants/dusclops_states.h"
+#include "constants/board/dusclops_states.h"
 
 s16 CollisionCheck_Dusclops(struct Vector16* arg0, u16* arg1) {
     struct Vector16 vec1;

@@ -2,7 +2,7 @@
 #include "main.h"
 #include "m4a.h"
 #include "constants/bg_music.h"
-#include "constants/sapphire_states.h"
+#include "constants/board/sapphire_states.h"
 
 extern u16 gSapphireTargetBumperIndexMap[];
 

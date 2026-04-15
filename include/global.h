@@ -768,7 +768,7 @@ struct PinballGame
     /*0x6D9*/ s8 roulettePortraitIndexes[2];
     /*0x6DB*/ u8 creatureOamPriority;
     /*0x6DC*/ u8 prizeId; //Used both for roulette and shop purchases
-    /*0x6DD*/ s8 shopPurchaseConfirmed;
+    /*0x6DD*/ s8 prizeSelected;
     /*0x6DE*/ u16 outcomeFrameCounter;
     /*0x6E0*/ s16 rouletteSubOffset;
     /*0x6E2*/ u8 filler6E2[0x2];

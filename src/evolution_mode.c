@@ -2,7 +2,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "constants/bg_music.h"
-#include "constants/main_board.h"
+#include "constants/board/main_board.h"
 
 extern struct SongHeader se_evo_item_appear;
 extern struct SongHeader se_evo_item_finish_appear;
@@ -73,7 +73,7 @@ void InitEvolutionMode(void)
     gCurrentPinballGame->evoItemsCaught = 0;
     gCurrentPinballGame->evoModeResetFlag = 0;
     gCurrentPinballGame->evoItemAppearTimer = 0;
-    LoadPortraitGraphics(CENTER_SCREEN_STATE_3, CENTER_SCREEN_MAIN_SLOT);
+    LoadPortraitGraphics(CENTER_SCREEN_STATE_POKEMON_DISPLAY, CENTER_SCREEN_MAIN_SLOT);
 }
 
 void UpdateEvolutionMode(void)

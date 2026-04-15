@@ -1,6 +1,6 @@
 #include "global.h"
 #include "main.h"
-#include "constants/groudon_states.h"
+#include "constants/board/groudon_states.h"
 
 s16 CollisionCheck_Groudon(struct Vector16 *arg0, u16 *arg1)
 {

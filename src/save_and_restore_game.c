@@ -2,8 +2,8 @@
 #include "agb_sram.h"
 #include "main.h"
 #include "m4a.h"
-#include "constants/main_board.h"
-#include "constants/groudon_states.h"
+#include "constants/board/main_board.h"
+#include "constants/board/groudon_states.h"
 
 extern u8 gBoardGfxBuffer[];
 extern u8 gBoardBGTileBufferAlt[];

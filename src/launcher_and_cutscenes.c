@@ -2,7 +2,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "constants/bg_music.h"
-#include "constants/main_board.h"
+#include "constants/board/main_board.h"
 
 extern const u8 gRubyTravelVolbeat_Gfx[][0x480];
 extern const u8 gSapphireTravelIllumise_Gfx[][0x480];
@@ -627,7 +627,7 @@ void RunEvolutionCutscene(void)
             gMain.fieldSpriteGroups[28]->active = FALSE;
             gMain.fieldSpriteGroups[15]->active = FALSE;
             gCurrentPinballGame->currentSpecies = gCurrentPinballGame->postEvoSpecies;
-            LoadPortraitGraphics(CENTER_SCREEN_STATE_3, CENTER_SCREEN_MAIN_SLOT);
+            LoadPortraitGraphics(CENTER_SCREEN_STATE_POKEMON_DISPLAY, CENTER_SCREEN_MAIN_SLOT);
             gCurrentPinballGame->activePortraitType = 17;
             DmaCopy16(3, gHatchFinalTilesGfx, (void *)0x06015800, 0x1800);
             DmaCopy16(3, gHatchFinalPalette, (void *)0x050003C0, 0x20);

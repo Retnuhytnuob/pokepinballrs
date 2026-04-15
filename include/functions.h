@@ -523,7 +523,7 @@ extern void InitBurstTileParticles(void);
 extern void UpdateBurstTileParticles(void);
 extern void InitRouletteWheel(void);
 extern void RunRouletteWheel(void);
-extern void ProcessRouletteOutcome();
+extern void GivePrize();
 //extern ? sub_2C518();
 //extern ? UpdateRubyRampPrizeGate();
 //extern ? DrawRubyNuzleafPlatformSprite();

@@ -2,7 +2,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "constants/bg_music.h"
-#include "constants/sapphire_states.h"
+#include "constants/board/sapphire_states.h"
 
 extern const u16 gHatchCaveOamFramesets[40][2][3];
 extern const u16 gSeedotBasketBounceFrames[];
