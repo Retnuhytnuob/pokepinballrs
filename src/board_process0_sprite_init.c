@@ -10,22 +10,22 @@ void RubyBoardProcess_0A_50848(void)
     for (i = 0; i < 84; i++)
         gMain.spriteGroups[i].active = 0;
 
-    gMain.spriteGroups[SG_64].active = 1;
-    group = &gMain.spriteGroups[SG_48]; // fake match?
-    gMain.spriteGroups[SG_70].active = 1;
-    gMain.spriteGroups[SG_0].active = 1;
-    gMain.spriteGroups[SG_1].active = 1;
-    gMain.spriteGroups[SG_2].active = 1;
-    gMain.spriteGroups[SG_28].active = 1;
-    gMain.spriteGroups[SG_81].active = 1;
-    gMain.spriteGroups[SG_65].active = 1;
-    gMain.spriteGroups[SG_71].active = 1;
-    gMain.spriteGroups[SG_66].active = 1;
-    gMain.spriteGroups[SG_51].active = 1;
-    gMain.spriteGroups[SG_61].active = 1;
+    gMain.spriteGroups[64].active = 1;
+    group = &gMain.spriteGroups[48]; // fake match?
+    gMain.spriteGroups[70].active = 1;
+    gMain.spriteGroups[0].active = 1;
+    gMain.spriteGroups[1].active = 1;
+    gMain.spriteGroups[2].active = 1;
+    gMain.spriteGroups[28].active = 1;
+    gMain.spriteGroups[81].active = 1;
+    gMain.spriteGroups[65].active = 1;
+    gMain.spriteGroups[71].active = 1;
+    gMain.spriteGroups[66].active = 1;
+    gMain.spriteGroups[51].active = 1;
+    gMain.spriteGroups[61].active = 1;
     group->active = 1;
-    gMain.spriteGroups[SG_52].active = 1;
-    gMain.spriteGroups[SG_62].active = 1;
+    gMain.spriteGroups[52].active = 1;
+    gMain.spriteGroups[62].active = 1;
     LoadSpriteSets(
         gFieldSpriteSets[gMain.selectedField].spriteSets,
         gFieldSpriteSets[gMain.selectedField].numSpriteSets,
@@ -36,60 +36,60 @@ void RubyBoardProcess_0B_50918(void)
 {
     s16 i;
 
-    gMain.spriteGroups[SG_10].active = 0;
-    gMain.spriteGroups[SG_11].active = 0;
-    gMain.spriteGroups[SG_48].active = 0;
-    gMain.spriteGroups[SG_71].active = 0;
+    gMain.spriteGroups[10].active = 0;
+    gMain.spriteGroups[11].active = 0;
+    gMain.spriteGroups[48].active = 0;
+    gMain.spriteGroups[71].active = 0;
     for (i = 51; i < 67; i++)
         gMain.spriteGroups[i].active = 0;
 
     gCurrentPinballGame->randomSpriteVariantSeed = gMain.systemFrameCount % 25;
     if (gCurrentPinballGame->cameraYViewport < 110)
     {
-        gMain.spriteGroups[SG_65].active = 1;
-        gMain.spriteGroups[SG_71].active = 1;
-        gMain.spriteGroups[SG_66].active = 1;
+        gMain.spriteGroups[65].active = 1;
+        gMain.spriteGroups[71].active = 1;
+        gMain.spriteGroups[66].active = 1;
     }
 
     if (gCurrentPinballGame->cameraYViewport < 168)
     {
-        gMain.spriteGroups[SG_48].active = 1;
-        gMain.spriteGroups[SG_52].active = 1;
+        gMain.spriteGroups[48].active = 1;
+        gMain.spriteGroups[52].active = 1;
     }
 
     if (gCurrentPinballGame->cameraYViewport < 220)
     {
-        gMain.spriteGroups[SG_51].active = 1;
-        gMain.spriteGroups[SG_61].active = 1;
-        gMain.spriteGroups[SG_64].active = 1;
+        gMain.spriteGroups[51].active = 1;
+        gMain.spriteGroups[61].active = 1;
+        gMain.spriteGroups[64].active = 1;
         if (gCurrentPinballGame->shouldProcessWhiscash)
-            gMain.spriteGroups[SG_63].active = 1;
+            gMain.spriteGroups[63].active = 1;
         else
-            gMain.spriteGroups[SG_62].active = 1;
+            gMain.spriteGroups[62].active = 1;
     }
 
     if (gCurrentPinballGame->cameraYViewport > 63)
     {
-        gMain.spriteGroups[SG_53].active = 1;
-        gMain.spriteGroups[SG_57].active = 1;
+        gMain.spriteGroups[53].active = 1;
+        gMain.spriteGroups[57].active = 1;
     }
 
     if (gCurrentPinballGame->cameraYViewport > 115)
-        gMain.spriteGroups[SG_58].active = 1;
+        gMain.spriteGroups[58].active = 1;
 
     if (gCurrentPinballGame->cameraYViewport > 130)
     {
-        gMain.spriteGroups[SG_59].active = 1;
-        gMain.spriteGroups[SG_60].active = 1;
+        gMain.spriteGroups[59].active = 1;
+        gMain.spriteGroups[60].active = 1;
     }
 
     if (gCurrentPinballGame->cameraYViewport > 216)
     {
-        gMain.spriteGroups[SG_56].active = 1;
-        gMain.spriteGroups[SG_54].active = 1;
-        gMain.spriteGroups[SG_55].active = 1;
-        gMain.spriteGroups[SG_10].active = 1;
-        gMain.spriteGroups[SG_11].active = 1;
+        gMain.spriteGroups[56].active = 1;
+        gMain.spriteGroups[54].active = 1;
+        gMain.spriteGroups[55].active = 1;
+        gMain.spriteGroups[10].active = 1;
+        gMain.spriteGroups[11].active = 1;
     }
 
     LoadSpriteSets(
@@ -105,17 +105,17 @@ void SapphireBoardProcess_0A_50AD4(void)
     for (i = 0; i < 87; i++)
         gMain.spriteGroups[i].active = 0;
 
-    gMain.spriteGroups[SG_72].active = 1;
-    gMain.spriteGroups[SG_63].active = 1;
-    gMain.spriteGroups[SG_60].active = 1;
-    gMain.spriteGroups[SG_69].active = 1;
-    gMain.spriteGroups[SG_52].active = 1;
-    gMain.spriteGroups[SG_74].active = 1;
-    gMain.spriteGroups[SG_0].active = 1;
-    gMain.spriteGroups[SG_1].active = 1;
-    gMain.spriteGroups[SG_2].active = 1;
-    gMain.spriteGroups[SG_25].active = 1;
-    gMain.spriteGroups[SG_85].active = 1;
+    gMain.spriteGroups[72].active = 1;
+    gMain.spriteGroups[63].active = 1;
+    gMain.spriteGroups[60].active = 1;
+    gMain.spriteGroups[69].active = 1;
+    gMain.spriteGroups[52].active = 1;
+    gMain.spriteGroups[74].active = 1;
+    gMain.spriteGroups[0].active = 1;
+    gMain.spriteGroups[1].active = 1;
+    gMain.spriteGroups[2].active = 1;
+    gMain.spriteGroups[25].active = 1;
+    gMain.spriteGroups[85].active = 1;
     LoadSpriteSets(gFieldSpriteSets[gMain.selectedField].spriteSets,
                    gFieldSpriteSets[gMain.selectedField].numSpriteSets,
                    gMain.spriteGroups);
@@ -128,59 +128,59 @@ void SapphireBoardProcess_0B_50B80(void)
     for (i = 55; i < 71; i++)
         gMain.spriteGroups[i].active = 0;
 
-    gMain.spriteGroups[SG_52].active = 0;
-    gMain.spriteGroups[SG_72].active = 0;
-    gMain.spriteGroups[SG_26].active = 0;
-    gMain.spriteGroups[SG_51].active = 0;
-    gMain.spriteGroups[SG_76].active = 0;
-    gMain.spriteGroups[SG_75].active = 0;
-    gMain.spriteGroups[SG_10].active = 0;
-    gMain.spriteGroups[SG_11].active = 0;
+    gMain.spriteGroups[52].active = 0;
+    gMain.spriteGroups[72].active = 0;
+    gMain.spriteGroups[26].active = 0;
+    gMain.spriteGroups[51].active = 0;
+    gMain.spriteGroups[76].active = 0;
+    gMain.spriteGroups[75].active = 0;
+    gMain.spriteGroups[10].active = 0;
+    gMain.spriteGroups[11].active = 0;
     gCurrentPinballGame->randomSpriteVariantSeed = gMain.systemFrameCount % 25;
     if (gCurrentPinballGame->cameraYViewport < 90)
     {
-        gMain.spriteGroups[SG_52].active = 1;
-        gMain.spriteGroups[SG_51].active = 1;
+        gMain.spriteGroups[52].active = 1;
+        gMain.spriteGroups[51].active = 1;
     }
     if (gCurrentPinballGame->cameraYViewport < 220)
     {
-        gMain.spriteGroups[SG_72].active = 1;
+        gMain.spriteGroups[72].active = 1;
     }
     if (gCurrentPinballGame->cameraYViewport < 150)
     {
-        gMain.spriteGroups[SG_60].active = 1;
-        gMain.spriteGroups[SG_69].active = 1;
+        gMain.spriteGroups[60].active = 1;
+        gMain.spriteGroups[69].active = 1;
     }
     if (gCurrentPinballGame->cameraYViewport < 196)
     {
-        gMain.spriteGroups[SG_63].active = 1;
-        gMain.spriteGroups[SG_75].active = 1;
+        gMain.spriteGroups[63].active = 1;
+        gMain.spriteGroups[75].active = 1;
     }
     if (gCurrentPinballGame->cameraYViewport < 202)
     {
-        gMain.spriteGroups[SG_61].active = 1;
-        gMain.spriteGroups[SG_58].active = 1;
-        gMain.spriteGroups[SG_62].active = 1;
-        gMain.spriteGroups[SG_59].active = 1;
-        gMain.spriteGroups[SG_76].active = 1;
+        gMain.spriteGroups[61].active = 1;
+        gMain.spriteGroups[58].active = 1;
+        gMain.spriteGroups[62].active = 1;
+        gMain.spriteGroups[59].active = 1;
+        gMain.spriteGroups[76].active = 1;
     }
     if (gCurrentPinballGame->cameraYViewport > 118)
     {
-        gMain.spriteGroups[SG_70].active = 1;
-        gMain.spriteGroups[SG_26].active = 1;
-        gMain.spriteGroups[SG_64].active = 1;
-        gMain.spriteGroups[SG_68].active = 1;
-        gMain.spriteGroups[SG_65].active = 1;
-        gMain.spriteGroups[SG_66].active = 1;
-        gMain.spriteGroups[SG_67].active = 1;
+        gMain.spriteGroups[70].active = 1;
+        gMain.spriteGroups[26].active = 1;
+        gMain.spriteGroups[64].active = 1;
+        gMain.spriteGroups[68].active = 1;
+        gMain.spriteGroups[65].active = 1;
+        gMain.spriteGroups[66].active = 1;
+        gMain.spriteGroups[67].active = 1;
     }
     if (gCurrentPinballGame->cameraYViewport > 216)
     {
-        gMain.spriteGroups[SG_57].active = 1;
-        gMain.spriteGroups[SG_55].active = 1;
-        gMain.spriteGroups[SG_56].active = 1;
-        gMain.spriteGroups[SG_10].active = 1;
-        gMain.spriteGroups[SG_11].active = 1;
+        gMain.spriteGroups[57].active = 1;
+        gMain.spriteGroups[55].active = 1;
+        gMain.spriteGroups[56].active = 1;
+        gMain.spriteGroups[10].active = 1;
+        gMain.spriteGroups[11].active = 1;
     }
 
     LoadSpriteSets(gFieldSpriteSets[gMain.selectedField].spriteSets, gFieldSpriteSets[gMain.selectedField].numSpriteSets, gMain.spriteGroups);
@@ -225,30 +225,30 @@ void KecleonBoardProcess_0A_50DE0(void)
     }
 
     gMain.fieldSpriteGroups[0]->active = 1;
-    gMain.spriteGroups[SG_23].active = 1;
-    gMain.spriteGroups[SG_9].active = 1;
-    gMain.spriteGroups[SG_24].active = 1;
-    gMain.spriteGroups[SG_16].active = 1;
-    gMain.spriteGroups[SG_17].active = 1;
-    gMain.spriteGroups[SG_7].active = 1;
-    gMain.spriteGroups[SG_10].active = 1;
-    gMain.spriteGroups[SG_11].active = 1;
-    gMain.spriteGroups[SG_12].active = 1;
-    gMain.spriteGroups[SG_13].active = 1;
-    gMain.spriteGroups[SG_14].active = 1;
-    gMain.spriteGroups[SG_15].active = 1;
-    gMain.spriteGroups[SG_18].active = 1;
-    gMain.spriteGroups[SG_19].active = 1;
-    gMain.spriteGroups[SG_20].active = 1;
-    gMain.spriteGroups[SG_21].active = 1;
-    gMain.spriteGroups[SG_25].active = 1;
-    gMain.spriteGroups[SG_26].active = 1;
-    gMain.spriteGroups[SG_27].active = 1;
-    gMain.spriteGroups[SG_28].active = 1;
-    gMain.spriteGroups[SG_31].active = 1;
-    gMain.spriteGroups[SG_32].active = 1;
-    gMain.spriteGroups[SG_29].active = 1;
-    gMain.spriteGroups[SG_30].active = 1;
+    gMain.spriteGroups[23].active = 1;
+    gMain.spriteGroups[9].active = 1;
+    gMain.spriteGroups[24].active = 1;
+    gMain.spriteGroups[16].active = 1;
+    gMain.spriteGroups[17].active = 1;
+    gMain.spriteGroups[7].active = 1;
+    gMain.spriteGroups[10].active = 1;
+    gMain.spriteGroups[11].active = 1;
+    gMain.spriteGroups[12].active = 1;
+    gMain.spriteGroups[13].active = 1;
+    gMain.spriteGroups[14].active = 1;
+    gMain.spriteGroups[15].active = 1;
+    gMain.spriteGroups[18].active = 1;
+    gMain.spriteGroups[19].active = 1;
+    gMain.spriteGroups[20].active = 1;
+    gMain.spriteGroups[21].active = 1;
+    gMain.spriteGroups[25].active = 1;
+    gMain.spriteGroups[26].active = 1;
+    gMain.spriteGroups[27].active = 1;
+    gMain.spriteGroups[28].active = 1;
+    gMain.spriteGroups[31].active = 1;
+    gMain.spriteGroups[32].active = 1;
+    gMain.spriteGroups[29].active = 1;
+    gMain.spriteGroups[30].active = 1;
 
     LoadSpriteSets(
         gFieldSpriteSets[gMain.selectedField].spriteSets,
@@ -273,14 +273,14 @@ void KyogreBoardProcess_0A_50F04()
     }
 
     gMain.fieldSpriteGroups[0]->active = 1;
-    gMain.spriteGroups[SG_11].active = 1;
-    gMain.spriteGroups[SG_12].active = 1;
-    gMain.spriteGroups[SG_13].active = 1;
-    gMain.spriteGroups[SG_14].active = 1;
-    gMain.spriteGroups[SG_21].active = 1;
-    gMain.spriteGroups[SG_22].active = 1;
-    gMain.spriteGroups[SG_23].active = 1;
-    gMain.spriteGroups[SG_15].active = 1;
+    gMain.spriteGroups[11].active = 1;
+    gMain.spriteGroups[12].active = 1;
+    gMain.spriteGroups[13].active = 1;
+    gMain.spriteGroups[14].active = 1;
+    gMain.spriteGroups[21].active = 1;
+    gMain.spriteGroups[22].active = 1;
+    gMain.spriteGroups[23].active = 1;
+    gMain.spriteGroups[15].active = 1;
 
     LoadSpriteSets(gFieldSpriteSets[gMain.selectedField].spriteSets,
                    gFieldSpriteSets[gMain.selectedField].numSpriteSets,
@@ -308,11 +308,11 @@ void GroudonBoardProcess_0A_50FD4(void)
     }
 
     gMain.fieldSpriteGroups[0]->active = 1;
-    gMain.spriteGroups[SG_11].active = 1;
-    gMain.spriteGroups[SG_12].active = 1;
-    gMain.spriteGroups[SG_13].active = 1;
-    gMain.spriteGroups[SG_14].active = 1;
-    gMain.spriteGroups[SG_29].active = 1;
+    gMain.spriteGroups[11].active = 1;
+    gMain.spriteGroups[12].active = 1;
+    gMain.spriteGroups[13].active = 1;
+    gMain.spriteGroups[14].active = 1;
+    gMain.spriteGroups[29].active = 1;
 
     LoadSpriteSets(gFieldSpriteSets[gMain.selectedField].spriteSets,
                    gFieldSpriteSets[gMain.selectedField].numSpriteSets,
@@ -339,11 +339,11 @@ void RayquazaBoardProcess_0A_51090(void)
     }
 
     gMain.fieldSpriteGroups[0]->active = 1;
-    gMain.spriteGroups[SG_42].active = 1;
-    gMain.spriteGroups[SG_11].active = 1;
-    gMain.spriteGroups[SG_12].active = 1;
-    gMain.spriteGroups[SG_13].active = 1;
-    gMain.spriteGroups[SG_21].active = 1;
+    gMain.spriteGroups[42].active = 1;
+    gMain.spriteGroups[11].active = 1;
+    gMain.spriteGroups[12].active = 1;
+    gMain.spriteGroups[13].active = 1;
+    gMain.spriteGroups[21].active = 1;
 
     LoadSpriteSets(gFieldSpriteSets[gMain.selectedField].spriteSets,
                    gFieldSpriteSets[gMain.selectedField].numSpriteSets,
@@ -370,13 +370,13 @@ void SphealBoardProcess_0A_51150(void)
     }
 
     gMain.fieldSpriteGroups[0]->active = 1;
-    gMain.spriteGroups[SG_18].active = 1;
-    gMain.spriteGroups[SG_21].active = 1;
-    gMain.spriteGroups[SG_22].active = 1;
-    gMain.spriteGroups[SG_14].active = 1;
-    gMain.spriteGroups[SG_15].active = 1;
-    gMain.spriteGroups[SG_16].active = 1;
-    gMain.spriteGroups[SG_17].active = 1;
+    gMain.spriteGroups[18].active = 1;
+    gMain.spriteGroups[21].active = 1;
+    gMain.spriteGroups[22].active = 1;
+    gMain.spriteGroups[14].active = 1;
+    gMain.spriteGroups[15].active = 1;
+    gMain.spriteGroups[16].active = 1;
+    gMain.spriteGroups[17].active = 1;
 
     LoadSpriteSets(gFieldSpriteSets[gMain.selectedField].spriteSets,
                    gFieldSpriteSets[gMain.selectedField].numSpriteSets,

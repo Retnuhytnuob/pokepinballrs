@@ -191,7 +191,7 @@ void UpdateEvolutionMode(void)
         if (gCurrentPinballGame->modeAnimTimer == 148)
         {
             gCurrentPinballGame->modeAnimTimer++;
-            if (gMain.spriteGroups[SG_13].active)
+            if (gMain.spriteGroups[13].active)
             {
                 if (gCurrentPinballGame->chikoritaProjectileTimer >= 80)
                 {

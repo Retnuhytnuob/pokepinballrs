@@ -223,8 +223,8 @@ void RenderBonusFieldSelectSprites(void)
     {
         sgptrs[i] = &gMain.spriteGroups[i];
     }
-    r10 = &gMain.spriteGroups[SG_6 + gSelectedBonusField];
-    r8 = &gMain.spriteGroups[SG_12 + gSelectedBallSpeed * 2 + gBallSpeedDisplayToggle];
+    r10 = &gMain.spriteGroups[6 + gSelectedBonusField];
+    r8 = &gMain.spriteGroups[12 + gSelectedBallSpeed * 2 + gBallSpeedDisplayToggle];
     for (j = 0; j < 6; j++)
     {
         sgptrs[j]->active = TRUE;

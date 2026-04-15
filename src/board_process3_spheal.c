@@ -201,10 +201,10 @@ void SphealBoardProcess_3B_43228(void)
         {
             gCurrentPinballGame->boardState = 3;
             gCurrentPinballGame->stageTimer = 0;
-            gMain.spriteGroups[SG_7].active = 1;
-            gMain.spriteGroups[SG_8].active = 1;
-            gMain.spriteGroups[SG_9].active = 1;
-            gMain.spriteGroups[SG_10].active = 1;
+            gMain.spriteGroups[7].active = 1;
+            gMain.spriteGroups[8].active = 1;
+            gMain.spriteGroups[9].active = 1;
+            gMain.spriteGroups[10].active = 1;
             DmaCopy16(3, gSphealResultsScreenGfx, (void *)0x06015800, 0x800);
             gCurrentPinballGame->bannerSlideYOffset = -126;
             gCurrentPinballGame->boardEntityActive = 1;
@@ -367,7 +367,7 @@ void UpdateSealeoEntityLogic(void)
         }
     }
 
-    group = &gMain.spriteGroups[SG_22];
+    group = &gMain.spriteGroups[22];
     if (group->active)
     {
         group->baseX = 100 - gCurrentPinballGame->cameraXOffset;
@@ -383,7 +383,7 @@ void UpdateSealeoEntityLogic(void)
         gOamBuffer[oamSimple->oamId].y = oamSimple->yOffset + group->baseY;
     }
 
-    group = &gMain.spriteGroups[SG_21];
+    group = &gMain.spriteGroups[21];
     if (group->active)
     {
         group->baseX = 140 - gCurrentPinballGame->cameraXOffset;
@@ -835,7 +835,7 @@ void UpdateSphealEntityLogic(void)
 
     for (i = 0; i < 2; i++)
     {
-        group = &gMain.spriteGroups[SG_14 + i];
+        group = &gMain.spriteGroups[14 + i];
         if (group->active)
         {
             sp4 = gCurrentPinballGame->flyingEnemyPrevSpriteIndex[i];
@@ -888,7 +888,7 @@ void UpdateSphealEntityLogic(void)
 
             gCurrentPinballGame->flyingEnemyScreenY[i] = gCurrentPinballGame->flyingEnemyPositionQ8[i].y / 256 + gCurrentPinballGame->flyingEnemyOamYOffset[i];
 
-            group = &gMain.spriteGroups[SG_16 + i];
+            group = &gMain.spriteGroups[16 + i];
             if (sp4 == 12 || sp4 == 42)
             {
                 if (gCurrentPinballGame->flyingEnemyFramesetIndex[i] == 11)
@@ -923,7 +923,7 @@ void UpdateSphealScoreAndDelivery(void)
     struct OamDataSimple *oamSimple;
 
     var0 = 0;
-    group = &gMain.spriteGroups[SG_18];
+    group = &gMain.spriteGroups[18];
     if (group->active)
     {
         group->baseX = 104 - gCurrentPinballGame->cameraXOffset;
@@ -937,7 +937,7 @@ void UpdateSphealScoreAndDelivery(void)
         gOamBuffer[oamSimple->oamId].y = oamSimple->yOffset + group->baseY;
     }
 
-    group = &gMain.spriteGroups[SG_11];
+    group = &gMain.spriteGroups[11];
     if (group->active)
     {
         group->baseX = 104 - gCurrentPinballGame->cameraXOffset;
@@ -952,7 +952,7 @@ void UpdateSphealScoreAndDelivery(void)
     }
 
     if (gCurrentPinballGame->boardState == 1)
-        gMain.spriteGroups[SG_11].active = 1;
+        gMain.spriteGroups[11].active = 1;
 
     if (gCurrentPinballGame->boardState < 2 && gMain.modeChangeFlags == MODE_CHANGE_NONE && gCurrentPinballGame->scoreCountdownTimer)
     {
@@ -981,7 +981,7 @@ void SphealBoard_WhiscashDeliversBall(void)
     const u16 *offsets;
     s16 var0;
 
-    group = &gMain.spriteGroups[SG_19];
+    group = &gMain.spriteGroups[19];
     if (group->active)
     {
         offsets = gSphealWhiscashAnimFrameset[gCurrentPinballGame->deliveryAnimFrameIndex];
@@ -1006,12 +1006,12 @@ void SphealBoard_WhiscashDeliversBall(void)
         gCurrentPinballGame->deliveryAnimTimer = 0;
         gCurrentPinballGame->deliveryAnimFrameIndex++;
         if (gCurrentPinballGame->deliveryAnimFrameIndex == 1)
-            gMain.spriteGroups[SG_19].active = 1;
+            gMain.spriteGroups[19].active = 1;
 
         if (gCurrentPinballGame->deliveryAnimFrameIndex == 19)
         {
             gCurrentPinballGame->deliveryAnimFrameIndex = 18;
-            gMain.spriteGroups[SG_19].active = 0;
+            gMain.spriteGroups[19].active = 0;
             gCurrentPinballGame->ballDeliveryActive = 0;
         }
 
@@ -1055,7 +1055,7 @@ void SphealBoard_PelipperDeliversBall(void)
     struct OamDataSimple *oamSimple;
     s16 index;
 
-    group = &gMain.spriteGroups[SG_20];
+    group = &gMain.spriteGroups[20];
     if (group->active)
     {
         group->baseX = (gCurrentPinballGame->pelipperPosX / 10) - (gCurrentPinballGame->cameraXOffset - 146);
@@ -1081,7 +1081,7 @@ void SphealBoard_PelipperDeliversBall(void)
             gCurrentPinballGame->pelipperFrameTimer = 0;
             gCurrentPinballGame->pelipperState = 8;
             gCurrentPinballGame->deliveryAnimFrameIndex = 13;
-            gMain.spriteGroups[SG_20].active = 1;
+            gMain.spriteGroups[20].active = 1;
             gCurrentPinballGame->boardEntityActive = 1;
         }
     }
@@ -1099,7 +1099,7 @@ void SphealBoard_PelipperDeliversBall(void)
         }
         else
         {
-            gMain.spriteGroups[SG_20].active = 0;
+            gMain.spriteGroups[20].active = 0;
         }
 
         if (gCurrentPinballGame->pelipperFrameTimer == 13)
@@ -1511,7 +1511,7 @@ void UpdateSphealResultsScreen(void)
 
     gCurrentPinballGame->resultsAnimTimer++;
 
-    group = &gMain.spriteGroups[SG_7];
+    group = &gMain.spriteGroups[7];
     if (!group->active)
         return;
 
@@ -1562,7 +1562,7 @@ void UpdateSphealResultsScreen(void)
     sp18[10] = sp0[0] * 2 + 0x2D0;
     sp18[11] = sp0[1] * 2 + 0x2D0;
 
-    group = &gMain.spriteGroups[SG_8];
+    group = &gMain.spriteGroups[8];
     group->baseX = 120;
     group->baseY = 60 + gCurrentPinballGame->bannerSlideYOffset;
     for (i = 0; i < 12; i++)
@@ -1611,7 +1611,7 @@ void UpdateSphealResultsScreen(void)
     sp18[10] = sp0[0] * 2 + 0x2D0;
     sp18[11] = sp0[1] * 2 + 0x2D0;
 
-    group = &gMain.spriteGroups[SG_9];
+    group = &gMain.spriteGroups[9];
     group->baseX = 120;
     group->baseY = 60 + gCurrentPinballGame->bannerSlideYOffset;
     for (i = 0; i < 12; i++)
@@ -1659,7 +1659,7 @@ void UpdateSphealResultsScreen(void)
     sp0[0] = value;
     sp18[11] = sp0[0] * 2 + 0x2D0;
 
-    group = &gMain.spriteGroups[SG_10];
+    group = &gMain.spriteGroups[10];
     group->baseX = 120;
     group->baseY = 60 + gCurrentPinballGame->bannerSlideYOffset;
     for (i = 0; i < 12; i++)

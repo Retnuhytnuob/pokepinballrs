@@ -306,11 +306,11 @@ static void RenderFieldSelectSprites(void)
     REG_BLDCNT = gMain.blendControl;
     REG_BLDALPHA = gMain.blendAlpha;
 
-    r6 = &gMain.spriteGroups[SG_0];
-    r9 = &gMain.spriteGroups[SG_1];
+    r6 = &gMain.spriteGroups[0];
+    r9 = &gMain.spriteGroups[1];
     sp0 = &gMain.spriteGroups[gFieldSelectData.rubyFieldSpriteId];
     r10 = &gMain.spriteGroups[gFieldSelectData.sapphireFieldSpriteId];
-    r8 = &gMain.spriteGroups[SG_12 + gFieldSelectData.ballSpeed * 2 + gFieldSelectData.speedBlinkToggle];
+    r8 = &gMain.spriteGroups[12 + gFieldSelectData.ballSpeed * 2 + gFieldSelectData.speedBlinkToggle];
 
     r6->active = gFieldSelectData.rubyHighlightVisible;
     r9->active = gFieldSelectData.sapphireHighlightVisible;

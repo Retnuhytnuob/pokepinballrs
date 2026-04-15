@@ -989,10 +989,10 @@ void RenderHighScoreSprites(void)
 
     spriteGroups = gMain_spriteGroups;
     spriteGroup1 = spriteGroups;
-    spriteGroup2 = &spriteGroups[SG_1];
-    spriteGroup3 = &spriteGroups[(s8)gDialogType + SG_2];
+    spriteGroup2 = &spriteGroups[1];
+    spriteGroup3 = &spriteGroups[2 + (s8)gDialogType];
     var1_02002858 = &gHighScoreScreenState;
-    spriteGroup4 = &spriteGroups[gHighScoreDisplayMode + SG_7];
+    spriteGroup4 = &spriteGroups[7 + gHighScoreDisplayMode];
 
     if (gScrollXOffset == 0)
     {

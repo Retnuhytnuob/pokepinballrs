@@ -151,8 +151,8 @@ void KyogreBoardProcess_3B_3869C(void)
         {
             gCurrentPinballGame->boardState = 3;
             gCurrentPinballGame->stageTimer = 0;
-            gMain.spriteGroups[SG_6].active = 1;
-            gMain.spriteGroups[SG_5].active = 1;
+            gMain.spriteGroups[6].active = 1;
+            gMain.spriteGroups[5].active = 1;
             DmaCopy16(3, gKyogreBonusClear_Gfx, (void *)0x06015800, 0x2000);
             gCurrentPinballGame->bannerSlideYOffset = 136;
             gMain.modeChangeFlags = MODE_CHANGE_BONUS_BANNER;
@@ -193,8 +193,8 @@ void KyogreBoardProcess_3B_3869C(void)
     case 4:
         gCurrentPinballGame->boardState = 5;
         gCurrentPinballGame->stageTimer = 140;
-        gMain.spriteGroups[SG_6].active = 1;
-        gMain.spriteGroups[SG_5].active = 1;
+        gMain.spriteGroups[6].active = 1;
+        gMain.spriteGroups[5].active = 1;
         DmaCopy16(3, gKyogreBonusClear_Gfx, (void *)0x06015800, 0x2000);
         gCurrentPinballGame->bannerSlideYOffset = 136;
         gMain.modeChangeFlags = MODE_CHANGE_BONUS_BANNER;
@@ -473,7 +473,7 @@ void UpdateKyogreEntityLogic(void)
 
             if (gCurrentPinballGame->shockwaveAlreadyHit == 0 && gCurrentPinballGame->bossFramesetIndex == 42)
             {
-                gMain.spriteGroups[SG_24].active = 1;
+                gMain.spriteGroups[24].active = 1;
                 gCurrentPinballGame->shockwaveAnimTimer = 0;
                 MPlayStart(&gMPlayInfo_SE1, &se_unk_10e);
             }
@@ -490,8 +490,8 @@ void UpdateKyogreEntityLogic(void)
             // catch kyogre
             gCurrentPinballGame->bossEntityState = 10;
             gCurrentPinballGame->bossFramesetIndex = 0;
-            gMain.spriteGroups[SG_10].active = 1;
-            gMain.spriteGroups[SG_9].active = 1;
+            gMain.spriteGroups[10].active = 1;
+            gMain.spriteGroups[9].active = 1;
             gCurrentPinballGame->currentSpecies = SPECIES_KYOGRE;
             gCurrentPinballGame->bossAttackTimer = 0;
             gCurrentPinballGame->captureSequenceTimer = 0;
@@ -508,7 +508,7 @@ void UpdateKyogreEntityLogic(void)
             gCurrentPinballGame->ballRespawnTimer = 0;
         }
 
-        if (gMain.spriteGroups[SG_16].active)
+        if (gMain.spriteGroups[16].active)
         {
             gCurrentPinballGame->whirlpoolTrapPhase = 7;
             gCurrentPinballGame->whirlpoolTrapPauseTimer = 1;
@@ -675,7 +675,7 @@ void RenderKyogreSprites(void)
     s16 index;
     s16 palette;
 
-    group = &gMain.spriteGroups[SG_21];
+    group = &gMain.spriteGroups[21];
     if (group->active)
     {
         index = gCurrentPinballGame->bossVulnerable;
@@ -751,7 +751,7 @@ void RenderKyogreSprites(void)
         }
     }
 
-    group = &gMain.spriteGroups[SG_26];
+    group = &gMain.spriteGroups[26];
     if (group->active)
     {
         group->baseX = gCurrentPinballGame->bossPositionX / 10 + 108 - gCurrentPinballGame->cameraXOffset;
@@ -775,7 +775,7 @@ void RenderKyogreSprites(void)
         else
         {
             gCurrentPinballGame->shockwaveAnimTimer = 0;
-            gMain.spriteGroups[SG_26].active = 0;
+            gMain.spriteGroups[26].active = 0;
         }
     }
     else
@@ -804,7 +804,7 @@ void UpdateKyogreFieldEntities(void)
     struct Vector32 tempVector3;
 
     index = 0;
-    group = &gMain.spriteGroups[SG_10];
+    group = &gMain.spriteGroups[10];
     if (group->active)
     {
         if (gCurrentPinballGame->portraitDisplayState == 3)
@@ -832,7 +832,7 @@ void UpdateKyogreFieldEntities(void)
             gOamBuffer[oamSimple->oamId].y = oamSimple->yOffset + group->baseY;
         }
 
-        group = &gMain.spriteGroups[SG_9];
+        group = &gMain.spriteGroups[9];
         group->baseX = gCurrentPinballGame->rouletteBasePos.x - 8;
         group->baseY = gCurrentPinballGame->rouletteBasePos.y - 8;
         if (group->baseY >= 200)
@@ -847,7 +847,7 @@ void UpdateKyogreFieldEntities(void)
         }
     }
 
-    group = &gMain.spriteGroups[SG_16];
+    group = &gMain.spriteGroups[16];
     if (group->active)
     {
         switch (gCurrentPinballGame->whirlpoolTrapPhase)
@@ -922,7 +922,7 @@ void UpdateKyogreFieldEntities(void)
             gCurrentPinballGame->whirlpoolTrapNextPhase = 7;
             break;
         case 7:
-            gMain.spriteGroups[SG_16].active = 0;
+            gMain.spriteGroups[16].active = 0;
             break;
         }
 
@@ -1005,7 +1005,7 @@ void UpdateKyogreFieldEntities(void)
 
     for (i = 0; i < 2; i++)
     {
-        group = &gMain.spriteGroups[SG_22 + i];
+        group = &gMain.spriteGroups[22 + i];
         if ((gMain.modeChangeFlags & MODE_CHANGE_BONUS_BANNER) == 0)
         {
             switch (gCurrentPinballGame->orbEntityState[i]) {
@@ -1187,7 +1187,7 @@ void UpdateKyogreFieldEntities(void)
         }
     }
 
-    group = &gMain.spriteGroups[SG_24];
+    group = &gMain.spriteGroups[24];
     if (group->active)
     {
         s16 scale;
@@ -1258,15 +1258,15 @@ void UpdateKyogreFieldEntities(void)
                 gCurrentPinballGame->whirlpoolTrapPhase = 0;
                 gCurrentPinballGame->whirlpoolTrapAnimFrame = 0;
                 gCurrentPinballGame->whirlpoolTrapFrameTimer = 0;
-                if (!gMain.spriteGroups[SG_16].active)
+                if (!gMain.spriteGroups[16].active)
                     PlayRumble(8);
 
-                gMain.spriteGroups[SG_16].active = 1;
+                gMain.spriteGroups[16].active = 1;
             }
         }
 
         if (gMain.modeChangeFlags & MODE_CHANGE_EXPIRED_BONUS_BANNER)
-            gMain.spriteGroups[SG_24].active = 0;
+            gMain.spriteGroups[24].active = 0;
     }
 }
 
@@ -1276,7 +1276,7 @@ void HideKyogreSplashSprite(void)
     struct SpriteGroup *group;
     struct OamDataSimple *oamSimple;
 
-    group = &gMain.spriteGroups[SG_24];
+    group = &gMain.spriteGroups[24];
     if (group->active)
     {
         group->baseX = 240;
@@ -1323,7 +1323,7 @@ void AnimateKyogreBackground(void)
 
     for (j = 0; j < 4; j++)
     {
-        group = &gMain.spriteGroups[SG_11 + j];
+        group = &gMain.spriteGroups[11 + j];
         group->baseX = 120 - gCurrentPinballGame->cameraXOffset;
         group->baseY = 128 - gCurrentPinballGame->cameraYOffset;
         for (i = 0; i < 3; i++)
@@ -1335,7 +1335,7 @@ void AnimateKyogreBackground(void)
         }
     }
 
-    group = &gMain.spriteGroups[SG_15];
+    group = &gMain.spriteGroups[15];
     if (group->active)
     {
         group->baseX = 120 - gCurrentPinballGame->cameraXOffset;
@@ -1348,6 +1348,6 @@ void AnimateKyogreBackground(void)
         }
 
         if (gCurrentPinballGame->stageTimer == 480)
-            gMain.spriteGroups[SG_15].active = 0;
+            gMain.spriteGroups[15].active = 0;
     }
 }

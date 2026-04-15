@@ -521,7 +521,7 @@ void IntroScene1_RenderTitleSprite(void)
     struct SpriteGroup *puVar4;
     const struct SpriteSet *puVar6;
 
-    puVar4 = &gMain.spriteGroups[SG_4 + gIntroSpriteEntities[0].animFrame];
+    puVar4 = &gMain.spriteGroups[4 + gIntroSpriteEntities[0].animFrame];
     puVar4->active = gIntroSpriteEntities[0].visible;
     LoadSpriteSets(gIntroScene1_SpriteSets, 0x31, gMain.spriteGroups);
 
@@ -548,7 +548,7 @@ void IntroScene1_RenderScaledTitle(void)
     struct SpriteGroup *puVar4;
     struct OamDataSimple *puVar2;
 
-    puVar4 = &gMain.spriteGroups[SG_40];
+    puVar4 = &gMain.spriteGroups[40];
     puVar4->active = gIntroSpriteEntities[0].visible;
     LoadSpriteSets(gIntroScene1_SpriteSets, 0x31, gMain.spriteGroups);
 
@@ -587,8 +587,8 @@ void IntroScene1_RenderAllSprites(void)
     REG_BLDALPHA = gMain.blendAlpha;
 
     puVar1 = &gMain.spriteGroups[gIntroSpriteEntities[1].animFrame];
-    mainSg3 = &gMain.spriteGroups[SG_3];
-    mainSg2 = &gMain.spriteGroups[SG_2];
+    mainSg3 = &gMain.spriteGroups[3];
+    mainSg2 = &gMain.spriteGroups[2];
     otherSg = &gMain_spriteGroups_48;
 
     puVar1->active = gIntroSpriteEntities[1].visible;
@@ -946,7 +946,7 @@ void IntroScene3_RenderPokeball(void)
     REG_BLDCNT = gMain.blendControl;
     REG_BLDALPHA = gMain.blendAlpha;
 
-    puVar4 = &gMain.spriteGroups[SG_0];
+    puVar4 = &gMain.spriteGroups[0];
     puVar4->active = TRUE;
     LoadSpriteSets(gIntroScene3_SpriteSets, 0x1, puVar4);
 
@@ -1262,9 +1262,9 @@ void IntroScene5_RenderAllSprites(void)
     REG_BLDCNT = gMain.blendControl;
     REG_BLDALPHA = gMain.blendAlpha;
 
-    mainSg1 = &gMain.spriteGroups[SG_1];
-    mainSg0 = &gMain.spriteGroups[SG_0];
-    mainSg2 = &gMain.spriteGroups[SG_2];
+    mainSg1 = &gMain.spriteGroups[1];
+    mainSg0 = &gMain.spriteGroups[0];
+    mainSg2 = &gMain.spriteGroups[2];
 
     mainSg1->active = TRUE;
     mainSg0->active = TRUE;
@@ -1495,23 +1495,23 @@ void IntroScene6_RenderStarSprites(void)
     s32 i;
     s32 j;
     const struct SpriteSet *p;
-    struct SpriteGroup *spriteGroups[SG_6];
+    struct SpriteGroup *spriteGroups[6];
 
-    spriteGroups[SG_0] = &gMain.spriteGroups[SG_6 * gIntroSpriteEntities[0].animFrame];
-    spriteGroups[SG_1] = &gMain.spriteGroups[SG_6 * gIntroSpriteEntities[1].animFrame + 1];
-    spriteGroups[SG_2] = &gMain.spriteGroups[SG_6 * gIntroSpriteEntities[2].animFrame + 2];
-    spriteGroups[SG_3] = &gMain.spriteGroups[SG_6 * gIntroSpriteEntities[3].animFrame + 3];
-    spriteGroups[SG_4] = &gMain.spriteGroups[SG_6 * gIntroSpriteEntities[4].animFrame + 4];
-    spriteGroups[SG_5] = &gMain.spriteGroups[SG_6 * gIntroSpriteEntities[5].animFrame + 5];
+    spriteGroups[0] = &gMain.spriteGroups[6 * gIntroSpriteEntities[0].animFrame];
+    spriteGroups[1] = &gMain.spriteGroups[6 * gIntroSpriteEntities[1].animFrame + 1];
+    spriteGroups[2] = &gMain.spriteGroups[6 * gIntroSpriteEntities[2].animFrame + 2];
+    spriteGroups[3] = &gMain.spriteGroups[6 * gIntroSpriteEntities[3].animFrame + 3];
+    spriteGroups[4] = &gMain.spriteGroups[6 * gIntroSpriteEntities[4].animFrame + 4];
+    spriteGroups[5] = &gMain.spriteGroups[6 * gIntroSpriteEntities[5].animFrame + 5];
 
-    spriteGroups[SG_0]->active = gIntroSpriteEntities[0].visible;
-    spriteGroups[SG_1]->active = gIntroSpriteEntities[1].visible;
-    spriteGroups[SG_2]->active = gIntroSpriteEntities[2].visible;
-    spriteGroups[SG_3]->active = gIntroSpriteEntities[3].visible;
-    spriteGroups[SG_4]->active = gIntroSpriteEntities[4].visible;
-    spriteGroups[SG_5]->active = gIntroSpriteEntities[5].visible;
+    spriteGroups[0]->active = gIntroSpriteEntities[0].visible;
+    spriteGroups[1]->active = gIntroSpriteEntities[1].visible;
+    spriteGroups[2]->active = gIntroSpriteEntities[2].visible;
+    spriteGroups[3]->active = gIntroSpriteEntities[3].visible;
+    spriteGroups[4]->active = gIntroSpriteEntities[4].visible;
+    spriteGroups[5]->active = gIntroSpriteEntities[5].visible;
 
-    LoadSpriteSets(gIntroScene6_SpriteSets, 0x12, &gMain.spriteGroups[SG_0]);
+    LoadSpriteSets(gIntroScene6_SpriteSets, 0x12, &gMain.spriteGroups[0]);
     for (i = 0; i < 6; i++)
     {
         if (spriteGroups[i]->active != 1)
@@ -1541,12 +1541,12 @@ void IntroScene6_RenderStarSprites(void)
             gIntroSpriteEntities[i].visible = 0;
     }
 
-    spriteGroups[SG_0]->active = 0;
-    spriteGroups[SG_1]->active = 0;
-    spriteGroups[SG_2]->active = 0;
-    spriteGroups[SG_3]->active = 0;
-    spriteGroups[SG_4]->active = 0;
-    spriteGroups[SG_5]->active = 0;
+    spriteGroups[0]->active = 0;
+    spriteGroups[1]->active = 0;
+    spriteGroups[2]->active = 0;
+    spriteGroups[3]->active = 0;
+    spriteGroups[4]->active = 0;
+    spriteGroups[5]->active = 0;
 }
 
 void IntroScene6_AdvanceIndex(void)
@@ -1805,7 +1805,7 @@ void IntroScene7_RenderWailmer(void)
     struct SpriteGroup *spriteGroup;
     struct OamDataSimple *oamData;
 
-    spriteGroup = &gMain.spriteGroups[SG_0];
+    spriteGroup = &gMain.spriteGroups[0];
     spriteGroup->active = TRUE;
     LoadSpriteSets(gIntroScene7_SpriteSets, 0x1, gMain.spriteGroups);
     if (spriteGroup->active == 1)
@@ -1976,7 +1976,7 @@ void IntroScene8a_RenderAllSprites(void)
 {
     struct SpriteGroup *sg0;
     struct SpriteGroup *sg1;
-    struct SpriteGroup *spriteGroups[SG_5];
+    struct SpriteGroup *spriteGroups[5];
     struct OamDataSimple *oamData;
     const struct SpriteSet *p;
     s32 i;
@@ -1985,24 +1985,24 @@ void IntroScene8a_RenderAllSprites(void)
     s8 cVar2;
 
 
-    sg0 = &gMain.spriteGroups[SG_0];
-    sg1 = &gMain.spriteGroups[SG_1];
+    sg0 = &gMain.spriteGroups[0];
+    sg1 = &gMain.spriteGroups[1];
 
-    spriteGroups[SG_0] = &gMain.spriteGroups[(5 * gIntroSpriteEntities[2].animFrame) + SG_2];
-    spriteGroups[SG_1] = &gMain.spriteGroups[(5 * gIntroSpriteEntities[3].animFrame) + SG_3];
-    spriteGroups[SG_2] = &gMain.spriteGroups[(5 * gIntroSpriteEntities[4].animFrame) + SG_4];
-    spriteGroups[SG_3] = &gMain.spriteGroups[(5 * gIntroSpriteEntities[5].animFrame) + SG_5];
-    spriteGroups[SG_4] = &gMain.spriteGroups[(5 * gIntroSpriteEntities[6].animFrame) + SG_6];
+    spriteGroups[0] = &gMain.spriteGroups[2 + (5 * gIntroSpriteEntities[2].animFrame)];
+    spriteGroups[1] = &gMain.spriteGroups[3 + (5 * gIntroSpriteEntities[3].animFrame)];
+    spriteGroups[2] = &gMain.spriteGroups[4 + (5 * gIntroSpriteEntities[4].animFrame)];
+    spriteGroups[3] = &gMain.spriteGroups[5 + (5 * gIntroSpriteEntities[5].animFrame)];
+    spriteGroups[4] = &gMain.spriteGroups[6 + (5 * gIntroSpriteEntities[6].animFrame)];
 
 
     sg0->active = gIntroSpriteEntities[0].visible;
     sg1->active = 1;
 
-    spriteGroups[SG_0]->active = gIntroSpriteEntities[2].visible;
-    spriteGroups[SG_1]->active = gIntroSpriteEntities[3].visible;
-    spriteGroups[SG_2]->active = gIntroSpriteEntities[4].visible;
-    spriteGroups[SG_3]->active = gIntroSpriteEntities[5].visible;
-    spriteGroups[SG_4]->active = gIntroSpriteEntities[6].visible;
+    spriteGroups[0]->active = gIntroSpriteEntities[2].visible;
+    spriteGroups[1]->active = gIntroSpriteEntities[3].visible;
+    spriteGroups[2]->active = gIntroSpriteEntities[4].visible;
+    spriteGroups[3]->active = gIntroSpriteEntities[5].visible;
+    spriteGroups[4]->active = gIntroSpriteEntities[6].visible;
 
     LoadSpriteSets(gIntroScene8a_SpriteSets, 0x11, gMain.spriteGroups);
 
@@ -2078,11 +2078,11 @@ void IntroScene8a_RenderAllSprites(void)
     sg1->active = 0;
     sg0->active = 0;
 
-    spriteGroups[SG_0]->active = 0;
-    spriteGroups[SG_1]->active = 0;
-    spriteGroups[SG_2]->active = 0;
-    spriteGroups[SG_3]->active = 0;
-    spriteGroups[SG_4]->active = 0;
+    spriteGroups[0]->active = 0;
+    spriteGroups[1]->active = 0;
+    spriteGroups[2]->active = 0;
+    spriteGroups[3]->active = 0;
+    spriteGroups[4]->active = 0;
 }
 void IntroScene8a_ClearAndResetOAM(void)
 {
@@ -2278,7 +2278,7 @@ void IntroScene8b_RenderBallAndCloud(void)
     struct OamDataSimple *oamData;
 
     spriteGroup0 = &gMain.spriteGroups[gIntroSpriteEntities[0].animFrame];
-    spriteGroup1 = &gMain.spriteGroups[SG_0];
+    spriteGroup1 = &gMain.spriteGroups[0];
     spriteGroup0->active = gIntroSpriteEntities[0].visible;
     spriteGroup1->active = gIntroSpriteEntities[1].visible;
     LoadSpriteSets(gIntroScene8b_SpriteSets, 11, gMain.spriteGroups);
