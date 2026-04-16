@@ -674,7 +674,7 @@ u16 PixelWalkCollisionDetection(struct Vector16* arg0, struct Vector16 arg1) {
             gCurrentPinballGame->collisionResponseType = 0;
 
             if (CheckFlipperCollision(arg0, &sp0_return) != 0 ||
-                (gCurrentPinballGame->jirachiCollisionEnabled != 0 && CheckCatchTargetCollision(arg0, &sp0_return) != 0))
+                (gCurrentPinballGame->catchMonCollisionEnabled != 0 && CheckCatchTargetCollision(arg0, &sp0_return) != 0))
                 break;
         }
 

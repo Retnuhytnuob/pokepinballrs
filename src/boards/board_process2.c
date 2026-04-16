@@ -529,7 +529,7 @@ void ResetBoardStateOnDeath(void)
     if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_TRAVEL_MODE)
         gCurrentPinballGame->boardSubState = TRAVEL_SUBSTATE_6;
     if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_CATCH_EM_MODE)
-        gCurrentPinballGame->boardSubState = CATCH_EM_SUBSTATE_10;
+        gCurrentPinballGame->boardSubState = CATCH_EM_SUBSTATE_END_CATCH_HIT_PHASE;
     if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_EGG_HATCH_MODE)
         gCurrentPinballGame->boardSubState = EGG_HATCH_SUBSTATE_6;
     if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_EVO_MODE)

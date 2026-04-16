@@ -30,7 +30,7 @@ void InitBoardIntroMode(void)
     LoadPortraitGraphics(PORTRAIT_STATE_CURRENT_LOCATION, PORTRAIT_MAIN_SLOT);
     LoadPortraitGraphics(PORTRAIT_STATE_CURRENT_LOCATION, PORTRAIT_ALT_SLOT);
     for (i = 0; i < 6; i++)
-        gCurrentPinballGame->hatchTilePalette[i] = 13;
+        gCurrentPinballGame->catchTilePalette[i] = 13;
 
     DmaCopy16(3, gTravelPortraitPalette, (void *)0x050003C0, 0x20);
     DmaCopy16(3, gAreaRouletteSelectedFx_Gfx, (void *)0x06015800, 0x280);

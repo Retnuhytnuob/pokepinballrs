@@ -1018,10 +1018,10 @@ gCatchTargetCollisionBitmap:: @ 0x0839A28C
 
 .include "data/graphics/mon_portraits_pals.inc"
 
-gSapphireCatchTilesGfx:: @ 0x0839C78C
+gCatchMonAppearFx_Gfx:: @ 0x0839C78C
 	.incbin "baserom.gba", 0x39C78C, 0x1420
 
-gSapphireCatchPalette:: @ 0x0839DBAC
+gCatchMonAppearFx_Pal:: @ 0x0839DBAC
 	.incbin "baserom.gba", 0x39DBAC, 0x200
 
 gCatchTile_RevealTilesGfx:: @ 0x0839DDAC
@@ -1262,7 +1262,7 @@ gLotadBumperTiles:: @ 0x0844928C
 gRubyStageCyndaquil_Gfx:: @ 0x08449D8C
 	.incbin "graphics/stage/ruby/cyndaquil.4bpp"
 
-gBasketAnimationTilesGfx:: @ 0x0844AA0C
+gJirachiFx_Gfx:: @ 0x0844AA0C
 	.incbin "graphics/stage/main/gunk_0844AA0C.4bpp"
 
 gSapphireStageBasket_Gfx:: @ 0x0844F20C

@@ -6,7 +6,7 @@ extern const s16 gHatchPieceVelocities[][2];
 extern const s16 gHatchPieceAffineModes[];
 extern const s16 gHatchPieceMatrixNums[6];
 extern const s16 gHatchPieceAnimIndices[][12];
-extern const u16 gHatchParticleOamAttributes[][3];
+extern const u16 gCatchTileParticleOamAttributes[][3];
 extern const u16 gHatchAnimOamAttributes[][3];
 
 void InitSequentialTileParticles(void)
@@ -71,7 +71,7 @@ void UpdateSequentialTileParticles(void)
     }
     else
     {
-        gCurrentPinballGame->hatchSequentialTileRevealFrameAnimTimer = 0x7100;
+        gCurrentPinballGame->catchTileRevealFrameAnimTimer = 0x7100;
         gMain.fieldSpriteGroups[12]->active = FALSE;
     }
 }
@@ -135,9 +135,9 @@ void UpdateBurstTileParticles(void)
 
             oamSimple = &group->oam[i];
             dst = (u16*)&gOamBuffer[oamSimple->oamId];
-            *dst++ = gHatchParticleOamAttributes[sp0[i]][0];
-            *dst++ = gHatchParticleOamAttributes[sp0[i]][1];
-            *dst++ = gHatchParticleOamAttributes[sp0[i]][2];
+            *dst++ = gCatchTileParticleOamAttributes[sp0[i]][0];
+            *dst++ = gCatchTileParticleOamAttributes[sp0[i]][1];
+            *dst++ = gCatchTileParticleOamAttributes[sp0[i]][2];
 
             gOamBuffer[oamSimple->oamId].x += tempVector.x;
             gOamBuffer[oamSimple->oamId].y += tempVector.y;
@@ -172,7 +172,7 @@ void UpdateBurstTileParticles(void)
     }
     else
     {
-        gCurrentPinballGame->hatchSequentialTileRevealFrameAnimTimer = 0x7100;
+        gCurrentPinballGame->catchTileRevealFrameAnimTimer = 0x7100;
         gMain.fieldSpriteGroups[12]->active = FALSE;
     }
 }

@@ -1357,7 +1357,7 @@ void UpdateEggModeAnimation(void)
             }
 
             if (gCurrentPinballGame->eggAnimFrameIndex == 20)
-                LoadEggSpriteGraphics();
+                LoadMonFieldSpriteGraphics();
 
             if ((gCurrentPinballGame->eggAnimFrameIndex == 8 || gCurrentPinballGame->eggAnimFrameIndex == 27) && gCurrentPinballGame->eggFrameTimer == 0)
                 m4aMPlayAllStop();
@@ -1937,7 +1937,7 @@ void UpdateEggMode(void)
         gCurrentPinballGame->catchTargetX = gCurrentPinballGame->walkMonXPos / 10 + 8;
         gCurrentPinballGame->catchTargetY = gCurrentPinballGame->walkMonYPos / 10 - 31;
         for (i = 0; i < 6; i++)
-            gCurrentPinballGame->hatchTilePalette[i] = 13;
+            gCurrentPinballGame->catchTilePalette[i] = 13;
 
         gCurrentPinballGame->boardSubState++;
         group->baseX = gCurrentPinballGame->walkMonXPos / 10 - gCurrentPinballGame->cameraXOffset;

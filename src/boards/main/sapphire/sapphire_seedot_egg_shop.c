@@ -115,7 +115,7 @@ void UpdateSapphireEggHatchAnimation(void)
             }
 
             if (gCurrentPinballGame->eggAnimFrameIndex == 20)
-                LoadEggSpriteGraphics();
+                LoadMonFieldSpriteGraphics();
 
             if ((gCurrentPinballGame->eggAnimFrameIndex == 8 || gCurrentPinballGame->eggAnimFrameIndex == 27) && gCurrentPinballGame->eggFrameTimer == 0)
                 m4aMPlayAllStop();

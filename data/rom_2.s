@@ -3897,7 +3897,7 @@ gCatchTile_SequentialFramesetData:: @ 0x086AD3FE
     @ 8 bytes unidentified data
     .byte 0, 0, 0, 0x70, 0, 0, 0xff, 0x7f
 
-gHatchSequentialFrameData:: @ 0x086AD436
+gCatchMonRevealFrameData:: @ 0x086AD436
 	.2byte 0x0000, 0x0005
 	.2byte 0x0001, 0x0003
 	.2byte 0x0002, 0x0004
@@ -6706,7 +6706,7 @@ gUnknown_086B24E0:: @ 0x086B24E0
 .4byte gUnknown_086B1A98
 
 
-gSapphireFloatOamFramesets:: @ 0x086B263C
+gJirachiFloatOamFramesets:: @ 0x086B263C
     packed_sprite_oam x=0x0, y=0x0, spriteSize=SPRITE_SIZE_8x8, tileNum=0x291, priority=0x1, paletteNum=0xd
     packed_sprite_oam x=0x0, y=0x0, spriteSize=SPRITE_SIZE_8x8, tileNum=0x291, priority=0x1, paletteNum=0xd
     packed_sprite_oam x=0x0, y=0x0, spriteSize=SPRITE_SIZE_8x8, tileNum=0x291, priority=0x1, paletteNum=0xd
@@ -8474,7 +8474,7 @@ gHatchCaveOamFramesets:: @ 0x086B4D4E
     packed_sprite_oam x=0x2, y=-0x20, spriteSize=SPRITE_SIZE_32x16, tileNum=0xef, priority=0x1, paletteNum=0xb
 
 
-gHatchParticleOamAttributes:: @ 0x086B4E3E
+gCatchTileParticleOamAttributes:: @ 0x086B4E3E
 	.incbin "baserom.gba", 0x6B4E3E, 0x4
 
 gUnknown_086B4E42:: @ 0x086B4E42
@@ -8812,7 +8812,7 @@ gCatchTile_SequentialBreakSpritesheetOam:: @ 0x086B53E4
     packed_sprite_oam x=0x8, y=0x5, spriteSize=SPRITE_SIZE_32x32, hFlip=0x1, vFlip=0x1, tileNum=0x3a1, paletteNum=0xe
 
 
-gSapphireHatchOamFramesets:: @ 0x086B55DC
+gCatchMonRevealOamFramesets:: @ 0x086B55DC
     packed_sprite_oam x=0x10, y=0x8, spriteSize=SPRITE_SIZE_16x16, tileNum=0x2c0, paletteNum=0xe
     packed_sprite_oam x=0x10, y=0x8, spriteSize=SPRITE_SIZE_16x16, tileNum=0x2c0, paletteNum=0xe
     packed_sprite_oam x=0x10, y=0x8, spriteSize=SPRITE_SIZE_16x16, tileNum=0x2c0, paletteNum=0xe

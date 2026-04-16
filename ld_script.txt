@@ -70,7 +70,7 @@ SECTIONS
         src/boards/main/board_intro_mode.o(.text);
         src/boards/main/travel_mode.o(.text);
         src/boards/main/evolution_mode.o(.text);
-        src/boards/main/catch_and_hatch_modes.o(.text);
+        src/boards/main/catch_normal_and_jirachi_modes.o(.text);
         src/boards/main/catch_tile_particles.o(.text);
         src/boards/main/center_capture_hole.o(.text);
         src/boards/main/ruby/ruby_ramp.o(.text);

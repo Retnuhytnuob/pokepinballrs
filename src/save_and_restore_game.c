@@ -39,7 +39,7 @@ extern const u8 gRubyBoardShop_Gfx[][0x500];
 
 extern const u8 gSapphireTravelPaint_Gfx[];
 extern const u8 gSapphirePainterPalette[];
-extern const u8 gSapphireCatchTilesGfx[];
+extern const u8 gCatchMonAppearFx_Gfx[];
 extern const u8 gSapphireBoardZigzagoonFx_Gfx[];
 
 extern const u8 gAlphabetTilesGfx[][0x40];
@@ -375,7 +375,7 @@ void RestoreFieldSpecificGraphics(void)
         DmaCopy16(3, gCaptureScreenTilesGfx, (void *)0x6015800, 0x1C00);
         break;
     case 9:
-        DmaCopy16(3, gSapphireCatchTilesGfx, (void *)0x6015800, 0x1400);
+        DmaCopy16(3, gCatchMonAppearFx_Gfx, (void *)0x6015800, 0x1400);
         break;
     case 10:
         DmaCopy16(3, gCatchTile_RevealTilesGfx, (void *)0x6015800, 0x2800);
@@ -475,7 +475,7 @@ void RestoreMainFieldDynamicGraphics(void)
     s16 var0;
 
     LoadCatchSpriteGraphics();
-    LoadEggSpriteGraphics();
+    LoadMonFieldSpriteGraphics();
 
     for (i = 0; i <= 1; i++)
     {

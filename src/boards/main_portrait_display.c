@@ -225,7 +225,7 @@ void UpdatePortraitSpritePositions(void)
     for (i = 0; i < 6; i++)
     {
         oamSimple = &group->oam[i];
-        gOamBuffer[oamSimple->oamId].paletteNum = gCurrentPinballGame->hatchTilePalette[i];
+        gOamBuffer[oamSimple->oamId].paletteNum = gCurrentPinballGame->catchTilePalette[i];
         gOamBuffer[oamSimple->oamId].priority = gCurrentPinballGame->creatureOamPriority;
         gOamBuffer[oamSimple->oamId].x = oamSimple->xOffset + group->baseX;
         gOamBuffer[oamSimple->oamId].y = oamSimple->yOffset + group->baseY;

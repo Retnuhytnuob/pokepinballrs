@@ -339,20 +339,20 @@ void HandleRubyBumperHit(void)
             m4aSongNumStart(SE_RUBY_BUMPER_HIT);
             PlayRumble(7);
             if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_CATCH_EM_MODE
-                && gCurrentPinballGame->boardSubState == CATCH_EM_SUBSTATE_5)
+                && gCurrentPinballGame->boardSubState == CATCH_EM_SUBSTATE_AWAITING_BUMPER_HITS)
             {
-                if (gCurrentPinballGame->hatchTilesBumperAcknowledged < 6)
+                if (gCurrentPinballGame->catchTilesBumperAcknowledged < 6)
                 {
-                    if (gCurrentPinballGame->hatchTilesBumperAcknowledged == 0)
-                        gCurrentPinballGame->hatchTilesBumperAcknowledged = 1;
-                    else if (gCurrentPinballGame->hatchTilesBumperAcknowledged == 1)
-                        gCurrentPinballGame->hatchTilesBumperAcknowledged = 3;
+                    if (gCurrentPinballGame->catchTilesBumperAcknowledged == 0)
+                        gCurrentPinballGame->catchTilesBumperAcknowledged = 1;
+                    else if (gCurrentPinballGame->catchTilesBumperAcknowledged == 1)
+                        gCurrentPinballGame->catchTilesBumperAcknowledged = 3;
                     else
-                        gCurrentPinballGame->hatchTilesBumperAcknowledged = 6;
+                        gCurrentPinballGame->catchTilesBumperAcknowledged = 6;
 
-                    if (gCurrentPinballGame->hatchTilesBumperAcknowledged == 6)
+                    if (gCurrentPinballGame->catchTilesBumperAcknowledged == 6)
                     {
-                        if (gCurrentPinballGame->hatchTilesBoardAcknowledged == 0)
+                        if (gCurrentPinballGame->catchTilesBoardAcknowledged == 0)
                         {
                             gMain.modeChangeFlags |= MODE_CHANGE_BANNER;
                             gCurrentPinballGame->bannerDelayTimer = 50;

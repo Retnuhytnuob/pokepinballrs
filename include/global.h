@@ -699,7 +699,7 @@ struct PinballGame
     /*0x5C0*/ struct Vector16 tileParticlePos[6];
     /*0x5D8*/ struct Vector16 tileParticleVel[6];
     /*0x5F0*/ u16 caughtMonCount; // Number of mons caught in this game
-    /*0x5F2*/ s8 jirachiCollisionEnabled;
+    /*0x5F2*/ s8 catchMonCollisionEnabled;
     /*0x5F3*/ s8 bonusTrapEnabled;
     /*0x5F4*/ u16 collisionMapScrollY;
     /*0x5F6*/ s8 ballUpgradeType;
@@ -730,7 +730,7 @@ struct PinballGame
     /*0x61E*/ u16 kickbackLaunchTimer;
     /*0x620*/ struct Vector16 kickbackBallHoverPos;
     /*0x624*/ s8 bumperHitCountdown; // 2 when Hit, one frame of ignored collision, then ready to hit again
-    /*0x625*/ s8 hatchTilesBumperAcknowledged;
+    /*0x625*/ s8 catchTilesBumperAcknowledged;
     /*0x626*/ s8 evoItemAnimFrame;
     /*0x627*/ u8 filler627[0x1];
     /*0x628*/ u16 evoItemAnimFrameTimer;
@@ -756,15 +756,15 @@ struct PinballGame
     /*0x6C0*/ u16 seedotExitSequenceTimer;
     /*0x6C2*/ u16 seedotModeStartDelay;
     /*0x6C4*/ s8 portraitDisplayState;
-    /*0x6C5*/ s8 hatchTileRevealState;
-    /*0x6C6*/ s8 hatchTilesBoardAcknowledged;
+    /*0x6C5*/ s8 catchTileRevealState;
+    /*0x6C6*/ s8 catchTilesBoardAcknowledged;
     /*0x6C7*/ s8 hatchSequentialTilesRevealed;
     /*0x6C8*/ s8 hatchGridCellIndex;
-    /*0x6C9*/ s8 hatchTilesRemaining;
-    /*0x6CA*/ u16 hatchSequentialTileRevealFrameAnimTimer;
-    /*0x6CC*/ s8 hatchFrameId;
-    /*0x6CD*/ u8 hatchTileShufflePool[6];
-    /*0x6D3*/ u8 hatchTilePalette[6];
+    /*0x6C9*/ s8 catchTilesRemaining;
+    /*0x6CA*/ u16 catchTileRevealFrameAnimTimer;
+    /*0x6CC*/ s8 catchRevealFrameId;
+    /*0x6CD*/ u8 catchTileShufflePool[6];
+    /*0x6D3*/ u8 catchTilePalette[6];
     /*0x6D9*/ s8 roulettePortraitIndexes[2];
     /*0x6DB*/ u8 creatureOamPriority;
     /*0x6DC*/ u8 prizeId; //Used both for roulette and shop purchases
