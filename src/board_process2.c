@@ -418,7 +418,7 @@ void ProcessMainBoardBallDrainAndLaunch(void)
 {
     struct BallState *ballStates;
 
-    if (gCurrentPinballGame->boardState != MAIN_BOARD_STATE_AREA_ROULETTE
+    if (gCurrentPinballGame->boardState != MAIN_BOARD_STATE_BOARD_INTRO
         && gCurrentPinballGame->newButtonActions[1] && gCurrentPinballGame->ballInLaunchChute)
     {
         gCurrentPinballGame->launcherCharging = 1;

@@ -2,6 +2,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "constants/bg_music.h"
+#include "constants/board/kecleon_states.h"
 
 #define BONUS_KECLEON_COMPLETE_POINTS 30000000
 
@@ -59,7 +60,7 @@ void KecleonBoardProcess_3A_35860(void)
     s16 i;
 
     gCurrentPinballGame->stageTimer = 0;
-    gCurrentPinballGame->boardSubState = 0;
+    gCurrentPinballGame->boardSubState = BONUS_BOARD_SUBSTATE_ACTIVE;
     gCurrentPinballGame->boardState = 0;
     gCurrentPinballGame->boardModeType = 1;
     gCurrentPinballGame->eventTimer = gCurrentPinballGame->timerBonus + 120 * 60; // 120 seconds

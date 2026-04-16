@@ -570,7 +570,7 @@ void AnimateSapphireShopArrow(void)
     index = 0;
     if (gCurrentPinballGame->shopShockWallAnimState == 3)
         gCurrentPinballGame->shopArrowActive = 1;
-    else if (gCurrentPinballGame->boardState != MAIN_BOARD_STATE_AREA_ROULETTE)
+    else if (gCurrentPinballGame->boardState != MAIN_BOARD_STATE_BOARD_INTRO)
         gCurrentPinballGame->shopArrowActive = 0;
 
     if (gCurrentPinballGame->shopArrowActive > 0)

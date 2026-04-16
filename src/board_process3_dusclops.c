@@ -22,7 +22,7 @@ void DuskullBonus_Setup(void)
 {
     s16 i;
     gCurrentPinballGame->stageTimer = 0;
-    gCurrentPinballGame->boardSubState = BONUS_BOARD_SUBSTATE_0;
+    gCurrentPinballGame->boardSubState = BONUS_BOARD_SUBSTATE_ACTIVE;
     gCurrentPinballGame->boardState = DUSCLOPS_BOARD_STATE_0_INTRO;
     gCurrentPinballGame->boardModeType = 1;
     gCurrentPinballGame->eventTimer = gCurrentPinballGame->timerBonus + BONUS_DUSKULL_TIME;

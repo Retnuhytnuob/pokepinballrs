@@ -234,7 +234,7 @@ void InitBonusStageSelect(void)
     }
     else
     {
-        gCurrentPinballGame->boardSubState = BOSS_HOLE_SUBSTATE_0;
+        gCurrentPinballGame->boardSubState = BOSS_HOLE_SUBSTATE_INIT;
         gCurrentPinballGame->stageTimer = 0;
         gCurrentPinballGame->portraitCycleFrame = 0;
         LoadPortraitGraphics(CENTER_SCREEN_STATE_CONFIRMATION_PROMPT, CENTER_SCREEN_MAIN_SLOT);
@@ -245,7 +245,7 @@ void UpdateBonusStageSelect(void)
 {
     switch (gCurrentPinballGame->boardSubState)
     {
-    case BOSS_HOLE_SUBSTATE_0:
+    case BOSS_HOLE_SUBSTATE_INIT:
         if (gCurrentPinballGame->stageTimer < 60)
         {
             gCurrentPinballGame->stageTimer++;
@@ -349,7 +349,7 @@ void UpdateBonusStageSelect(void)
         else
         {
             gCurrentPinballGame->stageTimer = 0;
-            gCurrentPinballGame->boardSubState = BOSS_HOLE_SUBSTATE_0;
+            gCurrentPinballGame->boardSubState = BOSS_HOLE_SUBSTATE_INIT;
             gCurrentPinballGame->bonusReturnState = 0;
             TransitionToBonusField();
         }
@@ -1585,7 +1585,7 @@ void CleanupEggModeState(void)
 
 void InitEggMode(void)
 {
-    gCurrentPinballGame->boardSubState = EGG_HATCH_SUBSTATE_0;
+    gCurrentPinballGame->boardSubState = EGG_HATCH_SUBSTATE_INIT;
     gCurrentPinballGame->stageTimer = 0;
     gCurrentPinballGame->saverTimeRemaining = 1800;
     gCurrentPinballGame->creatureHitCount = 0;
@@ -1631,7 +1631,7 @@ void UpdateEggMode(void)
     priority = 1;
     switch (gCurrentPinballGame->boardSubState)
     {
-    case EGG_HATCH_SUBSTATE_0:
+    case EGG_HATCH_SUBSTATE_INIT:
         gCurrentPinballGame->portraitDisplayState = 3;
         gMain.fieldSpriteGroups[41]->active = TRUE;
         gCurrentPinballGame->boardSubState++;
@@ -2007,7 +2007,7 @@ void UpdateEggMode(void)
             else
                 RequestBoardStateTransition(MAIN_BOARD_STATE_DEFAULT);
 
-            gCurrentPinballGame->boardSubState = DEFAULT_MODE_SUBSTATE_0;
+            gCurrentPinballGame->boardSubState = DEFAULT_MODE_SUBSTATE_INIT;
         }
         break;
     }

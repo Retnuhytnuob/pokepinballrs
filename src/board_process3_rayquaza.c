@@ -2,6 +2,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "constants/bg_music.h"
+#include "constants/board/rayquaza_states.h"
 
 extern const s16 gWhirlwindGrabAnimFrameIndices[];
 extern const u8 gRayquazaBonusClear_Gfx[];
@@ -31,7 +32,7 @@ void RayquazaBoardProcess_3A_3E79C(void)
         Random();
 
     gCurrentPinballGame->stageTimer = 0;
-    gCurrentPinballGame->boardSubState = 0;
+    gCurrentPinballGame->boardSubState = BONUS_BOARD_SUBSTATE_ACTIVE;
     gCurrentPinballGame->boardState = 0;
     if (gCurrentPinballGame->numCompletedBonusStages % 10 == 9)
         gCurrentPinballGame->legendaryHitsRequired = 18;

@@ -38,7 +38,7 @@ void GroudonBoardProcess_3A_3B120(void)
     s16 i;
 
     gCurrentPinballGame->stageTimer = 0;
-    gCurrentPinballGame->boardSubState = BONUS_BOARD_SUBSTATE_0;
+    gCurrentPinballGame->boardSubState = BONUS_BOARD_SUBSTATE_ACTIVE;
     gCurrentPinballGame->boardState = GROUDON_BOARD_STATE_INTRO;
     if (gCurrentPinballGame->numCompletedBonusStages % 5 == 3)
         gCurrentPinballGame->legendaryHitsRequired = 18;

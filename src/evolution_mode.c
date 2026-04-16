@@ -37,7 +37,7 @@ void CleanupEvolutionModeState(void)
 
 void InitEvolutionMode(void)
 {
-    gCurrentPinballGame->boardSubState = EVOLUTION_SUBSTATE_0;
+    gCurrentPinballGame->boardSubState = EVOLUTION_SUBSTATE_INIT;
     gCurrentPinballGame->stageTimer = 0;
     gCurrentPinballGame->boardModeType = 2;
     gCurrentPinballGame->eventTimer = gCurrentPinballGame->timerBonus + 7200;
@@ -95,7 +95,7 @@ void UpdateEvolutionMode(void)
 
     switch (gCurrentPinballGame->boardSubState)
     {
-    case EVOLUTION_SUBSTATE_0:
+    case EVOLUTION_SUBSTATE_INIT:
         if (gCurrentPinballGame->evoModeShuffleRound < 2)
         {
             for (i = 0; i < 8; i++)
@@ -358,7 +358,7 @@ void UpdateEvolutionMode(void)
             else
                 RequestBoardStateTransition(MAIN_BOARD_STATE_DEFAULT);
 
-            gCurrentPinballGame->boardSubState = DEFAULT_MODE_SUBSTATE_0;
+            gCurrentPinballGame->boardSubState = DEFAULT_MODE_SUBSTATE_INIT;
         }
         break;
     }

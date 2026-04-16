@@ -63,7 +63,7 @@ void InitCatchEmMode(void)
 {
     s16 i, j;
 
-    gCurrentPinballGame->boardSubState = CATCH_EM_SUBSTATE_0;
+    gCurrentPinballGame->boardSubState = CATCH_EM_SUBSTATE_INIT;
     gCurrentPinballGame->stageTimer = 0;
     gCurrentPinballGame->boardModeType = 1;
     gCurrentPinballGame->eventTimer = gCurrentPinballGame->timerBonus + BONUS_CATCH_TIME;
@@ -120,7 +120,7 @@ void UpdateCatchEmMode(void)
 
     switch (gCurrentPinballGame->boardSubState)
     {
-    case CATCH_EM_SUBSTATE_0:
+    case CATCH_EM_SUBSTATE_INIT:
         BuildSpeciesWeightsForCatchEmMode();
         gCurrentPinballGame->boardSubState++;
         break;
@@ -295,7 +295,7 @@ void UpdateCatchEmMode(void)
             else
                 RequestBoardStateTransition(MAIN_BOARD_STATE_DEFAULT);
 
-            gCurrentPinballGame->boardSubState = DEFAULT_MODE_SUBSTATE_0;
+            gCurrentPinballGame->boardSubState = DEFAULT_MODE_SUBSTATE_INIT;
         }
         break;
     }
@@ -304,7 +304,7 @@ void UpdateCatchEmMode(void)
 //jirachi.c starts here
 void InitJirachiBonus(void)
 {
-    gCurrentPinballGame->boardSubState = JIRACHI_CATCH_SUBSTATE_0;
+    gCurrentPinballGame->boardSubState = JIRACHI_CATCH_SUBSTATE_INIT;
     gCurrentPinballGame->stageTimer = 0;
     gCurrentPinballGame->boardModeType = 1;
     gCurrentPinballGame->eventTimer = gCurrentPinballGame->timerBonus + 1800;
@@ -348,7 +348,7 @@ void UpdateJirachiBonus(void)
 
     switch (gCurrentPinballGame->boardSubState)
     {
-    case JIRACHI_CATCH_SUBSTATE_0:
+    case JIRACHI_CATCH_SUBSTATE_INIT:
         gCurrentPinballGame->currentSpecies = SPECIES_JIRACHI;
         LoadCatchSpriteGraphics();
         gCurrentPinballGame->boardSubState++;
@@ -557,7 +557,7 @@ void UpdateJirachiBonus(void)
             else
                 RequestBoardStateTransition(MAIN_BOARD_STATE_DEFAULT);
 
-            gCurrentPinballGame->boardSubState = DEFAULT_MODE_SUBSTATE_0;
+            gCurrentPinballGame->boardSubState = DEFAULT_MODE_SUBSTATE_INIT;
         }
     }
 }

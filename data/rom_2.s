@@ -3939,7 +3939,7 @@ gEvoItemTilesGfxPtrs:: @ 0x086AD49C
 
 
 gBoardStateInitFuncs:: @ 0x086AD4C4
-    .4byte InitAreaRoulette
+    .4byte InitBoardIntroMode
     .4byte InitFieldIdle
     .4byte InitCatchTrigger
     .4byte InitBonusStageSelect
@@ -3950,7 +3950,7 @@ gBoardStateInitFuncs:: @ 0x086AD4C4
     .4byte InitJirachiBonus
 
 gBoardStateUpdateFuncs:: @ 0x086AD4E8
-    .4byte UpdateAreaRoulette
+    .4byte UpdateBoardIntroMode
     .4byte UpdateFieldIdle
     .4byte UpdateCatchTrigger
     .4byte UpdateBonusStageSelect

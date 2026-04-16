@@ -2,6 +2,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "constants/bg_music.h"
+#include "constants/board/spheal_states.h"
 
 struct SphealFlightPath
 {
@@ -44,7 +45,7 @@ void SphealBoardProcess_3A_42E48(void)
 
     gMain.rngValue = gMain.systemFrameCount;
     gCurrentPinballGame->stageTimer = 0;
-    gCurrentPinballGame->boardSubState = 0;
+    gCurrentPinballGame->boardSubState = BONUS_BOARD_SUBSTATE_ACTIVE;
     gCurrentPinballGame->boardState = 0;
     gCurrentPinballGame->boardModeType = 1;
     gCurrentPinballGame->eventTimer = gCurrentPinballGame->timerBonus + 7200;

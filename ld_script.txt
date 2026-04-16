@@ -67,6 +67,7 @@ SECTIONS
         src/pichu_entity.o(.text);
         src/rom_27E08.o(.text);
         src/catch_tile_logic.o(.text);
+        src/board_intro_mode.o(.text);
         src/travel_mode.o(.text);
         src/evolution_mode.o(.text);
         src/catch_and_hatch_modes.o(.text);

@@ -306,7 +306,7 @@ void AnimateRubyShopRampArrow(void)
     index = 0;
     if (gCurrentPinballGame->shopDoorTargetFrame > 2)
         gCurrentPinballGame->shopArrowActive = 1;
-    else if (gCurrentPinballGame->boardState != MAIN_BOARD_STATE_AREA_ROULETTE)
+    else if (gCurrentPinballGame->boardState != MAIN_BOARD_STATE_BOARD_INTRO)
         gCurrentPinballGame->shopArrowActive = 0;
 
     if (gCurrentPinballGame->shopArrowActive > 0)

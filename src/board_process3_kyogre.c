@@ -2,6 +2,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "constants/bg_music.h"
+#include "constants/board/kyogre_states.h"
 
 extern const u8 gKyogreBonusClear_Gfx[];
 extern const u8 gKyogreWaterAnimPaletteFrames[][0x20];
@@ -40,7 +41,7 @@ void KyogreBoardProcess_3A_383E4(void)
     s16 i;
 
     gCurrentPinballGame->stageTimer = 0;
-    gCurrentPinballGame->boardSubState = 0;
+    gCurrentPinballGame->boardSubState = BONUS_BOARD_SUBSTATE_ACTIVE;
     gCurrentPinballGame->boardState = 0;
     gCurrentPinballGame->boardModeType = 0;
     gCurrentPinballGame->eventTimer = gCurrentPinballGame->timerBonus + 10800;

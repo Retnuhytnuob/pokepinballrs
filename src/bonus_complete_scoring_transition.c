@@ -19,12 +19,12 @@ void FadeToMainBoard(void)
     gCurrentPinballGame->startButtonDisabled = 1;
     switch (gCurrentPinballGame->boardSubState)
     {
-    case BONUS_BOARD_SUBSTATE_0:
+    case BONUS_BOARD_SUBSTATE_ACTIVE:
         gCurrentPinballGame->stageTimer = 65;
-        gCurrentPinballGame->boardSubState = BONUS_BOARD_SUBSTATE_1;
+        gCurrentPinballGame->boardSubState = BONUS_BOARD_SUBSTATE_FADETRANSITION;
         gMain.blendControl = 0x9F;
         break;
-    case BONUS_BOARD_SUBSTATE_1:
+    case BONUS_BOARD_SUBSTATE_FADETRANSITION:
         if (gCurrentPinballGame->stageTimer)
         {
             gCurrentPinballGame->stageTimer--;
@@ -33,7 +33,7 @@ void FadeToMainBoard(void)
                 gCurrentPinballGame->boardSubState++;
         }
         break;
-    case BONUS_BOARD_SUBSTATE_2:
+    case BONUS_BOARD_SUBSTATE_TRANSFER_TO_MAIN_BOARD:
         if (gCurrentPinballGame->stageTimer < 30)
         {
             gCurrentPinballGame->stageTimer++;
@@ -41,7 +41,7 @@ void FadeToMainBoard(void)
         else
         {
             gCurrentPinballGame->stageTimer = 0;
-            gCurrentPinballGame->boardSubState = DEFAULT_MODE_SUBSTATE_0;
+            gCurrentPinballGame->boardSubState = DEFAULT_MODE_SUBSTATE_INIT;
             gMain.spriteGroups[6].active = FALSE;
             gMain.spriteGroups[5].active = FALSE;
             if (gMain.tempField != gMain.selectedField)
