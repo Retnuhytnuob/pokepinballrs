@@ -645,7 +645,7 @@ void RunBallCaptureSequence(void)
                     (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_CATCH_EM_MODE
                         && gCurrentPinballGame->boardSubState == CATCH_EM_SUBSTATE_CATCH_HIT_PHASE)
                     || (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_JIRACHI_CATCH_MODE
-                        && gCurrentPinballGame->boardSubState == JIRACHI_CATCH_SUBSTATE_3)
+                        && gCurrentPinballGame->boardSubState == JIRACHI_CATCH_SUBSTATE_CATCH_HIT_PHASE)
                 ))
             {
                 DmaCopy16(3, &gCatchSequencePalB, 0x050003A0, 0x20);
@@ -724,7 +724,7 @@ void RunBallCaptureSequence(void)
             (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_CATCH_EM_MODE
              && gCurrentPinballGame->boardSubState == CATCH_EM_SUBSTATE_CATCH_HIT_PHASE)
             || (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_JIRACHI_CATCH_MODE
-                 && gCurrentPinballGame->boardSubState == JIRACHI_CATCH_SUBSTATE_3))
+                 && gCurrentPinballGame->boardSubState == JIRACHI_CATCH_SUBSTATE_CATCH_HIT_PHASE))
         {
             DmaCopy16(3, &gCatchSpritePalettes, 0x050003A0, 0x20);
         }
@@ -845,7 +845,7 @@ void RunBallCaptureSequence(void)
                 (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_CATCH_EM_MODE
                  && gCurrentPinballGame->boardSubState == CATCH_EM_SUBSTATE_CATCH_HIT_PHASE)
                 || (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_JIRACHI_CATCH_MODE
-                    && gCurrentPinballGame->boardSubState == JIRACHI_CATCH_SUBSTATE_3))
+                    && gCurrentPinballGame->boardSubState == JIRACHI_CATCH_SUBSTATE_CATCH_HIT_PHASE))
                 DmaCopy16(3, &gCatchSequencePalA, 0x050003A0, 0x20);
         }
         else if (gCurrentPinballGame->captureSequenceTimer == 19 || gCurrentPinballGame->captureSequenceTimer == 22)
@@ -856,7 +856,7 @@ void RunBallCaptureSequence(void)
                 (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_CATCH_EM_MODE
                     && gCurrentPinballGame->boardSubState == CATCH_EM_SUBSTATE_CATCH_HIT_PHASE)
                 || (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_JIRACHI_CATCH_MODE
-                    && gCurrentPinballGame->boardSubState == JIRACHI_CATCH_SUBSTATE_3))
+                    && gCurrentPinballGame->boardSubState == JIRACHI_CATCH_SUBSTATE_CATCH_HIT_PHASE))
                 DmaCopy16(3, &gCatchSequencePalC, 0x050003A0, 0x20);
         }
 
@@ -875,7 +875,7 @@ void RunBallCaptureSequence(void)
                 }
 
                 if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_JIRACHI_CATCH_MODE
-                    && gCurrentPinballGame->boardSubState == JIRACHI_CATCH_SUBSTATE_3)
+                    && gCurrentPinballGame->boardSubState == JIRACHI_CATCH_SUBSTATE_CATCH_HIT_PHASE)
                 {
                     CleanupJirachiSprites();
                     gCurrentPinballGame->catchMonCollisionEnabled = 0;
@@ -1329,7 +1329,7 @@ void RunBallCaptureSequence(void)
                 gCurrentPinballGame->boardSubState = CATCH_EM_SUBSTATE_END_CATCH_HIT_PHASE;
 
             if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_JIRACHI_CATCH_MODE)
-                gCurrentPinballGame->boardSubState = JIRACHI_CATCH_SUBSTATE_5;
+                gCurrentPinballGame->boardSubState = JIRACHI_CATCH_SUBSTATE_BOARD_STATE_CLEANUP;
 
             if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_EGG_HATCH_MODE)
                 gCurrentPinballGame->boardSubState = EGG_HATCH_SUBSTATE_6;
