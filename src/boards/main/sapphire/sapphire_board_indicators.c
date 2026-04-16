@@ -78,7 +78,8 @@ void UpdateSapphireBoardAnimations(void)
     if (gCurrentPinballGame->hudSpriteBaseY >= 8 && gCurrentPinballGame->hudSpriteBaseY < 182)
         AnimatePelipperBumper();
 
-    if (gCurrentPinballGame->saverTimeRemaining && gCurrentPinballGame->ballCatchState == 0)
+    if (gCurrentPinballGame->saverTimeRemaining
+        && gCurrentPinballGame->ballCatchState == NOT_TRAPPED)
         gCurrentPinballGame->saverTimeRemaining--;
 }
 

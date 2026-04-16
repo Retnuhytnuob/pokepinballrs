@@ -292,7 +292,9 @@ void ProcessTiltInput(void)
     int i;
     s16 sp0[4];
 
-    if (gCurrentPinballGame->ballCatchState == NOT_TRAPPED && gCurrentPinballGame->captureState != 2 && gCurrentPinballGame->kickbackFiring == 0)
+    if (gCurrentPinballGame->ballCatchState == NOT_TRAPPED
+        && gCurrentPinballGame->captureState != 2
+        && gCurrentPinballGame->kickbackFiring == 0)
     {
         if (gCurrentPinballGame->newButtonActions[2])
         {
@@ -523,7 +525,7 @@ void ResetBoardStateOnDeath(void)
     gCurrentPinballGame->stageTimer = 10199;
 
     if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
-        gCurrentPinballGame->boardSubState = BONUS_HOLE_SUBSTATE_5;
+        gCurrentPinballGame->boardSubState = BONUS_HOLE_SUBSTATE_START_CLOSING;
     if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_TRAVEL_MODE)
         gCurrentPinballGame->boardSubState = TRAVEL_SUBSTATE_6;
     if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_CATCH_EM_MODE)

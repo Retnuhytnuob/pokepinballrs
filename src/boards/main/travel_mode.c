@@ -122,7 +122,7 @@ void UpdateTravelMode(void)
         break;
     case TRAVEL_SUBSTATE_3:
         AnimateBonusTrapSprite();
-        if (gCurrentPinballGame->ballCatchState == 4)
+        if (gCurrentPinballGame->ballCatchState == TRAP_CENTER_HOLE)
             gCurrentPinballGame->boardSubState++;
         break;
     case TRAVEL_SUBSTATE_4:

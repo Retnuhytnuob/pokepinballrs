@@ -177,7 +177,7 @@ void UpdateEvolutionMode(void)
         break;
     case EVOLUTION_SUBSTATE_4:
         AnimateBonusTrapSprite();
-        if (gCurrentPinballGame->ballCatchState == 4)
+        if (gCurrentPinballGame->ballCatchState == TRAP_CENTER_HOLE)
             gCurrentPinballGame->boardSubState++;
         break;
     case EVOLUTION_SUBSTATE_5:

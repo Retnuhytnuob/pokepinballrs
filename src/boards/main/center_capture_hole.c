@@ -251,7 +251,7 @@ void GivePrize(void)
         gCurrentPinballGame->saverTimeRemaining = (gCurrentPinballGame->prizeId + 1) * 1800;
         break;
     case PRIZE_PICHU_SAVER:
-        if (gCurrentPinballGame->ballCatchState == 3)
+        if (gCurrentPinballGame->ballCatchState == TRAP_EVO_SHOP_HOLE)
         {
             if (gCurrentPinballGame->outcomeFrameCounter > 124)
             {

@@ -169,9 +169,9 @@ void ProcessSapphireCollisionEvent(u8 arg0, u16* arg1, u16* arg2)
         if (gCurrentPinballGame->collisionCooldownTimer == 0)
         {
             if (gCurrentPinballGame->ball->positionQ1.x >= 200)
-                gCurrentPinballGame->ballCatchState = 1;
+                gCurrentPinballGame->ballCatchState = TRAP_CATCH_HOLE;
             else
-                gCurrentPinballGame->ballCatchState = 3;
+                gCurrentPinballGame->ballCatchState = TRAP_EVO_SHOP_HOLE;
 
             DispatchSapphireCatchModeInit();
             gCurrentPinballGame->collisionResponseType = 7;

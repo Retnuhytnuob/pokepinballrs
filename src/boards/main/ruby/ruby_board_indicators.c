@@ -70,7 +70,8 @@ void UpdateRubyBoardAnimations(void)
     if (gCurrentPinballGame->hudSpriteBaseY > 202)
         DrawRubyModeTimerDisplay();
 
-    if (gCurrentPinballGame->saverTimeRemaining && gCurrentPinballGame->ballCatchState == 0)
+    if (gCurrentPinballGame->saverTimeRemaining
+        && gCurrentPinballGame->ballCatchState == NOT_TRAPPED)
         gCurrentPinballGame->saverTimeRemaining--;
 }
 

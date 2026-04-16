@@ -43,7 +43,8 @@ extern const u16 gAngleToDirectionTable[];
 
 extern u8 gCatchSpritePaletteBuffer[];
 
-
+// This is the 'Gravity Well' in the center of the board.
+// Used with travel confirmation, bonus board entry, roulette, etc
 
 void ResetCatchState(s16 resetHoleIndicators)
 {
@@ -58,7 +59,7 @@ void ResetCatchState(s16 resetHoleIndicators)
 
     gCurrentPinballGame->trapAnimState = 0;
     gCurrentPinballGame->bonusTrapEnabled = 0;
-    if (gCurrentPinballGame->boardTransitionPhase != BOARD_STATE_DISPATCHER_STATE_CHANGING 
+    if (gCurrentPinballGame->boardTransitionPhase != BOARD_STATE_DISPATCHER_STATE_CHANGING
         || gCurrentPinballGame->nextBoardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
     {
         if ((gCurrentPinballGame->jirachiActivationFlags & 0xF) == 0)
@@ -68,13 +69,14 @@ void ResetCatchState(s16 resetHoleIndicators)
         }
     }
 
-    if (gCurrentPinballGame->nextBoardState == MAIN_BOARD_STATE_EVO_MODE && gCurrentPinballGame->boardTransitionPhase == 2)
+    if (gCurrentPinballGame->nextBoardState == MAIN_BOARD_STATE_EVO_MODE
+        && gCurrentPinballGame->boardTransitionPhase == BOARD_STATE_DISPATCHER_STATE_CHANGING)
         gCurrentPinballGame->shopDoorTargetFrame = 0;
 }
 
 void InitCatchTrigger(void)
 {
-    gCurrentPinballGame->boardSubState = BONUS_HOLE_SUBSTATE_1;
+    gCurrentPinballGame->boardSubState = BONUS_HOLE_SUBSTATE_OPEN_TRAP_DOOR;
     gCurrentPinballGame->stageTimer = 0;
     gCurrentPinballGame->prizeSelected = 0;
 }
@@ -83,7 +85,7 @@ void UpdateCatchTrigger(void)
 {
     switch (gCurrentPinballGame->boardSubState)
     {
-    case BONUS_HOLE_SUBSTATE_1:
+    case BONUS_HOLE_SUBSTATE_OPEN_TRAP_DOOR:
         if (gCurrentPinballGame->stageTimer < 9)
         {
             gCurrentPinballGame->stageTimer++;
@@ -101,15 +103,15 @@ void UpdateCatchTrigger(void)
             }
         }
         break;
-    case BONUS_HOLE_SUBSTATE_2:
+    case BONUS_HOLE_SUBSTATE_GRAVITY_WELL:
         AnimateBonusTrapSprite();
-        if (gCurrentPinballGame->ballCatchState == 0)
+        if (gCurrentPinballGame->ballCatchState == NOT_TRAPPED)
             LoadPortraitGraphics(PORTRAIT_STATE_SLOT_START_CARD, PORTRAIT_MAIN_SLOT);
 
-        if (gCurrentPinballGame->ballCatchState == 4)
+        if (gCurrentPinballGame->ballCatchState == TRAP_CENTER_HOLE)
             gCurrentPinballGame->boardSubState++;
         break;
-    case BONUS_HOLE_SUBSTATE_3:
+    case BONUS_HOLE_SUBSTATE_START_ROULETTE:
         gCurrentPinballGame->allHolesLit = 0;
         gCurrentPinballGame->holeIndicators[0] = 0;
         gCurrentPinballGame->holeIndicators[1] = gCurrentPinballGame->holeIndicators[0];
@@ -120,7 +122,7 @@ void UpdateCatchTrigger(void)
         if (gCurrentPinballGame->catchTriggerCompletionCount < 99)
             gCurrentPinballGame->catchTriggerCompletionCount++;
         break;
-    case BONUS_HOLE_SUBSTATE_4:
+    case BONUS_HOLE_SUBSTATE_RUN_ROULETTE:
         if (gCurrentPinballGame->modeAnimTimer == 148)
         {
             gCurrentPinballGame->modeAnimTimer++;
@@ -151,16 +153,16 @@ void UpdateCatchTrigger(void)
 
         gCurrentPinballGame->stageTimer = 0;
         break;
-    case BONUS_HOLE_SUBSTATE_5:
+    case BONUS_HOLE_SUBSTATE_START_CLOSING:
         AnimateBonusTrapSprite();
         gMain.fieldSpriteGroups[13]->active = FALSE;
         gCurrentPinballGame->boardSubState++;
         break;
-    case BONUS_HOLE_SUBSTATE_6:
+    case BONUS_HOLE_SUBSTATE_BOARD_STATE_CLEANUP:
         ResetCatchState(1);
         gCurrentPinballGame->boardSubState++;
         break;
-    case BONUS_HOLE_SUBSTATE_7:
+    case BONUS_HOLE_SUBSTATE_RETURN_TO_DEFAULT_TIMER:
         if (gCurrentPinballGame->stageTimer)
             gCurrentPinballGame->stageTimer--;
         else
@@ -225,16 +227,16 @@ void InitBonusStageSelect(void)
         }
     }
 
-    if (gCurrentPinballGame->ballCatchState == 4
+    if (gCurrentPinballGame->ballCatchState == TRAP_CENTER_HOLE
         && gCurrentPinballGame->prevBoardState == MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
     {
         gCurrentPinballGame->modeAnimTimer = 150;
-        gCurrentPinballGame->boardSubState = BOSS_HOLE_SUBSTATE_3;
+        gCurrentPinballGame->boardSubState = BOSS_HOLE_SUBSTATE_DISPLAY_CONFIRMATION;
         gCurrentPinballGame->stageTimer = 0;
     }
     else
     {
-        gCurrentPinballGame->boardSubState = BOSS_HOLE_SUBSTATE_INIT;
+        gCurrentPinballGame->boardSubState = BOSS_HOLE_SUBSTATE_INIT_DELAY;
         gCurrentPinballGame->stageTimer = 0;
         gCurrentPinballGame->portraitCycleFrame = 0;
         LoadPortraitGraphics(PORTRAIT_STATE_CONFIRMATION_PROMPT, PORTRAIT_MAIN_SLOT);
@@ -245,7 +247,7 @@ void UpdateBonusStageSelect(void)
 {
     switch (gCurrentPinballGame->boardSubState)
     {
-    case BOSS_HOLE_SUBSTATE_INIT:
+    case BOSS_HOLE_SUBSTATE_INIT_DELAY:
         if (gCurrentPinballGame->stageTimer < 60)
         {
             gCurrentPinballGame->stageTimer++;
@@ -256,7 +258,7 @@ void UpdateBonusStageSelect(void)
             gCurrentPinballGame->boardSubState++;
         }
         break;
-    case BOSS_HOLE_SUBSTATE_1:
+    case BOSS_HOLE_SUBSTATE_OPEN_TRAP_DOOR:
         if (gCurrentPinballGame->stageTimer < 9)
         {
             gCurrentPinballGame->stageTimer++;
@@ -286,22 +288,23 @@ void UpdateBonusStageSelect(void)
             }
         }
         break;
-    case BOSS_HOLE_SUBSTATE_2:
+    case BOSS_HOLE_SUBSTATE_GRAVITY_WELL:
         AnimateBonusTrapSprite();
         LoadPortraitGraphics(PORTRAIT_STATE_CONFIRMATION_PROMPT, PORTRAIT_MAIN_SLOT);
-        if (gCurrentPinballGame->ballCatchState == 4)
+        if (gCurrentPinballGame->ballCatchState == TRAP_CENTER_HOLE)
             gCurrentPinballGame->boardSubState++;
         break;
-    case BOSS_HOLE_SUBSTATE_3:
+    case BOSS_HOLE_SUBSTATE_DISPLAY_CONFIRMATION:
         gCurrentPinballGame->boardSubState++;
         gCurrentPinballGame->stageTimer = 0;
         gCurrentPinballGame->portraitCycleFrame = 0;
         gCurrentPinballGame->modeOutcomeValues[0] = 46;
         LoadPortraitGraphics(PORTRAIT_STATE_CONFIRMATION_PROMPT, PORTRAIT_MAIN_SLOT);
         break;
-    case BOSS_HOLE_SUBSTATE_4:
+    case BOSS_HOLE_SUBSTATE_AWAIT_CONFIRMATION:
         if (gCurrentPinballGame->modeAnimTimer == 145)
         {
+            //Adds timer tick back, to ensure we wait for player input
             gCurrentPinballGame->modeAnimTimer++;
             if (JOY_NEW(A_BUTTON))
             {
@@ -313,7 +316,7 @@ void UpdateBonusStageSelect(void)
                 m4aMPlayAllStop();
                 m4aSongNumStart(SE_MENU_CANCEL);
                 gCurrentPinballGame->modeAnimTimer = 60;
-                gCurrentPinballGame->boardSubState = BOSS_HOLE_SUBSTATE_6;
+                gCurrentPinballGame->boardSubState = BOSS_HOLE_SUBSTATE_CANCEL_BONUS;
                 if (gCurrentPinballGame->allHolesLit)
                     gCurrentPinballGame->allHolesLitDelayTimer = 120;
             }
@@ -341,7 +344,7 @@ void UpdateBonusStageSelect(void)
                 gCurrentPinballGame->boardSubState++;
         }
         break;
-    case BOSS_HOLE_SUBSTATE_5:
+    case BOSS_HOLE_SUBSTATE_PREPARE_BONUS_TRANSFER:
         if (gCurrentPinballGame->stageTimer < 30)
         {
             gCurrentPinballGame->stageTimer++;
@@ -349,22 +352,22 @@ void UpdateBonusStageSelect(void)
         else
         {
             gCurrentPinballGame->stageTimer = 0;
-            gCurrentPinballGame->boardSubState = BOSS_HOLE_SUBSTATE_INIT;
+            gCurrentPinballGame->boardSubState = DEFAULT_MODE_SUBSTATE_INIT;
             gCurrentPinballGame->bonusReturnState = 0;
             TransitionToBonusField();
         }
         break;
-    case BOSS_HOLE_SUBSTATE_6:
+    case BOSS_HOLE_SUBSTATE_CANCEL_BONUS:
         AnimateBonusTrapSprite();
         gMain.fieldSpriteGroups[13]->active = FALSE;
         gCurrentPinballGame->boardSubState++;
         gCurrentPinballGame->stageTimer = 0;
         break;
-    case BOSS_HOLE_SUBSTATE_7:
+    case BOSS_HOLE_SUBSTATE_BOARD_STATE_CLEANUP:
         FullCatchStateCleanup();
         gCurrentPinballGame->boardSubState++;
         break;
-    case BOSS_HOLE_SUBSTATE_8:
+    case BOSS_HOLE_SUBSTATE_RETURN_TO_DEFAULT:
         RequestBoardStateTransition(MAIN_BOARD_STATE_DEFAULT);
         break;
     }
@@ -392,7 +395,7 @@ void AnimateBonusTrapSprite(void)
         if (group->baseY >= 200)
             group->baseY = 200;
 
-        if (gCurrentPinballGame->ballCatchState == 3)
+        if (gCurrentPinballGame->ballCatchState == TRAP_EVO_SHOP_HOLE)
         {
             group->baseY = 200;
         }
@@ -509,7 +512,7 @@ void UpdateEvolutionShopSprite(void)
         }
         else if (gCurrentPinballGame->boardState != MAIN_BOARD_STATE_EVO_MODE
             && gCurrentPinballGame->evolutionShopActive == 1
-            && gCurrentPinballGame->ballCatchState != 4)
+            && gCurrentPinballGame->ballCatchState != TRAP_CENTER_HOLE)
         {
             gCurrentPinballGame->shopTransitionActive = 1;
             gCurrentPinballGame->shopAnimTimer = 0;
@@ -754,7 +757,8 @@ void AnimateCoinReward(void)
         }
         else
         {
-            if (gCurrentPinballGame->ballCatchState == 4 && (gCurrentPinballGame->newButtonActions[1] || JOY_NEW(A_BUTTON)))
+            if (gCurrentPinballGame->ballCatchState == TRAP_CENTER_HOLE
+                && (gCurrentPinballGame->newButtonActions[1] || JOY_NEW(A_BUTTON)))
                 gCurrentPinballGame->coinRewardFastPayout = 1;
 
             if (gCurrentPinballGame->coinsAwarded < gCurrentPinballGame->coinRewardAmount)
@@ -830,7 +834,7 @@ void AnimateCoinReward(void)
         {
             gMain.fieldSpriteGroups[39]->active = FALSE;
             gCurrentPinballGame->coinRewardAmount = 0;
-            if (gCurrentPinballGame->ballCatchState == 4)
+            if (gCurrentPinballGame->ballCatchState == TRAP_CENTER_HOLE)
                 gCurrentPinballGame->outcomeFrameCounter = 170;
         }
     }

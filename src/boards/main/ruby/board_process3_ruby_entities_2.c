@@ -162,7 +162,7 @@ void UpdateNuzleafEntity(void)
 
 void SelectRubyShopDoorState(void)
 {
-    if (gCurrentPinballGame->ballCatchState != 3)
+    if (gCurrentPinballGame->ballCatchState != TRAP_EVO_SHOP_HOLE)
     {
         if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
         {

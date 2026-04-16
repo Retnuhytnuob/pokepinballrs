@@ -186,8 +186,10 @@ void RenderBannerSlideAnimation(void)
                             if (gCurrentPinballGame->bannerSlideTimer < 36)
                             {
 
-                                if ((gCurrentPinballGame->ballCatchState == TRAP_EVO_SHOP_HOLE && gCurrentPinballGame->evolutionShopActive == 1) ||
-                                    (gCurrentPinballGame->ballCatchState == TRAP_CENTER_HOLE && gCurrentPinballGame->prizeId == PRIZE_START_EVO_MODE))
+                                if ((gCurrentPinballGame->ballCatchState == TRAP_EVO_SHOP_HOLE
+                                        && gCurrentPinballGame->evolutionShopActive == 1) ||
+                                    (gCurrentPinballGame->ballCatchState == TRAP_CENTER_HOLE
+                                        && gCurrentPinballGame->prizeId == PRIZE_START_EVO_MODE))
                                 {
                                     gCurrentPinballGame->paletteSwapActive = 0;
                                 }
@@ -213,8 +215,10 @@ void RenderBannerSlideAnimation(void)
                             gMain.blendBrightness = 4;
                             if (gCurrentPinballGame->bannerSlideTimer <= 0x27)
                             {
-                                if ((gCurrentPinballGame->ballCatchState == TRAP_EVO_SHOP_HOLE && gCurrentPinballGame->evolutionShopActive == 1) ||
-                                    (gCurrentPinballGame->ballCatchState == TRAP_CENTER_HOLE && gCurrentPinballGame->prizeId == PRIZE_START_EVO_MODE))
+                                if ((gCurrentPinballGame->ballCatchState == TRAP_EVO_SHOP_HOLE
+                                        && gCurrentPinballGame->evolutionShopActive == 1) ||
+                                    (gCurrentPinballGame->ballCatchState == TRAP_CENTER_HOLE
+                                        && gCurrentPinballGame->prizeId == PRIZE_START_EVO_MODE))
                                 {
                                     gCurrentPinballGame->paletteSwapActive = 0;
                                 }
@@ -254,8 +258,10 @@ void RenderBannerSlideAnimation(void)
                 gCurrentPinballGame->bannerSlideTimer++;
                 gCurrentPinballGame->bannerSlideVelocity -= 0xA;
                 if (gCurrentPinballGame->bannerSlideTimer > 0x18 &&
-                    (gCurrentPinballGame->ballCatchState != TRAP_EVO_SHOP_HOLE || gCurrentPinballGame->evolutionShopActive != 1) &&
-                    (gCurrentPinballGame->ballCatchState != TRAP_CENTER_HOLE || gCurrentPinballGame->prizeId != PRIZE_START_EVO_MODE))
+                    (gCurrentPinballGame->ballCatchState != TRAP_EVO_SHOP_HOLE
+                        || gCurrentPinballGame->evolutionShopActive != 1)
+                    && (gCurrentPinballGame->ballCatchState != TRAP_CENTER_HOLE
+                        || gCurrentPinballGame->prizeId != PRIZE_START_EVO_MODE))
                 {
                     gMain.blendBrightness = 4;
                     if (gCurrentPinballGame->bannerSlideTimer > 0x19)
@@ -283,8 +289,10 @@ void RenderBannerSlideAnimation(void)
                     gMain.fieldSpriteGroups[11]->active = FALSE;
                     gCurrentPinballGame->bannerGfxIndex = 0;
                     gCurrentPinballGame->activePortraitType = 0;
-                    if ((gCurrentPinballGame->ballCatchState != TRAP_EVO_SHOP_HOLE || gCurrentPinballGame->evolutionShopActive != 1) &&
-                        (gCurrentPinballGame->ballCatchState != TRAP_CENTER_HOLE || gCurrentPinballGame->prizeId != PRIZE_START_EVO_MODE))
+                    if ((gCurrentPinballGame->ballCatchState != TRAP_EVO_SHOP_HOLE
+                            || gCurrentPinballGame->evolutionShopActive != 1)
+                        && (gCurrentPinballGame->ballCatchState != TRAP_CENTER_HOLE
+                            || gCurrentPinballGame->prizeId != PRIZE_START_EVO_MODE))
                     {
                         gMain.blendBrightness = 0;
                         DmaCopy16(3, gBoardConfig.fieldLayout.objPaletteSets[0], (void *)(OBJ_PLTT), 0x20);
