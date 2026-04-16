@@ -1332,7 +1332,7 @@ void RunBallCaptureSequence(void)
                 gCurrentPinballGame->boardSubState = JIRACHI_CATCH_SUBSTATE_BOARD_STATE_CLEANUP;
 
             if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_EGG_HATCH_MODE)
-                gCurrentPinballGame->boardSubState = EGG_HATCH_SUBSTATE_6;
+                gCurrentPinballGame->boardSubState = EGG_HATCH_SUBSTATE_CLEANUP_MON_SPRITES;
 
         }
         else

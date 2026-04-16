@@ -531,7 +531,7 @@ void ResetBoardStateOnDeath(void)
     if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_CATCH_EM_MODE)
         gCurrentPinballGame->boardSubState = CATCH_EM_SUBSTATE_END_CATCH_HIT_PHASE;
     if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_EGG_HATCH_MODE)
-        gCurrentPinballGame->boardSubState = EGG_HATCH_SUBSTATE_6;
+        gCurrentPinballGame->boardSubState = EGG_HATCH_SUBSTATE_CLEANUP_MON_SPRITES;
     if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_EVO_MODE)
         gCurrentPinballGame->boardSubState = EVOLUTION_SUBSTATE_8;
 

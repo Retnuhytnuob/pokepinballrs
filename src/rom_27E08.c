@@ -1264,7 +1264,7 @@ void AnimateEvolutionSuccessScreen(void)
     }
 }
 
-void InitRubyEggModeAnimation(void)
+void InitRubyEggHatchAnimation(void)
 {
     gCurrentPinballGame->eggAnimationPhase = 1;
     gCurrentPinballGame->prevEggAnimFrame = 0;
@@ -1274,7 +1274,7 @@ void InitRubyEggModeAnimation(void)
     gCurrentPinballGame->eggCaveReEntryFlag = 0;
 }
 
-void UpdateEggModeAnimation(void)
+void UpdateRubyEggHatchAnimation(void)
 {
     s16 i;
     struct SpriteGroup *group;
@@ -1501,7 +1501,7 @@ void UpdateHatchCave(void)
                 }
                 else
                 {
-                    InitRubyEggModeAnimation();
+                    InitRubyEggHatchAnimation();
                     gCurrentPinballGame->eggCaveState = 0;
                     gCurrentPinballGame->rubyEggDeliveryState = 0;
                 }
@@ -1640,7 +1640,7 @@ void UpdateEggMode(void)
         gMain.fieldSpriteGroups[41]->active = TRUE;
         gCurrentPinballGame->boardSubState++;
         break;
-    case EGG_HATCH_SUBSTATE_1:
+    case EGG_HATCH_SUBSTATE_SETUP_WANDERING:
         if (gEggHatchAnimData[gCurrentPinballGame->creatureWaypointIndex][1] > gCurrentPinballGame->waypointSubTimer)
         {
             gCurrentPinballGame->waypointSubTimer++;
@@ -1654,7 +1654,7 @@ void UpdateEggMode(void)
                 if (gCurrentPinballGame->creatureWaypointIndex > 13)
                 {
                     gCurrentPinballGame->creatureWaypointIndex = 0;
-                    gCurrentPinballGame->boardSubState = EGG_HATCH_SUBSTATE_3;
+                    gCurrentPinballGame->boardSubState = EGG_HATCH_SUBSTATE_WANDERING;
                     gCurrentPinballGame->walkMonXVelocity = 0;
                     gCurrentPinballGame->walkMonYVelocity = 0;
                 }
@@ -1688,7 +1688,7 @@ void UpdateEggMode(void)
                 {
                     gCurrentPinballGame->waypointSubTimer = 0;
                     gCurrentPinballGame->creatureWaypointIndex = 10;
-                    gCurrentPinballGame->boardSubState = EGG_HATCH_SUBSTATE_2;
+                    gCurrentPinballGame->boardSubState = EGG_HATCH_SUBSTATE_SAPPHIRE_RAMP_SLIDE;
                     gCurrentPinballGame->walkMonXVelocity = 0;
                     gCurrentPinballGame->walkMonYVelocity = 0;
                 }
@@ -1722,7 +1722,7 @@ void UpdateEggMode(void)
             gOamBuffer[oamSimple->oamId].priority = priority;
         }
         break;
-    case EGG_HATCH_SUBSTATE_2:
+    case EGG_HATCH_SUBSTATE_SAPPHIRE_RAMP_SLIDE:
         if (gCurrentPinballGame->waypointSubTimer < 240)
         {
             priority = 1;
@@ -1779,7 +1779,7 @@ void UpdateEggMode(void)
                 else
                 {
                     gCurrentPinballGame->creatureWaypointIndex = 3;
-                    gCurrentPinballGame->boardSubState = EGG_HATCH_SUBSTATE_3;
+                    gCurrentPinballGame->boardSubState = EGG_HATCH_SUBSTATE_WANDERING;
                     gCurrentPinballGame->walkMonXVelocity = 0;
                     gCurrentPinballGame->walkMonYVelocity = 0;
                 }
@@ -1813,7 +1813,7 @@ void UpdateEggMode(void)
             gOamBuffer[oamSimple->oamId].y = oamSimple->yOffset + group->baseY;
         }
         break;
-    case EGG_HATCH_SUBSTATE_3:
+    case EGG_HATCH_SUBSTATE_WANDERING:
         tempVec.x = gEggWalkPathWaypoints[gMain.selectedField][gCurrentPinballGame->creatureWaypointIndex].x - 120 - gCurrentPinballGame->walkMonXPos;
         tempVec.y = gEggWalkPathWaypoints[gMain.selectedField][gCurrentPinballGame->creatureWaypointIndex].y - 160 - gCurrentPinballGame->walkMonYPos;
         xx = tempVec.x * tempVec.x;
@@ -1853,7 +1853,7 @@ void UpdateEggMode(void)
                 m4aMPlayAllStop();
                 m4aSongNumStart(MUS_END_OF_BALL);
                 gCurrentPinballGame->stageTimer = 200;
-                gCurrentPinballGame->boardSubState = EGG_HATCH_SUBSTATE_6;
+                gCurrentPinballGame->boardSubState = EGG_HATCH_SUBSTATE_CLEANUP_MON_SPRITES;
             }
         }
 
@@ -1907,7 +1907,7 @@ void UpdateEggMode(void)
                 gCurrentPinballGame->creatureHitCooldown = 4;
                 gCurrentPinballGame->captureFlashTimer = 20;
                 if (gCurrentPinballGame->creatureHitCount > 1)
-                    gCurrentPinballGame->boardSubState = EGG_HATCH_SUBSTATE_4;
+                    gCurrentPinballGame->boardSubState = EGG_HATCH_SUBSTATE_SETUP_CATCH_ANIMATION;
 
                 m4aSongNumStart(SE_PICHU_IN_POSITION_CHIRP);
                 angle2 = ArcTan2(-gCurrentPinballGame->ball->velocity.x, gCurrentPinballGame->ball->velocity.y);
@@ -1926,7 +1926,7 @@ void UpdateEggMode(void)
             }
         }
         break;
-    case EGG_HATCH_SUBSTATE_4:
+    case EGG_HATCH_SUBSTATE_SETUP_CATCH_ANIMATION:
         gCurrentPinballGame->activePortraitType = 9;
         DmaCopy16(3, gCapturePalette, (void *)0x050003E0, 0x20);
         DmaCopy16(3, gCaptureScreenTilesGfx, (void *)0x06015800, 0x1C00);
@@ -1956,7 +1956,7 @@ void UpdateEggMode(void)
 
         gCurrentPinballGame->stageTimer = 0;
         break;
-    case EGG_HATCH_SUBSTATE_5:
+    case EGG_HATCH_SUBSTATE_CATCH_ANIMATION:
         if (gCurrentPinballGame->captureSequenceTimer < 17)
             priority = 2;
         else
@@ -1979,7 +1979,7 @@ void UpdateEggMode(void)
                 gMain.fieldSpriteGroups[41]->active = FALSE;
         }
         break;
-    case EGG_HATCH_SUBSTATE_6:
+    case EGG_HATCH_SUBSTATE_CLEANUP_MON_SPRITES:
         if (group->active)
         {
             group->baseX = 0;
@@ -1994,12 +1994,12 @@ void UpdateEggMode(void)
         gMain.fieldSpriteGroups[41]->active = FALSE;
         gCurrentPinballGame->boardSubState++;
         break;
-    case EGG_HATCH_SUBSTATE_7:
+    case EGG_HATCH_SUBSTATE_BOARD_STATE_CLEANUP:
         CleanupEggModeState();
         gCurrentPinballGame->boardSubState++;
         gCurrentPinballGame->eggHatchShockWallOverride = 0;
         break;
-    case EGG_HATCH_SUBSTATE_8:
+    case EGG_HATCH_SUBSTATE_PREPARE_NEXT_BOARD_MODE:
         if (gCurrentPinballGame->stageTimer)
         {
             gCurrentPinballGame->stageTimer--;

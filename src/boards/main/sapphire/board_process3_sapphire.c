@@ -24,7 +24,7 @@ void SapphireBoardProcess_3A_326F4(void)
     gCurrentPinballGame->chargeIndicatorScaleX = 0x100;
     gCurrentPinballGame->chargeIndicatorScaleY = 0x100;
 
-    InitSapphireEggHatchState();
+    InitSapphireEggHatchAnimation();
     UpdateSapphireEggHatchAnimation();
     UpdateSapphireShopSignAnimation();
     DrawSapphireShopSignSprite();

@@ -28,7 +28,7 @@ void UpdateRubyBoardEntityRendering(void)
     AnimateOneUpSprite();
     if (gCurrentPinballGame->cameraYViewport < 168)
     {
-        UpdateEggModeAnimation();
+        UpdateRubyEggHatchAnimation();
     }
     if (gCurrentPinballGame->cameraYViewport < 220)
     {

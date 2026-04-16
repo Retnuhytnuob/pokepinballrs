@@ -25,7 +25,7 @@ extern const u8 gSapphireShopSignPalettes[][0x20];
 extern const u8 gSapphireShopSignTileGfx[][0x480];
 
 
-void InitSapphireEggHatchState(void)
+void InitSapphireEggHatchAnimation(void)
 {
     gCurrentPinballGame->eggAnimationPhase = 1;
     gCurrentPinballGame->prevEggAnimFrame = 0;

@@ -12,8 +12,8 @@ void RubyBoardProcess_3A_19A20(void)
     UpdateNuzleafEntity();
     LoadShopItemGraphics(0);
     AnimateRubyShopDoor();
-    InitRubyEggModeAnimation();
-    UpdateEggModeAnimation();
+    InitRubyEggHatchAnimation();
+    UpdateRubyEggHatchAnimation();
 
     gCurrentPinballGame->cyndaquilCaveSpriteX = 73;
     gCurrentPinballGame->cyndaquilCaveSpriteY = 154;
