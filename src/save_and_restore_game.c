@@ -17,11 +17,11 @@ extern const u8 gAreaRouletteSelectedFx_Gfx[];
 extern const u8 gCaptureModeTilesGfx[];
 extern const u8 gCaptureScreenTilesGfx[];
 
-extern const u8 gHatchRevealTilesGfx[];
-extern const u8 gCatchStartingTileCoverGfx[];
-extern const u8 gHatchStage2TilesGfx[];
-extern const u8 gHatchStage3TilesGfx[];
-extern const u8 gHatchFinalTilesGfx[];
+extern const u8 gCatchTile_RevealTilesGfx[];
+extern const u8 gCatchTile_BurstStart_Gfx[];
+extern const u8 gCatchTile_BurstStage2_Gfx[];
+extern const u8 gCatchTile_BurstStage3_Gfx[];
+extern const u8 gCatchTile_BurstStage4_Gfx[];
 
 extern const u8 *gEvoItemAppear_GfxList[];
 extern const s16 gEvoShopAnimFrames[][7];
@@ -360,16 +360,16 @@ void RestoreFieldSpecificGraphics(void)
         DmaCopy16(3, gModeBannerTilemaps[gCurrentPinballGame->bannerGfxIndex], (void *)0x6015800, 0x25E0);
         break;
     case 4:
-        DmaCopy16(3, gCatchStartingTileCoverGfx, (void *)0x6015800, 0x2000);
+        DmaCopy16(3, gCatchTile_BurstStart_Gfx, (void *)0x6015800, 0x2000);
         break;
     case 5:
-        DmaCopy16(3, gHatchStage2TilesGfx, (void *)0x6015800, 0x800);
+        DmaCopy16(3, gCatchTile_BurstStage2_Gfx, (void *)0x6015800, 0x800);
         break;
     case 6:
-        DmaCopy16(3, gHatchStage3TilesGfx, (void *)0x6015800, 0x2000);
+        DmaCopy16(3, gCatchTile_BurstStage3_Gfx, (void *)0x6015800, 0x2000);
         break;
     case 7:
-        DmaCopy16(3, gHatchFinalTilesGfx, (void *)0x6015800, 0x1800);
+        DmaCopy16(3, gCatchTile_BurstStage4_Gfx, (void *)0x6015800, 0x1800);
         break;
     case 8:
         DmaCopy16(3, gCaptureScreenTilesGfx, (void *)0x6015800, 0x1C00);
@@ -378,7 +378,7 @@ void RestoreFieldSpecificGraphics(void)
         DmaCopy16(3, gSapphireCatchTilesGfx, (void *)0x6015800, 0x1400);
         break;
     case 10:
-        DmaCopy16(3, gHatchRevealTilesGfx, (void *)0x6015800, 0x2800);
+        DmaCopy16(3, gCatchTile_RevealTilesGfx, (void *)0x6015800, 0x2800);
         break;
     case 11:
         DmaCopy16(3, gAreaRouletteSelectedFx_Gfx, (void *)0x6015800, 0x280);
@@ -432,7 +432,7 @@ void RestoreFieldSpecificGraphics(void)
         DmaCopy16(3, gBoardActionTilesGfx, (void *)0x6015800, 0x2400);
         break;
     case 16:
-        DmaCopy16(3, gHatchFinalTilesGfx, (void *)0x6015800, 0x1800);
+        DmaCopy16(3, gCatchTile_BurstStage4_Gfx, (void *)0x6015800, 0x1800);
         break;
     case 17:
         DmaCopy16(3, gPokemonNameDisplayGfx, (void *)0x6015C00, 0x940);

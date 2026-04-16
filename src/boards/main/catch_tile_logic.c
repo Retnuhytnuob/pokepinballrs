@@ -3,27 +3,27 @@
 #include "main.h"
 #include "constants/bg_music.h"
 
-extern const s16 gHatchSequentialTileFramesetData[][2];
-extern const u16 gHatchSequentialTileBreakSpritesheetOam[28][18];
-extern const s16 gHatchRevealSparkleTimings[];
-extern const u16 gHatchRevealOamFramesets[16][18];
-extern const u8 gHatchRevealPalette[];
-extern const u16 gHatchFullRevealOamFramesets[18][18];
-extern const u8 gHatchRevealTilesGfx[];
-extern const s16 gHatchRevealFinalTimings[];
-extern const u8 gHatchFinalTilesGfx[];
-extern const u8 gHatchFinalPalette[];
-extern const u16 gHatchSequentialOamFramesets[22][12];
+extern const s16 gCatchTile_SequentialFramesetData[][2];
+extern const u16 gCatchTile_SequentialBreakSpritesheetOam[28][18];
+extern const s16 gCatchTile_RevealSparkleTimings[];
+extern const u16 gCatchTile_RevealOamFramesets[16][18];
+extern const u8 gCatchTile_RevealPalette[];
+extern const u16 gCatchTile_BurstRevealOamFramesets0[18][18];
+extern const u8 gCatchTile_RevealTilesGfx[];
+extern const s16 gCatchTile_RevealFinalTimings[];
+extern const u8 gCatchTile_BurstStage4_Gfx[];
+extern const u8 gCatchTile_BurstStage4_Pal[];
+extern const u16 gCatchTile_BurstRevealOamFramesets1[22][12];
 
-extern const u8 gCatchStartingTileCoverGfx[];
-extern const u8 gHatchStartPalette[];
-extern const u8 gHatchStage2TilesGfx[];
-extern const u8 gHatchStage2Palette[];
-extern const u8 gHatchStage3TilesGfx[];
-extern const u8 gHatchStage3Palette[];
+extern const u8 gCatchTile_BurstStart_Gfx[];
+extern const u8 gCatchTile_BurstStart_Pal[];
+extern const u8 gCatchTile_BurstStage2_Gfx[];
+extern const u8 gCatchTile_BurstStage2_Pal[];
+extern const u8 gCatchTile_BurstStage3_Gfx[];
+extern const u8 gCatchTile_BurstStage3_Pal[];
 
 
-void DisableHatchTileDisplay(void)
+void DisableCatchTileDisplay(void)
 {
     s16 i;
     struct SpriteGroup *group;
@@ -54,7 +54,7 @@ void DisableHatchTileDisplay(void)
     gCurrentPinballGame->activePortraitType = 0;
 }
 
-void RevealSequentialHatchTiles(void)
+void RevealCatchTilesSequential(void)
 {
     s16 i;
     struct SpriteGroup *group;
@@ -73,11 +73,11 @@ void RevealSequentialHatchTiles(void)
         if (gCurrentPinballGame->hatchFrameId == 0 && gCurrentPinballGame->hatchSequentialTileRevealFrameAnimTimer == 0)
         {
             gCurrentPinballGame->activePortraitType = 11;
-            DmaCopy16(3, gHatchRevealPalette, (void *)0x050003C0, 0x20);
-            DmaCopy16(3, gHatchRevealTilesGfx, (void *)0x06015800, 0x2800);
+            DmaCopy16(3, gCatchTile_RevealPalette, (void *)0x050003C0, 0x20);
+            DmaCopy16(3, gCatchTile_RevealTilesGfx, (void *)0x06015800, 0x2800);
         }
 
-        if (gHatchSequentialTileFramesetData[gCurrentPinballGame->hatchFrameId][1] > gCurrentPinballGame->hatchSequentialTileRevealFrameAnimTimer)
+        if (gCatchTile_SequentialFramesetData[gCurrentPinballGame->hatchFrameId][1] > gCurrentPinballGame->hatchSequentialTileRevealFrameAnimTimer)
         {
             gCurrentPinballGame->hatchSequentialTileRevealFrameAnimTimer++;
         }
@@ -162,9 +162,9 @@ void RevealSequentialHatchTiles(void)
     {
         oamSimple = &group->oam[i];
         dst = (u16 *)&gOamBuffer[oamSimple->oamId];
-        *dst++ = gHatchSequentialTileBreakSpritesheetOam[gHatchSequentialTileFramesetData[gCurrentPinballGame->hatchFrameId][0]][i * 3 + 0];
-        *dst++ = gHatchSequentialTileBreakSpritesheetOam[gHatchSequentialTileFramesetData[gCurrentPinballGame->hatchFrameId][0]][i * 3 + 1];
-        *dst++ = gHatchSequentialTileBreakSpritesheetOam[gHatchSequentialTileFramesetData[gCurrentPinballGame->hatchFrameId][0]][i * 3 + 2];
+        *dst++ = gCatchTile_SequentialBreakSpritesheetOam[gCatchTile_SequentialFramesetData[gCurrentPinballGame->hatchFrameId][0]][i * 3 + 0];
+        *dst++ = gCatchTile_SequentialBreakSpritesheetOam[gCatchTile_SequentialFramesetData[gCurrentPinballGame->hatchFrameId][0]][i * 3 + 1];
+        *dst++ = gCatchTile_SequentialBreakSpritesheetOam[gCatchTile_SequentialFramesetData[gCurrentPinballGame->hatchFrameId][0]][i * 3 + 2];
 
         gOamBuffer[oamSimple->oamId].priority = 3;
         gOamBuffer[oamSimple->oamId].x += group->baseX;
@@ -172,7 +172,7 @@ void RevealSequentialHatchTiles(void)
     }
 }
 
-void RevealAllHatchTilesAtOnce(void)
+void RevealCatchTilesBurst(void)
 {
     s16 i;
     struct SpriteGroup *group;
@@ -196,8 +196,8 @@ void RevealAllHatchTilesAtOnce(void)
         break;
     case 1:
         gCurrentPinballGame->activePortraitType = 5;
-        DmaCopy16(3, gCatchStartingTileCoverGfx, (void *)0x06015800, 0x2000);
-        DmaCopy16(3, gHatchStartPalette, (void *)0x050003C0, 0x20);
+        DmaCopy16(3, gCatchTile_BurstStart_Gfx, (void *)0x06015800, 0x2000);
+        DmaCopy16(3, gCatchTile_BurstStart_Pal, (void *)0x050003C0, 0x20);
         gMain.fieldSpriteGroups[35]->active = TRUE;
         m4aSongNumStart(SE_CATCH_ALL_REVEAL_LIGHTNING);
         gCurrentPinballGame->hatchRevealPhase++;
@@ -205,7 +205,7 @@ void RevealAllHatchTilesAtOnce(void)
         gCurrentPinballGame->revealFramesetIndex = 0;
         break;
     case 2:
-        if (gHatchRevealSparkleTimings[gCurrentPinballGame->revealFramesetIndex] > gCurrentPinballGame->revealAnimFrameCounter)
+        if (gCatchTile_RevealSparkleTimings[gCurrentPinballGame->revealFramesetIndex] > gCurrentPinballGame->revealAnimFrameCounter)
         {
             gCurrentPinballGame->revealAnimFrameCounter++;
         }
@@ -232,9 +232,9 @@ void RevealAllHatchTilesAtOnce(void)
         {
             oamSimple = &group->oam[i];
             dst = (u16 *)&gOamBuffer[oamSimple->oamId];
-            *dst++ = gHatchRevealOamFramesets[var0][i * 3 + 0];
-            *dst++ = gHatchRevealOamFramesets[var0][i * 3 + 1];
-            *dst++ = gHatchRevealOamFramesets[var0][i * 3 + 2];
+            *dst++ = gCatchTile_RevealOamFramesets[var0][i * 3 + 0];
+            *dst++ = gCatchTile_RevealOamFramesets[var0][i * 3 + 1];
+            *dst++ = gCatchTile_RevealOamFramesets[var0][i * 3 + 2];
 
             gOamBuffer[oamSimple->oamId].x += group->baseX;
             gOamBuffer[oamSimple->oamId].y += group->baseY;
@@ -242,8 +242,8 @@ void RevealAllHatchTilesAtOnce(void)
         break;
     case 3:
         gCurrentPinballGame->activePortraitType = 6;
-        DmaCopy16(3, gHatchStage2TilesGfx, (void *)0x06015800, 0x800);
-        DmaCopy16(3, gHatchStage2Palette, (void *)0x050003C0, 0x20);
+        DmaCopy16(3, gCatchTile_BurstStage2_Gfx, (void *)0x06015800, 0x800);
+        DmaCopy16(3, gCatchTile_BurstStage2_Pal, (void *)0x050003C0, 0x20);
         gMain.fieldSpriteGroups[36]->active = TRUE;
         gCurrentPinballGame->hatchRevealPhase++;
         gCurrentPinballGame->revealAnimFrameCounter = 0;
@@ -273,9 +273,9 @@ void RevealAllHatchTilesAtOnce(void)
         {
             oamSimple = &group->oam[i];
             dst = (u16 *)&gOamBuffer[oamSimple->oamId];
-            *dst++ = gHatchFullRevealOamFramesets[var0][i * 3 + 0];
-            *dst++ = gHatchFullRevealOamFramesets[var0][i * 3 + 1];
-            *dst++ = gHatchFullRevealOamFramesets[var0][i * 3 + 2];
+            *dst++ = gCatchTile_BurstRevealOamFramesets0[var0][i * 3 + 0];
+            *dst++ = gCatchTile_BurstRevealOamFramesets0[var0][i * 3 + 1];
+            *dst++ = gCatchTile_BurstRevealOamFramesets0[var0][i * 3 + 2];
 
             gOamBuffer[oamSimple->oamId].x += group->baseX;
             gOamBuffer[oamSimple->oamId].y += group->baseY;
@@ -283,8 +283,8 @@ void RevealAllHatchTilesAtOnce(void)
         break;
     case 5:
         gCurrentPinballGame->activePortraitType = 7;
-        DmaCopy16(3, gHatchStage3TilesGfx, (void *)0x06015800, 0x2000);
-        DmaCopy16(3, gHatchStage3Palette, (void *)0x050003C0, 0x20);
+        DmaCopy16(3, gCatchTile_BurstStage3_Gfx, (void *)0x06015800, 0x2000);
+        DmaCopy16(3, gCatchTile_BurstStage3_Pal, (void *)0x050003C0, 0x20);
         gCurrentPinballGame->hatchRevealPhase++;
         InitBurstTileParticles();
         m4aSongNumStart(SE_CATCH_ALL_REVEAL_SHATTER);
@@ -327,14 +327,14 @@ void RevealAllHatchTilesAtOnce(void)
         break;
     case 7:
         gCurrentPinballGame->activePortraitType = 8;
-        DmaCopy16(3, gHatchFinalTilesGfx, (void *)0x06015800, 0x1800);
-        DmaCopy16(3, gHatchFinalPalette, (void *)0x050003C0, 0x20);
+        DmaCopy16(3, gCatchTile_BurstStage4_Gfx, (void *)0x06015800, 0x1800);
+        DmaCopy16(3, gCatchTile_BurstStage4_Pal, (void *)0x050003C0, 0x20);
         gMain.fieldSpriteGroups[37]->active = TRUE;
         gCurrentPinballGame->hatchRevealPhase++;
         gCurrentPinballGame->startButtonDisabled = 0;
         break;
     case 8:
-        if (gHatchRevealFinalTimings[gCurrentPinballGame->revealFramesetIndex] > gCurrentPinballGame->revealAnimFrameCounter)
+        if (gCatchTile_RevealFinalTimings[gCurrentPinballGame->revealFramesetIndex] > gCurrentPinballGame->revealAnimFrameCounter)
         {
             gCurrentPinballGame->revealAnimFrameCounter++;
         }
@@ -368,9 +368,9 @@ void RevealAllHatchTilesAtOnce(void)
         {
             oamSimple = &group->oam[i];
             dst = (u16 *)&gOamBuffer[oamSimple->oamId];
-            *dst++ = gHatchSequentialOamFramesets[var0][i * 3 + 0];
-            *dst++ = gHatchSequentialOamFramesets[var0][i * 3 + 1];
-            *dst++ = gHatchSequentialOamFramesets[var0][i * 3 + 2];
+            *dst++ = gCatchTile_BurstRevealOamFramesets1[var0][i * 3 + 0];
+            *dst++ = gCatchTile_BurstRevealOamFramesets1[var0][i * 3 + 1];
+            *dst++ = gCatchTile_BurstRevealOamFramesets1[var0][i * 3 + 2];
 
             gOamBuffer[oamSimple->oamId].x += group->baseX;
             gOamBuffer[oamSimple->oamId].y += group->baseY;

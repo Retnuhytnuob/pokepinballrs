@@ -275,7 +275,7 @@ void UpdateCatchEmMode(void)
         break;
     case CATCH_EM_SUBSTATE_10:
         CleanupCaughtPokemonSprite();
-        DisableHatchTileDisplay();
+        DisableCatchTileDisplay();
         gCurrentPinballGame->boardSubState++;
         break;
     case CATCH_EM_SUBSTATE_11:
@@ -844,9 +844,9 @@ void CheckHatchTileRevealState(void)
     }
 
     if (gCurrentPinballGame->hatchTileRevealState == HATCH_TILE_REVEAL_ALL_AT_ONCE)
-        RevealAllHatchTilesAtOnce();
+        RevealCatchTilesBurst();
     else if (gCurrentPinballGame->hatchTileRevealState == HATCH_TILE_REVEAL_ONE_AT_A_TIME)
-        RevealSequentialHatchTiles();
+        RevealCatchTilesSequential();
 }
 
 void PlayEggCrackAnimation(void)

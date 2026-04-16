@@ -14,13 +14,13 @@ extern const s16 gTravelEventAnimData[][3];
 extern const s16 gAreaPortraitIndexes[];
 extern const s16 gAreaRouletteTable[][7];
 extern u16 gTravelEventSpritesheetOam[][18];
-extern const s16 gHatchRevealFinalTimings[];
-extern const u16 gHatchSequentialOamFramesets[22][12];
+extern const s16 gCatchTile_RevealFinalTimings[];
+extern const u16 gCatchTile_BurstRevealOamFramesets1[22][12];
 extern const u8 gBoardActionTilesGfx[];
 extern const u8 gBoardActionObjPal[];
 extern const u16 gEvolutionSparkleSpritesheetOam[20][12];
-extern const u8 gHatchFinalTilesGfx[];
-extern const u8 gHatchFinalPalette[];
+extern const u8 gCatchTile_BurstStage4_Gfx[];
+extern const u8 gCatchTile_BurstStage4_Pal[];
 extern const s16 gSpoinkAnimFrameset[][2];
 extern const u8 gSpoinkEntity_Gfx[][0x1C0];
 extern const u8 gOneUpBannerSprite_Gfx[][0x200];
@@ -629,8 +629,8 @@ void RunEvolutionCutscene(void)
             gCurrentPinballGame->currentSpecies = gCurrentPinballGame->postEvoSpecies;
             LoadPortraitGraphics(CENTER_SCREEN_STATE_POKEMON_DISPLAY, CENTER_SCREEN_MAIN_SLOT);
             gCurrentPinballGame->activePortraitType = 17;
-            DmaCopy16(3, gHatchFinalTilesGfx, (void *)0x06015800, 0x1800);
-            DmaCopy16(3, gHatchFinalPalette, (void *)0x050003C0, 0x20);
+            DmaCopy16(3, gCatchTile_BurstStage4_Gfx, (void *)0x06015800, 0x1800);
+            DmaCopy16(3, gCatchTile_BurstStage4_Pal, (void *)0x050003C0, 0x20);
             gCurrentPinballGame->creatureOamPriority = 3;
         }
     }
@@ -660,7 +660,7 @@ void RunEvolutionCutscene(void)
         else
         {
             gCurrentPinballGame->startButtonDisabled = 0;
-            if (gHatchRevealFinalTimings[gCurrentPinballGame->revealFramesetIndex] > gCurrentPinballGame->revealAnimFrameCounter)
+            if (gCatchTile_RevealFinalTimings[gCurrentPinballGame->revealFramesetIndex] > gCurrentPinballGame->revealAnimFrameCounter)
             {
                 gCurrentPinballGame->revealAnimFrameCounter++;
             }
@@ -690,9 +690,9 @@ void RunEvolutionCutscene(void)
             {
                 oamSimple = &group->oam[i];
                 dst = (u16*)&gOamBuffer[oamSimple->oamId];
-                *dst++ = gHatchSequentialOamFramesets[index][i * 3 + 0];
-                *dst++ = gHatchSequentialOamFramesets[index][i * 3 + 1];
-                *dst++ = gHatchSequentialOamFramesets[index][i * 3 + 2];
+                *dst++ = gCatchTile_BurstRevealOamFramesets1[index][i * 3 + 0];
+                *dst++ = gCatchTile_BurstRevealOamFramesets1[index][i * 3 + 1];
+                *dst++ = gCatchTile_BurstRevealOamFramesets1[index][i * 3 + 2];
                 gOamBuffer[oamSimple->oamId].x += group->baseX;
                 gOamBuffer[oamSimple->oamId].y += group->baseY;
             }

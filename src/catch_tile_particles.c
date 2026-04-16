@@ -1,7 +1,7 @@
 #include "global.h"
 #include "main.h"
 
-extern const s16 gHatchRevealPieceIndices[][16];
+extern const s16 gCatchTile_RevealPieceIndices[][16];
 extern const s16 gHatchPieceVelocities[][2];
 extern const s16 gHatchPieceAffineModes[];
 extern const s16 gHatchPieceMatrixNums[6];
@@ -117,7 +117,7 @@ void UpdateBurstTileParticles(void)
         for (i = 0; i < 6; i++)
         {
             index = gCurrentPinballGame->particleAnimTimer / 5;
-            sp0[i] = gHatchRevealPieceIndices[i][index];
+            sp0[i] = gCatchTile_RevealPieceIndices[i][index];
             if (gCurrentPinballGame->particleAnimTimer > 4)
             {
                 gCurrentPinballGame->tileParticleVel[i].y += gCurrentPinballGame->tileParticleGravity[i];

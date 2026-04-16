@@ -1024,34 +1024,34 @@ gSapphireCatchTilesGfx:: @ 0x0839C78C
 gSapphireCatchPalette:: @ 0x0839DBAC
 	.incbin "baserom.gba", 0x39DBAC, 0x200
 
-gHatchRevealTilesGfx:: @ 0x0839DDAC
+gCatchTile_RevealTilesGfx:: @ 0x0839DDAC
 	.incbin "baserom.gba", 0x39DDAC, 0x2820
 
-gHatchRevealPalette:: @ 0x083A05CC
+gCatchTile_RevealPalette:: @ 0x083A05CC
 	.incbin "baserom.gba", 0x3A05CC, 0x200
 
-gCatchStartingTileCoverGfx:: @ 0x083A07CC
+gCatchTile_BurstStart_Gfx:: @ 0x083A07CC
 	.incbin "baserom.gba", 0x3A07CC, 0x2020
 
-gHatchStartPalette:: @ 0x083A27EC
+gCatchTile_BurstStart_Pal:: @ 0x083A27EC
 	.incbin "baserom.gba", 0x3A27EC, 0x200
 
-gHatchStage2TilesGfx:: @ 0x083A29EC
+gCatchTile_BurstStage2_Gfx:: @ 0x083A29EC
 	.incbin "baserom.gba", 0x3A29EC, 0x820
 
-gHatchStage2Palette:: @ 0x083A320C
+gCatchTile_BurstStage2_Pal:: @ 0x083A320C
 	.incbin "baserom.gba", 0x3A320C, 0x200
 
-gHatchStage3TilesGfx:: @ 0x083A340C
+gCatchTile_BurstStage3_Gfx:: @ 0x083A340C
 	.incbin "baserom.gba", 0x3A340C, 0x2020
 
-gHatchStage3Palette:: @ 0x083A542C
+gCatchTile_BurstStage3_Pal:: @ 0x083A542C
 	.incbin "baserom.gba", 0x3A542C, 0x200
 
-gHatchFinalTilesGfx:: @ 0x083A562C
+gCatchTile_BurstStage4_Gfx:: @ 0x083A562C
 	.incbin "baserom.gba", 0x3A562C, 0x1820
 
-gHatchFinalPalette:: @ 0x083A6E4C
+gCatchTile_BurstStage4_Pal:: @ 0x083A6E4C
 	.incbin "baserom.gba", 0x3A6E4C, 0x200
 
 gEggModeTilesGfx:: @ 0x083A704C
