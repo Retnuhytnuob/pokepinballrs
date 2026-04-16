@@ -15,7 +15,7 @@ extern const u8 gHatchFinalTilesGfx[];
 extern const u8 gHatchFinalPalette[];
 extern const u16 gHatchSequentialOamFramesets[22][12];
 
-extern const u8 gHatchStartTilesGfx[];
+extern const u8 gCatchStartingTileCoverGfx[];
 extern const u8 gHatchStartPalette[];
 extern const u8 gHatchStage2TilesGfx[];
 extern const u8 gHatchStage2Palette[];
@@ -196,7 +196,7 @@ void RevealAllHatchTilesAtOnce(void)
         break;
     case 1:
         gCurrentPinballGame->activePortraitType = 5;
-        DmaCopy16(3, gHatchStartTilesGfx, (void *)0x06015800, 0x2000);
+        DmaCopy16(3, gCatchStartingTileCoverGfx, (void *)0x06015800, 0x2000);
         DmaCopy16(3, gHatchStartPalette, (void *)0x050003C0, 0x20);
         gMain.fieldSpriteGroups[35]->active = TRUE;
         m4aSongNumStart(SE_CATCH_ALL_REVEAL_LIGHTNING);

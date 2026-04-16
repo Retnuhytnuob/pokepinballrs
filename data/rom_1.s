@@ -1030,7 +1030,7 @@ gHatchRevealTilesGfx:: @ 0x0839DDAC
 gHatchRevealPalette:: @ 0x083A05CC
 	.incbin "baserom.gba", 0x3A05CC, 0x200
 
-gHatchStartTilesGfx:: @ 0x083A07CC
+gCatchStartingTileCoverGfx:: @ 0x083A07CC
 	.incbin "baserom.gba", 0x3A07CC, 0x2020
 
 gHatchStartPalette:: @ 0x083A27EC

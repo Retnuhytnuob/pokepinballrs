@@ -18,7 +18,7 @@ extern const u8 gCaptureModeTilesGfx[];
 extern const u8 gCaptureScreenTilesGfx[];
 
 extern const u8 gHatchRevealTilesGfx[];
-extern const u8 gHatchStartTilesGfx[];
+extern const u8 gCatchStartingTileCoverGfx[];
 extern const u8 gHatchStage2TilesGfx[];
 extern const u8 gHatchStage3TilesGfx[];
 extern const u8 gHatchFinalTilesGfx[];
@@ -360,7 +360,7 @@ void RestoreFieldSpecificGraphics(void)
         DmaCopy16(3, gModeBannerTilemaps[gCurrentPinballGame->bannerGfxIndex], (void *)0x6015800, 0x25E0);
         break;
     case 4:
-        DmaCopy16(3, gHatchStartTilesGfx, (void *)0x6015800, 0x2000);
+        DmaCopy16(3, gCatchStartingTileCoverGfx, (void *)0x6015800, 0x2000);
         break;
     case 5:
         DmaCopy16(3, gHatchStage2TilesGfx, (void *)0x6015800, 0x800);
