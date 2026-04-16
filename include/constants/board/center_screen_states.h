@@ -1,5 +1,5 @@
-#ifndef GUARD_PORTRAIT_STATES_H
-#define GUARD_PORTRAIT_STATES_H
+#ifndef GUARD_CENTER_SCREEN_STATES_H
+#define GUARD_CENTER_SCREEN_STATES_H
 
 // Portrait/CenterScreen is for the 'screen' that shows the location, travel indicator, roulette wheel
 // catch picture, etc.
@@ -10,7 +10,7 @@ enum PortraitDisplayMode{
     PORTRAIT_DISPLAY_MODE_BANNER = 3,
 };
 
-enum CenterScreenStates{
+enum PortraitStates{
     PORTRAIT_STATE_CURRENT_LOCATION = 0,
     PORTRAIT_STATE_SLOT_START_CARD = 1,
     PORTRAIT_STATE_ROULETTE_WHEEL = 2,
@@ -23,7 +23,7 @@ enum CenterScreenStates{
     PORTRAIT_STATE_EVO_PREVIEW = 9,
 };
 
-enum CenterScreenSlot{
+enum PortraitSlot{
     PORTRAIT_MAIN_SLOT = 0,
     PORTRAIT_ALT_SLOT = 1,
 };
@@ -86,4 +86,4 @@ enum Prizes{
     PRIZE_START_BONUS_MODE_E = 45,
 };
 
-#endif //GUARD_PORTRAIT_STATES_H
+#endif //GUARD_CENTER_SCREEN_STATES_H
