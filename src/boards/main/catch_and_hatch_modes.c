@@ -43,9 +43,9 @@ void CleanupCatchEmState(void)
     gMain.fieldSpriteGroups[18]->active = FALSE;
     gMain.fieldSpriteGroups[12]->active = FALSE;
     gCurrentPinballGame->jirachiCollisionEnabled = 0;
-    LoadPortraitGraphics(CENTER_SCREEN_STATE_CURRENT_LOCATION,
-        CENTER_SCREEN_MAIN_SLOT);
-    gCurrentPinballGame->portraitDisplayState = 0;
+    LoadPortraitGraphics(PORTRAIT_STATE_CURRENT_LOCATION,
+        PORTRAIT_MAIN_SLOT);
+    gCurrentPinballGame->portraitDisplayState = PORTRAIT_DISPLAY_MODE_BOARD_CENTER;
     ResetEventState();
     for (i = 0; i < 6; i++)
         gCurrentPinballGame->hatchTilePalette[i] = 13;
@@ -137,8 +137,8 @@ void UpdateCatchEmMode(void)
         gCurrentPinballGame->boardSubState++;
         break;
     case CATCH_EM_SUBSTATE_3:
-        LoadPortraitGraphics(CENTER_SCREEN_STATE_POKEMON_DISPLAY,
-            CENTER_SCREEN_MAIN_SLOT);
+        LoadPortraitGraphics(PORTRAIT_STATE_POKEMON_DISPLAY,
+            PORTRAIT_MAIN_SLOT);
         gCurrentPinballGame->hatchTileRevealState = HATCH_TILE_REVEAL_NONE;
         gCurrentPinballGame->hatchRevealPhase = 0;
         gCurrentPinballGame->boardSubState++;
@@ -429,7 +429,7 @@ void UpdateJirachiBonus(void)
         }
         else if ((gMain.modeChangeFlags & MODE_CHANGE_BANNER) && gCurrentPinballGame->bannerSlideTimer == 1)
         {
-            gCurrentPinballGame->portraitDisplayState = 3;
+            gCurrentPinballGame->portraitDisplayState = PORTRAIT_DISPLAY_MODE_BANNER;
             return;
         }
         break;
@@ -868,7 +868,7 @@ void PlayEggCrackAnimation(void)
 
     if (gCurrentPinballGame->hatchFrameId == 2 && gCurrentPinballGame->hatchSequentialTileRevealFrameAnimTimer > 3)
     {
-        gCurrentPinballGame->portraitDisplayState = 3;
+        gCurrentPinballGame->portraitDisplayState = PORTRAIT_DISPLAY_MODE_BANNER;
         gMain.fieldSpriteGroups[33]->active = TRUE;
     }
 

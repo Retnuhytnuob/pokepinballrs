@@ -3,6 +3,7 @@
 #include "main.h"
 #include "constants/bg_music.h"
 #include "constants/board/kyogre_states.h"
+#include "constants/board/center_screen_states.h"
 
 extern const u8 gKyogreBonusClear_Gfx[];
 extern const u8 gKyogreWaterAnimPaletteFrames[][0x20];
@@ -63,7 +64,7 @@ void KyogreBoardProcess_3A_383E4(void)
     gCurrentPinballGame->bossAttackTimer = 0;
     gCurrentPinballGame->bonusModeHitCount = 0;
     gCurrentPinballGame->boardEntityCollisionMode = 0;
-    gCurrentPinballGame->portraitDisplayState = 3;
+    gCurrentPinballGame->portraitDisplayState = PORTRAIT_DISPLAY_MODE_BANNER;
     gCurrentPinballGame->bossVulnerable = 14;
     gCurrentPinballGame->bossEntityState = 0;
     gCurrentPinballGame->bossPositionX = 0;
@@ -808,7 +809,7 @@ void UpdateKyogreFieldEntities(void)
     group = &gMain.spriteGroups[10];
     if (group->active)
     {
-        if (gCurrentPinballGame->portraitDisplayState == 3)
+        if (gCurrentPinballGame->portraitDisplayState == PORTRAIT_DISPLAY_MODE_BANNER)
         {
             group->baseX = 240;
             group->baseY = 180;

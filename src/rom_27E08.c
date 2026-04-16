@@ -63,8 +63,8 @@ void ResetCatchState(s16 resetHoleIndicators)
     {
         if ((gCurrentPinballGame->jirachiActivationFlags & 0xF) == 0)
         {
-            LoadPortraitGraphics(CENTER_SCREEN_STATE_CURRENT_LOCATION, CENTER_SCREEN_MAIN_SLOT);
-            gCurrentPinballGame->portraitDisplayState = 0;
+            LoadPortraitGraphics(PORTRAIT_STATE_CURRENT_LOCATION, PORTRAIT_MAIN_SLOT);
+            gCurrentPinballGame->portraitDisplayState = PORTRAIT_DISPLAY_MODE_BOARD_CENTER;
         }
     }
 
@@ -96,7 +96,7 @@ void UpdateCatchTrigger(void)
                 ShowBonusTrapSprite();
                 gCurrentPinballGame->trapAnimState = 2;
                 gCurrentPinballGame->portraitCycleFrame = 0;
-                LoadPortraitGraphics(CENTER_SCREEN_STATE_SLOT_START_CARD, CENTER_SCREEN_MAIN_SLOT);
+                LoadPortraitGraphics(PORTRAIT_STATE_SLOT_START_CARD, PORTRAIT_MAIN_SLOT);
                 gCurrentPinballGame->boardSubState++;
             }
         }
@@ -104,7 +104,7 @@ void UpdateCatchTrigger(void)
     case BONUS_HOLE_SUBSTATE_2:
         AnimateBonusTrapSprite();
         if (gCurrentPinballGame->ballCatchState == 0)
-            LoadPortraitGraphics(CENTER_SCREEN_STATE_SLOT_START_CARD, CENTER_SCREEN_MAIN_SLOT);
+            LoadPortraitGraphics(PORTRAIT_STATE_SLOT_START_CARD, PORTRAIT_MAIN_SLOT);
 
         if (gCurrentPinballGame->ballCatchState == 4)
             gCurrentPinballGame->boardSubState++;
@@ -131,7 +131,7 @@ void UpdateCatchTrigger(void)
         }
         else if (gCurrentPinballGame->modeAnimTimer == 24)
         {
-            LoadPortraitGraphics(CENTER_SCREEN_STATE_CURRENT_LOCATION, CENTER_SCREEN_MAIN_SLOT);
+            LoadPortraitGraphics(PORTRAIT_STATE_CURRENT_LOCATION, PORTRAIT_MAIN_SLOT);
         }
         else if (gCurrentPinballGame->modeAnimTimer == 0)
         {
@@ -173,8 +173,8 @@ void FullCatchStateCleanup(void)
 {
     gCurrentPinballGame->trapAnimState = 0;
     gCurrentPinballGame->bonusTrapEnabled = 0;
-    LoadPortraitGraphics(CENTER_SCREEN_STATE_CURRENT_LOCATION, CENTER_SCREEN_MAIN_SLOT);
-    gCurrentPinballGame->portraitDisplayState = 0;
+    LoadPortraitGraphics(PORTRAIT_STATE_CURRENT_LOCATION, PORTRAIT_MAIN_SLOT);
+    gCurrentPinballGame->portraitDisplayState = PORTRAIT_DISPLAY_MODE_BOARD_CENTER;
     gCurrentPinballGame->evoItemCount = 0;
     gCurrentPinballGame->evoBlinkTimer = 0;
     gCurrentPinballGame->catchLights[0] = 0;
@@ -237,7 +237,7 @@ void InitBonusStageSelect(void)
         gCurrentPinballGame->boardSubState = BOSS_HOLE_SUBSTATE_INIT;
         gCurrentPinballGame->stageTimer = 0;
         gCurrentPinballGame->portraitCycleFrame = 0;
-        LoadPortraitGraphics(CENTER_SCREEN_STATE_CONFIRMATION_PROMPT, CENTER_SCREEN_MAIN_SLOT);
+        LoadPortraitGraphics(PORTRAIT_STATE_CONFIRMATION_PROMPT, PORTRAIT_MAIN_SLOT);
     }
 }
 
@@ -288,7 +288,7 @@ void UpdateBonusStageSelect(void)
         break;
     case BOSS_HOLE_SUBSTATE_2:
         AnimateBonusTrapSprite();
-        LoadPortraitGraphics(CENTER_SCREEN_STATE_CONFIRMATION_PROMPT, CENTER_SCREEN_MAIN_SLOT);
+        LoadPortraitGraphics(PORTRAIT_STATE_CONFIRMATION_PROMPT, PORTRAIT_MAIN_SLOT);
         if (gCurrentPinballGame->ballCatchState == 4)
             gCurrentPinballGame->boardSubState++;
         break;
@@ -297,7 +297,7 @@ void UpdateBonusStageSelect(void)
         gCurrentPinballGame->stageTimer = 0;
         gCurrentPinballGame->portraitCycleFrame = 0;
         gCurrentPinballGame->modeOutcomeValues[0] = 46;
-        LoadPortraitGraphics(CENTER_SCREEN_STATE_CONFIRMATION_PROMPT, CENTER_SCREEN_MAIN_SLOT);
+        LoadPortraitGraphics(PORTRAIT_STATE_CONFIRMATION_PROMPT, PORTRAIT_MAIN_SLOT);
         break;
     case BOSS_HOLE_SUBSTATE_4:
         if (gCurrentPinballGame->modeAnimTimer == 145)
@@ -319,7 +319,7 @@ void UpdateBonusStageSelect(void)
             }
 
             gCurrentPinballGame->modeOutcomeValues[0] = 46;
-            LoadPortraitGraphics(CENTER_SCREEN_STATE_CONFIRMATION_PROMPT, CENTER_SCREEN_MAIN_SLOT);
+            LoadPortraitGraphics(PORTRAIT_STATE_CONFIRMATION_PROMPT, PORTRAIT_MAIN_SLOT);
         }
 
         if (gCurrentPinballGame->modeAnimTimer == 130)
@@ -1000,7 +1000,7 @@ void LoadPokemonNameGraphics(void)
     int index;
 
     gCurrentPinballGame->nameSpacingOffset = 0;
-    LoadPortraitGraphics(CENTER_SCREEN_STATE_EVO_PREVIEW, CENTER_SCREEN_MAIN_SLOT);
+    LoadPortraitGraphics(PORTRAIT_STATE_EVO_PREVIEW, PORTRAIT_MAIN_SLOT);
     gCurrentPinballGame->activePortraitType = 14;
     gMain.fieldSpriteGroups[4]->active = TRUE;
     for (i = 0; i < 10; i++)
@@ -1051,7 +1051,7 @@ void InitEvolutionSuccessDisplay(void)
     gCurrentPinballGame->nameSpacingOffset = 0;
     gCurrentPinballGame->creatureOamPriority = 0;
     gCurrentPinballGame->nameRevealAnimFrame = 0;
-    LoadPortraitGraphics(CENTER_SCREEN_STATE_POKEMON_DISPLAY, CENTER_SCREEN_MAIN_SLOT);
+    LoadPortraitGraphics(PORTRAIT_STATE_POKEMON_DISPLAY, PORTRAIT_MAIN_SLOT);
     gCurrentPinballGame->activePortraitType = 13;
     gMain.fieldSpriteGroups[4]->active = TRUE;
     for (i = 0; i < 10; i++)
@@ -1102,7 +1102,7 @@ void AnimateEvolutionSuccessScreen(void)
     struct OamDataSimple *oamSimple;
     u32 var0;
 
-    gCurrentPinballGame->portraitDisplayState = 0;
+    gCurrentPinballGame->portraitDisplayState = PORTRAIT_DISPLAY_MODE_BOARD_CENTER;
     if (gCurrentPinballGame->nameRevealAnimFrame == 0)
     {
         gCurrentPinballGame->nameRevealAnimFrame++;
@@ -1572,8 +1572,8 @@ void CleanupEggModeState(void)
         gCurrentPinballGame->sapphirerubyEggDeliveryState = 1;
 
     gCurrentPinballGame->creatureHitCount = 0;
-    LoadPortraitGraphics(CENTER_SCREEN_STATE_CURRENT_LOCATION, CENTER_SCREEN_MAIN_SLOT);
-    gCurrentPinballGame->portraitDisplayState = 0;
+    LoadPortraitGraphics(PORTRAIT_STATE_CURRENT_LOCATION, PORTRAIT_MAIN_SLOT);
+    gCurrentPinballGame->portraitDisplayState = PORTRAIT_DISPLAY_MODE_BOARD_CENTER;
     for (i = 0; i < 3; i++)
     {
         if (i < gCurrentPinballGame->evoItemCount)
@@ -1632,7 +1632,7 @@ void UpdateEggMode(void)
     switch (gCurrentPinballGame->boardSubState)
     {
     case EGG_HATCH_SUBSTATE_INIT:
-        gCurrentPinballGame->portraitDisplayState = 3;
+        gCurrentPinballGame->portraitDisplayState = PORTRAIT_DISPLAY_MODE_BANNER;
         gMain.fieldSpriteGroups[41]->active = TRUE;
         gCurrentPinballGame->boardSubState++;
         break;

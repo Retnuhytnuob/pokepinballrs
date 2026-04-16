@@ -82,7 +82,7 @@ void UpdateShopEntryAnimation(s16 arg0)
             gCurrentPinballGame->shopSlideDirection = 0;
             gCurrentPinballGame->shopSelectedItemId = gShopCursorToItemMap[gCurrentPinballGame->shopItemCursor];
 
-            LoadPortraitGraphics(CENTER_SCREEN_STATE_SHOP_SELECTOR, CENTER_SCREEN_MAIN_SLOT);
+            LoadPortraitGraphics(PORTRAIT_STATE_SHOP_SELECTOR, PORTRAIT_MAIN_SLOT);
             RenderEvolutionUI(1);
 
             gMain.fieldSpriteGroups[7]->active = TRUE;
@@ -109,7 +109,7 @@ void UpdateShopEntryAnimation(s16 arg0)
         if (gCurrentPinballGame->shopEntryTimer <= 144)
         {
             gCurrentPinballGame->rouletteSubOffset = 0;
-            gCurrentPinballGame->portraitDisplayState = 2;
+            gCurrentPinballGame->portraitDisplayState = PORTRAIT_DISPLAY_MODE_SHOP;
             gCurrentPinballGame->creatureOamPriority = 0;
             var_r7 = 0;
 
@@ -138,7 +138,7 @@ void UpdateShopEntryAnimation(s16 arg0)
                         else
                             gCurrentPinballGame->shopSelectedItemId = gShopCursorToItemMap[gCurrentPinballGame->shopItemCursor];
 
-                        LoadPortraitGraphics(CENTER_SCREEN_STATE_SHOP_SELECTOR, CENTER_SCREEN_MAIN_SLOT);
+                        LoadPortraitGraphics(PORTRAIT_STATE_SHOP_SELECTOR, PORTRAIT_MAIN_SLOT);
                         var_r7 = 1;
                     }
                 }
@@ -333,11 +333,11 @@ void UpdateShopEntryAnimation(s16 arg0)
                     gCurrentPinballGame->modeAnimTimer = 24;
 
                 if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
-                    LoadPortraitGraphics(CENTER_SCREEN_STATE_SLOT_START_CARD, CENTER_SCREEN_MAIN_SLOT);
+                    LoadPortraitGraphics(PORTRAIT_STATE_SLOT_START_CARD, PORTRAIT_MAIN_SLOT);
                 else
-                    LoadPortraitGraphics(CENTER_SCREEN_STATE_CURRENT_LOCATION, CENTER_SCREEN_MAIN_SLOT);
+                    LoadPortraitGraphics(PORTRAIT_STATE_CURRENT_LOCATION, PORTRAIT_MAIN_SLOT);
 
-                gCurrentPinballGame->portraitDisplayState = 0;
+                gCurrentPinballGame->portraitDisplayState = PORTRAIT_DISPLAY_MODE_BOARD_CENTER;
                 gCurrentPinballGame->creatureOamPriority = 3;
                 gCurrentPinballGame->prizeSelected = 0;
 
@@ -438,7 +438,7 @@ void UpdateShopEntryAnimation(s16 arg0)
             if (gCurrentPinballGame->shopEntryTimer <= 144)
             {
                 gCurrentPinballGame->rouletteSubOffset = 0;
-                gCurrentPinballGame->portraitDisplayState = 2;
+                gCurrentPinballGame->portraitDisplayState = PORTRAIT_DISPLAY_MODE_SHOP;
                 gCurrentPinballGame->creatureOamPriority = 0;
 
                 if (gCurrentPinballGame->shopAnimSlideTimer > 0)
@@ -750,7 +750,7 @@ void UpdateShopEntryAnimation(s16 arg0)
                 else
                     gCurrentPinballGame->modeAnimTimer = 24;
 
-                gCurrentPinballGame->portraitDisplayState = 0;
+                gCurrentPinballGame->portraitDisplayState = PORTRAIT_DISPLAY_MODE_BOARD_CENTER;
                 gCurrentPinballGame->creatureOamPriority = 3;
 
                 gMain.fieldSpriteGroups[8]->active = FALSE;

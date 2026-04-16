@@ -19,8 +19,8 @@ void CleanupEvolutionModeState(void)
 {
     s16 i;
 
-    LoadPortraitGraphics(CENTER_SCREEN_STATE_CURRENT_LOCATION, CENTER_SCREEN_MAIN_SLOT);
-    gCurrentPinballGame->portraitDisplayState = 0;
+    LoadPortraitGraphics(PORTRAIT_STATE_CURRENT_LOCATION, PORTRAIT_MAIN_SLOT);
+    gCurrentPinballGame->portraitDisplayState = PORTRAIT_DISPLAY_MODE_BOARD_CENTER;
     for (i = 0; i < 3; i++)
     {
         if (i < gCurrentPinballGame->evoItemCount)
@@ -73,7 +73,7 @@ void InitEvolutionMode(void)
     gCurrentPinballGame->evoItemsCaught = 0;
     gCurrentPinballGame->evoModeResetFlag = 0;
     gCurrentPinballGame->evoItemAppearTimer = 0;
-    LoadPortraitGraphics(CENTER_SCREEN_STATE_POKEMON_DISPLAY, CENTER_SCREEN_MAIN_SLOT);
+    LoadPortraitGraphics(PORTRAIT_STATE_POKEMON_DISPLAY, PORTRAIT_MAIN_SLOT);
 }
 
 void UpdateEvolutionMode(void)
@@ -231,8 +231,8 @@ void UpdateEvolutionMode(void)
 
                     if (gCurrentPinballGame->stageTimer == 270)
                     {
-                        LoadPortraitGraphics(CENTER_SCREEN_STATE_CURRENT_LOCATION, CENTER_SCREEN_MAIN_SLOT);
-                        gCurrentPinballGame->portraitDisplayState = 0;
+                        LoadPortraitGraphics(PORTRAIT_STATE_CURRENT_LOCATION, PORTRAIT_MAIN_SLOT);
+                        gCurrentPinballGame->portraitDisplayState = PORTRAIT_DISPLAY_MODE_BOARD_CENTER;
                     }
 
                     if (gCurrentPinballGame->scoreCounterAnimationEnabled)

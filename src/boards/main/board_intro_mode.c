@@ -27,8 +27,8 @@ void InitBoardIntroMode(void)
     gCurrentPinballGame->roulettePortraitIndexes[1] = gAreaPortraitIndexes[gCurrentPinballGame->area];
     gCurrentPinballGame->area = gAreaRouletteTable[gMain.selectedField][(gCurrentPinballGame->areaRouletteSlotIndex + 1) % 6];
     gCurrentPinballGame->roulettePortraitIndexes[0] = gAreaPortraitIndexes[gCurrentPinballGame->area];
-    LoadPortraitGraphics(CENTER_SCREEN_STATE_CURRENT_LOCATION, CENTER_SCREEN_MAIN_SLOT);
-    LoadPortraitGraphics(CENTER_SCREEN_STATE_CURRENT_LOCATION, CENTER_SCREEN_ALT_SLOT);
+    LoadPortraitGraphics(PORTRAIT_STATE_CURRENT_LOCATION, PORTRAIT_MAIN_SLOT);
+    LoadPortraitGraphics(PORTRAIT_STATE_CURRENT_LOCATION, PORTRAIT_ALT_SLOT);
     for (i = 0; i < 6; i++)
         gCurrentPinballGame->hatchTilePalette[i] = 13;
 
@@ -98,7 +98,7 @@ void UpdateBoardIntroMode(void)
         }
 
         gCurrentPinballGame->rouletteSubOffset = (gCurrentPinballGame->rouletteFrameIndex * 32) / gCurrentPinballGame->rouletteRotationPeriod;
-        gCurrentPinballGame->portraitDisplayState = 1;
+        gCurrentPinballGame->portraitDisplayState = PORTRAIT_DISPLAY_MODE_ROULETTE;
         gCurrentPinballGame->stageTimer++;
         UpdateBoardArrowAnimState();
         break;
@@ -193,7 +193,7 @@ void UpdateBoardIntroMode(void)
         if (gCurrentPinballGame->rouletteFrameIndex == 0)
         {
             gCurrentPinballGame->roulettePortraitIndexes[0] = gCurrentPinballGame->roulettePortraitIndexes[1];
-            LoadPortraitGraphics(CENTER_SCREEN_STATE_CURRENT_LOCATION, CENTER_SCREEN_MAIN_SLOT);
+            LoadPortraitGraphics(PORTRAIT_STATE_CURRENT_LOCATION, PORTRAIT_MAIN_SLOT);
         }
 
         if (gCurrentPinballGame->rouletteFrameIndex == 1)
@@ -213,7 +213,7 @@ void UpdateBoardIntroMode(void)
 
             gCurrentPinballGame->area = gAreaRouletteTable[gMain.selectedField][gCurrentPinballGame->areaRouletteSlotIndex];
             gCurrentPinballGame->roulettePortraitIndexes[1] = gAreaPortraitIndexes[gCurrentPinballGame->area];
-            LoadPortraitGraphics(CENTER_SCREEN_STATE_CURRENT_LOCATION, CENTER_SCREEN_ALT_SLOT);
+            LoadPortraitGraphics(PORTRAIT_STATE_CURRENT_LOCATION, PORTRAIT_ALT_SLOT);
             m4aSongNumStart(SE_ROULETTE_TICK);
         }
         break;
@@ -262,7 +262,7 @@ void UpdateBoardIntroMode(void)
             }
         }
 
-        gCurrentPinballGame->portraitDisplayState = 0;
+        gCurrentPinballGame->portraitDisplayState = PORTRAIT_DISPLAY_MODE_BOARD_CENTER;
         break;
     }
 }

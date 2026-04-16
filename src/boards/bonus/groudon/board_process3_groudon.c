@@ -3,6 +3,7 @@
 #include "main.h"
 #include "constants/bg_music.h"
 #include "constants/board/groudon_states.h"
+#include "constants/board/center_screen_states.h"
 
 
 extern const u8 gGroudonBonusClear_Gfx[];
@@ -53,7 +54,7 @@ void GroudonBoardProcess_3A_3B120(void)
     gCurrentPinballGame->ball->ballHidden = 1;
     gCurrentPinballGame->returnToMainBoardFlag = 0;
     gCurrentPinballGame->boardEntityCollisionMode = 1;
-    gCurrentPinballGame->portraitDisplayState = 3;
+    gCurrentPinballGame->portraitDisplayState = PORTRAIT_DISPLAY_MODE_BANNER;
     gCurrentPinballGame->bossLightFadeInCounter = 0;
     gCurrentPinballGame->ballGrabbed = 0;
     gCurrentPinballGame->bonusModeHitCount = 0;
@@ -961,7 +962,7 @@ void UpdateGroudonFieldEntities(void)
     group = &gMain.spriteGroups[10];
     if (group->active)
     {
-        if (gCurrentPinballGame->portraitDisplayState == 3)
+        if (gCurrentPinballGame->portraitDisplayState == PORTRAIT_DISPLAY_MODE_BANNER)
         {
             group->baseX = 240;
             group->baseY = 180;

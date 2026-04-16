@@ -121,8 +121,8 @@ void InitRouletteWheel(void)
     gCurrentPinballGame->rouletteSlotCursor = 1;
     gCurrentPinballGame->modeOutcomeValues[0] = gCurrentPinballGame->rouletteSlotValues[0];
     gCurrentPinballGame->modeOutcomeValues[1] = gCurrentPinballGame->rouletteSlotValues[1];
-    LoadPortraitGraphics(CENTER_SCREEN_STATE_ROULETTE_WHEEL, CENTER_SCREEN_MAIN_SLOT);
-    LoadPortraitGraphics(CENTER_SCREEN_STATE_ROULETTE_WHEEL, CENTER_SCREEN_ALT_SLOT);
+    LoadPortraitGraphics(PORTRAIT_STATE_ROULETTE_WHEEL, PORTRAIT_MAIN_SLOT);
+    LoadPortraitGraphics(PORTRAIT_STATE_ROULETTE_WHEEL, PORTRAIT_ALT_SLOT);
 }
 
 void RunRouletteWheel(void)
@@ -146,7 +146,7 @@ void RunRouletteWheel(void)
 
     if (gCurrentPinballGame->rouletteStopRequested == 0)
     {
-        gCurrentPinballGame->portraitDisplayState = 1;
+        gCurrentPinballGame->portraitDisplayState = PORTRAIT_DISPLAY_MODE_ROULETTE;
         gCurrentPinballGame->rouletteFrameIndex++;
         if (gCurrentPinballGame->rouletteSpinSpeed)
         {
@@ -194,7 +194,7 @@ void RunRouletteWheel(void)
             gMain.fieldSpriteGroups[20]->active = FALSE;
             gMain.fieldSpriteGroups[21]->active = FALSE;
             gCurrentPinballGame->rouletteSubOffset = 0;
-            gCurrentPinballGame->portraitDisplayState = 0;
+            gCurrentPinballGame->portraitDisplayState = PORTRAIT_DISPLAY_MODE_BOARD_CENTER;
             m4aMPlayStop(&gMPlayInfo_BGM);
             gCurrentPinballGame->prizeSelected = 1;
             gCurrentPinballGame->outcomeFrameCounter = 0;
@@ -204,7 +204,7 @@ void RunRouletteWheel(void)
     if (gCurrentPinballGame->rouletteFrameIndex == 0)
     {
         gCurrentPinballGame->modeOutcomeValues[0] = gCurrentPinballGame->modeOutcomeValues[1];
-        LoadPortraitGraphics(CENTER_SCREEN_STATE_ROULETTE_WHEEL, CENTER_SCREEN_MAIN_SLOT);
+        LoadPortraitGraphics(PORTRAIT_STATE_ROULETTE_WHEEL, PORTRAIT_MAIN_SLOT);
         gCurrentPinballGame->prizeId = gCurrentPinballGame->modeOutcomeValues[0];
     }
 
@@ -216,7 +216,7 @@ void RunRouletteWheel(void)
             gCurrentPinballGame->rouletteSlotCursor = 0;
 
         gCurrentPinballGame->modeOutcomeValues[1] = gCurrentPinballGame->rouletteSlotValues[gCurrentPinballGame->rouletteSlotCursor];
-        LoadPortraitGraphics(CENTER_SCREEN_STATE_ROULETTE_WHEEL, CENTER_SCREEN_ALT_SLOT);
+        LoadPortraitGraphics(PORTRAIT_STATE_ROULETTE_WHEEL, PORTRAIT_ALT_SLOT);
         MPlayStart(&gMPlayInfo_SE1, &se_roulette_tick);
     }
 }
@@ -240,7 +240,7 @@ void GivePrize(void)
 
         gCurrentPinballGame->outcomeFrameCounter++;
         if (gCurrentPinballGame->outcomeFrameCounter < 80)
-            LoadPortraitGraphics(CENTER_SCREEN_STATE_ROULETTE_OUTCOME, CENTER_SCREEN_MAIN_SLOT);
+            LoadPortraitGraphics(PORTRAIT_STATE_ROULETTE_OUTCOME, PORTRAIT_MAIN_SLOT);
     }
 
     switch (gCurrentPinballGame->prizeId)
@@ -357,7 +357,7 @@ void GivePrize(void)
             if (gCurrentPinballGame->outcomeFrameCounter == 149)
             {
                 gCurrentPinballGame->shopEntryTimer = 180;
-                gCurrentPinballGame->portraitDisplayState = 3;
+                gCurrentPinballGame->portraitDisplayState = PORTRAIT_DISPLAY_MODE_BANNER;
             }
 
             if (gCurrentPinballGame->outcomeFrameCounter == 150)
@@ -1172,8 +1172,8 @@ void RunBallCaptureSequence(void)
 
         if (gCurrentPinballGame->captureSequenceFrame == 270 && gMain.selectedField < MAIN_FIELD_COUNT)
         {
-            LoadPortraitGraphics(CENTER_SCREEN_STATE_CURRENT_LOCATION, CENTER_SCREEN_MAIN_SLOT);
-            gCurrentPinballGame->portraitDisplayState = 0;
+            LoadPortraitGraphics(PORTRAIT_STATE_CURRENT_LOCATION, PORTRAIT_MAIN_SLOT);
+            gCurrentPinballGame->portraitDisplayState = PORTRAIT_DISPLAY_MODE_BOARD_CENTER;
         }
 
         if (gCurrentPinballGame->captureSequenceFrame <= 29)
@@ -1340,7 +1340,7 @@ void RunBallCaptureSequence(void)
             gCurrentPinballGame->ballFrozenState = 1;
             gCurrentPinballGame->ball->velocity.y = 0;
             gCurrentPinballGame->ball->velocity.x = 0;
-            gCurrentPinballGame->portraitDisplayState = 3;
+            gCurrentPinballGame->portraitDisplayState = PORTRAIT_DISPLAY_MODE_BANNER;
             gCurrentPinballGame->boardState = MAIN_BOARD_STATE_CATCH_EM_MODE;
             gCurrentPinballGame->caughtMonCount++;
 

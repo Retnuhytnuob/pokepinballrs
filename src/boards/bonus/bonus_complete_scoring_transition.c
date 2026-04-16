@@ -268,9 +268,9 @@ void TransitionFromBonusToMainBoard(void)
     gCurrentPinballGame->boardTransitionPhase = BOARD_STATE_DISPATCHER_STATE_INIT;
     gCurrentPinballGame->boardEntityActive = 0;
     gCurrentPinballGame->cameraYAdjust = 0;
-    LoadPortraitGraphics(CENTER_SCREEN_STATE_CURRENT_LOCATION,
-        CENTER_SCREEN_MAIN_SLOT);
-    gCurrentPinballGame->portraitDisplayState = 0;
+    LoadPortraitGraphics(PORTRAIT_STATE_CURRENT_LOCATION,
+        PORTRAIT_MAIN_SLOT);
+    gCurrentPinballGame->portraitDisplayState = PORTRAIT_DISPLAY_MODE_BOARD_CENTER;
     if (gCurrentPinballGame->allHolesLit)
         gCurrentPinballGame->allHolesLitDelayTimer = 120;
 }

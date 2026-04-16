@@ -627,7 +627,7 @@ void RunEvolutionCutscene(void)
             gMain.fieldSpriteGroups[28]->active = FALSE;
             gMain.fieldSpriteGroups[15]->active = FALSE;
             gCurrentPinballGame->currentSpecies = gCurrentPinballGame->postEvoSpecies;
-            LoadPortraitGraphics(CENTER_SCREEN_STATE_POKEMON_DISPLAY, CENTER_SCREEN_MAIN_SLOT);
+            LoadPortraitGraphics(PORTRAIT_STATE_POKEMON_DISPLAY, PORTRAIT_MAIN_SLOT);
             gCurrentPinballGame->activePortraitType = 17;
             DmaCopy16(3, gCatchTile_BurstStage4_Gfx, (void *)0x06015800, 0x1800);
             DmaCopy16(3, gCatchTile_BurstStage4_Pal, (void *)0x050003C0, 0x20);
@@ -775,7 +775,7 @@ void RunTravelEventCutscene(void)
                 {
                     gCurrentPinballGame->area =  gAreaRouletteTable[gMain.selectedField][gCurrentPinballGame->areaRouletteSlotIndex];
                     gCurrentPinballGame->roulettePortraitIndexes[0] = gAreaPortraitIndexes[gCurrentPinballGame->area];
-                    LoadPortraitGraphics(CENTER_SCREEN_STATE_CURRENT_LOCATION, CENTER_SCREEN_MAIN_SLOT);
+                    LoadPortraitGraphics(PORTRAIT_STATE_CURRENT_LOCATION, PORTRAIT_MAIN_SLOT);
                 }
 
                 if (gCurrentPinballGame->travelAnimKeyframeIndex == 11)

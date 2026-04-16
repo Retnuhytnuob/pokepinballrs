@@ -19,8 +19,8 @@ void CleanupTravelModeState(void)
 
     gCurrentPinballGame->seedotExitSequenceActive = 1;
     gCurrentPinballGame->seedotExitSequenceTimer = 0;
-    LoadPortraitGraphics(CENTER_SCREEN_STATE_CURRENT_LOCATION, CENTER_SCREEN_MAIN_SLOT);
-    gCurrentPinballGame->portraitDisplayState = 0;
+    LoadPortraitGraphics(PORTRAIT_STATE_CURRENT_LOCATION, PORTRAIT_MAIN_SLOT);
+    gCurrentPinballGame->portraitDisplayState = PORTRAIT_DISPLAY_MODE_BOARD_CENTER;
     gMain.fieldSpriteGroups[13]->active = FALSE;
     gCurrentPinballGame->trapAnimState = 0;
     gCurrentPinballGame->bonusTrapEnabled = 0;
@@ -65,7 +65,7 @@ void UpdateTravelMode(void)
         gCurrentPinballGame->travelRouletteSlotHitType = 0;
         break;
     case TRAVEL_SUBSTATE_1:
-        LoadPortraitGraphics(CENTER_SCREEN_STATE_TRAVEL_RAMP_INDICATOR, CENTER_SCREEN_MAIN_SLOT);
+        LoadPortraitGraphics(PORTRAIT_STATE_TRAVEL_RAMP_INDICATOR, PORTRAIT_MAIN_SLOT);
         if (gCurrentPinballGame->stageTimer == 35)
             m4aSongNumStart(MUS_TRAVEL_MODE);
 
@@ -114,7 +114,7 @@ void UpdateTravelMode(void)
     case TRAVEL_SUBSTATE_2:
         ShowBonusTrapSprite();
         gCurrentPinballGame->trapAnimState = 2;
-        LoadPortraitGraphics(CENTER_SCREEN_STATE_CURRENT_LOCATION, CENTER_SCREEN_MAIN_SLOT);
+        LoadPortraitGraphics(PORTRAIT_STATE_CURRENT_LOCATION, PORTRAIT_MAIN_SLOT);
         gCurrentPinballGame->prevTravelArrowTiles[0] = gCurrentPinballGame->travelArrowTiles[0] = 0;
         gCurrentPinballGame->prevTravelArrowTiles[1] = gCurrentPinballGame->travelArrowTiles[1] = 0;
         gCurrentPinballGame->prevTravelArrowTiles[2] = gCurrentPinballGame->travelArrowTiles[2] = 0;
@@ -131,19 +131,19 @@ void UpdateTravelMode(void)
         gCurrentPinballGame->stageTimer = 0;
         gCurrentPinballGame->portraitCycleFrame = 0;
         gCurrentPinballGame->modeOutcomeValues[0] = 47;
-        LoadPortraitGraphics(CENTER_SCREEN_STATE_CONFIRMATION_PROMPT, CENTER_SCREEN_MAIN_SLOT);
+        LoadPortraitGraphics(PORTRAIT_STATE_CONFIRMATION_PROMPT, PORTRAIT_MAIN_SLOT);
         break;
     case TRAVEL_SUBSTATE_5:
         if (gCurrentPinballGame->modeAnimTimer == 145)
         {
             gCurrentPinballGame->modeAnimTimer++;
             gCurrentPinballGame->modeOutcomeValues[0] = 47;
-            LoadPortraitGraphics(CENTER_SCREEN_STATE_CONFIRMATION_PROMPT, CENTER_SCREEN_MAIN_SLOT);
+            LoadPortraitGraphics(PORTRAIT_STATE_CONFIRMATION_PROMPT, PORTRAIT_MAIN_SLOT);
             if (JOY_NEW(A_BUTTON))
             {
                 gCurrentPinballGame->modeAnimTimer = 144;
                 m4aMPlayAllStop();
-                LoadPortraitGraphics(CENTER_SCREEN_STATE_CURRENT_LOCATION, CENTER_SCREEN_MAIN_SLOT);
+                LoadPortraitGraphics(PORTRAIT_STATE_CURRENT_LOCATION, PORTRAIT_MAIN_SLOT);
                 if (gCurrentPinballGame->areaVisitCount < 5)
                 {
                     var0 = gCurrentPinballGame->areaRouletteFarSlot;

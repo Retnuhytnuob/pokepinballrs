@@ -32,28 +32,28 @@ void LoadPortraitGraphics(s16 displayMode, s16 picIx)
     switch (displayMode)
     {
     // Show the 
-    case CENTER_SCREEN_STATE_CURRENT_LOCATION:
+    case PORTRAIT_STATE_CURRENT_LOCATION:
         gCurrentPinballGame->creatureOamPriority = 3;
         gCurrentPinballGame->portraitGfxIndex[picIx] = gCurrentPinballGame->roulettePortraitIndexes[picIx];
         DmaCopy16(3, gPortraitGenericGraphics[gCurrentPinballGame->portraitGfxIndex[picIx]], (void *)0x06010CA0 + picIx * 0x300, 0x300);
         index = gCurrentPinballGame->roulettePortraitIndexes[picIx] * 0x10;
         DmaCopy16(3, &gPortraitGenericPalettes[index], (void *)0x05000200 + gPortraitPaletteSlots[picIx] * 0x20, 0x20);
         break;
-    case CENTER_SCREEN_STATE_SLOT_START_CARD:
+    case PORTRAIT_STATE_SLOT_START_CARD:
         ptr = gPortraitIdleCycleData;
         gCurrentPinballGame->portraitGfxIndex[picIx] = ptr[(gCurrentPinballGame->portraitCycleFrame % 48) / 24];
         index = ptr[2] * 0x10;
         DmaCopy16(3, gPortraitAnimFrameGraphics[gCurrentPinballGame->portraitGfxIndex[picIx]], (void *)0x06010CA0 + picIx * 0x300, 0x300);
         DmaCopy16(3, &gPortraitAnimPalettes[index], (void *)0x05000200 + gPortraitPaletteSlots[picIx] * 0x20, 0x20);
         break;
-    case CENTER_SCREEN_STATE_ROULETTE_WHEEL:
+    case PORTRAIT_STATE_ROULETTE_WHEEL:
         ptr = gShopItemData[gCurrentPinballGame->modeOutcomeValues[picIx]];
         gCurrentPinballGame->portraitGfxIndex[picIx] = ptr[0];
         index = ptr[2] * 0x10;
         DmaCopy16(3, gPortraitAnimFrameGraphics[gCurrentPinballGame->portraitGfxIndex[picIx]], (void *)0x06010CA0 + picIx * 0x300, 0x300);
         DmaCopy16(3, &gPortraitAnimPalettes[index], (void *)0x05000200 + gPortraitPaletteSlots[picIx] * 0x20, 0x20);
         break;
-    case CENTER_SCREEN_STATE_POKEMON_DISPLAY:
+    case PORTRAIT_STATE_POKEMON_DISPLAY:
         gCurrentPinballGame->portraitGfxIndex[picIx] = gCurrentPinballGame->currentSpecies;
         DmaCopy16(
             3,
@@ -67,7 +67,7 @@ void LoadPortraitGraphics(s16 displayMode, s16 picIx)
             0x20);
         DmaCopy16(3, gMonPortraitGroupPals[0] + 15 * 0x20, (void *)0x050003E0, 0x20);
         break;
-    case CENTER_SCREEN_STATE_EVO_PREVIEW:
+    case PORTRAIT_STATE_EVO_PREVIEW:
         if (gCurrentPinballGame->evoChainPosition > 0)
         {
             if (gMain_saveData.pokedexFlags[gCurrentPinballGame->evoTargetSpecies] == SPECIES_UNSEEN)
@@ -110,7 +110,7 @@ void LoadPortraitGraphics(s16 displayMode, s16 picIx)
             (void *)0x06010CA0 + picIx * 0x18,
             0x300);
         break;
-    case CENTER_SCREEN_STATE_TRAVEL_RAMP_INDICATOR:
+    case PORTRAIT_STATE_TRAVEL_RAMP_INDICATOR:
         if (gCurrentPinballGame->boardSubState == TRAVEL_SUBSTATE_2)
         {
             gCurrentPinballGame->portraitGfxIndex[picIx] = gShopItemData[15][(gCurrentPinballGame->portraitCycleFrame % 48) / 24];
@@ -127,7 +127,7 @@ void LoadPortraitGraphics(s16 displayMode, s16 picIx)
         }
         DmaCopy16(3, &gPortraitAnimPalettes[index], (void *)0x05000200 + gPortraitPaletteSlots[picIx] * 0x20, 0x20);
         break;
-    case CENTER_SCREEN_STATE_SHOP_SELECTOR:
+    case PORTRAIT_STATE_SHOP_SELECTOR:
         ptr = gShopItemData[gCurrentPinballGame->shopSelectedItemId];
         gCurrentPinballGame->portraitGfxIndex[picIx] = ptr[0];
         index = ptr[2] * 16;
@@ -155,7 +155,7 @@ void LoadPortraitGraphics(s16 displayMode, s16 picIx)
             DmaCopy16(3, &gPortraitAnimPalettes[index], (void *)0x05000200 + gPortraitPaletteSlots[picIx] * 0x20, 0x20);
         }
         break;
-    case CENTER_SCREEN_STATE_CONFIRMATION_PROMPT:
+    case PORTRAIT_STATE_CONFIRMATION_PROMPT:
         // TODO: fake match
         ptr2 = ptr = gShopItemData[gCurrentPinballGame->modeOutcomeValues[picIx]];
         gCurrentPinballGame->portraitGfxIndex[picIx] = *(ptr2 += (gCurrentPinballGame->portraitCycleFrame % 48) / 24);
@@ -163,7 +163,7 @@ void LoadPortraitGraphics(s16 displayMode, s16 picIx)
         DmaCopy16(3, gPortraitAnimFrameGraphics[gCurrentPinballGame->portraitGfxIndex[picIx]], (void *)0x06010CA0 + picIx * 0x300, 0x300);
         DmaCopy16(3, &gPortraitAnimPalettes[index], (void *)0x05000200 + gPortraitPaletteSlots[picIx] * 0x20, 0x20);
         break;
-    case CENTER_SCREEN_STATE_ROULETTE_OUTCOME:
+    case PORTRAIT_STATE_ROULETTE_OUTCOME:
         // TODO: fake match
         ptr2 = ptr = gShopItemData[gCurrentPinballGame->prizeId];
         gCurrentPinballGame->portraitGfxIndex[picIx] = *(ptr2 += gRouletteOutcomeFrameOffsets[gCurrentPinballGame->outcomeFrameCounter / 12]);
@@ -186,13 +186,13 @@ void UpdatePortraitSpritePositions(void)
     s16 var1;
     s16 var2;
 
-    if (gCurrentPinballGame->portraitDisplayState == 3)
+    if (gCurrentPinballGame->portraitDisplayState == PORTRAIT_DISPLAY_MODE_BANNER)
     {
         baseX = 0;
         var1 = 180;
         var2 = 180;
     }
-    else if (gCurrentPinballGame->portraitDisplayState == 2)
+    else if (gCurrentPinballGame->portraitDisplayState == PORTRAIT_DISPLAY_MODE_SHOP)
     {
         if (gMain.shopPanelSlideOffset < 20)
         {
@@ -231,7 +231,7 @@ void UpdatePortraitSpritePositions(void)
         gOamBuffer[oamSimple->oamId].y = oamSimple->yOffset + group->baseY;
     }
 
-    if (gCurrentPinballGame->portraitDisplayState == 1)
+    if (gCurrentPinballGame->portraitDisplayState == PORTRAIT_DISPLAY_MODE_ROULETTE)
     {
         group = gMain.fieldSpriteGroups[23];
         group->baseX = baseX;
@@ -295,7 +295,7 @@ void ClampPortraitSpritesToOffscreen(void)
     struct SpriteGroup *group;
     struct OamDataSimple *oamSimple;
 
-    if (gCurrentPinballGame->portraitDisplayState == 1)
+    if (gCurrentPinballGame->portraitDisplayState == PORTRAIT_DISPLAY_MODE_ROULETTE)
     {
         group = gMain.fieldSpriteGroups[22];
         group->baseY = 180;
