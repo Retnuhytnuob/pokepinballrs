@@ -380,7 +380,7 @@ void ProcessSapphireCollisionEvent(u8 arg0, u16* arg1, u16* arg2)
                         m4aSongNumStart(SE_UNKNOWN_0x99);
                     }
 
-                    gCurrentPinballGame->travelRouletteSlotHitType = 1;
+                    gCurrentPinballGame->travelRolloverTriggerHitZone = TRAVEL_ROLLOVER_TRIGGER_HIT_ZONE_LEFT;
                 }
 
                 gCurrentPinballGame->ballCollisionZone = 2;
@@ -453,7 +453,7 @@ void ProcessSapphireCollisionEvent(u8 arg0, u16* arg1, u16* arg2)
                             gCurrentPinballGame->catchProgressFlashing = 1;
                     }
 
-                    gCurrentPinballGame->travelRouletteSlotHitType = 2;
+                    gCurrentPinballGame->travelRolloverTriggerHitZone = TRAVEL_ROLLOVER_TRIGGER_HIT_ZONE_RIGHT;
                 }
 
                 gCurrentPinballGame->ballCollisionZone = 6;

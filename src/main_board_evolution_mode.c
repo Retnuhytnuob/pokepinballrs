@@ -37,7 +37,7 @@ void CleanupEvolutionModeState(void)
 
 void InitEvolutionMode(void)
 {
-    gCurrentPinballGame->boardSubState = EVOLUTION_SUBSTATE_INIT;
+    gCurrentPinballGame->boardSubState = EVOLUTION_SUBSTATE_SHUFFLE_EVO_ITEM_PLACEMENTS;
     gCurrentPinballGame->stageTimer = 0;
     gCurrentPinballGame->boardModeType = 2;
     gCurrentPinballGame->eventTimer = gCurrentPinballGame->timerBonus + 7200;
@@ -85,17 +85,17 @@ void UpdateEvolutionMode(void)
     s16 index;
 
     if (gCurrentPinballGame->boardModeType && gCurrentPinballGame->eventTimer < 2
-        && gCurrentPinballGame->boardSubState < EVOLUTION_SUBSTATE_8)
+        && gCurrentPinballGame->boardSubState < EVOLUTION_SUBSTATE_END_EVO_PHASE)
     {
         m4aMPlayAllStop();
         m4aSongNumStart(MUS_END_OF_BALL2);
         gCurrentPinballGame->stageTimer = 200;
-        gCurrentPinballGame->boardSubState = EVOLUTION_SUBSTATE_8;
+        gCurrentPinballGame->boardSubState = EVOLUTION_SUBSTATE_END_EVO_PHASE;
     }
 
     switch (gCurrentPinballGame->boardSubState)
     {
-    case EVOLUTION_SUBSTATE_INIT:
+    case EVOLUTION_SUBSTATE_SHUFFLE_EVO_ITEM_PLACEMENTS:
         if (gCurrentPinballGame->evoModeShuffleRound < 2)
         {
             for (i = 0; i < 8; i++)
@@ -150,7 +150,7 @@ void UpdateEvolutionMode(void)
         gCurrentPinballGame->evoModeShuffleRound++;
         gCurrentPinballGame->boardSubState++;
         break;
-    case EVOLUTION_SUBSTATE_1:
+    case EVOLUTION_SUBSTATE_PREP_SPAWN_EVO_ITEM:
         gCurrentPinballGame->evoItemSlotIndex = gCurrentPinballGame->evoShuffledSlots[gCurrentPinballGame->evoItemsCaught];
         gCurrentPinballGame->evoItemPosX = gEvoItemPositions[gMain.selectedField][gCurrentPinballGame->evoItemSlotIndex].x;
         gCurrentPinballGame->evoItemPosY = gEvoItemPositions[gMain.selectedField][gCurrentPinballGame->evoItemSlotIndex].y;
@@ -158,11 +158,11 @@ void UpdateEvolutionMode(void)
         gMain.fieldSpriteGroups[40]->active = TRUE;
         gCurrentPinballGame->boardSubState++;
         break;
-    case EVOLUTION_SUBSTATE_2:
+    case EVOLUTION_SUBSTATE_SPAWN_EVO_ITEM_AND_CHECK_FOR_COLLECTION:
         UpdateEvolutionItemAnimation();
         gCurrentPinballGame->stageTimer = 0;
         break;
-    case EVOLUTION_SUBSTATE_3:
+    case EVOLUTION_SUBSTATE_OPEN_TRAP_DOOR:
         gCurrentPinballGame->trapAnimState = 1;
         if (gCurrentPinballGame->stageTimer < 8)
         {
@@ -175,12 +175,12 @@ void UpdateEvolutionMode(void)
             gCurrentPinballGame->boardSubState++;
         }
         break;
-    case EVOLUTION_SUBSTATE_4:
+    case EVOLUTION_SUBSTATE_GRAVITY_WELL:
         AnimateBonusTrapSprite();
         if (gCurrentPinballGame->ballCatchState == TRAP_CENTER_HOLE)
             gCurrentPinballGame->boardSubState++;
         break;
-    case EVOLUTION_SUBSTATE_5:
+    case EVOLUTION_SUBSTATE_REGISTER_CAPTURE:
         gCurrentPinballGame->boardModeType = 3;
         gCurrentPinballGame->preEvoSpecies = gCurrentPinballGame->currentSpecies;
         RegisterCaptureOrEvolution(1);
@@ -188,7 +188,7 @@ void UpdateEvolutionMode(void)
         gCurrentPinballGame->stageTimer = 0;
         gCurrentPinballGame->boardSubState++;
         break;
-    case EVOLUTION_SUBSTATE_6:
+    case EVOLUTION_SUBSTATE_EVOLVE_CUTSCENE:
         if (gCurrentPinballGame->modeAnimTimer == 148)
         {
             gCurrentPinballGame->modeAnimTimer++;
@@ -197,19 +197,19 @@ void UpdateEvolutionMode(void)
                 if (gCurrentPinballGame->chikoritaProjectileTimer >= 80)
                 {
                     RunEvolutionCutscene();
-                    if (gCurrentPinballGame->boardSubState == EVOLUTION_SUBSTATE_6)
+                    if (gCurrentPinballGame->boardSubState == EVOLUTION_SUBSTATE_EVOLVE_CUTSCENE)
                         gCurrentPinballGame->stageTimer++;
                 }
             }
             else
             {
                 RunEvolutionCutscene();
-                if (gCurrentPinballGame->boardSubState == EVOLUTION_SUBSTATE_6)
+                if (gCurrentPinballGame->boardSubState == EVOLUTION_SUBSTATE_EVOLVE_CUTSCENE)
                     gCurrentPinballGame->stageTimer++;
             }
         }
         break;
-    case EVOLUTION_SUBSTATE_7:
+    case EVOLUTION_SUBSTATE_SHOWCASE_EVOLVED_FORM:
         if (gCurrentPinballGame->modeAnimTimer == 148)
         {
             gCurrentPinballGame->modeAnimTimer++;
@@ -323,7 +323,7 @@ void UpdateEvolutionMode(void)
             gCurrentPinballGame->stageTimer = 0;
         }
         break;
-    case EVOLUTION_SUBSTATE_8:
+    case EVOLUTION_SUBSTATE_END_EVO_PHASE:
         group = gMain.fieldSpriteGroups[32];
         oamSimple = &group->oam[0];
         gOamBuffer[oamSimple->oamId].x = oamSimple->xOffset;
@@ -342,11 +342,11 @@ void UpdateEvolutionMode(void)
         if (gCurrentPinballGame->allHolesLit)
             gCurrentPinballGame->allHolesLitDelayTimer = 120;
         break;
-    case EVOLUTION_SUBSTATE_9:
+    case EVOLUTION_SUBSTATE_BOARD_STATE_CLEANUP:
         CleanupEvolutionModeState();
         gCurrentPinballGame->boardSubState++;
         break;
-    case EVOLUTION_SUBSTATE_10:
+    case EVOLUTION_SUBSTATE_PREPARE_NEXT_BOARD_MODE:
         if (gCurrentPinballGame->stageTimer)
         {
             gCurrentPinballGame->stageTimer--;
@@ -446,14 +446,14 @@ void UpdateEvolutionItemAnimation(void)
         {
             gCurrentPinballGame->scoreAddedInFrame = 10000;
             MPlayStart(&gMPlayInfo_SE1, &se_evo_item_collected);
-            gCurrentPinballGame->boardSubState = EVOLUTION_SUBSTATE_1;
+            gCurrentPinballGame->boardSubState = EVOLUTION_SUBSTATE_PREP_SPAWN_EVO_ITEM;
             gCurrentPinballGame->catchLights[gCurrentPinballGame->evoItemsCaught] = 5;
             gCurrentPinballGame->evoItemsCaught++;
             gMain.fieldSpriteGroups[32]->active = FALSE;
             if (gCurrentPinballGame->evoItemsCaught == 3)
             {
                 gCurrentPinballGame->evoItemsCaught = 0;
-                gCurrentPinballGame->boardSubState = EVOLUTION_SUBSTATE_3;
+                gCurrentPinballGame->boardSubState = EVOLUTION_SUBSTATE_OPEN_TRAP_DOOR;
             }
         }
 

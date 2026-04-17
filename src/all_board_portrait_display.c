@@ -111,7 +111,7 @@ void LoadPortraitGraphics(s16 displayMode, s16 picIx)
             0x300);
         break;
     case PORTRAIT_STATE_TRAVEL_RAMP_INDICATOR:
-        if (gCurrentPinballGame->boardSubState == TRAVEL_SUBSTATE_2)
+        if (gCurrentPinballGame->boardSubState == TRAVEL_SUBSTATE_STOP_LANE_INDICATORS)
         {
             gCurrentPinballGame->portraitGfxIndex[picIx] = gShopItemData[15][(gCurrentPinballGame->portraitCycleFrame % 48) / 24];
             DmaCopy16(3, gPortraitAnimFrameGraphics[gCurrentPinballGame->portraitGfxIndex[picIx]], (void *)0x06010CA0 + picIx * 0x300, 0x300);

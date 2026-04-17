@@ -8,7 +8,7 @@ extern const u8 gDefaultBallPalette[];
 
 void CleanupTravelModeState(void)
 {
-    gCurrentPinballGame->travelRouletteSlotHitType = 0;
+    gCurrentPinballGame->travelRolloverTriggerHitZone = TRAVEL_ROLLOVER_TRIGGER_HIT_ZONE_NONE;
     gCurrentPinballGame->seedotCount = 0;
     if (gMain.selectedField == FIELD_RUBY)
     {
@@ -46,12 +46,12 @@ void UpdateTravelMode(void)
     s16 var0;
 
     if (gCurrentPinballGame->boardModeType && gCurrentPinballGame->eventTimer < 2
-        && gCurrentPinballGame->boardSubState < TRAVEL_SUBSTATE_6)
+        && gCurrentPinballGame->boardSubState < TRAVEL_SUBSTATE_BOARD_STATE_CLEANUP)
     {
         m4aMPlayAllStop();
         m4aSongNumStart(MUS_END_OF_BALL2);
         gCurrentPinballGame->stageTimer = 200;
-        gCurrentPinballGame->boardSubState = TRAVEL_SUBSTATE_6;
+        gCurrentPinballGame->boardSubState = TRAVEL_SUBSTATE_BOARD_STATE_CLEANUP;
     }
 
     switch (gCurrentPinballGame->boardSubState)
@@ -62,14 +62,14 @@ void UpdateTravelMode(void)
             gCurrentPinballGame->boardSubState++;
             gCurrentPinballGame->portraitCycleFrame = 0;
         }
-        gCurrentPinballGame->travelRouletteSlotHitType = 0;
+        gCurrentPinballGame->travelRolloverTriggerHitZone = TRAVEL_ROLLOVER_TRIGGER_HIT_ZONE_NONE;
         break;
-    case TRAVEL_SUBSTATE_1:
+    case TRAVEL_SUBSTATE_SHOW_LANE_INDICATORS:
         LoadPortraitGraphics(PORTRAIT_STATE_TRAVEL_RAMP_INDICATOR, PORTRAIT_MAIN_SLOT);
         if (gCurrentPinballGame->stageTimer == 35)
             m4aSongNumStart(MUS_TRAVEL_MODE);
 
-        if (gCurrentPinballGame->travelRouletteSlotHitType)
+        if (gCurrentPinballGame->travelRolloverTriggerHitZone != TRAVEL_ROLLOVER_TRIGGER_HIT_ZONE_NONE)
         {
             gCurrentPinballGame->boardSubState++;
             if (gCurrentPinballGame->stageTimer < 35)
@@ -111,7 +111,7 @@ void UpdateTravelMode(void)
         gCurrentPinballGame->prevTravelArrowTiles[1] = gCurrentPinballGame->travelArrowTiles[1];
         gCurrentPinballGame->prevTravelArrowTiles[2] = gCurrentPinballGame->travelArrowTiles[2];
         break;
-    case TRAVEL_SUBSTATE_2:
+    case TRAVEL_SUBSTATE_STOP_LANE_INDICATORS:
         ShowBonusTrapSprite();
         gCurrentPinballGame->trapAnimState = 2;
         LoadPortraitGraphics(PORTRAIT_STATE_CURRENT_LOCATION, PORTRAIT_MAIN_SLOT);
@@ -120,12 +120,12 @@ void UpdateTravelMode(void)
         gCurrentPinballGame->prevTravelArrowTiles[2] = gCurrentPinballGame->travelArrowTiles[2] = 0;
         gCurrentPinballGame->boardSubState++;
         break;
-    case TRAVEL_SUBSTATE_3:
+    case TRAVEL_SUBSTATE_OPEN_TRAP_DOOR:
         AnimateBonusTrapSprite();
         if (gCurrentPinballGame->ballCatchState == TRAP_CENTER_HOLE)
             gCurrentPinballGame->boardSubState++;
         break;
-    case TRAVEL_SUBSTATE_4:
+    case TRAVEL_SUBSTATE_GRAVITY_WELL:
         gCurrentPinballGame->boardModeType = 3;
         gCurrentPinballGame->boardSubState++;
         gCurrentPinballGame->stageTimer = 0;
@@ -133,7 +133,7 @@ void UpdateTravelMode(void)
         gCurrentPinballGame->modeOutcomeValues[0] = 47;
         LoadPortraitGraphics(PORTRAIT_STATE_CONFIRMATION_PROMPT, PORTRAIT_MAIN_SLOT);
         break;
-    case TRAVEL_SUBSTATE_5:
+    case TRAVEL_SUBSTATE_CONFIRMATION_AND_TRAVEL_CUTSCENE:
         if (gCurrentPinballGame->modeAnimTimer == 145)
         {
             gCurrentPinballGame->modeAnimTimer++;
@@ -147,7 +147,7 @@ void UpdateTravelMode(void)
                 if (gCurrentPinballGame->areaVisitCount < 5)
                 {
                     var0 = gCurrentPinballGame->areaRouletteFarSlot;
-                    if (gCurrentPinballGame->travelRouletteSlotHitType == 1)
+                    if (gCurrentPinballGame->travelRolloverTriggerHitZone == TRAVEL_ROLLOVER_TRIGGER_HIT_ZONE_LEFT)
                         gCurrentPinballGame->areaRouletteSlotIndex = gCurrentPinballGame->areaRouletteNextSlot;
                     else
                         gCurrentPinballGame->areaRouletteSlotIndex = gCurrentPinballGame->areaRouletteFarSlot;
@@ -167,7 +167,7 @@ void UpdateTravelMode(void)
                 m4aMPlayAllStop();
                 m4aSongNumStart(SE_MENU_CANCEL);
                 gCurrentPinballGame->modeAnimTimer = 60;
-                gCurrentPinballGame->boardSubState = TRAVEL_SUBSTATE_6;
+                gCurrentPinballGame->boardSubState = TRAVEL_SUBSTATE_BOARD_STATE_CLEANUP;
                 if (gCurrentPinballGame->allHolesLit)
                     gCurrentPinballGame->allHolesLitDelayTimer = 120;
             }
@@ -203,13 +203,13 @@ void UpdateTravelMode(void)
                 gCurrentPinballGame->travelModeCompletionCount++;
         }
         break;
-    case TRAVEL_SUBSTATE_6:
+    case TRAVEL_SUBSTATE_BOARD_STATE_CLEANUP:
         AnimateBonusTrapSprite();
         gMain.fieldSpriteGroups[13]->active = FALSE;
         CleanupTravelModeState();
         gCurrentPinballGame->boardSubState++;
         break;
-    case TRAVEL_SUBSTATE_7:
+    case TRAVEL_SUBSTATE_PREPARE_NEXT_BOARD_MODE:
         if (gCurrentPinballGame->stageTimer)
         {
             gCurrentPinballGame->stageTimer--;

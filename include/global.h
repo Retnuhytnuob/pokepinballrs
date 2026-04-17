@@ -749,7 +749,7 @@ struct PinballGame
     /*0x678*/ s8 bonusTextContent[3][20];
     /*0x6B4*/ u32 bonusTotalScoreLo;
     /*0x6B8*/ u32 bonusTotalScoreHi;
-    /*0x6BC*/ s8 travelRouletteSlotHitType;
+    /*0x6BC*/ s8 travelRolloverTriggerHitZone;
     /*0x6BD*/ s8 seedotCount;
     /*0x6BE*/ s8 seedotExitSequenceActive;
     /*0x6BF*/ u8 filler6BF[0x1];

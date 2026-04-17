@@ -527,13 +527,13 @@ void ResetBoardStateOnDeath(void)
     if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
         gCurrentPinballGame->boardSubState = BONUS_HOLE_SUBSTATE_START_CLOSING;
     if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_TRAVEL_MODE)
-        gCurrentPinballGame->boardSubState = TRAVEL_SUBSTATE_6;
+        gCurrentPinballGame->boardSubState = TRAVEL_SUBSTATE_BOARD_STATE_CLEANUP;
     if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_CATCH_EM_MODE)
         gCurrentPinballGame->boardSubState = CATCH_EM_SUBSTATE_END_CATCH_HIT_PHASE;
     if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_EGG_HATCH_MODE)
         gCurrentPinballGame->boardSubState = EGG_HATCH_SUBSTATE_CLEANUP_MON_SPRITES;
     if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_EVO_MODE)
-        gCurrentPinballGame->boardSubState = EVOLUTION_SUBSTATE_8;
+        gCurrentPinballGame->boardSubState = EVOLUTION_SUBSTATE_END_EVO_PHASE;
 
     gCurrentPinballGame->allHolesLit = 0;
     gCurrentPinballGame->holeIndicators[0] = 0;

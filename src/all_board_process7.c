@@ -7,6 +7,7 @@
 extern const u32 gBallSpawnGlowTiles_Type1[][0x80];
 extern const u32 gBallSpawnGlowTiles_Type2[][0x80];
 
+//Called once per frame; 7th process, Draws the ball & related graphics
 void MainBoardProcess_7B_12524(void)
 {
     s16 i;
@@ -228,6 +229,7 @@ void MainBoardProcess_7B_12524(void)
     }
 }
 
+//Called once per frame; 7th process, Draws the ball & related graphics
 void BonusBoardProcess_7B_12BF8()
 {
     s16 i;
