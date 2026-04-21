@@ -102,7 +102,7 @@ void ResetDisplayState(void)
     gMain.modeChangeFlags = MODE_CHANGE_NONE;
     gMain.debugMenuCursorIndex = 0;
     gMain.fieldFrameCount = 0;
-    gMain.pendingModeChangeType = 0;
+    gMain.pendingModeChangeType = MODE_CHANGE_NONE;
     gMain.animationTimer = 0;
     gMain.modeChangeDelayTimer = 0;
     gMain.vCount = 144;

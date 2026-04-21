@@ -458,13 +458,13 @@ void ProcessMainBoardBallDrainAndLaunch(void)
             if (gCurrentPinballGame->saverTimeRemaining)
             {
                 gMain.modeChangeDelayTimer = 4;
-                gMain.pendingModeChangeType = 8;
+                gMain.pendingModeChangeType = MODE_CHANGE_BALL_SAVER;
                 gMain.animationTimer = 204;
             }
             else
             {
                 gMain.modeChangeDelayTimer = 80;
-                gMain.pendingModeChangeType = 16;
+                gMain.pendingModeChangeType = MODE_CHANGE_END_OF_BALL;
                 gMain.animationTimer = 200;
                 m4aMPlayAllStop();
                 m4aSongNumStart(MUS_END_OF_BALL);

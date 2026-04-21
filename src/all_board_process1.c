@@ -87,7 +87,7 @@ void AllBoardProcess_1B_47160(void)
             {
                 if (gCurrentPinballGame->activePortraitType)
                     gMain.modeChangeDelayTimer = 10;
-                else if (gMain.pendingModeChangeType == 0x8)
+                else if (gMain.pendingModeChangeType == MODE_CHANGE_BALL_SAVER)
                     gCurrentPinballGame->activePortraitType = 19;
                 else
                     gCurrentPinballGame->activePortraitType = 20;
