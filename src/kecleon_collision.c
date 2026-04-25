@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/board/kecleon_states.h"
 
 s16 CollisionCheck_Kecleon(struct Vector16 *arg0, u16 *arg1)
 {
@@ -64,10 +65,11 @@ s16 CollisionCheck_Kecleon(struct Vector16 *arg0, u16 *arg1)
         break;
     }
 
-    ProcessKecleonCollisionEvent(some_enum, &return_val, arg1);
+    ProcessKecleonBallDisturbanceCollisionEvent(some_enum, &return_val, arg1);
     return return_val;
 }
 
+// This handles the ball hitting the kecleon
 void CheckKecleonEntityCollision(struct Vector16 *arg0, u16 *arg1, u8 *arg2)
 {
     s16 deltaX;
@@ -91,10 +93,10 @@ void CheckKecleonEntityCollision(struct Vector16 *arg0, u16 *arg1, u8 *arg2)
             return;
         if (gCurrentPinballGame->ball->ballHidden != 0)
             return;
-        if (gCurrentPinballGame->bossEntityState > 8)
+        if (gCurrentPinballGame->bossEntityState >= KECLEON_ENTITY_STATE_HIT_WHILE_STANDING)
             return;
 
-        gCurrentPinballGame->bossEntityState = 9;
+        gCurrentPinballGame->bossEntityState = KECLEON_ENTITY_STATE_HIT_WHILE_STANDING;
     }
     else if (gCurrentPinballGame->boardEntityCollisionMode == 2)
     {
@@ -116,16 +118,17 @@ void CheckKecleonEntityCollision(struct Vector16 *arg0, u16 *arg1, u8 *arg2)
             return;
         if (gCurrentPinballGame->ball->ballHidden != 0)
             return;
-        if (gCurrentPinballGame->bossEntityState == 12)
+        if (gCurrentPinballGame->bossEntityState == KECLEON_ENTITY_STATE_RESPOND_TO_HIT)
             return;
 
-        gCurrentPinballGame->bossEntityState = 11;
+        gCurrentPinballGame->bossEntityState = KECLEON_ENTITY_STATE_HIT_WHILE_DOWN;
         *arg1 = maskedResult;
         *arg2 = 6;
     }
 }
 
-void ProcessKecleonCollisionEvent(u8 arg0, u16 *arg1, u16 *arg2)
+//This handles the signs of motion in the flower/bush/water collision that the *ball* triggers
+void ProcessKecleonBallDisturbanceCollisionEvent(u8 arg0, u16 *arg1, u16 *arg2)
 {
     s16 x, y;
     x = gCurrentPinballGame->ball->positionQ0.x;
@@ -149,24 +152,24 @@ void ProcessKecleonCollisionEvent(u8 arg0, u16 *arg1, u16 *arg2)
         {
             if (y <= 0x38)
             {
-                if (gCurrentPinballGame->kecleonBerryLargeFlashTimer[0] <= 0)
-                    gCurrentPinballGame->kecleonBerryLargeFlashTimer[0] = 0x18;
+                if (gCurrentPinballGame->kecleonFlowerMotionTimer[0] <= 0)
+                    gCurrentPinballGame->kecleonFlowerMotionTimer[0] = 0x18;
             }
             else
             {
-                if (gCurrentPinballGame->kecleonBerryLargeFlashTimer[1] <= 0)
-                    gCurrentPinballGame->kecleonBerryLargeFlashTimer[1] = 0x18;
+                if (gCurrentPinballGame->kecleonFlowerMotionTimer[1] <= 0)
+                    gCurrentPinballGame->kecleonFlowerMotionTimer[1] = 0x18;
             }
         }
         else if (y <= 0x63)
         {
-            if (gCurrentPinballGame->kecleonBerryLargeFlashTimer[3] <= 0)
-                gCurrentPinballGame->kecleonBerryLargeFlashTimer[3] = 0x18;
+            if (gCurrentPinballGame->kecleonFlowerMotionTimer[3] <= 0)
+                gCurrentPinballGame->kecleonFlowerMotionTimer[3] = 0x18;
         }
         else
         {
-            if (gCurrentPinballGame->kecleonBerryLargeFlashTimer[2] <= 0)
-                gCurrentPinballGame->kecleonBerryLargeFlashTimer[2] = 0x18;
+            if (gCurrentPinballGame->kecleonFlowerMotionTimer[2] <= 0)
+                gCurrentPinballGame->kecleonFlowerMotionTimer[2] = 0x18;
         }
         break;
     case 9:
@@ -174,48 +177,48 @@ void ProcessKecleonCollisionEvent(u8 arg0, u16 *arg1, u16 *arg2)
         {
             if (y <= 0x45)
             {
-                if (gCurrentPinballGame->kecleonBerrySmallFlashTimer[7] <= 0)
-                    gCurrentPinballGame->kecleonBerrySmallFlashTimer[7] = 0x18;
+                if (gCurrentPinballGame->kecleonBushMotionTimer[7] <= 0)
+                    gCurrentPinballGame->kecleonBushMotionTimer[7] = 0x18;
             }
             else
             {
-                if (gCurrentPinballGame->kecleonBerrySmallFlashTimer[5] <= 0)
-                    gCurrentPinballGame->kecleonBerrySmallFlashTimer[5] = 0x18;
+                if (gCurrentPinballGame->kecleonBushMotionTimer[5] <= 0)
+                    gCurrentPinballGame->kecleonBushMotionTimer[5] = 0x18;
             }
         }
         else if (y <= 0x45)
         {
-            if (gCurrentPinballGame->kecleonBerrySmallFlashTimer[8] <= 0)
-                gCurrentPinballGame->kecleonBerrySmallFlashTimer[8] = 0x18;
+            if (gCurrentPinballGame->kecleonBushMotionTimer[8] <= 0)
+                gCurrentPinballGame->kecleonBushMotionTimer[8] = 0x18;
         }
         else
         {
-            if (gCurrentPinballGame->kecleonBerrySmallFlashTimer[0] <= 0)
-                gCurrentPinballGame->kecleonBerrySmallFlashTimer[0] = 0x18;
+            if (gCurrentPinballGame->kecleonBushMotionTimer[0] <= 0)
+                gCurrentPinballGame->kecleonBushMotionTimer[0] = 0x18;
         }
         break;
     case 10:
-        if (gCurrentPinballGame->kecleonHitboxX == 0)
+        if (gCurrentPinballGame->kecleonWaterBallCollisionTimer == 0)
         {
-            gCurrentPinballGame->kecleonHitSparkTimer[0] = 0xB;
+            gCurrentPinballGame->kecleonWaterMotionTimer[0] = 0xB;
             gCurrentPinballGame->ballTrailPosition[0].x = gCurrentPinballGame->ball->positionQ0.x - 7;
             gCurrentPinballGame->ballTrailPosition[0].y = gCurrentPinballGame->ball->positionQ0.y - 7;
         }
-        else if (gCurrentPinballGame->kecleonHitboxX == 3)
+        else if (gCurrentPinballGame->kecleonWaterBallCollisionTimer == 3)
         {
-            gCurrentPinballGame->kecleonHitSparkTimer[1] = 0xB;
+            gCurrentPinballGame->kecleonWaterMotionTimer[1] = 0xB;
             gCurrentPinballGame->ballTrailPosition[1].x = gCurrentPinballGame->ball->positionQ0.x - 7;
             gCurrentPinballGame->ballTrailPosition[1].y = gCurrentPinballGame->ball->positionQ0.y - 7;
         }
-        else if (gCurrentPinballGame->kecleonHitboxX == 6)
+        else if (gCurrentPinballGame->kecleonWaterBallCollisionTimer == 6)
         {
-            gCurrentPinballGame->kecleonHitSparkTimer[2] = 0xB;
+            gCurrentPinballGame->kecleonWaterMotionTimer[2] = 0xB;
             gCurrentPinballGame->ballTrailPosition[2].x = gCurrentPinballGame->ball->positionQ0.x - 7;
             gCurrentPinballGame->ballTrailPosition[2].y = gCurrentPinballGame->ball->positionQ0.y - 7;
         }
-        else if (gCurrentPinballGame->kecleonHitboxX == 9)
+        else if (gCurrentPinballGame->kecleonWaterBallCollisionTimer == 9)
         {
-            gCurrentPinballGame->kecleonHitSparkTimer[3] = 0xB;
+            gCurrentPinballGame->kecleonWaterMotionTimer[3] = 0xB;
             gCurrentPinballGame->ballTrailPosition[3].x = gCurrentPinballGame->ball->positionQ0.x - 7;
             gCurrentPinballGame->ballTrailPosition[3].y = gCurrentPinballGame->ball->positionQ0.y - 7;
         }
@@ -225,42 +228,43 @@ void ProcessKecleonCollisionEvent(u8 arg0, u16 *arg1, u16 *arg2)
         {
             if (y <= 0x45)
             {
-                if (gCurrentPinballGame->kecleonBerrySmallFlashTimer[9] <= 0)
-                    gCurrentPinballGame->kecleonBerrySmallFlashTimer[9] = 0x18;
+                if (gCurrentPinballGame->kecleonBushMotionTimer[9] <= 0)
+                    gCurrentPinballGame->kecleonBushMotionTimer[9] = 0x18;
             }
             else
             {
-                if (gCurrentPinballGame->kecleonBerrySmallFlashTimer[2] <= 0)
-                    gCurrentPinballGame->kecleonBerrySmallFlashTimer[2] = 0x18;
+                if (gCurrentPinballGame->kecleonBushMotionTimer[2] <= 0)
+                    gCurrentPinballGame->kecleonBushMotionTimer[2] = 0x18;
             }
         }
         else if (y <= 0x45)
         {
-            if (gCurrentPinballGame->kecleonBerrySmallFlashTimer[6] <= 0)
-                gCurrentPinballGame->kecleonBerrySmallFlashTimer[6] = 0x18;
+            if (gCurrentPinballGame->kecleonBushMotionTimer[6] <= 0)
+                gCurrentPinballGame->kecleonBushMotionTimer[6] = 0x18;
         }
         else
         {
-            if (gCurrentPinballGame->kecleonBerrySmallFlashTimer[1] <= 0)
-                gCurrentPinballGame->kecleonBerrySmallFlashTimer[1] = 0x18;
+            if (gCurrentPinballGame->kecleonBushMotionTimer[1] <= 0)
+                gCurrentPinballGame->kecleonBushMotionTimer[1] = 0x18;
         }
         break;
     case 12:
         if (x <= 0x72)
         {
-            if (gCurrentPinballGame->kecleonBerrySmallFlashTimer[4] <= 0)
-                gCurrentPinballGame->kecleonBerrySmallFlashTimer[4] = 0x18;
+            if (gCurrentPinballGame->kecleonBushMotionTimer[4] <= 0)
+                gCurrentPinballGame->kecleonBushMotionTimer[4] = 0x18;
         }
         else
         {
-            if (gCurrentPinballGame->kecleonBerrySmallFlashTimer[3] <= 0)
-                gCurrentPinballGame->kecleonBerrySmallFlashTimer[3] = 0x18;
+            if (gCurrentPinballGame->kecleonBushMotionTimer[3] <= 0)
+                gCurrentPinballGame->kecleonBushMotionTimer[3] = 0x18;
         }
         break;
     }
 }
 
-void CheckKecleonProjectileCollision(struct Vector16 *arg0)
+//This handles the signs of motion in the flowers/bushes/water that *kecleon* triggers when it moves.
+void ProcessKecleonSkulkingDisturbanceCollisionEvent(struct Vector16 *arg0)
 {
     struct Vector16 vec1;
     struct Vector16 vec2;
@@ -296,24 +300,24 @@ void CheckKecleonProjectileCollision(struct Vector16 *arg0)
         {
             if (y <= 0x38)
             {
-                if (gCurrentPinballGame->kecleonBerryLargeFlashTimer[0] <= 0)
-                    gCurrentPinballGame->kecleonBerryLargeFlashTimer[0] = 0x18;
+                if (gCurrentPinballGame->kecleonFlowerMotionTimer[0] <= 0)
+                    gCurrentPinballGame->kecleonFlowerMotionTimer[0] = 0x18;
             }
             else
             {
-                if (gCurrentPinballGame->kecleonBerryLargeFlashTimer[1] <= 0)
-                    gCurrentPinballGame->kecleonBerryLargeFlashTimer[1] = 0x18;
+                if (gCurrentPinballGame->kecleonFlowerMotionTimer[1] <= 0)
+                    gCurrentPinballGame->kecleonFlowerMotionTimer[1] = 0x18;
             }
         }
         else if (y <= 0x63)
         {
-            if (gCurrentPinballGame->kecleonBerryLargeFlashTimer[3] <= 0)
-                gCurrentPinballGame->kecleonBerryLargeFlashTimer[3] = 0x18;
+            if (gCurrentPinballGame->kecleonFlowerMotionTimer[3] <= 0)
+                gCurrentPinballGame->kecleonFlowerMotionTimer[3] = 0x18;
         }
         else
         {
-            if (gCurrentPinballGame->kecleonBerryLargeFlashTimer[2] <= 0)
-                gCurrentPinballGame->kecleonBerryLargeFlashTimer[2] = 0x18;
+            if (gCurrentPinballGame->kecleonFlowerMotionTimer[2] <= 0)
+                gCurrentPinballGame->kecleonFlowerMotionTimer[2] = 0x18;
         }
         break;
     case 9:
@@ -321,53 +325,53 @@ void CheckKecleonProjectileCollision(struct Vector16 *arg0)
         {
             if (y <= 0x45)
             {
-                if (gCurrentPinballGame->kecleonBerrySmallFlashTimer[7] <= 0)
-                    gCurrentPinballGame->kecleonBerrySmallFlashTimer[7] = 0x18;
+                if (gCurrentPinballGame->kecleonBushMotionTimer[7] <= 0)
+                    gCurrentPinballGame->kecleonBushMotionTimer[7] = 0x18;
             }
             else
             {
-                if (gCurrentPinballGame->kecleonBerrySmallFlashTimer[5] <= 0)
-                    gCurrentPinballGame->kecleonBerrySmallFlashTimer[5] = 0x18;
+                if (gCurrentPinballGame->kecleonBushMotionTimer[5] <= 0)
+                    gCurrentPinballGame->kecleonBushMotionTimer[5] = 0x18;
             }
         }
         else if (y <= 0x45)
         {
-            if (gCurrentPinballGame->kecleonBerrySmallFlashTimer[8] <= 0)
-                gCurrentPinballGame->kecleonBerrySmallFlashTimer[8] = 0x18;
+            if (gCurrentPinballGame->kecleonBushMotionTimer[8] <= 0)
+                gCurrentPinballGame->kecleonBushMotionTimer[8] = 0x18;
         }
         else
         {
-            if (gCurrentPinballGame->kecleonBerrySmallFlashTimer[0] <= 0)
-                gCurrentPinballGame->kecleonBerrySmallFlashTimer[0] = 0x18;
+            if (gCurrentPinballGame->kecleonBushMotionTimer[0] <= 0)
+                gCurrentPinballGame->kecleonBushMotionTimer[0] = 0x18;
         }
         break;
     case 10:
         gCurrentPinballGame->kecleonCollisionEnabled = 0;
-        if (gCurrentPinballGame->kecleonHitboxY == 0)
+        if (gCurrentPinballGame->kecleonWaterCollisionTimer == 0)
         {
-            if (gCurrentPinballGame->kecleonCollisionPos.x != gCurrentPinballGame->kecleonBerryHitPosition[0].x || gCurrentPinballGame->kecleonCollisionPos.y != gCurrentPinballGame->kecleonBerryHitPosition[0].y)
+            if (gCurrentPinballGame->kecleonCollisionPos.x != gCurrentPinballGame->kecleonWaterTileCollisionPosition[0].x || gCurrentPinballGame->kecleonCollisionPos.y != gCurrentPinballGame->kecleonWaterTileCollisionPosition[0].y)
             {
-                gCurrentPinballGame->kecleonHitSparkTimer[4] = 0x11;
-                gCurrentPinballGame->kecleonBerryHitPosition[0].x = gCurrentPinballGame->kecleonCollisionPos.x;
-                gCurrentPinballGame->kecleonBerryHitPosition[0].y = gCurrentPinballGame->kecleonCollisionPos.y;
+                gCurrentPinballGame->kecleonWaterMotionTimer[4] = 0x11;
+                gCurrentPinballGame->kecleonWaterTileCollisionPosition[0].x = gCurrentPinballGame->kecleonCollisionPos.x;
+                gCurrentPinballGame->kecleonWaterTileCollisionPosition[0].y = gCurrentPinballGame->kecleonCollisionPos.y;
             }
         }
-        else if (gCurrentPinballGame->kecleonHitboxY == 8)
+        else if (gCurrentPinballGame->kecleonWaterCollisionTimer == 8)
         {
-            if (gCurrentPinballGame->kecleonCollisionPos.x != gCurrentPinballGame->kecleonBerryHitPosition[1].x || gCurrentPinballGame->kecleonCollisionPos.y != gCurrentPinballGame->kecleonBerryHitPosition[1].y)
+            if (gCurrentPinballGame->kecleonCollisionPos.x != gCurrentPinballGame->kecleonWaterTileCollisionPosition[1].x || gCurrentPinballGame->kecleonCollisionPos.y != gCurrentPinballGame->kecleonWaterTileCollisionPosition[1].y)
             {
-                gCurrentPinballGame->kecleonHitSparkTimer[5] = 0x11;
-                gCurrentPinballGame->kecleonBerryHitPosition[1].x = gCurrentPinballGame->kecleonCollisionPos.x;
-                gCurrentPinballGame->kecleonBerryHitPosition[1].y = gCurrentPinballGame->kecleonCollisionPos.y;
+                gCurrentPinballGame->kecleonWaterMotionTimer[5] = 0x11;
+                gCurrentPinballGame->kecleonWaterTileCollisionPosition[1].x = gCurrentPinballGame->kecleonCollisionPos.x;
+                gCurrentPinballGame->kecleonWaterTileCollisionPosition[1].y = gCurrentPinballGame->kecleonCollisionPos.y;
             }
         }
-        else if (gCurrentPinballGame->kecleonHitboxY == 16)
+        else if (gCurrentPinballGame->kecleonWaterCollisionTimer == 16)
         {
-            if (gCurrentPinballGame->kecleonCollisionPos.x != gCurrentPinballGame->kecleonBerryHitPosition[2].x || gCurrentPinballGame->kecleonCollisionPos.y != gCurrentPinballGame->kecleonBerryHitPosition[2].y)
+            if (gCurrentPinballGame->kecleonCollisionPos.x != gCurrentPinballGame->kecleonWaterTileCollisionPosition[2].x || gCurrentPinballGame->kecleonCollisionPos.y != gCurrentPinballGame->kecleonWaterTileCollisionPosition[2].y)
             {
-                gCurrentPinballGame->kecleonHitSparkTimer[6] = 0x11;
-                gCurrentPinballGame->kecleonBerryHitPosition[2].x = gCurrentPinballGame->kecleonCollisionPos.x;
-                gCurrentPinballGame->kecleonBerryHitPosition[2].y = gCurrentPinballGame->kecleonCollisionPos.y;
+                gCurrentPinballGame->kecleonWaterMotionTimer[6] = 0x11;
+                gCurrentPinballGame->kecleonWaterTileCollisionPosition[2].x = gCurrentPinballGame->kecleonCollisionPos.x;
+                gCurrentPinballGame->kecleonWaterTileCollisionPosition[2].y = gCurrentPinballGame->kecleonCollisionPos.y;
             }
         }
         break;
@@ -376,36 +380,36 @@ void CheckKecleonProjectileCollision(struct Vector16 *arg0)
         {
             if (y <= 0x45)
             {
-                if (gCurrentPinballGame->kecleonBerrySmallFlashTimer[9] <= 0)
-                    gCurrentPinballGame->kecleonBerrySmallFlashTimer[9] = 0x18;
+                if (gCurrentPinballGame->kecleonBushMotionTimer[9] <= 0)
+                    gCurrentPinballGame->kecleonBushMotionTimer[9] = 0x18;
             }
             else
             {
-                if (gCurrentPinballGame->kecleonBerrySmallFlashTimer[2] <= 0)
-                    gCurrentPinballGame->kecleonBerrySmallFlashTimer[2] = 0x18;
+                if (gCurrentPinballGame->kecleonBushMotionTimer[2] <= 0)
+                    gCurrentPinballGame->kecleonBushMotionTimer[2] = 0x18;
             }
         }
         else if (y <= 0x45)
         {
-            if (gCurrentPinballGame->kecleonBerrySmallFlashTimer[6] <= 0)
-                gCurrentPinballGame->kecleonBerrySmallFlashTimer[6] = 0x18;
+            if (gCurrentPinballGame->kecleonBushMotionTimer[6] <= 0)
+                gCurrentPinballGame->kecleonBushMotionTimer[6] = 0x18;
         }
         else
         {
-            if (gCurrentPinballGame->kecleonBerrySmallFlashTimer[1] <= 0)
-                gCurrentPinballGame->kecleonBerrySmallFlashTimer[1] = 0x18;
+            if (gCurrentPinballGame->kecleonBushMotionTimer[1] <= 0)
+                gCurrentPinballGame->kecleonBushMotionTimer[1] = 0x18;
         }
         break;
     case 12:
         if (x <= 0x72)
         {
-            if (gCurrentPinballGame->kecleonBerrySmallFlashTimer[4] <= 0)
-                gCurrentPinballGame->kecleonBerrySmallFlashTimer[4] = 0x18;
+            if (gCurrentPinballGame->kecleonBushMotionTimer[4] <= 0)
+                gCurrentPinballGame->kecleonBushMotionTimer[4] = 0x18;
         }
         else
         {
-            if (gCurrentPinballGame->kecleonBerrySmallFlashTimer[3] <= 0)
-                gCurrentPinballGame->kecleonBerrySmallFlashTimer[3] = 0x18;
+            if (gCurrentPinballGame->kecleonBushMotionTimer[3] <= 0)
+                gCurrentPinballGame->kecleonBushMotionTimer[3] = 0x18;
         }
         break;
     }

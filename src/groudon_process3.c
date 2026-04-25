@@ -73,8 +73,8 @@ void GroudonBoardProcess_3A_3B120(void)
     gCurrentPinballGame->bossAnimLoopCount = 0;
     gCurrentPinballGame->bossPositionX = 0;
     gCurrentPinballGame->bossPositionY = 0;
-    gCurrentPinballGame->bossVelocityX = 0;
-    gCurrentPinballGame->bossVelocityY = 0;
+    gCurrentPinballGame->bossTargetXPosition = 0;
+    gCurrentPinballGame->bossTargetYPosition = 0;
     gCurrentPinballGame->bossCollisionX = 0;
     gCurrentPinballGame->bossCollisionY = 0;
     gCurrentPinballGame->bossHitFlashTimer = 0;

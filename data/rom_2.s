@@ -4368,10 +4368,10 @@ gKecleonOverlayTilemapPointers:: @ 0x086AEA50
     .4byte gKecleonOverlayTilemap3
 
 gKecleonOverlayTileAnimIndices:: @ 0x086AEA60
-	.incbin "baserom.gba", 0x6AEA60, 0x8
+	.byte 0,0,1,0,2,0,1,0
 
-gKecleonBerryFlashAnimIndices:: @ 0x086AEA68
-	.incbin "baserom.gba", 0x6AEA68, 0x8
+gKecleonPlantAnimIndices:: @ 0x086AEA68
+	.byte 0,0,1,0,0,0,2,0
 
 gKecleonSpriteYSortData:: @ 0x086AEA70
     @ 14 sets: {Pointer, 2 u8 vals, 0x2 spacer}

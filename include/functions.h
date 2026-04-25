@@ -393,8 +393,8 @@ extern void CheckDusclopsEntitiesCollision(struct Vector16 *arg0, s16* arg1, u8*
 extern void CheckDusclopsAbsorbZoneHit(u8, u16*, u16*);
 //extern ? CollisionCheck_Kecleon();
 extern void CheckKecleonEntityCollision(struct Vector16 *, u16 *, u8 *);
-extern void ProcessKecleonCollisionEvent(u8, u16 *, u16 *);
-extern void CheckKecleonProjectileCollision(struct Vector16 *);
+extern void ProcessKecleonBallDisturbanceCollisionEvent(u8, u16 *, u16 *);
+extern void ProcessKecleonSkulkingDisturbanceCollisionEvent(struct Vector16 *);
 //extern ? CollisionCheck_Kyogre();
 extern void CheckKyogreEntityCollision(struct Vector16 *, u16 *, u8 *);
 extern void ProcessKyogreCollisionEvent(u8, u16 *, u16 *);

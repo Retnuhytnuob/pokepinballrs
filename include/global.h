@@ -539,18 +539,18 @@ struct PinballGame
     /*0x3E6*/ s16 bossAnimLoopCount;
     /*0x3E8*/ s16 bossPositionX;
     /*0x3EA*/ s16 bossPositionY;
-    /*0x3EC*/ s16 bossVelocityX;
-    /*0x3EE*/ s16 bossVelocityY;
+    /*0x3EC*/ s16 bossTargetXPosition;
+    /*0x3EE*/ s16 bossTargetYPosition;
     /*0x3F0*/ u16 bossCollisionX;
     /*0x3F2*/ u16 bossCollisionY;
     /*0x3F4*/ s8 kecleonTargetState;
     /*0x3F5*/ s8 kecleonTargetFrameIndex;
-    /*0x3F6*/ s8 kecleonTargetColorMatch;
+    /*0x3F6*/ s8 kecleonFallDirection; // 0 = fell left; 1 fell right
     /*0x3F7*/ s8 kecleonTargetVisible;
     /*0x3F8*/ s8 kecleonCollisionEnabled;
     /*0x3F9*/ u8 filler3F9[0x1];
-    /*0x3FA*/ s16 kecleonTargetX;
-    /*0x3FC*/ s16 kecleonTargetY;
+    /*0x3FA*/ s16 kecleonCamoStrength;
+    /*0x3FC*/ s16 kecleonDustGfxFrame;
     /*0x3FE*/ u8 filler3FE[0x2];
     /*0x400*/ struct Vector16 kecleonCollisionPos;
     /*0x404*/ s8 kecleonBoardHitState;
@@ -561,15 +561,15 @@ struct PinballGame
     /*0x40A*/ u16 kecleonCollisionX;
     /*0x40C*/ u16 kecleonCollisionY;
     /*0x40E*/ u16 kecleonFrameTimer;
-    /*0x410*/ s16 kecleonHitboxX;
-    /*0x412*/ s16 kecleonHitboxY;
+    /*0x410*/ s16 kecleonWaterBallCollisionTimer; // controlls timer for when the Ball will leave splashes
+    /*0x412*/ s16 kecleonWaterCollisionTimer; // controls timer for when Kecleon will leave splashes
     /*0x414*/ struct Vector16 orbLogicPosition;
     /*0x418*/ struct Vector16 orbCollisionPosition;
-    /*0x41C*/ s8 kecleonBerryLargeFlashTimer[4];
-    /*0x420*/ s8 kecleonBerrySmallFlashTimer[10];
-    /*0x42A*/ s8 kecleonHitSparkTimer[7];
+    /*0x41C*/ s8 kecleonFlowerMotionTimer[4];
+    /*0x420*/ s8 kecleonBushMotionTimer[10];
+    /*0x42A*/ s8 kecleonWaterMotionTimer[7];
     /*0x431*/ u8 filler431[0x3];
-    /*0x434*/ struct Vector16 kecleonBerryHitPosition[3];
+    /*0x434*/ struct Vector16 kecleonWaterTileCollisionPosition[3];
     /*0x440*/ s8 shockwaveAlreadyHit;
     /*0x441*/ s8 orbEntityState[2];
     /*0x443*/ s8 orbTargetWaypointIndex[2];
