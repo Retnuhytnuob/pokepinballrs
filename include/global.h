@@ -518,11 +518,11 @@ struct PinballGame
     /*0x39A*/ u8 minionNextSpriteVariant[3];
     /*0x39D*/ s8 minionOamIx[3];
     /*0x3A0*/ s8 minionState[3];
-    /*0x3A3*/ s8 minionFramesetIx[3];
+    /*0x3A3*/ s8 minionFramesetIx[3]; // Duskull/Sealeo frame index
     /*0x3A6*/ s8 minionDrawInFrame[3];
     /*0x3A9*/ s8 minionCanCollide[3];
     /*0x3AC*/ s8 minionDeathTimer[3];
-    /*0x3B0*/ u16 minionStateTimer[3];
+    /*0x3B0*/ u16 minionStateTimer[3]; // Duskull/Sealeo state timer
     /*0x3B6*/ u16 minionTimeAlive[3];
     /*0x3BC*/ u16 minionEscapeAtTime[3];
     /*0x3C2*/ u8 filler3C2[0x2];
@@ -642,37 +642,38 @@ struct PinballGame
     /*0x520*/ struct Vector16 orbHitPosition;
     /*0x524*/ struct Vector16 windEntityPosition;
     /*0x528*/ struct Vector16 windCloudPosition;
-    /*0x52C*/ s8 sphealKnockdownCount[2];
-    /*0x52E*/ s8 sphealKnockdownDisplayCount[2];
-    /*0x530*/ s8 knockdownTargetIndex[3];
-    /*0x533*/ s8 knockdownBounceCount[3];
-    /*0x536*/ s8 knockdownPhase[3];
+    /*0x52C*/ s8 sphealKnockdownCount[2]; // ix: 0=spheal, 1 = ball
+    /*0x52E*/ s8 sphealKnockdownDisplayCount[2]; // ix: 0=spheal, 1 = ball
+
+    /*0x530*/ s8 knockdownTargetIndex[3]; // ix: 0/1=spheal, 2=ball -- val: 0=left sealeo, 1=right sealeo
+    /*0x533*/ s8 knockdownBounceCount[3]; // ix: 0/1=spheal, 2=ball
+    /*0x536*/ s8 knockdownPhase[3]; // ix: 0/1=spheal, 2=ball
     /*0x539*/ u8 filler539[0x1];
     /*0x53A*/ u16 resultsAnimTimer;
-    /*0x53C*/ u16 knockdownStunTimer[3];
+    /*0x53C*/ u16 knockdownBallReadinessTimer[3];
     /*0x542*/ u16 scoreCountdownTimer;
     /*0x544*/ u32 totalBonusScore;
-    /*0x548*/ s8 minionHitFlashTimer[2];
+    /*0x548*/ s8 sealeoStunnedTimer[2];
     /*0x54A*/ s8 unk54A;
-    /*0x54B*/ s8 flyingEnemySinkSpeed[2];
-    /*0x54D*/ s8 flyingEnemyHitCooldown[2];
-    /*0x54F*/ s8 flyingEnemyCollisionType[2];
-    /*0x551*/ s8 flyingEnemyDirection[2];
-    /*0x553*/ s8 flyingEnemyState[2];
-    /*0x555*/ s8 flyingEnemyPrevSpriteIndex[2];
-    /*0x557*/ s8 flyingEnemySpawnVariant[2];
-    /*0x559*/ s8 flyingEnemyPathIndex[2];
-    /*0x55B*/ s8 flyingEnemyFramesetIndex[2];
-    /*0x55D*/ s8 flyingEnemyOamXOffset[2];
-    /*0x55F*/ s8 flyingEnemyOamYOffset[2];
+    /*0x54B*/ s8 sphealWasStunned[2];
+    /*0x54D*/ s8 sphealStunnedTimer[2];
+    /*0x54F*/ s8 sphealEntityCollisionType[2];
+    /*0x551*/ s8 sphealMovementDirection[2]; //0 = left, 1 = right
+    /*0x553*/ s8 sphealEntityState[2];
+    /*0x555*/ s8 sphealNextFrameIx[2];
+    /*0x557*/ s8 sphealSpawnPositionVariant[2];
+    /*0x559*/ s8 sphealFlightPathIx[2];
+    /*0x55B*/ s8 sphealFramesetIndex[2];
+    /*0x55D*/ s8 sphealOamXOffset[2];
+    /*0x55F*/ s8 sphealOamYOffset[2];
     /*0x561*/ u8 filler561[0x1];
-    /*0x562*/ u16 flyingEnemyAnimTimer[2];
-    /*0x566*/ s16 flyingEnemyScreenY[2];
-    /*0x56A*/ s16 flyingEnemyFlyTimer[2];
+    /*0x562*/ u16 sphealAnimTimer[2];
+    /*0x566*/ s16 sphealHitYPosition[2];
+    /*0x56A*/ s16 sphealEscapeTimer[2];
     /*0x56E*/ u8 filler56E[0x2];
-    /*0x570*/ struct Vector16 flyingEnemyCollisionPos[2];
-    /*0x578*/ struct Vector16 flyingEnemyVelocity[2];
-    /*0x580*/ struct Vector32 flyingEnemyPositionQ8[2];
+    /*0x570*/ struct Vector16 sphealEntityCollisionPos[2];
+    /*0x578*/ struct Vector16 sphealVelocity[2];
+    /*0x580*/ struct Vector32 sphealPositionQ8[2];
     /*0x590*/ s8 unk590;
     /*0x591*/ s8 deliveryAnimFrameIndex;
     /*0x592*/ u16 deliveryAnimTimer;
@@ -960,7 +961,7 @@ extern u16 gKyogreForm2CollisionMap[];
 extern u16 gKyogreForm3CollisionMap[];
 extern u16 gGroudonBodyCollisionMap[0x3800];
 extern u16 gGroudonProjectileCollisionMap[0x2A80];
-extern const u16 gSphealCrackedIceCollisionMap[0x1000];
+extern const u16 gSphealRampCollisionMap[0x1000];
 extern const u16 gSphealFrozenIceCollisionMap[0x1000];
 extern u8 gFlipperTileGraphics[][0x200];
 extern u16 gDusclopsBoardDusclopsAppearFx_Gfx[]; 

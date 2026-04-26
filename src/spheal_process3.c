@@ -46,7 +46,7 @@ void SphealBoardProcess_3A_42E48(void)
     gMain.rngValue = gMain.systemFrameCount;
     gCurrentPinballGame->stageTimer = 0;
     gCurrentPinballGame->boardSubState = BONUS_BOARD_SUBSTATE_ACTIVE;
-    gCurrentPinballGame->boardState = 0;
+    gCurrentPinballGame->boardState = SPHEAL_BOARD_STATE_INTRO;
     gCurrentPinballGame->boardModeType = 1;
     gCurrentPinballGame->eventTimer = gCurrentPinballGame->timerBonus + 7200;
     gCurrentPinballGame->timerBonus = 0;
@@ -71,46 +71,50 @@ void SphealBoardProcess_3A_42E48(void)
     gCurrentPinballGame->unk596 = 0;
     gCurrentPinballGame->ballDeliveryActive = 1;
 
+    // Clear minion info, used for Sealeo. (3rd slot not used on this board)
     for (i = 0; i < 3; i++)
     {
-        gCurrentPinballGame->minionState[i] = 0;
+        gCurrentPinballGame->minionState[i] = SEALEO_ENTITY_STATE_INIT;
         gCurrentPinballGame->minionFramesetIx[i] = 0;
         gCurrentPinballGame->minionStateTimer[i] = 0;
     }
 
+    // Set base info for the 'knockdown' process. spheal/ball being bounced, and into the hoop.
     for (i = 0; i < 3; i++)
     {
-        gCurrentPinballGame->knockdownTargetIndex[i] = 0;
+        gCurrentPinballGame->knockdownTargetIndex[i] = TARGET_SEALEO_LEFT;
         gCurrentPinballGame->knockdownBounceCount[i] = 0;
-        gCurrentPinballGame->knockdownPhase[i] = 0;
-        gCurrentPinballGame->knockdownStunTimer[i] = 0;
+        gCurrentPinballGame->knockdownPhase[i] = SPHEAL_KNOCKDOWN_PHASE_WAITING;
+        gCurrentPinballGame->knockdownBallReadinessTimer[i] = 0;
     }
 
+    // Clear info for the hoop counts, sealeo stun timers, and spheal data
     for (i = 0; i < 2; i++)
     {
         gCurrentPinballGame->sphealKnockdownCount[i] = 0;
         gCurrentPinballGame->sphealKnockdownDisplayCount[i] = 0;
-        gCurrentPinballGame->minionHitFlashTimer[i] = 0;
-        gCurrentPinballGame->flyingEnemySinkSpeed[i] = 0;
-        gCurrentPinballGame->flyingEnemyHitCooldown[i] = 0;
-        gCurrentPinballGame->flyingEnemyCollisionType[i] = 0;
-        gCurrentPinballGame->flyingEnemyDirection[i] = 0;
-        gCurrentPinballGame->flyingEnemyState[i] = 0;
-        gCurrentPinballGame->flyingEnemyPrevSpriteIndex[i] = 0;
-        gCurrentPinballGame->flyingEnemySpawnVariant[i] = 0;
-        gCurrentPinballGame->flyingEnemyPathIndex[i] = 0;
-        gCurrentPinballGame->flyingEnemyFramesetIndex[i] = 0;
-        gCurrentPinballGame->flyingEnemyOamXOffset[i] = 0;
-        gCurrentPinballGame->flyingEnemyOamYOffset[i] = 0;
-        gCurrentPinballGame->flyingEnemyAnimTimer[i] = 0;
-        gCurrentPinballGame->flyingEnemyScreenY[i] = 0;
-        gCurrentPinballGame->flyingEnemyFlyTimer[i] = 0;
-        gCurrentPinballGame->flyingEnemyCollisionPos[i].x = 0;
-        gCurrentPinballGame->flyingEnemyCollisionPos[i].y = 0;
-        gCurrentPinballGame->flyingEnemyVelocity[i].x = 0;
-        gCurrentPinballGame->flyingEnemyVelocity[i].y = 0;
-        gCurrentPinballGame->flyingEnemyPositionQ8[i].x = 0;
-        gCurrentPinballGame->flyingEnemyPositionQ8[i].y = 0;
+        gCurrentPinballGame->sealeoStunnedTimer[i] = 0;
+
+        gCurrentPinballGame->sphealWasStunned[i] = FALSE;
+        gCurrentPinballGame->sphealStunnedTimer[i] = 0;
+        gCurrentPinballGame->sphealEntityCollisionType[i] = SPHEAL_COLLISION_TYPE_INACTIVE;
+        gCurrentPinballGame->sphealMovementDirection[i] = SPHEAL_MOVING_LEFT;
+        gCurrentPinballGame->sphealEntityState[i] = SPHEAL_ENTITY_STATE_INIT;
+        gCurrentPinballGame->sphealNextFrameIx[i] = 0;
+        gCurrentPinballGame->sphealSpawnPositionVariant[i] = SPHEAL_SPAWN_AT_LEFT_RAMP;
+        gCurrentPinballGame->sphealFlightPathIx[i] = 0;
+        gCurrentPinballGame->sphealFramesetIndex[i] = 0;
+        gCurrentPinballGame->sphealOamXOffset[i] = 0;
+        gCurrentPinballGame->sphealOamYOffset[i] = 0;
+        gCurrentPinballGame->sphealAnimTimer[i] = 0;
+        gCurrentPinballGame->sphealHitYPosition[i] = 0;
+        gCurrentPinballGame->sphealEscapeTimer[i] = 0;
+        gCurrentPinballGame->sphealEntityCollisionPos[i].x = 0;
+        gCurrentPinballGame->sphealEntityCollisionPos[i].y = 0;
+        gCurrentPinballGame->sphealVelocity[i].x = 0;
+        gCurrentPinballGame->sphealVelocity[i].y = 0;
+        gCurrentPinballGame->sphealPositionQ8[i].x = 0;
+        gCurrentPinballGame->sphealPositionQ8[i].y = 0;
     }
 
     gCurrentPinballGame->flippersDisabled = 0;
@@ -144,7 +148,7 @@ void SphealBoardProcess_3B_43228(void)
 {
     switch (gCurrentPinballGame->boardState)
     {
-    case 0:
+    case SPHEAL_BOARD_STATE_INTRO:
         gCurrentPinballGame->ballUpgradeTimerFrozen = 1;
         if (gCurrentPinballGame->stageTimer < 340)
         {
@@ -159,11 +163,11 @@ void SphealBoardProcess_3B_43228(void)
         else
         {
             gCurrentPinballGame->cameraYAdjust = 0;
-            gCurrentPinballGame->boardState = 1;
+            gCurrentPinballGame->boardState = SPHEAL_BOARD_STATE_ACTIVE_PHASE;
             gCurrentPinballGame->stageTimer = 0;
         }
         break;
-    case 1:
+    case SPHEAL_BOARD_STATE_ACTIVE_PHASE:
         if (gCurrentPinballGame->eventTimer == 0)
         {
             gCurrentPinballGame->boardModeType = 3;
@@ -182,12 +186,12 @@ void SphealBoardProcess_3B_43228(void)
             }
             else
             {
-                gCurrentPinballGame->boardState = 2;
+                gCurrentPinballGame->boardState = SPHEAL_BOARD_STATE_ENDING;
                 gCurrentPinballGame->stageTimer = 0;
             }
         }
         break;
-    case 2:
+    case SPHEAL_BOARD_STATE_ENDING:
         if (gCurrentPinballGame->stageTimer == 0)
         {
             m4aMPlayAllStop();
@@ -200,7 +204,7 @@ void SphealBoardProcess_3B_43228(void)
         }
         else
         {
-            gCurrentPinballGame->boardState = 3;
+            gCurrentPinballGame->boardState = SPHEAL_BOARD_STATE_SCORE_DISPLAY;
             gCurrentPinballGame->stageTimer = 0;
             gMain.spriteGroups[7].active = TRUE;
             gMain.spriteGroups[8].active = TRUE;
@@ -211,7 +215,7 @@ void SphealBoardProcess_3B_43228(void)
             gCurrentPinballGame->boardEntityActive = 1;
         }
         break;
-    case 3:
+    case SPHEAL_BOARD_STATE_SCORE_DISPLAY:
         UpdateSphealResultsScreen();
         if (gCurrentPinballGame->scoreCounterAnimationEnabled)
             gCurrentPinballGame->stageTimer = 181;
@@ -236,12 +240,12 @@ void SphealBoardProcess_3B_43228(void)
         else
         {
             gCurrentPinballGame->stageTimer = 0;
-            gCurrentPinballGame->boardState = 4;
+            gCurrentPinballGame->boardState = SPHEAL_BOARD_STATE_SCORE_DISPLAY_CLEANUP;
         }
 
         gCurrentPinballGame->boardEntityActive = 1;
         break;
-    case 4:
+    case SPHEAL_BOARD_STATE_SCORE_DISPLAY_CLEANUP:
         UpdateSphealResultsScreen();
         if (gCurrentPinballGame->stageTimer < 30)
         {
@@ -252,10 +256,10 @@ void SphealBoardProcess_3B_43228(void)
         else
         {
             gCurrentPinballGame->stageTimer = 0;
-            gCurrentPinballGame->boardState = 5;
+            gCurrentPinballGame->boardState = SPHEAL_BOARD_STATE_PREPARE_RETURN;
         }
         break;
-    case 5:
+    case SPHEAL_BOARD_STATE_PREPARE_RETURN:
         UpdateSphealResultsScreen();
         gCurrentPinballGame->returnToMainBoardFlag = 1;
         gCurrentPinballGame->boardEntityActive = 1;
@@ -282,14 +286,16 @@ void UpdateSealeoEntityLogic(void)
     struct OamDataSimple *oamSimple;
     s16 var0;
 
-    if (gCurrentPinballGame->boardState < 2 && gMain.modeChangeFlags == MODE_CHANGE_NONE)
+    if (gCurrentPinballGame->boardState < SPHEAL_BOARD_STATE_ENDING
+        && gMain.modeChangeFlags == MODE_CHANGE_NONE)
         UpdateSealeoKnockdownPhysics();
 
-    if (gCurrentPinballGame->boardState < 2 && gMain.modeChangeFlags == MODE_CHANGE_NONE)
+    if (gCurrentPinballGame->boardState < SPHEAL_BOARD_STATE_ENDING
+        && gMain.modeChangeFlags == MODE_CHANGE_NONE)
     {
         for (i = 0; i < 2; i++)
         {
-            if (gCurrentPinballGame->minionHitFlashTimer[i] == 23)
+            if (gCurrentPinballGame->sealeoStunnedTimer[i] == 23)
             {
                 MPlayStart(&gMPlayInfo_SE1, &se_unk_13c);
                 gCurrentPinballGame->scoreAddedInFrame = 5000;
@@ -298,15 +304,15 @@ void UpdateSealeoEntityLogic(void)
 
             switch (gCurrentPinballGame->minionState[i])
             {
-            case 0:
+            case SEALEO_ENTITY_STATE_INIT:
                 gCurrentPinballGame->minionStateTimer[i] = 0;
                 gCurrentPinballGame->minionFramesetIx[i] = 4;
-                gCurrentPinballGame->minionState[i] = 1;
+                gCurrentPinballGame->minionState[i] = SEALEO_ENTITY_STATE_READY;
                 break;
-            case 1:
-                if (gCurrentPinballGame->minionHitFlashTimer[i] > 0)
+            case SEALEO_ENTITY_STATE_READY:
+                if (gCurrentPinballGame->sealeoStunnedTimer[i] > 0)
                 {
-                    gCurrentPinballGame->minionHitFlashTimer[i]--;
+                    gCurrentPinballGame->sealeoStunnedTimer[i]--;
                 }
                 else
                 {
@@ -323,10 +329,10 @@ void UpdateSealeoEntityLogic(void)
                     }
                 }
                 break;
-            case 2:
-                if (gCurrentPinballGame->minionHitFlashTimer[i] > 0)
+            case SEALEO_ENTITY_STATE_ANTICIPATE_BOUNCE:
+                if (gCurrentPinballGame->sealeoStunnedTimer[i] > 0)
                 {
-                    gCurrentPinballGame->minionHitFlashTimer[i]--;
+                    gCurrentPinballGame->sealeoStunnedTimer[i]--;
                 }
                 else
                 {
@@ -341,10 +347,10 @@ void UpdateSealeoEntityLogic(void)
                     }
                 }
                 break;
-            case 3:
-                if (gCurrentPinballGame->minionHitFlashTimer[i] > 0)
+            case SEALEO_ENTITY_STATE_DONE_BOUNCING:
+                if (gCurrentPinballGame->sealeoStunnedTimer[i] > 0)
                 {
-                    gCurrentPinballGame->minionHitFlashTimer[i]--;
+                    gCurrentPinballGame->sealeoStunnedTimer[i]--;
                 }
                 else
                 {
@@ -359,7 +365,7 @@ void UpdateSealeoEntityLogic(void)
                         if (gCurrentPinballGame->minionFramesetIx[i] > 14)
                         {
                             gCurrentPinballGame->minionFramesetIx[i] = 4;
-                            gCurrentPinballGame->minionState[i] = 1;
+                            gCurrentPinballGame->minionState[i] = SEALEO_ENTITY_STATE_READY;
                         }
                     }
                 }
@@ -373,7 +379,7 @@ void UpdateSealeoEntityLogic(void)
     {
         group->baseX = 100 - gCurrentPinballGame->cameraXOffset;
         group->baseY = 94 - gCurrentPinballGame->cameraYOffset;
-        if (gCurrentPinballGame->minionHitFlashTimer[0] > 0)
+        if (gCurrentPinballGame->sealeoStunnedTimer[0] > 0)
             var0 = 0;
         else
             var0 = gSealeoFramesetData[gCurrentPinballGame->minionFramesetIx[0]][0];
@@ -389,7 +395,7 @@ void UpdateSealeoEntityLogic(void)
     {
         group->baseX = 140 - gCurrentPinballGame->cameraXOffset;
         group->baseY = 94 - gCurrentPinballGame->cameraYOffset;
-        if (gCurrentPinballGame->minionHitFlashTimer[1] > 0)
+        if (gCurrentPinballGame->sealeoStunnedTimer[1] > 0)
             var0 = 0;
         else
             var0 = gSealeoFramesetData[gCurrentPinballGame->minionFramesetIx[1]][0];
@@ -408,7 +414,7 @@ void UpdateSphealEntityLogic(void)
     s16 var1;
     struct SpriteGroup *group;
     struct OamDataSimple *oamSimple;
-    s16 sp4;
+    s16 sphealFrameIx;
     s16 var2;
     u16 *dst;
     const u16 *src;
@@ -416,417 +422,429 @@ void UpdateSphealEntityLogic(void)
     s16 var4;
     const struct SphealFlightPath *var5;
 
-    if (gCurrentPinballGame->boardState == 1 && gMain.modeChangeFlags == MODE_CHANGE_NONE)
+    if (gCurrentPinballGame->boardState == SPHEAL_BOARD_STATE_ACTIVE_PHASE && gMain.modeChangeFlags == MODE_CHANGE_NONE)
     {
         for (i = 0; i < 2; i++)
         {
-            switch (gCurrentPinballGame->flyingEnemyState[i])
+            switch (gCurrentPinballGame->sphealEntityState[i])
             {
-            case 0:
-                gCurrentPinballGame->flyingEnemyState[i] = 1;
-                gCurrentPinballGame->flyingEnemyFramesetIndex[i] = 0;
-                gCurrentPinballGame->flyingEnemyAnimTimer[i] = 0;
-                gCurrentPinballGame->flyingEnemyCollisionType[i] = 0;
-                gCurrentPinballGame->flyingEnemySpawnVariant[i] = -1;
+            case SPHEAL_ENTITY_STATE_INIT:
+                gCurrentPinballGame->sphealEntityState[i] = SPHEAL_ENTITY_STATE_CHOOSE_SPAWN;
+                gCurrentPinballGame->sphealFramesetIndex[i] = 0;
+                gCurrentPinballGame->sphealAnimTimer[i] = 0;
+                gCurrentPinballGame->sphealEntityCollisionType[i] = SPHEAL_COLLISION_TYPE_INACTIVE;
+                gCurrentPinballGame->sphealSpawnPositionVariant[i] = SPHEAL_SPAWN_UNDEFINED_POSITION;
                 break;
-            case 1:
-                if (gCurrentPinballGame->flyingEnemyAnimTimer[i] < i * 30 + 120)
+            case SPHEAL_ENTITY_STATE_CHOOSE_SPAWN:
+                if (gCurrentPinballGame->sphealAnimTimer[i] < i * 30 + 120)
                 {
-                    gCurrentPinballGame->flyingEnemyAnimTimer[i]++;
+                    gCurrentPinballGame->sphealAnimTimer[i]++;
                 }
                 else
                 {
                     u16 var0 = gMain.systemFrameCount + Random();
-                    gCurrentPinballGame->flyingEnemySpawnVariant[i] = var0 % 6;
-                    if (gCurrentPinballGame->flyingEnemySpawnVariant[0] == gCurrentPinballGame->flyingEnemySpawnVariant[1])
-                        gCurrentPinballGame->flyingEnemySpawnVariant[i] = (gCurrentPinballGame->flyingEnemySpawnVariant[i] + 2) % 6;
+                    gCurrentPinballGame->sphealSpawnPositionVariant[i] = var0 % 6;
 
-                    if (gCurrentPinballGame->flyingEnemySpawnVariant[i] < 2)
+                    // Don't allow both to be spawned at the same position. Bump if it rolls the same as other spheal.
+                    if (gCurrentPinballGame->sphealSpawnPositionVariant[0] == gCurrentPinballGame->sphealSpawnPositionVariant[1])
+                        gCurrentPinballGame->sphealSpawnPositionVariant[i] = (gCurrentPinballGame->sphealSpawnPositionVariant[i] + 2) % 6;
+
+                    if (gCurrentPinballGame->sphealSpawnPositionVariant[i] <= SPHEAL_SPAWN_AT_RIGHT_RAMP)
                     {
-                        if (gCurrentPinballGame->flyingEnemySpawnVariant[i] == 0)
+                        if (gCurrentPinballGame->sphealSpawnPositionVariant[i] == SPHEAL_SPAWN_AT_LEFT_RAMP)
                         {
-                            gCurrentPinballGame->flyingEnemyPositionQ8[i].x = 0x4900;
-                            gCurrentPinballGame->flyingEnemyPositionQ8[i].y = 0xAB00;
-                            gCurrentPinballGame->flyingEnemyDirection[i] = 0;
+                            gCurrentPinballGame->sphealPositionQ8[i].x = 0x4900;
+                            gCurrentPinballGame->sphealPositionQ8[i].y = 0xAB00;
+                            gCurrentPinballGame->sphealMovementDirection[i] = SPHEAL_MOVING_LEFT;
                         }
                         else
                         {
-                            gCurrentPinballGame->flyingEnemyPositionQ8[i].x = 0xA700;
-                            gCurrentPinballGame->flyingEnemyPositionQ8[i].y = 0xAC00;
-                            gCurrentPinballGame->flyingEnemyDirection[i] = 1;
+                            gCurrentPinballGame->sphealPositionQ8[i].x = 0xA700;
+                            gCurrentPinballGame->sphealPositionQ8[i].y = 0xAC00;
+                            gCurrentPinballGame->sphealMovementDirection[i] = SPHEAL_MOVING_RIGHT;
                         }
 
-                        gCurrentPinballGame->flyingEnemyFramesetIndex[i] = 9;
-                        gCurrentPinballGame->flyingEnemyState[i] = 7;
+                        gCurrentPinballGame->sphealFramesetIndex[i] = 9;
+                        gCurrentPinballGame->sphealEntityState[i] = SPHEAL_ENTITY_STATE_SURFACE_AT_RAMP;
                     }
                     else
                     {
-                        gCurrentPinballGame->flyingEnemyDirection[i] = (gMain.systemFrameCount + Random()) % 2;
-                        if (gCurrentPinballGame->flyingEnemyDirection[i])
+                        //Choose random direction & x position of the spawning Spheal.
+                        gCurrentPinballGame->sphealMovementDirection[i] = (gMain.systemFrameCount + Random()) % 2;
+                        if (gCurrentPinballGame->sphealMovementDirection[i] != SPHEAL_MOVING_LEFT)
                         {
-                            if (gCurrentPinballGame->flyingEnemySpawnVariant[i] == 5)
-                                gCurrentPinballGame->flyingEnemyPositionQ8[i].x = (((Random() % 101) / 5) + 80) << 8;
+                            //Lowest row doesn't have the full width to swim, constrain it to the smaller space.
+                            if (gCurrentPinballGame->sphealSpawnPositionVariant[i] == SPHEAL_SPAWN_AT_LOWEST_ROW)
+                                gCurrentPinballGame->sphealPositionQ8[i].x = (((Random() % 101) / 5) + 80) << 8;
                             else
-                                gCurrentPinballGame->flyingEnemyPositionQ8[i].x = (((Random() % 101) / 2) + 50) << 8;
+                                gCurrentPinballGame->sphealPositionQ8[i].x = (((Random() % 101) / 2) + 50) << 8;
                         }
                         else
                         {
-                            if (gCurrentPinballGame->flyingEnemySpawnVariant[i] == 5)
-                                gCurrentPinballGame->flyingEnemyPositionQ8[i].x = (((Random() % 101) / 5) + 140) << 8;
+                            if (gCurrentPinballGame->sphealSpawnPositionVariant[i] == SPHEAL_SPAWN_AT_LOWEST_ROW)
+                                gCurrentPinballGame->sphealPositionQ8[i].x = (((Random() % 101) / 5) + 140) << 8;
                             else
-                                gCurrentPinballGame->flyingEnemyPositionQ8[i].x = (((Random() % 101) / 2) + 140) << 8;
+                                gCurrentPinballGame->sphealPositionQ8[i].x = (((Random() % 101) / 2) + 140) << 8;
                         }
 
-                        gCurrentPinballGame->flyingEnemyPositionQ8[i].y = 0xAF00 + ((gCurrentPinballGame->flyingEnemySpawnVariant[i] - 2) * 0xA00);
+                        // Calculate Y position for the top, center high/low, lowest row.
+                        gCurrentPinballGame->sphealPositionQ8[i].y = 0xAF00 + ((gCurrentPinballGame->sphealSpawnPositionVariant[i] - 2) * 0xA00);
 
-                        gCurrentPinballGame->flyingEnemyFramesetIndex[i] = 0;
-                        gCurrentPinballGame->flyingEnemyState[i] = 2;
+                        gCurrentPinballGame->sphealFramesetIndex[i] = 0;
+                        gCurrentPinballGame->sphealEntityState[i] = SPHEAL_ENTITY_STATE_SURFACE_IN_WATER;
                     }
 
-                    gCurrentPinballGame->flyingEnemyAnimTimer[i] = 0;
+                    gCurrentPinballGame->sphealAnimTimer[i] = 0;
                 }
 
-                gCurrentPinballGame->flyingEnemyCollisionType[i] = 0;
+                gCurrentPinballGame->sphealEntityCollisionType[i] = SPHEAL_COLLISION_TYPE_INACTIVE;
                 break;
-            case 2:
-                if (gSphealFramesetData[gCurrentPinballGame->flyingEnemyFramesetIndex[i]][1] > gCurrentPinballGame->flyingEnemyAnimTimer[i])
+            case SPHEAL_ENTITY_STATE_SURFACE_IN_WATER:
+                if (gSphealFramesetData[gCurrentPinballGame->sphealFramesetIndex[i]][1] > gCurrentPinballGame->sphealAnimTimer[i])
                 {
-                    gCurrentPinballGame->flyingEnemyAnimTimer[i]++;
+                    gCurrentPinballGame->sphealAnimTimer[i]++;
                 }
                 else
                 {
-                    gCurrentPinballGame->flyingEnemyAnimTimer[i] = 0;
-                    gCurrentPinballGame->flyingEnemyFramesetIndex[i]++;
-                    if (gCurrentPinballGame->flyingEnemyFramesetIndex[i] == 3)
+                    gCurrentPinballGame->sphealAnimTimer[i] = 0;
+                    gCurrentPinballGame->sphealFramesetIndex[i]++;
+                    if (gCurrentPinballGame->sphealFramesetIndex[i] == 3)
                     {
-                        gCurrentPinballGame->flyingEnemyFramesetIndex[i] = 3;
-                        gCurrentPinballGame->flyingEnemyState[i] = 3;
+                        gCurrentPinballGame->sphealFramesetIndex[i] = 3;
+                        gCurrentPinballGame->sphealEntityState[i] = SPHEAL_ENTITY_STATE_SWIMMING;
                     }
 
-                    if (gCurrentPinballGame->flyingEnemyFramesetIndex[i] == 1)
+                    if (gCurrentPinballGame->sphealFramesetIndex[i] == 1)
                         m4aSongNumStart(SE_UNKNOWN_0x134);
                 }
 
-                gCurrentPinballGame->flyingEnemyFlyTimer[i] = 0;
-                gCurrentPinballGame->flyingEnemyCollisionType[i] = 1;
+                gCurrentPinballGame->sphealEscapeTimer[i] = 0;
+                gCurrentPinballGame->sphealEntityCollisionType[i] = SPHEAL_COLLISION_TYPE_SWIMMING;
                 break;
-            case 3:
-                if (gSphealFramesetData[gCurrentPinballGame->flyingEnemyFramesetIndex[i]][1] > gCurrentPinballGame->flyingEnemyAnimTimer[i])
+            case SPHEAL_ENTITY_STATE_SWIMMING:
+                if (gSphealFramesetData[gCurrentPinballGame->sphealFramesetIndex[i]][1] > gCurrentPinballGame->sphealAnimTimer[i])
                 {
-                    gCurrentPinballGame->flyingEnemyAnimTimer[i]++;
+                    gCurrentPinballGame->sphealAnimTimer[i]++;
                 }
                 else
                 {
-                    gCurrentPinballGame->flyingEnemyAnimTimer[i] = 0;
-                    gCurrentPinballGame->flyingEnemyFramesetIndex[i]++;
-                    if (gCurrentPinballGame->flyingEnemyFramesetIndex[i] == 5)
-                        gCurrentPinballGame->flyingEnemyFramesetIndex[i] = 3;
+                    gCurrentPinballGame->sphealAnimTimer[i] = 0;
+                    gCurrentPinballGame->sphealFramesetIndex[i]++;
+                    if (gCurrentPinballGame->sphealFramesetIndex[i] == 5)
+                        gCurrentPinballGame->sphealFramesetIndex[i] = 3;
                 }
 
-                if (gCurrentPinballGame->flyingEnemyFlyTimer[i] < 400)
+                if (gCurrentPinballGame->sphealEscapeTimer[i] < 400)
                 {
-                    gCurrentPinballGame->flyingEnemyFlyTimer[i]++;
-                    if (gCurrentPinballGame->flyingEnemyDirection[i])
-                        gCurrentPinballGame->flyingEnemyPositionQ8[i].x += 35;
+                    gCurrentPinballGame->sphealEscapeTimer[i]++;
+                    if (gCurrentPinballGame->sphealMovementDirection[i] != SPHEAL_MOVING_LEFT)
+                        gCurrentPinballGame->sphealPositionQ8[i].x += 35;
                     else
-                        gCurrentPinballGame->flyingEnemyPositionQ8[i].x -= 35;
+                        gCurrentPinballGame->sphealPositionQ8[i].x -= 35;
                 }
                 else
                 {
-                    gCurrentPinballGame->flyingEnemyFramesetIndex[i] = 6;
-                    gCurrentPinballGame->flyingEnemyAnimTimer[i] = 0;
-                    gCurrentPinballGame->flyingEnemyState[i] = 6;
+                    gCurrentPinballGame->sphealFramesetIndex[i] = 6;
+                    gCurrentPinballGame->sphealAnimTimer[i] = 0;
+                    gCurrentPinballGame->sphealEntityState[i] = SPHEAL_ENTITY_STATE_DIVING;
                 }
 
-                gCurrentPinballGame->flyingEnemyCollisionType[i] = 1;
+                gCurrentPinballGame->sphealEntityCollisionType[i] = SPHEAL_COLLISION_TYPE_SWIMMING;
                 break;
-            case 4:
+            case SPHEAL_ENTITY_STATE_HIT:
+                // Note: A hit while 'walking down' won't come here.
                 MPlayStart(&gMPlayInfo_SE1, &se_unk_137);
-                if (gCurrentPinballGame->flyingEnemyCollisionType[i] == 1)
+                if (gCurrentPinballGame->sphealEntityCollisionType[i] == SPHEAL_COLLISION_TYPE_SWIMMING)
                 {
-                    gCurrentPinballGame->flyingEnemyAnimTimer[i] = 0;
-                    gCurrentPinballGame->flyingEnemyFramesetIndex[i] = 5;
-                    gCurrentPinballGame->flyingEnemyState[i] = 5;
+                    gCurrentPinballGame->sphealAnimTimer[i] = 0;
+                    gCurrentPinballGame->sphealFramesetIndex[i] = 5;
+                    gCurrentPinballGame->sphealEntityState[i] = SPHEAL_ENTITY_STATE_HIT_WHILE_SWIMMING;
                 }
                 else
                 {
-                    if (gCurrentPinballGame->flyingEnemyPositionQ8[i].y + (gCurrentPinballGame->flyingEnemyOamYOffset[i] << 8) < gCurrentPinballGame->ball->positionQ8.y)
+                    if (gCurrentPinballGame->sphealPositionQ8[i].y + (gCurrentPinballGame->sphealOamYOffset[i] << 8) < gCurrentPinballGame->ball->positionQ8.y)
                     {
-                        gCurrentPinballGame->flyingEnemyState[i] = 10;
+                        gCurrentPinballGame->sphealEntityState[i] = SPHEAL_ENTITY_STATE_HIT_UP_RAMP;
                     }
                     else
                     {
-                        gCurrentPinballGame->flyingEnemyAnimTimer[i] = 0xAC - (gCurrentPinballGame->flyingEnemyAnimTimer[i] * 12) / 0xA0;
-                        gCurrentPinballGame->flyingEnemyState[i] = 8;
+                        gCurrentPinballGame->sphealAnimTimer[i] = 0xAC - (gCurrentPinballGame->sphealAnimTimer[i] * 12) / 0xA0;
+                        gCurrentPinballGame->sphealEntityState[i] = SPHEAL_ENTITY_STATE_CLIMBING_RAMP;
                     }
                 }
 
                 PlayRumble(7);
-                gCurrentPinballGame->flyingEnemyCollisionType[i] = 0;
+                gCurrentPinballGame->sphealEntityCollisionType[i] = SPHEAL_COLLISION_TYPE_INACTIVE;
                 gCurrentPinballGame->scoreAddedInFrame = 3000;
                 break;
-            case 5:
-                if (gCurrentPinballGame->flyingEnemyAnimTimer[i] < 10)
+            case SPHEAL_ENTITY_STATE_HIT_WHILE_SWIMMING:
+                if (gCurrentPinballGame->sphealAnimTimer[i] < 10)
                 {
-                    gCurrentPinballGame->flyingEnemyAnimTimer[i]++;
-                    gCurrentPinballGame->flyingEnemyFramesetIndex[i] = 5;
+                    gCurrentPinballGame->sphealAnimTimer[i]++;
+                    gCurrentPinballGame->sphealFramesetIndex[i] = 5;
                 }
                 else
                 {
-                    gCurrentPinballGame->flyingEnemyAnimTimer[i] = 0;
-                    gCurrentPinballGame->flyingEnemyState[i] = 6;
+                    gCurrentPinballGame->sphealAnimTimer[i] = 0;
+                    gCurrentPinballGame->sphealEntityState[i] = SPHEAL_ENTITY_STATE_DIVING;
                 }
                 break;
-            case 6:
-                if (gSphealFramesetData[gCurrentPinballGame->flyingEnemyFramesetIndex[i]][1] > gCurrentPinballGame->flyingEnemyAnimTimer[i])
+            case SPHEAL_ENTITY_STATE_DIVING:
+                if (gSphealFramesetData[gCurrentPinballGame->sphealFramesetIndex[i]][1] > gCurrentPinballGame->sphealAnimTimer[i])
                 {
-                    gCurrentPinballGame->flyingEnemyAnimTimer[i]++;
+                    gCurrentPinballGame->sphealAnimTimer[i]++;
                 }
                 else
                 {
-                    gCurrentPinballGame->flyingEnemyAnimTimer[i] = 0;
-                    gCurrentPinballGame->flyingEnemyFramesetIndex[i]++;
-                    if (gCurrentPinballGame->flyingEnemyFramesetIndex[i] == 9)
+                    gCurrentPinballGame->sphealAnimTimer[i] = 0;
+                    gCurrentPinballGame->sphealFramesetIndex[i]++;
+                    if (gCurrentPinballGame->sphealFramesetIndex[i] == 9)
                     {
-                        gCurrentPinballGame->flyingEnemyFramesetIndex[i] = 0;
-                        gCurrentPinballGame->flyingEnemyState[i] = 0;
+                        gCurrentPinballGame->sphealFramesetIndex[i] = 0;
+                        gCurrentPinballGame->sphealEntityState[i] = SPHEAL_ENTITY_STATE_INIT;
                     }
 
-                    if (gCurrentPinballGame->flyingEnemyFramesetIndex[i] == 7)
+                    if (gCurrentPinballGame->sphealFramesetIndex[i] == 7)
                         m4aSongNumStart(SE_UNKNOWN_0x135);
                 }
 
-                gCurrentPinballGame->flyingEnemyCollisionType[i] = 0;
+                gCurrentPinballGame->sphealEntityCollisionType[i] = SPHEAL_COLLISION_TYPE_INACTIVE;
 
                 break;
-            case 7:
-                if (gSphealFramesetData[gCurrentPinballGame->flyingEnemyFramesetIndex[i]][1] > gCurrentPinballGame->flyingEnemyAnimTimer[i])
+            case SPHEAL_ENTITY_STATE_SURFACE_AT_RAMP:
+                if (gSphealFramesetData[gCurrentPinballGame->sphealFramesetIndex[i]][1] > gCurrentPinballGame->sphealAnimTimer[i])
                 {
-                    gCurrentPinballGame->flyingEnemyAnimTimer[i]++;
+                    gCurrentPinballGame->sphealAnimTimer[i]++;
                 }
                 else
                 {
-                    gCurrentPinballGame->flyingEnemyAnimTimer[i] = 0;
-                    gCurrentPinballGame->flyingEnemyFramesetIndex[i]++;
-                    if (gCurrentPinballGame->flyingEnemyFramesetIndex[i] == 14)
+                    gCurrentPinballGame->sphealAnimTimer[i] = 0;
+                    gCurrentPinballGame->sphealFramesetIndex[i]++;
+                    if (gCurrentPinballGame->sphealFramesetIndex[i] == 14)
                     {
-                        gCurrentPinballGame->flyingEnemyState[i] = 8;
-                        gCurrentPinballGame->flyingEnemyPositionQ8[i].x += gCurrentPinballGame->flyingEnemyOamXOffset[i] << 8;
-                        gCurrentPinballGame->flyingEnemyPositionQ8[i].y += gCurrentPinballGame->flyingEnemyOamYOffset[i] << 8;
+                        gCurrentPinballGame->sphealEntityState[i] = SPHEAL_ENTITY_STATE_CLIMBING_RAMP;
+                        gCurrentPinballGame->sphealPositionQ8[i].x += gCurrentPinballGame->sphealOamXOffset[i] << 8;
+                        gCurrentPinballGame->sphealPositionQ8[i].y += gCurrentPinballGame->sphealOamYOffset[i] << 8;
                     }
 
-                    if (gCurrentPinballGame->flyingEnemyFramesetIndex[i] == 10)
+                    if (gCurrentPinballGame->sphealFramesetIndex[i] == 10)
                         m4aSongNumStart(SE_UNKNOWN_0x140);
 
                 }
-                gCurrentPinballGame->flyingEnemyCollisionType[i] = 2;
+                gCurrentPinballGame->sphealEntityCollisionType[i] = SPHEAL_COLLISION_TYPE_ON_RAMP;
 
                 break;
-            case 8:
-                if (gCurrentPinballGame->flyingEnemyAnimTimer[i] < 184)
+            case SPHEAL_ENTITY_STATE_CLIMBING_RAMP:
+                if (gCurrentPinballGame->sphealAnimTimer[i] < 184)
                 {
-                    if (gCurrentPinballGame->flyingEnemyAnimTimer[i] < 160)
+                    if (gCurrentPinballGame->sphealAnimTimer[i] < 160)
                     {
-                        if (gCurrentPinballGame->flyingEnemyDirection[i] == 0)
-                            gCurrentPinballGame->flyingEnemyPositionQ8[i].x -= 0x10;
+                        // Climbing up
+                        if (gCurrentPinballGame->sphealMovementDirection[i] == SPHEAL_MOVING_LEFT)
+                            gCurrentPinballGame->sphealPositionQ8[i].x -= 0x10;
                         else
-                            gCurrentPinballGame->flyingEnemyPositionQ8[i].x += 0x10;
+                            gCurrentPinballGame->sphealPositionQ8[i].x += 0x10;
 
-                        if (gCurrentPinballGame->flyingEnemyAnimTimer[i] & 1)
-                            gCurrentPinballGame->flyingEnemyPositionQ8[i].y -= 0x10;
+                        if (gCurrentPinballGame->sphealAnimTimer[i] & 1)
+                            gCurrentPinballGame->sphealPositionQ8[i].y -= 0x10;
                         else
-                            gCurrentPinballGame->flyingEnemyPositionQ8[i].y -= 0x20;
+                            gCurrentPinballGame->sphealPositionQ8[i].y -= 0x20;
 
-                        if (gCurrentPinballGame->flyingEnemyAnimTimer[i] % 19 < 10)
-                            gCurrentPinballGame->flyingEnemyFramesetIndex[i] = 14;
+                        if (gCurrentPinballGame->sphealAnimTimer[i] % 19 < 10)
+                            gCurrentPinballGame->sphealFramesetIndex[i] = 14;
                         else
-                            gCurrentPinballGame->flyingEnemyFramesetIndex[i] = 15;
+                            gCurrentPinballGame->sphealFramesetIndex[i] = 15;
                     }
                     else
                     {
-                        if (gCurrentPinballGame->flyingEnemyDirection[i] == 0)
-                            gCurrentPinballGame->flyingEnemyPositionQ8[i].x += 0x140;
+                        // Sliding down
+                        if (gCurrentPinballGame->sphealMovementDirection[i] == SPHEAL_MOVING_LEFT)
+                            gCurrentPinballGame->sphealPositionQ8[i].x += 0x140;
                         else
-                            gCurrentPinballGame->flyingEnemyPositionQ8[i].x -= 0x140;
+                            gCurrentPinballGame->sphealPositionQ8[i].x -= 0x140;
 
-                        if (gCurrentPinballGame->flyingEnemyAnimTimer[i] & 1)
-                            gCurrentPinballGame->flyingEnemyPositionQ8[i].y += 0x140;
+                        if (gCurrentPinballGame->sphealAnimTimer[i] & 1)
+                            gCurrentPinballGame->sphealPositionQ8[i].y += 0x140;
                         else
-                            gCurrentPinballGame->flyingEnemyPositionQ8[i].y += 0x1E0;
+                            gCurrentPinballGame->sphealPositionQ8[i].y += 0x1E0;
 
-                        gCurrentPinballGame->flyingEnemyFramesetIndex[i] = 15;
+                        gCurrentPinballGame->sphealFramesetIndex[i] = 15;
                     }
 
-                    gCurrentPinballGame->flyingEnemyAnimTimer[i]++;
+                    gCurrentPinballGame->sphealAnimTimer[i]++;
                 }
                 else
                 {
-                    gCurrentPinballGame->flyingEnemyState[i] = 9;
-                    gCurrentPinballGame->flyingEnemyFramesetIndex[i] = 16;
-                    gCurrentPinballGame->flyingEnemyAnimTimer[i] = 0;
-                    if (gCurrentPinballGame->flyingEnemyDirection[i] == 0)
-                        gCurrentPinballGame->flyingEnemyPositionQ8[i].x += 0xF0;
+                    // slid to end of ramp
+                    gCurrentPinballGame->sphealEntityState[i] = SPHEAL_ENTITY_STATE_SLIDE_PLUNGE;
+                    gCurrentPinballGame->sphealFramesetIndex[i] = 16;
+                    gCurrentPinballGame->sphealAnimTimer[i] = 0;
+
+                    if (gCurrentPinballGame->sphealMovementDirection[i] == SPHEAL_MOVING_LEFT)
+                        gCurrentPinballGame->sphealPositionQ8[i].x += 0xF0;
                     else
-                        gCurrentPinballGame->flyingEnemyPositionQ8[i].x -= 0xF0;
+                        gCurrentPinballGame->sphealPositionQ8[i].x -= 0xF0;
                 }
                 break;
-            case 9:
-                if (gSphealFramesetData[gCurrentPinballGame->flyingEnemyFramesetIndex[i]][1] > gCurrentPinballGame->flyingEnemyAnimTimer[i])
+            case SPHEAL_ENTITY_STATE_SLIDE_PLUNGE:
+                if (gSphealFramesetData[gCurrentPinballGame->sphealFramesetIndex[i]][1] > gCurrentPinballGame->sphealAnimTimer[i])
                 {
-                    gCurrentPinballGame->flyingEnemyAnimTimer[i]++;
+                    gCurrentPinballGame->sphealAnimTimer[i]++;
                 }
                 else
                 {
-                    gCurrentPinballGame->flyingEnemyAnimTimer[i] = 0;
-                    gCurrentPinballGame->flyingEnemyFramesetIndex[i]++;
-                    if (gCurrentPinballGame->flyingEnemyFramesetIndex[i] == 20)
+                    gCurrentPinballGame->sphealAnimTimer[i] = 0;
+                    gCurrentPinballGame->sphealFramesetIndex[i]++;
+                    if (gCurrentPinballGame->sphealFramesetIndex[i] == 20)
                     {
-                        gCurrentPinballGame->flyingEnemyFramesetIndex[i] = 0;
-                        gCurrentPinballGame->flyingEnemyState[i] = 0;
+                        gCurrentPinballGame->sphealFramesetIndex[i] = 0;
+                        gCurrentPinballGame->sphealEntityState[i] = SPHEAL_ENTITY_STATE_INIT;
                     }
 
-                    if (gCurrentPinballGame->flyingEnemyFramesetIndex[i] == 17)
+                    if (gCurrentPinballGame->sphealFramesetIndex[i] == 17)
                         m4aSongNumStart(SE_UNKNOWN_0x135);
                 }
                 break;
-            case 10: {
+            case SPHEAL_ENTITY_STATE_HIT_UP_RAMP: {
                 s16 len;
-                if (gCurrentPinballGame->flyingEnemyDirection[i] == 0)
+                if (gCurrentPinballGame->sphealMovementDirection[i] == SPHEAL_MOVING_LEFT)
                     var1 = 3;
                 else
                     var1 = 0;
 
+                // Use height on ramp where the spheal was hit to determine the starting flight path ix.
                 len = gSphealFlightPathData[var1].pathLength;
                 for (j = 0; j < len; j++)
                 {
-                    if (gSphealFlightPathData[var1].pathWaypoints[j].y <= gCurrentPinballGame->flyingEnemyScreenY[i])
+                    if (gSphealFlightPathData[var1].pathWaypoints[j].y <= gCurrentPinballGame->sphealHitYPosition[i])
                         break;
                 }
 
-                gCurrentPinballGame->flyingEnemyPathIndex[i] = j;
-                gCurrentPinballGame->flyingEnemyState[i] = 11;
-                gCurrentPinballGame->flyingEnemyFramesetIndex[i] = 29;
-                gCurrentPinballGame->flyingEnemyAnimTimer[i] = 0;
+                gCurrentPinballGame->sphealFlightPathIx[i] = j;
+                gCurrentPinballGame->sphealEntityState[i] = SPHEAL_ENTITY_STATE_FOLLOW_RAMP;
+                gCurrentPinballGame->sphealFramesetIndex[i] = 29;
+                gCurrentPinballGame->sphealAnimTimer[i] = 0;
 
-                gCurrentPinballGame->flyingEnemyPositionQ8[i].x = gSphealFlightPathData[var1].pathWaypoints[gCurrentPinballGame->flyingEnemyPathIndex[i]].x << 8;
-                gCurrentPinballGame->flyingEnemyPositionQ8[i].y = gSphealFlightPathData[var1].pathWaypoints[gCurrentPinballGame->flyingEnemyPathIndex[i]].y << 8;
+                gCurrentPinballGame->sphealPositionQ8[i].x = gSphealFlightPathData[var1].pathWaypoints[gCurrentPinballGame->sphealFlightPathIx[i]].x << 8;
+                gCurrentPinballGame->sphealPositionQ8[i].y = gSphealFlightPathData[var1].pathWaypoints[gCurrentPinballGame->sphealFlightPathIx[i]].y << 8;
 
-                gCurrentPinballGame->flyingEnemyPathIndex[i]++;
-                gCurrentPinballGame->flyingEnemyCollisionType[i] = 0;
+                gCurrentPinballGame->sphealFlightPathIx[i]++;
+                gCurrentPinballGame->sphealEntityCollisionType[i] = SPHEAL_COLLISION_TYPE_INACTIVE;
                 break;
             }
-            case 11:
-                if (gCurrentPinballGame->flyingEnemyDirection[i] == 0)
+            case SPHEAL_ENTITY_STATE_FOLLOW_RAMP:
+                if (gCurrentPinballGame->sphealMovementDirection[i] == SPHEAL_MOVING_LEFT)
                     var1 = 3;
                 else
                     var1 = 0;
 
-                var4 = gCurrentPinballGame->flyingEnemyPathIndex[i];
+                var4 = gCurrentPinballGame->sphealFlightPathIx[i];
                 var5 = gSphealFlightPathData;
                 if (var4 < var5[var1].pathLength)
                 {
-                    gCurrentPinballGame->flyingEnemyPositionQ8[i].x = var5[var1].pathWaypoints[gCurrentPinballGame->flyingEnemyPathIndex[i]].x << 8;
-                    gCurrentPinballGame->flyingEnemyPositionQ8[i].y = var5[var1].pathWaypoints[gCurrentPinballGame->flyingEnemyPathIndex[i]].y << 8;
-                    gCurrentPinballGame->flyingEnemyPathIndex[i]++;
-                    if (gCurrentPinballGame->flyingEnemyPathIndex[i] == var5[var1].pathLength)
-                    {
-                        gCurrentPinballGame->flyingEnemyState[i] = 12;
-                        gCurrentPinballGame->knockdownTargetIndex[i] = gCurrentPinballGame->flyingEnemyDirection[i];
-                        gCurrentPinballGame->knockdownPhase[i] = 2;
-                        if (gCurrentPinballGame->flyingEnemyDirection[i] == 0)
-                            gCurrentPinballGame->flyingEnemyVelocity[i].x = 0x140;
-                        else
-                            gCurrentPinballGame->flyingEnemyVelocity[i].x = -0x140;
+                    gCurrentPinballGame->sphealPositionQ8[i].x = var5[var1].pathWaypoints[gCurrentPinballGame->sphealFlightPathIx[i]].x << 8;
+                    gCurrentPinballGame->sphealPositionQ8[i].y = var5[var1].pathWaypoints[gCurrentPinballGame->sphealFlightPathIx[i]].y << 8;
 
-                        gCurrentPinballGame->flyingEnemyVelocity[i].y = 0x1D0;
+                    gCurrentPinballGame->sphealFlightPathIx[i]++;
+                    if (gCurrentPinballGame->sphealFlightPathIx[i] == var5[var1].pathLength)
+                    {
+                        gCurrentPinballGame->sphealEntityState[i] = SPHEAL_ENTITY_STATE_AWAIT_BOUNCE;
+                        gCurrentPinballGame->knockdownTargetIndex[i] = gCurrentPinballGame->sphealMovementDirection[i];
+                        gCurrentPinballGame->knockdownPhase[i] = SPHEAL_KNOCKDOWN_PHASE_PREPARE_BOUNCE;
+                        if (gCurrentPinballGame->sphealMovementDirection[i] == SPHEAL_MOVING_LEFT)
+                            gCurrentPinballGame->sphealVelocity[i].x = 0x140;
+                        else
+                            gCurrentPinballGame->sphealVelocity[i].x = -0x140;
+
+                        gCurrentPinballGame->sphealVelocity[i].y = 0x1D0;
                     }
                 }
 
-                gCurrentPinballGame->flyingEnemyFramesetIndex[i] = ((gCurrentPinballGame->flyingEnemyAnimTimer[i] % 32) / 4) + 30;
-                gCurrentPinballGame->flyingEnemyAnimTimer[i]++;
-                gCurrentPinballGame->flyingEnemyCollisionType[i] = 0;
+                gCurrentPinballGame->sphealFramesetIndex[i] = ((gCurrentPinballGame->sphealAnimTimer[i] % 32) / 4) + 30;
+                gCurrentPinballGame->sphealAnimTimer[i]++;
+                gCurrentPinballGame->sphealEntityCollisionType[i] = SPHEAL_COLLISION_TYPE_INACTIVE;
                 break;
-            case 12:
-                gCurrentPinballGame->flyingEnemyPositionQ8[i].x += gCurrentPinballGame->flyingEnemyVelocity[i].x;
-                gCurrentPinballGame->flyingEnemyPositionQ8[i].y += gCurrentPinballGame->flyingEnemyVelocity[i].y;
-                gCurrentPinballGame->flyingEnemyFramesetIndex[i] = ((gCurrentPinballGame->flyingEnemyAnimTimer[i] % 32) / 4) + 30;
-                gCurrentPinballGame->flyingEnemyAnimTimer[i]++;
-                gCurrentPinballGame->flyingEnemyCollisionType[i] = 0;
+            case SPHEAL_ENTITY_STATE_AWAIT_BOUNCE:
+                gCurrentPinballGame->sphealPositionQ8[i].x += gCurrentPinballGame->sphealVelocity[i].x;
+                gCurrentPinballGame->sphealPositionQ8[i].y += gCurrentPinballGame->sphealVelocity[i].y;
+                gCurrentPinballGame->sphealFramesetIndex[i] = ((gCurrentPinballGame->sphealAnimTimer[i] % 32) / 4) + 30;
+                gCurrentPinballGame->sphealAnimTimer[i]++;
+                gCurrentPinballGame->sphealEntityCollisionType[i] = SPHEAL_COLLISION_TYPE_INACTIVE;
                 break;
-            case 13:
-                gCurrentPinballGame->flyingEnemyPositionQ8[i].x += gCurrentPinballGame->flyingEnemyVelocity[i].x;
-                gCurrentPinballGame->flyingEnemyPositionQ8[i].y += gCurrentPinballGame->flyingEnemyVelocity[i].y;
-                gCurrentPinballGame->flyingEnemyFramesetIndex[i] = ((gCurrentPinballGame->flyingEnemyAnimTimer[i] % 32) / 8) + 26;
-                gCurrentPinballGame->flyingEnemyAnimTimer[i]++;
-                gCurrentPinballGame->flyingEnemyCollisionType[i] = 0;
+            case SPHEAL_ENTITY_STATE_BOUNCING:
+                gCurrentPinballGame->sphealPositionQ8[i].x += gCurrentPinballGame->sphealVelocity[i].x;
+                gCurrentPinballGame->sphealPositionQ8[i].y += gCurrentPinballGame->sphealVelocity[i].y;
+                gCurrentPinballGame->sphealFramesetIndex[i] = ((gCurrentPinballGame->sphealAnimTimer[i] % 32) / 8) + 26;
+                gCurrentPinballGame->sphealAnimTimer[i]++;
+                gCurrentPinballGame->sphealEntityCollisionType[i] = SPHEAL_COLLISION_TYPE_INACTIVE;
                 break;
-            case 14:
-                gCurrentPinballGame->flyingEnemySpawnVariant[i] = -1;
-                if (gCurrentPinballGame->flyingEnemyHitCooldown[i] > 0)
+            case SPHEAL_ENTITY_STATE_LAND_AND_WALK_TO_WATER:
+                gCurrentPinballGame->sphealSpawnPositionVariant[i] = SPHEAL_SPAWN_UNDEFINED_POSITION;
+                if (gCurrentPinballGame->sphealStunnedTimer[i] > 0)
                 {
-                    gCurrentPinballGame->flyingEnemyHitCooldown[i]--;
-                    gCurrentPinballGame->flyingEnemyFramesetIndex[i] = 38;
-                    gCurrentPinballGame->flyingEnemySinkSpeed[i] = 1;
+                    gCurrentPinballGame->sphealStunnedTimer[i]--;
+                    gCurrentPinballGame->sphealFramesetIndex[i] = 38;
+                    gCurrentPinballGame->sphealWasStunned[i] = TRUE;
                 }
                 else
                 {
-                    if (gCurrentPinballGame->flyingEnemyAnimTimer[i] < 334)
+                    if (gCurrentPinballGame->sphealAnimTimer[i] < 334)
                     {
-                        if (gCurrentPinballGame->flyingEnemyAnimTimer[i] < 16)
+                        if (gCurrentPinballGame->sphealAnimTimer[i] < 16)
                         {
-                            gCurrentPinballGame->flyingEnemyFramesetIndex[i] = 21;
-                            if (gCurrentPinballGame->flyingEnemyAnimTimer[i] == 1)
+                            gCurrentPinballGame->sphealFramesetIndex[i] = 21;
+                            if (gCurrentPinballGame->sphealAnimTimer[i] == 1)
                                 m4aSongNumStart(SE_UNKNOWN_0x13E);
 
-                            gCurrentPinballGame->flyingEnemyCollisionType[i] = 3;
+                            gCurrentPinballGame->sphealEntityCollisionType[i] = SPHEAL_COLLISION_TYPE_WALK_DOWN;
                         }
-                        else if (gCurrentPinballGame->flyingEnemyAnimTimer[i] < 316)
+                        else if (gCurrentPinballGame->sphealAnimTimer[i] < 316)
                         {
-                            if (gCurrentPinballGame->flyingEnemySinkSpeed[i] == 0)
+                            if (gCurrentPinballGame->sphealWasStunned[i] == FALSE)
                             {
-                                gCurrentPinballGame->flyingEnemyPositionQ8[i].y += 0x40;
-                                if (gCurrentPinballGame->flyingEnemyAnimTimer[i] % 19 < 10)
-                                    gCurrentPinballGame->flyingEnemyFramesetIndex[i] = 22;
+                                gCurrentPinballGame->sphealPositionQ8[i].y += 0x40;
+                                if (gCurrentPinballGame->sphealAnimTimer[i] % 19 < 10)
+                                    gCurrentPinballGame->sphealFramesetIndex[i] = 22;
                                 else
-                                    gCurrentPinballGame->flyingEnemyFramesetIndex[i] = 23;
+                                    gCurrentPinballGame->sphealFramesetIndex[i] = 23;
                             }
                             else
                             {
-                                gCurrentPinballGame->flyingEnemyPositionQ8[i].y += 0x80;
-                                if (gCurrentPinballGame->flyingEnemyAnimTimer[i] % 10 < 5)
-                                    gCurrentPinballGame->flyingEnemyFramesetIndex[i] = 22;
+                                gCurrentPinballGame->sphealPositionQ8[i].y += 0x80;
+                                if (gCurrentPinballGame->sphealAnimTimer[i] % 10 < 5)
+                                    gCurrentPinballGame->sphealFramesetIndex[i] = 22;
                                 else
-                                    gCurrentPinballGame->flyingEnemyFramesetIndex[i] = 23;
+                                    gCurrentPinballGame->sphealFramesetIndex[i] = 23;
                             }
 
-                            if (gCurrentPinballGame->flyingEnemyPositionQ8[i].y > 0xAC00)
-                                gCurrentPinballGame->flyingEnemyAnimTimer[i] = 316;
+                            if (gCurrentPinballGame->sphealPositionQ8[i].y > 0xAC00)
+                                gCurrentPinballGame->sphealAnimTimer[i] = 316;
 
-                            gCurrentPinballGame->flyingEnemyCollisionType[i] = 3;
+                            gCurrentPinballGame->sphealEntityCollisionType[i] = SPHEAL_COLLISION_TYPE_WALK_DOWN;
                         }
                         else
                         {
                             s16 var20;
-                            gCurrentPinballGame->flyingEnemyPositionQ8[i].y += 0x30;
-                            var20 = gCurrentPinballGame->flyingEnemyAnimTimer[i] - 316;
+                            gCurrentPinballGame->sphealPositionQ8[i].y += 0x30;
+                            var20 = gCurrentPinballGame->sphealAnimTimer[i] - 316;
                             if (var20 < 10)
-                                gCurrentPinballGame->flyingEnemyFramesetIndex[i] = 24;
+                                gCurrentPinballGame->sphealFramesetIndex[i] = 24;
                             else
-                                gCurrentPinballGame->flyingEnemyFramesetIndex[i] = 25;
+                                gCurrentPinballGame->sphealFramesetIndex[i] = 25;
 
                             if (var20 == 1)
                                 m4aSongNumStart(SE_UNKNOWN_0x136);
 
-                            gCurrentPinballGame->flyingEnemyCollisionType[i] = 0;
+                            gCurrentPinballGame->sphealEntityCollisionType[i] = SPHEAL_COLLISION_TYPE_INACTIVE;
                         }
 
-                        gCurrentPinballGame->flyingEnemyAnimTimer[i]++;
+                        gCurrentPinballGame->sphealAnimTimer[i]++;
                     }
                     else
                     {
-                        gCurrentPinballGame->flyingEnemyState[i] = 0;
-                        gCurrentPinballGame->flyingEnemyFramesetIndex[i] = 0;
-                        gCurrentPinballGame->flyingEnemyAnimTimer[i] = 0;
+                        gCurrentPinballGame->sphealEntityState[i] = SPHEAL_ENTITY_STATE_INIT;
+                        gCurrentPinballGame->sphealFramesetIndex[i] = 0;
+                        gCurrentPinballGame->sphealAnimTimer[i] = 0;
                     }
                 }
                 break;
@@ -839,14 +857,16 @@ void UpdateSphealEntityLogic(void)
         group = &gMain.spriteGroups[14 + i];
         if (group->active)
         {
-            sp4 = gCurrentPinballGame->flyingEnemyPrevSpriteIndex[i];
-            gCurrentPinballGame->flyingEnemyPrevSpriteIndex[i] = gSphealFramesetData[gCurrentPinballGame->flyingEnemyFramesetIndex[i]][2] + (1 - gCurrentPinballGame->flyingEnemyDirection[i]) * 30 ;
-            var2 = gSphealFramesetData[gCurrentPinballGame->flyingEnemyFramesetIndex[i]][0];
+            sphealFrameIx = gCurrentPinballGame->sphealNextFrameIx[i];
+            gCurrentPinballGame->sphealNextFrameIx[i] =
+                gSphealFramesetData[gCurrentPinballGame->sphealFramesetIndex[i]][2]
+                + (1 - gCurrentPinballGame->sphealMovementDirection[i]) * 30;
+            var2 = gSphealFramesetData[gCurrentPinballGame->sphealFramesetIndex[i]][0];
 
-            group->baseX = (gCurrentPinballGame->flyingEnemyPositionQ8[i].x / 256) - (gCurrentPinballGame->cameraXOffset + 12);
-            group->baseY = (gCurrentPinballGame->flyingEnemyPositionQ8[i].y / 256) - (gCurrentPinballGame->cameraYOffset + 14);
+            group->baseX = (gCurrentPinballGame->sphealPositionQ8[i].x / 256) - (gCurrentPinballGame->cameraXOffset + 12);
+            group->baseY = (gCurrentPinballGame->sphealPositionQ8[i].y / 256) - (gCurrentPinballGame->cameraYOffset + 14);
 
-            DmaCopy16(3, gSphealFlyingEnemyVariantSprites[sp4], (void *)0x06011CA0 + i * 0x120, 0x120);
+            DmaCopy16(3, gSphealFlyingEnemyVariantSprites[sphealFrameIx], (void *)0x06011CA0 + i * 0x120, 0x120);
             for (j = 0; j < 4; j++)
             {
                 oamSimple = &group->oam[j];
@@ -856,22 +876,22 @@ void UpdateSphealEntityLogic(void)
                 *dst++ = *src++;
                 *dst++ = *src++;
 
-                if (gCurrentPinballGame->flyingEnemyDirection[i] == 0)
+                if (gCurrentPinballGame->sphealMovementDirection[i] == SPHEAL_MOVING_LEFT)
                 {
                     if (j == 0)
                     {
-                        gCurrentPinballGame->flyingEnemyOamXOffset[i] = -gOamBuffer[oamSimple->oamId].x;
-                        gCurrentPinballGame->flyingEnemyOamYOffset[i] = gOamBuffer[oamSimple->oamId].y;
+                        gCurrentPinballGame->sphealOamXOffset[i] = -gOamBuffer[oamSimple->oamId].x;
+                        gCurrentPinballGame->sphealOamYOffset[i] = gOamBuffer[oamSimple->oamId].y;
                     }
 
-                    gOamBuffer[oamSimple->oamId].x += group->baseX + gCurrentPinballGame->flyingEnemyOamXOffset[i] * 2;
+                    gOamBuffer[oamSimple->oamId].x += group->baseX + gCurrentPinballGame->sphealOamXOffset[i] * 2;
                 }
                 else
                 {
                     if (j == 0)
                     {
-                        gCurrentPinballGame->flyingEnemyOamXOffset[i] = gOamBuffer[oamSimple->oamId].x;
-                        gCurrentPinballGame->flyingEnemyOamYOffset[i] = gOamBuffer[oamSimple->oamId].y;
+                        gCurrentPinballGame->sphealOamXOffset[i] = gOamBuffer[oamSimple->oamId].x;
+                        gCurrentPinballGame->sphealOamYOffset[i] = gOamBuffer[oamSimple->oamId].y;
                     }
 
                     gOamBuffer[oamSimple->oamId].x += group->baseX;
@@ -882,30 +902,32 @@ void UpdateSphealEntityLogic(void)
             }
 
             var3 = 0x10;
-            gCurrentPinballGame->flyingEnemyCollisionPos[i].x = ((gCurrentPinballGame->flyingEnemyPositionQ8[i].x / 256) + (gCurrentPinballGame->flyingEnemyOamXOffset[i] - var3)) * 2;
+            gCurrentPinballGame->sphealEntityCollisionPos[i].x = ((gCurrentPinballGame->sphealPositionQ8[i].x / 256) + (gCurrentPinballGame->sphealOamXOffset[i] - var3)) * 2;
 
             var3 = 0x12;
-            gCurrentPinballGame->flyingEnemyCollisionPos[i].y = ((gCurrentPinballGame->flyingEnemyPositionQ8[i].y / 256) + (gCurrentPinballGame->flyingEnemyOamYOffset[i] - var3)) * 2;
+            gCurrentPinballGame->sphealEntityCollisionPos[i].y = ((gCurrentPinballGame->sphealPositionQ8[i].y / 256) + (gCurrentPinballGame->sphealOamYOffset[i] - var3)) * 2;
 
-            gCurrentPinballGame->flyingEnemyScreenY[i] = gCurrentPinballGame->flyingEnemyPositionQ8[i].y / 256 + gCurrentPinballGame->flyingEnemyOamYOffset[i];
+            gCurrentPinballGame->sphealHitYPosition[i] = gCurrentPinballGame->sphealPositionQ8[i].y / 256 + gCurrentPinballGame->sphealOamYOffset[i];
 
             group = &gMain.spriteGroups[16 + i];
-            if (sp4 == 12 || sp4 == 42)
+
+            //Note: left/right are separated by 30
+            if (sphealFrameIx == 12 || sphealFrameIx == 42)
             {
-                if (gCurrentPinballGame->flyingEnemyFramesetIndex[i] == 11)
-                    sp4 = 8;
+                if (gCurrentPinballGame->sphealFramesetIndex[i] == 11)
+                    sphealFrameIx = 8;
                 else
-                    sp4 = 9;
+                    sphealFrameIx = 9;
             }
             else
             {
-                sp4 = 0;
+                sphealFrameIx = 0;
             }
 
-            group->baseX = (gCurrentPinballGame->flyingEnemyPositionQ8[i].x / 256) - (gCurrentPinballGame->cameraXOffset + 12);
-            group->baseY = (gCurrentPinballGame->flyingEnemyPositionQ8[i].y / 256) - (gCurrentPinballGame->cameraYOffset + 14);
+            group->baseX = (gCurrentPinballGame->sphealPositionQ8[i].x / 256) - (gCurrentPinballGame->cameraXOffset + 12);
+            group->baseY = (gCurrentPinballGame->sphealPositionQ8[i].y / 256) - (gCurrentPinballGame->cameraYOffset + 14);
 
-            DmaCopy16(3, gSphealFlyingEnemyVariantSprites[sp4], (void *)0x06011EE0 + i * 0x120, 0x120);
+            DmaCopy16(3, gSphealFlyingEnemyVariantSprites[sphealFrameIx], (void *)0x06011EE0 + i * 0x120, 0x120);
             for (j = 0; j < 4; j++)
             {
                 oamSimple = &group->oam[j];
@@ -952,10 +974,10 @@ void UpdateSphealScoreAndDelivery(void)
         }
     }
 
-    if (gCurrentPinballGame->boardState == 1)
+    if (gCurrentPinballGame->boardState == SPHEAL_BOARD_STATE_ACTIVE_PHASE)
         gMain.spriteGroups[11].active = TRUE;
 
-    if (gCurrentPinballGame->boardState < 2 && gMain.modeChangeFlags == MODE_CHANGE_NONE && gCurrentPinballGame->scoreCountdownTimer)
+    if (gCurrentPinballGame->boardState < SPHEAL_BOARD_STATE_ENDING && gMain.modeChangeFlags == MODE_CHANGE_NONE && gCurrentPinballGame->scoreCountdownTimer)
     {
         if (gCurrentPinballGame->scoreCountdownTimer == 21)
             MPlayStart(&gMPlayInfo_SE1, &se_unk_138);
@@ -1159,101 +1181,111 @@ void SphealBoard_PelipperDeliversBall(void)
     gCurrentPinballGame->deliveryAnimTimer++;
 }
 
+// Handles the sequence of the object being bounced, up, and into hoop.
 void UpdateSealeoKnockdownPhysics(void)
 {
     s16 i;
-    s16 var0;
+    s16 targetSealeoIx;
 
     for (i = 0; i < 3; i++)
     {
         switch (gCurrentPinballGame->knockdownPhase[i])
         {
-        case 0:
-            gCurrentPinballGame->knockdownTargetIndex[i] = 0;
+        case SPHEAL_KNOCKDOWN_PHASE_WAITING:
+            gCurrentPinballGame->knockdownTargetIndex[i] = TARGET_SEALEO_LEFT;
             break;
-        case 1:
-            var0 = gCurrentPinballGame->knockdownTargetIndex[i];
-            gCurrentPinballGame->minionState[var0] = 2;
-            gCurrentPinballGame->minionStateTimer[var0] = 0;
-            gCurrentPinballGame->minionFramesetIx[var0] = 7;
-            if (gCurrentPinballGame->knockdownStunTimer[i])
+        case SPHEAL_KNOCKDOWN_PHASE_BALL_PROXIMITY_CROSSED:
+            targetSealeoIx = gCurrentPinballGame->knockdownTargetIndex[i];
+            gCurrentPinballGame->minionState[targetSealeoIx] = SEALEO_ENTITY_STATE_ANTICIPATE_BOUNCE;
+            gCurrentPinballGame->minionStateTimer[targetSealeoIx] = 0;
+            gCurrentPinballGame->minionFramesetIx[targetSealeoIx] = 7;
+
+            // If the ball crosses the first rollover trigger, (corner of ramp, readying the sealeo)
+            // but fails to cross the second, (at the end of the ramp) within a given number of frames,
+            // reset the sealeo, and stop the knockdown phase.
+            if (gCurrentPinballGame->knockdownBallReadinessTimer[i])
             {
-                gCurrentPinballGame->knockdownStunTimer[i]--;
-                if (gCurrentPinballGame->knockdownStunTimer[i] == 0)
+                gCurrentPinballGame->knockdownBallReadinessTimer[i]--;
+                if (gCurrentPinballGame->knockdownBallReadinessTimer[i] == 0)
                 {
-                    gCurrentPinballGame->knockdownPhase[i] = 0;
-                    gCurrentPinballGame->minionState[var0] = 1;
-                    gCurrentPinballGame->minionStateTimer[var0] = 0;
-                    gCurrentPinballGame->minionFramesetIx[var0] = 4;
+                    gCurrentPinballGame->knockdownPhase[i] = SPHEAL_KNOCKDOWN_PHASE_WAITING;
+                    gCurrentPinballGame->minionState[targetSealeoIx] = SEALEO_ENTITY_STATE_READY;
+                    gCurrentPinballGame->minionStateTimer[targetSealeoIx] = 0;
+                    gCurrentPinballGame->minionFramesetIx[targetSealeoIx] = 4;
                 }
             }
             break;
-        case 2:
-            var0 = gCurrentPinballGame->knockdownTargetIndex[i];
+        case SPHEAL_KNOCKDOWN_PHASE_PREPARE_BOUNCE:
+            targetSealeoIx = gCurrentPinballGame->knockdownTargetIndex[i];
             if (i == 2)
             {
+                // Ball
                 gCurrentPinballGame->ballFrozenState = 1;
-                gCurrentPinballGame->ball->velocity.x += 5 - var0 * 10;
+                gCurrentPinballGame->ball->velocity.x += 5 - targetSealeoIx * 10;
             }
 
-            gCurrentPinballGame->knockdownPhase[i] = 3;
+            gCurrentPinballGame->knockdownPhase[i] = SPHEAL_KNOCKDOWN_PHASE_VERTICAL_BOUNCE;
             gCurrentPinballGame->knockdownBounceCount[i] = 0;
-            gCurrentPinballGame->minionState[var0] = 2;
-            gCurrentPinballGame->minionStateTimer[var0] = 0;
-            gCurrentPinballGame->minionFramesetIx[var0] = 7;
+            gCurrentPinballGame->minionState[targetSealeoIx] = SEALEO_ENTITY_STATE_ANTICIPATE_BOUNCE;
+            gCurrentPinballGame->minionStateTimer[targetSealeoIx] = 0;
+            gCurrentPinballGame->minionFramesetIx[targetSealeoIx] = 7;
             break;
-        case 3:
-            var0 = gCurrentPinballGame->knockdownTargetIndex[i];
+        case SPHEAL_KNOCKDOWN_PHASE_VERTICAL_BOUNCE:
+            targetSealeoIx = gCurrentPinballGame->knockdownTargetIndex[i];
             if (i < 2)
             {
-                if (var0 == 0)
+                // Spheals
+                if (targetSealeoIx == TARGET_SEALEO_LEFT)
                 {
-                    if (gCurrentPinballGame->flyingEnemyPositionQ8[i].x >= 0x5600)
-                        gCurrentPinballGame->flyingEnemyVelocity[i].x = 0;
+                    if (gCurrentPinballGame->sphealPositionQ8[i].x >= 0x5600)
+                        gCurrentPinballGame->sphealVelocity[i].x = 0;
                 }
                 else
                 {
-                    if (gCurrentPinballGame->flyingEnemyPositionQ8[i].x <= 0x9C00)
-                        gCurrentPinballGame->flyingEnemyVelocity[i].x = 0;
+                    if (gCurrentPinballGame->sphealPositionQ8[i].x <= 0x9C00)
+                        gCurrentPinballGame->sphealVelocity[i].x = 0;
 
                 }
 
-                gCurrentPinballGame->flyingEnemyVelocity[i].y += 12;
-                if (gCurrentPinballGame->minionHitFlashTimer[var0] > 0)
+                gCurrentPinballGame->sphealVelocity[i].y += 12;
+
+                if (gCurrentPinballGame->sealeoStunnedTimer[targetSealeoIx] > 0)
                 {
-                    if (gCurrentPinballGame->flyingEnemyPositionQ8[i].y >= 0x6600)
+                    // If sealeo recovers from being stunned, before the ball would bounce, it's ok.
+                    // If the spheal crosses the threshold while the sealeo is stunned, it is dropped.
+                    if (gCurrentPinballGame->sphealPositionQ8[i].y >= 0x6600)
                     {
                         gCurrentPinballGame->knockdownBounceCount[i] = 0;
-                        gCurrentPinballGame->knockdownPhase[i] = 5;
-                        gCurrentPinballGame->minionState[var0] = 3;
-                        gCurrentPinballGame->minionFramesetIx[var0] = 15;
-                        gCurrentPinballGame->minionStateTimer[var0] = 0;
+                        gCurrentPinballGame->knockdownPhase[i] = SPHEAL_KNOCKDOWN_PHASE_DROPPED;
+                        gCurrentPinballGame->minionState[targetSealeoIx] = SEALEO_ENTITY_STATE_DONE_BOUNCING;
+                        gCurrentPinballGame->minionFramesetIx[targetSealeoIx] = 15;
+                        gCurrentPinballGame->minionStateTimer[targetSealeoIx] = 0;
                     }
                 }
                 else
                 {
-                    if (gCurrentPinballGame->flyingEnemyPositionQ8[i].y >= 0x6600)
+                    if (gCurrentPinballGame->sphealPositionQ8[i].y >= 0x6600)
                     {
                         gCurrentPinballGame->knockdownBounceCount[i]++;
                         MPlayStart(&gMPlayInfo_SE1, &se_unk_13d);
                         if (gCurrentPinballGame->knockdownBounceCount[i] < 3)
                         {
-                            gCurrentPinballGame->flyingEnemyPositionQ8[i].y = 0x6600;
-                            gCurrentPinballGame->flyingEnemyVelocity[i].y = 0xFED4;
-                            gCurrentPinballGame->flyingEnemyState[i] = 13;
-                            gCurrentPinballGame->minionState[var0] = 2;
-                            gCurrentPinballGame->minionFramesetIx[var0] = 8;
-                            gCurrentPinballGame->minionStateTimer[var0] = 12;
+                            gCurrentPinballGame->sphealPositionQ8[i].y = 0x6600;
+                            gCurrentPinballGame->sphealVelocity[i].y = 0xFED4;
+                            gCurrentPinballGame->sphealEntityState[i] = SPHEAL_ENTITY_STATE_BOUNCING;
+                            gCurrentPinballGame->minionState[targetSealeoIx] = SEALEO_ENTITY_STATE_ANTICIPATE_BOUNCE;
+                            gCurrentPinballGame->minionFramesetIx[targetSealeoIx] = 8;
+                            gCurrentPinballGame->minionStateTimer[targetSealeoIx] = 12;
                         }
                         else
                         {
-                            gCurrentPinballGame->flyingEnemyVelocity[i].x = (30 - var0 * 60) * 4;
-                            gCurrentPinballGame->flyingEnemyVelocity[i].y = 0xFE70;
+                            gCurrentPinballGame->sphealVelocity[i].x = (30 - targetSealeoIx * 60) * 4;
+                            gCurrentPinballGame->sphealVelocity[i].y = 0xFE70;
                             gCurrentPinballGame->knockdownBounceCount[i] = 0;
-                            gCurrentPinballGame->knockdownPhase[i] = 4;
-                            gCurrentPinballGame->minionState[var0] = 3;
-                            gCurrentPinballGame->minionFramesetIx[var0] = 11;
-                            gCurrentPinballGame->minionStateTimer[var0] = 0;
+                            gCurrentPinballGame->knockdownPhase[i] = SPHEAL_KNOCKDOWN_PHASE_BOUNCE_TO_HOOP;
+                            gCurrentPinballGame->minionState[targetSealeoIx] = SEALEO_ENTITY_STATE_DONE_BOUNCING;
+                            gCurrentPinballGame->minionFramesetIx[targetSealeoIx] = 11;
+                            gCurrentPinballGame->minionStateTimer[targetSealeoIx] = 0;
                             gCurrentPinballGame->scoreCountdownTimer = 100;
                             gCurrentPinballGame->sphealKnockdownCount[0]++;
                         }
@@ -1262,7 +1294,8 @@ void UpdateSealeoKnockdownPhysics(void)
             }
             else
             {
-                if (var0 == 0)
+                // Ball
+                if (targetSealeoIx == TARGET_SEALEO_LEFT)
                 {
                     if (gCurrentPinballGame->ball->positionQ8.x >= 0x5600)
                         gCurrentPinballGame->ball->velocity.x = 0;
@@ -1283,53 +1316,55 @@ void UpdateSealeoKnockdownPhysics(void)
                     {
                         gCurrentPinballGame->ball->positionQ8.y = 0x6500;
                         gCurrentPinballGame->ball->velocity.y = -0x5A;
-                        gCurrentPinballGame->minionState[var0] = 2;
-                        gCurrentPinballGame->minionFramesetIx[var0] = 8;
-                        gCurrentPinballGame->minionStateTimer[var0] = 12;
+                        gCurrentPinballGame->minionState[targetSealeoIx] = SEALEO_ENTITY_STATE_ANTICIPATE_BOUNCE;
+                        gCurrentPinballGame->minionFramesetIx[targetSealeoIx] = 8;
+                        gCurrentPinballGame->minionStateTimer[targetSealeoIx] = 12;
                     }
                     else
                     {
-                        gCurrentPinballGame->ball->velocity.x = 28 - var0 * 56;
+                        gCurrentPinballGame->ball->velocity.x = 28 - targetSealeoIx * 56;
                         gCurrentPinballGame->ball->velocity.y = -0x78;
                         gCurrentPinballGame->knockdownBounceCount[i] = 0;
-                        gCurrentPinballGame->knockdownPhase[i] = 4;
-                        gCurrentPinballGame->minionState[var0] = 3;
-                        gCurrentPinballGame->minionFramesetIx[var0] = 11;
-                        gCurrentPinballGame->minionStateTimer[var0] = 0;
+                        gCurrentPinballGame->knockdownPhase[i] = SPHEAL_KNOCKDOWN_PHASE_BOUNCE_TO_HOOP;
+                        gCurrentPinballGame->minionState[targetSealeoIx] = SEALEO_ENTITY_STATE_DONE_BOUNCING;
+                        gCurrentPinballGame->minionFramesetIx[targetSealeoIx] = 11;
+                        gCurrentPinballGame->minionStateTimer[targetSealeoIx] = 0;
                         gCurrentPinballGame->scoreCountdownTimer = 106;
                         gCurrentPinballGame->sphealKnockdownCount[1]++;
                     }
                 }
             }
             break;
-        case 4:
-            var0 = gCurrentPinballGame->knockdownTargetIndex[i];
+        case SPHEAL_KNOCKDOWN_PHASE_BOUNCE_TO_HOOP:
+            targetSealeoIx = gCurrentPinballGame->knockdownTargetIndex[i];
             if (i < 2)
             {
-                gCurrentPinballGame->flyingEnemyVelocity[i].y += 12;
-                if (var0 == 0)
+                //Spheals
+                gCurrentPinballGame->sphealVelocity[i].y += 12;
+                if (targetSealeoIx == TARGET_SEALEO_LEFT)
                 {
-                    if (gCurrentPinballGame->flyingEnemyPositionQ8[i].x >= 0x7800)
-                        gCurrentPinballGame->flyingEnemyVelocity[i].x = 0;
+                    if (gCurrentPinballGame->sphealPositionQ8[i].x >= 0x7800)
+                        gCurrentPinballGame->sphealVelocity[i].x = 0;
                 }
                 else
                 {
-                    if (gCurrentPinballGame->flyingEnemyPositionQ8[i].x <= 0x7800)
-                        gCurrentPinballGame->flyingEnemyVelocity[i].x = 0;
+                    if (gCurrentPinballGame->sphealPositionQ8[i].x <= 0x7800)
+                        gCurrentPinballGame->sphealVelocity[i].x = 0;
                 }
 
-                if (gCurrentPinballGame->flyingEnemyPositionQ8[i].y >= 0x8400)
+                if (gCurrentPinballGame->sphealPositionQ8[i].y >= 0x8400)
                 {
-                    gCurrentPinballGame->knockdownPhase[i] = 0;
-                    gCurrentPinballGame->flyingEnemyState[i] = 14;
-                    gCurrentPinballGame->flyingEnemyAnimTimer[i] = 0;
-                    gCurrentPinballGame->flyingEnemySinkSpeed[i] = 0;
+                    gCurrentPinballGame->knockdownPhase[i] = SPHEAL_KNOCKDOWN_PHASE_WAITING;
+                    gCurrentPinballGame->sphealEntityState[i] = SPHEAL_ENTITY_STATE_LAND_AND_WALK_TO_WATER;
+                    gCurrentPinballGame->sphealAnimTimer[i] = 0;
+                    gCurrentPinballGame->sphealWasStunned[i] = FALSE;
                 }
             }
             else
             {
+                //Ball
                 gCurrentPinballGame->ball->velocity.y += 3;
-                if (var0 == 0)
+                if (targetSealeoIx == TARGET_SEALEO_LEFT)
                 {
                     if (gCurrentPinballGame->ball->positionQ8.x >= 0x7800)
                         gCurrentPinballGame->ball->velocity.x = 0;
@@ -1354,41 +1389,44 @@ void UpdateSealeoKnockdownPhysics(void)
                     else
                     {
                         gCurrentPinballGame->ball->velocity.y = 0;
-                        gCurrentPinballGame->ball->velocity.x = 5 - var0 * 10;
+                        gCurrentPinballGame->ball->velocity.x = 5 - targetSealeoIx * 10;
                         gCurrentPinballGame->ballFrozenState = 0;
-                        gCurrentPinballGame->knockdownPhase[i] = 0;
+                        gCurrentPinballGame->knockdownPhase[i] = SPHEAL_KNOCKDOWN_PHASE_WAITING;
                     }
                 }
             }
             break;
-        case 5:
-            var0 = gCurrentPinballGame->knockdownTargetIndex[i];
+        case SPHEAL_KNOCKDOWN_PHASE_DROPPED:
+            targetSealeoIx = gCurrentPinballGame->knockdownTargetIndex[i];
             if (i < 2)
             {
-                gCurrentPinballGame->flyingEnemyVelocity[i].y += 12;
-                if (var0 == 0)
+                //Spheals
+                gCurrentPinballGame->sphealVelocity[i].y += 12;
+                if (targetSealeoIx == TARGET_SEALEO_LEFT)
                 {
-                    if (gCurrentPinballGame->flyingEnemyPositionQ8[i].x >= 0x7800)
-                        gCurrentPinballGame->flyingEnemyVelocity[i].x = 0;
+                    if (gCurrentPinballGame->sphealPositionQ8[i].x >= 0x7800)
+                        gCurrentPinballGame->sphealVelocity[i].x = 0;
                 }
                 else
                 {
-                    if (gCurrentPinballGame->flyingEnemyPositionQ8[i].x <= 0x7800)
-                        gCurrentPinballGame->flyingEnemyVelocity[i].x = 0;
+                    if (gCurrentPinballGame->sphealPositionQ8[i].x <= 0x7800)
+                        gCurrentPinballGame->sphealVelocity[i].x = 0;
                 }
 
-                if (gCurrentPinballGame->flyingEnemyPositionQ8[i].y >= 0x8E00)
+                if (gCurrentPinballGame->sphealPositionQ8[i].y >= 0x8E00)
                 {
-                    gCurrentPinballGame->knockdownPhase[i] = 0;
-                    gCurrentPinballGame->flyingEnemyState[i] = 14;
-                    gCurrentPinballGame->flyingEnemyAnimTimer[i] = 0;
-                    gCurrentPinballGame->flyingEnemySinkSpeed[i] = 0;
+                    gCurrentPinballGame->knockdownPhase[i] = SPHEAL_KNOCKDOWN_PHASE_WAITING;
+                    gCurrentPinballGame->sphealEntityState[i] = SPHEAL_ENTITY_STATE_LAND_AND_WALK_TO_WATER;
+                    gCurrentPinballGame->sphealAnimTimer[i] = 0;
+                    gCurrentPinballGame->sphealWasStunned[i] = FALSE;
                 }
             }
             else
             {
+                // Ball -- Dropped ball should be an unreachable branch.
+                // This may be dead code from a time when multiball was a thing
                 gCurrentPinballGame->ball->velocity.y += 3;
-                if (var0 == 0)
+                if (targetSealeoIx == TARGET_SEALEO_LEFT)
                 {
                     if (gCurrentPinballGame->ball->positionQ8.x >= 0x7800)
                         gCurrentPinballGame->ball->velocity.x = 0;
@@ -1411,9 +1449,9 @@ void UpdateSealeoKnockdownPhysics(void)
                     else
                     {
                         gCurrentPinballGame->ball->velocity.y = 0;
-                        gCurrentPinballGame->ball->velocity.x = 5 - var0 * 10;
+                        gCurrentPinballGame->ball->velocity.x = 5 - targetSealeoIx * 10;
                         gCurrentPinballGame->ballFrozenState = 0;
-                        gCurrentPinballGame->knockdownPhase[i] = 0;
+                        gCurrentPinballGame->knockdownPhase[i] = SPHEAL_KNOCKDOWN_PHASE_WAITING;
                     }
                 }
             }
@@ -1443,7 +1481,7 @@ void UpdateSphealResultsScreen(void)
     s16 sp0[12];
     s16 sp18[12];
 
-    if (gCurrentPinballGame->boardState > 3)
+    if (gCurrentPinballGame->boardState > SPHEAL_BOARD_STATE_SCORE_DISPLAY)
     {
         if (gCurrentPinballGame->bannerSlideYOffset > -126)
         {
@@ -1463,13 +1501,13 @@ void UpdateSphealResultsScreen(void)
         gMain.bgOffsets[1].yOffset = -gCurrentPinballGame->bannerSlideYOffset + 4;
     }
 
-    if (gCurrentPinballGame->boardState < 5)
+    if (gCurrentPinballGame->boardState < SPHEAL_BOARD_STATE_PREPARE_RETURN)
     {
         gMain.blendControl = 0x1C42;
         gMain.blendAlpha = 0xC04;
     }
 
-    if (gCurrentPinballGame->boardState == 3)
+    if (gCurrentPinballGame->boardState == SPHEAL_BOARD_STATE_SCORE_DISPLAY)
     {
         if (gCurrentPinballGame->stageTimer)
             gCurrentPinballGame->stageTimer += 0;

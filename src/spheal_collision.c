@@ -1,5 +1,6 @@
 #include "global.h"
 #include "main.h"
+#include "constants/board/spheal_states.h"
 
 s16 CollisionCheck_Spheal(struct Vector16 *arg0, u16 *arg1)
 {
@@ -80,9 +81,9 @@ s16 CollisionCheck_Spheal(struct Vector16 *arg0, u16 *arg1)
         *arg1 = sp0 & 0x0000FFF0;
 
         if (gCurrentPinballGame->ball->positionQ0.x < 120)
-            gCurrentPinballGame->minionHitFlashTimer[0] = 24;
+            gCurrentPinballGame->sealeoStunnedTimer[0] = 24;
         else
-            gCurrentPinballGame->minionHitFlashTimer[1] = 24;
+            gCurrentPinballGame->sealeoStunnedTimer[1] = 24;
 
         sp4_return = 1;
         break;
@@ -104,13 +105,13 @@ void CheckSphealEntityCollision(struct Vector16 *arg0, u16 *arg1, u8 *arg2)
     for (i = 0; i < 2; i++)
     {
 
-        if (gCurrentPinballGame->flyingEnemyCollisionType[i] == 1)
+        if (gCurrentPinballGame->sphealEntityCollisionType[i] == SPHEAL_COLLISION_TYPE_SWIMMING)
         {
             if ((arg2[0] & 0xf) != 0)
                 continue;
 
-            deltaX = arg0->x - gCurrentPinballGame->flyingEnemyCollisionPos[i].x;
-            deltaY = arg0->y - gCurrentPinballGame->flyingEnemyCollisionPos[i].y;
+            deltaX = arg0->x - gCurrentPinballGame->sphealEntityCollisionPos[i].x;
+            deltaY = arg0->y - gCurrentPinballGame->sphealEntityCollisionPos[i].y;
             if ((deltaX >= 64 || deltaX < 0) || (deltaY >= 64 || deltaY < 0))
                 continue;
 
@@ -125,59 +126,63 @@ void CheckSphealEntityCollision(struct Vector16 *arg0, u16 *arg1, u8 *arg2)
             arg1[0] = upperReadFromRom;
             arg2[0] = lowerReadFromRom;
             arg2[0] = 6;
-            gCurrentPinballGame->flyingEnemyState[i] = 4;
+            gCurrentPinballGame->sphealEntityState[i] = SPHEAL_ENTITY_STATE_HIT;
         }
-        else if (gCurrentPinballGame->flyingEnemyCollisionType[i] != 0)
+        else if (gCurrentPinballGame->sphealEntityCollisionType[i] != SPHEAL_COLLISION_TYPE_INACTIVE)
         {
+            //Handles ramp and 'walk down' collisions
+
             if ((arg2[0] & 0xf) != 0)
                 continue;
 
-            deltaX = arg0->x - gCurrentPinballGame->flyingEnemyCollisionPos[i].x;
-            deltaY = arg0->y - gCurrentPinballGame->flyingEnemyCollisionPos[i].y;
+            deltaX = arg0->x - gCurrentPinballGame->sphealEntityCollisionPos[i].x;
+            deltaY = arg0->y - gCurrentPinballGame->sphealEntityCollisionPos[i].y;
             if ((deltaX >= 64 || deltaX < 0) || (deltaY >= 64 || deltaY < 0))
                 continue;
 
-            upperReadFromRom = gSphealCrackedIceCollisionMap[(deltaY * 64) + deltaX] & 0xFFF0;
-            lowerReadFromRom = gSphealCrackedIceCollisionMap[(deltaY * 64) + deltaX] & 0xF;
+            upperReadFromRom = gSphealRampCollisionMap[(deltaY * 64) + deltaX] & 0xFFF0;
+            lowerReadFromRom = gSphealRampCollisionMap[(deltaY * 64) + deltaX] & 0xF;
             if (lowerReadFromRom == 0)
                 continue;
 
             arg1[0] = upperReadFromRom;
             arg2[0] = lowerReadFromRom;
             arg2[0] = 6;
-            if (gCurrentPinballGame->flyingEnemyCollisionType[i] == 2)
+            if (gCurrentPinballGame->sphealEntityCollisionType[i] == SPHEAL_COLLISION_TYPE_ON_RAMP)
             {
-                gCurrentPinballGame->flyingEnemyState[i] = 4;
+                gCurrentPinballGame->sphealEntityState[i] = SPHEAL_ENTITY_STATE_HIT;
             }
             else
             {
-                gCurrentPinballGame->flyingEnemyHitCooldown[i] = 24;
+                //Will stun the spheal if they are hit while walking down after scoring.
+                gCurrentPinballGame->sphealStunnedTimer[i] = 24;
             }
         }
     }
 }
 
+// Ball entering ramp, bounce position
 void ProcessSphealCollisionEvent(u8 arg0_enum, u16 *arg1, u16 *arg2)
 {
     switch (arg0_enum)
     {
     case 2:
-        gCurrentPinballGame->knockdownTargetIndex[2] = 0;
-        gCurrentPinballGame->knockdownPhase[2] = 2;
+        gCurrentPinballGame->knockdownTargetIndex[2] = TARGET_SEALEO_LEFT;
+        gCurrentPinballGame->knockdownPhase[2] = SPHEAL_KNOCKDOWN_PHASE_PREPARE_BOUNCE;
         break;
     case 3:
-        gCurrentPinballGame->knockdownTargetIndex[2] = 1;
-        gCurrentPinballGame->knockdownPhase[2] = 2;
+        gCurrentPinballGame->knockdownTargetIndex[2] = TARGET_SEALEO_RIGHT;
+        gCurrentPinballGame->knockdownPhase[2] = SPHEAL_KNOCKDOWN_PHASE_PREPARE_BOUNCE;
         break;
     case 8:
-        gCurrentPinballGame->knockdownTargetIndex[2] = 0;
-        gCurrentPinballGame->knockdownPhase[2] = 1;
-        gCurrentPinballGame->knockdownStunTimer[2] = 100;
+        gCurrentPinballGame->knockdownTargetIndex[2] = TARGET_SEALEO_LEFT;
+        gCurrentPinballGame->knockdownPhase[2] = SPHEAL_KNOCKDOWN_PHASE_BALL_PROXIMITY_CROSSED;
+        gCurrentPinballGame->knockdownBallReadinessTimer[2] = 100;
         break;
     case 9:
-        gCurrentPinballGame->knockdownTargetIndex[2] = 1;
-        gCurrentPinballGame->knockdownPhase[2] = 1;
-        gCurrentPinballGame->knockdownStunTimer[2] = 100;
+        gCurrentPinballGame->knockdownTargetIndex[2] = TARGET_SEALEO_RIGHT;
+        gCurrentPinballGame->knockdownPhase[2] = SPHEAL_KNOCKDOWN_PHASE_BALL_PROXIMITY_CROSSED;
+        gCurrentPinballGame->knockdownBallReadinessTimer[2] = 100;
         break;
     case 1:
     case 4:
