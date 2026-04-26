@@ -12,7 +12,7 @@ enum SphealBoardState{
 };
 
 //NOTE: Hit stun tracked with a timer, rather than a state
-enum SphealUnknownState{
+enum SealeoEntityState{
     SEALEO_ENTITY_STATE_INIT = 0,
     SEALEO_ENTITY_STATE_READY = 1,
     SEALEO_ENTITY_STATE_ANTICIPATE_BOUNCE = 2,
