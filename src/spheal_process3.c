@@ -852,6 +852,7 @@ void UpdateSphealEntityLogic(void)
         }
     }
 
+    // Draw Spheals; set collision position.
     for (i = 0; i < 2; i++)
     {
         group = &gMain.spriteGroups[14 + i];
@@ -1185,7 +1186,7 @@ void SphealBoard_PelipperDeliversBall(void)
 void UpdateSealeoKnockdownPhysics(void)
 {
     s16 i;
-    s16 targetSealeoIx;
+    s16 targetSealeoIx; // 0= left, 1 = right
 
     for (i = 0; i < 3; i++)
     {

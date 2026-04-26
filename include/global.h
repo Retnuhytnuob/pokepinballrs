@@ -529,7 +529,7 @@ struct PinballGame
     /*0x3C4*/ struct Vector16 minionLogicPosition[3];
     /*0x3D0*/ struct Vector16 minionCollisionPosition[3];
     /*0x3DC*/ s8 bossEntityState;
-    /*0x3DD*/ s8 bossAttackPhase;
+    /*0x3DD*/ s8 bossNextAttackState;
     /*0x3DE*/ s8 kecleonFramesetBase;
     /*0x3DF*/ s8 bossVulnerable;
     /*0x3E0*/ s8 dusclopsWalkFootIndex;
@@ -571,24 +571,24 @@ struct PinballGame
     /*0x431*/ u8 filler431[0x3];
     /*0x434*/ struct Vector16 kecleonWaterTileCollisionPosition[3];
     /*0x440*/ s8 shockwaveAlreadyHit;
-    /*0x441*/ s8 orbEntityState[2];
-    /*0x443*/ s8 orbTargetWaypointIndex[2];
-    /*0x445*/ s8 whirlpoolTrapPhase;
-    /*0x446*/ s8 whirlpoolTrapAnimEndFrame;
-    /*0x447*/ s8 whirlpoolTrapNextPhase;
-    /*0x448*/ s8 whirlpoolTrapAnimFrame;
-    /*0x449*/ s8 whirlpoolTrapAnimLoopStart;
-    /*0x44A*/ s8 whirlpoolTrapLoopCount;
+    /*0x441*/ s8 vortexEntityState[2]; // kyogre whirlpool, rayquaza tornado
+    /*0x443*/ s8 vortexTargetWaypointIndex[2]; // kyogre whirlpool - target position to move towards
+    /*0x445*/ s8 freezeTrapPhase;
+    /*0x446*/ s8 freezeTrapAnimEndFrame;
+    /*0x447*/ s8 freezeTrapNextPhase;
+    /*0x448*/ s8 freezeTrapAnimFrame;
+    /*0x449*/ s8 freezeTrapAnimLoopStart;
+    /*0x44A*/ s8 freezeTrapLoopCount;
     /*0x44B*/ u8 filler44B[0x1];
     /*0x44C*/ u16 kyogreBgAnimTimer;
-    /*0x44E*/ s16 whirlpoolTrapPauseTimer;
+    /*0x44E*/ s16 freezeTrapPauseTimer;
     /*0x450*/ u16 kyogreWaveTimer;
     /*0x452*/ u16 bossHitFlashTimer;
-    /*0x454*/ u16 whirlpoolTrapFrameTimer;
+    /*0x454*/ u16 freezeTrapFrameTimer;
     /*0x456*/ u16 shockwaveAnimTimer;
-    /*0x458*/ u16 orbAnimTimer[2];
-    /*0x45C*/ struct Vector16 orbScreenPosition[2];
-    /*0x464*/ struct Vector16 orbOrbitCenter[2];
+    /*0x458*/ u16 vortexAnimTimer[2]; // kyogre whirlpool, rayquaza tornado
+    /*0x45C*/ struct Vector16 vortexScreenPosition[2]; // kyogre whirlpool, rayquaza tornado
+    /*0x464*/ struct Vector16 vortexOrbitCenter[2]; // kyogre whirlpool, rayquaza tornado
     /*0x46C*/ struct Vector16 shockwaveQuadrantOffset[4];
     /*0x47C*/ s8 projectileAttackCount;
     /*0x47D*/ s8 projectileDirection;

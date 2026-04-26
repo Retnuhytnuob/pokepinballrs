@@ -1,5 +1,6 @@
 #include "global.h"
 #include "main.h"
+#include "constants/board/kyogre_states.h"
 
 s16 CollisionCheck_Kyogre(struct Vector16 *arg0, u16 *arg1)
 {
@@ -105,7 +106,7 @@ void CheckKyogreEntityCollision(struct Vector16 *arg0, u16 *arg1, u8 *arg2)
     u16 arrayValue;
     u16 maskedResult;
 
-    if (gCurrentPinballGame->boardEntityCollisionMode == 1)
+    if (gCurrentPinballGame->boardEntityCollisionMode == KYOGRE_COLLISION_MODE_1)
     {
         if (*arg2 & 0xF)
             return;
@@ -126,7 +127,7 @@ void CheckKyogreEntityCollision(struct Vector16 *arg0, u16 *arg1, u8 *arg2)
         *arg1 = maskedResult;
         *arg2 = 6;
     }
-    else if (gCurrentPinballGame->boardEntityCollisionMode == 2)
+    else if (gCurrentPinballGame->boardEntityCollisionMode == KYOGRE_COLLISION_MODE_2)
     {
         if (*arg2 & 0xF)
             return;
@@ -147,7 +148,7 @@ void CheckKyogreEntityCollision(struct Vector16 *arg0, u16 *arg1, u8 *arg2)
         *arg1 = maskedResult;
         *arg2 = 6;
     }
-    else if (gCurrentPinballGame->boardEntityCollisionMode == 3)
+    else if (gCurrentPinballGame->boardEntityCollisionMode == KYOGRE_COLLISION_MODE_3)
     {
         if (*arg2 & 0xF)
             return;
@@ -179,7 +180,7 @@ void ProcessKyogreCollisionEvent(u8 arg0, u16 *arg1, u16 *arg2)
     case 3:
         break;
     case 4:
-        gCurrentPinballGame->bossEntityState = 6;
+        gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_6;
         gCurrentPinballGame->ballFrozenState = 1;
         break;
     case 5:

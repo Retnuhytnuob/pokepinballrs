@@ -53,7 +53,7 @@ void GroudonBoardProcess_3A_3B120(void)
     gCurrentPinballGame->ballRespawnTimer = 0;
     gCurrentPinballGame->ball->ballHidden = 1;
     gCurrentPinballGame->returnToMainBoardFlag = 0;
-    gCurrentPinballGame->boardEntityCollisionMode = 1;
+    gCurrentPinballGame->boardEntityCollisionMode = GROUDON_COLLISION_MODE_ACTIVE;
     gCurrentPinballGame->portraitDisplayState = PORTRAIT_DISPLAY_MODE_BANNER;
     gCurrentPinballGame->bossLightFadeInCounter = 0;
     gCurrentPinballGame->ballGrabbed = 0;
@@ -63,7 +63,7 @@ void GroudonBoardProcess_3A_3B120(void)
     gCurrentPinballGame->bossRoarTimer = 0;
     gCurrentPinballGame->bannerSlideYOffset = 0;
     gCurrentPinballGame->bossEntityState = GROUDON_ENTITY_STATE_SPAWN;
-    gCurrentPinballGame->bossAttackPhase = 0;
+    gCurrentPinballGame->bossNextAttackState = 0;
     gCurrentPinballGame->kecleonFramesetBase = 0;
     gCurrentPinballGame->bossVulnerable = 0;
     gCurrentPinballGame->dusclopsWalkFootIndex = 0;
@@ -327,7 +327,7 @@ void UpdateGroudonEntityLogic(void)
                 {
                     gCurrentPinballGame->bossFramesetIndex = 0;
                     gCurrentPinballGame->bossEntityState = GROUDON_ENTITY_STATE_IDLE;
-                    gCurrentPinballGame->bossAttackPhase = 4;
+                    gCurrentPinballGame->bossNextAttackState = GROUDON_ENTITY_STATE_SHOCKWAVE;
                     gCurrentPinballGame->bossMovementPhase = 9;
                 }
             }
@@ -412,7 +412,8 @@ void UpdateGroudonEntityLogic(void)
                 {
                     gCurrentPinballGame->bossFramesetIndex = 0;
                     gCurrentPinballGame->bossMovementPhase++;
-                    if (gCurrentPinballGame->bossMovementPhase == 12 && gCurrentPinballGame->bossAttackPhase == 4)
+                    if (gCurrentPinballGame->bossMovementPhase == 12
+                        && gCurrentPinballGame->bossNextAttackState == GROUDON_ENTITY_STATE_SHOCKWAVE)
                     {
                         for (i = 0; i < 4; i++)
                         {
@@ -423,13 +424,13 @@ void UpdateGroudonEntityLogic(void)
                 }
                 else
                 {
-                    if (gCurrentPinballGame->bossAttackPhase == 4)
+                    if (gCurrentPinballGame->bossNextAttackState == GROUDON_ENTITY_STATE_SHOCKWAVE)
                     {
                         gCurrentPinballGame->bossFramesetIndex = 36;
                         gCurrentPinballGame->bossEntityState = GROUDON_ENTITY_STATE_SHOCKWAVE;
                         gCurrentPinballGame->bossMovementPhase = 0;
                     }
-                    else if (gCurrentPinballGame->bossAttackPhase == 3)
+                    else if (gCurrentPinballGame->bossNextAttackState == GROUDON_ENTITY_STATE_FIREBALL)
                     {
                         gCurrentPinballGame->bossFramesetIndex = 76;
                         gCurrentPinballGame->bossEntityState = GROUDON_ENTITY_STATE_FIREBALL;
@@ -465,12 +466,12 @@ void UpdateGroudonEntityLogic(void)
 
                 if (gCurrentPinballGame->projectileAttackCount & 1)
                 {
-                    gCurrentPinballGame->bossAttackPhase = 4;
+                    gCurrentPinballGame->bossNextAttackState = GROUDON_ENTITY_STATE_SHOCKWAVE;
                     gCurrentPinballGame->bossMovementPhase = 8;
                 }
                 else
                 {
-                    gCurrentPinballGame->bossAttackPhase = 5;
+                    gCurrentPinballGame->bossNextAttackState = GROUDON_ENTITY_STATE_JUMP;
                     gCurrentPinballGame->bossMovementPhase = 8;
                 }
 
@@ -550,7 +551,7 @@ void UpdateGroudonEntityLogic(void)
                 {
                     gCurrentPinballGame->bossFramesetIndex = 0;
                     gCurrentPinballGame->bossEntityState = GROUDON_ENTITY_STATE_IDLE;
-                    gCurrentPinballGame->bossAttackPhase = 3;
+                    gCurrentPinballGame->bossNextAttackState = GROUDON_ENTITY_STATE_FIREBALL;
                     gCurrentPinballGame->bossMovementPhase = 6;
                 }
             }
@@ -579,7 +580,7 @@ void UpdateGroudonEntityLogic(void)
             {
                 gCurrentPinballGame->bossFramesetIndex = 0;
                 gCurrentPinballGame->bossEntityState = GROUDON_ENTITY_STATE_IDLE;
-                gCurrentPinballGame->bossAttackPhase = 3;
+                gCurrentPinballGame->bossNextAttackState = GROUDON_ENTITY_STATE_FIREBALL;
                 gCurrentPinballGame->bossMovementPhase = 8;
             }
 
@@ -619,7 +620,7 @@ void UpdateGroudonEntityLogic(void)
             // bonus completed
             gCurrentPinballGame->bossEntityState = GROUDON_ENTITY_STATE_PREPARE_LEAVING;
             gCurrentPinballGame->bossFramesetIndex = 32;
-            gCurrentPinballGame->boardEntityCollisionMode = 0;
+            gCurrentPinballGame->boardEntityCollisionMode = GROUDON_COLLISION_MODE_NONE;
             gMain.modeChangeFlags = MODE_CHANGE_BONUS_BANNER;
             gCurrentPinballGame->ballRespawnState = 2;
             gCurrentPinballGame->ballRespawnTimer = 0;

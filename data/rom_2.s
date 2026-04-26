@@ -4454,7 +4454,7 @@ gKyogreWhirlpoolTargetPositions:: @ 0x086AEDE8
 gShockwaveSplashDistanceThresholds:: @ 0x086AEE20
 	.incbin "baserom.gba", 0x6AEE20, 0x3E
 
-gKyogreWhirlpoolTrapAnimFrameset:: @ 0x086AEE5E
+gKyogrefreezeTrapAnimFrameset:: @ 0x086AEE5E
 	.incbin "baserom.gba", 0x6AEE5E, 0x78
 
 gWaterTilePaletteCycle:: @ 0x086AEED6
@@ -4508,7 +4508,7 @@ gGroudonBgSpriteBaseTileNums:: @ 0x086AF3C6
 gRayquazaAnimFramesetTable:: @ 0x086AF3CC
 	.incbin "baserom.gba", 0x6AF3CC, 0x378
 
-gRayquazaMinionOrbitWaypoints:: @ 0x086AF744
+gRayquazaTornadoSpawnPos:: @ 0x086AF744
 	.incbin "baserom.gba", 0x6AF744, 0x40
 
 gRayquazaCloudScrollPositions:: @ 0x086AF784
@@ -11402,7 +11402,7 @@ gGroudonFirePillarOamData:: @ 0x086B8AE0
     packed_sprite_oam x=0x0, y=0x0, spriteSize=SPRITE_SIZE_8x8, tileNum=0x19c, priority=0x1, paletteNum=0x4
     packed_sprite_oam x=0x0, y=0x0, spriteSize=SPRITE_SIZE_8x8, tileNum=0x19c, priority=0x1, paletteNum=0x4
 
-gKyogreWhirlpoolTrapOamData:: @ 0x086B91AC
+gKyogrefreezeTrapOamData:: @ 0x086B91AC
     packed_sprite_oam x=-0x10, y=-0x9, spriteSize=SPRITE_SIZE_32x32, tileNum=0x127, priority=0x1, paletteNum=0xc
     packed_sprite_oam x=0x10, y=-0x9, spriteSize=SPRITE_SIZE_16x32, tileNum=0x137, priority=0x1, paletteNum=0xc
     packed_sprite_oam x=-0x10, y=0x17, spriteSize=SPRITE_SIZE_32x8, tileNum=0x13f, priority=0x1, paletteNum=0xc

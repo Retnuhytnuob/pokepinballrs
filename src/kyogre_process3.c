@@ -27,13 +27,13 @@ extern const s16 gKyogreRisingPaletteCycleIndices[];
 extern const s16 gKyogreSplashAnimIndices[];
 extern const struct Vector16 gKyogreWhirlpoolTargetPositions[];
 extern const s16 gShockwaveSplashDistanceThresholds[];
-extern const s16 gKyogreWhirlpoolTrapAnimFrameset[][3];
+extern const s16 gKyogrefreezeTrapAnimFrameset[][3];
 extern const s16 gWaterTilePaletteCycle[];
 extern const s16 gKyogreWaterPaletteSegmentCycle[];
 extern const s16 gKyogreBgTileVariantCycle[];
 extern const u16 gKyogreBgSpriteBaseTileNums[];
 extern const s16 gKyogreIntroPaletteCycleIndices[];
-extern const u16 gKyogreWhirlpoolTrapOamData[28][4][3];
+extern const u16 gKyogrefreezeTrapOamData[28][4][3];
 extern const u16 gKyogreMainBodyOamData[66][10][3];
 
 
@@ -43,7 +43,7 @@ void KyogreBoardProcess_3A_383E4(void)
 
     gCurrentPinballGame->stageTimer = 0;
     gCurrentPinballGame->boardSubState = BONUS_BOARD_SUBSTATE_ACTIVE;
-    gCurrentPinballGame->boardState = 0;
+    gCurrentPinballGame->boardState = KYOGRE_BOARD_STATE_INTRO;
     gCurrentPinballGame->boardModeType = 0;
     gCurrentPinballGame->eventTimer = gCurrentPinballGame->timerBonus + 10800;
     gCurrentPinballGame->timerBonus = 0;
@@ -63,10 +63,10 @@ void KyogreBoardProcess_3A_383E4(void)
     gCurrentPinballGame->bannerSlideYOffset = 0;
     gCurrentPinballGame->bossAttackTimer = 0;
     gCurrentPinballGame->bonusModeHitCount = 0;
-    gCurrentPinballGame->boardEntityCollisionMode = 0;
+    gCurrentPinballGame->boardEntityCollisionMode = KYOGRE_COLLISION_MODE_NONE;
     gCurrentPinballGame->portraitDisplayState = PORTRAIT_DISPLAY_MODE_BANNER;
     gCurrentPinballGame->bossVulnerable = 14;
-    gCurrentPinballGame->bossEntityState = 0;
+    gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_0;
     gCurrentPinballGame->bossPositionX = 0;
     gCurrentPinballGame->bossPositionY = 0;
     gCurrentPinballGame->kecleonFramesetBase = 0;
@@ -74,27 +74,27 @@ void KyogreBoardProcess_3A_383E4(void)
     gCurrentPinballGame->bossFramesetIndex = 0;
     gCurrentPinballGame->bossFrameTimer = 0;
     gCurrentPinballGame->shockwaveAlreadyHit = 0;
-    gCurrentPinballGame->whirlpoolTrapPhase = 0;
-    gCurrentPinballGame->whirlpoolTrapAnimEndFrame = 0;
-    gCurrentPinballGame->whirlpoolTrapNextPhase = 0;
-    gCurrentPinballGame->whirlpoolTrapAnimFrame = 0;
-    gCurrentPinballGame->whirlpoolTrapAnimLoopStart = 0;
-    gCurrentPinballGame->whirlpoolTrapLoopCount = 0;
-    gCurrentPinballGame->whirlpoolTrapPauseTimer = 0;
+    gCurrentPinballGame->freezeTrapPhase = KYOGRE_FREEZE_PHASE_0;
+    gCurrentPinballGame->freezeTrapAnimEndFrame = 0;
+    gCurrentPinballGame->freezeTrapNextPhase = KYOGRE_FREEZE_PHASE_0;
+    gCurrentPinballGame->freezeTrapAnimFrame = 0;
+    gCurrentPinballGame->freezeTrapAnimLoopStart = 0;
+    gCurrentPinballGame->freezeTrapLoopCount = 0;
+    gCurrentPinballGame->freezeTrapPauseTimer = 0;
     gCurrentPinballGame->bossHitFlashTimer = 0;
-    gCurrentPinballGame->whirlpoolTrapFrameTimer = 0;
+    gCurrentPinballGame->freezeTrapFrameTimer = 0;
     gCurrentPinballGame->shockwaveAnimTimer = 0;
     gCurrentPinballGame->kyogreWaveTimer = 0;
 
     for (i = 0; i < 2; i++)
     {
-        gCurrentPinballGame->orbEntityState[i] = 0;
-        gCurrentPinballGame->orbTargetWaypointIndex[i] = 0;
-        gCurrentPinballGame->orbAnimTimer[i] = 0;
-        gCurrentPinballGame->orbScreenPosition[i].x = 0;
-        gCurrentPinballGame->orbScreenPosition[i].y = 0;
-        gCurrentPinballGame->orbOrbitCenter[i].x = 0;
-        gCurrentPinballGame->orbOrbitCenter[i].y = 0;
+        gCurrentPinballGame->vortexEntityState[i] = KYOGRE_WHIRLPOOL_PHASE_0;
+        gCurrentPinballGame->vortexTargetWaypointIndex[i] = 0;
+        gCurrentPinballGame->vortexAnimTimer[i] = 0;
+        gCurrentPinballGame->vortexScreenPosition[i].x = 0;
+        gCurrentPinballGame->vortexScreenPosition[i].y = 0;
+        gCurrentPinballGame->vortexOrbitCenter[i].x = 0;
+        gCurrentPinballGame->vortexOrbitCenter[i].y = 0;
     }
 
     for (i = 0; i < 4; i ++)
@@ -118,7 +118,7 @@ void KyogreBoardProcess_3B_3869C(void)
 {
     switch (gCurrentPinballGame->boardState)
     {
-    case 0:
+    case KYOGRE_BOARD_STATE_INTRO:
         gCurrentPinballGame->ballUpgradeTimerFrozen = 1;
         if (gCurrentPinballGame->stageTimer < 500)
         {
@@ -140,18 +140,18 @@ void KyogreBoardProcess_3B_3869C(void)
         } else
         {
             gCurrentPinballGame->cameraYAdjust = 0;
-            gCurrentPinballGame->boardState = 1;
+            gCurrentPinballGame->boardState = KYOGRE_BOARD_STATE_BATTLE_PHASE;
             gCurrentPinballGame->stageTimer = 0;
         }
         break;
-    case 2:
+    case KYOGRE_BOARD_STATE_SUCCESS_BANNER:
         if (gCurrentPinballGame->stageTimer < 120)
         {
             gCurrentPinballGame->stageTimer++;
         }
         else
         {
-            gCurrentPinballGame->boardState = 3;
+            gCurrentPinballGame->boardState = KYOGRE_BOARD_STATE_SUCCESS_SCORING;
             gCurrentPinballGame->stageTimer = 0;
             gMain.spriteGroups[6].active = TRUE;
             gMain.spriteGroups[5].active = TRUE;
@@ -161,7 +161,7 @@ void KyogreBoardProcess_3B_3869C(void)
             gCurrentPinballGame->boardEntityActive = 1;
         }
         break;
-    case 3:
+    case KYOGRE_BOARD_STATE_SUCCESS_SCORING:
         ProcessBonusBannerAndScoring();
         if (gCurrentPinballGame->scoreCounterAnimationEnabled)
             gCurrentPinballGame->stageTimer = 181;
@@ -186,14 +186,14 @@ void KyogreBoardProcess_3B_3869C(void)
         else
         {
             gCurrentPinballGame->stageTimer = 0;
-            gCurrentPinballGame->boardState = 6;
+            gCurrentPinballGame->boardState = KYOGRE_BOARD_STATE_SCORE_COUNTING_FINISHED;
             gCurrentPinballGame->numCompletedBonusStages++;
         }
 
         gCurrentPinballGame->boardEntityActive = 1;
         break;
-    case 4:
-        gCurrentPinballGame->boardState = 5;
+    case KYOGRE_BOARD_STATE_CATCH_BANNER:
+        gCurrentPinballGame->boardState = KYOGRE_BOARD_STATE_CATCH_SCORING;
         gCurrentPinballGame->stageTimer = 140;
         gMain.spriteGroups[6].active = TRUE;
         gMain.spriteGroups[5].active = TRUE;
@@ -201,7 +201,7 @@ void KyogreBoardProcess_3B_3869C(void)
         gCurrentPinballGame->bannerSlideYOffset = 136;
         gMain.modeChangeFlags = MODE_CHANGE_BONUS_BANNER;
         break;
-    case 5:
+    case KYOGRE_BOARD_STATE_CATCH_SCORING:
         ProcessBonusBannerAndScoring();
         if (gCurrentPinballGame->scoreCounterAnimationEnabled)
             gCurrentPinballGame->stageTimer = 181;
@@ -220,11 +220,11 @@ void KyogreBoardProcess_3B_3869C(void)
         else
         {
             gCurrentPinballGame->stageTimer = 0;
-            gCurrentPinballGame->boardState = 6;
+            gCurrentPinballGame->boardState = KYOGRE_BOARD_STATE_SCORE_COUNTING_FINISHED;
             gCurrentPinballGame->numCompletedBonusStages++;
         }
         break;
-    case 6:
+    case KYOGRE_BOARD_STATE_SCORE_COUNTING_FINISHED:
         ProcessBonusBannerAndScoring();
         gCurrentPinballGame->returnToMainBoardFlag = 1;
         gCurrentPinballGame->boardEntityActive = 1;
@@ -258,7 +258,7 @@ void UpdateKyogreEntityLogic(void)
     if (gCurrentPinballGame->bossHitFlashTimer)
     {
         gCurrentPinballGame->bossHitFlashTimer--;
-        if (gCurrentPinballGame->bossEntityState != 8)
+        if (gCurrentPinballGame->bossEntityState != KYOGRE_ENTITY_STATE_8)
         {
             gCurrentPinballGame->legendaryFlashState = 1;
             if (gCurrentPinballGame->bossHitFlashTimer == 4)
@@ -268,8 +268,8 @@ void UpdateKyogreEntityLogic(void)
                 gCurrentPinballGame->scoreAddedInFrame = 500000;
                 gCurrentPinballGame->bonusModeHitCount++;
                 if (gCurrentPinballGame->bonusModeHitCount >= gCurrentPinballGame->legendaryHitsRequired &&
-                    gCurrentPinballGame->boardEntityCollisionMode == 1)
-                    gCurrentPinballGame->bossEntityState = 7;
+                    gCurrentPinballGame->boardEntityCollisionMode == KYOGRE_COLLISION_MODE_1)
+                    gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_7;
             }
         }
 
@@ -279,15 +279,15 @@ void UpdateKyogreEntityLogic(void)
 
     switch (gCurrentPinballGame->bossEntityState)
     {
-    case 0:
-        gCurrentPinballGame->bossEntityState = 1;
+    case KYOGRE_ENTITY_STATE_0:
+        gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_1;
         gCurrentPinballGame->bossFramesetIndex = 12;
         gCurrentPinballGame->bossFrameTimer = 0;
         gCurrentPinballGame->bossPositionX = 0;
         gCurrentPinballGame->bossPositionY = 0;
         gCurrentPinballGame->kyogreWaveTimer = 0;
         break;
-    case 1:
+    case KYOGRE_ENTITY_STATE_1:
         index = gKyogreRisingPaletteCycleIndices[(gCurrentPinballGame->kyogreWaveTimer % 280) / 14];
         DmaCopy16(3, gKyogreWaterAnimPaletteFrames[index], (void *)0x050003E0, 0x20);
         gCurrentPinballGame->kyogreWaveTimer++;
@@ -302,8 +302,8 @@ void UpdateKyogreEntityLogic(void)
             if (gCurrentPinballGame->bossFramesetIndex == 34)
             {
                 gCurrentPinballGame->bossFramesetIndex = 0;
-                gCurrentPinballGame->bossEntityState = 4;
-                gCurrentPinballGame->bossAttackPhase = 6;
+                gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_4;
+                gCurrentPinballGame->bossNextAttackState = KYOGRE_ENTITY_STATE_6;
                 gCurrentPinballGame->bossMovementPhase = 0;
                 gCurrentPinballGame->bossRoarTimer = 60;
                 DmaCopy16(3, &gKyogreWaterAnimPaletteFrames[5], (void *)0x050003E0, 0x20);
@@ -315,14 +315,14 @@ void UpdateKyogreEntityLogic(void)
             if (gCurrentPinballGame->bossFramesetIndex == 33)
             {
                 MPlayStart(&gMPlayInfo_SE1, &se_unk_10b);
-                gCurrentPinballGame->boardEntityCollisionMode = 1;
+                gCurrentPinballGame->boardEntityCollisionMode = KYOGRE_COLLISION_MODE_1;
             }
         }
 
         if (gCurrentPinballGame->ballRespawnTimer > 2)
             gCurrentPinballGame->ballRespawnTimer--;
         break;
-    case 2:
+    case KYOGRE_ENTITY_STATE_2:
         if (gKyogreAnimFramesetTable[gCurrentPinballGame->bossFramesetIndex][1] > gCurrentPinballGame->bossFrameTimer)
         {
             gCurrentPinballGame->bossFrameTimer++;
@@ -334,19 +334,19 @@ void UpdateKyogreEntityLogic(void)
             if (gCurrentPinballGame->bossFramesetIndex == 12)
             {
                 gCurrentPinballGame->bossFramesetIndex = 0;
-                gCurrentPinballGame->bossEntityState = 4;
-                gCurrentPinballGame->bossAttackPhase = 6;
+                gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_4;
+                gCurrentPinballGame->bossNextAttackState = KYOGRE_ENTITY_STATE_6;
                 gCurrentPinballGame->bossMovementPhase = 2;
             }
 
             if (gCurrentPinballGame->bossFramesetIndex == 11)
             {
-                gCurrentPinballGame->boardEntityCollisionMode = 1;
+                gCurrentPinballGame->boardEntityCollisionMode = KYOGRE_COLLISION_MODE_1;
                 MPlayStart(&gMPlayInfo_SE1, &se_unk_10b);
             }
         }
         break;
-    case 3:
+    case KYOGRE_ENTITY_STATE_3:
         if (gKyogreAnimFramesetTable[gCurrentPinballGame->bossFramesetIndex][1] > gCurrentPinballGame->bossFrameTimer)
         {
             gCurrentPinballGame->bossFrameTimer++;
@@ -358,18 +358,18 @@ void UpdateKyogreEntityLogic(void)
             if (gCurrentPinballGame->bossFramesetIndex == 8)
             {
                 gCurrentPinballGame->bossFramesetIndex = 8;
-                gCurrentPinballGame->bossEntityState = 11;
+                gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_11;
                 gCurrentPinballGame->bossMovementPhase = 0;
             }
 
             if (gCurrentPinballGame->bossFramesetIndex == 5)
             {
-                gCurrentPinballGame->boardEntityCollisionMode = 0;
+                gCurrentPinballGame->boardEntityCollisionMode = KYOGRE_COLLISION_MODE_NONE;
                 MPlayStart(&gMPlayInfo_SE1, &se_unk_10c);
             }
         }
         break;
-    case 4:
+    case KYOGRE_ENTITY_STATE_4:
         if (gKyogreAnimFramesetTable[gCurrentPinballGame->bossFramesetIndex][1] > gCurrentPinballGame->bossFrameTimer)
         {
             gCurrentPinballGame->bossFrameTimer++;
@@ -387,25 +387,25 @@ void UpdateKyogreEntityLogic(void)
                 }
                 else
                 {
-                    if (gCurrentPinballGame->bossAttackPhase == 3)
+                    if (gCurrentPinballGame->bossNextAttackState == KYOGRE_ENTITY_STATE_3)
                     {
                         if (gCurrentPinballGame->bonusModeHitCount >= gCurrentPinballGame->legendaryHitsRequired)
                         {
                             gCurrentPinballGame->bossFramesetIndex = 0;
-                            gCurrentPinballGame->bossEntityState = 4;
+                            gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_4;
                             gCurrentPinballGame->bossMovementPhase = 0;
-                            gCurrentPinballGame->bossAttackPhase = 6;
+                            gCurrentPinballGame->bossNextAttackState = KYOGRE_ENTITY_STATE_6;
                         }
                         else
                         {
                             gCurrentPinballGame->bossFramesetIndex = 4;
-                            gCurrentPinballGame->bossEntityState = gCurrentPinballGame->bossAttackPhase;
+                            gCurrentPinballGame->bossEntityState = gCurrentPinballGame->bossNextAttackState;
                         }
                     }
                     else
                     {
                         gCurrentPinballGame->bossFramesetIndex = 34;
-                        gCurrentPinballGame->bossEntityState = gCurrentPinballGame->bossAttackPhase;
+                        gCurrentPinballGame->bossEntityState = gCurrentPinballGame->bossNextAttackState;
                         gCurrentPinballGame->shockwaveAlreadyHit = 0;
                         gCurrentPinballGame->bossMovementPhase = 0;
                     }
@@ -413,7 +413,7 @@ void UpdateKyogreEntityLogic(void)
             }
         }
         break;
-    case 5:
+    case KYOGRE_ENTITY_STATE_5:
         if (gKyogreAnimFramesetTable[gCurrentPinballGame->bossFramesetIndex][1] > gCurrentPinballGame->bossFrameTimer)
         {
             gCurrentPinballGame->bossFrameTimer++;
@@ -432,23 +432,23 @@ void UpdateKyogreEntityLogic(void)
                 else
                 {
                     gCurrentPinballGame->bossFramesetIndex = 0;
-                    gCurrentPinballGame->bossEntityState = 4;
+                    gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_4;
                     gCurrentPinballGame->bossMovementPhase = 1;
-                    gCurrentPinballGame->bossAttackPhase = 3;
+                    gCurrentPinballGame->bossNextAttackState = KYOGRE_ENTITY_STATE_3;
                 }
             }
 
             if (gCurrentPinballGame->bossFramesetIndex == 52)
             {
-                gCurrentPinballGame->orbAnimTimer[gCurrentPinballGame->bossMovementPhase] = 0;
-                gCurrentPinballGame->orbEntityState[gCurrentPinballGame->bossMovementPhase] = 1;
+                gCurrentPinballGame->vortexAnimTimer[gCurrentPinballGame->bossMovementPhase] = 0;
+                gCurrentPinballGame->vortexEntityState[gCurrentPinballGame->bossMovementPhase] = KYOGRE_WHIRLPOOL_PHASE_1;
             }
 
             if (gCurrentPinballGame->bossFramesetIndex == 50 || gCurrentPinballGame->bossFramesetIndex == 56 || gCurrentPinballGame->bossFramesetIndex == 62)
                 MPlayStart(&gMPlayInfo_SE1, &se_unk_10d);
         }
         break;
-    case 6:
+    case KYOGRE_ENTITY_STATE_6:
         if (gKyogreAnimFramesetTable[gCurrentPinballGame->bossFramesetIndex][1] > gCurrentPinballGame->bossFrameTimer)
         {
             gCurrentPinballGame->bossFrameTimer++;
@@ -469,7 +469,7 @@ void UpdateKyogreEntityLogic(void)
             if (gCurrentPinballGame->bossFramesetIndex == 45)
             {
                 gCurrentPinballGame->bossFramesetIndex = 45;
-                gCurrentPinballGame->bossEntityState = 5;
+                gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_5;
                 gCurrentPinballGame->bossMovementPhase = 0;
             }
 
@@ -484,13 +484,13 @@ void UpdateKyogreEntityLogic(void)
         if (gCurrentPinballGame->bossHitFlashTimer > 6)
             gCurrentPinballGame->shockwaveAlreadyHit = 1;
         break;
-    case 7:
+    case KYOGRE_ENTITY_STATE_7:
         gCurrentPinballGame->boardModeType = 3;
 
         if (gCurrentPinballGame->numCompletedBonusStages % 5 == 3)
         {
             // catch kyogre
-            gCurrentPinballGame->bossEntityState = 10;
+            gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_10;
             gCurrentPinballGame->bossFramesetIndex = 0;
             gMain.spriteGroups[10].active = TRUE;
             gMain.spriteGroups[9].active = TRUE;
@@ -503,7 +503,7 @@ void UpdateKyogreEntityLogic(void)
         else
         {
             // normal completion
-            gCurrentPinballGame->bossEntityState = 9;
+            gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_9;
             gCurrentPinballGame->bossFramesetIndex = 79;
             gMain.modeChangeFlags = MODE_CHANGE_BONUS_BANNER;
             gCurrentPinballGame->ballRespawnState = 2;
@@ -512,15 +512,15 @@ void UpdateKyogreEntityLogic(void)
 
         if (gMain.spriteGroups[16].active)
         {
-            gCurrentPinballGame->whirlpoolTrapPhase = 7;
-            gCurrentPinballGame->whirlpoolTrapPauseTimer = 1;
+            gCurrentPinballGame->freezeTrapPhase = KYOGRE_FREEZE_PHASE_7;
+            gCurrentPinballGame->freezeTrapPauseTimer = 1;
         }
 
         gCurrentPinballGame->bossFrameTimer = 0;
         break;
-    case 8:
+    case KYOGRE_ENTITY_STATE_8:
         break;
-    case 9:
+    case KYOGRE_ENTITY_STATE_9:
         if (gKyogreAnimFramesetTable[gCurrentPinballGame->bossFramesetIndex][1] > gCurrentPinballGame->bossFrameTimer)
         {
             gCurrentPinballGame->bossFrameTimer++;
@@ -532,19 +532,19 @@ void UpdateKyogreEntityLogic(void)
             if (gCurrentPinballGame->bossFramesetIndex == 108)
             {
                 gCurrentPinballGame->bossFramesetIndex = 107;
-                gCurrentPinballGame->bossEntityState = 13;
+                gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_13;
                 gCurrentPinballGame->boardState = 2;
                 gCurrentPinballGame->stageTimer = 0;
             }
 
             if (gCurrentPinballGame->bossFramesetIndex == 97)
             {
-                gCurrentPinballGame->boardEntityCollisionMode = 0;
+                gCurrentPinballGame->boardEntityCollisionMode = KYOGRE_COLLISION_MODE_NONE;
                 MPlayStart(&gMPlayInfo_SE1, &se_unk_10f);
             }
         }
         break;
-    case 10:
+    case KYOGRE_ENTITY_STATE_10:
         if (gKyogreAnimFramesetTable[gCurrentPinballGame->bossFramesetIndex][1] > gCurrentPinballGame->bossFrameTimer)
         {
             gCurrentPinballGame->bossFrameTimer++;
@@ -571,7 +571,7 @@ void UpdateKyogreEntityLogic(void)
         if (gCurrentPinballGame->captureSequenceTimer == 22)
             gCurrentPinballGame->bossFramesetIndex = 115;
         break;
-    case 11:
+    case KYOGRE_ENTITY_STATE_11:
         if (gCurrentPinballGame->bossFrameTimer < 300)
         {
             gCurrentPinballGame->bossFrameTimer++;
@@ -586,17 +586,17 @@ void UpdateKyogreEntityLogic(void)
             {
                 for (i = 0; i < 2; i++)
                 {
-                    if (gCurrentPinballGame->orbEntityState[i] == 3)
+                    if (gCurrentPinballGame->vortexEntityState[i] == KYOGRE_WHIRLPOOL_PHASE_3)
                     {
-                        gCurrentPinballGame->orbAnimTimer[i] = 0;
-                        gCurrentPinballGame->orbEntityState[i] = 4;
+                        gCurrentPinballGame->vortexAnimTimer[i] = 0;
+                        gCurrentPinballGame->vortexEntityState[i] = KYOGRE_WHIRLPOOL_PHASE_4;
                         gCurrentPinballGame->trapSpinRadius /= 2;
                     }
 
-                    if (gCurrentPinballGame->orbEntityState[i] == 2)
+                    if (gCurrentPinballGame->vortexEntityState[i] == KYOGRE_WHIRLPOOL_PHASE_2)
                     {
-                        gCurrentPinballGame->orbAnimTimer[i] = 0;
-                        gCurrentPinballGame->orbEntityState[i] = 5;
+                        gCurrentPinballGame->vortexAnimTimer[i] = 0;
+                        gCurrentPinballGame->vortexEntityState[i] = KYOGRE_WHIRLPOOL_PHASE_5;
                     }
                 }
             }
@@ -605,13 +605,13 @@ void UpdateKyogreEntityLogic(void)
         {
             gCurrentPinballGame->bossFrameTimer = 0;
             gCurrentPinballGame->bossFramesetIndex = 67;
-            gCurrentPinballGame->bossEntityState = 12;
-            gCurrentPinballGame->boardEntityCollisionMode = 2;
+            gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_12;
+            gCurrentPinballGame->boardEntityCollisionMode = KYOGRE_COLLISION_MODE_2;
             MPlayStart(&gMPlayInfo_SE1, &se_unk_10b);
             PlayRumble(8);
         }
         break;
-    case 12:
+    case KYOGRE_ENTITY_STATE_12:
         if (gKyogreAnimFramesetTable[gCurrentPinballGame->bossFramesetIndex][1] > gCurrentPinballGame->bossFrameTimer)
         {
             gCurrentPinballGame->bossFrameTimer++;
@@ -625,24 +625,24 @@ void UpdateKyogreEntityLogic(void)
                 if (gCurrentPinballGame->bossMovementPhase <= 0)
                 {
                     gCurrentPinballGame->bossFramesetIndex = 78;
-                    gCurrentPinballGame->bossEntityState = 11;
+                    gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_11;
                     gCurrentPinballGame->bossMovementPhase++;
                 }
                 else
                 {
                     gCurrentPinballGame->bossMovementPhase = 0;
                     gCurrentPinballGame->bossFramesetIndex = 8;
-                    gCurrentPinballGame->bossEntityState = 2;
+                    gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_2;
                     gCurrentPinballGame->bossPositionX = 0;
                     gCurrentPinballGame->bossPositionY = 0;
                 }
             }
 
             if (gCurrentPinballGame->bossFramesetIndex == 70)
-                gCurrentPinballGame->boardEntityCollisionMode = 3;
+                gCurrentPinballGame->boardEntityCollisionMode = KYOGRE_COLLISION_MODE_3;
 
             if (gCurrentPinballGame->bossFramesetIndex == 73)
-                gCurrentPinballGame->boardEntityCollisionMode = 0;
+                gCurrentPinballGame->boardEntityCollisionMode = KYOGRE_COLLISION_MODE_NONE;
 
             if (gCurrentPinballGame->bossFramesetIndex == 72)
             {
@@ -651,7 +651,7 @@ void UpdateKyogreEntityLogic(void)
             }
         }
         break;
-    case 13:
+    case KYOGRE_ENTITY_STATE_13:
         break;
     }
 
@@ -697,12 +697,12 @@ void RenderKyogreSprites(void)
         group->baseY = gCurrentPinballGame->bossPositionY / 10 + 66u - gCurrentPinballGame->cameraYOffset;
         gCurrentPinballGame->catchTargetX = gCurrentPinballGame->bossPositionX / 10 + 120;
         gCurrentPinballGame->catchTargetY = gCurrentPinballGame->bossPositionY / 10 + 50;
-        if (gCurrentPinballGame->boardEntityCollisionMode == 2)
+        if (gCurrentPinballGame->boardEntityCollisionMode == KYOGRE_COLLISION_MODE_2)
         {
             gCurrentPinballGame->bossCollisionX = (gCurrentPinballGame->bossPositionX / 10) * 2 + 192;
             gCurrentPinballGame->bossCollisionY = (gCurrentPinballGame->bossPositionY / 10) * 2 + 134;
         }
-        else if (gCurrentPinballGame->boardEntityCollisionMode == 3)
+        else if (gCurrentPinballGame->boardEntityCollisionMode == KYOGRE_COLLISION_MODE_3)
         {
             gCurrentPinballGame->bossCollisionX = (gCurrentPinballGame->bossPositionX / 10) * 2 + 192;
             gCurrentPinballGame->bossCollisionY = (gCurrentPinballGame->bossPositionY / 10) * 2 + 150;
@@ -782,8 +782,11 @@ void RenderKyogreSprites(void)
     }
     else
     {
-        if (gCurrentPinballGame->bossEntityState == 11 && gCurrentPinballGame->bossFrameTimer == 218)
+        if (gCurrentPinballGame->bossEntityState == KYOGRE_ENTITY_STATE_11
+            && gCurrentPinballGame->bossFrameTimer == 218)
+        {
             group->active = TRUE;
+        }
     }
 }
 
@@ -852,118 +855,118 @@ void UpdateKyogreFieldEntities(void)
     group = &gMain.spriteGroups[16];
     if (group->active)
     {
-        switch (gCurrentPinballGame->whirlpoolTrapPhase)
+        switch (gCurrentPinballGame->freezeTrapPhase)
         {
-        case 0:
-            gCurrentPinballGame->whirlpoolTrapAnimLoopStart = 0;
-            gCurrentPinballGame->whirlpoolTrapAnimEndFrame = 5;
-            gCurrentPinballGame->whirlpoolTrapNextPhase = 1;
-            gCurrentPinballGame->whirlpoolTrapLoopCount = 0;
-            gCurrentPinballGame->whirlpoolTrapPauseTimer = 0;
-            if (gCurrentPinballGame->whirlpoolTrapAnimFrame == 2)
+        case KYOGRE_FREEZE_PHASE_0:
+            gCurrentPinballGame->freezeTrapAnimLoopStart = 0;
+            gCurrentPinballGame->freezeTrapAnimEndFrame = 5;
+            gCurrentPinballGame->freezeTrapNextPhase = KYOGRE_FREEZE_PHASE_1;
+            gCurrentPinballGame->freezeTrapLoopCount = 0;
+            gCurrentPinballGame->freezeTrapPauseTimer = 0;
+            if (gCurrentPinballGame->freezeTrapAnimFrame == 2)
             {
                 int a; // force addition of 8 instead of offsetting the global constant
                 DmaCopy16(3, &gBallPalettes[a = gCurrentPinballGame->ballUpgradeType + 8], (void *)0x05000220, 0x20);
             }
             break;
-        case 1:
-            gCurrentPinballGame->whirlpoolTrapLoopCount = 4;
-            gCurrentPinballGame->whirlpoolTrapPauseTimer = 90;
-            gCurrentPinballGame->whirlpoolTrapPhase = 2;
+        case KYOGRE_FREEZE_PHASE_1:
+            gCurrentPinballGame->freezeTrapLoopCount = 4;
+            gCurrentPinballGame->freezeTrapPauseTimer = 90;
+            gCurrentPinballGame->freezeTrapPhase = KYOGRE_FREEZE_PHASE_2;
             break;
-        case 2:
+        case KYOGRE_FREEZE_PHASE_2:
             if (gCurrentPinballGame->newButtonActions[0] || gCurrentPinballGame->newButtonActions[1])
             {
-                gCurrentPinballGame->whirlpoolTrapPauseTimer -= 90;
-                if (gCurrentPinballGame->whirlpoolTrapPauseTimer < 0)
-                    gCurrentPinballGame->whirlpoolTrapPauseTimer = 0;
+                gCurrentPinballGame->freezeTrapPauseTimer -= 90;
+                if (gCurrentPinballGame->freezeTrapPauseTimer < 0)
+                    gCurrentPinballGame->freezeTrapPauseTimer = 0;
 
                 m4aSongNumStart(SE_UNKNOWN_0x111);
             }
 
-            gCurrentPinballGame->whirlpoolTrapAnimLoopStart = 5;
-            gCurrentPinballGame->whirlpoolTrapAnimEndFrame = 9;
-            gCurrentPinballGame->whirlpoolTrapNextPhase = 3;
+            gCurrentPinballGame->freezeTrapAnimLoopStart = 5;
+            gCurrentPinballGame->freezeTrapAnimEndFrame = 9;
+            gCurrentPinballGame->freezeTrapNextPhase = KYOGRE_FREEZE_PHASE_3;
             break;
-        case 3:
-            gCurrentPinballGame->whirlpoolTrapLoopCount = 4;
-            gCurrentPinballGame->whirlpoolTrapPauseTimer = 90;
-            gCurrentPinballGame->whirlpoolTrapPhase = 4;
+        case KYOGRE_FREEZE_PHASE_3:
+            gCurrentPinballGame->freezeTrapLoopCount = 4;
+            gCurrentPinballGame->freezeTrapPauseTimer = 90;
+            gCurrentPinballGame->freezeTrapPhase = KYOGRE_FREEZE_PHASE_4;
             break;
-        case 4:
+        case KYOGRE_FREEZE_PHASE_4:
             if (gCurrentPinballGame->newButtonActions[0] || gCurrentPinballGame->newButtonActions[1])
             {
-                gCurrentPinballGame->whirlpoolTrapPauseTimer -= 90;
-                if (gCurrentPinballGame->whirlpoolTrapPauseTimer < 0)
-                    gCurrentPinballGame->whirlpoolTrapPauseTimer = 0;
+                gCurrentPinballGame->freezeTrapPauseTimer -= 90;
+                if (gCurrentPinballGame->freezeTrapPauseTimer < 0)
+                    gCurrentPinballGame->freezeTrapPauseTimer = 0;
 
                 m4aSongNumStart(SE_UNKNOWN_0x111);
             }
 
-            gCurrentPinballGame->whirlpoolTrapAnimLoopStart = 9;
-            gCurrentPinballGame->whirlpoolTrapAnimEndFrame = 13;
-            gCurrentPinballGame->whirlpoolTrapNextPhase = 5;
+            gCurrentPinballGame->freezeTrapAnimLoopStart = 9;
+            gCurrentPinballGame->freezeTrapAnimEndFrame = 13;
+            gCurrentPinballGame->freezeTrapNextPhase = KYOGRE_FREEZE_PHASE_5;
             break;
-        case 5:
-            gCurrentPinballGame->whirlpoolTrapLoopCount = 0;
-            gCurrentPinballGame->whirlpoolTrapPauseTimer = 90;
-            gCurrentPinballGame->whirlpoolTrapPhase = 6;
+        case KYOGRE_FREEZE_PHASE_5:
+            gCurrentPinballGame->freezeTrapLoopCount = 0;
+            gCurrentPinballGame->freezeTrapPauseTimer = 90;
+            gCurrentPinballGame->freezeTrapPhase = KYOGRE_FREEZE_PHASE_6;
             break;
-        case 6:
+        case KYOGRE_FREEZE_PHASE_6:
             if (gCurrentPinballGame->newButtonActions[0] || gCurrentPinballGame->newButtonActions[1])
             {
-                gCurrentPinballGame->whirlpoolTrapPauseTimer -= 90;
-                if (gCurrentPinballGame->whirlpoolTrapPauseTimer < 0)
-                    gCurrentPinballGame->whirlpoolTrapPauseTimer = 0;
+                gCurrentPinballGame->freezeTrapPauseTimer -= 90;
+                if (gCurrentPinballGame->freezeTrapPauseTimer < 0)
+                    gCurrentPinballGame->freezeTrapPauseTimer = 0;
 
                 m4aSongNumStart(SE_UNKNOWN_0x111);
             }
 
-            gCurrentPinballGame->whirlpoolTrapAnimLoopStart = 13;
-            gCurrentPinballGame->whirlpoolTrapAnimEndFrame = 19;
-            gCurrentPinballGame->whirlpoolTrapNextPhase = 7;
+            gCurrentPinballGame->freezeTrapAnimLoopStart = 13;
+            gCurrentPinballGame->freezeTrapAnimEndFrame = 19;
+            gCurrentPinballGame->freezeTrapNextPhase = KYOGRE_FREEZE_PHASE_7;
             break;
-        case 7:
+        case KYOGRE_FREEZE_PHASE_7:
             gMain.spriteGroups[16].active = FALSE;
             break;
         }
 
-        if (gCurrentPinballGame->whirlpoolTrapPauseTimer > 0)
+        if (gCurrentPinballGame->freezeTrapPauseTimer > 0)
         {
-            gCurrentPinballGame->whirlpoolTrapPauseTimer--;
-            if (gCurrentPinballGame->whirlpoolTrapPauseTimer == 0)
+            gCurrentPinballGame->freezeTrapPauseTimer--;
+            if (gCurrentPinballGame->freezeTrapPauseTimer == 0)
                 m4aSongNumStart(SE_UNKNOWN_0x111);
         }
         else
         {
-            if (gKyogreWhirlpoolTrapAnimFrameset[gCurrentPinballGame->whirlpoolTrapAnimFrame][1] > gCurrentPinballGame->whirlpoolTrapFrameTimer)
+            if (gKyogrefreezeTrapAnimFrameset[gCurrentPinballGame->freezeTrapAnimFrame][1] > gCurrentPinballGame->freezeTrapFrameTimer)
             {
-                gCurrentPinballGame->whirlpoolTrapFrameTimer++;
+                gCurrentPinballGame->freezeTrapFrameTimer++;
             }
             else
             {
-                gCurrentPinballGame->whirlpoolTrapFrameTimer = 0;
-                gCurrentPinballGame->whirlpoolTrapAnimFrame++;
-                if (gCurrentPinballGame->whirlpoolTrapAnimFrame == gCurrentPinballGame->whirlpoolTrapAnimEndFrame)
+                gCurrentPinballGame->freezeTrapFrameTimer = 0;
+                gCurrentPinballGame->freezeTrapAnimFrame++;
+                if (gCurrentPinballGame->freezeTrapAnimFrame == gCurrentPinballGame->freezeTrapAnimEndFrame)
                 {
-                    if (gCurrentPinballGame->whirlpoolTrapLoopCount > 0)
+                    if (gCurrentPinballGame->freezeTrapLoopCount > 0)
                     {
-                        gCurrentPinballGame->whirlpoolTrapAnimFrame = gCurrentPinballGame->whirlpoolTrapAnimLoopStart;
-                        gCurrentPinballGame->whirlpoolTrapLoopCount--;
+                        gCurrentPinballGame->freezeTrapAnimFrame = gCurrentPinballGame->freezeTrapAnimLoopStart;
+                        gCurrentPinballGame->freezeTrapLoopCount--;
                     }
                     else
                     {
-                        gCurrentPinballGame->whirlpoolTrapAnimFrame = gCurrentPinballGame->whirlpoolTrapAnimEndFrame - 1;
-                        gCurrentPinballGame->whirlpoolTrapPhase = gCurrentPinballGame->whirlpoolTrapNextPhase;
+                        gCurrentPinballGame->freezeTrapAnimFrame = gCurrentPinballGame->freezeTrapAnimEndFrame - 1;
+                        gCurrentPinballGame->freezeTrapPhase = gCurrentPinballGame->freezeTrapNextPhase;
                     }
 
-                    gCurrentPinballGame->whirlpoolTrapPauseTimer = 90;
+                    gCurrentPinballGame->freezeTrapPauseTimer = 90;
                 }
 
-                if (gCurrentPinballGame->whirlpoolTrapAnimFrame == 1)
+                if (gCurrentPinballGame->freezeTrapAnimFrame == 1)
                     m4aSongNumStart(SE_UNKNOWN_0x110);
 
-                if (gCurrentPinballGame->whirlpoolTrapAnimFrame == 15)
+                if (gCurrentPinballGame->freezeTrapAnimFrame == 15)
                 {
                     DmaCopy16(3, gBallPalettes[gCurrentPinballGame->ballUpgradeType], (void *)0x05000220, 0x20);
                     m4aSongNumStart(SE_UNKNOWN_0x112);
@@ -971,7 +974,7 @@ void UpdateKyogreFieldEntities(void)
             }
         }
 
-        if (gCurrentPinballGame->whirlpoolTrapAnimFrame < 18)
+        if (gCurrentPinballGame->freezeTrapAnimFrame < 18)
         {
             gCurrentPinballGame->ballGrabbed = 1;
             gCurrentPinballGame->ball->velocity.x = 0;
@@ -988,14 +991,14 @@ void UpdateKyogreFieldEntities(void)
         if (group->baseY >= 200)
             group->baseY = 200;
 
-        index = gKyogreWhirlpoolTrapAnimFrameset[gCurrentPinballGame->whirlpoolTrapAnimFrame][2];
+        index = gKyogrefreezeTrapAnimFrameset[gCurrentPinballGame->freezeTrapAnimFrame][2];
         DmaCopy16(3, gKyogreWhirlpoolSpriteFrames[index], (void *)0x060124E0, 0x3C0);
-        var0 = gKyogreWhirlpoolTrapAnimFrameset[gCurrentPinballGame->whirlpoolTrapAnimFrame][0];
+        var0 = gKyogrefreezeTrapAnimFrameset[gCurrentPinballGame->freezeTrapAnimFrame][0];
         for (i = 0; i < 4; i++)
         {
             oamSimple = &group->oam[i];
             dst = (u16*)&gOamBuffer[oamSimple->oamId];
-            src = gKyogreWhirlpoolTrapOamData[var0][i];
+            src = gKyogrefreezeTrapOamData[var0][i];
             *dst++ = *src++;
             *dst++ = *src++;
             *dst++ = *src++;
@@ -1010,38 +1013,39 @@ void UpdateKyogreFieldEntities(void)
         group = &gMain.spriteGroups[22 + i];
         if ((gMain.modeChangeFlags & MODE_CHANGE_BONUS_BANNER) == 0)
         {
-            switch (gCurrentPinballGame->orbEntityState[i]) {
-            case 0:
+            switch (gCurrentPinballGame->vortexEntityState[i]) {
+            case KYOGRE_WHIRLPOOL_PHASE_0:
                 index = 0;
-                gCurrentPinballGame->orbScreenPosition[i].x = 0;
-                gCurrentPinballGame->orbScreenPosition[i].y = 0;
+                gCurrentPinballGame->vortexScreenPosition[i].x = 0;
+                gCurrentPinballGame->vortexScreenPosition[i].y = 0;
                 break;
-            case 1:
-                index = gCurrentPinballGame->orbAnimTimer[i] / 9;
-                if (gCurrentPinballGame->orbAnimTimer[i] < 98)
+            case KYOGRE_WHIRLPOOL_PHASE_1:
+                index = gCurrentPinballGame->vortexAnimTimer[i] / 9;
+                if (gCurrentPinballGame->vortexAnimTimer[i] < 98)
                 {
-                    gCurrentPinballGame->orbAnimTimer[i]++;
+                    gCurrentPinballGame->vortexAnimTimer[i]++;
                 }
                 else
                 {
-                    gCurrentPinballGame->orbAnimTimer[i] = 0;
-                    gCurrentPinballGame->orbEntityState[i] = 2;
-                    gCurrentPinballGame->orbTargetWaypointIndex[i] = i * 7 + ((Random() + gMain.systemFrameCount) % 7);
-                    gCurrentPinballGame->orbOrbitCenter[i].x = gKyogreWhirlpoolTargetPositions[gCurrentPinballGame->orbTargetWaypointIndex[i]].x;
-                    gCurrentPinballGame->orbOrbitCenter[i].y = gKyogreWhirlpoolTargetPositions[gCurrentPinballGame->orbTargetWaypointIndex[i]].y;
+                    gCurrentPinballGame->vortexAnimTimer[i] = 0;
+                    gCurrentPinballGame->vortexEntityState[i] = KYOGRE_WHIRLPOOL_PHASE_2;
+                    gCurrentPinballGame->vortexTargetWaypointIndex[i] = i * 7 + ((Random() + gMain.systemFrameCount) % 7);
+                    gCurrentPinballGame->vortexOrbitCenter[i].x = gKyogreWhirlpoolTargetPositions[gCurrentPinballGame->vortexTargetWaypointIndex[i]].x;
+                    gCurrentPinballGame->vortexOrbitCenter[i].y = gKyogreWhirlpoolTargetPositions[gCurrentPinballGame->vortexTargetWaypointIndex[i]].y;
                 }
 
-                gCurrentPinballGame->orbScreenPosition[i].x = 0;
-                gCurrentPinballGame->orbScreenPosition[i].y = 0;
+                gCurrentPinballGame->vortexScreenPosition[i].x = 0;
+                gCurrentPinballGame->vortexScreenPosition[i].y = 0;
                 break;
-            case 2:
-                index = ((gCurrentPinballGame->orbAnimTimer[i] % 40) / 8) + 6;
-                if (gCurrentPinballGame->orbEntityState[0] < 3 && gCurrentPinballGame->orbEntityState[1] < 3)
+            case KYOGRE_WHIRLPOOL_PHASE_2:
+                index = ((gCurrentPinballGame->vortexAnimTimer[i] % 40) / 8) + 6;
+                if (gCurrentPinballGame->vortexEntityState[0] < KYOGRE_WHIRLPOOL_PHASE_3 
+                    && gCurrentPinballGame->vortexEntityState[1] < KYOGRE_WHIRLPOOL_PHASE_3)
                 {
                     int xoff = 120;
                     int yoff = 144;
-                    tempVector.x = (gCurrentPinballGame->ball->positionQ0.x - xoff) - (gCurrentPinballGame->orbScreenPosition[i].x / 10);
-                    tempVector.y = (gCurrentPinballGame->ball->positionQ0.y - yoff) - (gCurrentPinballGame->orbScreenPosition[i].y / 10);
+                    tempVector.x = (gCurrentPinballGame->ball->positionQ0.x - xoff) - (gCurrentPinballGame->vortexScreenPosition[i].x / 10);
+                    tempVector.y = (gCurrentPinballGame->ball->positionQ0.y - yoff) - (gCurrentPinballGame->vortexScreenPosition[i].y / 10);
                     xx = tempVector.x * tempVector.x;
                     yy = tempVector.y * tempVector.y;
                     squaredMagnitude = xx + yy;
@@ -1052,11 +1056,11 @@ void UpdateKyogreFieldEntities(void)
                         m4aSongNumStart(SE_UNKNOWN_0x113);
                         PlayRumble(12);
                         gCurrentPinballGame->ballFrozenState = 1;
-                        gCurrentPinballGame->orbAnimTimer[i] = 0;
-                        gCurrentPinballGame->orbEntityState[i] = 3;
+                        gCurrentPinballGame->vortexAnimTimer[i] = 0;
+                        gCurrentPinballGame->vortexEntityState[i] = KYOGRE_WHIRLPOOL_PHASE_3;
                         gCurrentPinballGame->boardEntityActive = 1;
-                        tempVector2.x = gCurrentPinballGame->orbScreenPosition[i].x / 10 + 120;
-                        tempVector2.y = gCurrentPinballGame->orbScreenPosition[i].y / 10 + 144;
+                        tempVector2.x = gCurrentPinballGame->vortexScreenPosition[i].x / 10 + 120;
+                        tempVector2.y = gCurrentPinballGame->vortexScreenPosition[i].y / 10 + 144;
                         tempVector.x = (tempVector2.x << 8) - gCurrentPinballGame->ball->positionQ8.x;
                         tempVector.y = (tempVector2.y << 8) - gCurrentPinballGame->ball->positionQ8.y;
                         gCurrentPinballGame->trapSpinRadius = (tempVector.x * tempVector.x) + (tempVector.y * tempVector.y);
@@ -1065,106 +1069,107 @@ void UpdateKyogreFieldEntities(void)
                     }
                 }
 
-                if (gCurrentPinballGame->orbAnimTimer[i] < 900)
+                if (gCurrentPinballGame->vortexAnimTimer[i] < 900)
                 {
-                    gCurrentPinballGame->orbAnimTimer[i]++;
+                    gCurrentPinballGame->vortexAnimTimer[i]++;
                 }
                 else
                 {
-                    gCurrentPinballGame->orbAnimTimer[i] = 0;
-                    gCurrentPinballGame->orbEntityState[i] = 5;
+                    gCurrentPinballGame->vortexAnimTimer[i] = 0;
+                    gCurrentPinballGame->vortexEntityState[i] = KYOGRE_WHIRLPOOL_PHASE_5;
                 }
                 break;
-            case 3:
-                index = ((gCurrentPinballGame->orbAnimTimer[i] % 40) / 8) + 6;
+            case KYOGRE_WHIRLPOOL_PHASE_3:
+                index = ((gCurrentPinballGame->vortexAnimTimer[i] % 40) / 8) + 6;
                 if (gCurrentPinballGame->newButtonActions[0] || gCurrentPinballGame->newButtonActions[1])
-                    gCurrentPinballGame->orbAnimTimer[i] += 8;
+                    gCurrentPinballGame->vortexAnimTimer[i] += 8;
 
-                var4 = 29 - gCurrentPinballGame->orbAnimTimer[i];
+                var4 = 29 - gCurrentPinballGame->vortexAnimTimer[i];
                 if (var4 < 10)
                     var4 = 10;
 
                 gCurrentPinballGame->trapAngleQ16 -= ((0x2000 - (var4 * 0x2000) / 30) * 2) / 5;
                 gCurrentPinballGame->ball->spinAngle -= 0x2000;
                 var5 = (gCurrentPinballGame->trapSpinRadius * var4) / 30;
-                tempVector2.x = gCurrentPinballGame->orbScreenPosition[i].x / 10 + 120;
-                tempVector2.y = gCurrentPinballGame->orbScreenPosition[i].y / 10 + 144;
+                tempVector2.x = gCurrentPinballGame->vortexScreenPosition[i].x / 10 + 120;
+                tempVector2.y = gCurrentPinballGame->vortexScreenPosition[i].y / 10 + 144;
                 gCurrentPinballGame->ball->positionQ8.x = (tempVector2.x << 8) + ((Cos(gCurrentPinballGame->trapAngleQ16) * var5) / 20000);
                 gCurrentPinballGame->ball->positionQ8.y = (tempVector2.y << 8) - ((Sin(gCurrentPinballGame->trapAngleQ16) * var5) / 20000);
                 gCurrentPinballGame->ball->velocity.x = (gCurrentPinballGame->ball->velocity.x * 4) / 5;
                 gCurrentPinballGame->ball->velocity.y = (gCurrentPinballGame->ball->velocity.y * 4) / 5;
 
-                if (gCurrentPinballGame->orbAnimTimer[i] < 480)
+                if (gCurrentPinballGame->vortexAnimTimer[i] < 480)
                 {
-                    gCurrentPinballGame->orbAnimTimer[i]++;
-                    if (gCurrentPinballGame->orbAnimTimer[i] % 9 == 0)
+                    gCurrentPinballGame->vortexAnimTimer[i]++;
+                    if (gCurrentPinballGame->vortexAnimTimer[i] % 9 == 0)
                         PlayRumble(12);
                 }
                 else
                 {
-                    gCurrentPinballGame->orbAnimTimer[i] = 0;
-                    gCurrentPinballGame->orbEntityState[i] = 4;
+                    gCurrentPinballGame->vortexAnimTimer[i] = 0;
+                    gCurrentPinballGame->vortexEntityState[i] = KYOGRE_WHIRLPOOL_PHASE_4;
                     gCurrentPinballGame->trapSpinRadius /= 2;
                 }
                 break;
-            case 4:
-                index = 5 - gCurrentPinballGame->orbAnimTimer[i] / 8;
-                var4 = 47 - gCurrentPinballGame->orbAnimTimer[i];
+            case KYOGRE_WHIRLPOOL_PHASE_4:
+                index = 5 - gCurrentPinballGame->vortexAnimTimer[i] / 8;
+                var4 = 47 - gCurrentPinballGame->vortexAnimTimer[i];
                 gCurrentPinballGame->trapAngleQ16 -= ((0x2000 - (var4 * 0x1000) / 47) * 2) / 5;
                 gCurrentPinballGame->ball->spinAngle -= 0x2000;
                 var5 = (gCurrentPinballGame->trapSpinRadius * var4) / 47;
-                tempVector2.x = gCurrentPinballGame->orbScreenPosition[i].x / 10 + 120;
-                tempVector2.y = gCurrentPinballGame->orbScreenPosition[i].y / 10 + 144;
+                tempVector2.x = gCurrentPinballGame->vortexScreenPosition[i].x / 10 + 120;
+                tempVector2.y = gCurrentPinballGame->vortexScreenPosition[i].y / 10 + 144;
                 gCurrentPinballGame->ball->positionQ8.x = (tempVector2.x << 8) + ((Cos(gCurrentPinballGame->trapAngleQ16) * var5) / 20000);
                 gCurrentPinballGame->ball->positionQ8.y = (tempVector2.y << 8) - ((Sin(gCurrentPinballGame->trapAngleQ16) * var5) / 20000);
                 gCurrentPinballGame->ball->velocity.x = (gCurrentPinballGame->ball->velocity.x * 4) / 5;
                 gCurrentPinballGame->ball->velocity.y = (gCurrentPinballGame->ball->velocity.y * 4) / 5;
 
-                if (gCurrentPinballGame->orbAnimTimer[i] < 47)
+                if (gCurrentPinballGame->vortexAnimTimer[i] < 47)
                 {
-                    gCurrentPinballGame->orbAnimTimer[i]++;
+                    gCurrentPinballGame->vortexAnimTimer[i]++;
                 }
                 else
                 {
-                    gCurrentPinballGame->orbAnimTimer[i] = 0;
+                    gCurrentPinballGame->vortexAnimTimer[i] = 0;
                     gCurrentPinballGame->ball->velocity.x = -150 + (gMain.systemFrameCount % 2) * 300;
                     gCurrentPinballGame->ball->velocity.y = 300;
                     gCurrentPinballGame->ballFrozenState = 0;
-                    gCurrentPinballGame->orbEntityState[i] = 0;
+                    gCurrentPinballGame->vortexEntityState[i] = KYOGRE_WHIRLPOOL_PHASE_0;
                     gCurrentPinballGame->boardEntityActive = 0;
                 }
                 break;
-            case 5:
-                index = 5 - gCurrentPinballGame->orbAnimTimer[i] / 6;
-                if (gCurrentPinballGame->orbAnimTimer[i] < 36)
+            case KYOGRE_WHIRLPOOL_PHASE_5:
+                index = 5 - gCurrentPinballGame->vortexAnimTimer[i] / 6;
+                if (gCurrentPinballGame->vortexAnimTimer[i] < 36)
                 {
-                    gCurrentPinballGame->orbAnimTimer[i]++;
+                    gCurrentPinballGame->vortexAnimTimer[i]++;
                 }
                 else
                 {
-                    gCurrentPinballGame->orbAnimTimer[i] = 0;
-                    gCurrentPinballGame->orbEntityState[i] = 0;
+                    gCurrentPinballGame->vortexAnimTimer[i] = 0;
+                    gCurrentPinballGame->vortexEntityState[i] = KYOGRE_WHIRLPOOL_PHASE_0;
                 }
                 break;
             }
 
-            if (gCurrentPinballGame->orbEntityState[i] >= 2 && gCurrentPinballGame->orbEntityState[i] < 4)
+            if (gCurrentPinballGame->vortexEntityState[i] >= KYOGRE_WHIRLPOOL_PHASE_2
+                && gCurrentPinballGame->vortexEntityState[i] < KYOGRE_WHIRLPOOL_PHASE_4)
             {
-                tempVector.x = gCurrentPinballGame->orbOrbitCenter[i].x - gCurrentPinballGame->orbScreenPosition[i].x;
-                tempVector.y = gCurrentPinballGame->orbOrbitCenter[i].y - gCurrentPinballGame->orbScreenPosition[i].y;
+                tempVector.x = gCurrentPinballGame->vortexOrbitCenter[i].x - gCurrentPinballGame->vortexScreenPosition[i].x;
+                tempVector.y = gCurrentPinballGame->vortexOrbitCenter[i].y - gCurrentPinballGame->vortexScreenPosition[i].y;
                 xx = tempVector.x * tempVector.x;
                 yy = tempVector.y * tempVector.y;
                 squaredMagnitude = xx + yy;
                 angle = ArcTan2(tempVector.x, -tempVector.y);
                 tempVector3.x =  (Cos(angle) * 4) / 20000;
                 tempVector3.y = -(Sin(angle) * 4) / 20000;
-                gCurrentPinballGame->orbScreenPosition[i].x += tempVector3.x;
-                gCurrentPinballGame->orbScreenPosition[i].y += tempVector3.y;
+                gCurrentPinballGame->vortexScreenPosition[i].x += tempVector3.x;
+                gCurrentPinballGame->vortexScreenPosition[i].y += tempVector3.y;
                 if (squaredMagnitude < 2500)
                 {
-                    gCurrentPinballGame->orbTargetWaypointIndex[i] = i * 7 + ((Random() + gMain.systemFrameCount) % 7);
-                    gCurrentPinballGame->orbOrbitCenter[i].x = gKyogreWhirlpoolTargetPositions[gCurrentPinballGame->orbTargetWaypointIndex[i]].x;
-                    gCurrentPinballGame->orbOrbitCenter[i].y = gKyogreWhirlpoolTargetPositions[gCurrentPinballGame->orbTargetWaypointIndex[i]].y;
+                    gCurrentPinballGame->vortexTargetWaypointIndex[i] = i * 7 + ((Random() + gMain.systemFrameCount) % 7);
+                    gCurrentPinballGame->vortexOrbitCenter[i].x = gKyogreWhirlpoolTargetPositions[gCurrentPinballGame->vortexTargetWaypointIndex[i]].x;
+                    gCurrentPinballGame->vortexOrbitCenter[i].y = gKyogreWhirlpoolTargetPositions[gCurrentPinballGame->vortexTargetWaypointIndex[i]].y;
                 }
             }
         }
@@ -1172,10 +1177,10 @@ void UpdateKyogreFieldEntities(void)
         DmaCopy16(3, gKyogreWhirlpoolMinionSprites[index], (void *)0x06011520 + i * 0x200, 0x200);
         if (group->active)
         {
-            if (gCurrentPinballGame->orbEntityState[i] > 0)
+            if (gCurrentPinballGame->vortexEntityState[i] > KYOGRE_WHIRLPOOL_PHASE_0)
             {
-                group->baseX = gCurrentPinballGame->orbScreenPosition[i].x / 10 - (gCurrentPinballGame->cameraXOffset - 104u);
-                group->baseY = gCurrentPinballGame->orbScreenPosition[i].y / 10 - (gCurrentPinballGame->cameraYOffset - 128u);
+                group->baseX = gCurrentPinballGame->vortexScreenPosition[i].x / 10 - (gCurrentPinballGame->cameraXOffset - 104u);
+                group->baseY = gCurrentPinballGame->vortexScreenPosition[i].y / 10 - (gCurrentPinballGame->cameraYOffset - 128u);
             }
             else
             {
@@ -1257,9 +1262,9 @@ void UpdateKyogreFieldEntities(void)
             squaredMagnitude = xx + yy;
             if (gCurrentPinballGame->ballRespawnState == 0 && squaredMagnitude < gShockwaveSplashDistanceThresholds[gCurrentPinballGame->shockwaveAnimTimer])
             {
-                gCurrentPinballGame->whirlpoolTrapPhase = 0;
-                gCurrentPinballGame->whirlpoolTrapAnimFrame = 0;
-                gCurrentPinballGame->whirlpoolTrapFrameTimer = 0;
+                gCurrentPinballGame->freezeTrapPhase = KYOGRE_FREEZE_PHASE_0;
+                gCurrentPinballGame->freezeTrapAnimFrame = 0;
+                gCurrentPinballGame->freezeTrapFrameTimer = 0;
                 if (!gMain.spriteGroups[16].active)
                     PlayRumble(8);
 

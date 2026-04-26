@@ -49,4 +49,9 @@ enum GroudonFirePillarState{
     GROUDON_FIRE_PILLAR_STATE_CLEANUP = 10,
 };
 
+enum GroudonCollisionMode{
+    GROUDON_COLLISION_MODE_NONE = 0,
+    GROUDON_COLLISION_MODE_ACTIVE = 1
+};
+
 #endif // GUARD_CONSTANTS_GROUDON_STATES_H

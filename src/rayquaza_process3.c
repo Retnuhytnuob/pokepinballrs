@@ -14,7 +14,7 @@ extern const u8 gRayquazaSpriteSheet[];
 extern const u8 gRayquazaBodyVariantTiles[][0x800];
 extern const s16 gScreenShakeOscillationValues[];
 extern const u16 gRayquazaAnimFramesetTable[][3];
-extern const struct Vector16 gRayquazaMinionOrbitWaypoints[32];
+extern const struct Vector16 gRayquazaTornadoSpawnPos[32];
 extern const s16 gRayquazaCloudScrollPositions[];
 extern const u16 gRayquazaNeckSegmentOamData[39][6][3];
 extern const u16 gRayquazaHitBurstOamData[10][5][3];
@@ -67,7 +67,7 @@ void RayquazaBoardProcess_3A_3E79C(void)
     }
 
     gCurrentPinballGame->bossEntityState = 0;
-    gCurrentPinballGame->bossAttackPhase = 0;
+    gCurrentPinballGame->bossNextAttackState = 0;
     gCurrentPinballGame->kecleonFramesetBase = 0;
     gCurrentPinballGame->bossVulnerable = 0;
     gCurrentPinballGame->dusclopsWalkFootIndex = 0;
@@ -89,13 +89,13 @@ void RayquazaBoardProcess_3A_3E79C(void)
 
     for (i = 0; i < 2; i++)
     {
-        gCurrentPinballGame->orbEntityState[i] = 0;
-        gCurrentPinballGame->orbTargetWaypointIndex[i] = 0;
-        gCurrentPinballGame->orbAnimTimer[i] = 0;
-        gCurrentPinballGame->orbScreenPosition[i].x = 0;
-        gCurrentPinballGame->orbScreenPosition[i].y = 0;
-        gCurrentPinballGame->orbOrbitCenter[i].x = 0;
-        gCurrentPinballGame->orbOrbitCenter[i].y = 0;
+        gCurrentPinballGame->vortexEntityState[i] = 0;
+        gCurrentPinballGame->vortexTargetWaypointIndex[i] = 0;
+        gCurrentPinballGame->vortexAnimTimer[i] = 0;
+        gCurrentPinballGame->vortexScreenPosition[i].x = 0;
+        gCurrentPinballGame->vortexScreenPosition[i].y = 0;
+        gCurrentPinballGame->vortexOrbitCenter[i].x = 0;
+        gCurrentPinballGame->vortexOrbitCenter[i].y = 0;
     }
 
     gCurrentPinballGame->impactShakeTimer = 0;
@@ -335,7 +335,7 @@ void UpdateRayquazaEntityLogic(void)
         {
             gCurrentPinballGame->bossEntityState = 5;
             gCurrentPinballGame->bossMovementPhase = 0;
-            gCurrentPinballGame->bossAttackPhase = 6;
+            gCurrentPinballGame->bossNextAttackState = 6;
         }
         break;
     case 3:
@@ -362,7 +362,7 @@ void UpdateRayquazaEntityLogic(void)
         {
             gCurrentPinballGame->bossEntityState = 5;
             gCurrentPinballGame->bossMovementPhase = 0;
-            gCurrentPinballGame->bossAttackPhase = 6;
+            gCurrentPinballGame->bossNextAttackState = 6;
         }
         break;
     case 4:
@@ -409,7 +409,7 @@ void UpdateRayquazaEntityLogic(void)
                     gCurrentPinballGame->bossFramesetIndex = 13;
                     gCurrentPinballGame->bossMovementPhase++;
                 }
-                else if (gCurrentPinballGame->bossAttackPhase == 6)
+                else if (gCurrentPinballGame->bossNextAttackState == 6)
                 {
                     if (gCurrentPinballGame->bonusModeHitCount >= gCurrentPinballGame->legendaryHitsRequired - 1)
                     {
@@ -460,7 +460,7 @@ void UpdateRayquazaEntityLogic(void)
                 gCurrentPinballGame->bossFramesetIndex = 29;
                 gCurrentPinballGame->bossMovementPhase = 0;
                 gCurrentPinballGame->bossEntityState = 5;
-                gCurrentPinballGame->bossAttackPhase = 4;
+                gCurrentPinballGame->bossNextAttackState = 4;
                 gCurrentPinballGame->legendaryFlashState = 0;
             }
 
@@ -1093,7 +1093,7 @@ void UpdateRayquazaMinionsAndEffects(void)
                 squaredMagnitude = xx + yy;
 
                 PlayRumble(8);
-                if (gCurrentPinballGame->orbEntityState[0] < 3 && gCurrentPinballGame->orbEntityState[1] < 3 &&
+                if (gCurrentPinballGame->vortexEntityState[0] < 3 && gCurrentPinballGame->vortexEntityState[1] < 3 &&
                     gCurrentPinballGame->ballRespawnState == 0 && squaredMagnitude < 200)
                 {
                     gMain.spriteGroups[36].active = TRUE;
@@ -1226,27 +1226,27 @@ void UpdateRayquazaMinionsAndEffects(void)
     for (i = 0; i < 2; i++)
     {
         group = &gMain.spriteGroups[15 + i];
-        switch (gCurrentPinballGame->orbEntityState[i])
+        switch (gCurrentPinballGame->vortexEntityState[i])
         {
         case 0:
             sp0 = 0;
-            gCurrentPinballGame->orbScreenPosition[i].x = 0;
-            gCurrentPinballGame->orbScreenPosition[i].y = 0;
+            gCurrentPinballGame->vortexScreenPosition[i].x = 0;
+            gCurrentPinballGame->vortexScreenPosition[i].y = 0;
             break;
         case 1:
-            sp0 = gCurrentPinballGame->orbAnimTimer[i] / 5 + 1;
-            if (gCurrentPinballGame->orbAnimTimer[i] < 14)
+            sp0 = gCurrentPinballGame->vortexAnimTimer[i] / 5 + 1;
+            if (gCurrentPinballGame->vortexAnimTimer[i] < 14)
             {
-                gCurrentPinballGame->orbAnimTimer[i]++;
+                gCurrentPinballGame->vortexAnimTimer[i]++;
             }
             else
             {
-                gCurrentPinballGame->orbAnimTimer[i] = 0;
-                gCurrentPinballGame->orbEntityState[i] = 2;
+                gCurrentPinballGame->vortexAnimTimer[i] = 0;
+                gCurrentPinballGame->vortexEntityState[i] = 2;
             }
             break;
         case 2:
-            sp0 = gCurrentPinballGame->orbAnimTimer[i] % 16;
+            sp0 = gCurrentPinballGame->vortexAnimTimer[i] % 16;
             if (sp0 < 4)
                 sp0 = 4;
             else if (sp0 < 10)
@@ -1254,15 +1254,15 @@ void UpdateRayquazaMinionsAndEffects(void)
             else
                 sp0 = 6;
 
-            if (gCurrentPinballGame->orbEntityState[i] < 3)
+            if (gCurrentPinballGame->vortexEntityState[i] < 3)
             {
 
                 s16 angle = (((gMain.systemFrameCount + 120 * i) % 240) << 0x10) / 240;
-                gCurrentPinballGame->orbScreenPosition[i].x = gCurrentPinballGame->orbOrbitCenter[i].x + (Cos(angle) * 4) / 2000;
-                gCurrentPinballGame->orbScreenPosition[i].y = gCurrentPinballGame->orbOrbitCenter[i].y + (Sin(angle) * 4) / 2000;
+                gCurrentPinballGame->vortexScreenPosition[i].x = gCurrentPinballGame->vortexOrbitCenter[i].x + (Cos(angle) * 4) / 2000;
+                gCurrentPinballGame->vortexScreenPosition[i].y = gCurrentPinballGame->vortexOrbitCenter[i].y + (Sin(angle) * 4) / 2000;
 
-                tempVector.x = gCurrentPinballGame->ball->positionQ0.x - (gCurrentPinballGame->orbScreenPosition[i].x / 10) - 16;
-                tempVector.y = gCurrentPinballGame->ball->positionQ0.y - (gCurrentPinballGame->orbScreenPosition[i].y / 10) - 32;;
+                tempVector.x = gCurrentPinballGame->ball->positionQ0.x - (gCurrentPinballGame->vortexScreenPosition[i].x / 10) - 16;
+                tempVector.y = gCurrentPinballGame->ball->positionQ0.y - (gCurrentPinballGame->vortexScreenPosition[i].y / 10) - 32;;
                 xx = tempVector.x * tempVector.x;
                 yy = tempVector.y * tempVector.y;
                 squaredMagnitude = xx + yy;
@@ -1272,12 +1272,12 @@ void UpdateRayquazaMinionsAndEffects(void)
                 {
                     gCurrentPinballGame->ballGrabTimer = 6;
                     gCurrentPinballGame->ballFrozenState = 1;
-                    gCurrentPinballGame->orbAnimTimer[i] = 0;
-                    gCurrentPinballGame->orbEntityState[i] = 3;
+                    gCurrentPinballGame->vortexAnimTimer[i] = 0;
+                    gCurrentPinballGame->vortexEntityState[i] = 3;
                     gCurrentPinballGame->boardEntityActive = 1;
 
-                    tempVector2.x = gCurrentPinballGame->orbScreenPosition[i].x / 10 + 16;
-                    tempVector2.y = gCurrentPinballGame->orbScreenPosition[i].y / 10 + 32;
+                    tempVector2.x = gCurrentPinballGame->vortexScreenPosition[i].x / 10 + 16;
+                    tempVector2.y = gCurrentPinballGame->vortexScreenPosition[i].y / 10 + 32;
                     tempVector.x = (tempVector2.x << 8) - gCurrentPinballGame->ball->positionQ8.x;
                     tempVector.y = (tempVector2.y << 8) - gCurrentPinballGame->ball->positionQ8.y;
                     gCurrentPinballGame->trapSpinRadius = (tempVector.x * tempVector.x) + (tempVector.y * tempVector.y);
@@ -1285,28 +1285,28 @@ void UpdateRayquazaMinionsAndEffects(void)
                     gCurrentPinballGame->trapAngleQ16 = ArcTan2(-tempVector.x, tempVector.y);
 
                     gCurrentPinballGame->orbHitIndex = i + 1;
-                    gCurrentPinballGame->orbHitPosition.x = gCurrentPinballGame->orbScreenPosition[i].x;
-                    gCurrentPinballGame->orbHitPosition.y = gCurrentPinballGame->orbScreenPosition[i].y;
+                    gCurrentPinballGame->orbHitPosition.x = gCurrentPinballGame->vortexScreenPosition[i].x;
+                    gCurrentPinballGame->orbHitPosition.y = gCurrentPinballGame->vortexScreenPosition[i].y;
                     m4aSongNumStart(SE_UNKNOWN_0x12B);
                     PlayRumble(13);
                 }
             }
 
-            if (gCurrentPinballGame->orbAnimTimer[i] < 840)
+            if (gCurrentPinballGame->vortexAnimTimer[i] < 840)
             {
-                gCurrentPinballGame->orbAnimTimer[i]++;
+                gCurrentPinballGame->vortexAnimTimer[i]++;
             }
             else
             {
-                gCurrentPinballGame->orbAnimTimer[i] = 0;
-                gCurrentPinballGame->orbEntityState[i] = 5;
+                gCurrentPinballGame->vortexAnimTimer[i] = 0;
+                gCurrentPinballGame->vortexEntityState[i] = 5;
             }
             break;
         case 3: {
             s16 var4;
             int var5;
 
-            sp0 = gCurrentPinballGame->orbAnimTimer[i] % 16;
+            sp0 = gCurrentPinballGame->vortexAnimTimer[i] % 16;
             if (sp0 < 4)
                 sp0 = 4;
             else if (sp0 < 10)
@@ -1314,15 +1314,15 @@ void UpdateRayquazaMinionsAndEffects(void)
             else
                 sp0 = 6;
 
-            var4 = 29 - gCurrentPinballGame->orbAnimTimer[i];
+            var4 = 29 - gCurrentPinballGame->vortexAnimTimer[i];
             if (var4 < 10)
                 var4 = 10;
 
             gCurrentPinballGame->trapAngleQ16 -= ((0x2000 - (var4 * 0x2000) / 30) * 2) / 5;
             gCurrentPinballGame->ball->spinAngle -= 0x2000;
             var5 = (gCurrentPinballGame->trapSpinRadius * var4) / 30;
-            tempVector2.x = gCurrentPinballGame->orbScreenPosition[i].x / 10 + 16;
-            tempVector2.y = gCurrentPinballGame->orbScreenPosition[i].y / 10 + 32;
+            tempVector2.x = gCurrentPinballGame->vortexScreenPosition[i].x / 10 + 16;
+            tempVector2.y = gCurrentPinballGame->vortexScreenPosition[i].y / 10 + 32;
             gCurrentPinballGame->ball->positionQ8.x = (tempVector2.x << 8) + ((Cos(gCurrentPinballGame->trapAngleQ16) * var5) / 20000);
             gCurrentPinballGame->ball->positionQ8.y = (tempVector2.y << 8) - ((Sin(gCurrentPinballGame->trapAngleQ16) * var5) / 20000);
             gCurrentPinballGame->ball->velocity.x = (gCurrentPinballGame->ball->velocity.x * 4) / 5;
@@ -1334,23 +1334,23 @@ void UpdateRayquazaMinionsAndEffects(void)
                 gCurrentPinballGame->bossRenderOffsetY += 32;
             }
 
-            if (gCurrentPinballGame->orbAnimTimer[i] < 180)
+            if (gCurrentPinballGame->vortexAnimTimer[i] < 180)
             {
-                gCurrentPinballGame->orbAnimTimer[i]++;
+                gCurrentPinballGame->vortexAnimTimer[i]++;
             }
             else
             {
-                gCurrentPinballGame->orbAnimTimer[i] = 0;
-                gCurrentPinballGame->orbEntityState[i] = 4;
+                gCurrentPinballGame->vortexAnimTimer[i] = 0;
+                gCurrentPinballGame->vortexEntityState[i] = 4;
                 gCurrentPinballGame->trapSpinRadius /= 2;
                 gCurrentPinballGame->ball->positionQ8.y = 0xA500;
             }
             break;
         }
         case 4:
-            if (gCurrentPinballGame->orbAnimTimer[i] < 130)
+            if (gCurrentPinballGame->vortexAnimTimer[i] < 130)
             {
-                if (gCurrentPinballGame->orbAnimTimer[i] == 10)
+                if (gCurrentPinballGame->vortexAnimTimer[i] == 10)
                     m4aSongNumStart(SE_UNKNOWN_0x12C);
 
                 gCurrentPinballGame->rayquazaOrbAngle--;
@@ -1360,26 +1360,26 @@ void UpdateRayquazaMinionsAndEffects(void)
                     gCurrentPinballGame->bossRenderOffsetY = 0;
                     gCurrentPinballGame->ball->velocity.y = -((gCurrentPinballGame->rayquazaOrbAngle * 0x80) / 10) / 2;
                     gCurrentPinballGame->ballFrozenState = 0;
-                    gCurrentPinballGame->orbAnimTimer[i] = 0;
+                    gCurrentPinballGame->vortexAnimTimer[i] = 0;
                     gCurrentPinballGame->ball->velocity.x = 0;
-                    gCurrentPinballGame->orbEntityState[i] = 0;
+                    gCurrentPinballGame->vortexEntityState[i] = 0;
                     gCurrentPinballGame->boardEntityActive = 0;
                     PlayRumble(8);
                 }
 
-                gCurrentPinballGame->orbAnimTimer[i]++;
+                gCurrentPinballGame->vortexAnimTimer[i]++;
             }
             break;
         case 5:
-            sp0 = gCurrentPinballGame->orbAnimTimer[i] / 6 + 7;
-            if (gCurrentPinballGame->orbAnimTimer[i] < 11)
+            sp0 = gCurrentPinballGame->vortexAnimTimer[i] / 6 + 7;
+            if (gCurrentPinballGame->vortexAnimTimer[i] < 11)
             {
-                gCurrentPinballGame->orbAnimTimer[i]++;
+                gCurrentPinballGame->vortexAnimTimer[i]++;
             }
             else
             {
-                gCurrentPinballGame->orbAnimTimer[i] = 0;
-                gCurrentPinballGame->orbEntityState[i] = 0;
+                gCurrentPinballGame->vortexAnimTimer[i] = 0;
+                gCurrentPinballGame->vortexEntityState[i] = 0;
             }
             break;
         }
@@ -1387,8 +1387,8 @@ void UpdateRayquazaMinionsAndEffects(void)
         if (group->active)
         {
             DmaCopy16(3, gRayquazaMinionOrbFrames[sp0], (void *)0x06011EA0, 0x280);
-            group->baseX = gCurrentPinballGame->orbScreenPosition[i].x / 10 - gCurrentPinballGame->cameraXOffset;
-            group->baseY = gCurrentPinballGame->orbScreenPosition[i].y / 10 - gCurrentPinballGame->cameraYOffset;
+            group->baseX = gCurrentPinballGame->vortexScreenPosition[i].x / 10 - gCurrentPinballGame->cameraXOffset;
+            group->baseY = gCurrentPinballGame->vortexScreenPosition[i].y / 10 - gCurrentPinballGame->cameraYOffset;
             for (j = 0; j < 2; j++)
             {
                 oamSimple = &group->oam[j];
@@ -1396,7 +1396,7 @@ void UpdateRayquazaMinionsAndEffects(void)
                 gOamBuffer[oamSimple->oamId].y = oamSimple->yOffset + group->baseY;
             }
 
-            if (gCurrentPinballGame->orbEntityState[i] == 0)
+            if (gCurrentPinballGame->vortexEntityState[i] == 0)
                 group->active = FALSE;
 
             if (gCurrentPinballGame->orbHitIndex && i == (gCurrentPinballGame->orbHitIndex - 1))
@@ -1686,7 +1686,7 @@ void RenderWindCloudSprites(void)
             gMain.spriteGroups[25].active = FALSE;
             gMain.spriteGroups[26].active = TRUE;
             gMain.spriteGroups[27].active = TRUE;
-            if (gCurrentPinballGame->orbEntityState[0] < 3 && gCurrentPinballGame->orbEntityState[1] < 3 && gCurrentPinballGame->ballRespawnState == 0)
+            if (gCurrentPinballGame->vortexEntityState[0] < 3 && gCurrentPinballGame->vortexEntityState[1] < 3 && gCurrentPinballGame->ballRespawnState == 0)
             {
                 gCurrentPinballGame->ball->velocity.x += 500;
                 PlayRumble(13);
@@ -1715,7 +1715,7 @@ void RenderWindCloudSprites(void)
             gMain.spriteGroups[31].active = FALSE;
             gMain.spriteGroups[32].active = TRUE;
             gMain.spriteGroups[33].active = TRUE;
-            if (gCurrentPinballGame->orbEntityState[0] < 3 && gCurrentPinballGame->orbEntityState[1] < 3 && gCurrentPinballGame->ballRespawnState == 0)
+            if (gCurrentPinballGame->vortexEntityState[0] < 3 && gCurrentPinballGame->vortexEntityState[1] < 3 && gCurrentPinballGame->ballRespawnState == 0)
             {
                 gCurrentPinballGame->ball->velocity.x -= 500;
                 PlayRumble(13);
@@ -1739,34 +1739,34 @@ void RenderWindCloudSprites(void)
 
     if (gCurrentPinballGame->windCloudSpawnTimer == 10)
     {
-        if (gCurrentPinballGame->orbEntityState[0] < 3)
+        if (gCurrentPinballGame->vortexEntityState[0] < 3)
         {
-            gCurrentPinballGame->orbAnimTimer[0] = 0;
-            gCurrentPinballGame->orbEntityState[0] = 1;
+            gCurrentPinballGame->vortexAnimTimer[0] = 0;
+            gCurrentPinballGame->vortexEntityState[0] = 1;
             gMain.spriteGroups[15].active = TRUE;
             rand = Random() % 8;
             var0 = ((gMain.systemFrameCount % 240) << 0x10) / 240;
-            gCurrentPinballGame->orbOrbitCenter[0].x = gRayquazaMinionOrbitWaypoints[rand].x;
-            gCurrentPinballGame->orbOrbitCenter[0].y = gRayquazaMinionOrbitWaypoints[rand].y;
-            gCurrentPinballGame->orbScreenPosition[0].x = gCurrentPinballGame->orbOrbitCenter[0].x + (Cos(var0) * 4) / 2000;
-            gCurrentPinballGame->orbScreenPosition[0].y = gCurrentPinballGame->orbOrbitCenter[0].y + (Sin(var0) * 4) / 2000;
+            gCurrentPinballGame->vortexOrbitCenter[0].x = gRayquazaTornadoSpawnPos[rand].x;
+            gCurrentPinballGame->vortexOrbitCenter[0].y = gRayquazaTornadoSpawnPos[rand].y;
+            gCurrentPinballGame->vortexScreenPosition[0].x = gCurrentPinballGame->vortexOrbitCenter[0].x + (Cos(var0) * 4) / 2000;
+            gCurrentPinballGame->vortexScreenPosition[0].y = gCurrentPinballGame->vortexOrbitCenter[0].y + (Sin(var0) * 4) / 2000;
             m4aSongNumStart(SE_UNKNOWN_0x12D);
         }
     }
 
     if (gCurrentPinballGame->windCloudSpawnTimer == 16)
     {
-        if (gCurrentPinballGame->orbEntityState[1] < 3)
+        if (gCurrentPinballGame->vortexEntityState[1] < 3)
         {
-            gCurrentPinballGame->orbAnimTimer[1] = 0;
-            gCurrentPinballGame->orbEntityState[1] = 1;
+            gCurrentPinballGame->vortexAnimTimer[1] = 0;
+            gCurrentPinballGame->vortexEntityState[1] = 1;
             gMain.spriteGroups[16].active = TRUE;
             rand = (Random() % 8 + 8) % 32; // Force 8 to be added to r1
             var0 = (((gMain.systemFrameCount + 120) % 240) << 0x10) / 240;
-            gCurrentPinballGame->orbOrbitCenter[1].x = gRayquazaMinionOrbitWaypoints[rand].x;
-            gCurrentPinballGame->orbOrbitCenter[1].y = gRayquazaMinionOrbitWaypoints[rand].y;
-            gCurrentPinballGame->orbScreenPosition[1].x = gCurrentPinballGame->orbOrbitCenter[1].x + (Cos(var0) * 4) / 2000;
-            gCurrentPinballGame->orbScreenPosition[1].y = gCurrentPinballGame->orbOrbitCenter[1].y + (Sin(var0) * 4) / 2000;
+            gCurrentPinballGame->vortexOrbitCenter[1].x = gRayquazaTornadoSpawnPos[rand].x;
+            gCurrentPinballGame->vortexOrbitCenter[1].y = gRayquazaTornadoSpawnPos[rand].y;
+            gCurrentPinballGame->vortexScreenPosition[1].x = gCurrentPinballGame->vortexOrbitCenter[1].x + (Cos(var0) * 4) / 2000;
+            gCurrentPinballGame->vortexScreenPosition[1].y = gCurrentPinballGame->vortexOrbitCenter[1].y + (Sin(var0) * 4) / 2000;
             m4aSongNumStart(SE_UNKNOWN_0x12D);
         }
     }

@@ -76,7 +76,7 @@ void CheckKecleonEntityCollision(struct Vector16 *arg0, u16 *arg1, u8 *arg2)
     s16 deltaY;
     u16 arrayValue;
 
-    if (gCurrentPinballGame->boardEntityCollisionMode == 1)
+    if (gCurrentPinballGame->boardEntityCollisionMode == KECLEON_COLLISION_MODE_STANDING)
     {
         if (*arg2 & 0xF)
             return;
@@ -98,7 +98,7 @@ void CheckKecleonEntityCollision(struct Vector16 *arg0, u16 *arg1, u8 *arg2)
 
         gCurrentPinballGame->bossEntityState = KECLEON_ENTITY_STATE_HIT_WHILE_STANDING;
     }
-    else if (gCurrentPinballGame->boardEntityCollisionMode == 2)
+    else if (gCurrentPinballGame->boardEntityCollisionMode == KECLEON_COLLISION_MODE_KNOCKED_OVER)
     {
         u16 maskedResult;
 

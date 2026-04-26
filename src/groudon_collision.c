@@ -105,7 +105,7 @@ void CheckGroudonEntityCollision(struct Vector16 *arg0, u16 *arg1, u8 *arg2)
     u16 lowerNibble;
     s16 i;
 
-    if (gCurrentPinballGame->boardEntityCollisionMode == 1)
+    if (gCurrentPinballGame->boardEntityCollisionMode == GROUDON_COLLISION_MODE_ACTIVE)
     {
         if ((*arg2 & 0xF) == 0)
         {

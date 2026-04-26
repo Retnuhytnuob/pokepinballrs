@@ -76,7 +76,7 @@ void KecleonBoardProcess_3A_35860(void)
     gCurrentPinballGame->bossPositionY = 360;
     gCurrentPinballGame->bossVulnerable = 3;
     gCurrentPinballGame->bonusModeHitCount = 0;
-    gCurrentPinballGame->boardEntityCollisionMode = 0;
+    gCurrentPinballGame->boardEntityCollisionMode = KECLEON_COLLISION_MODE_NONE;
     gCurrentPinballGame->bannerSlideYOffset = 0;
     gCurrentPinballGame->kecleonFramesetBase = 0;
     gCurrentPinballGame->dusclopsWalkFootIndex = 0;
@@ -109,7 +109,7 @@ void KecleonBoardProcess_3A_35860(void)
     gCurrentPinballGame->flippersDisabled = 0;
     gCurrentPinballGame->kecleonCollisionPos.y = gCurrentPinballGame->bossPositionY / 10 + 58;
     SortKecleonSpritesByY();
-    gCurrentPinballGame->boardEntityCollisionMode = 1;
+    gCurrentPinballGame->boardEntityCollisionMode = KECLEON_COLLISION_MODE_STANDING;
     UpdateKecleonEntityLogic();
     RenderKecleonSprites();
     m4aSongNumStart(MUS_BONUS_FIELD_KECLEON);
@@ -647,7 +647,7 @@ void UpdateKecleonEntityLogic(void)
                     gCurrentPinballGame->kecleonBoardHitState = 0;
                     gCurrentPinballGame->kecleonAnimTimer = 0;
                     gCurrentPinballGame->kecleonTargetActive = 0;
-                    gCurrentPinballGame->boardEntityCollisionMode = 0;
+                    gCurrentPinballGame->boardEntityCollisionMode = KECLEON_COLLISION_MODE_NONE;
                 }
             }
         }
@@ -801,21 +801,21 @@ void RenderKecleonSprites(void)
         gCurrentPinballGame->bossCollisionX = 2 * (gCurrentPinballGame->bossPositionX / 10) + 144;
         gCurrentPinballGame->bossCollisionY = 2 * (gCurrentPinballGame->bossPositionY / 10) + 84;
         if (gCurrentPinballGame->bonusModeHitCount < 10)
-            gCurrentPinballGame->boardEntityCollisionMode = 2;
+            gCurrentPinballGame->boardEntityCollisionMode = KECLEON_COLLISION_MODE_KNOCKED_OVER;
     }
     else if (gCurrentPinballGame->bossFramesetIndex >= 33 && gCurrentPinballGame->bossFramesetIndex < 36)
     {
         gCurrentPinballGame->bossCollisionX = 2 * (gCurrentPinballGame->bossPositionX / 10) + 240;
         gCurrentPinballGame->bossCollisionY = 2 * (gCurrentPinballGame->bossPositionY / 10) + 84;
         if (gCurrentPinballGame->bonusModeHitCount < 10)
-            gCurrentPinballGame->boardEntityCollisionMode = 2;
+            gCurrentPinballGame->boardEntityCollisionMode = KECLEON_COLLISION_MODE_KNOCKED_OVER;
     }
     else
     {
         gCurrentPinballGame->bossCollisionX = 2 * (gCurrentPinballGame->bossPositionX / 10) + 208;
         gCurrentPinballGame->bossCollisionY = 2 * (gCurrentPinballGame->bossPositionY / 10) + 56;
         if (gCurrentPinballGame->bonusModeHitCount < 10)
-            gCurrentPinballGame->boardEntityCollisionMode = 1;
+            gCurrentPinballGame->boardEntityCollisionMode = KECLEON_COLLISION_MODE_STANDING;
     }
 
     gCurrentPinballGame->kecleonCollisionPos.x = (gCurrentPinballGame->bossPositionX / 10) + 120;
