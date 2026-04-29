@@ -66,7 +66,7 @@ void KyogreBoardProcess_3A_383E4(void)
     gCurrentPinballGame->boardEntityCollisionMode = KYOGRE_COLLISION_MODE_NONE;
     gCurrentPinballGame->portraitDisplayState = PORTRAIT_DISPLAY_MODE_BANNER;
     gCurrentPinballGame->bossVulnerable = 14;
-    gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_0;
+    gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_INIT;
     gCurrentPinballGame->bossPositionX = 0;
     gCurrentPinballGame->bossPositionY = 0;
     gCurrentPinballGame->kecleonFramesetBase = 0;
@@ -258,7 +258,7 @@ void UpdateKyogreEntityLogic(void)
     if (gCurrentPinballGame->bossHitFlashTimer)
     {
         gCurrentPinballGame->bossHitFlashTimer--;
-        if (gCurrentPinballGame->bossEntityState != KYOGRE_ENTITY_STATE_8)
+        if (gCurrentPinballGame->bossEntityState != KYOGRE_ENTITY_STATE_PRESUMED_UNREACHABLE)
         {
             gCurrentPinballGame->legendaryFlashState = 1;
             if (gCurrentPinballGame->bossHitFlashTimer == 4)
@@ -268,8 +268,8 @@ void UpdateKyogreEntityLogic(void)
                 gCurrentPinballGame->scoreAddedInFrame = 500000;
                 gCurrentPinballGame->bonusModeHitCount++;
                 if (gCurrentPinballGame->bonusModeHitCount >= gCurrentPinballGame->legendaryHitsRequired &&
-                    gCurrentPinballGame->boardEntityCollisionMode == KYOGRE_COLLISION_MODE_1)
-                    gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_7;
+                    gCurrentPinballGame->boardEntityCollisionMode == KYOGRE_COLLISION_MODE_TOP_POSITION)
+                    gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_SUFFICIENT_HITS;
             }
         }
 
@@ -279,15 +279,15 @@ void UpdateKyogreEntityLogic(void)
 
     switch (gCurrentPinballGame->bossEntityState)
     {
-    case KYOGRE_ENTITY_STATE_0:
-        gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_1;
+    case KYOGRE_ENTITY_STATE_INIT:
+        gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_ENTRY;
         gCurrentPinballGame->bossFramesetIndex = 12;
         gCurrentPinballGame->bossFrameTimer = 0;
         gCurrentPinballGame->bossPositionX = 0;
         gCurrentPinballGame->bossPositionY = 0;
         gCurrentPinballGame->kyogreWaveTimer = 0;
         break;
-    case KYOGRE_ENTITY_STATE_1:
+    case KYOGRE_ENTITY_STATE_ENTRY:
         index = gKyogreRisingPaletteCycleIndices[(gCurrentPinballGame->kyogreWaveTimer % 280) / 14];
         DmaCopy16(3, gKyogreWaterAnimPaletteFrames[index], (void *)0x050003E0, 0x20);
         gCurrentPinballGame->kyogreWaveTimer++;
@@ -302,8 +302,8 @@ void UpdateKyogreEntityLogic(void)
             if (gCurrentPinballGame->bossFramesetIndex == 34)
             {
                 gCurrentPinballGame->bossFramesetIndex = 0;
-                gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_4;
-                gCurrentPinballGame->bossNextAttackState = KYOGRE_ENTITY_STATE_6;
+                gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_IDLE;
+                gCurrentPinballGame->bossNextAttackState = KYOGRE_ENTITY_STATE_SHOCKWAVE;
                 gCurrentPinballGame->bossMovementPhase = 0;
                 gCurrentPinballGame->bossRoarTimer = 60;
                 DmaCopy16(3, &gKyogreWaterAnimPaletteFrames[5], (void *)0x050003E0, 0x20);
@@ -315,14 +315,14 @@ void UpdateKyogreEntityLogic(void)
             if (gCurrentPinballGame->bossFramesetIndex == 33)
             {
                 MPlayStart(&gMPlayInfo_SE1, &se_unk_10b);
-                gCurrentPinballGame->boardEntityCollisionMode = KYOGRE_COLLISION_MODE_1;
+                gCurrentPinballGame->boardEntityCollisionMode = KYOGRE_COLLISION_MODE_TOP_POSITION;
             }
         }
 
         if (gCurrentPinballGame->ballRespawnTimer > 2)
             gCurrentPinballGame->ballRespawnTimer--;
         break;
-    case KYOGRE_ENTITY_STATE_2:
+    case KYOGRE_ENTITY_STATE_RETURN_TO_TOP:
         if (gKyogreAnimFramesetTable[gCurrentPinballGame->bossFramesetIndex][1] > gCurrentPinballGame->bossFrameTimer)
         {
             gCurrentPinballGame->bossFrameTimer++;
@@ -334,19 +334,19 @@ void UpdateKyogreEntityLogic(void)
             if (gCurrentPinballGame->bossFramesetIndex == 12)
             {
                 gCurrentPinballGame->bossFramesetIndex = 0;
-                gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_4;
-                gCurrentPinballGame->bossNextAttackState = KYOGRE_ENTITY_STATE_6;
+                gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_IDLE;
+                gCurrentPinballGame->bossNextAttackState = KYOGRE_ENTITY_STATE_SHOCKWAVE;
                 gCurrentPinballGame->bossMovementPhase = 2;
             }
 
             if (gCurrentPinballGame->bossFramesetIndex == 11)
             {
-                gCurrentPinballGame->boardEntityCollisionMode = KYOGRE_COLLISION_MODE_1;
+                gCurrentPinballGame->boardEntityCollisionMode = KYOGRE_COLLISION_MODE_TOP_POSITION;
                 MPlayStart(&gMPlayInfo_SE1, &se_unk_10b);
             }
         }
         break;
-    case KYOGRE_ENTITY_STATE_3:
+    case KYOGRE_ENTITY_STATE_DIVE:
         if (gKyogreAnimFramesetTable[gCurrentPinballGame->bossFramesetIndex][1] > gCurrentPinballGame->bossFrameTimer)
         {
             gCurrentPinballGame->bossFrameTimer++;
@@ -358,7 +358,7 @@ void UpdateKyogreEntityLogic(void)
             if (gCurrentPinballGame->bossFramesetIndex == 8)
             {
                 gCurrentPinballGame->bossFramesetIndex = 8;
-                gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_11;
+                gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_UNDERWATER;
                 gCurrentPinballGame->bossMovementPhase = 0;
             }
 
@@ -369,7 +369,7 @@ void UpdateKyogreEntityLogic(void)
             }
         }
         break;
-    case KYOGRE_ENTITY_STATE_4:
+    case KYOGRE_ENTITY_STATE_IDLE:
         if (gKyogreAnimFramesetTable[gCurrentPinballGame->bossFramesetIndex][1] > gCurrentPinballGame->bossFrameTimer)
         {
             gCurrentPinballGame->bossFrameTimer++;
@@ -387,14 +387,14 @@ void UpdateKyogreEntityLogic(void)
                 }
                 else
                 {
-                    if (gCurrentPinballGame->bossNextAttackState == KYOGRE_ENTITY_STATE_3)
+                    if (gCurrentPinballGame->bossNextAttackState == KYOGRE_ENTITY_STATE_DIVE)
                     {
                         if (gCurrentPinballGame->bonusModeHitCount >= gCurrentPinballGame->legendaryHitsRequired)
                         {
                             gCurrentPinballGame->bossFramesetIndex = 0;
-                            gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_4;
+                            gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_IDLE;
                             gCurrentPinballGame->bossMovementPhase = 0;
-                            gCurrentPinballGame->bossNextAttackState = KYOGRE_ENTITY_STATE_6;
+                            gCurrentPinballGame->bossNextAttackState = KYOGRE_ENTITY_STATE_SHOCKWAVE;
                         }
                         else
                         {
@@ -413,7 +413,7 @@ void UpdateKyogreEntityLogic(void)
             }
         }
         break;
-    case KYOGRE_ENTITY_STATE_5:
+    case KYOGRE_ENTITY_STATE_SPAWN_WHIRLPOOLS:
         if (gKyogreAnimFramesetTable[gCurrentPinballGame->bossFramesetIndex][1] > gCurrentPinballGame->bossFrameTimer)
         {
             gCurrentPinballGame->bossFrameTimer++;
@@ -424,6 +424,7 @@ void UpdateKyogreEntityLogic(void)
             gCurrentPinballGame->bossFramesetIndex++;
             if (gCurrentPinballGame->bossFramesetIndex == 67)
             {
+                //First pass resets to earlier in the animation, to spawn the second whirlpool, before actually moving
                 if (gCurrentPinballGame->bossMovementPhase <= 0)
                 {
                     gCurrentPinballGame->bossFramesetIndex = 45;
@@ -432,9 +433,9 @@ void UpdateKyogreEntityLogic(void)
                 else
                 {
                     gCurrentPinballGame->bossFramesetIndex = 0;
-                    gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_4;
+                    gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_IDLE;
                     gCurrentPinballGame->bossMovementPhase = 1;
-                    gCurrentPinballGame->bossNextAttackState = KYOGRE_ENTITY_STATE_3;
+                    gCurrentPinballGame->bossNextAttackState = KYOGRE_ENTITY_STATE_DIVE;
                 }
             }
 
@@ -448,7 +449,7 @@ void UpdateKyogreEntityLogic(void)
                 MPlayStart(&gMPlayInfo_SE1, &se_unk_10d);
         }
         break;
-    case KYOGRE_ENTITY_STATE_6:
+    case KYOGRE_ENTITY_STATE_SHOCKWAVE:
         if (gKyogreAnimFramesetTable[gCurrentPinballGame->bossFramesetIndex][1] > gCurrentPinballGame->bossFrameTimer)
         {
             gCurrentPinballGame->bossFrameTimer++;
@@ -469,7 +470,7 @@ void UpdateKyogreEntityLogic(void)
             if (gCurrentPinballGame->bossFramesetIndex == 45)
             {
                 gCurrentPinballGame->bossFramesetIndex = 45;
-                gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_5;
+                gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_SPAWN_WHIRLPOOLS;
                 gCurrentPinballGame->bossMovementPhase = 0;
             }
 
@@ -481,16 +482,17 @@ void UpdateKyogreEntityLogic(void)
             }
         }
 
+        // if boss is hit in the first several frames in this state, cancel the shockwave/freeze.
         if (gCurrentPinballGame->bossHitFlashTimer > 6)
             gCurrentPinballGame->shockwaveAlreadyHit = 1;
         break;
-    case KYOGRE_ENTITY_STATE_7:
+    case KYOGRE_ENTITY_STATE_SUFFICIENT_HITS:
         gCurrentPinballGame->boardModeType = 3;
 
         if (gCurrentPinballGame->numCompletedBonusStages % 5 == 3)
         {
             // catch kyogre
-            gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_10;
+            gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_CAPTURE;
             gCurrentPinballGame->bossFramesetIndex = 0;
             gMain.spriteGroups[10].active = TRUE;
             gMain.spriteGroups[9].active = TRUE;
@@ -503,7 +505,7 @@ void UpdateKyogreEntityLogic(void)
         else
         {
             // normal completion
-            gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_9;
+            gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_PREPARE_LEAVING;
             gCurrentPinballGame->bossFramesetIndex = 79;
             gMain.modeChangeFlags = MODE_CHANGE_BONUS_BANNER;
             gCurrentPinballGame->ballRespawnState = 2;
@@ -518,9 +520,9 @@ void UpdateKyogreEntityLogic(void)
 
         gCurrentPinballGame->bossFrameTimer = 0;
         break;
-    case KYOGRE_ENTITY_STATE_8:
+    case KYOGRE_ENTITY_STATE_PRESUMED_UNREACHABLE:
         break;
-    case KYOGRE_ENTITY_STATE_9:
+    case KYOGRE_ENTITY_STATE_PREPARE_LEAVING:
         if (gKyogreAnimFramesetTable[gCurrentPinballGame->bossFramesetIndex][1] > gCurrentPinballGame->bossFrameTimer)
         {
             gCurrentPinballGame->bossFrameTimer++;
@@ -532,8 +534,8 @@ void UpdateKyogreEntityLogic(void)
             if (gCurrentPinballGame->bossFramesetIndex == 108)
             {
                 gCurrentPinballGame->bossFramesetIndex = 107;
-                gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_13;
-                gCurrentPinballGame->boardState = 2;
+                gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_FINISHED;
+                gCurrentPinballGame->boardState = KYOGRE_BOARD_STATE_SUCCESS_BANNER;
                 gCurrentPinballGame->stageTimer = 0;
             }
 
@@ -544,7 +546,7 @@ void UpdateKyogreEntityLogic(void)
             }
         }
         break;
-    case KYOGRE_ENTITY_STATE_10:
+    case KYOGRE_ENTITY_STATE_CAPTURE:
         if (gKyogreAnimFramesetTable[gCurrentPinballGame->bossFramesetIndex][1] > gCurrentPinballGame->bossFrameTimer)
         {
             gCurrentPinballGame->bossFrameTimer++;
@@ -571,7 +573,7 @@ void UpdateKyogreEntityLogic(void)
         if (gCurrentPinballGame->captureSequenceTimer == 22)
             gCurrentPinballGame->bossFramesetIndex = 115;
         break;
-    case KYOGRE_ENTITY_STATE_11:
+    case KYOGRE_ENTITY_STATE_UNDERWATER:
         if (gCurrentPinballGame->bossFrameTimer < 300)
         {
             gCurrentPinballGame->bossFrameTimer++;
@@ -605,13 +607,13 @@ void UpdateKyogreEntityLogic(void)
         {
             gCurrentPinballGame->bossFrameTimer = 0;
             gCurrentPinballGame->bossFramesetIndex = 67;
-            gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_12;
-            gCurrentPinballGame->boardEntityCollisionMode = KYOGRE_COLLISION_MODE_2;
+            gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_LEAP;
+            gCurrentPinballGame->boardEntityCollisionMode = KYOGRE_COLLISION_MODE_EMERGING_FROM_WATER;
             MPlayStart(&gMPlayInfo_SE1, &se_unk_10b);
             PlayRumble(8);
         }
         break;
-    case KYOGRE_ENTITY_STATE_12:
+    case KYOGRE_ENTITY_STATE_LEAP:
         if (gKyogreAnimFramesetTable[gCurrentPinballGame->bossFramesetIndex][1] > gCurrentPinballGame->bossFrameTimer)
         {
             gCurrentPinballGame->bossFrameTimer++;
@@ -625,21 +627,21 @@ void UpdateKyogreEntityLogic(void)
                 if (gCurrentPinballGame->bossMovementPhase <= 0)
                 {
                     gCurrentPinballGame->bossFramesetIndex = 78;
-                    gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_11;
+                    gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_UNDERWATER;
                     gCurrentPinballGame->bossMovementPhase++;
                 }
                 else
                 {
                     gCurrentPinballGame->bossMovementPhase = 0;
                     gCurrentPinballGame->bossFramesetIndex = 8;
-                    gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_2;
+                    gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_RETURN_TO_TOP;
                     gCurrentPinballGame->bossPositionX = 0;
                     gCurrentPinballGame->bossPositionY = 0;
                 }
             }
 
             if (gCurrentPinballGame->bossFramesetIndex == 70)
-                gCurrentPinballGame->boardEntityCollisionMode = KYOGRE_COLLISION_MODE_3;
+                gCurrentPinballGame->boardEntityCollisionMode = KYOGRE_COLLISION_MODE_JUMPING;
 
             if (gCurrentPinballGame->bossFramesetIndex == 73)
                 gCurrentPinballGame->boardEntityCollisionMode = KYOGRE_COLLISION_MODE_NONE;
@@ -651,7 +653,7 @@ void UpdateKyogreEntityLogic(void)
             }
         }
         break;
-    case KYOGRE_ENTITY_STATE_13:
+    case KYOGRE_ENTITY_STATE_FINISHED:
         break;
     }
 
@@ -697,12 +699,12 @@ void RenderKyogreSprites(void)
         group->baseY = gCurrentPinballGame->bossPositionY / 10 + 66u - gCurrentPinballGame->cameraYOffset;
         gCurrentPinballGame->catchTargetX = gCurrentPinballGame->bossPositionX / 10 + 120;
         gCurrentPinballGame->catchTargetY = gCurrentPinballGame->bossPositionY / 10 + 50;
-        if (gCurrentPinballGame->boardEntityCollisionMode == KYOGRE_COLLISION_MODE_2)
+        if (gCurrentPinballGame->boardEntityCollisionMode == KYOGRE_COLLISION_MODE_EMERGING_FROM_WATER)
         {
             gCurrentPinballGame->bossCollisionX = (gCurrentPinballGame->bossPositionX / 10) * 2 + 192;
             gCurrentPinballGame->bossCollisionY = (gCurrentPinballGame->bossPositionY / 10) * 2 + 134;
         }
-        else if (gCurrentPinballGame->boardEntityCollisionMode == KYOGRE_COLLISION_MODE_3)
+        else if (gCurrentPinballGame->boardEntityCollisionMode == KYOGRE_COLLISION_MODE_JUMPING)
         {
             gCurrentPinballGame->bossCollisionX = (gCurrentPinballGame->bossPositionX / 10) * 2 + 192;
             gCurrentPinballGame->bossCollisionY = (gCurrentPinballGame->bossPositionY / 10) * 2 + 150;
@@ -782,7 +784,7 @@ void RenderKyogreSprites(void)
     }
     else
     {
-        if (gCurrentPinballGame->bossEntityState == KYOGRE_ENTITY_STATE_11
+        if (gCurrentPinballGame->bossEntityState == KYOGRE_ENTITY_STATE_UNDERWATER
             && gCurrentPinballGame->bossFrameTimer == 218)
         {
             group->active = TRUE;
@@ -1305,7 +1307,8 @@ void AnimateKyogreBackground(void)
     s16 var0;
     s16 index;
 
-    if (gCurrentPinballGame->boardState == 0 && gCurrentPinballGame->stageTimer < 600)
+    if (gCurrentPinballGame->boardState == KYOGRE_BOARD_STATE_INTRO
+        && gCurrentPinballGame->stageTimer < 600)
     {
         index = gKyogreIntroPaletteCycleIndices[(gCurrentPinballGame->stageTimer % 240) / 24];
         DmaCopy16(3, gKyogreIntroIcePalette[index], (void *)0x05000340, 0x20);

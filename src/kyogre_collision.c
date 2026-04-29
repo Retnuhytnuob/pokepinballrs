@@ -106,7 +106,7 @@ void CheckKyogreEntityCollision(struct Vector16 *arg0, u16 *arg1, u8 *arg2)
     u16 arrayValue;
     u16 maskedResult;
 
-    if (gCurrentPinballGame->boardEntityCollisionMode == KYOGRE_COLLISION_MODE_1)
+    if (gCurrentPinballGame->boardEntityCollisionMode == KYOGRE_COLLISION_MODE_TOP_POSITION)
     {
         if (*arg2 & 0xF)
             return;
@@ -127,7 +127,7 @@ void CheckKyogreEntityCollision(struct Vector16 *arg0, u16 *arg1, u8 *arg2)
         *arg1 = maskedResult;
         *arg2 = 6;
     }
-    else if (gCurrentPinballGame->boardEntityCollisionMode == KYOGRE_COLLISION_MODE_2)
+    else if (gCurrentPinballGame->boardEntityCollisionMode == KYOGRE_COLLISION_MODE_EMERGING_FROM_WATER)
     {
         if (*arg2 & 0xF)
             return;
@@ -148,7 +148,7 @@ void CheckKyogreEntityCollision(struct Vector16 *arg0, u16 *arg1, u8 *arg2)
         *arg1 = maskedResult;
         *arg2 = 6;
     }
-    else if (gCurrentPinballGame->boardEntityCollisionMode == KYOGRE_COLLISION_MODE_3)
+    else if (gCurrentPinballGame->boardEntityCollisionMode == KYOGRE_COLLISION_MODE_JUMPING)
     {
         if (*arg2 & 0xF)
             return;
@@ -180,7 +180,7 @@ void ProcessKyogreCollisionEvent(u8 arg0, u16 *arg1, u16 *arg2)
     case 3:
         break;
     case 4:
-        gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_6;
+        gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_SHOCKWAVE;
         gCurrentPinballGame->ballFrozenState = 1;
         break;
     case 5:
