@@ -43,7 +43,7 @@ void KyogreBoardProcess_3A_383E4(void)
 
     gCurrentPinballGame->stageTimer = 0;
     gCurrentPinballGame->boardSubState = BONUS_BOARD_SUBSTATE_ACTIVE;
-    gCurrentPinballGame->boardState = KYOGRE_BOARD_STATE_INTRO;
+    gCurrentPinballGame->boardState = LEGENDARY_BOARD_STATE_INTRO;
     gCurrentPinballGame->boardModeType = 0;
     gCurrentPinballGame->eventTimer = gCurrentPinballGame->timerBonus + 10800;
     gCurrentPinballGame->timerBonus = 0;
@@ -118,7 +118,7 @@ void KyogreBoardProcess_3B_3869C(void)
 {
     switch (gCurrentPinballGame->boardState)
     {
-    case KYOGRE_BOARD_STATE_INTRO:
+    case LEGENDARY_BOARD_STATE_INTRO:
         gCurrentPinballGame->ballUpgradeTimerFrozen = 1;
         if (gCurrentPinballGame->stageTimer < 500)
         {
@@ -140,18 +140,18 @@ void KyogreBoardProcess_3B_3869C(void)
         } else
         {
             gCurrentPinballGame->cameraYAdjust = 0;
-            gCurrentPinballGame->boardState = KYOGRE_BOARD_STATE_BATTLE_PHASE;
+            gCurrentPinballGame->boardState = LEGENDARY_BOARD_STATE_BATTLE_PHASE;
             gCurrentPinballGame->stageTimer = 0;
         }
         break;
-    case KYOGRE_BOARD_STATE_SUCCESS_BANNER:
+    case LEGENDARY_BOARD_STATE_SUCCESS_BANNER:
         if (gCurrentPinballGame->stageTimer < 120)
         {
             gCurrentPinballGame->stageTimer++;
         }
         else
         {
-            gCurrentPinballGame->boardState = KYOGRE_BOARD_STATE_SUCCESS_SCORING;
+            gCurrentPinballGame->boardState = LEGENDARY_BOARD_STATE_SUCCESS_SCORING;
             gCurrentPinballGame->stageTimer = 0;
             gMain.spriteGroups[6].active = TRUE;
             gMain.spriteGroups[5].active = TRUE;
@@ -161,7 +161,7 @@ void KyogreBoardProcess_3B_3869C(void)
             gCurrentPinballGame->boardEntityActive = 1;
         }
         break;
-    case KYOGRE_BOARD_STATE_SUCCESS_SCORING:
+    case LEGENDARY_BOARD_STATE_SUCCESS_SCORING:
         ProcessBonusBannerAndScoring();
         if (gCurrentPinballGame->scoreCounterAnimationEnabled)
             gCurrentPinballGame->stageTimer = 181;
@@ -186,14 +186,14 @@ void KyogreBoardProcess_3B_3869C(void)
         else
         {
             gCurrentPinballGame->stageTimer = 0;
-            gCurrentPinballGame->boardState = KYOGRE_BOARD_STATE_SCORE_COUNTING_FINISHED;
+            gCurrentPinballGame->boardState = LEGENDARY_BOARD_STATE_SCORE_COUNTING_FINISHED;
             gCurrentPinballGame->numCompletedBonusStages++;
         }
 
         gCurrentPinballGame->boardEntityActive = 1;
         break;
-    case KYOGRE_BOARD_STATE_CATCH_BANNER:
-        gCurrentPinballGame->boardState = KYOGRE_BOARD_STATE_CATCH_SCORING;
+    case LEGENDARY_BOARD_STATE_CATCH_BANNER:
+        gCurrentPinballGame->boardState = LEGENDARY_BOARD_STATE_CATCH_SCORING;
         gCurrentPinballGame->stageTimer = 140;
         gMain.spriteGroups[6].active = TRUE;
         gMain.spriteGroups[5].active = TRUE;
@@ -201,7 +201,7 @@ void KyogreBoardProcess_3B_3869C(void)
         gCurrentPinballGame->bannerSlideYOffset = 136;
         gMain.modeChangeFlags = MODE_CHANGE_BONUS_BANNER;
         break;
-    case KYOGRE_BOARD_STATE_CATCH_SCORING:
+    case LEGENDARY_BOARD_STATE_CATCH_SCORING:
         ProcessBonusBannerAndScoring();
         if (gCurrentPinballGame->scoreCounterAnimationEnabled)
             gCurrentPinballGame->stageTimer = 181;
@@ -220,11 +220,11 @@ void KyogreBoardProcess_3B_3869C(void)
         else
         {
             gCurrentPinballGame->stageTimer = 0;
-            gCurrentPinballGame->boardState = KYOGRE_BOARD_STATE_SCORE_COUNTING_FINISHED;
+            gCurrentPinballGame->boardState = LEGENDARY_BOARD_STATE_SCORE_COUNTING_FINISHED;
             gCurrentPinballGame->numCompletedBonusStages++;
         }
         break;
-    case KYOGRE_BOARD_STATE_SCORE_COUNTING_FINISHED:
+    case LEGENDARY_BOARD_STATE_SCORE_COUNTING_FINISHED:
         ProcessBonusBannerAndScoring();
         gCurrentPinballGame->returnToMainBoardFlag = 1;
         gCurrentPinballGame->boardEntityActive = 1;
@@ -500,7 +500,7 @@ void UpdateKyogreEntityLogic(void)
             gCurrentPinballGame->bossAttackTimer = 0;
             gCurrentPinballGame->captureSequenceTimer = 0;
             gCurrentPinballGame->captureSequenceFrame = 0;
-            gCurrentPinballGame->captureState = 2;
+            gCurrentPinballGame->captureState = MON_CAPTURE_SPECIAL_STATE_CAPTURE_CUTSCENE;
         }
         else
         {
@@ -535,7 +535,7 @@ void UpdateKyogreEntityLogic(void)
             {
                 gCurrentPinballGame->bossFramesetIndex = 107;
                 gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_FINISHED;
-                gCurrentPinballGame->boardState = KYOGRE_BOARD_STATE_SUCCESS_BANNER;
+                gCurrentPinballGame->boardState = LEGENDARY_BOARD_STATE_SUCCESS_BANNER;
                 gCurrentPinballGame->stageTimer = 0;
             }
 
@@ -1324,7 +1324,7 @@ void AnimateKyogreBackground(void)
     s16 var0;
     s16 index;
 
-    if (gCurrentPinballGame->boardState == KYOGRE_BOARD_STATE_INTRO
+    if (gCurrentPinballGame->boardState == LEGENDARY_BOARD_STATE_INTRO
         && gCurrentPinballGame->stageTimer < 600)
     {
         index = gKyogreIntroPaletteCycleIndices[(gCurrentPinballGame->stageTimer % 240) / 24];

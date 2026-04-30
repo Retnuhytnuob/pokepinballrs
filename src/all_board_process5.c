@@ -3,10 +3,11 @@
 #include "constants/bg_music.h"
 #include "constants/fields.h"
 #include "m4a.h"
+#include "constants/board/center_screen_states.h"
 
 extern void MainBoardProcess_7B_12524(void);
 extern void BonusBoardProcess_7B_12BF8(void);
-extern void RunBallCaptureSequence(void);
+extern void RunMonCaptureSequence(void);
 
 extern const u8 gBallPalettes[][0x20];
 
@@ -85,7 +86,8 @@ void MainBoardProcess_5B_11C98(void)
 
     currentBall = gCurrentPinballGame->ball;
     currentBall->prevPositionQ8 = currentBall->positionQ8;
-    if (gCurrentPinballGame->captureState != 2)
+
+    if (gCurrentPinballGame->captureState != MON_CAPTURE_SPECIAL_STATE_CAPTURE_CUTSCENE)
     {
         if (gCurrentPinballGame->ballSpeed != 0)
         {
@@ -150,7 +152,7 @@ void MainBoardProcess_5B_11C98(void)
     }
     else
     {
-        RunBallCaptureSequence();
+        RunMonCaptureSequence();
     }
 
     currentBall->prevPositionQ1 = currentBall->positionQ1;
@@ -170,7 +172,7 @@ void BonusBoardProcess_5B_11F88(void)
 
     currentBall = gCurrentPinballGame->ball;
     currentBall->prevPositionQ8 = currentBall->positionQ8;
-    if (gCurrentPinballGame->captureState != 2)
+    if (gCurrentPinballGame->captureState != MON_CAPTURE_SPECIAL_STATE_CAPTURE_CUTSCENE)
     {
         if (!gCurrentPinballGame->ballFrozenState && !gCurrentPinballGame->ballGrabbed)
         {
@@ -271,7 +273,7 @@ void BonusBoardProcess_5B_11F88(void)
     }
     else
     {
-        RunBallCaptureSequence();
+        RunMonCaptureSequence();
     }
 
     currentBall->prevPositionQ1 = currentBall->positionQ1;

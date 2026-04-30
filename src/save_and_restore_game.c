@@ -4,6 +4,7 @@
 #include "m4a.h"
 #include "constants/board/main_board.h"
 #include "constants/board/groudon_states.h"
+#include "constants/board/rayquaza_states.h"
 
 extern u8 gBoardGfxBuffer[];
 extern u8 gBoardBGTileBufferAlt[];
@@ -684,7 +685,7 @@ void RestoreKyogreBonusGraphics(void)
 
 void RestoreGroudonBonusGraphics(void)
 {
-    if (gCurrentPinballGame->boardState <= GROUDON_BOARD_STATE_BATTLE_PHASE)
+    if (gCurrentPinballGame->boardState <= LEGENDARY_BOARD_STATE_BATTLE_PHASE)
     {
         DmaCopy16(3, gGroudonBoardBackgroundGfx, (void *)0x6015800, 0x2000);
     }
@@ -705,11 +706,11 @@ void RestoreRayquazaBonusGraphics(void)
 {
     u8 var0;
 
-    if (gCurrentPinballGame->boardState == 0)
+    if (gCurrentPinballGame->boardState == LEGENDARY_BOARD_STATE_INTRO)
     {
         DmaCopy16(3, gRayquazaSkyBackgroundGfx, (void *)0x6015800, 0x2800);
     }
-    else if (gCurrentPinballGame->boardState == 1)
+    else if (gCurrentPinballGame->boardState == LEGENDARY_BOARD_STATE_BATTLE_PHASE)
     {
         DmaCopy16(3, gRayquazaWindBoardGfx, (void *)0x6015800, 0x1C00);
     }
@@ -719,7 +720,7 @@ void RestoreRayquazaBonusGraphics(void)
     }
 
     var0 = gCurrentPinballGame->bossEntityState - 2;
-    if (var0 > 9)
+    if (var0 > 9) // bossEntityState > RAYQUAZA_ENTITY_STATE_11
     {
         DmaCopy16(3, gRayquazaSpriteSheet, (void *)0x6011620, 0x860);
     }

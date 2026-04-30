@@ -293,7 +293,7 @@ void ProcessTiltInput(void)
     s16 sp0[4];
 
     if (gCurrentPinballGame->ballCatchState == NOT_TRAPPED
-        && gCurrentPinballGame->captureState != 2
+        && gCurrentPinballGame->captureState != MON_CAPTURE_SPECIAL_STATE_CAPTURE_CUTSCENE
         && gCurrentPinballGame->kickbackFiring == 0)
     {
         if (gCurrentPinballGame->newButtonActions[2])

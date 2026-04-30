@@ -6,6 +6,8 @@
 #include "constants/board/groudon_states.h"
 #include "constants/board/dusclops_states.h"
 #include "constants/board/kecleon_states.h"
+#include "constants/board/kyogre_states.h"
+#include "constants/board/rayquaza_states.h"
 
 extern struct SpriteGroup gMain_spriteGroups_12;
 extern struct SpriteGroup gMain_spriteGroups_14;
@@ -82,7 +84,7 @@ void ProcessBonusBannerAndScoring(void)
     switch (gMain.selectedField)
     {
     case FIELD_DUSCLOPS:
-        if (gCurrentPinballGame->boardState == DUSCLOPS_BOARD_STATE_SCORE_PHASE 
+        if (gCurrentPinballGame->boardState == DUSCLOPS_BOARD_STATE_SCORE_PHASE
             && gCurrentPinballGame->stageTimer < 180)
             var0 = (gCurrentPinballGame->stageTimer % 24) / 12 + 8;
         var1 = 30000000;
@@ -93,18 +95,18 @@ void ProcessBonusBannerAndScoring(void)
         var1 = 30000000;
         break;
     case FIELD_KYOGRE:
-        if (gCurrentPinballGame->boardState == 3 && gCurrentPinballGame->stageTimer < 180)
+        if (gCurrentPinballGame->boardState == LEGENDARY_BOARD_STATE_SUCCESS_SCORING && gCurrentPinballGame->stageTimer < 180)
             var0 = (gCurrentPinballGame->stageTimer % 24) / 12 + 8;
         var1 = 50000000;
         break;
     case FIELD_GROUDON:
-        if (gCurrentPinballGame->boardState == GROUDON_BOARD_STATE_SUCCESS_SCORING 
+        if (gCurrentPinballGame->boardState == LEGENDARY_BOARD_STATE_SUCCESS_SCORING
             && gCurrentPinballGame->stageTimer < 180)
             var0 = (gCurrentPinballGame->stageTimer % 24) / 12 + 8;
         var1 = 50000000;
         break;
     case FIELD_RAYQUAZA:
-        if (gCurrentPinballGame->boardState == 3 && gCurrentPinballGame->stageTimer < 180)
+        if (gCurrentPinballGame->boardState == LEGENDARY_BOARD_STATE_SUCCESS_SCORING && gCurrentPinballGame->stageTimer < 180)
             var0 = (gCurrentPinballGame->stageTimer % 24) / 12 + 8;
         var1 = 99999999;
         break;

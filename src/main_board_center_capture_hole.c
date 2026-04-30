@@ -3,6 +3,7 @@
 #include "main.h"
 #include "constants/bg_music.h"
 #include "constants/board/main_board.h"
+#include "constants/board/bonus_board.h"
 
 extern struct SongHeader se_roulette_tick;
 extern struct SongHeader se_unk_9a;
@@ -42,7 +43,7 @@ void InitRouletteWheel(void)
     for (i = 0; i < 6; i++)
     {
         gCurrentPinballGame->rouletteSlotValues[i] = gRouletteWheelContents[gCurrentPinballGame->rouletteLevel][i];
-        if (gCurrentPinballGame->rouletteSlotValues[i] == 41)
+        if (gCurrentPinballGame->rouletteSlotValues[i] == PRIZE_START_BONUS_MODE_ANY)
         {
             if (gMain.selectedField == FIELD_RUBY)
             {
@@ -50,14 +51,14 @@ void InitRouletteWheel(void)
                 {
                 case 0:
                 case 2:
-                    gCurrentPinballGame->rouletteSlotValues[i] = 42;
+                    gCurrentPinballGame->rouletteSlotValues[i] = PRIZE_START_BONUS_MODE_KECLEON;
                     break;
                 case 1:
                 case 3:
-                    gCurrentPinballGame->rouletteSlotValues[i] = 44;
+                    gCurrentPinballGame->rouletteSlotValues[i] = PRIZE_START_BONUS_MODE_GROUDON;
                     break;
                 case 4:
-                    gCurrentPinballGame->rouletteSlotValues[i] = 45;
+                    gCurrentPinballGame->rouletteSlotValues[i] = PRIZE_START_BONUS_MODE_RAYQUAZA;
                     break;
                 }
             }
@@ -67,46 +68,46 @@ void InitRouletteWheel(void)
                 {
                 case 0:
                 case 2:
-                    gCurrentPinballGame->rouletteSlotValues[i] = 41;
+                    gCurrentPinballGame->rouletteSlotValues[i] = PRIZE_START_BONUS_MODE_DUSKULL;
                     break;
                 case 1:
                 case 3:
-                    gCurrentPinballGame->rouletteSlotValues[i] = 43;
+                    gCurrentPinballGame->rouletteSlotValues[i] = PRIZE_START_BONUS_MODE_KYOGRE;
                     break;
                 case 4:
-                    gCurrentPinballGame->rouletteSlotValues[i] = 45;
+                    gCurrentPinballGame->rouletteSlotValues[i] = PRIZE_START_BONUS_MODE_RAYQUAZA;
                     break;
                 }
             }
         }
-        else if (gCurrentPinballGame->rouletteSlotValues[i] == 10)
+        else if (gCurrentPinballGame->rouletteSlotValues[i] == PRIZE_BALL_UPGRADE_BASE)
         {
             if (gCurrentPinballGame->ballUpgradeType < BALL_UPGRADE_TYPE_MASTER_BALL)
-                gCurrentPinballGame->rouletteSlotValues[i] = gCurrentPinballGame->ballUpgradeType + 10;
+                gCurrentPinballGame->rouletteSlotValues[i] = gCurrentPinballGame->ballUpgradeType + PRIZE_BALL_UPGRADE_BASE;
             else
-                gCurrentPinballGame->rouletteSlotValues[i] = 12;
+                gCurrentPinballGame->rouletteSlotValues[i] = PRIZE_BALL_UPGRADE_C;
         }
-        else if (gCurrentPinballGame->rouletteSlotValues[i] == 3)
+        else if (gCurrentPinballGame->rouletteSlotValues[i] == PRIZE_PICHU_SAVER)
         {
             if (gCurrentPinballGame->outLanePikaPosition == 2)
             {
                 if (gMain.systemFrameCount & 1)
                 {
                     if (gCurrentPinballGame->ballUpgradeType < BALL_UPGRADE_TYPE_MASTER_BALL)
-                        gCurrentPinballGame->rouletteSlotValues[i] = gCurrentPinballGame->ballUpgradeType + 10;
+                        gCurrentPinballGame->rouletteSlotValues[i] = gCurrentPinballGame->ballUpgradeType + PRIZE_BALL_UPGRADE_BASE;
                     else
-                        gCurrentPinballGame->rouletteSlotValues[i] = 12;
+                        gCurrentPinballGame->rouletteSlotValues[i] = PRIZE_BALL_UPGRADE_C;
                 }
                 else
                 {
-                    gCurrentPinballGame->rouletteSlotValues[i] = 1;
+                    gCurrentPinballGame->rouletteSlotValues[i] = PRIZE_60_SEC_BALL_SAVER;
                 }
             }
         }
-        else if (gCurrentPinballGame->rouletteSlotValues[i] == 9)
+        else if (gCurrentPinballGame->rouletteSlotValues[i] == PRIZE_START_EVO_MODE)
         {
             if (gCurrentPinballGame->evolvablePartySize <= 0)
-                gCurrentPinballGame->rouletteSlotValues[i] = 8;
+                gCurrentPinballGame->rouletteSlotValues[i] = PRIZE_START_CATCH_MODE;
         }
     }
 
@@ -339,9 +340,9 @@ void GivePrize(void)
         {
             gCurrentPinballGame->outcomeFrameCounter = 12;
             if (gCurrentPinballGame->rouletteLevel < 10)
-                gCurrentPinballGame->prizeId = (gMain.systemFrameCount % 3) + PRIZE_BONUS_MULT_PLUS_1;
+                gCurrentPinballGame->prizeId = (gMain.systemFrameCount % 3) + PRIZE_BONUS_MULT_PLUS_BASE;
             else
-                gCurrentPinballGame->prizeId = (gMain.systemFrameCount % 5) + PRIZE_BONUS_MULT_PLUS_1;
+                gCurrentPinballGame->prizeId = (gMain.systemFrameCount % 5) + PRIZE_BONUS_MULT_PLUS_BASE;
         }
         break;
     case PRIZE_START_CATCH_MODE:
@@ -381,6 +382,7 @@ void GivePrize(void)
     case PRIZE_BALL_UPGRADE_B:
     case PRIZE_BALL_UPGRADE_C:
         //Note: all 3 ball upgrades are equivalent, upgrade 1 level
+        //If ball already at masterball state, reset its timer.
         if (gCurrentPinballGame->outcomeFrameCounter == 130)
         {
             if (gCurrentPinballGame->ballUpgradeType < BALL_UPGRADE_TYPE_MASTER_BALL)
@@ -490,11 +492,11 @@ void GivePrize(void)
                 gCurrentPinballGame->progressLevel = 99;
         }
         break;
-    case PRIZE_START_BONUS_MODE_A:
-    case PRIZE_START_BONUS_MODE_B:
-    case PRIZE_START_BONUS_MODE_C:
-    case PRIZE_START_BONUS_MODE_D:
-    case PRIZE_START_BONUS_MODE_E:
+    case PRIZE_START_BONUS_MODE_DUSKULL:
+    case PRIZE_START_BONUS_MODE_KECLEON:
+    case PRIZE_START_BONUS_MODE_KYOGRE:
+    case PRIZE_START_BONUS_MODE_GROUDON:
+    case PRIZE_START_BONUS_MODE_RAYQUAZA:
         // Note: all start the currently available mode.
         // This controls Dusclops/Kecleon/Kyogre/Groudon/Rayquaza
         if (gCurrentPinballGame->outcomeFrameCounter == 150)
@@ -503,8 +505,8 @@ void GivePrize(void)
     }
 }
 
-//Gravity well + functionality
-void RunBallCaptureSequence(void)
+//Capture pokemon cutscene.
+void RunMonCaptureSequence(void)
 {
     s16 i;
     s16 j;
@@ -640,7 +642,7 @@ void RunBallCaptureSequence(void)
 
         if (temp_r3 == 0 || temp_r3 == 6)
         {
-            if (gMain.selectedField <= 3 &&
+            if (gMain.selectedField < FIELD_KYOGRE &&
                 (
                     (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_CATCH_EM_MODE
                         && gCurrentPinballGame->boardSubState == CATCH_EM_SUBSTATE_CATCH_HIT_PHASE)
@@ -862,7 +864,7 @@ void RunBallCaptureSequence(void)
 
         if (gCurrentPinballGame->captureSequenceTimer == 23)
         {
-            if (gMain.selectedField > 3)
+            if (gMain.selectedField >= FIELD_KYOGRE)
                 gCurrentPinballGame->legendaryFlashState = 10;
             else
             {
@@ -1290,7 +1292,7 @@ void RunBallCaptureSequence(void)
     case 34:
         gCurrentPinballGame->ballUpgradeTimerFrozen = 0;
         gCurrentPinballGame->ball->oamPriority = 3;
-        gCurrentPinballGame->captureState = 0;
+        gCurrentPinballGame->captureState = MON_CAPTURE_SPECIAL_STATE_INACTIVE;
         gCurrentPinballGame->captureSequenceFrame = 0;
         gCurrentPinballGame->captureSequenceTimer = 0;
 
@@ -1341,7 +1343,7 @@ void RunBallCaptureSequence(void)
             gCurrentPinballGame->ball->velocity.y = 0;
             gCurrentPinballGame->ball->velocity.x = 0;
             gCurrentPinballGame->portraitDisplayState = PORTRAIT_DISPLAY_MODE_BANNER;
-            gCurrentPinballGame->boardState = MAIN_BOARD_STATE_CATCH_EM_MODE;
+            gCurrentPinballGame->boardState = LEGENDARY_BOARD_STATE_CATCH_BANNER;
             gCurrentPinballGame->caughtMonCount++;
 
             if (gCurrentPinballGame->caughtMonCount == 15)

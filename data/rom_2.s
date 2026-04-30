@@ -3869,8 +3869,7 @@ gShopItemData:: @ 0x086AD000
 gPortraitIdleCycleData:: @ 0x086AD070
 	.incbin "baserom.gba", 0x6AD070, 0x110
 
-gRouletteWheelContents:: @ 0x086AD180
-	.incbin "baserom.gba", 0x6AD180, 0x15E
+.include "data/roulette_wheel_contents.inc"
 
 gShopCursorToItemMap:: @ 0x086AD2DE
 	.2byte 0x0000, 0x0001, 0x0002, 0x000A, 0x0014;

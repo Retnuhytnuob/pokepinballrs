@@ -40,7 +40,7 @@ void GroudonBoardProcess_3A_3B120(void)
 
     gCurrentPinballGame->stageTimer = 0;
     gCurrentPinballGame->boardSubState = BONUS_BOARD_SUBSTATE_ACTIVE;
-    gCurrentPinballGame->boardState = GROUDON_BOARD_STATE_INTRO;
+    gCurrentPinballGame->boardState = LEGENDARY_BOARD_STATE_INTRO;
     if (gCurrentPinballGame->numCompletedBonusStages % 5 == 3)
         gCurrentPinballGame->legendaryHitsRequired = 18;
     else
@@ -140,7 +140,7 @@ void GroudonBoardProcess_3B_3B49C(void)
 {
     switch (gCurrentPinballGame->boardState)
     {
-    case GROUDON_BOARD_STATE_INTRO:
+    case LEGENDARY_BOARD_STATE_INTRO:
         gCurrentPinballGame->ballUpgradeTimerFrozen = 1;
         if (gCurrentPinballGame->stageTimer < 500)
         {
@@ -160,18 +160,18 @@ void GroudonBoardProcess_3B_3B49C(void)
         else
         {
             gCurrentPinballGame->cameraYAdjust = 0;
-            gCurrentPinballGame->boardState = GROUDON_BOARD_STATE_BATTLE_PHASE;
+            gCurrentPinballGame->boardState = LEGENDARY_BOARD_STATE_BATTLE_PHASE;
             gCurrentPinballGame->stageTimer = 0;
         }
         break;
-    case GROUDON_BOARD_STATE_SUCCESS_BANNER:
+    case LEGENDARY_BOARD_STATE_SUCCESS_BANNER:
         if (gCurrentPinballGame->stageTimer < 120)
         {
             gCurrentPinballGame->stageTimer++;
         }
         else
         {
-            gCurrentPinballGame->boardState = GROUDON_BOARD_STATE_SUCCESS_SCORING;
+            gCurrentPinballGame->boardState = LEGENDARY_BOARD_STATE_SUCCESS_SCORING;
             gCurrentPinballGame->stageTimer = 0;
             gMain.spriteGroups[6].active = TRUE;
             gMain.spriteGroups[5].active = TRUE;
@@ -181,7 +181,7 @@ void GroudonBoardProcess_3B_3B49C(void)
             gCurrentPinballGame->boardEntityActive = 1;
         }
         break;
-    case GROUDON_BOARD_STATE_SUCCESS_SCORING:
+    case LEGENDARY_BOARD_STATE_SUCCESS_SCORING:
         ProcessBonusBannerAndScoring();
         if (gCurrentPinballGame->scoreCounterAnimationEnabled)
             gCurrentPinballGame->stageTimer = 181;
@@ -206,14 +206,14 @@ void GroudonBoardProcess_3B_3B49C(void)
         else
         {
             gCurrentPinballGame->stageTimer = 0;
-            gCurrentPinballGame->boardState = GROUDON_BOARD_STATE_SCORE_COUNTING_FINISHED;
+            gCurrentPinballGame->boardState = LEGENDARY_BOARD_STATE_SCORE_COUNTING_FINISHED;
             gCurrentPinballGame->numCompletedBonusStages++;
         }
 
         gCurrentPinballGame->boardEntityActive = 1;
         break;
-    case GROUDON_BOARD_STATE_CATCH_BANNER:
-        gCurrentPinballGame->boardState = GROUDON_BOARD_STATE_CATCH_SCORING;
+    case LEGENDARY_BOARD_STATE_CATCH_BANNER:
+        gCurrentPinballGame->boardState = LEGENDARY_BOARD_STATE_CATCH_SCORING;
         gCurrentPinballGame->stageTimer = 140;
         gMain.spriteGroups[6].active = TRUE;
         gMain.spriteGroups[5].active = TRUE;
@@ -221,7 +221,7 @@ void GroudonBoardProcess_3B_3B49C(void)
         gCurrentPinballGame->bannerSlideYOffset = 136;
         gMain.modeChangeFlags = MODE_CHANGE_BONUS_BANNER;
         break;
-    case GROUDON_BOARD_STATE_CATCH_SCORING:
+    case LEGENDARY_BOARD_STATE_CATCH_SCORING:
         ProcessBonusBannerAndScoring();
         if (gCurrentPinballGame->scoreCounterAnimationEnabled)
             gCurrentPinballGame->stageTimer = 181;
@@ -240,11 +240,11 @@ void GroudonBoardProcess_3B_3B49C(void)
         else
         {
             gCurrentPinballGame->stageTimer = 0;
-            gCurrentPinballGame->boardState = GROUDON_BOARD_STATE_SCORE_COUNTING_FINISHED;
+            gCurrentPinballGame->boardState = LEGENDARY_BOARD_STATE_SCORE_COUNTING_FINISHED;
             gCurrentPinballGame->numCompletedBonusStages++;
         }
         break;
-    case GROUDON_BOARD_STATE_SCORE_COUNTING_FINISHED:
+    case LEGENDARY_BOARD_STATE_SCORE_COUNTING_FINISHED:
         ProcessBonusBannerAndScoring();
         gCurrentPinballGame->returnToMainBoardFlag = 1;
         gCurrentPinballGame->boardEntityActive = 1;
@@ -613,7 +613,7 @@ void UpdateGroudonEntityLogic(void)
             gCurrentPinballGame->bossAttackTimer = 0;
             gCurrentPinballGame->captureSequenceTimer = 0;
             gCurrentPinballGame->captureSequenceFrame = 0;
-            gCurrentPinballGame->captureState = 2;
+            gCurrentPinballGame->captureState = MON_CAPTURE_SPECIAL_STATE_CAPTURE_CUTSCENE;
         }
         else
         {
@@ -682,7 +682,7 @@ void UpdateGroudonEntityLogic(void)
                 {
                     gCurrentPinballGame->bossFramesetIndex = 3;
                     gCurrentPinballGame->bossEntityState = GROUDON_ENTITY_STATE_FINISHED;
-                    gCurrentPinballGame->boardState = GROUDON_BOARD_STATE_SUCCESS_BANNER;
+                    gCurrentPinballGame->boardState = LEGENDARY_BOARD_STATE_SUCCESS_BANNER;
                     gCurrentPinballGame->stageTimer = 0;
                 }
             }
@@ -933,7 +933,7 @@ void RenderGroudonSprites(void)
             gOamBuffer[oamSimple->oamId].y += group->baseY;
         }
 
-        if (gCurrentPinballGame->captureState == 2)
+        if (gCurrentPinballGame->captureState == MON_CAPTURE_SPECIAL_STATE_CAPTURE_CUTSCENE)
         {
             gMain.spriteGroups[23].active = FALSE;
             gCurrentPinballGame->projectileAttackAnimTimer = 0;
@@ -1162,7 +1162,7 @@ void UpdateGroudonFieldEntities(void)
             gOamBuffer[oamSimple->oamId].y += group->baseY;
         }
 
-        if (gCurrentPinballGame->captureState == 2)
+        if (gCurrentPinballGame->captureState == MON_CAPTURE_SPECIAL_STATE_CAPTURE_CUTSCENE)
         {
             gMain.spriteGroups[22].active = FALSE;
             gCurrentPinballGame->projectileFlightTimer = 0;

@@ -456,7 +456,7 @@ void UpdateJirachiBonus(void)
         gCurrentPinballGame->jirachiDisplayY = gCurrentPinballGame->jirachiLogicY;
         return;
     case JIRACHI_CATCH_SUBSTATE_CATCH_HIT_PHASE:
-        if (gCurrentPinballGame->captureState == 2)
+        if (gCurrentPinballGame->captureState == MON_CAPTURE_SPECIAL_STATE_CAPTURE_CUTSCENE)
         {
             gCurrentPinballGame->catchTargetX = gCurrentPinballGame->jirachiDisplayX / 10 + 118;
             gCurrentPinballGame->catchTargetY = gCurrentPinballGame->jirachiDisplayY / 10 + 272;
@@ -722,7 +722,7 @@ void DrawJirachiSprites(void)
             DmaCopy16(3, &gCatchSpriteGfxBuffer[index * 0x480], (void *)0x06010CA0, 0x480);
         }
 
-        if (gCurrentPinballGame->captureState != 2)
+        if (gCurrentPinballGame->captureState != MON_CAPTURE_SPECIAL_STATE_CAPTURE_CUTSCENE)
         {
             priority = 1;
         }
@@ -776,7 +776,7 @@ void DrawJirachiSprites(void)
             }
         }
 
-        if (gCurrentPinballGame->captureState != 2
+        if (gCurrentPinballGame->captureState != MON_CAPTURE_SPECIAL_STATE_CAPTURE_CUTSCENE
             && gCurrentPinballGame->boardSubState < JIRACHI_CATCH_SUBSTATE_ESCAPING)
         {
             if (gCurrentPinballGame->jirachiTagTimer[j] == 0)

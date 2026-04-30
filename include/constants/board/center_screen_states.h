@@ -1,6 +1,8 @@
 #ifndef GUARD_CENTER_SCREEN_STATES_H
 #define GUARD_CENTER_SCREEN_STATES_H
 
+#include "prize_definitions.h"
+
 // Portrait/CenterScreen is for the 'screen' that shows the location, travel indicator, roulette wheel
 // catch picture, etc.
 enum PortraitDisplayMode{
@@ -28,62 +30,14 @@ enum PortraitSlot{
     PORTRAIT_ALT_SLOT = 1,
 };
 
-//Roulette and shop
-enum Prizes{
-    PRIZE_30_SEC_BALL_SAVER = 0,
-    PRIZE_60_SEC_BALL_SAVER = 1,
-    PRIZE_90_SEC_BALL_SAVER = 2,
-    PRIZE_PICHU_SAVER = 3,
-    PRIZE_EXTRA_BALL = 4,
-    PRIZE_SMALL_POINT_BONUS = 5,
-    PRIZE_BIG_POINT_BONUS = 6,
-    PRIZE_RANDOM_BONUS_MULTIPLIER = 7,
-    PRIZE_START_CATCH_MODE = 8,
-    PRIZE_START_EVO_MODE = 9,
-
-    //Note: A/B/C ball upgrades are equivalent, upgrade 1 level
-    PRIZE_BALL_UPGRADE_A = 10,
-    PRIZE_BALL_UPGRADE_B = 11,
-    PRIZE_BALL_UPGRADE_C = 12,
-    PRIZE_BALL_UPGRADE_TO_MASTER = 13,
-
-    //Note Prize 14-16 unused
-    PRIZE_14 = 14,
-    PRIZE_15 = 15,
-    PRIZE_16 = 16,
-
-    PRIZE_10_COINS = 17,
-    PRIZE_30_COINS = 18,
-    PRIZE_50_COINS = 19,
-    PRIZE_30_SEC_EXTRA_BONUS_STAGE_TIME = 20,
-    PRIZE_JIRACHI_CATCH_MODE = 21,
-    PRIZE_WISCASH_ACTIVE_SPHEAL_OPPORTUNITY = 22,
-    PRIZE_PELIPPER_ACTIVE_SPHEAL_OPPORTUNITY = 23,
-    PRIZE_1M_POINTS = 24,
-    PRIZE_2M_POINTS = 25,
-    PRIZE_3M_POINTS = 26,
-    PRIZE_4M_POINTS = 27,
-    PRIZE_5M_POINTS = 28,
-    PRIZE_6M_POINTS = 29,
-    PRIZE_7M_POINTS = 30,
-    PRIZE_8M_POINTS = 31,
-    PRIZE_9M_POINTS = 32,
-    PRIZE_100_POINTS = 33,
-    PRIZE_500_POINTS = 34,
-    PRIZE_900_POINTS = 35,
-    PRIZE_BONUS_MULT_PLUS_1 = 36,
-    PRIZE_BONUS_MULT_PLUS_2 = 37,
-    PRIZE_BONUS_MULT_PLUS_3 = 38,
-    PRIZE_BONUS_MULT_PLUS_4 = 39,
-    PRIZE_BONUS_MULT_PLUS_5 = 40,
-
-    // Note: all start the currently available mode.
-    // This controls Dusclops/Kecleon/Kyogre/Groudon/Rayquaza
-    PRIZE_START_BONUS_MODE_A = 41,
-    PRIZE_START_BONUS_MODE_B = 42,
-    PRIZE_START_BONUS_MODE_C = 43,
-    PRIZE_START_BONUS_MODE_D = 44,
-    PRIZE_START_BONUS_MODE_E = 45,
+// Inactive: no special override of the ball handling logic for the capture process
+// Mon_hit_in_catch_mode: extremely short lived. Returns to inactive after adding
+//    additional bounce strength to the ball.
+// Capture Cutscene: ball flies around in circles, opens up, and absorbs mon.
+enum MonCaptureSpecialStates{
+    MON_CAPTURE_SPECIAL_STATE_INACTIVE = 0,
+    MON_CAPTURE_SPECIAL_STATE_MON_HIT_IN_CATCH_MODE = 1,
+    MON_CAPTURE_SPECIAL_STATE_CAPTURE_CUTSCENE = 2,
 };
 
 #endif //GUARD_CENTER_SCREEN_STATES_H

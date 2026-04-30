@@ -1,5 +1,6 @@
 #include "global.h"
 #include "main.h"
+#include "constants/board/rayquaza_states.h"
 
 //One known callsite is 080145D2 during the rayquaza bonus stage
 s16 CollisionCheck_Rayquaza(struct Vector16 *arg0, u16 *arg1)
@@ -134,7 +135,7 @@ void ProcessRayquazaCollisionEvent(u8 arg0, u16 *arg1, u16 *arg2)
     case 3:
         break;
     case 4:
-        gCurrentPinballGame->bossEntityState = 6;
+        gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_6;
         gCurrentPinballGame->ballFrozenState = 1;
         break;
     case 5:
