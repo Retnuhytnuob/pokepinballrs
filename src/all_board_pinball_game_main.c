@@ -425,7 +425,7 @@ void ConfigureBoardProcessesForField(void)
         CurrentBoardProcPairs_020028D8[4] = BoardProcPairs_086B077C[12];
         CurrentBoardProcPairs_020028D8[2] = BoardProcPairs_086B077C[2];
         CurrentBoardProcPairs_020028D8[5] = BoardProcPairs_086B077C[14];
-        gMain.fieldSpriteGroups = gBonusFieldSpriteGroups[gMain.selectedField - FIELD_DUSCLOPS];
+        gMain.fieldSpriteGroups = gBonusFieldSpriteGroups[gMain.selectedField - FIELD_BONUS_START];
         break;
     case FIELD_KECLEON:
         CurrentBoardProcPairs_020028D8[3] = BoardProcPairs_086B077C[6];
@@ -434,7 +434,7 @@ void ConfigureBoardProcessesForField(void)
         CurrentBoardProcPairs_020028D8[4] = BoardProcPairs_086B077C[12];
         CurrentBoardProcPairs_020028D8[2] = BoardProcPairs_086B077C[2];
         CurrentBoardProcPairs_020028D8[5] = BoardProcPairs_086B077C[14];
-        gMain.fieldSpriteGroups = gBonusFieldSpriteGroups[gMain.selectedField - FIELD_DUSCLOPS];
+        gMain.fieldSpriteGroups = gBonusFieldSpriteGroups[gMain.selectedField - FIELD_BONUS_START];
         break;
     case FIELD_KYOGRE:
         CurrentBoardProcPairs_020028D8[3] = BoardProcPairs_086B077C[7];
@@ -443,7 +443,7 @@ void ConfigureBoardProcessesForField(void)
         CurrentBoardProcPairs_020028D8[4] = BoardProcPairs_086B077C[12];
         CurrentBoardProcPairs_020028D8[2] = BoardProcPairs_086B077C[2];
         CurrentBoardProcPairs_020028D8[5] = BoardProcPairs_086B077C[14];
-        gMain.fieldSpriteGroups = gBonusFieldSpriteGroups[gMain.selectedField - FIELD_DUSCLOPS];
+        gMain.fieldSpriteGroups = gBonusFieldSpriteGroups[gMain.selectedField - FIELD_BONUS_START];
         break;
     case FIELD_GROUDON:
         CurrentBoardProcPairs_020028D8[3] = BoardProcPairs_086B077C[8];
@@ -452,7 +452,7 @@ void ConfigureBoardProcessesForField(void)
         CurrentBoardProcPairs_020028D8[4] = BoardProcPairs_086B077C[12];
         CurrentBoardProcPairs_020028D8[2] = BoardProcPairs_086B077C[2];
         CurrentBoardProcPairs_020028D8[5] = BoardProcPairs_086B077C[14];
-        gMain.fieldSpriteGroups = gBonusFieldSpriteGroups[gMain.selectedField - FIELD_DUSCLOPS];
+        gMain.fieldSpriteGroups = gBonusFieldSpriteGroups[gMain.selectedField - FIELD_BONUS_START];
         break;
     case FIELD_RAYQUAZA:
         CurrentBoardProcPairs_020028D8[3] = BoardProcPairs_086B077C[9];
@@ -461,7 +461,7 @@ void ConfigureBoardProcessesForField(void)
         CurrentBoardProcPairs_020028D8[4] = BoardProcPairs_086B077C[12];
         CurrentBoardProcPairs_020028D8[2] = BoardProcPairs_086B077C[2];
         CurrentBoardProcPairs_020028D8[5] = BoardProcPairs_086B077C[14];
-        gMain.fieldSpriteGroups = gBonusFieldSpriteGroups[gMain.selectedField - FIELD_DUSCLOPS];
+        gMain.fieldSpriteGroups = gBonusFieldSpriteGroups[gMain.selectedField - FIELD_BONUS_START];
         break;
     case FIELD_SPHEAL:
         CurrentBoardProcPairs_020028D8[3] = BoardProcPairs_086B077C[10];
@@ -470,7 +470,7 @@ void ConfigureBoardProcessesForField(void)
         CurrentBoardProcPairs_020028D8[4] = BoardProcPairs_086B077C[12];
         CurrentBoardProcPairs_020028D8[2] = BoardProcPairs_086B077C[2];
         CurrentBoardProcPairs_020028D8[5] = BoardProcPairs_086B077C[14];
-        gMain.fieldSpriteGroups = gBonusFieldSpriteGroups[gMain.selectedField - FIELD_DUSCLOPS];
+        gMain.fieldSpriteGroups = gBonusFieldSpriteGroups[gMain.selectedField - FIELD_BONUS_START];
         break;
     }
 }
@@ -817,7 +817,7 @@ void PinballGame_State3_4B20C(void)
 
     if (gMain.gameExitState == 0)
     {
-        if (gMain.selectedField >= MAIN_FIELD_COUNT)
+        if (gMain.selectedField >= FIELD_BONUS_START)
         {
             SetMainGameState(STATE_BONUS_FIELD_SELECT);
             return;

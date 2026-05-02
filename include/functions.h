@@ -607,7 +607,7 @@ extern void AnimateGroudonBackground(void);
 extern void UpdateRayquazaEntityLogic(void);
 extern void RenderRayquazaSprites(void);
 extern void UpdateRayquazaMinionsAndEffects(void);
-extern void UpdateWhirlwindGrabEntity(void);
+extern void UpdateLightningGrabEntity(void);
 extern void RenderWindCloudSprites(void);
 extern void UpdateRayquazaIntroSequence(void);
 //extern ? SphealBoardProcess_3A_42E48();

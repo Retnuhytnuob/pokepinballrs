@@ -135,7 +135,7 @@ void ProcessRayquazaCollisionEvent(u8 arg0, u16 *arg1, u16 *arg2)
     case 3:
         break;
     case 4:
-        gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_6;
+        gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_LIGHTNING_ATTACK;
         gCurrentPinballGame->ballFrozenState = 1;
         break;
     case 5:

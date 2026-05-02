@@ -720,7 +720,7 @@ void RestoreRayquazaBonusGraphics(void)
     }
 
     var0 = gCurrentPinballGame->bossEntityState - 2;
-    if (var0 > 9) // bossEntityState > RAYQUAZA_ENTITY_STATE_11
+    if (var0 > 9) // bossEntityState > RAYQUAZA_ENTITY_STATE_DEPARTS
     {
         DmaCopy16(3, gRayquazaSpriteSheet, (void *)0x6011620, 0x860);
     }

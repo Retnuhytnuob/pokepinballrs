@@ -5,7 +5,7 @@
 #include "constants/board/rayquaza_states.h"
 #include "constants/board/center_screen_states.h"
 
-extern const s16 gWhirlwindGrabAnimFrameIndices[];
+extern const s16 gLightningGrabAnimFrameIndices[];
 extern const u8 gRayquazaBonusClear_Gfx[];
 extern const u8 gRayquazaSkyBackgroundGfx[];
 extern const u8 gRayquazaMinionOrbFrames[][0x280];
@@ -54,8 +54,8 @@ void RayquazaBoardProcess_3A_3E79C(void)
     gCurrentPinballGame->bonusModeHitCount = 0;
     gCurrentPinballGame->returnToMainBoardFlag = 0;
     gCurrentPinballGame->legendaryFlashState = 0;
-    gCurrentPinballGame->rayquazaOrbAngle = 0;
-    gCurrentPinballGame->bossRenderOffsetY = 0;
+    gCurrentPinballGame->ballWhirlwindFallAcceleration = 0;
+    gCurrentPinballGame->ballWhirlwindLiftY = 0;
     gCurrentPinballGame->bossAttackTimer = 0;
     gCurrentPinballGame->bossRoarTimer = 0;
     gCurrentPinballGame->bannerSlideYOffset = 0;
@@ -66,7 +66,7 @@ void RayquazaBoardProcess_3A_3E79C(void)
         gCurrentPinballGame->minionLogicPosition[i].y = 0;
     }
 
-    gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_0;
+    gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_SPAWN;
     gCurrentPinballGame->bossNextAttackState = 0;
     gCurrentPinballGame->kecleonFramesetBase = 0;
     gCurrentPinballGame->bossVulnerable = 0;
@@ -89,7 +89,7 @@ void RayquazaBoardProcess_3A_3E79C(void)
 
     for (i = 0; i < 2; i++)
     {
-        gCurrentPinballGame->vortexEntityState[i] = 0;
+        gCurrentPinballGame->vortexEntityState[i] = RAYQUAZA_WHIRLWIND_STATE_INIT;
         gCurrentPinballGame->vortexTargetWaypointIndex[i] = 0;
         gCurrentPinballGame->vortexAnimTimer[i] = 0;
         gCurrentPinballGame->vortexScreenPosition[i].x = 0;
@@ -103,23 +103,23 @@ void RayquazaBoardProcess_3A_3E79C(void)
     gCurrentPinballGame->ballGrabFlashTimer = 0;
     gCurrentPinballGame->ballGrabTimer = 0;
     gCurrentPinballGame->windAttackCount = 0;
-    gCurrentPinballGame->orbHitIndex = 0;
+    gCurrentPinballGame->whirlwindHitIndex = 0;
     gCurrentPinballGame->introSequencePhase = 0;
-    gCurrentPinballGame->swoopAttackState = 0;
+    gCurrentPinballGame->lightningAttackState = RAYQUAZA_LIGHTNING_STATE_INACTIVE;
     gCurrentPinballGame->horizontalShakeTimer = 0;
     gCurrentPinballGame->roarBrightnessFlashTimer = 0;
     gCurrentPinballGame->bossInvulnTimer = 0;
     gCurrentPinballGame->hitBurstAnimFrame = 0;
-    gCurrentPinballGame->swoopAttackAnimFrame = 0;
+    gCurrentPinballGame->lightningAttackAnimFrame = 0;
     gCurrentPinballGame->bossSineAngle = 0;
     gCurrentPinballGame->windCloudSpawnTimer = 0;
     gCurrentPinballGame->introFrameCounter = 0;
     gCurrentPinballGame->bgScrollSpeed = 0;
     gCurrentPinballGame->bossHeadScreenY = 0;
-    gCurrentPinballGame->swoopTargetPosition.x = 0;
-    gCurrentPinballGame->swoopTargetPosition.y = 0;
-    gCurrentPinballGame->orbHitPosition.x = 0;
-    gCurrentPinballGame->orbHitPosition.y = 0;
+    gCurrentPinballGame->lightningTargetPosition.x = 0;
+    gCurrentPinballGame->lightningTargetPosition.y = 0;
+    gCurrentPinballGame->whirlwindHitPosition.x = 0;
+    gCurrentPinballGame->whirlwindHitPosition.y = 0;
     gCurrentPinballGame->windEntityPosition.x = 0;
     gCurrentPinballGame->windEntityPosition.y = 0;
     gCurrentPinballGame->windCloudPosition.x = 0;
@@ -262,8 +262,8 @@ void UpdateRayquazaEntityLogic(void)
             gCurrentPinballGame->bonusModeHitCount++;
             PlayRumble(7);
             if (gCurrentPinballGame->bonusModeHitCount >= gCurrentPinballGame->legendaryHitsRequired 
-                && gCurrentPinballGame->bossEntityState != RAYQUAZA_ENTITY_STATE_6)
-                gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_9;
+                && gCurrentPinballGame->bossEntityState != RAYQUAZA_ENTITY_STATE_LIGHTNING_ATTACK)
+                gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_SUFFICIENT_HITS;
         }
 
         gCurrentPinballGame->bossInvulnTimer = 20;
@@ -283,16 +283,16 @@ void UpdateRayquazaEntityLogic(void)
 
     switch (gCurrentPinballGame->bossEntityState)
     {
-    case RAYQUAZA_ENTITY_STATE_0:
+    case RAYQUAZA_ENTITY_STATE_SPAWN:
         gCurrentPinballGame->bossPositionX = 1140;
         gCurrentPinballGame->bossPositionY = 2400;
-        gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_1;
+        gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_ENTRY;
         gCurrentPinballGame->bossFramesetIndex = 13;
         gCurrentPinballGame->bossFrameTimer = 0;
         gCurrentPinballGame->bossMovementPhase = 0;
         gCurrentPinballGame->bossHeadScreenY = 0;
         break;
-    case RAYQUAZA_ENTITY_STATE_1:
+    case RAYQUAZA_ENTITY_STATE_ENTRY:
         if (gCurrentPinballGame->introFrameCounter > 530)
         {
             if (gCurrentPinballGame->bossPositionY > -1200)
@@ -300,7 +300,7 @@ void UpdateRayquazaEntityLogic(void)
 
             if (gCurrentPinballGame->introFrameCounter == 672)
             {
-                gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_2;
+                gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_BOUNCE_IN_PLACE;
                 gCurrentPinballGame->bossPositionX = 0;
                 gCurrentPinballGame->bossPositionY = -640;
             }
@@ -309,7 +309,7 @@ void UpdateRayquazaEntityLogic(void)
         if (gCurrentPinballGame->introFrameCounter == 530)
             gCurrentPinballGame->bossRoarTimer = 25;
         break;
-    case RAYQUAZA_ENTITY_STATE_2:
+    case RAYQUAZA_ENTITY_STATE_BOUNCE_IN_PLACE:
         if (gRayquazaAnimFramesetTable[gCurrentPinballGame->bossFramesetIndex][1] > gCurrentPinballGame->bossFrameTimer)
         {
             gCurrentPinballGame->bossFrameTimer++;
@@ -334,12 +334,12 @@ void UpdateRayquazaEntityLogic(void)
 
         if (gCurrentPinballGame->bossPositionY == 0)
         {
-            gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_5;
+            gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_BOUNCES_SIDEWAYS;
             gCurrentPinballGame->bossMovementPhase = 0;
-            gCurrentPinballGame->bossNextAttackState = RAYQUAZA_ENTITY_STATE_6;
+            gCurrentPinballGame->bossNextAttackState = RAYQUAZA_ENTITY_STATE_LIGHTNING_ATTACK;
         }
         break;
-    case RAYQUAZA_ENTITY_STATE_3:
+    case RAYQUAZA_ENTITY_STATE_LANDS:
         if (gRayquazaAnimFramesetTable[gCurrentPinballGame->bossFramesetIndex][1] > gCurrentPinballGame->bossFrameTimer)
         {
             gCurrentPinballGame->bossFrameTimer++;
@@ -361,12 +361,12 @@ void UpdateRayquazaEntityLogic(void)
 
         if (gCurrentPinballGame->bossPositionY == 0)
         {
-            gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_5;
+            gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_BOUNCES_SIDEWAYS;
             gCurrentPinballGame->bossMovementPhase = 0;
-            gCurrentPinballGame->bossNextAttackState = RAYQUAZA_ENTITY_STATE_6;
+            gCurrentPinballGame->bossNextAttackState = RAYQUAZA_ENTITY_STATE_LIGHTNING_ATTACK;
         }
         break;
-    case RAYQUAZA_ENTITY_STATE_4:
+    case RAYQUAZA_ENTITY_STATE_FLIES_UP:
         if (gRayquazaAnimFramesetTable[gCurrentPinballGame->bossFramesetIndex][1] > gCurrentPinballGame->bossFrameTimer)
         {
             gCurrentPinballGame->bossFrameTimer++;
@@ -390,11 +390,11 @@ void UpdateRayquazaEntityLogic(void)
         {
             gCurrentPinballGame->bossFramesetIndex = 0;
             gCurrentPinballGame->bossFrameTimer = 0;
-            gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_7;
+            gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_WAIT_FOR_FLYBY;
             gCurrentPinballGame->bossMovementPhase = 0;
         }
         break;
-    case RAYQUAZA_ENTITY_STATE_5:
+    case RAYQUAZA_ENTITY_STATE_BOUNCES_SIDEWAYS:
         if (gRayquazaAnimFramesetTable[gCurrentPinballGame->bossFramesetIndex][1] > gCurrentPinballGame->bossFrameTimer)
         {
             gCurrentPinballGame->bossFrameTimer++;
@@ -410,25 +410,25 @@ void UpdateRayquazaEntityLogic(void)
                     gCurrentPinballGame->bossFramesetIndex = 13;
                     gCurrentPinballGame->bossMovementPhase++;
                 }
-                else if (gCurrentPinballGame->bossNextAttackState == RAYQUAZA_ENTITY_STATE_6)
+                else if (gCurrentPinballGame->bossNextAttackState == RAYQUAZA_ENTITY_STATE_LIGHTNING_ATTACK)
                 {
                     if (gCurrentPinballGame->bonusModeHitCount >= gCurrentPinballGame->legendaryHitsRequired - 1)
                     {
                         gCurrentPinballGame->bossFramesetIndex = 13;
-                        gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_4;
+                        gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_FLIES_UP;
                         gCurrentPinballGame->bossMovementPhase = 0;
                     }
                     else
                     {
                         gCurrentPinballGame->bossFramesetIndex = 98;
-                        gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_6;
+                        gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_LIGHTNING_ATTACK;
                         gCurrentPinballGame->bossMovementPhase = 0;
                     }
                 }
                 else
                 {
                     gCurrentPinballGame->bossFramesetIndex = 13;
-                    gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_4;
+                    gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_FLIES_UP;
                     gCurrentPinballGame->bossMovementPhase = 0;
                 }
             }
@@ -440,7 +440,7 @@ void UpdateRayquazaEntityLogic(void)
             gCurrentPinballGame->bossPositionX = ((Sin(gCurrentPinballGame->bossSineAngle) * 62) / 20000) * 10;
         }
         break;
-    case RAYQUAZA_ENTITY_STATE_6:
+    case RAYQUAZA_ENTITY_STATE_LIGHTNING_ATTACK:
         gCurrentPinballGame->legendaryFlashState = 2;
         if (gRayquazaAnimFramesetTable[gCurrentPinballGame->bossFramesetIndex][1] > gCurrentPinballGame->bossFrameTimer)
         {
@@ -460,8 +460,8 @@ void UpdateRayquazaEntityLogic(void)
             {
                 gCurrentPinballGame->bossFramesetIndex = 29;
                 gCurrentPinballGame->bossMovementPhase = 0;
-                gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_5;
-                gCurrentPinballGame->bossNextAttackState = RAYQUAZA_ENTITY_STATE_4;
+                gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_BOUNCES_SIDEWAYS;
+                gCurrentPinballGame->bossNextAttackState = RAYQUAZA_ENTITY_STATE_FLIES_UP;
                 gCurrentPinballGame->legendaryFlashState = 0;
             }
 
@@ -472,7 +472,7 @@ void UpdateRayquazaEntityLogic(void)
                     gMain.spriteGroups[17].active = TRUE;
                     gMain.spriteGroups[18].active = TRUE;
                     gMain.spriteGroups[19].active = TRUE;
-                    gCurrentPinballGame->swoopAttackState = 1;
+                    gCurrentPinballGame->lightningAttackState = RAYQUAZA_LIGHTNING_STATE_CHARGING;
                 }
             }
 
@@ -483,14 +483,14 @@ void UpdateRayquazaEntityLogic(void)
                 gCurrentPinballGame->roarBrightnessFlashTimer = 16;
         }
         break;
-    case RAYQUAZA_ENTITY_STATE_7:
+    case RAYQUAZA_ENTITY_STATE_WAIT_FOR_FLYBY:
         if (gCurrentPinballGame->bossFrameTimer < 120)
         {
             gCurrentPinballGame->bossFrameTimer++;
         }
         else
         {
-            gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_8;
+            gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_FLYBY;
             DmaCopy16(3, gRayquazaWindBoardGfx, (void *)0x06015800, 0x1C00);
             if (gCurrentPinballGame->windAttackCount & 1)
             {
@@ -515,7 +515,7 @@ void UpdateRayquazaEntityLogic(void)
             m4aSongNumStart(SE_RAYQUAZA_WIND);
         }
         break;
-    case RAYQUAZA_ENTITY_STATE_8:
+    case RAYQUAZA_ENTITY_STATE_FLYBY:
         if (gMain.spriteGroups[22].active)
         {
             if (gCurrentPinballGame->windEntityPosition.x < 4800)
@@ -555,15 +555,15 @@ void UpdateRayquazaEntityLogic(void)
         {
             gCurrentPinballGame->bossFrameTimer = 0;
             gCurrentPinballGame->bossFramesetIndex = 13;
-            gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_3;
+            gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_LANDS;
         }
         break;
-    case RAYQUAZA_ENTITY_STATE_9:
+    case RAYQUAZA_ENTITY_STATE_SUFFICIENT_HITS:
         gCurrentPinballGame->boardModeType = 3;
         if (gCurrentPinballGame->numCompletedBonusStages % 10 == 9)
         {
             // Catch Rayquaza
-            gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_14;
+            gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_CAPTURE;
             gCurrentPinballGame->bossFramesetIndex = 0;
             gMain.spriteGroups[10].active = TRUE;
             gMain.spriteGroups[9].active = TRUE;
@@ -576,7 +576,7 @@ void UpdateRayquazaEntityLogic(void)
         else
         {
             // Normal Completion
-            gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_10;
+            gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_YELLS;
             gCurrentPinballGame->bossFramesetIndex = 98;
             gMain.modeChangeFlags = MODE_CHANGE_BONUS_BANNER;
             gCurrentPinballGame->ballRespawnState = 2;
@@ -587,7 +587,7 @@ void UpdateRayquazaEntityLogic(void)
         if (gMain.spriteGroups[36].active)
             gCurrentPinballGame->ballGrabTimer = 1;
         break;
-    case RAYQUAZA_ENTITY_STATE_10:
+    case RAYQUAZA_ENTITY_STATE_YELLS:
         if (gRayquazaAnimFramesetTable[gCurrentPinballGame->bossFramesetIndex][1] > gCurrentPinballGame->bossFrameTimer)
         {
             gCurrentPinballGame->bossFrameTimer++;
@@ -600,7 +600,7 @@ void UpdateRayquazaEntityLogic(void)
             {
                 gCurrentPinballGame->bossFramesetIndex = 13;
                 gCurrentPinballGame->bossMovementPhase = 0;
-                gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_11;
+                gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_DEPARTS;
                 gCurrentPinballGame->legendaryFlashState = 0;
             }
 
@@ -608,7 +608,7 @@ void UpdateRayquazaEntityLogic(void)
                 gCurrentPinballGame->bossRoarTimer = 21;
         }
         break;
-    case RAYQUAZA_ENTITY_STATE_11:
+    case RAYQUAZA_ENTITY_STATE_DEPARTS:
         if (gRayquazaAnimFramesetTable[gCurrentPinballGame->bossFramesetIndex][1] > gCurrentPinballGame->bossFrameTimer)
         {
             gCurrentPinballGame->bossFrameTimer++;
@@ -634,14 +634,14 @@ void UpdateRayquazaEntityLogic(void)
             {
                 gCurrentPinballGame->bossFramesetIndex = 0;
                 gCurrentPinballGame->bossFrameTimer = 0;
-                gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_12;
+                gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_BOARD_CLEANUP;
                 gCurrentPinballGame->bossMovementPhase = 0;
             }
 
         break;
-    case RAYQUAZA_ENTITY_STATE_12:
+    case RAYQUAZA_ENTITY_STATE_BOARD_CLEANUP:
         DmaCopy16(3, gRayquazaSpriteSheet, (void *)0x06011620, 0x860);
-        gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_13;
+        gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_FLYDOWN;
         gCurrentPinballGame->bossPositionX = 1140;
         gCurrentPinballGame->bossPositionY = -1200;
         gCurrentPinballGame->introSequencePhase = 2;
@@ -658,7 +658,7 @@ void UpdateRayquazaEntityLogic(void)
         gCurrentPinballGame->orbLogicPosition.x = 24;
         gCurrentPinballGame->orbLogicPosition.y = -16;
         break;
-    case RAYQUAZA_ENTITY_STATE_13:
+    case RAYQUAZA_ENTITY_STATE_FLYDOWN:
         if (gCurrentPinballGame->introFrameCounter < 256)
         {
             if (gCurrentPinballGame->bossFrameTimer < 80)
@@ -670,11 +670,11 @@ void UpdateRayquazaEntityLogic(void)
         {
             gCurrentPinballGame->boardState = LEGENDARY_BOARD_STATE_SUCCESS_BANNER;
             gCurrentPinballGame->stageTimer = 0;
-            gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_15;
+            gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_FINISHED;
         }
         break;
-    case RAYQUAZA_ENTITY_STATE_14:
-        gCurrentPinballGame->bossRenderOffsetY = 1;
+    case RAYQUAZA_ENTITY_STATE_CAPTURE:
+        gCurrentPinballGame->ballWhirlwindLiftY = 1;
         if (gCurrentPinballGame->bossAttackTimer > -500)
         {
             gCurrentPinballGame->bossAttackTimer += (-500 - gCurrentPinballGame->bossAttackTimer) / 30;
@@ -683,7 +683,7 @@ void UpdateRayquazaEntityLogic(void)
                 gCurrentPinballGame->cameraYAdjust = -38;
         }
         break;
-    case RAYQUAZA_ENTITY_STATE_15:
+    case RAYQUAZA_ENTITY_STATE_FINISHED:
         break;
     }
 
@@ -883,7 +883,7 @@ void RenderRayquazaSprites(void)
             else if (var2 > 9)
                 var2 = 9;
 
-            if (gCurrentPinballGame->bossEntityState != RAYQUAZA_ENTITY_STATE_14)
+            if (gCurrentPinballGame->bossEntityState != RAYQUAZA_ENTITY_STATE_CAPTURE)
             {
                 if (gCurrentPinballGame->roarBrightnessFlashTimer > 0)
                 {
@@ -907,7 +907,7 @@ void RenderRayquazaSprites(void)
             gOamBuffer[oamSimple->oamId].x = oamSimple->xOffset + group->baseX;
             gOamBuffer[oamSimple->oamId].y = oamSimple->yOffset + group->baseY;
 
-            if (gCurrentPinballGame->bossEntityState == RAYQUAZA_ENTITY_STATE_12)
+            if (gCurrentPinballGame->bossEntityState == RAYQUAZA_ENTITY_STATE_BOARD_CLEANUP)
             {
                 gMain.spriteGroups[43].active = TRUE;
                 gMain.spriteGroups[41].active = FALSE;
@@ -990,115 +990,116 @@ void UpdateRayquazaMinionsAndEffects(void)
         }
     }
 
-    UpdateWhirlwindGrabEntity();
+    UpdateLightningGrabEntity();
 
-    switch (gCurrentPinballGame->swoopAttackState)
+    switch (gCurrentPinballGame->lightningAttackState)
     {
-    case 0:
-        gCurrentPinballGame->swoopAttackAnimFrame = 0;
+    case RAYQUAZA_LIGHTNING_STATE_INACTIVE:
+        gCurrentPinballGame->lightningAttackAnimFrame = 0;
         var0 = 7;
         sp4 = 12;
         sp8 = 5;
         break;
-    case 1:
-        if (gCurrentPinballGame->swoopAttackAnimFrame == 0)
+    case RAYQUAZA_LIGHTNING_STATE_CHARGING:
+        if (gCurrentPinballGame->lightningAttackAnimFrame == 0)
             m4aSongNumStart(SE_UNKNOWN_0x128);
 
-        if (gCurrentPinballGame->swoopAttackAnimFrame == 8)
+        if (gCurrentPinballGame->lightningAttackAnimFrame == 8)
             m4aSongNumStop(SE_UNKNOWN_0x128);
 
-        if (gCurrentPinballGame->swoopAttackAnimFrame == 24)
+        if (gCurrentPinballGame->lightningAttackAnimFrame == 24)
             m4aSongNumStart(SE_UNKNOWN_0x128);
 
-        if (gCurrentPinballGame->swoopAttackAnimFrame == 36)
+        if (gCurrentPinballGame->lightningAttackAnimFrame == 36)
             m4aSongNumStop(SE_UNKNOWN_0x128);
 
-        if (gCurrentPinballGame->swoopAttackAnimFrame == 50)
+        if (gCurrentPinballGame->lightningAttackAnimFrame == 50)
             m4aSongNumStart(SE_UNKNOWN_0x128);
 
-        if (gCurrentPinballGame->swoopAttackAnimFrame == 56)
+        if (gCurrentPinballGame->lightningAttackAnimFrame == 56)
             m4aSongNumStop(SE_UNKNOWN_0x128);
 
-        if (gCurrentPinballGame->swoopAttackAnimFrame < 14)
-            var0 = gCurrentPinballGame->swoopAttackAnimFrame / 2;
-        else if (gCurrentPinballGame->swoopAttackAnimFrame < 42)
+        if (gCurrentPinballGame->lightningAttackAnimFrame < 14)
+            var0 = gCurrentPinballGame->lightningAttackAnimFrame / 2;
+        else if (gCurrentPinballGame->lightningAttackAnimFrame < 42)
             var0 = 7;
-        else if (gCurrentPinballGame->swoopAttackAnimFrame < 56)
-            var0 = (gCurrentPinballGame->swoopAttackAnimFrame - 42) / 2;
-        else if (gCurrentPinballGame->swoopAttackAnimFrame < 61)
+        else if (gCurrentPinballGame->lightningAttackAnimFrame < 56)
+            var0 = (gCurrentPinballGame->lightningAttackAnimFrame - 42) / 2;
+        else if (gCurrentPinballGame->lightningAttackAnimFrame < 61)
             var0 = 7;
         else
-            var0 = (gCurrentPinballGame->swoopAttackAnimFrame - 61) / 2;
+            var0 = (gCurrentPinballGame->lightningAttackAnimFrame - 61) / 2;
 
-        if (gCurrentPinballGame->swoopAttackAnimFrame < 8)
-            sp4 = gCurrentPinballGame->swoopAttackAnimFrame / 2;
-        else if (gCurrentPinballGame->swoopAttackAnimFrame < 48)
+        if (gCurrentPinballGame->lightningAttackAnimFrame < 8)
+            sp4 = gCurrentPinballGame->lightningAttackAnimFrame / 2;
+        else if (gCurrentPinballGame->lightningAttackAnimFrame < 48)
             sp4 = 12;
-        else if (gCurrentPinballGame->swoopAttackAnimFrame < 64)
-            sp4 = (gCurrentPinballGame->swoopAttackAnimFrame - 48) / 2 + 4;
+        else if (gCurrentPinballGame->lightningAttackAnimFrame < 64)
+            sp4 = (gCurrentPinballGame->lightningAttackAnimFrame - 48) / 2 + 4;
         else
             sp4 = 12;
 
         sp8 = 5;
-        gCurrentPinballGame->swoopAttackAnimFrame++;
-        if (gCurrentPinballGame->swoopAttackAnimFrame == 75)
+        gCurrentPinballGame->lightningAttackAnimFrame++;
+        if (gCurrentPinballGame->lightningAttackAnimFrame == 75)
         {
-            gCurrentPinballGame->swoopAttackAnimFrame = 0;
-            gCurrentPinballGame->swoopAttackState = 2;
+            gCurrentPinballGame->lightningAttackAnimFrame = 0;
+            gCurrentPinballGame->lightningAttackState = RAYQUAZA_LIGHTNING_STATE_TARGET_BALL;
         }
         break;
-    case 2:
+    case RAYQUAZA_LIGHTNING_STATE_TARGET_BALL:
         var0 = 7;
         sp4 = 12;
         sp8 = 5;
-        if (gCurrentPinballGame->swoopAttackAnimFrame < 34)
+        if (gCurrentPinballGame->lightningAttackAnimFrame < 34)
         {
-            gCurrentPinballGame->swoopAttackAnimFrame++;
-            if (gCurrentPinballGame->swoopAttackAnimFrame == 28)
+            gCurrentPinballGame->lightningAttackAnimFrame++;
+            if (gCurrentPinballGame->lightningAttackAnimFrame == 28)
             {
                 if (gCurrentPinballGame->ballRespawnState)
                 {
-                    gCurrentPinballGame->swoopTargetPosition.x = 200 - (Random() % 160);
-                    gCurrentPinballGame->swoopTargetPosition.y = gCurrentPinballGame->ball->positionQ0.y - 347 - (Random() % 80);
+                    gCurrentPinballGame->lightningTargetPosition.x = 200 - (Random() % 160);
+                    gCurrentPinballGame->lightningTargetPosition.y = gCurrentPinballGame->ball->positionQ0.y - 347 - (Random() % 80);
                 }
                 else
                 {
-                    gCurrentPinballGame->swoopTargetPosition.x = gCurrentPinballGame->ball->positionQ0.x - 13;
-                    gCurrentPinballGame->swoopTargetPosition.y = gCurrentPinballGame->ball->positionQ0.y - 347;
+                    gCurrentPinballGame->lightningTargetPosition.x = gCurrentPinballGame->ball->positionQ0.x - 13;
+                    gCurrentPinballGame->lightningTargetPosition.y = gCurrentPinballGame->ball->positionQ0.y - 347;
                 }
             }
         }
         else
         {
-            gCurrentPinballGame->swoopAttackAnimFrame = 0;
-            gCurrentPinballGame->swoopAttackState = 3;
+            gCurrentPinballGame->lightningAttackAnimFrame = 0;
+            gCurrentPinballGame->lightningAttackState = RAYQUAZA_LIGHTNING_STATE_STRIKING;
             m4aSongNumStart(SE_RAYQUAZA_FLYBY);
         }
         break;
-    case 3:
+    case RAYQUAZA_LIGHTNING_STATE_STRIKING:
         var0 = 7;
         sp4 = 12;
-        if (gCurrentPinballGame->swoopAttackAnimFrame < 2)
+        if (gCurrentPinballGame->lightningAttackAnimFrame < 2)
         {
-            sp8 = gCurrentPinballGame->swoopAttackAnimFrame;
+            sp8 = gCurrentPinballGame->lightningAttackAnimFrame;
         }
-        else if (gCurrentPinballGame->swoopAttackAnimFrame < 10)
+        else if (gCurrentPinballGame->lightningAttackAnimFrame < 10)
         {
-            sp8 = (gCurrentPinballGame->swoopAttackAnimFrame - 2) / 2 + 2;
+            sp8 = (gCurrentPinballGame->lightningAttackAnimFrame - 2) / 2 + 2;
             gCurrentPinballGame->horizontalShakeTimer = sp4;
             if (sp8 == 2)
             {
                 int a = 13;
                 int b = 347;
-                tempVector.x = gCurrentPinballGame->ball->positionQ0.x - a - gCurrentPinballGame->swoopTargetPosition.x;
-                tempVector.y = gCurrentPinballGame->ball->positionQ0.y - b - gCurrentPinballGame->swoopTargetPosition.y;
+                tempVector.x = gCurrentPinballGame->ball->positionQ0.x - a - gCurrentPinballGame->lightningTargetPosition.x;
+                tempVector.y = gCurrentPinballGame->ball->positionQ0.y - b - gCurrentPinballGame->lightningTargetPosition.y;
                 xx = tempVector.x * tempVector.x;
                 yy = tempVector.y * tempVector.y;
                 squaredMagnitude = xx + yy;
 
                 PlayRumble(8);
-                if (gCurrentPinballGame->vortexEntityState[0] < 3 && gCurrentPinballGame->vortexEntityState[1] < 3 &&
-                    gCurrentPinballGame->ballRespawnState == 0 && squaredMagnitude < 200)
+                if (gCurrentPinballGame->vortexEntityState[0] < RAYQUAZA_WHIRLWIND_STATE_FULL_CAUGHT_BALL
+                    && gCurrentPinballGame->vortexEntityState[1] < RAYQUAZA_WHIRLWIND_STATE_FULL_CAUGHT_BALL
+                    && gCurrentPinballGame->ballRespawnState == 0 && squaredMagnitude < 200)
                 {
                     gMain.spriteGroups[36].active = TRUE;
                     gCurrentPinballGame->ballGrabTimer = 600;
@@ -1110,14 +1111,14 @@ void UpdateRayquazaMinionsAndEffects(void)
         else
         {
             sp8 = 5;
-            gCurrentPinballGame->swoopAttackState = 4;
+            gCurrentPinballGame->lightningAttackState = RAYQUAZA_LIGHTNING_STATE_4;
         }
 
-        gCurrentPinballGame->swoopAttackAnimFrame++;
+        gCurrentPinballGame->lightningAttackAnimFrame++;
         break;
-    case 4:
-        gCurrentPinballGame->swoopAttackAnimFrame = 0;
-        gCurrentPinballGame->swoopAttackState = 0;
+    case RAYQUAZA_LIGHTNING_STATE_4:
+        gCurrentPinballGame->lightningAttackAnimFrame = 0;
+        gCurrentPinballGame->lightningAttackState = RAYQUAZA_LIGHTNING_STATE_INACTIVE;
         break;
     }
 
@@ -1140,7 +1141,7 @@ void UpdateRayquazaMinionsAndEffects(void)
             gOamBuffer[oamSimple->oamId].y += group->baseY;
         }
 
-        if (gCurrentPinballGame->swoopAttackState == 4)
+        if (gCurrentPinballGame->lightningAttackState == RAYQUAZA_LIGHTNING_STATE_4)
             gMain.spriteGroups[17].active = FALSE;
     }
 
@@ -1162,15 +1163,15 @@ void UpdateRayquazaMinionsAndEffects(void)
             gOamBuffer[oamSimple->oamId].y += group->baseY;
         }
 
-        if (gCurrentPinballGame->swoopAttackState == 4)
+        if (gCurrentPinballGame->lightningAttackState == RAYQUAZA_LIGHTNING_STATE_4)
             gMain.spriteGroups[18].active = FALSE;
     }
 
     group = &gMain.spriteGroups[19];
     if (group->active)
     {
-        group->baseX = gCurrentPinballGame->swoopTargetPosition.x - gCurrentPinballGame->cameraXOffset;
-        group->baseY = gCurrentPinballGame->swoopTargetPosition.y - gCurrentPinballGame->cameraYOffset;
+        group->baseX = gCurrentPinballGame->lightningTargetPosition.x - gCurrentPinballGame->cameraXOffset;
+        group->baseY = gCurrentPinballGame->lightningTargetPosition.y - gCurrentPinballGame->cameraYOffset;
         for (j = 0; j < 7; j++)
         {
             oamSimple = &group->oam[j];
@@ -1192,7 +1193,7 @@ void UpdateRayquazaMinionsAndEffects(void)
             }
         }
 
-        if (gCurrentPinballGame->swoopAttackState == 4)
+        if (gCurrentPinballGame->lightningAttackState == RAYQUAZA_LIGHTNING_STATE_4)
             gMain.spriteGroups[19].active = FALSE;
     }
 
@@ -1222,7 +1223,7 @@ void UpdateRayquazaMinionsAndEffects(void)
         }
     }
 
-    if (gCurrentPinballGame->bossRenderOffsetY > 0)
+    if (gCurrentPinballGame->ballWhirlwindLiftY > 0)
         gCurrentPinballGame->ball->oamPriority = 1;
     else
         gCurrentPinballGame->ball->oamPriority = 2;
@@ -1232,12 +1233,12 @@ void UpdateRayquazaMinionsAndEffects(void)
         group = &gMain.spriteGroups[15 + i];
         switch (gCurrentPinballGame->vortexEntityState[i])
         {
-        case 0:
+        case RAYQUAZA_WHIRLWIND_STATE_INIT:
             sp0 = 0;
             gCurrentPinballGame->vortexScreenPosition[i].x = 0;
             gCurrentPinballGame->vortexScreenPosition[i].y = 0;
             break;
-        case 1:
+        case RAYQUAZA_WHIRLWIND_STATE_SPAWN:
             sp0 = gCurrentPinballGame->vortexAnimTimer[i] / 5 + 1;
             if (gCurrentPinballGame->vortexAnimTimer[i] < 14)
             {
@@ -1246,10 +1247,10 @@ void UpdateRayquazaMinionsAndEffects(void)
             else
             {
                 gCurrentPinballGame->vortexAnimTimer[i] = 0;
-                gCurrentPinballGame->vortexEntityState[i] = 2;
+                gCurrentPinballGame->vortexEntityState[i] = RAYQUAZA_WHIRLWIND_STATE_FULL;
             }
             break;
-        case 2:
+        case RAYQUAZA_WHIRLWIND_STATE_FULL:
             sp0 = gCurrentPinballGame->vortexAnimTimer[i] % 16;
             if (sp0 < 4)
                 sp0 = 4;
@@ -1258,7 +1259,7 @@ void UpdateRayquazaMinionsAndEffects(void)
             else
                 sp0 = 6;
 
-            if (gCurrentPinballGame->vortexEntityState[i] < 3)
+            if (gCurrentPinballGame->vortexEntityState[i] < RAYQUAZA_WHIRLWIND_STATE_FULL_CAUGHT_BALL)
             {
 
                 s16 angle = (((gMain.systemFrameCount + 120 * i) % 240) << 0x10) / 240;
@@ -1277,7 +1278,7 @@ void UpdateRayquazaMinionsAndEffects(void)
                     gCurrentPinballGame->ballGrabTimer = 6;
                     gCurrentPinballGame->ballFrozenState = 1;
                     gCurrentPinballGame->vortexAnimTimer[i] = 0;
-                    gCurrentPinballGame->vortexEntityState[i] = 3;
+                    gCurrentPinballGame->vortexEntityState[i] = RAYQUAZA_WHIRLWIND_STATE_FULL_CAUGHT_BALL;
                     gCurrentPinballGame->boardEntityActive = 1;
 
                     tempVector2.x = gCurrentPinballGame->vortexScreenPosition[i].x / 10 + 16;
@@ -1288,9 +1289,9 @@ void UpdateRayquazaMinionsAndEffects(void)
                     gCurrentPinballGame->trapSpinRadius = Sqrt(gCurrentPinballGame->trapSpinRadius * 4) / 2;
                     gCurrentPinballGame->trapAngleQ16 = ArcTan2(-tempVector.x, tempVector.y);
 
-                    gCurrentPinballGame->orbHitIndex = i + 1;
-                    gCurrentPinballGame->orbHitPosition.x = gCurrentPinballGame->vortexScreenPosition[i].x;
-                    gCurrentPinballGame->orbHitPosition.y = gCurrentPinballGame->vortexScreenPosition[i].y;
+                    gCurrentPinballGame->whirlwindHitIndex = i + 1;
+                    gCurrentPinballGame->whirlwindHitPosition.x = gCurrentPinballGame->vortexScreenPosition[i].x;
+                    gCurrentPinballGame->whirlwindHitPosition.y = gCurrentPinballGame->vortexScreenPosition[i].y;
                     m4aSongNumStart(SE_UNKNOWN_0x12B);
                     PlayRumble(13);
                 }
@@ -1303,10 +1304,10 @@ void UpdateRayquazaMinionsAndEffects(void)
             else
             {
                 gCurrentPinballGame->vortexAnimTimer[i] = 0;
-                gCurrentPinballGame->vortexEntityState[i] = 5;
+                gCurrentPinballGame->vortexEntityState[i] = RAYQUAZA_WHIRLWIND_STATE_SHRUNK;
             }
             break;
-        case 3: {
+        case RAYQUAZA_WHIRLWIND_STATE_FULL_CAUGHT_BALL: {
             s16 var4;
             int var5;
 
@@ -1332,10 +1333,10 @@ void UpdateRayquazaMinionsAndEffects(void)
             gCurrentPinballGame->ball->velocity.x = (gCurrentPinballGame->ball->velocity.x * 4) / 5;
             gCurrentPinballGame->ball->velocity.y = (gCurrentPinballGame->ball->velocity.y * 4) / 5;
 
-            if (gCurrentPinballGame->bossRenderOffsetY < 1800)
+            if (gCurrentPinballGame->ballWhirlwindLiftY < 1800)
             {
-                gCurrentPinballGame->rayquazaOrbAngle = 0;
-                gCurrentPinballGame->bossRenderOffsetY += 32;
+                gCurrentPinballGame->ballWhirlwindFallAcceleration = 0;
+                gCurrentPinballGame->ballWhirlwindLiftY += 32;
             }
 
             if (gCurrentPinballGame->vortexAnimTimer[i] < 180)
@@ -1345,28 +1346,28 @@ void UpdateRayquazaMinionsAndEffects(void)
             else
             {
                 gCurrentPinballGame->vortexAnimTimer[i] = 0;
-                gCurrentPinballGame->vortexEntityState[i] = 4;
+                gCurrentPinballGame->vortexEntityState[i] = RAYQUAZA_WHIRLWIND_STATE_SHRINKING_CAUGHT_BALL;
                 gCurrentPinballGame->trapSpinRadius /= 2;
                 gCurrentPinballGame->ball->positionQ8.y = 0xA500;
             }
             break;
         }
-        case 4:
+        case RAYQUAZA_WHIRLWIND_STATE_SHRINKING_CAUGHT_BALL:
             if (gCurrentPinballGame->vortexAnimTimer[i] < 130)
             {
                 if (gCurrentPinballGame->vortexAnimTimer[i] == 10)
                     m4aSongNumStart(SE_UNKNOWN_0x12C);
 
-                gCurrentPinballGame->rayquazaOrbAngle--;
-                gCurrentPinballGame->bossRenderOffsetY += gCurrentPinballGame->rayquazaOrbAngle;
-                if (gCurrentPinballGame->bossRenderOffsetY <= 0)
+                gCurrentPinballGame->ballWhirlwindFallAcceleration--;
+                gCurrentPinballGame->ballWhirlwindLiftY += gCurrentPinballGame->ballWhirlwindFallAcceleration;
+                if (gCurrentPinballGame->ballWhirlwindLiftY <= 0)
                 {
-                    gCurrentPinballGame->bossRenderOffsetY = 0;
-                    gCurrentPinballGame->ball->velocity.y = -((gCurrentPinballGame->rayquazaOrbAngle * 0x80) / 10) / 2;
+                    gCurrentPinballGame->ballWhirlwindLiftY = 0;
+                    gCurrentPinballGame->ball->velocity.y = -((gCurrentPinballGame->ballWhirlwindFallAcceleration * 0x80) / 10) / 2;
                     gCurrentPinballGame->ballFrozenState = 0;
                     gCurrentPinballGame->vortexAnimTimer[i] = 0;
                     gCurrentPinballGame->ball->velocity.x = 0;
-                    gCurrentPinballGame->vortexEntityState[i] = 0;
+                    gCurrentPinballGame->vortexEntityState[i] = RAYQUAZA_WHIRLWIND_STATE_INIT;
                     gCurrentPinballGame->boardEntityActive = 0;
                     PlayRumble(8);
                 }
@@ -1374,7 +1375,7 @@ void UpdateRayquazaMinionsAndEffects(void)
                 gCurrentPinballGame->vortexAnimTimer[i]++;
             }
             break;
-        case 5:
+        case RAYQUAZA_WHIRLWIND_STATE_SHRUNK:
             sp0 = gCurrentPinballGame->vortexAnimTimer[i] / 6 + 7;
             if (gCurrentPinballGame->vortexAnimTimer[i] < 11)
             {
@@ -1383,7 +1384,7 @@ void UpdateRayquazaMinionsAndEffects(void)
             else
             {
                 gCurrentPinballGame->vortexAnimTimer[i] = 0;
-                gCurrentPinballGame->vortexEntityState[i] = 0;
+                gCurrentPinballGame->vortexEntityState[i] = RAYQUAZA_WHIRLWIND_STATE_INIT;
             }
             break;
         }
@@ -1400,10 +1401,10 @@ void UpdateRayquazaMinionsAndEffects(void)
                 gOamBuffer[oamSimple->oamId].y = oamSimple->yOffset + group->baseY;
             }
 
-            if (gCurrentPinballGame->vortexEntityState[i] == 0)
+            if (gCurrentPinballGame->vortexEntityState[i] == RAYQUAZA_WHIRLWIND_STATE_INIT)
                 group->active = FALSE;
 
-            if (gCurrentPinballGame->orbHitIndex && i == (gCurrentPinballGame->orbHitIndex - 1))
+            if (gCurrentPinballGame->whirlwindHitIndex && i == (gCurrentPinballGame->whirlwindHitIndex - 1))
                 group->active = FALSE;
         }
     }
@@ -1413,8 +1414,8 @@ void UpdateRayquazaMinionsAndEffects(void)
     if (group->active)
     {
         s16 a;
-        group->baseX = gCurrentPinballGame->orbHitPosition.x / 10 - gCurrentPinballGame->cameraXOffset;
-        group->baseY = gCurrentPinballGame->orbHitPosition.y / 10 - gCurrentPinballGame->cameraYOffset;
+        group->baseX = gCurrentPinballGame->whirlwindHitPosition.x / 10 - gCurrentPinballGame->cameraXOffset;
+        group->baseY = gCurrentPinballGame->whirlwindHitPosition.y / 10 - gCurrentPinballGame->cameraYOffset;
         a = gCurrentPinballGame->hitBurstAnimFrame / 5;
         for (j = 0; j < 5; j++)
         {
@@ -1437,15 +1438,15 @@ void UpdateRayquazaMinionsAndEffects(void)
         }
     }
 
-    if (gCurrentPinballGame->orbHitIndex)
+    if (gCurrentPinballGame->whirlwindHitIndex)
     {
-        gCurrentPinballGame->orbHitIndex = 0;
+        gCurrentPinballGame->whirlwindHitIndex = 0;
         gCurrentPinballGame->hitBurstAnimFrame = 0;
         group->active = TRUE;
     }
 }
 
-void UpdateWhirlwindGrabEntity(void)
+void UpdateLightningGrabEntity(void)
 {
     s16 i;
     struct SpriteGroup *group;
@@ -1461,7 +1462,7 @@ void UpdateWhirlwindGrabEntity(void)
     gCurrentPinballGame->ballGrabTimer--;
     if (gCurrentPinballGame->ballGrabTimer > 5)
     {
-        var0 = gWhirlwindGrabAnimFrameIndices[(gCurrentPinballGame->ballGrabTimer % 33) / 3];
+        var0 = gLightningGrabAnimFrameIndices[(gCurrentPinballGame->ballGrabTimer % 33) / 3];
         if (gCurrentPinballGame->ballGrabShakeTimer > 0)
         {
             if (gCurrentPinballGame->ballGrabShakeTimer == 7)
@@ -1690,7 +1691,9 @@ void RenderWindCloudSprites(void)
             gMain.spriteGroups[25].active = FALSE;
             gMain.spriteGroups[26].active = TRUE;
             gMain.spriteGroups[27].active = TRUE;
-            if (gCurrentPinballGame->vortexEntityState[0] < 3 && gCurrentPinballGame->vortexEntityState[1] < 3 && gCurrentPinballGame->ballRespawnState == 0)
+            if (gCurrentPinballGame->vortexEntityState[0] < RAYQUAZA_WHIRLWIND_STATE_FULL_CAUGHT_BALL
+                && gCurrentPinballGame->vortexEntityState[1] < RAYQUAZA_WHIRLWIND_STATE_FULL_CAUGHT_BALL
+                && gCurrentPinballGame->ballRespawnState == 0)
             {
                 gCurrentPinballGame->ball->velocity.x += 500;
                 PlayRumble(13);
@@ -1719,7 +1722,9 @@ void RenderWindCloudSprites(void)
             gMain.spriteGroups[31].active = FALSE;
             gMain.spriteGroups[32].active = TRUE;
             gMain.spriteGroups[33].active = TRUE;
-            if (gCurrentPinballGame->vortexEntityState[0] < 3 && gCurrentPinballGame->vortexEntityState[1] < 3 && gCurrentPinballGame->ballRespawnState == 0)
+            if (gCurrentPinballGame->vortexEntityState[0] < RAYQUAZA_WHIRLWIND_STATE_FULL_CAUGHT_BALL
+                && gCurrentPinballGame->vortexEntityState[1] < RAYQUAZA_WHIRLWIND_STATE_FULL_CAUGHT_BALL
+                && gCurrentPinballGame->ballRespawnState == 0)
             {
                 gCurrentPinballGame->ball->velocity.x -= 500;
                 PlayRumble(13);
@@ -1743,10 +1748,10 @@ void RenderWindCloudSprites(void)
 
     if (gCurrentPinballGame->windCloudSpawnTimer == 10)
     {
-        if (gCurrentPinballGame->vortexEntityState[0] < 3)
+        if (gCurrentPinballGame->vortexEntityState[0] < RAYQUAZA_WHIRLWIND_STATE_FULL_CAUGHT_BALL)
         {
             gCurrentPinballGame->vortexAnimTimer[0] = 0;
-            gCurrentPinballGame->vortexEntityState[0] = 1;
+            gCurrentPinballGame->vortexEntityState[0] = RAYQUAZA_WHIRLWIND_STATE_SPAWN;
             gMain.spriteGroups[15].active = TRUE;
             rand = Random() % 8;
             var0 = ((gMain.systemFrameCount % 240) << 0x10) / 240;
@@ -1760,10 +1765,10 @@ void RenderWindCloudSprites(void)
 
     if (gCurrentPinballGame->windCloudSpawnTimer == 16)
     {
-        if (gCurrentPinballGame->vortexEntityState[1] < 3)
+        if (gCurrentPinballGame->vortexEntityState[1] < RAYQUAZA_WHIRLWIND_STATE_FULL_CAUGHT_BALL)
         {
             gCurrentPinballGame->vortexAnimTimer[1] = 0;
-            gCurrentPinballGame->vortexEntityState[1] = 1;
+            gCurrentPinballGame->vortexEntityState[1] = RAYQUAZA_WHIRLWIND_STATE_SPAWN;
             gMain.spriteGroups[16].active = TRUE;
             rand = (Random() % 8 + 8) % 32; // Force 8 to be added to r1
             var0 = (((gMain.systemFrameCount + 120) % 240) << 0x10) / 240;

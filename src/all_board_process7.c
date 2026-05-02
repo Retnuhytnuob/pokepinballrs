@@ -282,7 +282,7 @@ void BonusBoardProcess_7B_12BF8()
         - gCurrentPinballGame->cameraScrollOffset
         - gCurrentPinballGame->cameraYAdjust
         - gCurrentPinballGame->screenShakeY
-        - (gCurrentPinballGame->bossRenderOffsetY / 10);
+        - (gCurrentPinballGame->ballWhirlwindLiftY / 10);
 
     if (spriteGroup->baseY < -60)
         spriteGroup->baseY = -60;

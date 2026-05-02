@@ -194,7 +194,7 @@ void BonusBoardProcess_5B_11F88(void)
             yy = currentBall->velocity.y * currentBall->velocity.y;
             squaredMagnitude = xx + yy;
 
-            if (gMain.selectedField <= FIELD_KECLEON)
+            if (gMain.selectedField < FIELD_BOSS_START)
             {
                 if (currentBall->positionQ0.y < 150)
                 {
@@ -236,7 +236,7 @@ void BonusBoardProcess_5B_11F88(void)
             yy = currentBall->velocity.y * currentBall->velocity.y;
             squaredMagnitude = xx + yy;
 
-            if (gMain.selectedField <= FIELD_KECLEON)
+            if (gMain.selectedField < FIELD_BOSS_START)
             {
                 if (currentBall->positionQ0.y < 150)
                 {

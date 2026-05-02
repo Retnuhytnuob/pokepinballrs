@@ -115,9 +115,9 @@ void InitRouletteWheel(void)
     if (gCurrentPinballGame->rouletteLevel < 25)
         gCurrentPinballGame->rouletteLevel++;
 
-    gCurrentPinballGame->rouletteSlotCount = 5;
+    gCurrentPinballGame->rouletteSlotMaxIndex = 5;
     if ((gCurrentPinballGame->jirachiActivationFlags & 0xF0) == 0 && gCurrentPinballGame->area > AREA_WILDERNESS)
-        gCurrentPinballGame->rouletteSlotCount++;
+        gCurrentPinballGame->rouletteSlotMaxIndex++;
 
     gCurrentPinballGame->rouletteSlotCursor = 1;
     gCurrentPinballGame->modeOutcomeValues[0] = gCurrentPinballGame->rouletteSlotValues[0];
@@ -211,7 +211,7 @@ void RunRouletteWheel(void)
 
     if (gCurrentPinballGame->rouletteFrameIndex == 1)
     {
-        if (gCurrentPinballGame->rouletteSlotCursor < gCurrentPinballGame->rouletteSlotCount)
+        if (gCurrentPinballGame->rouletteSlotCursor < gCurrentPinballGame->rouletteSlotMaxIndex)
             gCurrentPinballGame->rouletteSlotCursor++;
         else
             gCurrentPinballGame->rouletteSlotCursor = 0;
@@ -327,7 +327,7 @@ void GivePrize(void)
             gCurrentPinballGame->outcomeFrameCounter = 12;
             if (gCurrentPinballGame->rouletteLevel < 6)
                 gCurrentPinballGame->prizeId = (gMain.systemFrameCount % 3) + PRIZE_1M_POINTS;
-            else if ((s32) gCurrentPinballGame->rouletteLevel <= 0xA)
+            else if ((s32) gCurrentPinballGame->rouletteLevel <= 10)
                 gCurrentPinballGame->prizeId = (gMain.systemFrameCount % 5) + PRIZE_1M_POINTS;
             else if (gCurrentPinballGame->rouletteLevel % 5 == 0)
                 gCurrentPinballGame->prizeId = (gMain.systemFrameCount % 5) + PRIZE_5M_POINTS;
@@ -718,7 +718,7 @@ void RunMonCaptureSequence(void)
         gCurrentPinballGame->trapSpinRadius = Sqrt(gCurrentPinballGame->trapSpinRadius * 4) / 2;
         gCurrentPinballGame->trapAngleQ16 = ArcTan2(-tempVector.x, tempVector.y);
 
-        if (gMain.selectedField > 3)
+        if (gMain.selectedField >= FIELD_BOSS_START)
         {
             gCurrentPinballGame->legendaryFlashState = 0;
         }
@@ -841,7 +841,7 @@ void RunMonCaptureSequence(void)
         {
             gCurrentPinballGame->captureFlashTimer = 200;
 
-            if (gMain.selectedField > 3)
+            if (gMain.selectedField >= FIELD_BOSS_START)
                 gCurrentPinballGame->legendaryFlashState = 1;
             else if (
                 (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_CATCH_EM_MODE
@@ -852,7 +852,7 @@ void RunMonCaptureSequence(void)
         }
         else if (gCurrentPinballGame->captureSequenceTimer == 19 || gCurrentPinballGame->captureSequenceTimer == 22)
         {
-            if (gMain.selectedField > 3)
+            if (gMain.selectedField >= FIELD_BOSS_START)
                 gCurrentPinballGame->legendaryFlashState = 3;
             else if (
                 (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_CATCH_EM_MODE
@@ -864,7 +864,7 @@ void RunMonCaptureSequence(void)
 
         if (gCurrentPinballGame->captureSequenceTimer == 23)
         {
-            if (gMain.selectedField >= FIELD_KYOGRE)
+            if (gMain.selectedField >= FIELD_BOSS_START)
                 gCurrentPinballGame->legendaryFlashState = 10;
             else
             {

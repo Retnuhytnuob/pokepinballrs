@@ -694,7 +694,7 @@ gShopSignTransitionFrames:: @ 0x08137D06
 gDusclopsBossGuardReadyTileOffsets:: @ 0x08137D40
 	.2byte 12,13,12,14
 
-gWhirlwindGrabAnimFrameIndices:: @ 0x08137D48
+gLightningGrabAnimFrameIndices:: @ 0x08137D48
 	.2byte 0,1,2,3,4,7,2,1,7,5,6,0
 
 gSphealScoreDigitSpriteIndices:: @ 0x08137D60

@@ -507,8 +507,8 @@ struct PinballGame
     /*0x387*/ s8 boardEntityCollisionMode;
     /*0x388*/ s8 ballRespawnState;
     /*0x389*/ s8 legendaryFlashState;
-    /*0x38A*/ s16 rayquazaOrbAngle;
-    /*0x38C*/ s16 bossRenderOffsetY;
+    /*0x38A*/ s16 ballWhirlwindFallAcceleration;
+    /*0x38C*/ s16 ballWhirlwindLiftY;
     /*0x38E*/ s16 bossAttackTimer;
     /*0x390*/ u16 bossRoarTimer;
     /*0x392*/ u16 ballRespawnTimer;
@@ -563,8 +563,8 @@ struct PinballGame
     /*0x40E*/ u16 kecleonFrameTimer;
     /*0x410*/ s16 kecleonWaterBallCollisionTimer; // controlls timer for when the Ball will leave splashes
     /*0x412*/ s16 kecleonWaterCollisionTimer; // controls timer for when Kecleon will leave splashes
-    /*0x414*/ struct Vector16 orbLogicPosition;
-    /*0x418*/ struct Vector16 orbCollisionPosition;
+    /*0x414*/ struct Vector16 orbLogicPosition; // Scope item in Kecleon board / Rayquaza Intro Spark
+    /*0x418*/ struct Vector16 orbCollisionPosition; // Scope item in Kecleon board / Rayquaza Intro Spark
     /*0x41C*/ s8 kecleonFlowerMotionTimer[4];
     /*0x420*/ s8 kecleonBushMotionTimer[10];
     /*0x42A*/ s8 kecleonWaterMotionTimer[7];
@@ -625,21 +625,21 @@ struct PinballGame
     /*0x4EC*/ struct Vector16 boulderGroundPosition[3];
     /*0x4F8*/ struct Vector16 boulderCollisionPos[3];
     /*0x504*/ u8 windAttackCount;
-    /*0x505*/ s8 orbHitIndex;
+    /*0x505*/ s8 whirlwindHitIndex;
     /*0x506*/ s8 introSequencePhase;
-    /*0x507*/ s8 swoopAttackState;
+    /*0x507*/ s8 lightningAttackState;
     /*0x508*/ s16 horizontalShakeTimer;
     /*0x50A*/ s16 roarBrightnessFlashTimer;
     /*0x50C*/ u16 bossInvulnTimer;
     /*0x50E*/ u16 hitBurstAnimFrame;
-    /*0x510*/ u16 swoopAttackAnimFrame;
+    /*0x510*/ u16 lightningAttackAnimFrame;
     /*0x512*/ u16 bossSineAngle;
     /*0x514*/ u16 windCloudSpawnTimer;
     /*0x516*/ u16 introFrameCounter;
     /*0x518*/ s16 bgScrollSpeed;
     /*0x51A*/ s16 bossHeadScreenY;
-    /*0x51C*/ struct Vector16 swoopTargetPosition;
-    /*0x520*/ struct Vector16 orbHitPosition;
+    /*0x51C*/ struct Vector16 lightningTargetPosition;
+    /*0x520*/ struct Vector16 whirlwindHitPosition;
     /*0x524*/ struct Vector16 windEntityPosition;
     /*0x528*/ struct Vector16 windCloudPosition;
     /*0x52C*/ s8 sphealKnockdownCount[2]; // ix: 0=spheal, 1 = ball
@@ -776,7 +776,7 @@ struct PinballGame
     /*0x6E4*/ struct Vector16 rouletteBasePos;
     /*0x6E8*/ s8 rouletteStopRequested;
     /*0x6E9*/ s8 rouletteLevel;
-    /*0x6EA*/ s8 rouletteSlotCount;
+    /*0x6EA*/ s8 rouletteSlotMaxIndex;
     /*0x6EB*/ s8 rouletteSlotCursor;
     /*0x6EC*/ s8 modeOutcomeValues[2];
     /*0x6EE*/ u16 allHolesLitDelayTimer;

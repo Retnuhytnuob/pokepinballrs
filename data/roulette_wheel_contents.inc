@@ -92,7 +92,7 @@ gRouletteWheelContents:: @ 0x086AD180
     .2byte PRIZE_START_BONUS_MODE_ANY
     .2byte PRIZE_JIRACHI_CATCH_MODE
 
-@group 10
+@group 10 - Note: Sequence loops back to here.
     .2byte PRIZE_SMALL_POINT_BONUS
     .2byte PRIZE_30_SEC_BALL_SAVER
     .2byte PRIZE_BIG_POINT_BONUS
