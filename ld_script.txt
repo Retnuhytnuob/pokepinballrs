@@ -37,6 +37,7 @@ SECTIONS
         src/ereader.o(.text);
         src/pokedex.o(.text);
         src/field_select.o(.text);
+        src/generation_select.o(.text);
         src/intro.o(.text);
         src/high_scores.o(.text);
         src/display.o(.text);
