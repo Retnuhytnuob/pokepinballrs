@@ -51,11 +51,11 @@ static void LoadGenerationSelectGraphics(void)
     REG_DISPCNT |= DISPCNT_BG0_ON;
     gMain.dispcntBackup = REG_DISPCNT;
 
-    DmaFill16(3, RGB5(31, 18, 0), (void *)PLTT, 0x20);
-    ((u16 *)PLTT)[0] = RGB5(31, 18, 0);
-    ((u16 *)PLTT)[1] = RGB5(31, 31, 31);
-    ((u16 *)PLTT)[2] = RGB5(0, 0, 0);
-    ((u16 *)PLTT)[3] = RGB5(31, 31, 0);
+    DmaFill16(3, 0x025F, (void *)PLTT, 0x20);
+    ((u16 *)PLTT)[0] = 0x025F;
+    ((u16 *)PLTT)[1] = 0x7FFF;
+    ((u16 *)PLTT)[2] = 0x0000;
+    ((u16 *)PLTT)[3] = 0x03FF;
     LoadGenerationSelectFont();
 
     sGenerationCursor = gSelectedGeneration;
