@@ -623,6 +623,24 @@ gDexAnimationIx:: @ 0x086A61BC
 
     .2byte  79,  80,  81,  82,  83
     .2byte  84,  -1
+    .2byte  84,  84,  84,  84,  84,  84,  84,  84,  84,  84
+    .2byte  84,  84,  84,  84,  84,  84,  84,  84,  84,  84
+    .2byte  84,  84,  84,  84,  84,  84,  84,  84,  84,  84
+    .2byte  84,  84,  84,  84,  84,  84,  84,  84,  84,  84
+    .2byte  84,  84,  84,  84,  84,  84,  84,  84,  84,  84
+    .2byte  84,  84,  84,  84,  84,  84,  84,  84,  84,  84
+    .2byte  84,  84,  84,  84,  84,  84,  84,  84,  84,  84
+    .2byte  84,  84,  84,  84,  84,  84,  84,  84,  84,  84
+    .2byte  84,  84,  84,  84,  84,  84,  84,  84,  84,  84
+    .2byte  84,  84,  84,  84,  84,  84,  84,  84,  84,  84
+    .2byte  84,  84,  84,  84,  84,  84,  84,  84,  84,  84
+    .2byte  84,  84,  84,  84,  84,  84,  84,  84,  84,  84
+    .2byte  84,  84,  84,  84,  84,  84,  84,  84,  84,  84
+    .2byte  84,  84,  84,  84,  84,  84,  84,  84,  84,  84
+    .2byte  84,  84,  84,  84,  84,  84,  84,  84,  84,  84
+    .2byte  84,  84,  84,  84,  84,  84,  84,  84,  84,  84
+    .2byte  84,  84,  84,  84,  84,  84,  84,  84,  84,  84
+    .2byte  84,  84,  84,  84,  84,  84,  84,  84,  84,  84
 
 gPokedexCatchAnimIndices:: @ 0x086A6356
     .2byte 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
@@ -651,6 +669,24 @@ gPokedexCatchAnimIndices:: @ 0x086A6356
 
     .2byte 0, 0, 0, 0, 0
     .2byte 0, -1
+    .2byte   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
+    .2byte   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
+    .2byte   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
+    .2byte   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
+    .2byte   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
+    .2byte   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
+    .2byte   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
+    .2byte   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
+    .2byte   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
+    .2byte   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
+    .2byte   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
+    .2byte   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
+    .2byte   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
+    .2byte   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
+    .2byte   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
+    .2byte   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
+    .2byte   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
+    .2byte   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
 
 gPokedexListNameVramOffsets:: @ 0x086A64F0
     .2byte 0x4E20, 0x5400, 0x5500, 0x5600, 0x5700
@@ -13706,6 +13742,18 @@ gMonPortraitGroupPals:: @ 0x086BB6A4
 	.4byte gMonPortraitsGroup11_Pals
 	.4byte gMonPortraitsGroup12_Pals
 	.4byte gMonPortraitsGroup13_Pals
+	.4byte gMonPortraitsGroup14_Pals
+	.4byte gMonPortraitsGroup15_Pals
+	.4byte gMonPortraitsGroup16_Pals
+	.4byte gMonPortraitsGroup17_Pals
+	.4byte gMonPortraitsGroup18_Pals
+	.4byte gMonPortraitsGroup19_Pals
+	.4byte gMonPortraitsGroup20_Pals
+	.4byte gMonPortraitsGroup21_Pals
+	.4byte gMonPortraitsGroup22_Pals
+	.4byte gMonPortraitsGroup23_Pals
+	.4byte gMonPortraitsGroup24_Pals
+	.4byte gMonPortraitsGroup25_Pals
 
 gMonHatchSpriteGroupGfx:: @ 0x086BB6DC
 	.4byte gMonHatchSpriteGroup0_Gfx
@@ -13749,6 +13797,18 @@ gMonPortraitGroupGfx:: @ 0x086BB738
 	.4byte gMonPortraitsGroup11_Gfx
 	.4byte gMonPortraitsGroup12_Gfx
 	.4byte gMonPortraitsGroup13_Gfx
+	.4byte gMonPortraitsGroup14_Gfx
+	.4byte gMonPortraitsGroup15_Gfx
+	.4byte gMonPortraitsGroup16_Gfx
+	.4byte gMonPortraitsGroup17_Gfx
+	.4byte gMonPortraitsGroup18_Gfx
+	.4byte gMonPortraitsGroup19_Gfx
+	.4byte gMonPortraitsGroup20_Gfx
+	.4byte gMonPortraitsGroup21_Gfx
+	.4byte gMonPortraitsGroup22_Gfx
+	.4byte gMonPortraitsGroup23_Gfx
+	.4byte gMonPortraitsGroup24_Gfx
+	.4byte gMonPortraitsGroup25_Gfx
 
 gUnknown_086BB770:: @ 0x086BB770
     .incbin "baserom.gba", 0x6BB770, 0x64

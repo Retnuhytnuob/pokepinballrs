@@ -1,7 +1,7 @@
 
     .align 2, 0
 dexEntry1::
-    .2byte 0, 0, 1, 0xA, 1, 0, 8, 0xA, 0xA, 1, 1, 0
+    .2byte 2, 5, 2, 0xA, 1, 0, 8, 0xA, 0xA, 1, 1, 0
     .dexName "TREECKO"
     .dexCategory "WOOD GECKO"
     .dexText "TREECKO has small hooks on the bottom"
@@ -13,7 +13,7 @@ dexEntry1::
 
     .align 2, 0
 dexEntry2::
-    .2byte 0, 0, 2, 0xA, 2, 1, 1, 0xA, 0xA, 4, 7, 6
+    .2byte 2, 5, 3, 0xA, 2, 1, 1, 0xA, 0xA, 4, 7, 6
     .dexName "GROVYLE"
     .dexCategory "WOOD GECKO"
     .dexText "The leaves growing out of GROVYLE`s"
@@ -25,7 +25,7 @@ dexEntry2::
 
     .align 2, 0
 dexEntry3::
-    .2byte 0, 0, 3, 0xA, 5, 0, 7, 0xA, 1, 1, 5, 1
+    .2byte 2, 5, 4, 0xA, 5, 0, 7, 0xA, 1, 1, 5, 1
     .dexName "SCEPTILE"
     .dexCategory "FOREST"
     .dexText "The leaves growing on SCEPTILE`s body"
@@ -37,7 +37,7 @@ dexEntry3::
 
     .align 2, 0
 dexEntry4::
-    .2byte 0, 0, 4, 0xA, 1, 0, 4, 0xA, 0xA, 0xA, 5, 5
+    .2byte 2, 5, 5, 0xA, 1, 0, 4, 0xA, 0xA, 0xA, 5, 5
     .dexName "TORCHIC"
     .dexCategory "CHICK"
     .dexText "TORCHIC sticks with its TRAINER,"
@@ -49,7 +49,7 @@ dexEntry4::
 
     .align 2, 0
 dexEntry5::
-    .2byte 0, 0, 5, 0xA, 2, 1, 1, 0xA, 0xA, 4, 3, 0
+    .2byte 2, 5, 6, 0xA, 2, 1, 1, 0xA, 0xA, 4, 3, 0
     .dexName "COMBUSKEN"
     .dexCategory "YOUNG FOWL"
     .dexText "COMBUSKEN toughens up its legs and"
@@ -61,7 +61,7 @@ dexEntry5::
 
     .align 2, 0
 dexEntry6::
-    .2byte 0, 0, 6, 0xA, 6, 0, 3, 0xA, 1, 1, 4, 6
+    .2byte 2, 5, 7, 0xA, 6, 0, 3, 0xA, 1, 1, 4, 6
     .dexName "BLAZIKEN"
     .dexCategory "BLAZE"
     .dexText "In battle, BLAZIKEN blows out intense"
@@ -73,7 +73,7 @@ dexEntry6::
 
     .align 2, 0
 dexEntry7::
-    .2byte 0, 0, 7, 0xA, 1, 0, 4, 0xA, 0xA, 1, 6, 8
+    .2byte 2, 5, 8, 0xA, 1, 0, 4, 0xA, 0xA, 1, 6, 8
     .dexName "MUDKIP"
     .dexCategory "MUD FISH"
     .dexText "In water, MUDKIP breathes using the"
@@ -85,7 +85,7 @@ dexEntry7::
 
     .align 2, 0
 dexEntry8::
-    .2byte 0, 0, 8, 0xA, 2, 0, 4, 0xA, 0xA, 6, 1, 7
+    .2byte 2, 5, 9, 0xA, 2, 0, 4, 0xA, 0xA, 6, 1, 7
     .dexName "MARSHTOMP"
     .dexCategory "MUD FISH"
     .dexText "MARSHTOMP is much faster at traveling"
@@ -97,7 +97,7 @@ dexEntry8::
 
     .align 2, 0
 dexEntry9::
-    .2byte 0, 0, 9, 0xA, 4, 1, 1, 0xA, 1, 8, 0, 6
+    .2byte 2, 6, 0, 0xA, 4, 1, 1, 0xA, 1, 8, 0, 6
     .dexName "SWAMPERT"
     .dexCategory "MUD FISH"
     .dexText "SWAMPERT predicts storms by sensing"
@@ -109,7 +109,7 @@ dexEntry9::
 
     .align 2, 0
 dexEntry10::
-    .2byte 0, 1, 0, 0xA, 1, 0, 8, 0xA, 0xA, 3, 0, 0
+    .2byte 2, 6, 1, 0xA, 1, 0, 8, 0xA, 0xA, 3, 0, 0
     .dexName "POOCHYENA"
     .dexCategory "BITE"
     .dexText "At first sight, POOCHYENA takes a bite"
@@ -121,7 +121,7 @@ dexEntry10::
 
     .align 2, 0
 dexEntry11::
-    .2byte 0, 1, 1, 0xA, 3, 0, 3, 0xA, 0xA, 8, 1, 6
+    .2byte 2, 6, 2, 0xA, 3, 0, 3, 0xA, 0xA, 8, 1, 6
     .dexName "MIGHTYENA"
     .dexCategory "BITE"
     .dexText "MIGHTYENA gives obvious signals when"
@@ -133,7 +133,7 @@ dexEntry11::
 
     .align 2, 0
 dexEntry12::
-    .2byte 0, 1, 2, 0xA, 1, 0, 4, 0xA, 0xA, 3, 8, 6
+    .2byte 2, 6, 3, 0xA, 1, 0, 4, 0xA, 0xA, 3, 8, 6
     .dexName "ZIGZAGOON"
     .dexCategory "TINYRACCOON"
     .dexText "ZIGZAGOON restlessly wanders"
@@ -145,7 +145,7 @@ dexEntry12::
 
     .align 2, 0
 dexEntry13::
-    .2byte 0, 1, 3, 0xA, 1, 0, 8, 0xA, 0xA, 7, 1, 6
+    .2byte 2, 6, 4, 0xA, 1, 0, 8, 0xA, 0xA, 7, 1, 6
     .dexName "LINOONE"
     .dexCategory "RUSHING"
     .dexText "LINOONE always runs full speed and only"
@@ -157,7 +157,7 @@ dexEntry13::
 
     .align 2, 0
 dexEntry14::
-    .2byte 0, 1, 4, 0xA, 1, 0, 0, 0xA, 0xA, 0xA, 7, 9
+    .2byte 2, 6, 5, 0xA, 1, 0, 0, 0xA, 0xA, 0xA, 7, 9
     .dexName "WURMPLE"
     .dexCategory "WORM"
     .dexText "WURMPLE is targeted by SWELLOW as"
@@ -169,7 +169,7 @@ dexEntry14::
 
     .align 2, 0
 dexEntry15::
-    .2byte 0, 1, 5, 0xA, 2, 0, 0, 0xA, 0xA, 2, 2, 0
+    .2byte 2, 6, 6, 0xA, 2, 0, 0, 0xA, 0xA, 2, 2, 0
     .dexName "SILCOON"
     .dexCategory "COCOON"
     .dexText "SILCOON was thought to endure hunger"
@@ -181,7 +181,7 @@ dexEntry15::
 
     .align 2, 0
 dexEntry16::
-    .2byte 0, 1, 6, 0xA, 3, 0, 3, 0xA, 0xA, 6, 2, 6
+    .2byte 2, 6, 7, 0xA, 3, 0, 3, 0xA, 0xA, 6, 2, 6
     .dexName "BEAUTIFLY"
     .dexCategory "BUTTERFLY"
     .dexText "BEAUTIFLY has a long mouth like a coiled"
@@ -193,7 +193,7 @@ dexEntry16::
 
     .align 2, 0
 dexEntry17::
-    .2byte 0, 1, 7, 0xA, 2, 0, 4, 0xA, 0xA, 2, 5, 4
+    .2byte 2, 6, 8, 0xA, 2, 0, 4, 0xA, 0xA, 2, 5, 4
     .dexName "CASCOON"
     .dexCategory "COCOON"
     .dexText "If it is attacked, CASCOON remains"
@@ -205,7 +205,7 @@ dexEntry17::
 
     .align 2, 0
 dexEntry18::
-    .2byte 0, 1, 8, 0xA, 3, 1, 1, 0xA, 0xA, 6, 9, 7
+    .2byte 2, 6, 9, 0xA, 3, 1, 1, 0xA, 0xA, 6, 9, 7
     .dexName "DUSTOX"
     .dexCategory "POISON MOTH"
     .dexText "When DUSTOX flaps its wings, a fine"
@@ -217,7 +217,7 @@ dexEntry18::
 
     .align 2, 0
 dexEntry19::
-    .2byte 0, 1, 9, 0xA, 1, 0, 8, 0xA, 0xA, 0xA, 5, 7
+    .2byte 2, 7, 0, 0xA, 1, 0, 8, 0xA, 0xA, 0xA, 5, 7
     .dexName "LOTAD"
     .dexCategory "WATER WEED"
     .dexText "LOTAD is said to have dwelled on land"
@@ -229,7 +229,7 @@ dexEntry19::
 
     .align 2, 0
 dexEntry20::
-    .2byte 0, 2, 0, 0xA, 3, 1, 1, 0xA, 0xA, 7, 1, 6
+    .2byte 2, 7, 1, 0xA, 3, 1, 1, 0xA, 0xA, 7, 1, 6
     .dexName "LOMBRE"
     .dexCategory "JOLLY"
     .dexText "LOMBRE`s entire body is covered by a"
@@ -241,7 +241,7 @@ dexEntry20::
 
     .align 2, 0
 dexEntry21::
-    .2byte 0, 2, 1, 0xA, 4, 1, 1, 0xA, 1, 2, 1, 3
+    .2byte 2, 7, 2, 0xA, 4, 1, 1, 0xA, 1, 2, 1, 3
     .dexName "LUDICOLO"
     .dexCategory "CAREFREE"
     .dexText "Upon hearing an upbeat and cheerful"
@@ -253,7 +253,7 @@ dexEntry21::
 
     .align 2, 0
 dexEntry22::
-    .2byte 0, 2, 2, 0xA, 1, 0, 8, 0xA, 0xA, 0xA, 8, 8
+    .2byte 2, 7, 3, 0xA, 1, 0, 8, 0xA, 0xA, 0xA, 8, 8
     .dexName "SEEDOT"
     .dexCategory "ACORN"
     .dexText "SEEDOT attaches itself to a tree"
@@ -265,7 +265,7 @@ dexEntry22::
 
     .align 2, 0
 dexEntry23::
-    .2byte 0, 2, 3, 0xA, 3, 0, 3, 0xA, 0xA, 6, 1, 7
+    .2byte 2, 7, 4, 0xA, 3, 0, 3, 0xA, 0xA, 6, 1, 7
     .dexName "NUZLEAF"
     .dexCategory "WILY"
     .dexText "NUZLEAF live in densely overgrown"
@@ -277,7 +277,7 @@ dexEntry23::
 
     .align 2, 0
 dexEntry24::
-    .2byte 0, 2, 4, 0xA, 4, 0, 3, 0xA, 1, 3, 1, 4
+    .2byte 2, 7, 5, 0xA, 4, 0, 3, 0xA, 1, 3, 1, 4
     .dexName "SHIFTRY"
     .dexCategory "WICKED"
     .dexText "SHIFTRY is a mysterious POKéMON that"
@@ -289,7 +289,7 @@ dexEntry24::
 
     .align 2, 0
 dexEntry25::
-    .2byte 0, 2, 5, 0xA, 1, 0, 0, 0xA, 0xA, 0xA, 5, 1
+    .2byte 2, 7, 6, 0xA, 1, 0, 0, 0xA, 0xA, 0xA, 5, 1
     .dexName "TAILLOW"
     .dexCategory "TINYSWALLOW"
     .dexText "TAILLOW courageously stands its"
@@ -301,7 +301,7 @@ dexEntry25::
 
     .align 2, 0
 dexEntry26::
-    .2byte 0, 2, 6, 0xA, 2, 0, 4, 0xA, 0xA, 4, 3, 7
+    .2byte 2, 7, 7, 0xA, 2, 0, 4, 0xA, 0xA, 4, 3, 7
     .dexName "SWELLOW"
     .dexCategory "SWALLOW"
     .dexText "SWELLOW flies high above our heads,"
@@ -313,7 +313,7 @@ dexEntry26::
 
     .align 2, 0
 dexEntry27::
-    .2byte 0, 2, 7, 0xA, 2, 0, 0, 0xA, 0xA, 2, 0, 9
+    .2byte 2, 7, 8, 0xA, 2, 0, 0, 0xA, 0xA, 2, 0, 9
     .dexName "WINGULL"
     .dexCategory "SEAGULL"
     .dexText "WINGULL has the habit of carrying prey"
@@ -325,7 +325,7 @@ dexEntry27::
 
     .align 2, 0
 dexEntry28::
-    .2byte 0, 2, 8, 0xA, 3, 1, 1, 0xA, 0xA, 6, 1, 7
+    .2byte 2, 7, 9, 0xA, 3, 1, 1, 0xA, 0xA, 6, 1, 7
     .dexName "PELIPPER"
     .dexCategory "WATER BIRD"
     .dexText "PELIPPER is a flying transporter that"
@@ -337,7 +337,7 @@ dexEntry28::
 
     .align 2, 0
 dexEntry29::
-    .2byte 0, 2, 9, 0xA, 1, 0, 4, 0xA, 0xA, 1, 4, 6
+    .2byte 2, 8, 0, 0xA, 1, 0, 4, 0xA, 0xA, 1, 4, 6
     .dexName "RALTS"
     .dexCategory "FEELING"
     .dexText "RALTS senses the emotions of"
@@ -349,7 +349,7 @@ dexEntry29::
 
     .align 2, 0
 dexEntry30::
-    .2byte 0, 3, 0, 0xA, 2, 0, 7, 0xA, 0xA, 4, 4, 5
+    .2byte 2, 8, 1, 0xA, 2, 0, 7, 0xA, 0xA, 4, 4, 5
     .dexName "KIRLIA"
     .dexCategory "EMOTION"
     .dexText "It is said that a KIRLIA that is"
@@ -361,7 +361,7 @@ dexEntry30::
 
     .align 2, 0
 dexEntry31::
-    .2byte 0, 3, 1, 0xA, 5, 0, 3, 0xA, 1, 0, 6, 7
+    .2byte 2, 8, 2, 0xA, 5, 0, 3, 0xA, 1, 0, 6, 7
     .dexName "GARDEVOIR"
     .dexCategory "EMBRACE"
     .dexText "GARDEVOIR has the ability to read the"
@@ -373,7 +373,7 @@ dexEntry31::
 
     .align 2, 0
 dexEntry32::
-    .2byte 0, 3, 2, 0xA, 1, 0, 8, 0xA, 0xA, 0xA, 3, 7
+    .2byte 2, 8, 3, 0xA, 1, 0, 8, 0xA, 0xA, 0xA, 3, 7
     .dexName "SURSKIT"
     .dexCategory "POND SKATER"
     .dexText "If SURSKIT senses danger, it secretes"
@@ -385,7 +385,7 @@ dexEntry32::
 
     .align 2, 0
 dexEntry33::
-    .2byte 0, 3, 3, 0xA, 2, 0, 7, 0xA, 0xA, 0xA, 7, 9
+    .2byte 2, 8, 4, 0xA, 2, 0, 7, 0xA, 0xA, 0xA, 7, 9
     .dexName "MASQUERAIN"
     .dexCategory "EYEBALL"
     .dexText "MASQUERAIN`s antennas have eyelike"
@@ -397,7 +397,7 @@ dexEntry33::
 
     .align 2, 0
 dexEntry34::
-    .2byte 0, 3, 4, 0xA, 1, 0, 4, 0xA, 0xA, 0xA, 9, 9
+    .2byte 2, 8, 5, 0xA, 1, 0, 4, 0xA, 0xA, 0xA, 9, 9
     .dexName "SHROOMISH"
     .dexCategory "MUSHROOM"
     .dexText "SHROOMISH live in damp soil in the dark"
@@ -409,7 +409,7 @@ dexEntry34::
 
     .align 2, 0
 dexEntry35::
-    .2byte 0, 3, 5, 0xA, 3, 1, 1, 0xA, 0xA, 8, 6, 4
+    .2byte 2, 8, 6, 0xA, 3, 1, 1, 0xA, 0xA, 8, 6, 4
     .dexName "BRELOOM"
     .dexCategory "MUSHROOM"
     .dexText "BRELOOM closes in on its foe with light"
@@ -421,7 +421,7 @@ dexEntry35::
 
     .align 2, 0
 dexEntry36::
-    .2byte 0, 3, 6, 0xA, 2, 0, 7, 0xA, 0xA, 5, 2, 9
+    .2byte 2, 8, 7, 0xA, 2, 0, 7, 0xA, 0xA, 5, 2, 9
     .dexName "SLAKOTH"
     .dexCategory "SLACKER"
     .dexText "SLAKOTH`s heart beats just once a"
@@ -433,7 +433,7 @@ dexEntry36::
 
     .align 2, 0
 dexEntry37::
-    .2byte 0, 3, 7, 0xA, 4, 0, 7, 0xA, 1, 0, 2, 5
+    .2byte 2, 8, 8, 0xA, 4, 0, 7, 0xA, 1, 0, 2, 5
     .dexName "VIGOROTH"
     .dexCategory "WILD MONKEY"
     .dexText "VIGOROTH is simply incapable of"
@@ -445,7 +445,7 @@ dexEntry37::
 
     .align 2, 0
 dexEntry38::
-    .2byte 0, 3, 8, 0xA, 6, 0, 7, 0xA, 2, 8, 7, 7
+    .2byte 2, 8, 9, 0xA, 6, 0, 7, 0xA, 2, 8, 7, 7
     .dexName "SLAKING"
     .dexCategory "LAZY"
     .dexText "Wherever SLAKING live, rings of over"
@@ -457,7 +457,7 @@ dexEntry38::
 
     .align 2, 0
 dexEntry39::
-    .2byte 0, 3, 9, 0xA, 2, 1, 1, 0xA, 0xA, 4, 3, 0
+    .2byte 0, 6, 3, 0xA, 2, 1, 1, 0xA, 0xA, 4, 3, 0
     .dexName "ABRA"
     .dexCategory "PSI"
     .dexText "ABRA needs to sleep for eighteen hours"
@@ -469,7 +469,7 @@ dexEntry39::
 
     .align 2, 0
 dexEntry40::
-    .2byte 0, 4, 0, 0xA, 4, 0, 3, 0xA, 1, 2, 4, 6
+    .2byte 0, 6, 4, 0xA, 4, 0, 3, 0xA, 1, 2, 4, 6
     .dexName "KADABRA"
     .dexCategory "PSI"
     .dexText "KADABRA holds a silver spoon in its"
@@ -481,7 +481,7 @@ dexEntry40::
 
     .align 2, 0
 dexEntry41::
-    .2byte 0, 4, 1, 0xA, 4, 1, 1, 0xA, 1, 0, 5, 8
+    .2byte 0, 6, 5, 0xA, 4, 1, 1, 0xA, 1, 0, 5, 8
     .dexName "ALAKAZAM"
     .dexCategory "PSI"
     .dexText "ALAKAZAM`s brain continually grows,"
@@ -493,7 +493,7 @@ dexEntry41::
 
     .align 2, 0
 dexEntry42::
-    .2byte 0, 4, 2, 0xA, 1, 0, 8, 0xA, 0xA, 1, 2, 1
+    .2byte 2, 9, 0, 0xA, 1, 0, 8, 0xA, 0xA, 1, 2, 1
     .dexName "NINCADA"
     .dexCategory "TRAINEE"
     .dexText "NINCADA lives underground for many"
@@ -505,7 +505,7 @@ dexEntry42::
 
     .align 2, 0
 dexEntry43::
-    .2byte 0, 4, 3, 0xA, 2, 0, 7, 0xA, 0xA, 2, 6, 5
+    .2byte 2, 9, 1, 0xA, 2, 0, 7, 0xA, 0xA, 2, 6, 5
     .dexName "NINJASK"
     .dexCategory "NINJA"
     .dexText "NINJASK moves around at such a high"
@@ -517,7 +517,7 @@ dexEntry43::
 
     .align 2, 0
 dexEntry44::
-    .2byte 0, 4, 4, 0xA, 2, 0, 7, 0xA, 0xA, 0xA, 2, 6
+    .2byte 2, 9, 2, 0xA, 2, 0, 7, 0xA, 0xA, 0xA, 2, 6
     .dexName "SHEDINJA"
     .dexCategory "SHED"
     .dexText "SHEDINJA`s hard body doesn`t move -"
@@ -529,7 +529,7 @@ dexEntry44::
 
     .align 2, 0
 dexEntry45::
-    .2byte 0, 4, 5, 0xA, 2, 0, 0, 0xA, 0xA, 3, 5, 9
+    .2byte 2, 9, 3, 0xA, 2, 0, 0, 0xA, 0xA, 3, 5, 9
     .dexName "WHISMUR"
     .dexCategory "WHISPER"
     .dexText "WHISMUR is very timid. If it starts to"
@@ -541,7 +541,7 @@ dexEntry45::
 
     .align 2, 0
 dexEntry46::
-    .2byte 0, 4, 6, 0xA, 3, 0, 3, 0xA, 0xA, 8, 9, 3
+    .2byte 2, 9, 4, 0xA, 3, 0, 3, 0xA, 0xA, 8, 9, 3
     .dexName "LOUDRED"
     .dexCategory "BIG VOICE"
     .dexText "LOUDRED shouts while stamping its feet."
@@ -553,7 +553,7 @@ dexEntry46::
 
     .align 2, 0
 dexEntry47::
-    .2byte 0, 4, 7, 0xA, 4, 1, 1, 0xA, 1, 8, 5, 2
+    .2byte 2, 9, 5, 0xA, 4, 1, 1, 0xA, 1, 8, 5, 2
     .dexName "EXPLOUD"
     .dexCategory "LOUD NOISE"
     .dexText "EXPLOUD communicates its feelings to"
@@ -565,7 +565,7 @@ dexEntry47::
 
     .align 2, 0
 dexEntry48::
-    .2byte 0, 4, 8, 0xA, 3, 0, 3, 0xA, 1, 9, 0, 5
+    .2byte 2, 9, 6, 0xA, 3, 0, 3, 0xA, 1, 9, 0, 5
     .dexName "MAKUHITA"
     .dexCategory "GUTS"
     .dexText "MAKUHITA has a tireless spirit -"
@@ -577,7 +577,7 @@ dexEntry48::
 
     .align 2, 0
 dexEntry49::
-    .2byte 0, 4, 9, 0xA, 7, 0, 7, 0xA, 5, 5, 9, 5
+    .2byte 2, 9, 7, 0xA, 7, 0, 7, 0xA, 5, 5, 9, 5
     .dexName "HARIYAMA"
     .dexCategory "ARM THRUST"
     .dexText "HARIYAMA`s thick body may appear fat,"
@@ -589,7 +589,7 @@ dexEntry49::
 
     .align 2, 0
 dexEntry50::
-    .2byte 0, 5, 0, 0xA, 2, 0, 0, 0xA, 0xA, 3, 3, 1
+    .2byte 1, 1, 8, 0xA, 2, 0, 0, 0xA, 0xA, 3, 3, 1
     .dexName "GOLDEEN"
     .dexCategory "GOLDFISH"
     .dexText "GOLDEEN loves swimming wild and free"
@@ -601,7 +601,7 @@ dexEntry50::
 
     .align 2, 0
 dexEntry51::
-    .2byte 0, 5, 1, 0xA, 4, 0, 3, 0xA, 0xA, 8, 6, 0
+    .2byte 1, 1, 9, 0xA, 4, 0, 3, 0xA, 0xA, 8, 6, 0
     .dexName "SEAKING"
     .dexCategory "GOLDFISH"
     .dexText "SEAKING is very protective of its eggs."
@@ -613,7 +613,7 @@ dexEntry51::
 
     .align 2, 0
 dexEntry52::
-    .2byte 0, 5, 2, 0xA, 2, 1, 1, 0xA, 0xA, 2, 2, 0
+    .2byte 1, 2, 9, 0xA, 2, 1, 1, 0xA, 0xA, 2, 2, 0
     .dexName "MAGIKARP"
     .dexCategory "FISH"
     .dexText "MAGIKARP is virtually useless in battle"
@@ -625,7 +625,7 @@ dexEntry52::
 
     .align 2, 0
 dexEntry53::
-    .2byte 0, 5, 3, 2, 1, 0, 4, 0xA, 5, 1, 8, 1
+    .2byte 1, 3, 0, 2, 1, 0, 4, 0xA, 5, 1, 8, 1
     .dexName "GYARADOS"
     .dexCategory "ATROCIOUS"
     .dexText "Once GYARADOS goes on a rampage, its"
@@ -637,7 +637,7 @@ dexEntry53::
 
     .align 2, 0
 dexEntry54::
-    .2byte 0, 5, 4, 0xA, 0, 0, 8, 0xA, 0xA, 0xA, 4, 4
+    .2byte 2, 9, 8, 0xA, 0, 0, 8, 0xA, 0xA, 0xA, 4, 4
     .dexName "AZURILL"
     .dexCategory "POLKA DOT"
     .dexText "AZURILL`s tail is large and bouncy."
@@ -649,7 +649,7 @@ dexEntry54::
 
     .align 2, 0
 dexEntry55::
-    .2byte 0, 5, 5, 0xA, 1, 0, 4, 0xA, 0xA, 1, 8, 7
+    .2byte 1, 8, 3, 0xA, 1, 0, 4, 0xA, 0xA, 1, 8, 7
     .dexName "MARILL"
     .dexCategory "AQUA MOUSE"
     .dexText "When fishing for food at the edge of a"
@@ -661,7 +661,7 @@ dexEntry55::
 
     .align 2, 0
 dexEntry56::
-    .2byte 0, 5, 6, 0xA, 2, 0, 7, 0xA, 0xA, 6, 2, 8
+    .2byte 1, 8, 4, 0xA, 2, 0, 7, 0xA, 0xA, 6, 2, 8
     .dexName "AZUMARILL"
     .dexCategory "AQUA RABBIT"
     .dexText "AZUMARILL can make balloons out of"
@@ -673,7 +673,7 @@ dexEntry56::
 
     .align 2, 0
 dexEntry57::
-    .2byte 0, 5, 7, 0xA, 1, 0, 4, 0xA, 0xA, 4, 4, 1
+    .2byte 0, 7, 4, 0xA, 1, 0, 4, 0xA, 0xA, 4, 4, 1
     .dexName "GEODUDE"
     .dexCategory "ROCK"
     .dexText "When GEODUDE sleeps deeply, it buries"
@@ -685,7 +685,7 @@ dexEntry57::
 
     .align 2, 0
 dexEntry58::
-    .2byte 0, 5, 8, 0xA, 3, 0, 3, 0xA, 2, 3, 1, 5
+    .2byte 0, 7, 5, 0xA, 3, 0, 3, 0xA, 2, 3, 1, 5
     .dexName "GRAVELER"
     .dexCategory "ROCK"
     .dexText "Rocks are GRAVELER`s favorite food."
@@ -697,7 +697,7 @@ dexEntry58::
 
     .align 2, 0
 dexEntry59::
-    .2byte 0, 5, 9, 0xA, 4, 0, 7, 0xA, 6, 6, 1, 4
+    .2byte 0, 7, 6, 0xA, 4, 0, 7, 0xA, 6, 6, 1, 4
     .dexName "GOLEM"
     .dexCategory "MEGATON"
     .dexText "GOLEM is known for rolling down from"
@@ -709,7 +709,7 @@ dexEntry59::
 
     .align 2, 0
 dexEntry60::
-    .2byte 0, 6, 0, 0xA, 3, 0, 3, 0xA, 2, 1, 3, 8
+    .2byte 2, 9, 9, 0xA, 3, 0, 3, 0xA, 2, 1, 3, 8
     .dexName "NOSEPASS"
     .dexCategory "COMPASS"
     .dexText "NOSEPASS`s magnetic nose is always"
@@ -721,7 +721,7 @@ dexEntry60::
 
     .align 2, 0
 dexEntry61::
-    .2byte 0, 6, 1, 0xA, 2, 0, 0, 0xA, 0xA, 2, 4, 3
+    .2byte 3, 0, 0, 0xA, 2, 0, 0, 0xA, 0xA, 2, 4, 3
     .dexName "SKITTY"
     .dexCategory "KITTEN"
     .dexText "SKITTY has the habit of becoming"
@@ -733,7 +733,7 @@ dexEntry61::
 
     .align 2, 0
 dexEntry62::
-    .2byte 0, 6, 2, 0xA, 3, 0, 7, 0xA, 0xA, 7, 1, 9
+    .2byte 3, 0, 1, 0xA, 3, 0, 7, 0xA, 0xA, 7, 1, 9
     .dexName "DELCATTY"
     .dexCategory "PRIM"
     .dexText "DELCATTY prefers to live an unfettered"
@@ -745,7 +745,7 @@ dexEntry62::
 
     .align 2, 0
 dexEntry63::
-    .2byte 0, 6, 3, 0xA, 2, 0, 7, 0xA, 0xA, 1, 6, 5
+    .2byte 0, 4, 1, 0xA, 2, 0, 7, 0xA, 0xA, 1, 6, 5
     .dexName "ZUBAT"
     .dexCategory "BAT"
     .dexText "ZUBAT avoids sunlight because exposure"
@@ -757,7 +757,7 @@ dexEntry63::
 
     .align 2, 0
 dexEntry64::
-    .2byte 0, 6, 4, 0xA, 5, 0, 3, 0xA, 1, 2, 1, 3
+    .2byte 0, 4, 2, 0xA, 5, 0, 3, 0xA, 1, 2, 1, 3
     .dexName "GOLBAT"
     .dexCategory "BAT"
     .dexText "GOLBAT bites down on prey with its four"
@@ -769,7 +769,7 @@ dexEntry64::
 
     .align 2, 0
 dexEntry65::
-    .2byte 0, 6, 5, 0xA, 5, 1, 1, 0xA, 1, 6, 5, 3
+    .2byte 1, 6, 9, 0xA, 5, 1, 1, 0xA, 1, 6, 5, 3
     .dexName "CROBAT"
     .dexCategory "BAT"
     .dexText "CROBAT sneaks up on its intended prey"
@@ -781,7 +781,7 @@ dexEntry65::
 
     .align 2, 0
 dexEntry66::
-    .2byte 0, 6, 6, 0xA, 2, 1, 1, 0xA, 1, 0, 0, 3
+    .2byte 0, 7, 2, 0xA, 2, 1, 1, 0xA, 1, 0, 0, 3
     .dexName "TENTACOOL"
     .dexCategory "JELLYFISH"
     .dexText "TENTACOOL`s body is largely composed"
@@ -793,7 +793,7 @@ dexEntry66::
 
     .align 2, 0
 dexEntry67::
-    .2byte 0, 6, 7, 0xA, 5, 0, 3, 0xA, 1, 2, 1, 3
+    .2byte 0, 7, 3, 0xA, 5, 0, 3, 0xA, 1, 2, 1, 3
     .dexName "TENTACRUEL"
     .dexCategory "JELLYFISH"
     .dexText "TENTACRUEL has large red orbs on its"
@@ -805,7 +805,7 @@ dexEntry67::
 
     .align 2, 0
 dexEntry68::
-    .2byte 0, 6, 8, 0xA, 1, 0, 8, 0xA, 0xA, 2, 4, 3
+    .2byte 3, 0, 2, 0xA, 1, 0, 8, 0xA, 0xA, 2, 4, 3
     .dexName "SABLEYE"
     .dexCategory "DARKNESS"
     .dexText "SABLEYE digs the ground with sharpened"
@@ -817,7 +817,7 @@ dexEntry68::
 
     .align 2, 0
 dexEntry69::
-    .2byte 0, 6, 9, 0xA, 2, 0, 0, 0xA, 0xA, 2, 5, 4
+    .2byte 3, 0, 3, 0xA, 2, 0, 0, 0xA, 0xA, 2, 5, 4
     .dexName "MAWILE"
     .dexCategory "DECEIVER"
     .dexText "MAWILE`s huge jaws are actually steel"
@@ -829,7 +829,7 @@ dexEntry69::
 
     .align 2, 0
 dexEntry70::
-    .2byte 0, 7, 0, 0xA, 1, 0, 4, 0xA, 1, 3, 2, 3
+    .2byte 3, 0, 4, 0xA, 1, 0, 4, 0xA, 1, 3, 2, 3
     .dexName "ARON"
     .dexCategory "IRON ARMOR"
     .dexText "ARON has a body of steel."
@@ -841,7 +841,7 @@ dexEntry70::
 
     .align 2, 0
 dexEntry71::
-    .2byte 0, 7, 1, 0xA, 2, 1, 1, 0xA, 2, 6, 4, 6
+    .2byte 3, 0, 5, 0xA, 2, 1, 1, 0xA, 2, 6, 4, 6
     .dexName "LAIRON"
     .dexCategory "IRON ARMOR"
     .dexText "LAIRON feeds on iron contained in"
@@ -853,7 +853,7 @@ dexEntry71::
 
     .align 2, 0
 dexEntry72::
-    .2byte 0, 7, 2, 0xA, 6, 1, 1, 0xA, 7, 9, 3, 7
+    .2byte 3, 0, 6, 0xA, 6, 1, 1, 0xA, 7, 9, 3, 7
     .dexName "AGGRON"
     .dexCategory "IRON ARMOR"
     .dexText "AGGRON is surprisingly protective"
@@ -865,7 +865,7 @@ dexEntry72::
 
     .align 2, 0
 dexEntry73::
-    .2byte 0, 7, 3, 0xA, 2, 0, 7, 0xA, 0xA, 4, 3, 0
+    .2byte 0, 6, 6, 0xA, 2, 0, 7, 0xA, 0xA, 4, 3, 0
     .dexName "MACHOP"
     .dexCategory "SUPERPOWER"
     .dexText "MACHOP`s muscles are special - they"
@@ -877,7 +877,7 @@ dexEntry73::
 
     .align 2, 0
 dexEntry74::
-    .2byte 0, 7, 4, 0xA, 4, 1, 1, 0xA, 1, 5, 5, 4
+    .2byte 0, 6, 7, 0xA, 4, 1, 1, 0xA, 1, 5, 5, 4
     .dexName "MACHOKE"
     .dexCategory "SUPERPOWER"
     .dexText "MACHOKE`s thoroughly toned muscles"
@@ -889,7 +889,7 @@ dexEntry74::
 
     .align 2, 0
 dexEntry75::
-    .2byte 0, 7, 5, 0xA, 5, 0, 3, 0xA, 2, 8, 6, 6
+    .2byte 0, 6, 8, 0xA, 5, 0, 3, 0xA, 2, 8, 6, 6
     .dexName "MACHAMP"
     .dexCategory "SUPERPOWER"
     .dexText "MACHAMP has the power to hurl anything"
@@ -901,7 +901,7 @@ dexEntry75::
 
     .align 2, 0
 dexEntry76::
-    .2byte 0, 7, 6, 0xA, 2, 0, 0, 0xA, 0xA, 2, 4, 7
+    .2byte 3, 0, 7, 0xA, 2, 0, 0, 0xA, 0xA, 2, 4, 7
     .dexName "MEDITITE"
     .dexCategory "MEDITATE"
     .dexText "MEDITITE heightens its inner energy"
@@ -913,7 +913,7 @@ dexEntry76::
 
     .align 2, 0
 dexEntry77::
-    .2byte 0, 7, 7, 0xA, 4, 0, 3, 0xA, 0xA, 6, 9, 4
+    .2byte 3, 0, 8, 0xA, 4, 0, 3, 0xA, 0xA, 6, 9, 4
     .dexName "MEDICHAM"
     .dexCategory "MEDITATE"
     .dexText "Through the power of meditation,"
@@ -925,7 +925,7 @@ dexEntry77::
 
     .align 2, 0
 dexEntry78::
-    .2byte 0, 7, 8, 0xA, 2, 0, 0, 0xA, 0xA, 3, 3, 5
+    .2byte 3, 0, 9, 0xA, 2, 0, 0, 0xA, 0xA, 3, 3, 5
     .dexName "ELECTRIKE"
     .dexCategory "LIGHTNING"
     .dexText "ELECTRIKE stores electricity in its"
@@ -937,7 +937,7 @@ dexEntry78::
 
     .align 2, 0
 dexEntry79::
-    .2byte 0, 7, 9, 0xA, 4, 1, 1, 0xA, 0xA, 8, 8, 6
+    .2byte 3, 1, 0, 0xA, 4, 1, 1, 0xA, 0xA, 8, 8, 6
     .dexName "MANECTRIC"
     .dexCategory "DISCHARGE"
     .dexText "MANECTRIC is constantly discharging"
@@ -949,7 +949,7 @@ dexEntry79::
 
     .align 2, 0
 dexEntry80::
-    .2byte 0, 8, 0, 0xA, 1, 0, 4, 0xA, 0xA, 0xA, 9, 3
+    .2byte 3, 1, 1, 0xA, 1, 0, 4, 0xA, 0xA, 0xA, 9, 3
     .dexName "PLUSLE"
     .dexCategory "CHEERING"
     .dexText "PLUSLE always acts as a cheerleader"
@@ -961,7 +961,7 @@ dexEntry80::
 
     .align 2, 0
 dexEntry81::
-    .2byte 0, 8, 1, 0xA, 1, 0, 4, 0xA, 0xA, 0xA, 9, 3
+    .2byte 3, 1, 2, 0xA, 1, 0, 4, 0xA, 0xA, 0xA, 9, 3
     .dexName "MINUN"
     .dexCategory "CHEERING"
     .dexText "MINUN is more concerned about cheering"
@@ -973,7 +973,7 @@ dexEntry81::
 
     .align 2, 0
 dexEntry82::
-    .2byte 0, 8, 2, 0xA, 1, 0, 0, 0xA, 0xA, 1, 3, 2
+    .2byte 0, 8, 1, 0xA, 1, 0, 0, 0xA, 0xA, 1, 3, 2
     .dexName "MAGNEMITE"
     .dexCategory "MAGNET"
     .dexText "MAGNEMITE floats in the air by emitting"
@@ -985,7 +985,7 @@ dexEntry82::
 
     .align 2, 0
 dexEntry83::
-    .2byte 0, 8, 3, 0xA, 3, 0, 3, 0xA, 1, 3, 2, 3
+    .2byte 0, 8, 2, 0xA, 3, 0, 3, 0xA, 1, 3, 2, 3
     .dexName "MAGNETON"
     .dexCategory "MAGNET"
     .dexText "MAGNETON emits a powerful magnetic"
@@ -997,7 +997,7 @@ dexEntry83::
 
     .align 2, 0
 dexEntry84::
-    .2byte 0, 8, 4, 0xA, 1, 0, 8, 0xA, 0xA, 2, 2, 9
+    .2byte 1, 0, 0, 0xA, 1, 0, 8, 0xA, 0xA, 2, 2, 9
     .dexName "VOLTORB"
     .dexCategory "BALL"
     .dexText "VOLTORB was first sighted at a company"
@@ -1009,7 +1009,7 @@ dexEntry84::
 
     .align 2, 0
 dexEntry85::
-    .2byte 0, 8, 5, 0xA, 3, 1, 1, 0xA, 1, 4, 6, 8
+    .2byte 1, 0, 1, 0xA, 3, 1, 1, 0xA, 1, 4, 6, 8
     .dexName "ELECTRODE"
     .dexCategory "BALL"
     .dexText "ELECTRODE eats electricity in the"
@@ -1021,7 +1021,7 @@ dexEntry85::
 
     .align 2, 0
 dexEntry86::
-    .2byte 0, 8, 6, 0xA, 2, 0, 4, 0xA, 0xA, 3, 9, 0
+    .2byte 3, 1, 3, 0xA, 2, 0, 4, 0xA, 0xA, 3, 9, 0
     .dexName "VOLBEAT"
     .dexCategory "FIREFLY"
     .dexText "VOLBEAT`s tail glows like a lightbulb."
@@ -1033,7 +1033,7 @@ dexEntry86::
 
     .align 2, 0
 dexEntry87::
-    .2byte 0, 8, 7, 0xA, 2, 0, 0, 0xA, 0xA, 3, 9, 0
+    .2byte 3, 1, 4, 0xA, 2, 0, 0, 0xA, 0xA, 3, 9, 0
     .dexName "ILLUMISE"
     .dexCategory "FIREFLY"
     .dexText "ILLUMISE attracts a swarm of VOLBEAT"
@@ -1045,7 +1045,7 @@ dexEntry87::
 
     .align 2, 0
 dexEntry88::
-    .2byte 0, 8, 8, 0xA, 1, 0, 8, 0xA, 0xA, 1, 1, 9
+    .2byte 0, 4, 3, 0xA, 1, 0, 8, 0xA, 0xA, 1, 1, 9
     .dexName "ODDISH"
     .dexCategory "WEED"
     .dexText "ODDISH searches for fertile, nutrient-"
@@ -1057,7 +1057,7 @@ dexEntry88::
 
     .align 2, 0
 dexEntry89::
-    .2byte 0, 8, 9, 0xA, 2, 0, 7, 0xA, 0xA, 1, 9, 0
+    .2byte 0, 4, 4, 0xA, 2, 0, 7, 0xA, 0xA, 1, 9, 0
     .dexName "GLOOM"
     .dexCategory "WEED"
     .dexText "From its mouth GLOOM drips honey that"
@@ -1069,7 +1069,7 @@ dexEntry89::
 
     .align 2, 0
 dexEntry90::
-    .2byte 0, 9, 0, 0xA, 3, 1, 1, 0xA, 0xA, 4, 1, 0
+    .2byte 0, 4, 5, 0xA, 3, 1, 1, 0xA, 0xA, 4, 1, 0
     .dexName "VILEPLUME"
     .dexCategory "FLOWER"
     .dexText "VILEPLUME has the world`s largest"
@@ -1081,7 +1081,7 @@ dexEntry90::
 
     .align 2, 0
 dexEntry91::
-    .2byte 0, 9, 1, 0xA, 1, 0, 4, 0xA, 0xA, 1, 2, 8
+    .2byte 1, 8, 2, 0xA, 1, 0, 4, 0xA, 0xA, 1, 2, 8
     .dexName "BELLOSSOM"
     .dexCategory "FLOWER"
     .dexText "A BELLOSSOM grows flowers more"
@@ -1093,7 +1093,7 @@ dexEntry91::
 
     .align 2, 0
 dexEntry92::
-    .2byte 0, 9, 2, 0xA, 4, 0, 7, 0xA, 0xA, 8, 6, 4
+    .2byte 0, 8, 4, 0xA, 4, 0, 7, 0xA, 0xA, 8, 6, 4
     .dexName "DODUO"
     .dexCategory "TWIN BIRD"
     .dexText "DODUO`s two heads never sleep at the"
@@ -1105,7 +1105,7 @@ dexEntry92::
 
     .align 2, 0
 dexEntry93::
-    .2byte 0, 9, 3, 0xA, 5, 1, 1, 0xA, 1, 8, 7, 8
+    .2byte 0, 8, 5, 0xA, 5, 1, 1, 0xA, 1, 8, 7, 8
     .dexName "DODRIO"
     .dexCategory "TRIPLE BIRD"
     .dexText "Watch out if DODRIO`s three heads are"
@@ -1117,7 +1117,7 @@ dexEntry93::
 
     .align 2, 0
 dexEntry94::
-    .2byte 0, 9, 4, 0xA, 1, 0, 0, 0xA, 0xA, 0xA, 4, 4
+    .2byte 3, 1, 5, 0xA, 1, 0, 0, 0xA, 0xA, 0xA, 4, 4
     .dexName "ROSELIA"
     .dexCategory "THORN"
     .dexText "On extremely rare occasions, a ROSELIA"
@@ -1129,7 +1129,7 @@ dexEntry94::
 
     .align 2, 0
 dexEntry95::
-    .2byte 0, 9, 5, 0xA, 1, 0, 4, 0xA, 0xA, 2, 2, 7
+    .2byte 3, 1, 6, 0xA, 1, 0, 4, 0xA, 0xA, 2, 2, 7
     .dexName "GULPIN"
     .dexCategory "STOMACH"
     .dexText "Most of GULPIN`s body is made up of its"
@@ -1141,7 +1141,7 @@ dexEntry95::
 
     .align 2, 0
 dexEntry96::
-    .2byte 0, 9, 6, 0xA, 5, 0, 7, 0xA, 1, 7, 6, 4
+    .2byte 3, 1, 7, 0xA, 5, 0, 7, 0xA, 1, 7, 6, 4
     .dexName "SWALOT"
     .dexCategory "POISON BAG"
     .dexText "SWALOT has no teeth, so what it"
@@ -1153,7 +1153,7 @@ dexEntry96::
 
     .align 2, 0
 dexEntry97::
-    .2byte 0, 9, 7, 0xA, 2, 0, 7, 0xA, 0xA, 4, 5, 9
+    .2byte 3, 1, 8, 0xA, 2, 0, 7, 0xA, 0xA, 4, 5, 9
     .dexName "CARVANHA"
     .dexCategory "SAVAGE"
     .dexText "CARVANHA`s strongly developed jaws"
@@ -1165,7 +1165,7 @@ dexEntry97::
 
     .align 2, 0
 dexEntry98::
-    .2byte 0, 9, 8, 0xA, 5, 1, 1, 0xA, 1, 9, 5, 8
+    .2byte 3, 1, 9, 0xA, 5, 1, 1, 0xA, 1, 9, 5, 8
     .dexName "SHARPEDO"
     .dexCategory "BRUTAL"
     .dexText "Nicknamed “the bully of the sea,”"
@@ -1177,7 +1177,7 @@ dexEntry98::
 
     .align 2, 0
 dexEntry99::
-    .2byte 0, 9, 9, 0xA, 6, 0, 7, 0xA, 2, 8, 6, 6
+    .2byte 3, 2, 0, 0xA, 6, 0, 7, 0xA, 2, 8, 6, 6
     .dexName "WAILMER"
     .dexCategory "BALL WHALE"
     .dexText "WAILMER`s nostrils are located above"
@@ -1189,7 +1189,7 @@ dexEntry99::
 
     .align 2, 0
 dexEntry100::
-    .2byte 1, 0, 0, 4, 7, 0, 7, 0xA, 8, 7, 7, 4
+    .2byte 3, 2, 1, 4, 7, 0, 7, 0xA, 8, 7, 7, 4
     .dexName "WAILORD"
     .dexCategory "FLOAT WHALE"
     .dexText "WAILORD is the largest of all identified"
@@ -1201,7 +1201,7 @@ dexEntry100::
 
     .align 2, 0
 dexEntry101::
-    .2byte 1, 0, 1, 0xA, 2, 0, 4, 0xA, 0xA, 5, 2, 9
+    .2byte 3, 2, 2, 0xA, 2, 0, 4, 0xA, 0xA, 5, 2, 9
     .dexName "NUMEL"
     .dexCategory "NUMB"
     .dexText "NUMEL is extremely dull witted - it"
@@ -1213,7 +1213,7 @@ dexEntry101::
 
     .align 2, 0
 dexEntry102::
-    .2byte 1, 0, 2, 0xA, 6, 0, 3, 0xA, 4, 8, 5, 0
+    .2byte 3, 2, 3, 0xA, 6, 0, 3, 0xA, 4, 8, 5, 0
     .dexName "CAMERUPT"
     .dexCategory "ERUPTION"
     .dexText "CAMERUPT has a volcano inside its body."
@@ -1225,7 +1225,7 @@ dexEntry102::
 
     .align 2, 0
 dexEntry103::
-    .2byte 1, 0, 3, 0xA, 2, 0, 4, 0xA, 0xA, 7, 7, 2
+    .2byte 2, 1, 8, 0xA, 2, 0, 4, 0xA, 0xA, 7, 7, 2
     .dexName "SLUGMA"
     .dexCategory "LAVA"
     .dexText "Molten magma courses throughout"
@@ -1237,7 +1237,7 @@ dexEntry103::
 
     .align 2, 0
 dexEntry104::
-    .2byte 1, 0, 4, 0xA, 2, 0, 7, 0xA, 1, 2, 1, 3
+    .2byte 2, 1, 9, 0xA, 2, 0, 7, 0xA, 1, 2, 1, 3
     .dexName "MAGCARGO"
     .dexCategory "LAVA"
     .dexText "MAGCARGO`s shell is actually its skin"
@@ -1249,7 +1249,7 @@ dexEntry104::
 
     .align 2, 0
 dexEntry105::
-    .2byte 1, 0, 5, 0xA, 1, 0, 8, 0xA, 1, 7, 7, 2
+    .2byte 3, 2, 4, 0xA, 1, 0, 8, 0xA, 1, 7, 7, 2
     .dexName "TORKOAL"
     .dexCategory "COAL"
     .dexText "TORKOAL digs through mountains in"
@@ -1261,7 +1261,7 @@ dexEntry105::
 
     .align 2, 0
 dexEntry106::
-    .2byte 1, 0, 6, 0xA, 2, 1, 1, 0xA, 0xA, 6, 6, 1
+    .2byte 0, 8, 8, 0xA, 2, 1, 1, 0xA, 0xA, 6, 6, 1
     .dexName "GRIMER"
     .dexCategory "SLUDGE"
     .dexText "GRIMER emerged from the sludge that"
@@ -1273,7 +1273,7 @@ dexEntry106::
 
     .align 2, 0
 dexEntry107::
-    .2byte 1, 0, 7, 0xA, 3, 1, 1, 0xA, 0xA, 6, 6, 1
+    .2byte 0, 8, 9, 0xA, 3, 1, 1, 0xA, 0xA, 6, 6, 1
     .dexName "MUK"
     .dexCategory "SLUDGE"
     .dexText "This POKéMON`s favorite food is"
@@ -1285,7 +1285,7 @@ dexEntry107::
 
     .align 2, 0
 dexEntry108::
-    .2byte 1, 0, 8, 0xA, 2, 0, 0, 0xA, 0xA, 0xA, 2, 2
+    .2byte 1, 0, 9, 0xA, 2, 0, 0, 0xA, 0xA, 0xA, 2, 2
     .dexName "KOFFING"
     .dexCategory "POISON GAS"
     .dexText "If KOFFING becomes agitated, it raises"
@@ -1297,7 +1297,7 @@ dexEntry108::
 
     .align 2, 0
 dexEntry109::
-    .2byte 1, 0, 9, 0xA, 3, 1, 1, 0xA, 0xA, 2, 0, 9
+    .2byte 1, 1, 0, 0xA, 3, 1, 1, 0xA, 0xA, 2, 0, 9
     .dexName "WEEZING"
     .dexCategory "POISON GAS"
     .dexText "WEEZING loves the gases given off by"
@@ -1309,7 +1309,7 @@ dexEntry109::
 
     .align 2, 0
 dexEntry110::
-    .2byte 1, 1, 0, 0xA, 2, 0, 4, 0xA, 0xA, 6, 7, 5
+    .2byte 3, 2, 5, 0xA, 2, 0, 4, 0xA, 0xA, 6, 7, 5
     .dexName "SPOINK"
     .dexCategory "BOUNCE"
     .dexText "SPOINK bounces around on its tail."
@@ -1321,7 +1321,7 @@ dexEntry110::
 
     .align 2, 0
 dexEntry111::
-    .2byte 1, 1, 1, 0xA, 2, 1, 1, 0xA, 1, 5, 7, 6
+    .2byte 3, 2, 6, 0xA, 2, 1, 1, 0xA, 1, 5, 7, 6
     .dexName "GRUMPIG"
     .dexCategory "MANIPULATE"
     .dexText "GRUMPIG uses the black pearls on its"
@@ -1333,7 +1333,7 @@ dexEntry111::
 
     .align 2, 0
 dexEntry112::
-    .2byte 1, 1, 2, 0xA, 2, 0, 0, 0xA, 0xA, 2, 6, 5
+    .2byte 0, 2, 7, 0xA, 2, 0, 0, 0xA, 0xA, 2, 6, 5
     .dexName "SANDSHREW"
     .dexCategory "MOUSE"
     .dexText "SANDSHREW has a very dry hide that is"
@@ -1345,7 +1345,7 @@ dexEntry112::
 
     .align 2, 0
 dexEntry113::
-    .2byte 1, 1, 3, 0xA, 3, 0, 3, 0xA, 0xA, 6, 5, 0
+    .2byte 0, 2, 8, 0xA, 3, 0, 3, 0xA, 0xA, 6, 5, 0
     .dexName "SANDSLASH"
     .dexCategory "MOUSE"
     .dexText "SANDSLASH can roll up its body as if it"
@@ -1357,7 +1357,7 @@ dexEntry113::
 
     .align 2, 0
 dexEntry114::
-    .2byte 1, 1, 4, 0xA, 3, 0, 7, 0xA, 0xA, 1, 1, 0
+    .2byte 3, 2, 7, 0xA, 3, 0, 7, 0xA, 0xA, 1, 1, 0
     .dexName "SPINDA"
     .dexCategory "SPOT PANDA"
     .dexText "All the SPINDA that exist in the"
@@ -1369,7 +1369,7 @@ dexEntry114::
 
     .align 2, 0
 dexEntry115::
-    .2byte 1, 1, 5, 0xA, 5, 0, 7, 0xA, 1, 1, 1, 3
+    .2byte 2, 2, 7, 0xA, 5, 0, 7, 0xA, 1, 1, 1, 3
     .dexName "SKARMORY"
     .dexCategory "ARMOR BIRD"
     .dexText "SKARMORY is entirely encased in hard,"
@@ -1381,7 +1381,7 @@ dexEntry115::
 
     .align 2, 0
 dexEntry116::
-    .2byte 1, 1, 6, 0xA, 2, 0, 4, 0xA, 0xA, 3, 3, 1
+    .2byte 3, 2, 8, 0xA, 2, 0, 4, 0xA, 0xA, 3, 3, 1
     .dexName "TRAPINCH"
     .dexCategory "ANT PIT"
     .dexText "TRAPINCH is a patient hunter. It digs"
@@ -1393,7 +1393,7 @@ dexEntry116::
 
     .align 2, 0
 dexEntry117::
-    .2byte 1, 1, 7, 0xA, 3, 0, 7, 0xA, 0xA, 3, 3, 7
+    .2byte 3, 2, 9, 0xA, 3, 0, 7, 0xA, 0xA, 3, 3, 7
     .dexName "VIBRAVA"
     .dexCategory "VIBRATION"
     .dexText "VIBRAVA`s wings have not yet"
@@ -1405,7 +1405,7 @@ dexEntry117::
 
     .align 2, 0
 dexEntry118::
-    .2byte 1, 1, 8, 0xA, 6, 0, 7, 0xA, 1, 8, 0, 8
+    .2byte 3, 3, 0, 0xA, 6, 0, 7, 0xA, 1, 8, 0, 8
     .dexName "FLYGON"
     .dexCategory "MYSTIC"
     .dexText "FLYGON whips up a sandstorm by"
@@ -1417,7 +1417,7 @@ dexEntry118::
 
     .align 2, 0
 dexEntry119::
-    .2byte 1, 1, 9, 0xA, 1, 0, 4, 0xA, 1, 1, 3, 1
+    .2byte 3, 3, 1, 0xA, 1, 0, 4, 0xA, 1, 1, 3, 1
     .dexName "CACNEA"
     .dexCategory "CACTUS"
     .dexText "The more arid and harsh the"
@@ -1429,7 +1429,7 @@ dexEntry119::
 
     .align 2, 0
 dexEntry120::
-    .2byte 1, 2, 0, 0xA, 4, 0, 3, 0xA, 1, 7, 0, 6
+    .2byte 3, 3, 2, 0xA, 4, 0, 3, 0xA, 1, 7, 0, 6
     .dexName "CACTURNE"
     .dexCategory "SCARECROW"
     .dexText "If a traveler is going through a desert"
@@ -1441,7 +1441,7 @@ dexEntry120::
 
     .align 2, 0
 dexEntry121::
-    .2byte 1, 2, 1, 0xA, 1, 0, 4, 0xA, 0xA, 0xA, 2, 6
+    .2byte 3, 3, 3, 0xA, 1, 0, 4, 0xA, 0xA, 0xA, 2, 6
     .dexName "SWABLU"
     .dexCategory "COTTON BIRD"
     .dexText "SWABLU loves to make things clean."
@@ -1453,7 +1453,7 @@ dexEntry121::
 
     .align 2, 0
 dexEntry122::
-    .2byte 1, 2, 2, 0xA, 3, 0, 7, 0xA, 0xA, 4, 5, 4
+    .2byte 3, 3, 4, 0xA, 3, 0, 7, 0xA, 0xA, 4, 5, 4
     .dexName "ALTARIA"
     .dexCategory "HUMMING"
     .dexText "ALTARIA sings in a gorgeous soprano."
@@ -1465,7 +1465,7 @@ dexEntry122::
 
     .align 2, 0
 dexEntry123::
-    .2byte 1, 2, 3, 0xA, 4, 0, 3, 0xA, 0xA, 8, 8, 8
+    .2byte 3, 3, 5, 0xA, 4, 0, 3, 0xA, 0xA, 8, 8, 8
     .dexName "ZANGOOSE"
     .dexCategory "CAT FERRET"
     .dexText "Memories of battling its arch-rival"
@@ -1477,7 +1477,7 @@ dexEntry123::
 
     .align 2, 0
 dexEntry124::
-    .2byte 1, 2, 4, 0xA, 8, 1, 0, 0xA, 1, 1, 5, 7
+    .2byte 3, 3, 6, 0xA, 8, 1, 0, 0xA, 1, 1, 5, 7
     .dexName "SEVIPER"
     .dexCategory "FANG SNAKE"
     .dexText "SEVIPER`s swordlike tail serves two"
@@ -1489,7 +1489,7 @@ dexEntry124::
 
     .align 2, 0
 dexEntry125::
-    .2byte 1, 2, 5, 0xA, 3, 0, 3, 0xA, 3, 7, 0, 4
+    .2byte 3, 3, 7, 0xA, 3, 0, 3, 0xA, 3, 7, 0, 4
     .dexName "LUNATONE"
     .dexCategory "METEORITE"
     .dexText "LUNATONE becomes active around the"
@@ -1501,7 +1501,7 @@ dexEntry125::
 
     .align 2, 0
 dexEntry126::
-    .2byte 1, 2, 6, 0xA, 3, 1, 1, 0xA, 3, 3, 9, 5
+    .2byte 3, 3, 8, 0xA, 3, 1, 1, 0xA, 3, 3, 9, 5
     .dexName "SOLROCK"
     .dexCategory "METEORITE"
     .dexText "SOLROCK is a new species of POKéMON"
@@ -1513,7 +1513,7 @@ dexEntry126::
 
     .align 2, 0
 dexEntry127::
-    .2byte 1, 2, 7, 0xA, 1, 0, 4, 0xA, 0xA, 0xA, 4, 2
+    .2byte 3, 3, 9, 0xA, 1, 0, 4, 0xA, 0xA, 0xA, 4, 2
     .dexName "BARBOACH"
     .dexCategory "WHISKERS"
     .dexText "BARBOACH`s body is covered with a"
@@ -1525,7 +1525,7 @@ dexEntry127::
 
     .align 2, 0
 dexEntry128::
-    .2byte 1, 2, 8, 0xA, 2, 1, 1, 0xA, 0xA, 5, 2, 0
+    .2byte 3, 4, 0, 0xA, 2, 1, 1, 0xA, 0xA, 5, 2, 0
     .dexName "WHISCASH"
     .dexCategory "WHISKERS"
     .dexText "If WHISCASH goes on a wild rampage,"
@@ -1537,7 +1537,7 @@ dexEntry128::
 
     .align 2, 0
 dexEntry129::
-    .2byte 1, 2, 9, 0xA, 2, 0, 0, 0xA, 0xA, 2, 5, 4
+    .2byte 3, 4, 1, 0xA, 2, 0, 0, 0xA, 0xA, 2, 5, 4
     .dexName "CORPHISH"
     .dexCategory "RUFFIAN"
     .dexText "CORPHISH catches prey with its sharp"
@@ -1549,7 +1549,7 @@ dexEntry129::
 
     .align 2, 0
 dexEntry130::
-    .2byte 1, 3, 0, 0xA, 3, 0, 7, 0xA, 0xA, 7, 2, 3
+    .2byte 3, 4, 2, 0xA, 3, 0, 7, 0xA, 0xA, 7, 2, 3
     .dexName "CRAWDAUNT"
     .dexCategory "ROGUE"
     .dexText "CRAWDAUNT molts (sheds) its shell"
@@ -1561,7 +1561,7 @@ dexEntry130::
 
     .align 2, 0
 dexEntry131::
-    .2byte 1, 3, 1, 0xA, 1, 0, 8, 0xA, 0xA, 4, 7, 4
+    .2byte 3, 4, 3, 0xA, 1, 0, 8, 0xA, 0xA, 4, 7, 4
     .dexName "BALTOY"
     .dexCategory "CLAY DOLL"
     .dexText "As soon as it spots others of its kind,"
@@ -1573,7 +1573,7 @@ dexEntry131::
 
     .align 2, 0
 dexEntry132::
-    .2byte 1, 3, 2, 0xA, 4, 1, 1, 0xA, 2, 3, 8, 1
+    .2byte 3, 4, 4, 0xA, 4, 1, 1, 0xA, 2, 3, 8, 1
     .dexName "CLAYDOL"
     .dexCategory "CLAY DOLL"
     .dexText "CLAYDOL is an enigma that appeared"
@@ -1585,7 +1585,7 @@ dexEntry132::
 
     .align 2, 0
 dexEntry133::
-    .2byte 1, 3, 3, 0xA, 3, 0, 3, 0xA, 0xA, 5, 2, 5
+    .2byte 3, 4, 5, 0xA, 3, 0, 3, 0xA, 0xA, 5, 2, 5
     .dexName "LILEEP"
     .dexCategory "SEA LILY"
     .dexText "LILEEP became extinct approximately"
@@ -1597,7 +1597,7 @@ dexEntry133::
 
     .align 2, 0
 dexEntry134::
-    .2byte 1, 3, 4, 0xA, 4, 1, 1, 0xA, 1, 3, 3, 2
+    .2byte 3, 4, 6, 0xA, 4, 1, 1, 0xA, 1, 3, 3, 2
     .dexName "CRADILY"
     .dexCategory "BARNACLE"
     .dexText "CRADILY roams around the ocean floor"
@@ -1609,7 +1609,7 @@ dexEntry134::
 
     .align 2, 0
 dexEntry135::
-    .2byte 1, 3, 5, 0xA, 2, 0, 4, 0xA, 0xA, 2, 7, 6
+    .2byte 3, 4, 7, 0xA, 2, 0, 4, 0xA, 0xA, 2, 7, 6
     .dexName "ANORITH"
     .dexCategory "OLD SHRIMP"
     .dexText "ANORITH is said to be a type of"
@@ -1621,7 +1621,7 @@ dexEntry135::
 
     .align 2, 0
 dexEntry136::
-    .2byte 1, 3, 6, 0xA, 4, 1, 1, 0xA, 1, 5, 0, 4
+    .2byte 3, 4, 8, 0xA, 4, 1, 1, 0xA, 1, 5, 0, 4
     .dexName "ARMALDO"
     .dexCategory "PLATE"
     .dexText "ARMALDO is a POKéMON species that"
@@ -1633,7 +1633,7 @@ dexEntry136::
 
     .align 2, 0
 dexEntry137::
-    .2byte 1, 3, 7, 0xA, 1, 0, 0, 0xA, 0xA, 0xA, 2, 2
+    .2byte 1, 7, 4, 0xA, 1, 0, 0, 0xA, 0xA, 0xA, 2, 2
     .dexName "IGGLYBUFF"
     .dexCategory "BALLOON"
     .dexText "IGGLYBUFF has a soft and plushy body"
@@ -1645,7 +1645,7 @@ dexEntry137::
 
     .align 2, 0
 dexEntry138::
-    .2byte 1, 3, 8, 0xA, 1, 0, 8, 0xA, 0xA, 1, 2, 1
+    .2byte 0, 3, 9, 0xA, 1, 0, 8, 0xA, 0xA, 1, 2, 1
     .dexName "JIGGLYPUFF"
     .dexCategory "BALLOON"
     .dexText "When this POKéMON sings, it never"
@@ -1657,7 +1657,7 @@ dexEntry138::
 
     .align 2, 0
 dexEntry139::
-    .2byte 1, 3, 9, 0xA, 3, 0, 3, 0xA, 0xA, 2, 6, 5
+    .2byte 0, 4, 0, 0xA, 3, 0, 3, 0xA, 0xA, 2, 6, 5
     .dexName "WIGGLYTUFF"
     .dexCategory "BALLOON"
     .dexText "WIGGLYTUFF`s body is very flexible."
@@ -1669,7 +1669,7 @@ dexEntry139::
 
     .align 2, 0
 dexEntry140::
-    .2byte 1, 4, 0, 0xA, 2, 0, 0, 0xA, 0xA, 1, 6, 3
+    .2byte 3, 4, 9, 0xA, 2, 0, 0, 0xA, 0xA, 1, 6, 3
     .dexName "FEEBAS"
     .dexCategory "FISH"
     .dexText "While FEEBAS`s body is in tatters,"
@@ -1681,7 +1681,7 @@ dexEntry140::
 
     .align 2, 0
 dexEntry141::
-    .2byte 1, 4, 1, 2, 0, 0, 4, 0xA, 3, 5, 7, 1
+    .2byte 3, 5, 0, 2, 0, 0, 4, 0xA, 3, 5, 7, 1
     .dexName "MILOTIC"
     .dexCategory "TENDER"
     .dexText "MILOTIC live at the bottom of large"
@@ -1693,7 +1693,7 @@ dexEntry141::
 
     .align 2, 0
 dexEntry142::
-    .2byte 1, 4, 2, 0xA, 1, 0, 0, 0xA, 0xA, 0xA, 1, 8
+    .2byte 3, 5, 1, 0xA, 1, 0, 0, 0xA, 0xA, 0xA, 1, 8
     .dexName "CASTFORM"
     .dexCategory "WEATHER"
     .dexText "CASTFORM borrows the power of nature"
@@ -1705,7 +1705,7 @@ dexEntry142::
 
     .align 2, 0
 dexEntry143::
-    .2byte 1, 4, 3, 0xA, 2, 0, 7, 0xA, 0xA, 7, 6, 1
+    .2byte 1, 2, 0, 0xA, 2, 0, 7, 0xA, 0xA, 7, 6, 1
     .dexName "STARYU"
     .dexCategory "STAR SHAPE"
     .dexText "STARYU`s center section has an organ"
@@ -1717,7 +1717,7 @@ dexEntry143::
 
     .align 2, 0
 dexEntry144::
-    .2byte 1, 4, 4, 0xA, 3, 0, 7, 0xA, 1, 7, 6, 4
+    .2byte 1, 2, 1, 0xA, 3, 0, 7, 0xA, 1, 7, 6, 4
     .dexName "STARMIE"
     .dexCategory "MYSTERIOUS"
     .dexText "STARMIE`s center section - the core -"
@@ -1729,7 +1729,7 @@ dexEntry144::
 
     .align 2, 0
 dexEntry145::
-    .2byte 1, 4, 5, 0xA, 3, 0, 3, 0xA, 0xA, 4, 8, 5
+    .2byte 3, 5, 2, 0xA, 3, 0, 3, 0xA, 0xA, 4, 8, 5
     .dexName "KECLEON"
     .dexCategory "COLOR SWAP"
     .dexText "KECLEON alters its body coloration to"
@@ -1741,7 +1741,7 @@ dexEntry145::
 
     .align 2, 0
 dexEntry146::
-    .2byte 1, 4, 6, 0xA, 2, 0, 0, 0xA, 0xA, 0xA, 5, 1
+    .2byte 3, 5, 3, 0xA, 2, 0, 0, 0xA, 0xA, 0xA, 5, 1
     .dexName "SHUPPET"
     .dexCategory "PUPPET"
     .dexText "SHUPPET is attracted by feelings"
@@ -1753,7 +1753,7 @@ dexEntry146::
 
     .align 2, 0
 dexEntry147::
-    .2byte 1, 4, 7, 0xA, 3, 0, 7, 0xA, 0xA, 2, 7, 6
+    .2byte 3, 5, 4, 0xA, 3, 0, 7, 0xA, 0xA, 2, 7, 6
     .dexName "BANETTE"
     .dexCategory "MARIONETTE"
     .dexText "BANETTE generates energy for laying"
@@ -1765,7 +1765,7 @@ dexEntry147::
 
     .align 2, 0
 dexEntry148::
-    .2byte 1, 4, 8, 0xA, 2, 0, 7, 0xA, 0xA, 3, 3, 1
+    .2byte 3, 5, 5, 0xA, 2, 0, 7, 0xA, 0xA, 3, 3, 1
     .dexName "DUSKULL"
     .dexCategory "REQUIEM"
     .dexText "DUSKULL wanders lost among the deep"
@@ -1777,7 +1777,7 @@ dexEntry148::
 
     .align 2, 0
 dexEntry149::
-    .2byte 1, 4, 9, 0xA, 5, 0, 3, 0xA, 0xA, 6, 7, 5
+    .2byte 3, 5, 6, 0xA, 5, 0, 3, 0xA, 0xA, 6, 7, 5
     .dexName "DUSCLOPS"
     .dexCategory "BECKON"
     .dexText "DUSCLOPS absorbs anything, however"
@@ -1789,7 +1789,7 @@ dexEntry149::
 
     .align 2, 0
 dexEntry150::
-    .2byte 1, 5, 0, 0xA, 6, 0, 7, 0xA, 2, 2, 0, 5
+    .2byte 3, 5, 7, 0xA, 6, 0, 7, 0xA, 2, 2, 0, 5
     .dexName "TROPIUS"
     .dexCategory "FRUIT"
     .dexText "Children of the southern tropics eat"
@@ -1801,7 +1801,7 @@ dexEntry150::
 
     .align 2, 0
 dexEntry151::
-    .2byte 1, 5, 1, 0xA, 2, 0, 0, 0xA, 0xA, 0xA, 2, 2
+    .2byte 3, 5, 8, 0xA, 2, 0, 0, 0xA, 0xA, 0xA, 2, 2
     .dexName "CHIMECHO"
     .dexCategory "WIND CHIME"
     .dexText "In high winds, CHIMECHO cries as it"
@@ -1813,7 +1813,7 @@ dexEntry151::
 
     .align 2, 0
 dexEntry152::
-    .2byte 1, 5, 2, 0xA, 3, 1, 1, 0xA, 1, 0, 3, 6
+    .2byte 3, 5, 9, 0xA, 3, 1, 1, 0xA, 1, 0, 3, 6
     .dexName "ABSOL"
     .dexCategory "DISASTER"
     .dexText "ABSOL has the ability to foretell the"
@@ -1825,7 +1825,7 @@ dexEntry152::
 
     .align 2, 0
 dexEntry153::
-    .2byte 1, 5, 3, 0xA, 2, 0, 0, 0xA, 0xA, 2, 1, 8
+    .2byte 0, 3, 7, 0xA, 2, 0, 0, 0xA, 0xA, 2, 1, 8
     .dexName "VULPIX"
     .dexCategory "FOX"
     .dexText "At the time of its birth, VULPIX has one"
@@ -1837,7 +1837,7 @@ dexEntry153::
 
     .align 2, 0
 dexEntry154::
-    .2byte 1, 5, 4, 0xA, 3, 0, 7, 0xA, 0xA, 4, 3, 9
+    .2byte 0, 3, 8, 0xA, 3, 0, 7, 0xA, 0xA, 4, 3, 9
     .dexName "NINETALES"
     .dexCategory "FOX"
     .dexText "NINETALES casts a sinister light from"
@@ -1849,7 +1849,7 @@ dexEntry154::
 
     .align 2, 0
 dexEntry155::
-    .2byte 1, 5, 5, 0xA, 1, 0, 0, 0xA, 0xA, 0xA, 4, 4
+    .2byte 1, 7, 2, 0xA, 1, 0, 0, 0xA, 0xA, 0xA, 4, 4
     .dexName "PICHU"
     .dexCategory "TINY MOUSE"
     .dexText "PICHU charges itself with electricity"
@@ -1861,7 +1861,7 @@ dexEntry155::
 
     .align 2, 0
 dexEntry156::
-    .2byte 1, 5, 6, 0xA, 1, 0, 4, 0xA, 0xA, 1, 3, 2
+    .2byte 0, 2, 5, 0xA, 1, 0, 4, 0xA, 0xA, 1, 3, 2
     .dexName "PIKACHU"
     .dexCategory "MOUSE"
     .dexText "Whenever PIKACHU comes across"
@@ -1873,7 +1873,7 @@ dexEntry156::
 
     .align 2, 0
 dexEntry157::
-    .2byte 1, 5, 7, 0xA, 2, 0, 7, 0xA, 0xA, 6, 6, 1
+    .2byte 0, 2, 6, 0xA, 2, 0, 7, 0xA, 0xA, 6, 6, 1
     .dexName "RAICHU"
     .dexCategory "MOUSE"
     .dexText "If the electrical sacks become"
@@ -1885,7 +1885,7 @@ dexEntry157::
 
     .align 2, 0
 dexEntry158::
-    .2byte 1, 5, 8, 0xA, 2, 0, 7, 0xA, 0xA, 4, 3, 2
+    .2byte 0, 5, 4, 0xA, 2, 0, 7, 0xA, 0xA, 4, 3, 2
     .dexName "PSYDUCK"
     .dexCategory "DUCK"
     .dexText "PSYDUCK uses a mysterious power."
@@ -1897,7 +1897,7 @@ dexEntry158::
 
     .align 2, 0
 dexEntry159::
-    .2byte 1, 5, 9, 0xA, 5, 0, 7, 0xA, 1, 6, 8, 9
+    .2byte 0, 5, 5, 0xA, 5, 0, 7, 0xA, 1, 6, 8, 9
     .dexName "GOLDUCK"
     .dexCategory "DUCK"
     .dexText "The webbed flippers on its forelegs and"
@@ -1909,7 +1909,7 @@ dexEntry159::
 
     .align 2, 0
 dexEntry160::
-    .2byte 1, 6, 0, 0xA, 2, 0, 0, 0xA, 0xA, 3, 0, 9
+    .2byte 3, 6, 0, 0xA, 2, 0, 0, 0xA, 0xA, 3, 0, 9
     .dexName "WYNAUT"
     .dexCategory "BRIGHT"
     .dexText "WYNAUT can always be seen with a big,"
@@ -1921,7 +1921,7 @@ dexEntry160::
 
     .align 2, 0
 dexEntry161::
-    .2byte 1, 6, 1, 0xA, 4, 0, 3, 0xA, 0xA, 6, 2, 8
+    .2byte 2, 0, 2, 0xA, 4, 0, 3, 0xA, 0xA, 6, 2, 8
     .dexName "WOBBUFFET"
     .dexCategory "PATIENT"
     .dexText "If two or more WOBBUFFET meet, they will"
@@ -1933,7 +1933,7 @@ dexEntry161::
 
     .align 2, 0
 dexEntry162::
-    .2byte 1, 6, 2, 0xA, 0, 0, 8, 0xA, 0xA, 0xA, 4, 4
+    .2byte 1, 7, 7, 0xA, 0, 0, 8, 0xA, 0xA, 0xA, 4, 4
     .dexName "NATU"
     .dexCategory "TINY BIRD"
     .dexText "NATU cannot fly because its wings are"
@@ -1945,7 +1945,7 @@ dexEntry162::
 
     .align 2, 0
 dexEntry163::
-    .2byte 1, 6, 3, 0xA, 4, 1, 1, 0xA, 0xA, 3, 3, 1
+    .2byte 1, 7, 8, 0xA, 4, 1, 1, 0xA, 0xA, 3, 3, 1
     .dexName "XATU"
     .dexCategory "MYSTIC"
     .dexText "XATU stands rooted and still in one"
@@ -1957,7 +1957,7 @@ dexEntry163::
 
     .align 2, 0
 dexEntry164::
-    .2byte 1, 6, 4, 0xA, 4, 1, 1, 0xA, 0xA, 9, 1, 5
+    .2byte 2, 0, 3, 0xA, 4, 1, 1, 0xA, 0xA, 9, 1, 5
     .dexName "GIRAFARIG"
     .dexCategory "LONG NECK"
     .dexText "GIRAFARIG`s rear head also has a brain,"
@@ -1969,7 +1969,7 @@ dexEntry164::
 
     .align 2, 0
 dexEntry165::
-    .2byte 1, 6, 5, 0xA, 1, 0, 8, 0xA, 0xA, 7, 3, 9
+    .2byte 2, 3, 1, 0xA, 1, 0, 8, 0xA, 0xA, 7, 3, 9
     .dexName "PHANPY"
     .dexCategory "LONG NOSE"
     .dexText "PHANPY uses its long nose to shower"
@@ -1981,7 +1981,7 @@ dexEntry165::
 
     .align 2, 0
 dexEntry166::
-    .2byte 1, 6, 6, 0xA, 3, 0, 7, 0xA, 2, 6, 4, 6
+    .2byte 2, 3, 2, 0xA, 3, 0, 7, 0xA, 2, 6, 4, 6
     .dexName "DONPHAN"
     .dexCategory "ARMOR"
     .dexText "If DONPHAN were to tackle with its hard"
@@ -1993,7 +1993,7 @@ dexEntry166::
 
     .align 2, 0
 dexEntry167::
-    .2byte 1, 6, 7, 0xA, 4, 1, 1, 0xA, 1, 2, 1, 3
+    .2byte 1, 2, 7, 0xA, 4, 1, 1, 0xA, 1, 2, 1, 3
     .dexName "PINSIR"
     .dexCategory "STAG BEETLE"
     .dexText "PINSIR is astoundingly strong. It can"
@@ -2005,7 +2005,7 @@ dexEntry167::
 
     .align 2, 0
 dexEntry168::
-    .2byte 1, 6, 8, 0xA, 4, 1, 1, 0xA, 1, 1, 9, 0
+    .2byte 2, 1, 4, 0xA, 4, 1, 1, 0xA, 1, 1, 9, 0
     .dexName "HERACROSS"
     .dexCategory "SINGLE HORN"
     .dexText "HERACROSS charges in a straight line at"
@@ -2017,7 +2017,7 @@ dexEntry168::
 
     .align 2, 0
 dexEntry169::
-    .2byte 1, 6, 9, 0xA, 3, 0, 3, 0xA, 2, 5, 3, 5
+    .2byte 1, 1, 1, 0xA, 3, 0, 3, 0xA, 2, 5, 3, 5
     .dexName "RHYHORN"
     .dexCategory "SPIKES"
     .dexText "RHYHORN runs in a straight line,"
@@ -2029,7 +2029,7 @@ dexEntry169::
 
     .align 2, 0
 dexEntry170::
-    .2byte 1, 7, 0, 0xA, 6, 0, 3, 0xA, 2, 6, 4, 6
+    .2byte 1, 1, 2, 0xA, 6, 0, 3, 0xA, 2, 6, 4, 6
     .dexName "RHYDON"
     .dexCategory "DRILL"
     .dexText "RHYDON`s horn can crush even uncut"
@@ -2041,7 +2041,7 @@ dexEntry170::
 
     .align 2, 0
 dexEntry171::
-    .2byte 1, 7, 1, 0xA, 2, 0, 4, 0xA, 0xA, 3, 7, 0
+    .2byte 3, 6, 1, 0xA, 2, 0, 4, 0xA, 0xA, 3, 7, 0
     .dexName "SNORUNT"
     .dexCategory "SNOW HAT"
     .dexText "SNORUNT live in regions with heavy"
@@ -2053,7 +2053,7 @@ dexEntry171::
 
     .align 2, 0
 dexEntry172::
-    .2byte 1, 7, 2, 0xA, 4, 1, 1, 0xA, 5, 6, 5, 5
+    .2byte 3, 6, 2, 0xA, 4, 1, 1, 0xA, 5, 6, 5, 5
     .dexName "GLALIE"
     .dexCategory "FACE"
     .dexText "GLALIE has a body made of rock, which it"
@@ -2065,7 +2065,7 @@ dexEntry172::
 
     .align 2, 0
 dexEntry173::
-    .2byte 1, 7, 3, 0xA, 2, 0, 7, 0xA, 0xA, 8, 7, 1
+    .2byte 3, 6, 3, 0xA, 2, 0, 7, 0xA, 0xA, 8, 7, 1
     .dexName "SPHEAL"
     .dexCategory "CLAP"
     .dexText "SPHEAL is much faster rolling than"
@@ -2077,7 +2077,7 @@ dexEntry173::
 
     .align 2, 0
 dexEntry174::
-    .2byte 1, 7, 4, 0xA, 3, 0, 7, 0xA, 1, 9, 3, 1
+    .2byte 3, 6, 4, 0xA, 3, 0, 7, 0xA, 1, 9, 3, 1
     .dexName "SEALEO"
     .dexCategory "BALL ROLL"
     .dexText "SEALEO has the habit of always juggling"
@@ -2089,7 +2089,7 @@ dexEntry174::
 
     .align 2, 0
 dexEntry175::
-    .2byte 1, 7, 5, 0xA, 4, 0, 7, 0xA, 3, 3, 2, 0
+    .2byte 3, 6, 5, 0xA, 4, 0, 7, 0xA, 3, 3, 2, 0
     .dexName "WALREIN"
     .dexCategory "ICE BREAK"
     .dexText "WALREIN`s two massively developed"
@@ -2101,7 +2101,7 @@ dexEntry175::
 
     .align 2, 0
 dexEntry176::
-    .2byte 1, 7, 6, 0xA, 1, 0, 4, 0xA, 1, 1, 5, 7
+    .2byte 3, 6, 6, 0xA, 1, 0, 4, 0xA, 1, 1, 5, 7
     .dexName "CLAMPERL"
     .dexCategory "BIVALVE"
     .dexText "CLAMPERL grows while being protected"
@@ -2113,7 +2113,7 @@ dexEntry176::
 
     .align 2, 0
 dexEntry177::
-    .2byte 1, 7, 7, 0xA, 5, 0, 7, 0xA, 0xA, 5, 9, 5
+    .2byte 3, 6, 7, 0xA, 5, 0, 7, 0xA, 0xA, 5, 9, 5
     .dexName "HUNTAIL"
     .dexCategory "DEEP SEA"
     .dexText "HUNTAIL`s tail is shaped like a fish."
@@ -2125,7 +2125,7 @@ dexEntry177::
 
     .align 2, 0
 dexEntry178::
-    .2byte 1, 7, 8, 0xA, 5, 1, 1, 0xA, 0xA, 4, 9, 8
+    .2byte 3, 6, 8, 0xA, 5, 1, 1, 0xA, 0xA, 4, 9, 8
     .dexName "GOREBYSS"
     .dexCategory "SOUTH SEA"
     .dexText "Although GOREBYSS is the very picture"
@@ -2137,7 +2137,7 @@ dexEntry178::
 
     .align 2, 0
 dexEntry179::
-    .2byte 1, 7, 9, 0xA, 3, 0, 3, 0xA, 0xA, 5, 1, 6
+    .2byte 3, 6, 9, 0xA, 3, 0, 3, 0xA, 0xA, 5, 1, 6
     .dexName "RELICANTH"
     .dexCategory "LONGEVITY"
     .dexText "RELICANTH is a POKéMON species that"
@@ -2149,7 +2149,7 @@ dexEntry179::
 
     .align 2, 0
 dexEntry180::
-    .2byte 1, 8, 0, 0xA, 2, 0, 0, 0xA, 0xA, 1, 1, 0
+    .2byte 2, 2, 2, 0xA, 2, 0, 0, 0xA, 0xA, 1, 1, 0
     .dexName "CORSOLA"
     .dexCategory "CORAL"
     .dexText "Clusters of CORSOLA congregate in warm"
@@ -2161,7 +2161,7 @@ dexEntry180::
 
     .align 2, 0
 dexEntry181::
-    .2byte 1, 8, 1, 0xA, 1, 0, 8, 0xA, 0xA, 2, 6, 5
+    .2byte 1, 7, 0, 0xA, 1, 0, 8, 0xA, 0xA, 2, 6, 5
     .dexName "CHINCHOU"
     .dexCategory "ANGLER"
     .dexText "CHINCHOU`s two antennas are filled with"
@@ -2173,7 +2173,7 @@ dexEntry181::
 
     .align 2, 0
 dexEntry182::
-    .2byte 1, 8, 2, 0xA, 3, 1, 1, 0xA, 0xA, 4, 9, 6
+    .2byte 1, 7, 1, 0xA, 3, 1, 1, 0xA, 0xA, 4, 9, 6
     .dexName "LANTURN"
     .dexCategory "LIGHT"
     .dexText "LANTURN is known to emit light."
@@ -2185,7 +2185,7 @@ dexEntry182::
 
     .align 2, 0
 dexEntry183::
-    .2byte 1, 8, 3, 0xA, 2, 0, 0, 0xA, 0xA, 1, 9, 2
+    .2byte 3, 7, 0, 0xA, 2, 0, 0, 0xA, 0xA, 1, 9, 2
     .dexName "LUVDISC"
     .dexCategory "RENDEZVOUS"
     .dexText "LUVDISC live in shallow seas in the"
@@ -2197,7 +2197,7 @@ dexEntry183::
 
     .align 2, 0
 dexEntry184::
-    .2byte 1, 8, 4, 0xA, 1, 0, 4, 0xA, 0xA, 1, 7, 6
+    .2byte 1, 1, 6, 0xA, 1, 0, 4, 0xA, 0xA, 1, 7, 6
     .dexName "HORSEA"
     .dexCategory "DRAGON"
     .dexText "If HORSEA senses danger, it will"
@@ -2209,7 +2209,7 @@ dexEntry184::
 
     .align 2, 0
 dexEntry185::
-    .2byte 1, 8, 5, 0xA, 3, 1, 1, 0xA, 0xA, 5, 5, 1
+    .2byte 1, 1, 7, 0xA, 3, 1, 1, 0xA, 0xA, 5, 5, 1
     .dexName "SEADRA"
     .dexCategory "DRAGON"
     .dexText "SEADRA generates whirlpools by spinning"
@@ -2221,7 +2221,7 @@ dexEntry185::
 
     .align 2, 0
 dexEntry186::
-    .2byte 1, 8, 6, 0xA, 5, 1, 1, 0xA, 3, 3, 5, 1
+    .2byte 2, 3, 0, 0xA, 5, 1, 1, 0xA, 3, 3, 5, 1
     .dexName "KINGDRA"
     .dexCategory "DRAGON"
     .dexText "KINGDRA sleeps on the seafloor where"
@@ -2233,7 +2233,7 @@ dexEntry186::
 
     .align 2, 0
 dexEntry187::
-    .2byte 1, 8, 7, 0xA, 2, 0, 0, 0xA, 0xA, 9, 2, 8
+    .2byte 3, 7, 1, 0xA, 2, 0, 0, 0xA, 0xA, 9, 2, 8
     .dexName "BAGON"
     .dexCategory "ROCK HEAD"
     .dexText "BAGON has a dream of one day soaring"
@@ -2245,7 +2245,7 @@ dexEntry187::
 
     .align 2, 0
 dexEntry188::
-    .2byte 1, 8, 8, 0xA, 3, 0, 7, 0xA, 2, 4, 3, 6
+    .2byte 3, 7, 2, 0xA, 3, 0, 7, 0xA, 2, 4, 3, 6
     .dexName "SHELGON"
     .dexCategory "ENDURANCE"
     .dexText "Inside SHELGON`s armor-like shell, cells"
@@ -2257,7 +2257,7 @@ dexEntry188::
 
     .align 2, 0
 dexEntry189::
-    .2byte 1, 8, 9, 0xA, 4, 1, 1, 0xA, 2, 2, 6, 2
+    .2byte 3, 7, 3, 0xA, 4, 1, 1, 0xA, 2, 2, 6, 2
     .dexName "SALAMENCE"
     .dexCategory "DRAGON"
     .dexText "SALAMENCE came about as a result of a"
@@ -2269,7 +2269,7 @@ dexEntry189::
 
     .align 2, 0
 dexEntry190::
-    .2byte 1, 9, 0, 0xA, 2, 0, 0, 0xA, 2, 0, 9, 9
+    .2byte 3, 7, 4, 0xA, 2, 0, 0, 0xA, 2, 0, 9, 9
     .dexName "BELDUM"
     .dexCategory "IRON BALL"
     .dexText "BELDUM keeps itself floating by"
@@ -2281,7 +2281,7 @@ dexEntry190::
 
     .align 2, 0
 dexEntry191::
-    .2byte 1, 9, 1, 0xA, 3, 1, 1, 0xA, 4, 4, 6, 4
+    .2byte 3, 7, 5, 0xA, 3, 1, 1, 0xA, 4, 4, 6, 4
     .dexName "METANG"
     .dexCategory "IRON CLAW"
     .dexText "When two BELDUM fuse together, METANG"
@@ -2293,7 +2293,7 @@ dexEntry191::
 
     .align 2, 0
 dexEntry192::
-    .2byte 1, 9, 2, 0xA, 5, 0, 3, 1, 2, 1, 2, 5
+    .2byte 3, 7, 6, 0xA, 5, 0, 3, 1, 2, 1, 2, 5
     .dexName "METAGROSS"
     .dexCategory "IRON LEG"
     .dexText "METAGROSS is the result of two METANG"
@@ -2305,7 +2305,7 @@ dexEntry192::
 
     .align 2, 0
 dexEntry193::
-    .2byte 1, 9, 3, 0xA, 5, 0, 7, 0xA, 5, 0, 7, 1
+    .2byte 3, 7, 7, 0xA, 5, 0, 7, 0xA, 5, 0, 7, 1
     .dexName "REGIROCK"
     .dexCategory "ROCK PEAK"
     .dexText "REGIROCK was sealed away by people"
@@ -2317,7 +2317,7 @@ dexEntry193::
 
     .align 2, 0
 dexEntry194::
-    .2byte 1, 9, 4, 0xA, 5, 1, 1, 0xA, 3, 8, 5, 8
+    .2byte 3, 7, 8, 0xA, 5, 1, 1, 0xA, 3, 8, 5, 8
     .dexName "REGICE"
     .dexCategory "ICEBERG"
     .dexText "REGICE cloaks itself with frigid air of"
@@ -2329,7 +2329,7 @@ dexEntry194::
 
     .align 2, 0
 dexEntry195::
-    .2byte 1, 9, 5, 0xA, 6, 0, 3, 0xA, 4, 5, 1, 9
+    .2byte 3, 7, 9, 0xA, 6, 0, 3, 0xA, 4, 5, 1, 9
     .dexName "REGISTEEL"
     .dexCategory "IRON"
     .dexText "REGISTEEL has a body that is harder"
@@ -2341,7 +2341,7 @@ dexEntry195::
 
     .align 2, 0
 dexEntry196::
-    .2byte 1, 9, 6, 0xA, 4, 0, 7, 0xA, 0xA, 8, 8, 2
+    .2byte 3, 8, 0, 0xA, 4, 0, 7, 0xA, 0xA, 8, 8, 2
     .dexName "LATIAS"
     .dexCategory "EON"
     .dexText "LATIAS is highly intelligent and capable"
@@ -2353,7 +2353,7 @@ dexEntry196::
 
     .align 2, 0
 dexEntry197::
-    .2byte 1, 9, 7, 0xA, 6, 0, 7, 0xA, 1, 3, 2, 3
+    .2byte 3, 8, 1, 0xA, 6, 0, 7, 0xA, 1, 3, 2, 3
     .dexName "LATIOS"
     .dexCategory "EON"
     .dexText "LATIOS has the ability to make its foe"
@@ -2365,7 +2365,7 @@ dexEntry197::
 
     .align 2, 0
 dexEntry198::
-    .2byte 1, 9, 8, 1, 4, 0, 9, 0xA, 7, 7, 6, 0
+    .2byte 3, 8, 2, 1, 4, 0, 9, 0xA, 7, 7, 6, 0
     .dexName "KYOGRE"
     .dexCategory "SEA BASIN"
     .dexText "KYOGRE is named in mythology as the"
@@ -2377,7 +2377,7 @@ dexEntry198::
 
     .align 2, 0
 dexEntry199::
-    .2byte 1, 9, 9, 1, 1, 0, 6, 2, 0, 9, 4, 4
+    .2byte 3, 8, 3, 1, 1, 0, 6, 2, 0, 9, 4, 4
     .dexName "GROUDON"
     .dexCategory "CONTINENT"
     .dexText "GROUDON has long been described in"
@@ -2389,7 +2389,7 @@ dexEntry199::
 
     .align 2, 0
 dexEntry200::
-    .2byte 2, 0, 0, 2, 3, 0, 0, 0xA, 4, 5, 5, 2
+    .2byte 3, 8, 4, 2, 3, 0, 0, 0xA, 4, 5, 5, 2
     .dexName "RAYQUAZA"
     .dexCategory "SKY HIGH"
     .dexText "RAYQUAZA is said to have lived for"
@@ -2401,7 +2401,7 @@ dexEntry200::
 
     .align 2, 0
 dexEntry201::
-    .2byte 2, 0, 1, 0xA, 1, 0, 0, 0xA, 0xA, 0xA, 2, 4
+    .2byte 3, 8, 5, 0xA, 1, 0, 0, 0xA, 0xA, 0xA, 2, 4
     .dexName "JIRACHI"
     .dexCategory "WISH"
     .dexText "A legend states that JIRACHI will make"
@@ -2413,7 +2413,7 @@ dexEntry201::
 
     .align 2, 0
 dexEntry202::
-    .2byte 0xA, 0xA, 0xA, 0xA, 2, 1, 1, 0xA, 0xA, 1, 4, 1
+    .2byte 1, 5, 2, 0xA, 2, 1, 1, 0xA, 0xA, 1, 4, 1
     .dexName "CHIKORITA"
     .dexCategory "LEAF"
     .dexText "Bonus appearance on Ruby Field."
@@ -2425,7 +2425,7 @@ dexEntry202::
 
     .align 2, 0
 dexEntry203::
-    .2byte 0xA, 0xA, 0xA, 0xA, 1, 0, 8, 0xA, 0xA, 1, 7, 4
+    .2byte 1, 5, 5, 0xA, 1, 0, 8, 0xA, 0xA, 1, 7, 4
     .dexName "CYNDAQUIL"
     .dexCategory "FIRE MOUSE"
     .dexText "Bonus appearance on Ruby Field."
@@ -2437,7 +2437,7 @@ dexEntry203::
 
     .align 2, 0
 dexEntry204::
-    .2byte 0xA, 0xA, 0xA, 0xA, 2, 0, 0, 0xA, 0xA, 2, 0, 9
+    .2byte 1, 5, 8, 0xA, 2, 0, 0, 0xA, 0xA, 2, 0, 9
     .dexName "TOTODILE"
     .dexCategory "BIG JAW"
     .dexText "Bonus appearance on Ruby Field."
@@ -2449,7 +2449,7 @@ dexEntry204::
 
     .align 2, 0
 dexEntry205::
-    .2byte 0xA, 0xA, 0xA, 0xA, 5, 1, 1, 0xA, 1, 3, 0, 1
+    .2byte 1, 4, 2, 0xA, 5, 1, 1, 0xA, 1, 3, 0, 1
     .dexName "AERODACTYL"
     .dexCategory "FOSSIL"
     .dexText "Bonus appearance on Ruby Field."
@@ -2461,7 +2461,7 @@ dexEntry205::
 
     .align 2, 0
 dexEntry206::
-    .2byte 2, 0, 6, 0xA, 0, 0, 8, 0xA, 2, 9, 8, 0
+    .2byte 5, 2, 2, 0xA, 0, 0, 8, 0xA, 2, 9, 8, 0
     .dexName "BLITZLE"
     .dexCategory "ELECTRIC"
     .dexText "BLITZLE stores electricity in the"
@@ -2473,12 +2473,2171 @@ dexEntry206::
 
     .align 2, 0
 dexEntry207::
-    .2byte 2, 0, 7, 0xA, 0, 0, 1, 0xA, 1, 9, 5, 0
+    .2byte 5, 2, 3, 0xA, 0, 0, 1, 0xA, 1, 9, 5, 0
     .dexName "ZEBSTRIKA"
     .dexCategory "THUNDERBOLT"
     .dexText "ZEBSTRIKA runs like lightning"
     .dexText "across open grasslands."
     .dexText "Its mane crackles with electricity"
     .dexText "when it charges into battle."
+    .dexText ""
+    .dexText ""
+    .align 2, 0
+dexEntry208::
+    .2byte 0, 0, 1, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "BULBASAUR"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry209::
+    .2byte 0, 0, 2, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "IVYSAUR"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry210::
+    .2byte 0, 0, 3, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "VENUSAUR"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry211::
+    .2byte 0, 0, 4, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "CHARMANDER"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry212::
+    .2byte 0, 0, 5, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "CHARMELEON"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry213::
+    .2byte 0, 0, 6, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "CHARIZARD"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry214::
+    .2byte 0, 0, 7, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "SQUIRTLE"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry215::
+    .2byte 0, 0, 8, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "WARTORTLE"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry216::
+    .2byte 0, 0, 9, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "BLASTOISE"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry217::
+    .2byte 0, 1, 0, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "CATERPIE"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry218::
+    .2byte 0, 1, 1, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "METAPOD"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry219::
+    .2byte 0, 1, 2, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "BUTTERFREE"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry220::
+    .2byte 0, 1, 3, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "WEEDLE"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry221::
+    .2byte 0, 1, 4, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "KAKUNA"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry222::
+    .2byte 0, 1, 5, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "BEEDRILL"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry223::
+    .2byte 0, 1, 6, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "PIDGEY"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry224::
+    .2byte 0, 1, 7, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "PIDGEOTTO"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry225::
+    .2byte 0, 1, 8, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "PIDGEOT"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry226::
+    .2byte 0, 1, 9, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "RATTATA"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry227::
+    .2byte 0, 2, 0, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "RATICATE"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry228::
+    .2byte 0, 2, 1, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "SPEAROW"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry229::
+    .2byte 0, 2, 2, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "FEAROW"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry230::
+    .2byte 0, 2, 3, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "EKANS"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry231::
+    .2byte 0, 2, 4, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "ARBOK"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry232::
+    .2byte 0, 2, 9, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "NIDORAN F"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry233::
+    .2byte 0, 3, 0, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "NIDORINA"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry234::
+    .2byte 0, 3, 1, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "NIDOQUEEN"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry235::
+    .2byte 0, 3, 2, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "NIDORAN M"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry236::
+    .2byte 0, 3, 3, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "NIDORINO"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry237::
+    .2byte 0, 3, 4, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "NIDOKING"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry238::
+    .2byte 0, 3, 5, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "CLEFAIRY"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry239::
+    .2byte 0, 3, 6, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "CLEFABLE"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry240::
+    .2byte 0, 4, 6, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "PARAS"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry241::
+    .2byte 0, 4, 7, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "PARASECT"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry242::
+    .2byte 0, 4, 8, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "VENONAT"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry243::
+    .2byte 0, 4, 9, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "VENOMOTH"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry244::
+    .2byte 0, 5, 0, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "DIGLETT"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry245::
+    .2byte 0, 5, 1, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "DUGTRIO"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry246::
+    .2byte 0, 5, 2, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "MEOWTH"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry247::
+    .2byte 0, 5, 3, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "PERSIAN"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry248::
+    .2byte 0, 5, 6, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "MANKEY"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry249::
+    .2byte 0, 5, 7, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "PRIMEAPE"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry250::
+    .2byte 0, 5, 8, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "GROWLITHE"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry251::
+    .2byte 0, 5, 9, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "ARCANINE"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry252::
+    .2byte 0, 6, 0, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "POLIWAG"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry253::
+    .2byte 0, 6, 1, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "POLIWHIRL"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry254::
+    .2byte 0, 6, 2, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "POLIWRATH"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry255::
+    .2byte 0, 6, 9, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "BELLSPROUT"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry256::
+    .2byte 0, 7, 0, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "WEEPINBELL"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry257::
+    .2byte 0, 7, 1, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "VICTREEBEL"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry258::
+    .2byte 0, 7, 7, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "PONYTA"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry259::
+    .2byte 0, 7, 8, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "RAPIDASH"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry260::
+    .2byte 0, 7, 9, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "SLOWPOKE"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry261::
+    .2byte 0, 8, 0, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "SLOWBRO"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry262::
+    .2byte 0, 8, 3, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "FARFETCHD"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry263::
+    .2byte 0, 8, 6, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "SEEL"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry264::
+    .2byte 0, 8, 7, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "DEWGONG"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry265::
+    .2byte 0, 9, 0, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "SHELLDER"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry266::
+    .2byte 0, 9, 1, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "CLOYSTER"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry267::
+    .2byte 0, 9, 2, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "GASTLY"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry268::
+    .2byte 0, 9, 3, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "HAUNTER"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry269::
+    .2byte 0, 9, 4, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "GENGAR"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry270::
+    .2byte 0, 9, 5, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "ONIX"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry271::
+    .2byte 0, 9, 6, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "DROWZEE"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry272::
+    .2byte 0, 9, 7, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "HYPNO"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry273::
+    .2byte 0, 9, 8, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "KRABBY"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry274::
+    .2byte 0, 9, 9, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "KINGLER"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry275::
+    .2byte 1, 0, 2, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "EXEGGCUTE"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry276::
+    .2byte 1, 0, 3, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "EXEGGUTOR"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry277::
+    .2byte 1, 0, 4, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "CUBONE"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry278::
+    .2byte 1, 0, 5, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "MAROWAK"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry279::
+    .2byte 1, 0, 6, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "HITMONLEE"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry280::
+    .2byte 1, 0, 7, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "HITMONCHAN"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry281::
+    .2byte 1, 0, 8, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "LICKITUNG"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry282::
+    .2byte 1, 1, 3, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "CHANSEY"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry283::
+    .2byte 1, 1, 4, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "TANGELA"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry284::
+    .2byte 1, 1, 5, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "KANGASKHAN"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry285::
+    .2byte 1, 2, 2, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "MR MIME"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry286::
+    .2byte 1, 2, 3, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "SCYTHER"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry287::
+    .2byte 1, 2, 4, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "JYNX"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry288::
+    .2byte 1, 2, 5, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "ELECTABUZZ"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry289::
+    .2byte 1, 2, 6, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "MAGMAR"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry290::
+    .2byte 1, 2, 8, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "TAUROS"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry291::
+    .2byte 1, 3, 1, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "LAPRAS"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry292::
+    .2byte 1, 3, 2, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "DITTO"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry293::
+    .2byte 1, 3, 3, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "EEVEE"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry294::
+    .2byte 1, 3, 4, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "VAPOREON"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry295::
+    .2byte 1, 3, 5, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "JOLTEON"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry296::
+    .2byte 1, 3, 6, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "FLAREON"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry297::
+    .2byte 1, 3, 7, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "PORYGON"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry298::
+    .2byte 1, 3, 8, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "OMANYTE"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry299::
+    .2byte 1, 3, 9, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "OMASTAR"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry300::
+    .2byte 1, 4, 0, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "KABUTO"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry301::
+    .2byte 1, 4, 1, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "KABUTOPS"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry302::
+    .2byte 1, 4, 3, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "SNORLAX"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry303::
+    .2byte 1, 4, 4, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "ARTICUNO"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry304::
+    .2byte 1, 4, 5, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "ZAPDOS"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry305::
+    .2byte 1, 4, 6, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "MOLTRES"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry306::
+    .2byte 1, 4, 7, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "DRATINI"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry307::
+    .2byte 1, 4, 8, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "DRAGONAIR"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry308::
+    .2byte 1, 4, 9, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "DRAGONITE"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry309::
+    .2byte 1, 5, 0, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "MEWTWO"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry310::
+    .2byte 1, 5, 1, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "MEW"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry311::
+    .2byte 1, 5, 3, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "BAYLEEF"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry312::
+    .2byte 1, 5, 4, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "MEGANIUM"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry313::
+    .2byte 1, 5, 6, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "QUILAVA"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry314::
+    .2byte 1, 5, 7, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "TYPHLOSION"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry315::
+    .2byte 1, 5, 9, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "CROCONAW"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry316::
+    .2byte 1, 6, 0, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "FERALIGATR"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry317::
+    .2byte 1, 6, 1, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "SENTRET"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry318::
+    .2byte 1, 6, 2, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "FURRET"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry319::
+    .2byte 1, 6, 3, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "HOOTHOOT"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry320::
+    .2byte 1, 6, 4, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "NOCTOWL"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry321::
+    .2byte 1, 6, 5, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "LEDYBA"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry322::
+    .2byte 1, 6, 6, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "LEDIAN"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry323::
+    .2byte 1, 6, 7, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "SPINARAK"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry324::
+    .2byte 1, 6, 8, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "ARIADOS"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry325::
+    .2byte 1, 7, 3, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "CLEFFA"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry326::
+    .2byte 1, 7, 5, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "TOGEPI"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry327::
+    .2byte 1, 7, 6, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "TOGETIC"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry328::
+    .2byte 1, 7, 9, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "MAREEP"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry329::
+    .2byte 1, 8, 0, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "FLAAFFY"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry330::
+    .2byte 1, 8, 1, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "AMPHAROS"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry331::
+    .2byte 1, 8, 5, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "SUDOWOODO"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry332::
+    .2byte 1, 8, 6, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "POLITOED"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry333::
+    .2byte 1, 8, 7, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "HOPPIP"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry334::
+    .2byte 1, 8, 8, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "SKIPLOOM"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry335::
+    .2byte 1, 8, 9, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "JUMPLUFF"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry336::
+    .2byte 1, 9, 0, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "AIPOM"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry337::
+    .2byte 1, 9, 1, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "SUNKERN"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry338::
+    .2byte 1, 9, 2, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "SUNFLORA"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry339::
+    .2byte 1, 9, 3, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "YANMA"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry340::
+    .2byte 1, 9, 4, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "WOOPER"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry341::
+    .2byte 1, 9, 5, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "QUAGSIRE"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry342::
+    .2byte 1, 9, 6, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "ESPEON"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry343::
+    .2byte 1, 9, 7, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "UMBREON"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry344::
+    .2byte 1, 9, 8, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "MURKROW"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry345::
+    .2byte 1, 9, 9, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "SLOWKING"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry346::
+    .2byte 2, 0, 0, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "MISDREAVUS"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry347::
+    .2byte 2, 0, 1, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "UNOWN"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry348::
+    .2byte 2, 0, 4, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "PINECO"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry349::
+    .2byte 2, 0, 5, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "FORRETRESS"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry350::
+    .2byte 2, 0, 6, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "DUNSPARCE"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry351::
+    .2byte 2, 0, 7, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "GLIGAR"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry352::
+    .2byte 2, 0, 8, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "STEELIX"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry353::
+    .2byte 2, 0, 9, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "SNUBBULL"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry354::
+    .2byte 2, 1, 0, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "GRANBULL"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry355::
+    .2byte 2, 1, 1, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "QWILFISH"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry356::
+    .2byte 2, 1, 2, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "SCIZOR"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry357::
+    .2byte 2, 1, 3, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "SHUCKLE"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry358::
+    .2byte 2, 1, 5, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "SNEASEL"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry359::
+    .2byte 2, 1, 6, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "TEDDIURSA"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry360::
+    .2byte 2, 1, 7, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "URSARING"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry361::
+    .2byte 2, 2, 0, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "SWINUB"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry362::
+    .2byte 2, 2, 1, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "PILOSWINE"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry363::
+    .2byte 2, 2, 3, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "REMORAID"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry364::
+    .2byte 2, 2, 4, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "OCTILLERY"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry365::
+    .2byte 2, 2, 5, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "DELIBIRD"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry366::
+    .2byte 2, 2, 6, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "MANTINE"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry367::
+    .2byte 2, 2, 8, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "HOUNDOUR"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry368::
+    .2byte 2, 2, 9, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "HOUNDOOM"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry369::
+    .2byte 2, 3, 3, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "PORYGON2"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry370::
+    .2byte 2, 3, 4, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "STANTLER"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry371::
+    .2byte 2, 3, 5, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "SMEARGLE"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry372::
+    .2byte 2, 3, 6, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "TYROGUE"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry373::
+    .2byte 2, 3, 7, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "HITMONTOP"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry374::
+    .2byte 2, 3, 8, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "SMOOCHUM"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry375::
+    .2byte 2, 3, 9, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "ELEKID"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry376::
+    .2byte 2, 4, 0, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "MAGBY"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry377::
+    .2byte 2, 4, 1, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "MILTANK"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry378::
+    .2byte 2, 4, 2, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "BLISSEY"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry379::
+    .2byte 2, 4, 3, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "RAIKOU"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry380::
+    .2byte 2, 4, 4, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "ENTEI"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry381::
+    .2byte 2, 4, 5, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "SUICUNE"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry382::
+    .2byte 2, 4, 6, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "LARVITAR"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry383::
+    .2byte 2, 4, 7, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "PUPITAR"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry384::
+    .2byte 2, 4, 8, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "TYRANITAR"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry385::
+    .2byte 2, 4, 9, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "LUGIA"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry386::
+    .2byte 2, 5, 0, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "HO-OH"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry387::
+    .2byte 2, 5, 1, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "CELEBI"
+    .dexCategory "TEMP"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait and catch art use"
+    .dexText "placeholder graphics for now."
+    .dexText ""
     .dexText ""
     .dexText ""

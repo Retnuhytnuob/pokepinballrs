@@ -80,7 +80,7 @@ struct PokemonSpecies {
     /*0x13*/ u8 specialEggFlag; // Something egg related; only hatch pokemon have this set to 1, but not all do, and there is no other pattern
     // specialEggFlag list: Azurill, Skitty, Zubat, Plusle, Minun, Igglybuff, Shuppet, Chimecho, Pichu, Natu
     /*0x14*/ s8 evolutionMethod; // Exp, Stone, etc.
-    /*0x15*/ u8 evolutionTarget; // Uses the standard index numbers; e.g. Treecko is 0x00 (SPECIES_TREECKO)
+    /*0x16*/ u16 evolutionTarget; // Uses the standard index numbers; e.g. Treecko is 0x00 (SPECIES_TREECKO)
 };
 
 #endif  // GUARD_TYPES_H

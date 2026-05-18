@@ -169,14 +169,43 @@ static void LoadGenerationSelectFont(void)
         const u8 *glyph = GetGenerationGlyph(tile + 32);
         for (row = 0; row < 8; row++)
         {
-            u8 bits = glyph[row];
             u32 packed = 0;
             s16 pixel;
 
             for (pixel = 0; pixel < 8; pixel++)
             {
-                if (bits & (0x80 >> pixel))
-                    packed |= 2 << (pixel * 4);
+                s16 outline;
+                s16 neighborRow;
+                s16 neighborPixel;
+                u8 color = 0;
+
+                if (glyph[row] & (0x80 >> pixel))
+                {
+                    color = 1;
+                }
+                else
+                {
+                    outline = 0;
+                    for (neighborRow = row - 1; neighborRow <= row + 1; neighborRow++)
+                    {
+                        if (neighborRow < 0 || neighborRow >= 8)
+                            continue;
+
+                        for (neighborPixel = pixel - 1; neighborPixel <= pixel + 1; neighborPixel++)
+                        {
+                            if (neighborPixel < 0 || neighborPixel >= 8)
+                                continue;
+
+                            if (glyph[neighborRow] & (0x80 >> neighborPixel))
+                                outline = 1;
+                        }
+                    }
+
+                    if (outline)
+                        color = 2;
+                }
+
+                packed |= color << (pixel * 4);
             }
             *dest++ = packed;
         }

@@ -1,4 +1,4 @@
-gMonPortraitsGroup0_Gfx:: @ 0x084C596C
+gMonPortraitsGroup0_Gfx:: @ 0x0
 	.incbin "graphics/mon_portraits/treecko_portrait.4bpp"
 	.incbin "graphics/mon_portraits/grovyle_portrait.4bpp"
 	.incbin "graphics/mon_portraits/sceptile_portrait.4bpp"
@@ -15,7 +15,7 @@ gMonPortraitsGroup0_Gfx:: @ 0x084C596C
 	.incbin "graphics/mon_portraits/wurmple_portrait.4bpp"
 	.incbin "graphics/mon_portraits/silcoon_portrait.4bpp"
 
-gMonPortraitsGroup1_Gfx:: @ 0x084C866C
+gMonPortraitsGroup1_Gfx:: @ 0x0
 	.incbin "graphics/mon_portraits/beautifly_portrait.4bpp"
 	.incbin "graphics/mon_portraits/cascoon_portrait.4bpp"
 	.incbin "graphics/mon_portraits/dustox_portrait.4bpp"
@@ -32,7 +32,7 @@ gMonPortraitsGroup1_Gfx:: @ 0x084C866C
 	.incbin "graphics/mon_portraits/ralts_portrait.4bpp"
 	.incbin "graphics/mon_portraits/kirlia_portrait.4bpp"
 
-gMonPortraitsGroup2_Gfx:: @ 0x084CB36C
+gMonPortraitsGroup2_Gfx:: @ 0x0
 	.incbin "graphics/mon_portraits/gardevoir_portrait.4bpp"
 	.incbin "graphics/mon_portraits/surskit_portrait.4bpp"
 	.incbin "graphics/mon_portraits/masquerain_portrait.4bpp"
@@ -49,7 +49,7 @@ gMonPortraitsGroup2_Gfx:: @ 0x084CB36C
 	.incbin "graphics/mon_portraits/shedinja_portrait.4bpp"
 	.incbin "graphics/mon_portraits/whismur_portrait.4bpp"
 
-gMonPortraitsGroup3_Gfx:: @ 0x084CE06C
+gMonPortraitsGroup3_Gfx:: @ 0x0
 	.incbin "graphics/mon_portraits/loudred_portrait.4bpp"
 	.incbin "graphics/mon_portraits/exploud_portrait.4bpp"
 	.incbin "graphics/mon_portraits/makuhita_portrait.4bpp"
@@ -66,7 +66,7 @@ gMonPortraitsGroup3_Gfx:: @ 0x084CE06C
 	.incbin "graphics/mon_portraits/golem_portrait.4bpp"
 	.incbin "graphics/mon_portraits/nosepass_portrait.4bpp"
 
-gMonPortraitsGroup4_Gfx:: @ 0x084D0D6C
+gMonPortraitsGroup4_Gfx:: @ 0x0
 	.incbin "graphics/mon_portraits/skitty_portrait.4bpp"
 	.incbin "graphics/mon_portraits/delcatty_portrait.4bpp"
 	.incbin "graphics/mon_portraits/zubat_portrait.4bpp"
@@ -83,7 +83,7 @@ gMonPortraitsGroup4_Gfx:: @ 0x084D0D6C
 	.incbin "graphics/mon_portraits/machoke_portrait.4bpp"
 	.incbin "graphics/mon_portraits/machamp_portrait.4bpp"
 
-gMonPortraitsGroup5_Gfx:: @ 0x084D3A6C
+gMonPortraitsGroup5_Gfx:: @ 0x0
 	.incbin "graphics/mon_portraits/meditite_portrait.4bpp"
 	.incbin "graphics/mon_portraits/medicham_portrait.4bpp"
 	.incbin "graphics/mon_portraits/electrike_portrait.4bpp"
@@ -100,7 +100,7 @@ gMonPortraitsGroup5_Gfx:: @ 0x084D3A6C
 	.incbin "graphics/mon_portraits/gloom_portrait.4bpp"
 	.incbin "graphics/mon_portraits/vileplume_portrait.4bpp"
 
-gMonPortraitsGroup6_Gfx:: @ 0x084D676C
+gMonPortraitsGroup6_Gfx:: @ 0x0
 	.incbin "graphics/mon_portraits/bellossom_portrait.4bpp"
 	.incbin "graphics/mon_portraits/doduo_portrait.4bpp"
 	.incbin "graphics/mon_portraits/dodrio_portrait.4bpp"
@@ -117,7 +117,7 @@ gMonPortraitsGroup6_Gfx:: @ 0x084D676C
 	.incbin "graphics/mon_portraits/magcargo_portrait.4bpp"
 	.incbin "graphics/mon_portraits/torkoal_portrait.4bpp"
 
-gMonPortraitsGroup7_Gfx:: @ 0x084D946C
+gMonPortraitsGroup7_Gfx:: @ 0x0
 	.incbin "graphics/mon_portraits/grimer_portrait.4bpp"
 	.incbin "graphics/mon_portraits/muk_portrait.4bpp"
 	.incbin "graphics/mon_portraits/koffing_portrait.4bpp"
@@ -134,7 +134,7 @@ gMonPortraitsGroup7_Gfx:: @ 0x084D946C
 	.incbin "graphics/mon_portraits/cacnea_portrait.4bpp"
 	.incbin "graphics/mon_portraits/cacturne_portrait.4bpp"
 
-gMonPortraitsGroup8_Gfx:: @ 0x084DC16C
+gMonPortraitsGroup8_Gfx:: @ 0x0
 	.incbin "graphics/mon_portraits/swablu_portrait.4bpp"
 	.incbin "graphics/mon_portraits/altaria_portrait.4bpp"
 	.incbin "graphics/mon_portraits/zangoose_portrait.4bpp"
@@ -151,7 +151,7 @@ gMonPortraitsGroup8_Gfx:: @ 0x084DC16C
 	.incbin "graphics/mon_portraits/cradily_portrait.4bpp"
 	.incbin "graphics/mon_portraits/anorith_portrait.4bpp"
 
-gMonPortraitsGroup9_Gfx:: @ 0x084DF16C
+gMonPortraitsGroup9_Gfx:: @ 0x0
 	.incbin "graphics/mon_portraits/armaldo_portrait.4bpp"
 	.incbin "graphics/mon_portraits/igglybuff_portrait.4bpp"
 	.incbin "graphics/mon_portraits/jigglypuff_portrait.4bpp"
@@ -168,7 +168,7 @@ gMonPortraitsGroup9_Gfx:: @ 0x084DF16C
 	.incbin "graphics/mon_portraits/dusclops_portrait.4bpp"
 	.incbin "graphics/mon_portraits/tropius_portrait.4bpp"
 
-gMonPortraitsGroup10_Gfx:: @ 0x084E216C
+gMonPortraitsGroup10_Gfx:: @ 0x0
 	.incbin "graphics/mon_portraits/chimecho_portrait.4bpp"
 	.incbin "graphics/mon_portraits/absol_portrait.4bpp"
 	.incbin "graphics/mon_portraits/vulpix_portrait.4bpp"
@@ -185,7 +185,7 @@ gMonPortraitsGroup10_Gfx:: @ 0x084E216C
 	.incbin "graphics/mon_portraits/girafarig_portrait.4bpp"
 	.incbin "graphics/mon_portraits/phanpy_portrait.4bpp"
 
-gMonPortraitsGroup11_Gfx:: @ 0x084E4E6C
+gMonPortraitsGroup11_Gfx:: @ 0x0
 	.incbin "graphics/mon_portraits/donphan_portrait.4bpp"
 	.incbin "graphics/mon_portraits/pinsir_portrait.4bpp"
 	.incbin "graphics/mon_portraits/heracross_portrait.4bpp"
@@ -202,7 +202,7 @@ gMonPortraitsGroup11_Gfx:: @ 0x084E4E6C
 	.incbin "graphics/mon_portraits/relicanth_portrait.4bpp"
 	.incbin "graphics/mon_portraits/corsola_portrait.4bpp"
 
-gMonPortraitsGroup12_Gfx:: @ 0x084E756C
+gMonPortraitsGroup12_Gfx:: @ 0x0
 	.incbin "graphics/mon_portraits/chinchou_portrait.4bpp"
 	.incbin "graphics/mon_portraits/lanturn_portrait.4bpp"
 	.incbin "graphics/mon_portraits/luvdisc_portrait.4bpp"
@@ -219,7 +219,7 @@ gMonPortraitsGroup12_Gfx:: @ 0x084E756C
 	.incbin "graphics/mon_portraits/regice_portrait.4bpp"
 	.incbin "graphics/mon_portraits/registeel_portrait.4bpp"
 
-gMonPortraitsGroup13_Gfx:: @ 0x084EA26C
+gMonPortraitsGroup13_Gfx:: @ 0x0
 	.incbin "graphics/mon_portraits/latias_portrait.4bpp"
 	.incbin "graphics/mon_portraits/latios_portrait.4bpp"
 	.incbin "graphics/mon_portraits/kyogre_portrait.4bpp"
@@ -232,7 +232,207 @@ gMonPortraitsGroup13_Gfx:: @ 0x084EA26C
 	.incbin "graphics/mon_portraits/aerodactyl_portrait.4bpp"
 	.incbin "graphics/mon_portraits/blitzle_portrait.4bpp"
 	.incbin "graphics/mon_portraits/zebstrika_portrait.4bpp"
-	.incbin "graphics/mon_portraits/207_portrait.4bpp"
-	.incbin "graphics/mon_portraits/208_portrait.4bpp"
-	.incbin "graphics/mon_portraits/209_portrait.4bpp"
-	.incbin "graphics/mon_portraits/210_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+
+gMonPortraitsGroup14_Gfx:: @ 0x0
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+
+gMonPortraitsGroup15_Gfx:: @ 0x0
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+
+gMonPortraitsGroup16_Gfx:: @ 0x0
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+
+gMonPortraitsGroup17_Gfx:: @ 0x0
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+
+gMonPortraitsGroup18_Gfx:: @ 0x0
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+
+gMonPortraitsGroup19_Gfx:: @ 0x0
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+
+gMonPortraitsGroup20_Gfx:: @ 0x0
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+
+gMonPortraitsGroup21_Gfx:: @ 0x0
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+
+gMonPortraitsGroup22_Gfx:: @ 0x0
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+
+gMonPortraitsGroup23_Gfx:: @ 0x0
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+
+gMonPortraitsGroup24_Gfx:: @ 0x0
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+
+gMonPortraitsGroup25_Gfx:: @ 0x0
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"
+	.incbin "graphics/mon_portraits/question_mark_portrait.4bpp"

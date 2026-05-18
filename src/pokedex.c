@@ -87,6 +87,7 @@ enum PokedexPopupType {
 // The japanese and english text glyphs are sourced from the same blob of tile graphics, and
 // each glyph is two tiles high.
 #define ENGLISH_GLYPHS_START 0x2820
+#define POKEDEX_RAM_FLAG_COUNT 232
 extern const u8 gPokedexTextGlyphs_Gfx[];
 
 struct PokedexEntry
@@ -101,6 +102,33 @@ struct PokedexEntry
 }; /* size=0x23C */
 
 extern const struct PokedexEntry gPokedexEntries[];
+
+static const s16 gPokedexOrder[NUM_SPECIES] = {
+#include "../data/pokedex_entries/pokedex_order.inc"
+};
+
+static s16 PokedexListPositionToSpecies(s16 listPosition)
+{
+    if (listPosition < 0)
+        return gPokedexOrder[0];
+    if (listPosition >= NUM_SPECIES)
+        return gPokedexOrder[NUM_SPECIES - 1];
+
+    return gPokedexOrder[listPosition];
+}
+
+static s16 GetPokedexFlag(s16 species)
+{
+    if (species >= NUM_SAVE_SPECIES && species < NUM_SPECIES)
+        return gExtraPokedexFlags[species - NUM_SAVE_SPECIES];
+
+    return gPokedexFlags[species];
+}
+
+static void UpdateSelectedMonFromListPosition(void)
+{
+    gPokedexSelectedMon = PokedexListPositionToSpecies(gPokedexListPosition + gPokedexCursorOffset);
+}
 
 void PokedexMain(void)
 {
@@ -207,6 +235,7 @@ void InitPokedexState(void)
     }
 
     gPokedexListEntryCount = NUM_SPECIES;
+    UpdateSelectedMonFromListPosition();
 }
 
 void Pokedex_HandleListInput(void)
@@ -253,7 +282,7 @@ void Pokedex_HandleListInput(void)
         {
             gPokedexDetailFrameCount = 0;
 
-            if (gPokedexFlags[gPokedexSelectedMon] >= 2)
+            if (GetPokedexFlag(gPokedexSelectedMon) >= 2)
             {
                 gPokedexShowButtonPrompt = 0;
                 DmaCopy16(3, 0x6000280, (void *)gPokedexInfoWindowBackupTiles, 0x200);
@@ -309,7 +338,7 @@ void Pokedex_HandleListInput(void)
         {
             gPokedexDetailFrameCount = 0;
 
-            if (gPokedexFlags[gPokedexSelectedMon] >= SPECIES_SHARED)
+            if (GetPokedexFlag(gPokedexSelectedMon) >= SPECIES_SHARED)
             {
                 gPokedexShowButtonPrompt = 0;
                 DmaCopy16(3, 0x6000280, (void *)gPokedexInfoWindowBackupTiles, 0x200);
@@ -471,7 +500,7 @@ void Pokedex_DetailViewInput(void)
 
     if (JOY_HELD(SELECT_BUTTON))
     {
-        if (gPokedexFlags[gPokedexSelectedMon] == SPECIES_CAUGHT)
+        if (GetPokedexFlag(gPokedexSelectedMon) == SPECIES_CAUGHT)
         {
             if (gDexAnimationIx[gPokedexSelectedMon] == -1)
             {
@@ -720,10 +749,7 @@ void Pokedex_DeleteConfirmation(void)
             gPokedexFlagExchangeBuffer[i] = 0;
             gPokedexFlags[i] = 0;
         }
-        for (i = 0; i < NUM_SAVE_SPECIES; i++)
-        {
-            gMain_saveData.pokedexFlags[i] = gPokedexFlags[i];
-        }
+        ResetPokedex();
 
         gPokedexShowPopupWindow = 0;
         gPokedexPopupTypeIndex = POKEDEX_POPUP_TRANSMISSION_CONNECT_PROMPT;
@@ -774,7 +800,6 @@ static void PokedexListScrollUp(void)
             if (gPokedexScrollActive == 0)
             {
                 gPokedexListPosition = gPokedexListEntryCount - NUM_BONUS_SPECIES - 1;
-                gPokedexSelectedMon = gPokedexListEntryCount - 1;
                 gPokedexCursorOffset = 4;
                 m4aSongNumStart(SE_MENU_MOVE);
             }
@@ -782,7 +807,6 @@ static void PokedexListScrollUp(void)
         else
         {
             gPokedexListPosition--;
-            gPokedexSelectedMon--;
             m4aSongNumStart(SE_MENU_MOVE);
         }
 
@@ -792,12 +816,12 @@ static void PokedexListScrollUp(void)
     {
         m4aSongNumStart(SE_MENU_MOVE);
         gPokedexCursorOffset--;
-        gPokedexSelectedMon--;
 
         gPokedexScrollWaitFrames = SCROLL_WAIT_FRAMES;
     }
 
     gPokedexScrollActive = 1;
+    UpdateSelectedMonFromListPosition();
 }
 
 static void PokedexListScrollDown(void)
@@ -814,7 +838,6 @@ static void PokedexListScrollDown(void)
             if (gPokedexScrollActive == 0)
             {
                 gPokedexListPosition = 0;
-                gPokedexSelectedMon = 0;
                 gPokedexCursorOffset = 0;
                 m4aSongNumStart(SE_MENU_MOVE);
             }
@@ -822,7 +845,6 @@ static void PokedexListScrollDown(void)
         else
         {
             gPokedexListPosition++;
-            gPokedexSelectedMon++;
             m4aSongNumStart(SE_MENU_MOVE);
         }
 
@@ -832,11 +854,11 @@ static void PokedexListScrollDown(void)
     {
         m4aSongNumStart(SE_MENU_MOVE);
         gPokedexCursorOffset++;
-        gPokedexSelectedMon++;
         gPokedexScrollWaitFrames = SCROLL_WAIT_FRAMES;
     }
 
     gPokedexScrollActive = 1;
+    UpdateSelectedMonFromListPosition();
 }
 
 static void PokedexListScrollUpFast(void)
@@ -854,7 +876,7 @@ static void PokedexListScrollUpFast(void)
     if (gPokedexListPosition < 0)
         gPokedexListPosition = 0;
 
-    gPokedexSelectedMon = gPokedexListPosition + gPokedexCursorOffset;
+    UpdateSelectedMonFromListPosition();
     gPokedexScrollWaitFrames = SCROLL_WAIT_FRAMES;
 }
 
@@ -873,7 +895,7 @@ static void PokedexListScrollDownFast(void)
     if (gPokedexListPosition > gPokedexListEntryCount - NUM_BONUS_SPECIES - 1)
         gPokedexListPosition = gPokedexListEntryCount - NUM_BONUS_SPECIES - 1;
 
-    gPokedexSelectedMon = gPokedexListPosition + gPokedexCursorOffset;
+    UpdateSelectedMonFromListPosition();
     gPokedexScrollWaitFrames = SCROLL_WAIT_FRAMES;
 }
 
@@ -908,7 +930,7 @@ void Pokedex_CheckDeleteKeyComboPressed(void)
 
 void UpdateMonSpriteVisibility(void)
 {
-    if (gPokedexFlags[gPokedexSelectedMon] == SPECIES_CAUGHT)
+    if (GetPokedexFlag(gPokedexSelectedMon) == SPECIES_CAUGHT)
     {
         if (gDexAnimationIx[gPokedexSelectedMon] == -1)
         {
@@ -945,7 +967,7 @@ void UpdateMonSpriteVisibility(void)
 
 u8 GetSelectedMonSpriteType(void)
 {
-    if (gPokedexFlags[gPokedexSelectedMon] == SPECIES_CAUGHT && gDexAnimationIx[gPokedexSelectedMon] != -1)
+    if (GetPokedexFlag(gPokedexSelectedMon) == SPECIES_CAUGHT && gDexAnimationIx[gPokedexSelectedMon] != -1)
     {
         if (gDexAnimationIx[gPokedexSelectedMon] < 100)
             return 1;
@@ -1023,8 +1045,8 @@ void RenderPokedexSprites(void)
     gOamBuffer[groupOam->oamId].x = groupOam->xOffset + group0->baseX;
     gOamBuffer[groupOam->oamId].y = groupOam->yOffset + group0->baseY;
 
-    if (gPokedexSelectedMon < 200)
-        gPokedexScrollbarY = 86 + gPokedexSelectedMon / 3;
+    if (gPokedexListPosition + gPokedexCursorOffset < 200)
+        gPokedexScrollbarY = 86 + (gPokedexListPosition + gPokedexCursorOffset) / 3;
     else
         gPokedexScrollbarY = 152;
 
@@ -1235,7 +1257,7 @@ static void RenderLinkGraphics(void)
     gOamBuffer[groupOam->oamId].x = groupOam->xOffset + group0->baseX;
     gOamBuffer[groupOam->oamId].y = groupOam->yOffset + group0->baseY;
 
-    gPokedexScrollbarY = 86 + gPokedexSelectedMon / 3;
+    gPokedexScrollbarY = 86 + (gPokedexListPosition + gPokedexCursorOffset) / 3;
     group1->baseX = 13;
     group1->baseY = gPokedexScrollbarY;
     groupOam = &group1->oam[0];
@@ -1707,7 +1729,7 @@ static void PrintSelectedMonDexNum(s16 species)
     var0 = 0;
     if (species == SPECIES_JIRACHI)
     {
-        if (gPokedexFlags[SPECIES_JIRACHI] != SPECIES_UNSEEN)
+        if (GetPokedexFlag(SPECIES_JIRACHI) != SPECIES_UNSEEN)
         {
             PrintString(CHAR_2_FONT_1, 1, 5, 2, 1, 2);
             PrintString(CHAR_0_FONT_1, 1, 6, 2, 1, 2);
@@ -1727,7 +1749,7 @@ static void PrintSelectedMonDexNum(s16 species)
             PrintString(gPokedexEntries[species].dexNum[i] + 32, 1, i + 5, 2, 1, 2);
     }
 
-    if (gPokedexFlags[species] > SPECIES_UNSEEN)
+    if (GetPokedexFlag(species) > SPECIES_UNSEEN)
     {
         for (i = 0; i < POKEMON_NAME_LENGTH; i++)
         {
@@ -1752,7 +1774,7 @@ static void PrintSelectedMonDexNum(s16 species)
             CopyBgTilesRect((void *)&gPokedexTextGlyphs_Gfx[ENGLISH_GLYPHS_START], (void *)0x06004C00 + i * 0x20, 1, 2);
     }
 
-    if (gPokedexFlags[species] == SPECIES_SEEN || gPokedexFlags[species] > SPECIES_SHARED)
+    if (GetPokedexFlag(species) == SPECIES_SEEN || GetPokedexFlag(species) > SPECIES_SHARED)
     {
         for (i = 0; i < POKEMON_CATEGORY_NAME_LENGTH; i++)
         {
@@ -1776,7 +1798,7 @@ static void PrintSelectedMonDexNum(s16 species)
             CopyBgTilesRect((void *)&gPokedexTextGlyphs_Gfx[ENGLISH_GLYPHS_START], (void *)0x06004D00 + i * 0x20, 1, 2);
     }
 
-    if (gPokedexFlags[species] == SPECIES_CAUGHT)
+    if (GetPokedexFlag(species) == SPECIES_CAUGHT)
     {
         PrintString(gPokedexEntries[species].heightWeight[0] + 32, 1, 16, 6, 1, 2);
         PrintString(gPokedexEntries[species].heightWeight[1] + 32, 1, 17, 6, 1, 2);
@@ -1833,9 +1855,11 @@ void PrintDexNumbersFromListPosition(s16 listPosition)
     var0 = 0;
     for (i = 0; i < ENTRIES_SHOWN_COUNT; i++)
     {
-        if (listPosition + i == SPECIES_JIRACHI)
+        species = PokedexListPositionToSpecies(listPosition + i);
+
+        if (species == SPECIES_JIRACHI)
         {
-            if (gPokedexFlags[SPECIES_JIRACHI] != SPECIES_UNSEEN)
+            if (GetPokedexFlag(SPECIES_JIRACHI) != SPECIES_UNSEEN)
             {
                 PrintString(CHAR_2_FONT_1, 2, 8, i * 2 + 10, 1, 2);
                 PrintString(CHAR_0_FONT_1, 2, 9, i * 2 + 10, 1, 2);
@@ -1850,15 +1874,16 @@ void PrintDexNumbersFromListPosition(s16 listPosition)
         }
         else
         {
-            // Doesn't use listPosition for some reason, despite being the only value passed
             for (j = 0; j < DEX_NUM_DIGITS; j++)
-                PrintString(gPokedexEntries[gPokedexListPosition + i].dexNum[j] + 32, 2, j + 8, i * 2 + 10, 1, 2);
+                PrintString(gPokedexEntries[species].dexNum[j] + 32, 2, j + 8, i * 2 + 10, 1, 2);
         }
     }
 
     for (i = 0; i < ENTRIES_SHOWN_COUNT; i++)
     {
-        if (gPokedexFlags[listPosition + i] > SPECIES_UNSEEN)
+        species = PokedexListPositionToSpecies(listPosition + i);
+
+        if (GetPokedexFlag(species) > SPECIES_UNSEEN)
         {
 			//This manually builds the tiles needed, for kerning reasons.
 			//First 3 bytes point to a tile glyph pair (with an upper and lower half) and
@@ -1866,9 +1891,8 @@ void PrintDexNumbersFromListPosition(s16 listPosition)
 			//The 'space' character is 4 px wide.
             for (j = 0; j < POKEMON_NAME_LENGTH; j++)
             {
-                // These don't use listPosition for some reason, despite being the only value passed
-                var1 = gPokedexEntries[gPokedexListPosition + i].name[j] & ~0xF;
-                var2 = gPokedexEntries[gPokedexListPosition + i].name[j] & 0xF;
+                var1 = gPokedexEntries[species].name[j] & ~0xF;
+                var2 = gPokedexEntries[species].name[j] & 0xF;
                 if (var2 == 0)
                     var2 = 4;
 
@@ -1899,14 +1923,14 @@ static void PrintCaughtBallFromListPosition(s16 position)
 
     for (i = 0; i < ENTRIES_SHOWN_COUNT; i++)
     {
-        var0 = gPokedexFlags[position + i] == SPECIES_CAUGHT ? CHAR_BALL_CAUGHT : CHAR_BALL_NOT_CAUGHT;
+        var0 = GetPokedexFlag(PokedexListPositionToSpecies(position + i)) == SPECIES_CAUGHT ? CHAR_BALL_CAUGHT : CHAR_BALL_NOT_CAUGHT;
         PrintString(var0, 1, 4, 10 + i * 2, 2, 2);
     }
 }
 
 void LoadMonPortrait(s16 species)
 {
-    s16 state = gPokedexFlags[gPokedexSelectedMon];
+    s16 state = GetPokedexFlag(gPokedexSelectedMon);
     s16 var1 = species / 15;
     s16 var2 = species % 15;
 
@@ -2355,20 +2379,19 @@ void LoadPokedexFlagsFromSave(void)
 
     for (i = NUM_SAVE_SPECIES; i < NUM_SPECIES; i++)
     {
-        gPokedexFlags[i] = gExtraPokedexFlags[i - NUM_SAVE_SPECIES];
-        if (gPokedexFlags[i] == SPECIES_UNSEEN)
-            gPokedexFlags[i] = SPECIES_SEEN;
+        if (gExtraPokedexFlags[i - NUM_SAVE_SPECIES] == SPECIES_UNSEEN)
+            gExtraPokedexFlags[i - NUM_SAVE_SPECIES] = SPECIES_SEEN;
     }
 
 	// It's unclear what these trailing 20 entries are...
-    for (i = NUM_SPECIES; i < NUM_SPECIES + 20; i++)
+    for (i = NUM_SAVE_SPECIES; i < POKEDEX_RAM_FLAG_COUNT; i++)
         gPokedexFlags[i] = 0;
 
     gPokedexNumOwned = 0;
     gPokedexNumSeen = 0;
     for (i = 0; i < NUM_SPECIES; i++)
     {
-        switch (gPokedexFlags[i])
+        switch (GetPokedexFlag(i))
         {
         case SPECIES_CAUGHT:
             gPokedexNumOwned++;
@@ -2425,7 +2448,7 @@ s16 CheckMonHasAnimation(s16 species)
         return gPokedexShowAnimSprite;
     }
 
-    if (gPokedexFlags[species] == 4 && gDexAnimationIx[species] != -1)
+    if (GetPokedexFlag(species) == 4 && gDexAnimationIx[species] != -1)
         gPokedexShowAnimSprite = 1;
     else
         gPokedexShowAnimSprite = 0;

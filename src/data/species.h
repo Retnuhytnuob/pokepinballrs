@@ -2069,4 +2069,1804 @@ const struct PokemonSpecies gSpeciesInfo[NUM_SPECIES] = {
         .evolutionMethod = 0,
         .evolutionTarget = SPECIES_NONE
     },
+    [SPECIES_BULBASAUR] = {
+        .speciesIdRS = 1,
+        .nameJapanese = {0},
+        .name = "BULBASAUR ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_IVYSAUR] = {
+        .speciesIdRS = 2,
+        .nameJapanese = {0},
+        .name = "IVYSAUR   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_VENUSAUR] = {
+        .speciesIdRS = 3,
+        .nameJapanese = {0},
+        .name = "VENUSAUR  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_CHARMANDER] = {
+        .speciesIdRS = 4,
+        .nameJapanese = {0},
+        .name = "CHARMANDER",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_CHARMELEON] = {
+        .speciesIdRS = 5,
+        .nameJapanese = {0},
+        .name = "CHARMELEON",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_CHARIZARD] = {
+        .speciesIdRS = 6,
+        .nameJapanese = {0},
+        .name = "CHARIZARD ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_SQUIRTLE] = {
+        .speciesIdRS = 7,
+        .nameJapanese = {0},
+        .name = "SQUIRTLE  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_WARTORTLE] = {
+        .speciesIdRS = 8,
+        .nameJapanese = {0},
+        .name = "WARTORTLE ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_BLASTOISE] = {
+        .speciesIdRS = 9,
+        .nameJapanese = {0},
+        .name = "BLASTOISE ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_CATERPIE] = {
+        .speciesIdRS = 10,
+        .nameJapanese = {0},
+        .name = "CATERPIE  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_METAPOD] = {
+        .speciesIdRS = 11,
+        .nameJapanese = {0},
+        .name = "METAPOD   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_BUTTERFREE] = {
+        .speciesIdRS = 12,
+        .nameJapanese = {0},
+        .name = "BUTTERFREE",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_WEEDLE] = {
+        .speciesIdRS = 13,
+        .nameJapanese = {0},
+        .name = "WEEDLE    ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_KAKUNA] = {
+        .speciesIdRS = 14,
+        .nameJapanese = {0},
+        .name = "KAKUNA    ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_BEEDRILL] = {
+        .speciesIdRS = 15,
+        .nameJapanese = {0},
+        .name = "BEEDRILL  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_PIDGEY] = {
+        .speciesIdRS = 16,
+        .nameJapanese = {0},
+        .name = "PIDGEY    ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_PIDGEOTTO] = {
+        .speciesIdRS = 17,
+        .nameJapanese = {0},
+        .name = "PIDGEOTTO ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_PIDGEOT] = {
+        .speciesIdRS = 18,
+        .nameJapanese = {0},
+        .name = "PIDGEOT   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_RATTATA] = {
+        .speciesIdRS = 19,
+        .nameJapanese = {0},
+        .name = "RATTATA   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_RATICATE] = {
+        .speciesIdRS = 20,
+        .nameJapanese = {0},
+        .name = "RATICATE  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_SPEAROW] = {
+        .speciesIdRS = 21,
+        .nameJapanese = {0},
+        .name = "SPEAROW   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_FEAROW] = {
+        .speciesIdRS = 22,
+        .nameJapanese = {0},
+        .name = "FEAROW    ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_EKANS] = {
+        .speciesIdRS = 23,
+        .nameJapanese = {0},
+        .name = "EKANS     ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_ARBOK] = {
+        .speciesIdRS = 24,
+        .nameJapanese = {0},
+        .name = "ARBOK     ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_NIDORAN_F] = {
+        .speciesIdRS = 29,
+        .nameJapanese = {0},
+        .name = "NIDORAN F ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_NIDORINA] = {
+        .speciesIdRS = 30,
+        .nameJapanese = {0},
+        .name = "NIDORINA  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_NIDOQUEEN] = {
+        .speciesIdRS = 31,
+        .nameJapanese = {0},
+        .name = "NIDOQUEEN ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_NIDORAN_M] = {
+        .speciesIdRS = 32,
+        .nameJapanese = {0},
+        .name = "NIDORAN M ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_NIDORINO] = {
+        .speciesIdRS = 33,
+        .nameJapanese = {0},
+        .name = "NIDORINO  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_NIDOKING] = {
+        .speciesIdRS = 34,
+        .nameJapanese = {0},
+        .name = "NIDOKING  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_CLEFAIRY] = {
+        .speciesIdRS = 35,
+        .nameJapanese = {0},
+        .name = "CLEFAIRY  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_CLEFABLE] = {
+        .speciesIdRS = 36,
+        .nameJapanese = {0},
+        .name = "CLEFABLE  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_PARAS] = {
+        .speciesIdRS = 46,
+        .nameJapanese = {0},
+        .name = "PARAS     ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_PARASECT] = {
+        .speciesIdRS = 47,
+        .nameJapanese = {0},
+        .name = "PARASECT  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_VENONAT] = {
+        .speciesIdRS = 48,
+        .nameJapanese = {0},
+        .name = "VENONAT   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_VENOMOTH] = {
+        .speciesIdRS = 49,
+        .nameJapanese = {0},
+        .name = "VENOMOTH  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_DIGLETT] = {
+        .speciesIdRS = 50,
+        .nameJapanese = {0},
+        .name = "DIGLETT   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_DUGTRIO] = {
+        .speciesIdRS = 51,
+        .nameJapanese = {0},
+        .name = "DUGTRIO   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_MEOWTH] = {
+        .speciesIdRS = 52,
+        .nameJapanese = {0},
+        .name = "MEOWTH    ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_PERSIAN] = {
+        .speciesIdRS = 53,
+        .nameJapanese = {0},
+        .name = "PERSIAN   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_MANKEY] = {
+        .speciesIdRS = 56,
+        .nameJapanese = {0},
+        .name = "MANKEY    ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_PRIMEAPE] = {
+        .speciesIdRS = 57,
+        .nameJapanese = {0},
+        .name = "PRIMEAPE  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_GROWLITHE] = {
+        .speciesIdRS = 58,
+        .nameJapanese = {0},
+        .name = "GROWLITHE ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_ARCANINE] = {
+        .speciesIdRS = 59,
+        .nameJapanese = {0},
+        .name = "ARCANINE  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_POLIWAG] = {
+        .speciesIdRS = 60,
+        .nameJapanese = {0},
+        .name = "POLIWAG   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_POLIWHIRL] = {
+        .speciesIdRS = 61,
+        .nameJapanese = {0},
+        .name = "POLIWHIRL ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_POLIWRATH] = {
+        .speciesIdRS = 62,
+        .nameJapanese = {0},
+        .name = "POLIWRATH ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_BELLSPROUT] = {
+        .speciesIdRS = 69,
+        .nameJapanese = {0},
+        .name = "BELLSPROUT",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_WEEPINBELL] = {
+        .speciesIdRS = 70,
+        .nameJapanese = {0},
+        .name = "WEEPINBELL",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_VICTREEBEL] = {
+        .speciesIdRS = 71,
+        .nameJapanese = {0},
+        .name = "VICTREEBEL",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_PONYTA] = {
+        .speciesIdRS = 77,
+        .nameJapanese = {0},
+        .name = "PONYTA    ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_RAPIDASH] = {
+        .speciesIdRS = 78,
+        .nameJapanese = {0},
+        .name = "RAPIDASH  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_SLOWPOKE] = {
+        .speciesIdRS = 79,
+        .nameJapanese = {0},
+        .name = "SLOWPOKE  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_SLOWBRO] = {
+        .speciesIdRS = 80,
+        .nameJapanese = {0},
+        .name = "SLOWBRO   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_FARFETCHD] = {
+        .speciesIdRS = 83,
+        .nameJapanese = {0},
+        .name = "FARFETCHD ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_SEEL] = {
+        .speciesIdRS = 86,
+        .nameJapanese = {0},
+        .name = "SEEL      ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_DEWGONG] = {
+        .speciesIdRS = 87,
+        .nameJapanese = {0},
+        .name = "DEWGONG   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_SHELLDER] = {
+        .speciesIdRS = 90,
+        .nameJapanese = {0},
+        .name = "SHELLDER  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_CLOYSTER] = {
+        .speciesIdRS = 91,
+        .nameJapanese = {0},
+        .name = "CLOYSTER  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_GASTLY] = {
+        .speciesIdRS = 92,
+        .nameJapanese = {0},
+        .name = "GASTLY    ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_HAUNTER] = {
+        .speciesIdRS = 93,
+        .nameJapanese = {0},
+        .name = "HAUNTER   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_GENGAR] = {
+        .speciesIdRS = 94,
+        .nameJapanese = {0},
+        .name = "GENGAR    ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_ONIX] = {
+        .speciesIdRS = 95,
+        .nameJapanese = {0},
+        .name = "ONIX      ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_DROWZEE] = {
+        .speciesIdRS = 96,
+        .nameJapanese = {0},
+        .name = "DROWZEE   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_HYPNO] = {
+        .speciesIdRS = 97,
+        .nameJapanese = {0},
+        .name = "HYPNO     ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_KRABBY] = {
+        .speciesIdRS = 98,
+        .nameJapanese = {0},
+        .name = "KRABBY    ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_KINGLER] = {
+        .speciesIdRS = 99,
+        .nameJapanese = {0},
+        .name = "KINGLER   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_EXEGGCUTE] = {
+        .speciesIdRS = 102,
+        .nameJapanese = {0},
+        .name = "EXEGGCUTE ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_EXEGGUTOR] = {
+        .speciesIdRS = 103,
+        .nameJapanese = {0},
+        .name = "EXEGGUTOR ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_CUBONE] = {
+        .speciesIdRS = 104,
+        .nameJapanese = {0},
+        .name = "CUBONE    ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_MAROWAK] = {
+        .speciesIdRS = 105,
+        .nameJapanese = {0},
+        .name = "MAROWAK   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_HITMONLEE] = {
+        .speciesIdRS = 106,
+        .nameJapanese = {0},
+        .name = "HITMONLEE ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_HITMONCHAN] = {
+        .speciesIdRS = 107,
+        .nameJapanese = {0},
+        .name = "HITMONCHAN",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_LICKITUNG] = {
+        .speciesIdRS = 108,
+        .nameJapanese = {0},
+        .name = "LICKITUNG ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_CHANSEY] = {
+        .speciesIdRS = 113,
+        .nameJapanese = {0},
+        .name = "CHANSEY   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_TANGELA] = {
+        .speciesIdRS = 114,
+        .nameJapanese = {0},
+        .name = "TANGELA   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_KANGASKHAN] = {
+        .speciesIdRS = 115,
+        .nameJapanese = {0},
+        .name = "KANGASKHAN",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_MR_MIME] = {
+        .speciesIdRS = 122,
+        .nameJapanese = {0},
+        .name = "MR MIME   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_SCYTHER] = {
+        .speciesIdRS = 123,
+        .nameJapanese = {0},
+        .name = "SCYTHER   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_JYNX] = {
+        .speciesIdRS = 124,
+        .nameJapanese = {0},
+        .name = "JYNX      ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_ELECTABUZZ] = {
+        .speciesIdRS = 125,
+        .nameJapanese = {0},
+        .name = "ELECTABUZZ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_MAGMAR] = {
+        .speciesIdRS = 126,
+        .nameJapanese = {0},
+        .name = "MAGMAR    ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_TAUROS] = {
+        .speciesIdRS = 128,
+        .nameJapanese = {0},
+        .name = "TAUROS    ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_LAPRAS] = {
+        .speciesIdRS = 131,
+        .nameJapanese = {0},
+        .name = "LAPRAS    ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_DITTO] = {
+        .speciesIdRS = 132,
+        .nameJapanese = {0},
+        .name = "DITTO     ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_EEVEE] = {
+        .speciesIdRS = 133,
+        .nameJapanese = {0},
+        .name = "EEVEE     ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_VAPOREON] = {
+        .speciesIdRS = 134,
+        .nameJapanese = {0},
+        .name = "VAPOREON  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_JOLTEON] = {
+        .speciesIdRS = 135,
+        .nameJapanese = {0},
+        .name = "JOLTEON   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_FLAREON] = {
+        .speciesIdRS = 136,
+        .nameJapanese = {0},
+        .name = "FLAREON   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_PORYGON] = {
+        .speciesIdRS = 137,
+        .nameJapanese = {0},
+        .name = "PORYGON   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_OMANYTE] = {
+        .speciesIdRS = 138,
+        .nameJapanese = {0},
+        .name = "OMANYTE   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_OMASTAR] = {
+        .speciesIdRS = 139,
+        .nameJapanese = {0},
+        .name = "OMASTAR   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_KABUTO] = {
+        .speciesIdRS = 140,
+        .nameJapanese = {0},
+        .name = "KABUTO    ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_KABUTOPS] = {
+        .speciesIdRS = 141,
+        .nameJapanese = {0},
+        .name = "KABUTOPS  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_SNORLAX] = {
+        .speciesIdRS = 143,
+        .nameJapanese = {0},
+        .name = "SNORLAX   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_ARTICUNO] = {
+        .speciesIdRS = 144,
+        .nameJapanese = {0},
+        .name = "ARTICUNO  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_ZAPDOS] = {
+        .speciesIdRS = 145,
+        .nameJapanese = {0},
+        .name = "ZAPDOS    ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_MOLTRES] = {
+        .speciesIdRS = 146,
+        .nameJapanese = {0},
+        .name = "MOLTRES   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_DRATINI] = {
+        .speciesIdRS = 147,
+        .nameJapanese = {0},
+        .name = "DRATINI   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_DRAGONAIR] = {
+        .speciesIdRS = 148,
+        .nameJapanese = {0},
+        .name = "DRAGONAIR ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_DRAGONITE] = {
+        .speciesIdRS = 149,
+        .nameJapanese = {0},
+        .name = "DRAGONITE ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_MEWTWO] = {
+        .speciesIdRS = 150,
+        .nameJapanese = {0},
+        .name = "MEWTWO    ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_MEW] = {
+        .speciesIdRS = 151,
+        .nameJapanese = {0},
+        .name = "MEW       ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_BAYLEEF] = {
+        .speciesIdRS = 153,
+        .nameJapanese = {0},
+        .name = "BAYLEEF   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_MEGANIUM] = {
+        .speciesIdRS = 154,
+        .nameJapanese = {0},
+        .name = "MEGANIUM  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_QUILAVA] = {
+        .speciesIdRS = 156,
+        .nameJapanese = {0},
+        .name = "QUILAVA   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_TYPHLOSION] = {
+        .speciesIdRS = 157,
+        .nameJapanese = {0},
+        .name = "TYPHLOSION",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_CROCONAW] = {
+        .speciesIdRS = 159,
+        .nameJapanese = {0},
+        .name = "CROCONAW  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_FERALIGATR] = {
+        .speciesIdRS = 160,
+        .nameJapanese = {0},
+        .name = "FERALIGATR",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_SENTRET] = {
+        .speciesIdRS = 161,
+        .nameJapanese = {0},
+        .name = "SENTRET   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_FURRET] = {
+        .speciesIdRS = 162,
+        .nameJapanese = {0},
+        .name = "FURRET    ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_HOOTHOOT] = {
+        .speciesIdRS = 163,
+        .nameJapanese = {0},
+        .name = "HOOTHOOT  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_NOCTOWL] = {
+        .speciesIdRS = 164,
+        .nameJapanese = {0},
+        .name = "NOCTOWL   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_LEDYBA] = {
+        .speciesIdRS = 165,
+        .nameJapanese = {0},
+        .name = "LEDYBA    ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_LEDIAN] = {
+        .speciesIdRS = 166,
+        .nameJapanese = {0},
+        .name = "LEDIAN    ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_SPINARAK] = {
+        .speciesIdRS = 167,
+        .nameJapanese = {0},
+        .name = "SPINARAK  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_ARIADOS] = {
+        .speciesIdRS = 168,
+        .nameJapanese = {0},
+        .name = "ARIADOS   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_CLEFFA] = {
+        .speciesIdRS = 173,
+        .nameJapanese = {0},
+        .name = "CLEFFA    ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_TOGEPI] = {
+        .speciesIdRS = 175,
+        .nameJapanese = {0},
+        .name = "TOGEPI    ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_TOGETIC] = {
+        .speciesIdRS = 176,
+        .nameJapanese = {0},
+        .name = "TOGETIC   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_MAREEP] = {
+        .speciesIdRS = 179,
+        .nameJapanese = {0},
+        .name = "MAREEP    ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_FLAAFFY] = {
+        .speciesIdRS = 180,
+        .nameJapanese = {0},
+        .name = "FLAAFFY   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_AMPHAROS] = {
+        .speciesIdRS = 181,
+        .nameJapanese = {0},
+        .name = "AMPHAROS  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_SUDOWOODO] = {
+        .speciesIdRS = 185,
+        .nameJapanese = {0},
+        .name = "SUDOWOODO ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_POLITOED] = {
+        .speciesIdRS = 186,
+        .nameJapanese = {0},
+        .name = "POLITOED  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_HOPPIP] = {
+        .speciesIdRS = 187,
+        .nameJapanese = {0},
+        .name = "HOPPIP    ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_SKIPLOOM] = {
+        .speciesIdRS = 188,
+        .nameJapanese = {0},
+        .name = "SKIPLOOM  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_JUMPLUFF] = {
+        .speciesIdRS = 189,
+        .nameJapanese = {0},
+        .name = "JUMPLUFF  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_AIPOM] = {
+        .speciesIdRS = 190,
+        .nameJapanese = {0},
+        .name = "AIPOM     ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_SUNKERN] = {
+        .speciesIdRS = 191,
+        .nameJapanese = {0},
+        .name = "SUNKERN   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_SUNFLORA] = {
+        .speciesIdRS = 192,
+        .nameJapanese = {0},
+        .name = "SUNFLORA  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_YANMA] = {
+        .speciesIdRS = 193,
+        .nameJapanese = {0},
+        .name = "YANMA     ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_WOOPER] = {
+        .speciesIdRS = 194,
+        .nameJapanese = {0},
+        .name = "WOOPER    ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_QUAGSIRE] = {
+        .speciesIdRS = 195,
+        .nameJapanese = {0},
+        .name = "QUAGSIRE  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_ESPEON] = {
+        .speciesIdRS = 196,
+        .nameJapanese = {0},
+        .name = "ESPEON    ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_UMBREON] = {
+        .speciesIdRS = 197,
+        .nameJapanese = {0},
+        .name = "UMBREON   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_MURKROW] = {
+        .speciesIdRS = 198,
+        .nameJapanese = {0},
+        .name = "MURKROW   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_SLOWKING] = {
+        .speciesIdRS = 199,
+        .nameJapanese = {0},
+        .name = "SLOWKING  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_MISDREAVUS] = {
+        .speciesIdRS = 200,
+        .nameJapanese = {0},
+        .name = "MISDREAVUS",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_UNOWN] = {
+        .speciesIdRS = 201,
+        .nameJapanese = {0},
+        .name = "UNOWN     ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_PINECO] = {
+        .speciesIdRS = 204,
+        .nameJapanese = {0},
+        .name = "PINECO    ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_FORRETRESS] = {
+        .speciesIdRS = 205,
+        .nameJapanese = {0},
+        .name = "FORRETRESS",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_DUNSPARCE] = {
+        .speciesIdRS = 206,
+        .nameJapanese = {0},
+        .name = "DUNSPARCE ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_GLIGAR] = {
+        .speciesIdRS = 207,
+        .nameJapanese = {0},
+        .name = "GLIGAR    ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_STEELIX] = {
+        .speciesIdRS = 208,
+        .nameJapanese = {0},
+        .name = "STEELIX   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_SNUBBULL] = {
+        .speciesIdRS = 209,
+        .nameJapanese = {0},
+        .name = "SNUBBULL  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_GRANBULL] = {
+        .speciesIdRS = 210,
+        .nameJapanese = {0},
+        .name = "GRANBULL  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_QWILFISH] = {
+        .speciesIdRS = 211,
+        .nameJapanese = {0},
+        .name = "QWILFISH  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_SCIZOR] = {
+        .speciesIdRS = 212,
+        .nameJapanese = {0},
+        .name = "SCIZOR    ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_SHUCKLE] = {
+        .speciesIdRS = 213,
+        .nameJapanese = {0},
+        .name = "SHUCKLE   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_SNEASEL] = {
+        .speciesIdRS = 215,
+        .nameJapanese = {0},
+        .name = "SNEASEL   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_TEDDIURSA] = {
+        .speciesIdRS = 216,
+        .nameJapanese = {0},
+        .name = "TEDDIURSA ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_URSARING] = {
+        .speciesIdRS = 217,
+        .nameJapanese = {0},
+        .name = "URSARING  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_SWINUB] = {
+        .speciesIdRS = 220,
+        .nameJapanese = {0},
+        .name = "SWINUB    ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_PILOSWINE] = {
+        .speciesIdRS = 221,
+        .nameJapanese = {0},
+        .name = "PILOSWINE ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_REMORAID] = {
+        .speciesIdRS = 223,
+        .nameJapanese = {0},
+        .name = "REMORAID  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_OCTILLERY] = {
+        .speciesIdRS = 224,
+        .nameJapanese = {0},
+        .name = "OCTILLERY ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_DELIBIRD] = {
+        .speciesIdRS = 225,
+        .nameJapanese = {0},
+        .name = "DELIBIRD  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_MANTINE] = {
+        .speciesIdRS = 226,
+        .nameJapanese = {0},
+        .name = "MANTINE   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_HOUNDOUR] = {
+        .speciesIdRS = 228,
+        .nameJapanese = {0},
+        .name = "HOUNDOUR  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_HOUNDOOM] = {
+        .speciesIdRS = 229,
+        .nameJapanese = {0},
+        .name = "HOUNDOOM  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_PORYGON2] = {
+        .speciesIdRS = 233,
+        .nameJapanese = {0},
+        .name = "PORYGON2  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_STANTLER] = {
+        .speciesIdRS = 234,
+        .nameJapanese = {0},
+        .name = "STANTLER  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_SMEARGLE] = {
+        .speciesIdRS = 235,
+        .nameJapanese = {0},
+        .name = "SMEARGLE  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_TYROGUE] = {
+        .speciesIdRS = 236,
+        .nameJapanese = {0},
+        .name = "TYROGUE   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_HITMONTOP] = {
+        .speciesIdRS = 237,
+        .nameJapanese = {0},
+        .name = "HITMONTOP ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_SMOOCHUM] = {
+        .speciesIdRS = 238,
+        .nameJapanese = {0},
+        .name = "SMOOCHUM  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_ELEKID] = {
+        .speciesIdRS = 239,
+        .nameJapanese = {0},
+        .name = "ELEKID    ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_MAGBY] = {
+        .speciesIdRS = 240,
+        .nameJapanese = {0},
+        .name = "MAGBY     ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_MILTANK] = {
+        .speciesIdRS = 241,
+        .nameJapanese = {0},
+        .name = "MILTANK   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_BLISSEY] = {
+        .speciesIdRS = 242,
+        .nameJapanese = {0},
+        .name = "BLISSEY   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_RAIKOU] = {
+        .speciesIdRS = 243,
+        .nameJapanese = {0},
+        .name = "RAIKOU    ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_ENTEI] = {
+        .speciesIdRS = 244,
+        .nameJapanese = {0},
+        .name = "ENTEI     ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_SUICUNE] = {
+        .speciesIdRS = 245,
+        .nameJapanese = {0},
+        .name = "SUICUNE   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_LARVITAR] = {
+        .speciesIdRS = 246,
+        .nameJapanese = {0},
+        .name = "LARVITAR  ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_PUPITAR] = {
+        .speciesIdRS = 247,
+        .nameJapanese = {0},
+        .name = "PUPITAR   ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_TYRANITAR] = {
+        .speciesIdRS = 248,
+        .nameJapanese = {0},
+        .name = "TYRANITAR ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_LUGIA] = {
+        .speciesIdRS = 249,
+        .nameJapanese = {0},
+        .name = "LUGIA     ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_HO_OH] = {
+        .speciesIdRS = 250,
+        .nameJapanese = {0},
+        .name = "HO-OH     ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_CELEBI] = {
+        .speciesIdRS = 251,
+        .nameJapanese = {0},
+        .name = "CELEBI    ",
+        .catchIndex = 84,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
 };
