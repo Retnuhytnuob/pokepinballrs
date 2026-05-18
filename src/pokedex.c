@@ -1850,6 +1850,7 @@ void PrintDexNumbersFromListPosition(s16 listPosition)
     int var0;
     u16 var1;
     u16 var2;
+    s16 species;
 
     DmaFill16(3, 0, gTempGfxBuffer, 0x800);
     var0 = 0;
