@@ -75,7 +75,7 @@ void LoadPortraitGraphics(s16 arg0, s16 arg1)
             }
             else if (gMain_saveData.pokedexFlags[gCurrentPinballGame->evoTargetSpecies] == SPECIES_UNSEEN)
             {
-                gCurrentPinballGame->portraitGfxIndex[arg1] = SPECIES_NONE;
+                gCurrentPinballGame->portraitGfxIndex[arg1] = SPECIES_BULBASAUR;
                 DmaCopy16(
                     3,
                     gMonPortraitGroupPals[gCurrentPinballGame->portraitGfxIndex[arg1] / 15] + (gCurrentPinballGame->portraitGfxIndex[arg1] % 15) * 0x20,
