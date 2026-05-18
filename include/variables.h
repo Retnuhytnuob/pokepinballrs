@@ -176,6 +176,7 @@ extern const s16 gEReaderAccessButtonSequence[];
 extern const u8 gMonHatchSpriteGroup5_Gfx[];
 extern struct VectorU16 gFieldSelectBallSpeedPositions[];
 extern const struct SpriteSet *const gFieldSelectSpriteSets[];
+extern u8 gSelectedGeneration;
 extern const struct SpriteSet *const gNameEntryCursorSpriteSets[];
 extern const struct SpriteSet *const gHighScoreScreenSpriteSets[];
 extern const struct SpriteSet *const gCompletionBannerSpriteSets[];

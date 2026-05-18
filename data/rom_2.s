@@ -2,6 +2,7 @@
 #include "constants/areas.h"
 #include "constants/fields.h"
 #include "constants/species.h"
+#include "constants/global.h"
 #include "constants/bg_music.h"
 #include "gba/io_reg.h"
 #include "gba/oam_types.h"
@@ -38,6 +39,7 @@ gMainFuncs:: @ 0x086A4AD8
 	.4byte IdleHighScoresMain
 	.4byte FieldSelectMain
 	.4byte BonusFieldSelectMain
+	.4byte GenerationSelectMain
 
 gRumblePattern0:: @ 0x086A4B08
 	.4byte 2, 1, -1
@@ -2544,7 +2546,7 @@ gUnknown_086A9630:: @ 0x086A9630
 
 gTitleMenuStateTable:: @ 0x086A964C
 	.2byte 0x0002
-	.2byte 0x000A
+	.2byte STATE_GENERATION_SELECT
 	.2byte 0x0005
 	.2byte 0x0004
 	.2byte 0x0008
