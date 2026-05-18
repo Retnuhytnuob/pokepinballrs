@@ -15,17 +15,16 @@ EWRAM_DATA u8 gSelectedGeneration = DEFAULT_GENERATION;
 static EWRAM_DATA u8 sGenerationCursor = DEFAULT_GENERATION;
 static EWRAM_DATA u8 sGenerationNextMainState = STATE_FIELD_SELECT;
 
-extern const u16 gOptionsBackground_Pals[];
-extern const u8 gOptionsText_Gfx[];
-extern const u8 gOptionsBackground_Gfx[];
-extern const u8 gOptionsBackground_Tilemap[];
-
 static void LoadGenerationSelectGraphics(void);
 static void HandleGenerationSelectInput(void);
 static void ExitGenerationSelect(void);
 static void RenderGenerationSelectScreen(void);
 static void DrawGenerationSelectText(void);
 static void DrawGenerationCell(s16 generation, s16 selected);
+static void LoadGenerationSelectFont(void);
+static void DrawGenerationString(const u8 *text, s16 y, s16 x);
+static void DrawGenerationChar(u8 ch, s16 y, s16 x);
+static const u8 *GetGenerationGlyph(u8 ch);
 
 void GenerationSelectMain(void)
 {
@@ -49,14 +48,15 @@ static void LoadGenerationSelectGraphics(void)
 
     REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_FORCED_BLANK;
     REG_BG0CNT = BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(0) | BGCNT_PRIORITY(0) | BGCNT_TXT256x256;
-    REG_BG1CNT = BGCNT_CHARBASE(2) | BGCNT_SCREENBASE(1) | BGCNT_PRIORITY(1) | BGCNT_TXT256x256;
-    REG_DISPCNT |= DISPCNT_BG0_ON | DISPCNT_BG1_ON;
+    REG_DISPCNT |= DISPCNT_BG0_ON;
     gMain.dispcntBackup = REG_DISPCNT;
 
-    DmaCopy16(3, gOptionsBackground_Pals, (void *)PLTT, 0x200);
-    DmaCopy16(3, gOptionsText_Gfx, (void *)(VRAM + 0x4000), 0x1800);
-    DmaCopy16(3, gOptionsBackground_Gfx, (void *)(VRAM + 0x8000), 0xC00);
-    DmaCopy16(3, gOptionsBackground_Tilemap, (void *)(VRAM + 0x800), 0x800);
+    DmaFill16(3, RGB5(31, 18, 0), (void *)PLTT, 0x20);
+    ((u16 *)PLTT)[0] = RGB5(31, 18, 0);
+    ((u16 *)PLTT)[1] = RGB5(31, 31, 31);
+    ((u16 *)PLTT)[2] = RGB5(0, 0, 0);
+    ((u16 *)PLTT)[3] = RGB5(31, 31, 0);
+    LoadGenerationSelectFont();
 
     sGenerationCursor = gSelectedGeneration;
     sGenerationNextMainState = STATE_FIELD_SELECT;
@@ -131,9 +131,9 @@ static void DrawGenerationSelectText(void)
 {
     s16 i;
 
-    DmaFill16(3, 0x1FF, gBG0TilemapBuffer, 0x800);
-    DrawTextToTilemap((u8 *)"SELECT GENERATION", 3, 7);
-    DrawTextToTilemap((u8 *)"A OK   B BACK", 17, 8);
+    DmaFill16(3, 0, gBG0TilemapBuffer, 0x800);
+    DrawGenerationString((u8 *)"SELECT GENERATION", 3, 7);
+    DrawGenerationString((u8 *)"A OK   B BACK", 17, 8);
 
     for (i = 0; i < GENERATION_COUNT; i++)
         DrawGenerationCell(i, i == sGenerationCursor);
@@ -147,13 +147,117 @@ static void DrawGenerationCell(s16 generation, s16 selected)
     s16 x = 4 + col * 5;
     u8 text[5];
 
-    text[0] = selected ? '>' : ' ';
+    text[0] = selected ? '[' : ' ';
     text[1] = 'G';
     if (generation == GENERATION_EXTRA)
         text[2] = 'X';
     else
         text[2] = '1' + generation;
-    text[3] = selected ? '<' : ' ';
+    text[3] = selected ? ']' : ' ';
     text[4] = '\0';
-    DrawTextToTilemap(text, y, x);
+    DrawGenerationString(text, y, x);
+}
+
+static void LoadGenerationSelectFont(void)
+{
+    s16 tile;
+    s16 row;
+    u32 *dest = (u32 *)BG_CHAR_ADDR(1);
+
+    for (tile = 0; tile < 0x60; tile++)
+    {
+        const u8 *glyph = GetGenerationGlyph(tile + 32);
+        for (row = 0; row < 8; row++)
+        {
+            u8 bits = glyph[row];
+            u32 packed = 0;
+            s16 pixel;
+
+            for (pixel = 0; pixel < 8; pixel++)
+            {
+                if (bits & (0x80 >> pixel))
+                    packed |= 2 << (pixel * 4);
+            }
+            *dest++ = packed;
+        }
+    }
+}
+
+static void DrawGenerationString(const u8 *text, s16 y, s16 x)
+{
+    while (*text)
+    {
+        DrawGenerationChar(*text, y, x);
+        text++;
+        x++;
+    }
+}
+
+static void DrawGenerationChar(u8 ch, s16 y, s16 x)
+{
+    if (ch < 32 || ch >= 32 + 0x60)
+        ch = ' ';
+    gBG0TilemapBuffer[y * 32 + x] = ch - 32;
+}
+
+static const u8 *GetGenerationGlyph(u8 ch)
+{
+    static const u8 blank[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+    static const u8 a[8] = {0x38, 0x44, 0x44, 0x7C, 0x44, 0x44, 0x44, 0};
+    static const u8 b[8] = {0x78, 0x44, 0x44, 0x78, 0x44, 0x44, 0x78, 0};
+    static const u8 c[8] = {0x38, 0x44, 0x40, 0x40, 0x40, 0x44, 0x38, 0};
+    static const u8 e[8] = {0x7C, 0x40, 0x40, 0x78, 0x40, 0x40, 0x7C, 0};
+    static const u8 g[8] = {0x38, 0x44, 0x40, 0x5C, 0x44, 0x44, 0x38, 0};
+    static const u8 i[8] = {0x38, 0x10, 0x10, 0x10, 0x10, 0x10, 0x38, 0};
+    static const u8 k[8] = {0x44, 0x48, 0x50, 0x60, 0x50, 0x48, 0x44, 0};
+    static const u8 l[8] = {0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x7C, 0};
+    static const u8 n[8] = {0x44, 0x64, 0x54, 0x54, 0x4C, 0x44, 0x44, 0};
+    static const u8 o[8] = {0x38, 0x44, 0x44, 0x44, 0x44, 0x44, 0x38, 0};
+    static const u8 r[8] = {0x78, 0x44, 0x44, 0x78, 0x50, 0x48, 0x44, 0};
+    static const u8 s[8] = {0x3C, 0x40, 0x40, 0x38, 0x04, 0x04, 0x78, 0};
+    static const u8 t[8] = {0x7C, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0};
+    static const u8 x[8] = {0x44, 0x44, 0x28, 0x10, 0x28, 0x44, 0x44, 0};
+    static const u8 d0[8] = {0x38, 0x44, 0x4C, 0x54, 0x64, 0x44, 0x38, 0};
+    static const u8 d1[8] = {0x10, 0x30, 0x10, 0x10, 0x10, 0x10, 0x38, 0};
+    static const u8 d2[8] = {0x38, 0x44, 0x04, 0x18, 0x20, 0x40, 0x7C, 0};
+    static const u8 d3[8] = {0x38, 0x44, 0x04, 0x18, 0x04, 0x44, 0x38, 0};
+    static const u8 d4[8] = {0x08, 0x18, 0x28, 0x48, 0x7C, 0x08, 0x08, 0};
+    static const u8 d5[8] = {0x7C, 0x40, 0x78, 0x04, 0x04, 0x44, 0x38, 0};
+    static const u8 d6[8] = {0x38, 0x40, 0x40, 0x78, 0x44, 0x44, 0x38, 0};
+    static const u8 d7[8] = {0x7C, 0x04, 0x08, 0x10, 0x20, 0x20, 0x20, 0};
+    static const u8 d8[8] = {0x38, 0x44, 0x44, 0x38, 0x44, 0x44, 0x38, 0};
+    static const u8 d9[8] = {0x38, 0x44, 0x44, 0x3C, 0x04, 0x04, 0x38, 0};
+    static const u8 open[8] = {0x3C, 0x20, 0x20, 0x20, 0x20, 0x20, 0x3C, 0};
+    static const u8 close[8] = {0x3C, 0x04, 0x04, 0x04, 0x04, 0x04, 0x3C, 0};
+
+    switch (ch)
+    {
+    case 'A': return a;
+    case 'B': return b;
+    case 'C': return c;
+    case 'E': return e;
+    case 'G': return g;
+    case 'I': return i;
+    case 'K': return k;
+    case 'L': return l;
+    case 'N': return n;
+    case 'O': return o;
+    case 'R': return r;
+    case 'S': return s;
+    case 'T': return t;
+    case 'X': return x;
+    case '0': return d0;
+    case '1': return d1;
+    case '2': return d2;
+    case '3': return d3;
+    case '4': return d4;
+    case '5': return d5;
+    case '6': return d6;
+    case '7': return d7;
+    case '8': return d8;
+    case '9': return d9;
+    case '[': return open;
+    case ']': return close;
+    default: return blank;
+    }
 }
