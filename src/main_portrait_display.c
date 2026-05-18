@@ -13,6 +13,14 @@ extern const s16 gRouletteOutcomeFrameOffsets[];
     Can contain travel location picture, catch mon, roulette wheel
 */
 
+static u8 GetPortraitGfxIndexForSpecies(u16 species)
+{
+    if (species > 0xFF)
+        return SPECIES_BULBASAUR;
+
+    return species;
+}
+
 void LoadPortraitGraphics(s16 arg0, s16 arg1)
 {
     s16 i;
@@ -48,7 +56,7 @@ void LoadPortraitGraphics(s16 arg0, s16 arg1)
         DmaCopy16(3, &gPortraitAnimPalettes[index], (void *)0x05000200 + gPortraitPaletteSlots[arg1] * 0x20, 0x20);
         break;
     case 3:
-        gCurrentPinballGame->portraitGfxIndex[arg1] = gCurrentPinballGame->currentSpecies;
+        gCurrentPinballGame->portraitGfxIndex[arg1] = GetPortraitGfxIndexForSpecies(gCurrentPinballGame->currentSpecies);
         DmaCopy16(
             3,
             gMonPortraitGroupGfx[gCurrentPinballGame->portraitGfxIndex[arg1] / 15] + (gCurrentPinballGame->portraitGfxIndex[arg1] % 15) * 0x300,
@@ -66,7 +74,7 @@ void LoadPortraitGraphics(s16 arg0, s16 arg1)
         {
             if (gCurrentPinballGame->evoTargetSpecies >= NUM_SAVE_SPECIES)
             {
-                gCurrentPinballGame->portraitGfxIndex[arg1] = gCurrentPinballGame->evoTargetSpecies;
+                gCurrentPinballGame->portraitGfxIndex[arg1] = GetPortraitGfxIndexForSpecies(gCurrentPinballGame->evoTargetSpecies);
                 DmaCopy16(
                     3,
                     gMonPortraitGroupPals[gCurrentPinballGame->portraitGfxIndex[arg1] / 15] + (gCurrentPinballGame->portraitGfxIndex[arg1] % 15) * 0x20,
@@ -84,12 +92,12 @@ void LoadPortraitGraphics(s16 arg0, s16 arg1)
             }
             else if (gMain_saveData.pokedexFlags[gCurrentPinballGame->evoTargetSpecies] < SPECIES_CAUGHT)
             {
-                gCurrentPinballGame->portraitGfxIndex[arg1] = gCurrentPinballGame->evoTargetSpecies;
+                gCurrentPinballGame->portraitGfxIndex[arg1] = GetPortraitGfxIndexForSpecies(gCurrentPinballGame->evoTargetSpecies);
                 DmaCopy16(3, gMonPortraitGroupPals[0] + 15 * 0x20, (void *)0x050003A0, 0x20);
             }
             else
             {
-                gCurrentPinballGame->portraitGfxIndex[arg1] = gCurrentPinballGame->evoTargetSpecies;
+                gCurrentPinballGame->portraitGfxIndex[arg1] = GetPortraitGfxIndexForSpecies(gCurrentPinballGame->evoTargetSpecies);
                 DmaCopy16(
                     3,
                     gMonPortraitGroupPals[gCurrentPinballGame->portraitGfxIndex[arg1] / 15] + (gCurrentPinballGame->portraitGfxIndex[arg1] % 15) * 0x20,
@@ -99,7 +107,7 @@ void LoadPortraitGraphics(s16 arg0, s16 arg1)
         }
         else
         {
-            gCurrentPinballGame->portraitGfxIndex[arg1] = gCurrentPinballGame->currentSpecies;
+            gCurrentPinballGame->portraitGfxIndex[arg1] = GetPortraitGfxIndexForSpecies(gCurrentPinballGame->currentSpecies);
             DmaCopy16(
                 3,
                 gMonPortraitGroupPals[gCurrentPinballGame->portraitGfxIndex[arg1] / 15] + (gCurrentPinballGame->portraitGfxIndex[arg1] % 15) * 0x20,

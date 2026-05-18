@@ -1,13 +1,30 @@
 #include "global.h"
 #include "functions.h"
 #include "main.h"
+#include "variables.h"
 #include "constants/ereader.h"
 #include "constants/fields.h"
+#include "constants/generations.h"
 #include "constants/species.h"
 #include "constants/pinball_game.h"
 
 extern const u16 gWildMonLocations[AREA_COUNT][2][WILD_MON_LOCATION_COUNT];
+extern const u16 gWildMonLocationsGen1[AREA_COUNT][2][WILD_MON_LOCATION_COUNT];
+extern const u16 gWildMonLocationsGen2[AREA_COUNT][2][WILD_MON_LOCATION_COUNT];
 extern const u16 gEggLocations[MAIN_FIELD_COUNT][26];
+
+static u16 GetWildMonForSelectedGeneration(s16 area, s16 threeArrows, s16 index)
+{
+    switch (gSelectedGeneration)
+    {
+    case GENERATION_1:
+        return gWildMonLocationsGen1[area][threeArrows][index];
+    case GENERATION_2:
+        return gWildMonLocationsGen2[area][threeArrows][index];
+    default:
+        return gWildMonLocations[area][threeArrows][index];
+    }
+}
 
 static u8 GetSavedPokedexFlag(s16 species)
 {
@@ -179,7 +196,7 @@ void BuildSpeciesWeightsForCatchEmMode(void)
 
     for (i = 0; i < WILD_MON_LOCATION_COUNT; i++)
     {
-        currentSpecies = gWildMonLocations[gCurrentPinballGame->area][threeArrows][i];
+        currentSpecies = GetWildMonForSelectedGeneration(gCurrentPinballGame->area, threeArrows, i);
         switch (currentSpecies)
         {
             // Rare pokemon
@@ -241,7 +258,7 @@ void BuildSpeciesWeightsForCatchEmMode(void)
                         break;
                     }
                 }
-                currentSpecies = gWildMonLocations[gCurrentPinballGame->area][threeArrows][i];
+                currentSpecies = GetWildMonForSelectedGeneration(gCurrentPinballGame->area, threeArrows, i);
                 if (gCurrentPinballGame->caughtMonCount == 0
                  && currentSpecies != SPECIES_TEST_EXTRA
                  && gSpeciesInfo[currentSpecies].evolutionTarget >= SPECIES_NONE)
@@ -354,7 +371,7 @@ void PickSpeciesForCatchEmMode(void)
             rand %= gCurrentPinballGame->totalWeight;
             for (i = 0; i < WILD_MON_LOCATION_COUNT && gCurrentPinballGame->speciesWeights[i] <= rand; i++);
 
-            gCurrentPinballGame->currentSpecies = gWildMonLocations[gCurrentPinballGame->area][threeArrows][i];
+            gCurrentPinballGame->currentSpecies = GetWildMonForSelectedGeneration(gCurrentPinballGame->area, threeArrows, i);
         }
     }
 
