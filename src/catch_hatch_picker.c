@@ -122,6 +122,78 @@ static u8 GetSavedPokedexFlag(s16 species)
     return SPECIES_UNSEEN;
 }
 
+static u16 PickMissingBranchEvolution(u16 target1, u16 target2)
+{
+    if (GetSavedPokedexFlag(target1) < SPECIES_CAUGHT)
+        return target1;
+    if (GetSavedPokedexFlag(target2) < SPECIES_CAUGHT)
+        return target2;
+
+    return gMain.selectedField == FIELD_RUBY ? target1 : target2;
+}
+
+static u16 PickMissingTripleBranchEvolution(u16 target1, u16 target2, u16 target3)
+{
+    switch (gCurrentPinballGame->area)
+    {
+    case AREA_FOREST_RUBY:
+    case AREA_FOREST_SAPPHIRE:
+    case AREA_SAFARI_ZONE:
+        if (GetSavedPokedexFlag(target1) < SPECIES_CAUGHT)
+            return target1;
+        if (GetSavedPokedexFlag(target2) < SPECIES_CAUGHT)
+            return target2;
+        return target3;
+    case AREA_VOLCANO:
+    case AREA_CAVE_RUBY:
+    case AREA_CAVE_SAPPHIRE:
+        if (GetSavedPokedexFlag(target2) < SPECIES_CAUGHT)
+            return target2;
+        if (GetSavedPokedexFlag(target3) < SPECIES_CAUGHT)
+            return target3;
+        return target1;
+    default:
+        if (GetSavedPokedexFlag(target3) < SPECIES_CAUGHT)
+            return target3;
+        if (GetSavedPokedexFlag(target1) < SPECIES_CAUGHT)
+            return target1;
+        return target2;
+    }
+}
+
+static u16 GetEvolutionTargetForCurrentContext(u16 species)
+{
+    switch (species)
+    {
+    case SPECIES_WURMPLE:
+        return PickMissingBranchEvolution(SPECIES_SILCOON, SPECIES_CASCOON);
+    case SPECIES_GLOOM:
+        return gMain.selectedField == FIELD_RUBY ? SPECIES_VILEPLUME : SPECIES_BELLOSSOM;
+    case SPECIES_CLAMPERL:
+        return gMain.selectedField == FIELD_RUBY ? SPECIES_HUNTAIL : SPECIES_GOREBYSS;
+    case SPECIES_POLIWHIRL:
+        return gMain.selectedField == FIELD_RUBY ? SPECIES_POLIWRATH : SPECIES_POLITOED;
+    case SPECIES_SLOWPOKE:
+        return gMain.selectedField == FIELD_RUBY ? SPECIES_SLOWBRO : SPECIES_SLOWKING;
+    case SPECIES_EEVEE:
+        switch (gCurrentPinballGame->area)
+        {
+        case AREA_OCEAN_RUBY:
+        case AREA_OCEAN_SAPPHIRE:
+        case AREA_LAKE:
+            return SPECIES_VAPOREON;
+        case AREA_VOLCANO:
+            return SPECIES_FLAREON;
+        default:
+            return SPECIES_JOLTEON;
+        }
+    case SPECIES_TYROGUE:
+        return PickMissingTripleBranchEvolution(SPECIES_HITMONLEE, SPECIES_HITMONCHAN, SPECIES_HITMONTOP);
+    default:
+        return gSpeciesInfo[species].evolutionTarget;
+    }
+}
+
 /**
  *   0 if captured via ball
  *   1 if evolved
@@ -143,48 +215,7 @@ void RegisterCaptureOrEvolution(s16 evolved)
     {
         RemoveEvolvablePartySpecies(gCurrentPinballGame->evolvingPartyIndex);
 
-        if (gCurrentPinballGame->currentSpecies == SPECIES_WURMPLE)
-        {
-            if ((gMain.systemFrameCount & 1) == 0)
-            {
-                if (gMain_saveData.pokedexFlags[SPECIES_SILCOON] < SPECIES_CAUGHT)
-                    gCurrentPinballGame->currentSpecies = SPECIES_SILCOON;
-                else
-                    gCurrentPinballGame->currentSpecies = SPECIES_CASCOON;
-            }
-            else
-            {
-                if (gMain_saveData.pokedexFlags[SPECIES_CASCOON] < SPECIES_CAUGHT)
-                    gCurrentPinballGame->currentSpecies = SPECIES_CASCOON;
-                else
-                    gCurrentPinballGame->currentSpecies = SPECIES_SILCOON;
-            }
-        }
-        else if (gCurrentPinballGame->currentSpecies == SPECIES_GLOOM)
-        {
-            if (gMain.selectedField == FIELD_RUBY)
-                gCurrentPinballGame->currentSpecies = SPECIES_VILEPLUME;
-            else
-                gCurrentPinballGame->currentSpecies = SPECIES_BELLOSSOM;
-        }
-        else if (gCurrentPinballGame->currentSpecies == SPECIES_CLAMPERL)
-        {
-            if ((gMain.systemFrameCount & 1) == 0)
-            {
-                if (gMain_saveData.pokedexFlags[SPECIES_HUNTAIL] < SPECIES_CAUGHT)
-                    gCurrentPinballGame->currentSpecies = SPECIES_HUNTAIL;
-                else
-                    gCurrentPinballGame->currentSpecies = SPECIES_GOREBYSS;
-            }
-            else
-            {
-                if (gMain_saveData.pokedexFlags[SPECIES_GOREBYSS] < SPECIES_CAUGHT)
-                    gCurrentPinballGame->currentSpecies = SPECIES_GOREBYSS;
-                else
-                    gCurrentPinballGame->currentSpecies = SPECIES_HUNTAIL;
-            }
-        }
-        else if (gCurrentPinballGame->currentSpecies == SPECIES_NINCADA)
+        if (gCurrentPinballGame->currentSpecies == SPECIES_NINCADA)
         {
             gCurrentPinballGame->currentSpecies = SPECIES_SHEDINJA;
             if (gMain.mainState != STATE_GAME_IDLE)
@@ -194,8 +225,7 @@ void RegisterCaptureOrEvolution(s16 evolved)
         }
         else
         {
-            gCurrentPinballGame->currentSpecies =
-              gSpeciesInfo[gCurrentPinballGame->currentSpecies].evolutionTarget;
+            gCurrentPinballGame->currentSpecies = GetEvolutionTargetForCurrentContext(gCurrentPinballGame->currentSpecies);
         }
 
         if (gMain.mainState != STATE_GAME_IDLE)
@@ -282,11 +312,8 @@ void BuildSpeciesWeightsForCatchEmMode(void)
                 break;
 
             case SPECIES_CLAMPERL:
-                weight = gCommonAndEggWeights[gMain_saveData.pokedexFlags[SPECIES_CLAMPERL]];
-                evolutionWeight = gCommonAndEggWeights[gMain_saveData.pokedexFlags[SPECIES_HUNTAIL]];
-                if (weight < evolutionWeight)
-                    weight = evolutionWeight;
-                evolutionWeight = gCommonAndEggWeights[gMain_saveData.pokedexFlags[SPECIES_GOREBYSS]];
+                weight = gCommonAndEggWeights[GetSavedPokedexFlag(SPECIES_CLAMPERL)];
+                evolutionWeight = gCommonAndEggWeights[GetSavedPokedexFlag(GetEvolutionTargetForCurrentContext(SPECIES_CLAMPERL))];
                 if (weight < evolutionWeight)
                     weight = evolutionWeight;
                 break;
@@ -297,7 +324,7 @@ void BuildSpeciesWeightsForCatchEmMode(void)
                 weight = gCommonAndEggWeights[GetSavedPokedexFlag(currentSpecies)];
                 for (j = 0; j < 2; j++)
                 {
-                    currentSpecies = gSpeciesInfo[currentSpecies].evolutionTarget;
+                    currentSpecies = GetEvolutionTargetForCurrentContext(currentSpecies);
                     if (currentSpecies < SPECIES_NONE)
                     {
                         evolutionWeight = gCommonAndEggWeights[GetSavedPokedexFlag(currentSpecies)];
@@ -447,10 +474,7 @@ void BuildSpeciesWeightsForEggMode(void)
 
         if (currentSpecies == SPECIES_ODDISH)
         {
-            if (gMain.selectedField == FIELD_RUBY)
-                weight = gCommonAndEggWeights[gMain_saveData.pokedexFlags[SPECIES_VILEPLUME]];
-            else
-                weight = gCommonAndEggWeights[gMain_saveData.pokedexFlags[SPECIES_BELLOSSOM]];
+            weight = gCommonAndEggWeights[GetSavedPokedexFlag(GetEvolutionTargetForCurrentContext(SPECIES_GLOOM))];
         }
         else
         {
@@ -458,7 +482,7 @@ void BuildSpeciesWeightsForEggMode(void)
 
             for (j = 0; j < 2; j++)
             {
-                currentSpecies = gSpeciesInfo[currentSpecies].evolutionTarget;
+                currentSpecies = GetEvolutionTargetForCurrentContext(currentSpecies);
                 if (currentSpecies < SPECIES_NONE)
                 {
                     evolutionWeight = gCommonAndEggWeights[GetSavedPokedexFlag(currentSpecies)];

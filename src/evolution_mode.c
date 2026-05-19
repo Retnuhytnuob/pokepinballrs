@@ -14,6 +14,39 @@ extern const s16 gEvoItemAppearFrameThresholds[];
 extern const u16 gEvoItemAnimOamFramesets[58][15];
 extern const struct Vector16 gEvoItemPositions[][8];
 
+static s8 GetEvolutionMethodForCurrentContext(u16 species)
+{
+    switch (species)
+    {
+    case SPECIES_WURMPLE:
+        return 1;
+    case SPECIES_GLOOM:
+        return gMain.selectedField == FIELD_RUBY ? 2 : 8;
+    case SPECIES_CLAMPERL:
+        return 4;
+    case SPECIES_POLIWHIRL:
+        return gMain.selectedField == FIELD_RUBY ? 6 : 4;
+    case SPECIES_SLOWPOKE:
+        return gMain.selectedField == FIELD_RUBY ? 1 : 4;
+    case SPECIES_EEVEE:
+        switch (gCurrentPinballGame->area)
+        {
+        case AREA_OCEAN_RUBY:
+        case AREA_OCEAN_SAPPHIRE:
+        case AREA_LAKE:
+            return 6;
+        case AREA_VOLCANO:
+            return 3;
+        default:
+            return 7;
+        }
+    case SPECIES_TYROGUE:
+        return 1;
+    default:
+        return gSpeciesInfo[species].evolutionMethod;
+    }
+}
+
 void CleanupEvolutionModeState(void)
 {
     s16 i;
@@ -42,27 +75,9 @@ void InitEvolutionMode(void)
     gCurrentPinballGame->eventTimer = gCurrentPinballGame->timerBonus + 7200;
     gCurrentPinballGame->timerBonus = 0;
     gCurrentPinballGame->saverTimeRemaining = 3600;
-    if (gCurrentPinballGame->currentSpecies == SPECIES_WURMPLE)
-    {
+    gCurrentPinballGame->evoItemGfxIndex = GetEvolutionMethodForCurrentContext(gCurrentPinballGame->currentSpecies) - 1;
+    if (gCurrentPinballGame->evoItemGfxIndex < 0)
         gCurrentPinballGame->evoItemGfxIndex = 0;
-    }
-    else if (gCurrentPinballGame->currentSpecies == SPECIES_GLOOM)
-    {
-        if (gMain.selectedField == FIELD_RUBY)
-            gCurrentPinballGame->evoItemGfxIndex = 1;
-        else
-            gCurrentPinballGame->evoItemGfxIndex = 7;
-    }
-    else if (gCurrentPinballGame->currentSpecies == SPECIES_CLAMPERL)
-    {
-        gCurrentPinballGame->evoItemGfxIndex = 3;
-    }
-    else
-    {
-        gCurrentPinballGame->evoItemGfxIndex = gSpeciesInfo[gCurrentPinballGame->currentSpecies].evolutionMethod - 1;
-        if (gCurrentPinballGame->evoItemGfxIndex < 0)
-            gCurrentPinballGame->evoItemGfxIndex = 0;
-    }
 
     DmaCopy16(3, gDefaultBallPalette, (void *)0x05000180, 0x20);
     gCurrentPinballGame->evoArrowProgress = 0;

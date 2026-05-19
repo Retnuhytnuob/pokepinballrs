@@ -2326,7 +2326,7 @@ const struct PokemonSpecies gSpeciesInfo[NUM_SPECIES] = {
         .catchIndex = 84,
         .eggIndex = 0,
         .specialEggFlag = 0,
-        .evolutionMethod = 1,
+        .evolutionMethod = 5,
         .evolutionTarget = SPECIES_NIDOQUEEN
     },
     [SPECIES_NIDOQUEEN] = {
@@ -2356,7 +2356,7 @@ const struct PokemonSpecies gSpeciesInfo[NUM_SPECIES] = {
         .catchIndex = 84,
         .eggIndex = 0,
         .specialEggFlag = 0,
-        .evolutionMethod = 1,
+        .evolutionMethod = 5,
         .evolutionTarget = SPECIES_NIDOKING
     },
     [SPECIES_NIDOKING] = {
@@ -2376,7 +2376,7 @@ const struct PokemonSpecies gSpeciesInfo[NUM_SPECIES] = {
         .catchIndex = 84,
         .eggIndex = 0,
         .specialEggFlag = 0,
-        .evolutionMethod = 1,
+        .evolutionMethod = 5,
         .evolutionTarget = SPECIES_CLEFABLE
     },
     [SPECIES_CLEFABLE] = {
@@ -2496,7 +2496,7 @@ const struct PokemonSpecies gSpeciesInfo[NUM_SPECIES] = {
         .catchIndex = 84,
         .eggIndex = 0,
         .specialEggFlag = 0,
-        .evolutionMethod = 1,
+        .evolutionMethod = 3,
         .evolutionTarget = SPECIES_ARCANINE
     },
     [SPECIES_ARCANINE] = {
@@ -2526,7 +2526,7 @@ const struct PokemonSpecies gSpeciesInfo[NUM_SPECIES] = {
         .catchIndex = 84,
         .eggIndex = 0,
         .specialEggFlag = 0,
-        .evolutionMethod = 1,
+        .evolutionMethod = 6,
         .evolutionTarget = SPECIES_POLIWRATH
     },
     [SPECIES_POLIWRATH] = {
@@ -2556,7 +2556,7 @@ const struct PokemonSpecies gSpeciesInfo[NUM_SPECIES] = {
         .catchIndex = 84,
         .eggIndex = 0,
         .specialEggFlag = 0,
-        .evolutionMethod = 1,
+        .evolutionMethod = 2,
         .evolutionTarget = SPECIES_VICTREEBEL
     },
     [SPECIES_VICTREEBEL] = {
@@ -2646,7 +2646,7 @@ const struct PokemonSpecies gSpeciesInfo[NUM_SPECIES] = {
         .catchIndex = 84,
         .eggIndex = 0,
         .specialEggFlag = 0,
-        .evolutionMethod = 1,
+        .evolutionMethod = 6,
         .evolutionTarget = SPECIES_CLOYSTER
     },
     [SPECIES_CLOYSTER] = {
@@ -2676,7 +2676,7 @@ const struct PokemonSpecies gSpeciesInfo[NUM_SPECIES] = {
         .catchIndex = 84,
         .eggIndex = 0,
         .specialEggFlag = 0,
-        .evolutionMethod = 1,
+        .evolutionMethod = 4,
         .evolutionTarget = SPECIES_GENGAR
     },
     [SPECIES_GENGAR] = {
@@ -2696,7 +2696,7 @@ const struct PokemonSpecies gSpeciesInfo[NUM_SPECIES] = {
         .catchIndex = 84,
         .eggIndex = 0,
         .specialEggFlag = 0,
-        .evolutionMethod = 1,
+        .evolutionMethod = 4,
         .evolutionTarget = SPECIES_STEELIX
     },
     [SPECIES_DROWZEE] = {
@@ -2746,7 +2746,7 @@ const struct PokemonSpecies gSpeciesInfo[NUM_SPECIES] = {
         .catchIndex = 84,
         .eggIndex = 0,
         .specialEggFlag = 0,
-        .evolutionMethod = 1,
+        .evolutionMethod = 2,
         .evolutionTarget = SPECIES_EXEGGUTOR
     },
     [SPECIES_EXEGGUTOR] = {
@@ -2816,7 +2816,7 @@ const struct PokemonSpecies gSpeciesInfo[NUM_SPECIES] = {
         .catchIndex = 84,
         .eggIndex = 0,
         .specialEggFlag = 0,
-        .evolutionMethod = 1,
+        .evolutionMethod = 9,
         .evolutionTarget = SPECIES_BLISSEY
     },
     [SPECIES_TANGELA] = {
@@ -2856,7 +2856,7 @@ const struct PokemonSpecies gSpeciesInfo[NUM_SPECIES] = {
         .catchIndex = 84,
         .eggIndex = 0,
         .specialEggFlag = 0,
-        .evolutionMethod = 1,
+        .evolutionMethod = 4,
         .evolutionTarget = SPECIES_SCIZOR
     },
     [SPECIES_JYNX] = {
@@ -2926,7 +2926,7 @@ const struct PokemonSpecies gSpeciesInfo[NUM_SPECIES] = {
         .catchIndex = 84,
         .eggIndex = 0,
         .specialEggFlag = 0,
-        .evolutionMethod = 1,
+        .evolutionMethod = 6,
         .evolutionTarget = SPECIES_VAPOREON
     },
     [SPECIES_VAPOREON] = {
@@ -2966,7 +2966,7 @@ const struct PokemonSpecies gSpeciesInfo[NUM_SPECIES] = {
         .catchIndex = 84,
         .eggIndex = 0,
         .specialEggFlag = 0,
-        .evolutionMethod = 1,
+        .evolutionMethod = 4,
         .evolutionTarget = SPECIES_PORYGON2
     },
     [SPECIES_OMANYTE] = {
@@ -3246,7 +3246,7 @@ const struct PokemonSpecies gSpeciesInfo[NUM_SPECIES] = {
         .catchIndex = 84,
         .eggIndex = 0,
         .specialEggFlag = 0,
-        .evolutionMethod = 1,
+        .evolutionMethod = 9,
         .evolutionTarget = SPECIES_CLEFAIRY
     },
     [SPECIES_TOGEPI] = {
@@ -3256,7 +3256,7 @@ const struct PokemonSpecies gSpeciesInfo[NUM_SPECIES] = {
         .catchIndex = 84,
         .eggIndex = 0,
         .specialEggFlag = 0,
-        .evolutionMethod = 1,
+        .evolutionMethod = 9,
         .evolutionTarget = SPECIES_TOGETIC
     },
     [SPECIES_TOGETIC] = {
@@ -3366,7 +3366,7 @@ const struct PokemonSpecies gSpeciesInfo[NUM_SPECIES] = {
         .catchIndex = 84,
         .eggIndex = 0,
         .specialEggFlag = 0,
-        .evolutionMethod = 1,
+        .evolutionMethod = 8,
         .evolutionTarget = SPECIES_SUNFLORA
     },
     [SPECIES_SUNFLORA] = {

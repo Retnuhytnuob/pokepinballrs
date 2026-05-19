@@ -25,6 +25,7 @@ static void LoadGenerationSelectFont(void);
 static void DrawGenerationString(const u8 *text, s16 y, s16 x);
 static void DrawGenerationChar(u8 ch, s16 y, s16 x);
 static const u8 *GetGenerationGlyph(u8 ch);
+static bool8 GetGenerationGlyphPixel(const u8 *glyph, s16 row, s16 pixel);
 
 void GenerationSelectMain(void)
 {
@@ -179,7 +180,7 @@ static void LoadGenerationSelectFont(void)
                 s16 neighborPixel;
                 u8 color = 0;
 
-                if (glyph[row] & (0x80 >> pixel))
+                if (GetGenerationGlyphPixel(glyph, row, pixel))
                 {
                     color = 1;
                 }
@@ -196,7 +197,7 @@ static void LoadGenerationSelectFont(void)
                             if (neighborPixel < 0 || neighborPixel >= 8)
                                 continue;
 
-                            if (glyph[neighborRow] & (0x80 >> neighborPixel))
+                            if (GetGenerationGlyphPixel(glyph, neighborRow, neighborPixel))
                                 outline = 1;
                         }
                     }
@@ -210,6 +211,16 @@ static void LoadGenerationSelectFont(void)
             *dest++ = packed;
         }
     }
+}
+
+static bool8 GetGenerationGlyphPixel(const u8 *glyph, s16 row, s16 pixel)
+{
+    row--;
+
+    if (row < 0 || row >= 8)
+        return FALSE;
+
+    return glyph[row] & (0x80 >> pixel);
 }
 
 static void DrawGenerationString(const u8 *text, s16 y, s16 x)

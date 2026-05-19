@@ -5,8 +5,10 @@
 #include "main.h"
 #include "types.h"
 #include "variables.h"
+#include "constants/areas.h"
 #include "constants/bg_music.h"
 #include "constants/characters.h"
+#include "constants/pinball_game.h"
 
 #define DEX_NUM_DIGITS      3
 #define SCROLL_WAIT_FRAMES  9
@@ -54,6 +56,7 @@ void BlitGlyphToTileBuffer(int, int, int);
 void PrintDexNumbersFromListPosition(s16);
 static void PrintCaughtBallFromListPosition(s16);
 void LoadMonPortrait(s16);
+static bool8 IsSpeciesCatchableInAnyGeneration(s16);
 
 extern u8 *gMonIconPalettes[];
 extern u8 *gCatchSpriteGfxPtrs[];
@@ -75,6 +78,8 @@ extern const u16 gPokedexHatchAnimTileOffsets[][51];
 extern const s16 gPokedexAnimFrameDurations[][51];
 extern const u16 gPokedexAnimTileDeltas[][4];
 extern s16 gPokedexListNameVramOffsets[];
+extern const u16 gWildMonLocationsGen1[AREA_COUNT][2][WILD_MON_LOCATION_COUNT];
+extern const u16 gWildMonLocationsGen2[AREA_COUNT][2][WILD_MON_LOCATION_COUNT];
 
 enum PokedexPopupType {
     POKEDEX_POPUP_TRANSMISSION_CONNECT_PROMPT = 0,
@@ -500,7 +505,8 @@ void Pokedex_DetailViewInput(void)
 
     if (JOY_HELD(SELECT_BUTTON))
     {
-        if (GetPokedexFlag(gPokedexSelectedMon) == SPECIES_CAUGHT)
+        if (GetPokedexFlag(gPokedexSelectedMon) == SPECIES_CAUGHT
+         && IsSpeciesCatchableInAnyGeneration(gPokedexSelectedMon))
         {
             if (gDexAnimationIx[gPokedexSelectedMon] == -1)
             {
@@ -930,7 +936,8 @@ void Pokedex_CheckDeleteKeyComboPressed(void)
 
 void UpdateMonSpriteVisibility(void)
 {
-    if (GetPokedexFlag(gPokedexSelectedMon) == SPECIES_CAUGHT)
+    if (GetPokedexFlag(gPokedexSelectedMon) == SPECIES_CAUGHT
+     && IsSpeciesCatchableInAnyGeneration(gPokedexSelectedMon))
     {
         if (gDexAnimationIx[gPokedexSelectedMon] == -1)
         {
@@ -967,7 +974,9 @@ void UpdateMonSpriteVisibility(void)
 
 u8 GetSelectedMonSpriteType(void)
 {
-    if (GetPokedexFlag(gPokedexSelectedMon) == SPECIES_CAUGHT && gDexAnimationIx[gPokedexSelectedMon] != -1)
+    if (GetPokedexFlag(gPokedexSelectedMon) == SPECIES_CAUGHT
+     && gDexAnimationIx[gPokedexSelectedMon] != -1
+     && IsSpeciesCatchableInAnyGeneration(gPokedexSelectedMon))
     {
         if (gDexAnimationIx[gPokedexSelectedMon] < 100)
             return 1;
@@ -2378,12 +2387,6 @@ void LoadPokedexFlagsFromSave(void)
     for (i = 0; i < NUM_SAVE_SPECIES; i++)
         gPokedexFlags[i] = gMain_saveData.pokedexFlags[i];
 
-    for (i = NUM_SAVE_SPECIES; i < NUM_SPECIES; i++)
-    {
-        if (gExtraPokedexFlags[i - NUM_SAVE_SPECIES] == SPECIES_UNSEEN)
-            gExtraPokedexFlags[i - NUM_SAVE_SPECIES] = SPECIES_SEEN;
-    }
-
 	// It's unclear what these trailing 20 entries are...
     for (i = NUM_SAVE_SPECIES; i < POKEDEX_RAM_FLAG_COUNT; i++)
         gPokedexFlags[i] = 0;
@@ -2405,6 +2408,42 @@ void LoadPokedexFlagsFromSave(void)
             break;
         }
     }
+}
+
+static bool8 IsSpeciesInWildLocationTable(const u16 locations[AREA_COUNT][2][WILD_MON_LOCATION_COUNT], s16 species)
+{
+    s16 area;
+    s16 arrows;
+    s16 slot;
+
+    for (area = 0; area < AREA_COUNT; area++)
+    {
+        for (arrows = 0; arrows < 2; arrows++)
+        {
+            for (slot = 0; slot < WILD_MON_LOCATION_COUNT; slot++)
+            {
+                if (locations[area][arrows][slot] == species)
+                    return TRUE;
+            }
+        }
+    }
+
+    return FALSE;
+}
+
+static bool8 IsSpeciesCatchableInAnyGeneration(s16 species)
+{
+    if (species < 0 || species >= NUM_SPECIES)
+        return FALSE;
+
+    if (IsSpeciesInWildLocationTable(gWildMonLocations, species))
+        return TRUE;
+    if (IsSpeciesInWildLocationTable(gWildMonLocationsGen1, species))
+        return TRUE;
+    if (IsSpeciesInWildLocationTable(gWildMonLocationsGen2, species))
+        return TRUE;
+
+    return FALSE;
 }
 
 void LoadMonAnimationSprite(s16 species)
@@ -2449,7 +2488,9 @@ s16 CheckMonHasAnimation(s16 species)
         return gPokedexShowAnimSprite;
     }
 
-    if (GetPokedexFlag(species) == 4 && gDexAnimationIx[species] != -1)
+    if (GetPokedexFlag(species) == SPECIES_CAUGHT
+     && gDexAnimationIx[species] != -1
+     && IsSpeciesCatchableInAnyGeneration(species))
         gPokedexShowAnimSprite = 1;
     else
         gPokedexShowAnimSprite = 0;
