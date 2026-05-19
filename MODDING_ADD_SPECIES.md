@@ -7,13 +7,13 @@ guardado.
 
 ## Estado actual
 
-- El juego original guarda flags de Pokedex para 205 especies.
-- La rama mantiene ese tamano de guardado con `NUM_SAVE_SPECIES`.
-- Las especies nuevas viven por encima de `NUM_SAVE_SPECIES` y usan flags extra
-  en RAM para pruebas.
-- Blitzle usa el indice interno `SPECIES_TEST_EXTRA`, que actualmente vale `205`.
-- Zebstrika usa el indice interno `SPECIES_ZEBSTRIKA`, que actualmente vale `206`.
-- `SPECIES_NONE` vale `207`, asi que `NUM_SPECIES` tambien es `207`.
+- El juego original guardaba flags de Pokedex para 205 especies.
+- La rama mantiene el layout del save con mucho cuidado: no cambies campos sin
+  revisar `save.c`.
+- Las especies nuevas ya pueden tener flags persistentes fuera del bloque
+  original, pero deben pasar por las funciones auxiliares de Pokedex/save.
+- Los assets se renombran con numero de Pokedex Nacional para localizarlos
+  mejor.
 
 El punto importante: no subas el tamano de `pokedexFlags` dentro de `SaveData`
 si no quieres cambiar el layout del save y arriesgar corrupciones/crashes.
@@ -186,7 +186,7 @@ graphics/mon_portraits
 Anade el PNG:
 
 ```text
-graphics/mon_portraits/blitzle_portrait.png
+graphics/mon_portraits/522_blitzle_portrait.png
 ```
 
 Luego registra el grafico en:
@@ -199,8 +199,8 @@ Ejemplo:
 
 ```json
 {
-  "gfx_filename": "blitzle_portrait",
-  "palette": "blitzle_portrait.gbapal"
+  "gfx_filename": "522_blitzle_portrait",
+  "palette": "522_blitzle_portrait.gbapal"
 }
 ```
 
@@ -214,11 +214,11 @@ data/graphics/mon_portraits_pals.inc
 Ejemplo:
 
 ```asm
-.incbin "graphics/mon_portraits/blitzle_portrait.4bpp"
+.incbin "graphics/mon_portraits/522_blitzle_portrait.4bpp"
 ```
 
 ```asm
-.incbin "graphics/mon_portraits/blitzle_portrait.gbapal"
+.incbin "graphics/mon_portraits/522_blitzle_portrait.gbapal"
 ```
 
 El orden importa: la posicion del retrato debe coincidir con el indice de la
@@ -232,10 +232,10 @@ Carpeta:
 graphics/mon_catch_sprites
 ```
 
-Anade el PNG:
+Anade el PNG. El nombre debe usar el numero nacional:
 
 ```text
-graphics/mon_catch_sprites/catch_mon_85_blitzle.png
+graphics/mon_catch_sprites/catch_mon_522_blitzle.png
 ```
 
 Luego registra el grafico en:
@@ -248,8 +248,8 @@ Ejemplo:
 
 ```json
 {
-  "gfx_filename": "catch_mon_85_blitzle",
-  "palette": "catch_mon_85_blitzle.gbapal"
+  "gfx_filename": "catch_mon_522_blitzle",
+  "palette": "catch_mon_522_blitzle.gbapal"
 }
 ```
 
@@ -264,11 +264,11 @@ Ejemplo actual:
 
 ```asm
 gMonCatchSpriteGroup16_Gfx::
-    .incbin "graphics/mon_catch_sprites/catch_mon_81_chikorita.4bpp"
-    .incbin "graphics/mon_catch_sprites/catch_mon_82_cyndaquil.4bpp"
-    .incbin "graphics/mon_catch_sprites/catch_mon_83_totodile.4bpp"
-    .incbin "graphics/mon_catch_sprites/catch_mon_84_aerodactyl.4bpp"
-    .incbin "graphics/mon_catch_sprites/catch_mon_85_blitzle.4bpp"
+    .incbin "graphics/mon_catch_sprites/catch_mon_152_chikorita.4bpp"
+    .incbin "graphics/mon_catch_sprites/catch_mon_155_cyndaquil.4bpp"
+    .incbin "graphics/mon_catch_sprites/catch_mon_158_totodile.4bpp"
+    .incbin "graphics/mon_catch_sprites/catch_mon_142_aerodactyl.4bpp"
+    .incbin "graphics/mon_catch_sprites/catch_mon_522_blitzle.4bpp"
 ```
 
 ## 7. Conectar la animacion de Pokedex
@@ -336,7 +336,8 @@ Esta rama usa:
 #define NUM_SAVE_SPECIES 205
 ```
 
-Y `gExtraPokedexFlags` para los flags extra durante la partida.
+Y funciones auxiliares para que las especies nuevas no dependan de acceder
+directamente al array original.
 
 ## 9. Compilar en Codespaces
 

@@ -6,7 +6,7 @@ gWildMonLocations:: @ 0x08055A84
 	.2byte SPECIES_CASCOON
 	.2byte SPECIES_DUSKULL
 	.2byte SPECIES_KECLEON
-	.2byte SPECIES_TEST_EXTRA
+	.2byte SPECIES_ZIGZAGOON
 	.2byte SPECIES_NONE
 
 	@ Forest | Ruby | Three arrows
@@ -306,55 +306,55 @@ gWildMonLocationsGen1::
 	.2byte SPECIES_BULBASAUR
 	.2byte SPECIES_CATERPIE
 	.2byte SPECIES_WEEDLE
-	.2byte SPECIES_PIDGEY
-	.2byte SPECIES_RATTATA
 	.2byte SPECIES_ODDISH
 	.2byte SPECIES_PARAS
 	.2byte SPECIES_VENONAT
+	.2byte SPECIES_BELLSPROUT
+	.2byte SPECIES_PIKACHU
 
 	@ Forest | Ruby | Three arrows
 	.2byte SPECIES_BULBASAUR
-	.2byte SPECIES_PIKACHU
 	.2byte SPECIES_CATERPIE
 	.2byte SPECIES_WEEDLE
-	.2byte SPECIES_PIDGEY
 	.2byte SPECIES_ODDISH
 	.2byte SPECIES_PARAS
 	.2byte SPECIES_VENONAT
+	.2byte SPECIES_BELLSPROUT
+	.2byte SPECIES_PIKACHU
 
 	@ Forest | Sapphire | Two arrows
 	.2byte SPECIES_BULBASAUR
 	.2byte SPECIES_CATERPIE
 	.2byte SPECIES_WEEDLE
-	.2byte SPECIES_PIDGEY
-	.2byte SPECIES_RATTATA
 	.2byte SPECIES_ODDISH
 	.2byte SPECIES_PARAS
 	.2byte SPECIES_VENONAT
+	.2byte SPECIES_BELLSPROUT
+	.2byte SPECIES_PIKACHU
 
 	@ Forest | Sapphire | Three arrows
 	.2byte SPECIES_BULBASAUR
-	.2byte SPECIES_PIKACHU
 	.2byte SPECIES_CATERPIE
 	.2byte SPECIES_WEEDLE
-	.2byte SPECIES_PIDGEY
 	.2byte SPECIES_ODDISH
 	.2byte SPECIES_PARAS
 	.2byte SPECIES_VENONAT
+	.2byte SPECIES_BELLSPROUT
+	.2byte SPECIES_PIKACHU
 
 	@ Plains | Ruby | Two arrows
+	.2byte SPECIES_PIDGEY
+	.2byte SPECIES_RATTATA
 	.2byte SPECIES_SPEAROW
 	.2byte SPECIES_EKANS
 	.2byte SPECIES_SANDSHREW
 	.2byte SPECIES_NIDORAN_F
 	.2byte SPECIES_NIDORAN_M
 	.2byte SPECIES_MEOWTH
-	.2byte SPECIES_GROWLITHE
-	.2byte SPECIES_FARFETCHD
 
 	@ Plains | Ruby | Three arrows
-	.2byte SPECIES_SPEAROW
-	.2byte SPECIES_EKANS
+	.2byte SPECIES_PIDGEY
+	.2byte SPECIES_RATTATA
 	.2byte SPECIES_SANDSHREW
 	.2byte SPECIES_NIDORAN_F
 	.2byte SPECIES_NIDORAN_M
@@ -363,18 +363,18 @@ gWildMonLocationsGen1::
 	.2byte SPECIES_EEVEE
 
 	@ Plains | Sapphire | Two arrows
+	.2byte SPECIES_PIDGEY
+	.2byte SPECIES_RATTATA
 	.2byte SPECIES_SPEAROW
 	.2byte SPECIES_EKANS
 	.2byte SPECIES_SANDSHREW
 	.2byte SPECIES_NIDORAN_F
 	.2byte SPECIES_NIDORAN_M
 	.2byte SPECIES_MEOWTH
-	.2byte SPECIES_GROWLITHE
-	.2byte SPECIES_FARFETCHD
 
 	@ Plains | Sapphire | Three arrows
-	.2byte SPECIES_SPEAROW
-	.2byte SPECIES_EKANS
+	.2byte SPECIES_PIDGEY
+	.2byte SPECIES_RATTATA
 	.2byte SPECIES_SANDSHREW
 	.2byte SPECIES_NIDORAN_F
 	.2byte SPECIES_NIDORAN_M
@@ -393,7 +393,7 @@ gWildMonLocationsGen1::
 	.2byte SPECIES_GOLDEEN
 
 	@ Ocean | Ruby | Three arrows
-	.2byte SPECIES_SQUIRTLE
+	.2byte SPECIES_LAPRAS
 	.2byte SPECIES_TENTACOOL
 	.2byte SPECIES_SLOWPOKE
 	.2byte SPECIES_STARYU
@@ -413,7 +413,7 @@ gWildMonLocationsGen1::
 	.2byte SPECIES_GOLDEEN
 
 	@ Ocean | Sapphire | Three arrows
-	.2byte SPECIES_SQUIRTLE
+	.2byte SPECIES_LAPRAS
 	.2byte SPECIES_TENTACOOL
 	.2byte SPECIES_SLOWPOKE
 	.2byte SPECIES_STARYU
@@ -463,21 +463,21 @@ gWildMonLocationsGen1::
 	.2byte SPECIES_DROWZEE
 
 	@ Safari Zone | Ruby | Two arrows
-	.2byte SPECIES_PSYDUCK
 	.2byte SPECIES_DODUO
 	.2byte SPECIES_EXEGGCUTE
 	.2byte SPECIES_KANGASKHAN
 	.2byte SPECIES_LICKITUNG
+	.2byte SPECIES_MR_MIME
 	.2byte SPECIES_SCYTHER
 	.2byte SPECIES_PINSIR
 	.2byte SPECIES_TAUROS
 
 	@ Safari Zone | Ruby | Three arrows
-	.2byte SPECIES_PSYDUCK
-	.2byte SPECIES_DODUO
+	.2byte SPECIES_HITMONLEE
+	.2byte SPECIES_CHANSEY
 	.2byte SPECIES_EXEGGCUTE
 	.2byte SPECIES_KANGASKHAN
-	.2byte SPECIES_CHANSEY
+	.2byte SPECIES_HITMONCHAN
 	.2byte SPECIES_SCYTHER
 	.2byte SPECIES_PINSIR
 	.2byte SPECIES_TAUROS
@@ -529,7 +529,7 @@ gWildMonLocationsGen1::
 	.2byte SPECIES_TANGELA
 	.2byte SPECIES_DITTO
 	.2byte SPECIES_ELECTABUZZ
-	.2byte SPECIES_NONE
+	.2byte SPECIES_PORYGON
 	.2byte SPECIES_NONE
 
 	@ Wilderness | Sapphire | Three arrows
@@ -589,8 +589,8 @@ gWildMonLocationsGen1::
 	.2byte SPECIES_PIKACHU
 	.2byte SPECIES_EEVEE
 	.2byte SPECIES_DRATINI
-	.2byte SPECIES_MEW
-	.2byte SPECIES_SNORLAX
+	.2byte SPECIES_JOLTEON
+	.2byte SPECIES_FLAREON
 
 	@ Test Area | Ruby | Three arrows
 	.2byte SPECIES_BULBASAUR
@@ -599,8 +599,8 @@ gWildMonLocationsGen1::
 	.2byte SPECIES_PIKACHU
 	.2byte SPECIES_EEVEE
 	.2byte SPECIES_DRATINI
-	.2byte SPECIES_MEW
-	.2byte SPECIES_SNORLAX
+	.2byte SPECIES_JOLTEON
+	.2byte SPECIES_FLAREON
 
 
 gWildMonLocationsGen2::
@@ -623,7 +623,7 @@ gWildMonLocationsGen2::
 	.2byte SPECIES_SPINARAK
 	.2byte SPECIES_HOPPIP
 	.2byte SPECIES_SUNKERN
-	.2byte SPECIES_PINECO
+	.2byte SPECIES_TOGEPI
 
 	@ Forest | Sapphire | Two arrows
 	.2byte SPECIES_CHIKORITA
@@ -643,7 +643,7 @@ gWildMonLocationsGen2::
 	.2byte SPECIES_SPINARAK
 	.2byte SPECIES_HOPPIP
 	.2byte SPECIES_SUNKERN
-	.2byte SPECIES_PINECO
+	.2byte SPECIES_TOGEPI
 
 	@ Plains | Ruby | Two arrows
 	.2byte SPECIES_CYNDAQUIL
@@ -656,7 +656,7 @@ gWildMonLocationsGen2::
 	.2byte SPECIES_MILTANK
 
 	@ Plains | Ruby | Three arrows
-	.2byte SPECIES_CYNDAQUIL
+	.2byte SPECIES_TYROGUE
 	.2byte SPECIES_MAREEP
 	.2byte SPECIES_AIPOM
 	.2byte SPECIES_SNUBBULL
@@ -676,7 +676,7 @@ gWildMonLocationsGen2::
 	.2byte SPECIES_MILTANK
 
 	@ Plains | Sapphire | Three arrows
-	.2byte SPECIES_CYNDAQUIL
+	.2byte SPECIES_SMEARGLE
 	.2byte SPECIES_MAREEP
 	.2byte SPECIES_AIPOM
 	.2byte SPECIES_SNUBBULL
@@ -732,7 +732,7 @@ gWildMonLocationsGen2::
 	.2byte SPECIES_TEDDIURSA
 	.2byte SPECIES_SWINUB
 	.2byte SPECIES_LARVITAR
-	.2byte SPECIES_NONE
+	.2byte SPECIES_DELIBIRD
 	.2byte SPECIES_NONE
 
 	@ Cave | Ruby | Three arrows
@@ -752,7 +752,7 @@ gWildMonLocationsGen2::
 	.2byte SPECIES_TEDDIURSA
 	.2byte SPECIES_SWINUB
 	.2byte SPECIES_LARVITAR
-	.2byte SPECIES_NONE
+	.2byte SPECIES_DELIBIRD
 	.2byte SPECIES_NONE
 
 	@ Cave | Sapphire | Three arrows
@@ -812,7 +812,7 @@ gWildMonLocationsGen2::
 	.2byte SPECIES_POLIWAG
 	.2byte SPECIES_SLOWPOKE
 	.2byte SPECIES_REMORAID
-	.2byte SPECIES_NONE
+	.2byte SPECIES_PICHU
 	.2byte SPECIES_NONE
 
 	@ Lake | Sapphire | Three arrows
@@ -832,7 +832,7 @@ gWildMonLocationsGen2::
 	.2byte SPECIES_SNUBBULL
 	.2byte SPECIES_HOUNDOUR
 	.2byte SPECIES_SNEASEL
-	.2byte SPECIES_NONE
+	.2byte SPECIES_ELEKID
 	.2byte SPECIES_NONE
 
 	@ Wilderness | Sapphire | Three arrows
@@ -843,7 +843,7 @@ gWildMonLocationsGen2::
 	.2byte SPECIES_HOUNDOUR
 	.2byte SPECIES_SNEASEL
 	.2byte SPECIES_RAIKOU
-	.2byte SPECIES_NONE
+	.2byte SPECIES_SMOOCHUM
 
 	@ Ruin | Ruby | Two arrows
 	.2byte SPECIES_UNOWN
@@ -889,18 +889,18 @@ gWildMonLocationsGen2::
 	.2byte SPECIES_CHIKORITA
 	.2byte SPECIES_CYNDAQUIL
 	.2byte SPECIES_TOTODILE
-	.2byte SPECIES_MAREEP
-	.2byte SPECIES_MARILL
-	.2byte SPECIES_LARVITAR
-	.2byte SPECIES_CELEBI
-	.2byte SPECIES_TOGEPI
+	.2byte SPECIES_BELLOSSOM
+	.2byte SPECIES_POLITOED
+	.2byte SPECIES_ESPEON
+	.2byte SPECIES_UMBREON
+	.2byte SPECIES_SLOWKING
 
 	@ Test Area | Ruby | Three arrows
-	.2byte SPECIES_CHIKORITA
-	.2byte SPECIES_CYNDAQUIL
-	.2byte SPECIES_TOTODILE
-	.2byte SPECIES_MAREEP
-	.2byte SPECIES_MARILL
-	.2byte SPECIES_LARVITAR
+	.2byte SPECIES_PICHU
+	.2byte SPECIES_CLEFFA
+	.2byte SPECIES_IGGLYBUFF
+	.2byte SPECIES_TYROGUE
+	.2byte SPECIES_SMOOCHUM
+	.2byte SPECIES_SMEARGLE
 	.2byte SPECIES_CELEBI
 	.2byte SPECIES_TOGEPI
