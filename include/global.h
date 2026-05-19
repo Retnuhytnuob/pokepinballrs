@@ -876,7 +876,9 @@ struct PinballGame
     /*0x13BC*/struct FlipperState flipper[2];
     /*0x13D4*/u16 nameRevealDelaysRow2[10];
     /*0x13E8*/struct Vector16 nameSlideRow2[10];
-} /* size=0x1410 */;
+    /*0x1410*/u8 evolvablePartySpeciesHighBytes[MAX_EVOLVABLE_PARTY_SIZE];
+    /*0x1420*/u32 evolvablePartySpeciesStorageMagic;
+} /* size=0x1424 */;
 
 struct ReplayInputFrame
 {

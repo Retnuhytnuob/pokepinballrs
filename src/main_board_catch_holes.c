@@ -1,4 +1,5 @@
 #include "global.h"
+#include "functions.h"
 #include "main.h"
 #include "m4a.h"
 #include "constants/bg_music.h"
@@ -399,7 +400,7 @@ void UpdateShopEntryAnimation(s16 arg0)
                 int stage1Evo;
                 int stage2Evo;
                 gCurrentPinballGame->shopSlideDirection = 0;
-                gCurrentPinballGame->currentSpecies = gCurrentPinballGame->evolvablePartySpecies[gCurrentPinballGame->evolvingPartyIndex];
+                gCurrentPinballGame->currentSpecies = GetEvolvablePartySpecies(gCurrentPinballGame->evolvingPartyIndex);
                 gCurrentPinballGame->evoChainMaxStage = 0;
                 stage1Evo = gSpeciesInfo[gCurrentPinballGame->currentSpecies].evolutionTarget;
 
@@ -479,7 +480,7 @@ void UpdateShopEntryAnimation(s16 arg0)
                             else
                                 gCurrentPinballGame->evolvingPartyIndex = gCurrentPinballGame->evolvablePartySize - 1;
 
-                            gCurrentPinballGame->currentSpecies = gCurrentPinballGame->evolvablePartySpecies[gCurrentPinballGame->evolvingPartyIndex];
+                            gCurrentPinballGame->currentSpecies = GetEvolvablePartySpecies(gCurrentPinballGame->evolvingPartyIndex);
                             gCurrentPinballGame->shopSlideDirection = 1;
                             gCurrentPinballGame->shopAnimSlideTimer = 30;
                             gCurrentPinballGame->evoChainPosition = 0;
@@ -508,7 +509,7 @@ void UpdateShopEntryAnimation(s16 arg0)
                             else
                                 gCurrentPinballGame->evolvingPartyIndex = 0;
 
-                            gCurrentPinballGame->currentSpecies = gCurrentPinballGame->evolvablePartySpecies[gCurrentPinballGame->evolvingPartyIndex];
+                            gCurrentPinballGame->currentSpecies = GetEvolvablePartySpecies(gCurrentPinballGame->evolvingPartyIndex);
                             gCurrentPinballGame->shopSlideDirection = 0;
                             gCurrentPinballGame->shopAnimSlideTimer = 30;
                             gCurrentPinballGame->evoChainPosition = 0;

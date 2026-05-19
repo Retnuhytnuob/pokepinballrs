@@ -554,6 +554,9 @@ extern void UpdateSapphireEggMachine();
 extern void DrawBoardEdgeBanner(void);
 extern void RestoreBoardObjPalettes(s16);
 extern void RegisterCaptureOrEvolution(s16);
+extern u16 GetEvolvablePartySpecies(s16);
+extern void SetEvolvablePartySpecies(s16, u16);
+extern void NormalizeEvolvablePartySpeciesStorage(void);
 
 extern void BuildSpeciesWeightsForCatchEmMode(void);
 

@@ -1,5 +1,6 @@
 #include "global.h"
 #include "agb_sram.h"
+#include "functions.h"
 #include "main.h"
 #include "m4a.h"
 
@@ -132,6 +133,7 @@ void SaveGameStateSnapshot(s16 arg0)
 
 void SaveGameToSram(void)
 {
+    NormalizeEvolvablePartySpeciesStorage();
     gCurrentPinballGame->saveDataValid = 1;
     WriteAndVerifySramFast((const u8 *)gCurrentPinballGame, (void *)SRAM + 0x544, sizeof(*gCurrentPinballGame));
 }
@@ -145,10 +147,12 @@ void RestoreGameState(u16 arg0)
     if (arg0 == 1)
     {
         ReadSramFast((void *)SRAM + 0x544, (u8 *)gCurrentPinballGame, sizeof(*gCurrentPinballGame));
+        NormalizeEvolvablePartySpeciesStorage();
     }
     else if (arg0 == 2)
     {
         DmaCopy16(3, gBoardConfig.pinballGame, gCurrentPinballGame, sizeof(*gCurrentPinballGame));
+        NormalizeEvolvablePartySpeciesStorage();
         gCurrentPinballGame->ball = &gCurrentPinballGame->ballStates[0];
         gCurrentPinballGame->secondaryBall = &gCurrentPinballGame->ballStates[0];
         var2 = gMain.idleDemoVariant;

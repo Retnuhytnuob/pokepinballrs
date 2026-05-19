@@ -13,6 +13,93 @@ extern const u16 gWildMonLocationsGen1[AREA_COUNT][2][WILD_MON_LOCATION_COUNT];
 extern const u16 gWildMonLocationsGen2[AREA_COUNT][2][WILD_MON_LOCATION_COUNT];
 extern const u16 gEggLocations[MAIN_FIELD_COUNT][26];
 
+#define EVOLVABLE_PARTY_SPECIES_STORAGE_MAGIC 0x504B4556
+
+void NormalizeEvolvablePartySpeciesStorage(void)
+{
+    s16 i;
+    s16 partySize = gCurrentPinballGame->evolvablePartySize;
+    bool8 clearHighBytes = FALSE;
+
+    if (partySize < 0 || partySize > MAX_EVOLVABLE_PARTY_SIZE)
+        partySize = MAX_EVOLVABLE_PARTY_SIZE;
+
+    if (gCurrentPinballGame->evolvablePartySpeciesStorageMagic != EVOLVABLE_PARTY_SPECIES_STORAGE_MAGIC)
+    {
+        clearHighBytes = TRUE;
+    }
+    else
+    {
+        for (i = 0; i < partySize; i++)
+        {
+            u16 species = gCurrentPinballGame->evolvablePartySpecies[i]
+                        | (gCurrentPinballGame->evolvablePartySpeciesHighBytes[i] << 8);
+
+            if (species >= SPECIES_NONE)
+                clearHighBytes = TRUE;
+        }
+    }
+
+    if (!clearHighBytes)
+        return;
+
+    for (i = 0; i < MAX_EVOLVABLE_PARTY_SIZE; i++)
+        gCurrentPinballGame->evolvablePartySpeciesHighBytes[i] = 0;
+
+    gCurrentPinballGame->evolvablePartySpeciesStorageMagic = EVOLVABLE_PARTY_SPECIES_STORAGE_MAGIC;
+}
+
+u16 GetEvolvablePartySpecies(s16 index)
+{
+    u16 species = gCurrentPinballGame->evolvablePartySpecies[index];
+
+    if (gCurrentPinballGame->evolvablePartySpeciesStorageMagic == EVOLVABLE_PARTY_SPECIES_STORAGE_MAGIC)
+        species |= gCurrentPinballGame->evolvablePartySpeciesHighBytes[index] << 8;
+
+    return species;
+}
+
+void SetEvolvablePartySpecies(s16 index, u16 species)
+{
+    NormalizeEvolvablePartySpeciesStorage();
+
+    gCurrentPinballGame->evolvablePartySpecies[index] = species & 0xFF;
+    gCurrentPinballGame->evolvablePartySpeciesHighBytes[index] = species >> 8;
+}
+
+static void AddEvolvablePartySpecies(u16 species)
+{
+    s16 i;
+
+    if (gCurrentPinballGame->evolvablePartySize < MAX_EVOLVABLE_PARTY_SIZE)
+    {
+        SetEvolvablePartySpecies(gCurrentPinballGame->evolvablePartySize, species);
+        gCurrentPinballGame->evolvablePartySize++;
+    }
+    else
+    {
+        for (i = 0; i < MAX_EVOLVABLE_PARTY_SIZE - 1; i++)
+            SetEvolvablePartySpecies(i, GetEvolvablePartySpecies(i + 1));
+
+        SetEvolvablePartySpecies(MAX_EVOLVABLE_PARTY_SIZE - 1, species);
+    }
+}
+
+static void RemoveEvolvablePartySpecies(s16 index)
+{
+    s16 i;
+
+    if (gCurrentPinballGame->evolvablePartySize <= 0)
+        return;
+
+    gCurrentPinballGame->evolvablePartySize--;
+
+    for (i = index; i < gCurrentPinballGame->evolvablePartySize; i++)
+        SetEvolvablePartySpecies(i, GetEvolvablePartySpecies(i + 1));
+
+    SetEvolvablePartySpecies(gCurrentPinballGame->evolvablePartySize, 0);
+}
+
 static u16 GetWildMonForSelectedGeneration(s16 area, s16 threeArrows, s16 index)
 {
     switch (gSelectedGeneration)
@@ -41,8 +128,6 @@ static u8 GetSavedPokedexFlag(s16 species)
 */
 void RegisterCaptureOrEvolution(s16 evolved)
 {
-    s16 i;
-
     if (!evolved)
     {
         if (gMain.mainState != STATE_GAME_IDLE)
@@ -51,30 +136,12 @@ void RegisterCaptureOrEvolution(s16 evolved)
         if (gSpeciesInfo[gCurrentPinballGame->currentSpecies].evolutionMethod != 0)
         {
             if (gSpeciesInfo[gCurrentPinballGame->currentSpecies].evolutionTarget < SPECIES_NONE)
-            {
-                if (gCurrentPinballGame->evolvablePartySize < MAX_EVOLVABLE_PARTY_SIZE)
-                {
-                    gCurrentPinballGame->evolvablePartySpecies[gCurrentPinballGame->evolvablePartySize] =
-                        gCurrentPinballGame->currentSpecies;
-
-                    gCurrentPinballGame->evolvablePartySize++;
-                }
-                else
-                {
-                    for (i = 0; i < MAX_EVOLVABLE_PARTY_SIZE; i++)
-                        gCurrentPinballGame->evolvablePartySpecies[i] = gCurrentPinballGame->evolvablePartySpecies[i + 1];
-
-                    gCurrentPinballGame->evolvablePartySpecies[MAX_EVOLVABLE_PARTY_SIZE - 1] = gCurrentPinballGame->currentSpecies;
-                }
-            }
+                AddEvolvablePartySpecies(gCurrentPinballGame->currentSpecies);
         }
     }
     else
     {
-        gCurrentPinballGame->evolvablePartySize--;
-
-        for (i = gCurrentPinballGame->evolvingPartyIndex; i < gCurrentPinballGame->evolvablePartySize; i++)
-            gCurrentPinballGame->evolvablePartySpecies[i] = gCurrentPinballGame->evolvablePartySpecies[i + 1];
+        RemoveEvolvablePartySpecies(gCurrentPinballGame->evolvingPartyIndex);
 
         if (gCurrentPinballGame->currentSpecies == SPECIES_WURMPLE)
         {
@@ -137,21 +204,7 @@ void RegisterCaptureOrEvolution(s16 evolved)
         if (gSpeciesInfo[gCurrentPinballGame->currentSpecies].evolutionMethod != 0)
         {
             if (gSpeciesInfo[gCurrentPinballGame->currentSpecies].evolutionTarget < SPECIES_NONE)
-            {
-                if (gCurrentPinballGame->evolvablePartySize < MAX_EVOLVABLE_PARTY_SIZE)
-                {
-                    gCurrentPinballGame->evolvablePartySpecies[gCurrentPinballGame->evolvablePartySize] =
-                        gCurrentPinballGame->currentSpecies;
-                    gCurrentPinballGame->evolvablePartySize++;
-                }
-                else
-                {
-                    for (i = 0; i < MAX_EVOLVABLE_PARTY_SIZE; i++)
-                        gCurrentPinballGame->evolvablePartySpecies[i] = gCurrentPinballGame->evolvablePartySpecies[i + 1];
-
-                    gCurrentPinballGame->evolvablePartySpecies[MAX_EVOLVABLE_PARTY_SIZE - 1] = gCurrentPinballGame->currentSpecies;
-                }
-            }
+                AddEvolvablePartySpecies(gCurrentPinballGame->currentSpecies);
         }
     }
 }
