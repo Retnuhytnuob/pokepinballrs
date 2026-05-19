@@ -5,6 +5,21 @@
 #include "constants/species_rs.h"
 
 static bool16 LoadSaveDataFromSram(void);
+static void LoadExtraPokedexFlagsFromSram(void);
+static void SaveExtraPokedexFlagsToSram(void);
+
+#define EXTRA_POKEDEX_FLAGS_COUNT (NUM_SPECIES - NUM_SAVE_SPECIES)
+#define EXTRA_POKEDEX_SAVE_MAGIC 0x58444550
+#define EXTRA_POKEDEX_SAVE_OFFSET 0x1A00
+#define EXTRA_POKEDEX_SAVE_BACKUP_OFFSET 0x1B00
+
+struct ExtraPokedexSaveData
+{
+    u32 magic;
+    u16 count;
+    u16 checksum;
+    u8 flags[EXTRA_POKEDEX_FLAGS_COUNT];
+};
 
 void SaveFile_LoadGameData(void)
 {
@@ -23,6 +38,7 @@ void SaveFile_LoadGameData(void)
     else
     {
         SetButtonConfigInputs(gMain_saveData.buttonConfigType);
+        LoadExtraPokedexFlagsFromSram();
     }
 }
 
@@ -71,6 +87,73 @@ static bool16 LoadSaveDataFromSram(void)
     return isOk;
 }
 
+static u16 CalcExtraPokedexChecksum(struct ExtraPokedexSaveData *saveData)
+{
+    u16 i;
+    u16 checksum = 0;
+
+    checksum += saveData->magic & 0xFFFF;
+    checksum += saveData->magic >> 16;
+    checksum += saveData->count;
+
+    for (i = 0; i < EXTRA_POKEDEX_FLAGS_COUNT; i++)
+        checksum += saveData->flags[i];
+
+    return ~checksum;
+}
+
+static bool16 IsExtraPokedexSaveValid(struct ExtraPokedexSaveData *saveData)
+{
+    if (saveData->magic != EXTRA_POKEDEX_SAVE_MAGIC)
+        return FALSE;
+
+    if (saveData->count != EXTRA_POKEDEX_FLAGS_COUNT)
+        return FALSE;
+
+    if (saveData->checksum != CalcExtraPokedexChecksum(saveData))
+        return FALSE;
+
+    return TRUE;
+}
+
+static void LoadExtraPokedexFlagsFromSram(void)
+{
+    s16 i;
+    struct ExtraPokedexSaveData saveData;
+
+    ReadSramFast((void *)(SRAM + EXTRA_POKEDEX_SAVE_OFFSET), (u8 *)&saveData, sizeof(saveData));
+    if (!IsExtraPokedexSaveValid(&saveData))
+        ReadSramFast((void *)(SRAM + EXTRA_POKEDEX_SAVE_BACKUP_OFFSET), (u8 *)&saveData, sizeof(saveData));
+
+    if (IsExtraPokedexSaveValid(&saveData))
+    {
+        for (i = 0; i < EXTRA_POKEDEX_FLAGS_COUNT; i++)
+            gExtraPokedexFlags[i] = saveData.flags[i];
+    }
+    else
+    {
+        for (i = 0; i < EXTRA_POKEDEX_FLAGS_COUNT; i++)
+            gExtraPokedexFlags[i] = SPECIES_UNSEEN;
+    }
+}
+
+static void SaveExtraPokedexFlagsToSram(void)
+{
+    s16 i;
+    struct ExtraPokedexSaveData saveData;
+
+    saveData.magic = EXTRA_POKEDEX_SAVE_MAGIC;
+    saveData.count = EXTRA_POKEDEX_FLAGS_COUNT;
+
+    for (i = 0; i < EXTRA_POKEDEX_FLAGS_COUNT; i++)
+        saveData.flags[i] = gExtraPokedexFlags[i];
+
+    saveData.checksum = CalcExtraPokedexChecksum(&saveData);
+
+    WriteAndVerifySramFast((u8 *)&saveData, (void *)(SRAM + EXTRA_POKEDEX_SAVE_OFFSET), sizeof(saveData));
+    WriteAndVerifySramFast((u8 *)&saveData, (void *)(SRAM + EXTRA_POKEDEX_SAVE_BACKUP_OFFSET), sizeof(saveData));
+}
+
 void SaveFile_WriteToSram(void)
 {
     u32 checksum;
@@ -93,6 +176,7 @@ void SaveFile_WriteToSram(void)
 
     WriteAndVerifySramFast((u8 *)&gMain_saveData, (void *)(SRAM + 0x4),   sizeof(gMain_saveData));
     WriteAndVerifySramFast((u8 *)&gMain_saveData, (void *)(SRAM + 0x2A4), sizeof(gMain_saveData));
+    SaveExtraPokedexFlagsToSram();
 }
 
 void SaveFile_SetPokedexFlags(s16 species, u8 flag)
@@ -104,7 +188,10 @@ void SaveFile_SetPokedexFlags(s16 species, u8 flag)
     if (species >= NUM_SAVE_SPECIES && species < NUM_SPECIES)
     {
         if (gExtraPokedexFlags[species - NUM_SAVE_SPECIES] < flag)
+        {
             gExtraPokedexFlags[species - NUM_SAVE_SPECIES] = flag;
+            SaveExtraPokedexFlagsToSram();
+        }
         return;
     }
 
