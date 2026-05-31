@@ -13,6 +13,7 @@
 #define DEX_NUM_DIGITS      3
 #define SCROLL_WAIT_FRAMES  9
 #define ENTRIES_SHOWN_COUNT 5
+#define HATCH_DEX_ANIM_OFFSET 200
 
 enum PokedexStates
 {
@@ -519,7 +520,7 @@ void Pokedex_DetailViewInput(void)
             }
             else
             {
-                if (gDexAnimationIx[gPokedexSelectedMon] < 100)
+                if (gDexAnimationIx[gPokedexSelectedMon] < HATCH_DEX_ANIM_OFFSET)
                 {
                     gPokedexShowAnimSprite = 0;
                     gPokedexShowPortrait = 0;
@@ -948,7 +949,7 @@ void UpdateMonSpriteVisibility(void)
             gPokedexSpriteAnimTimer = 0;
             gPokedexSpriteAnimFrame = 0;
         }
-        else if (gDexAnimationIx[gPokedexSelectedMon] < 100)
+        else if (gDexAnimationIx[gPokedexSelectedMon] < HATCH_DEX_ANIM_OFFSET)
         {
             gPokedexShowAnimSprite = 0;
             gPokedexShowPortrait = 0;
@@ -978,7 +979,7 @@ u8 GetSelectedMonSpriteType(void)
      && gDexAnimationIx[gPokedexSelectedMon] != -1
      && IsSpeciesCatchableInAnyGeneration(gPokedexSelectedMon))
     {
-        if (gDexAnimationIx[gPokedexSelectedMon] < 100)
+        if (gDexAnimationIx[gPokedexSelectedMon] < HATCH_DEX_ANIM_OFFSET)
             return 1;
 
         return 2;
@@ -2460,7 +2461,7 @@ void LoadMonAnimationSprite(s16 species)
     if (var0 == -1)
         return;
 
-    if (var0 < 100)
+    if (var0 < HATCH_DEX_ANIM_OFFSET)
     {
         gPokedexSpriteCategory = 0;
         quotient = var0 / 5;
@@ -2472,8 +2473,8 @@ void LoadMonAnimationSprite(s16 species)
     else
     {
         gPokedexSpriteCategory = 1;
-        quotient = (var0 - 100) / 6;
-        remainder = (var0 - 100) % 6;
+        quotient = (var0 - HATCH_DEX_ANIM_OFFSET) / 6;
+        remainder = (var0 - HATCH_DEX_ANIM_OFFSET) % 6;
 
         CopyBgTilesRect(gMonHatchSpriteGroupGfx[quotient][remainder], (void *)(OBJ_VRAM0 + 0x4800), 135, 1);
         DmaCopy16(3, gMonHatchSpriteGroupPals[quotient][remainder], (void *)OBJ_PLTT + 0x60, 0x20);

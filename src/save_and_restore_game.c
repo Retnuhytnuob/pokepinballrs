@@ -35,9 +35,9 @@ extern const u8 gRubyFlashingTiles_Secondary[][0x100];
 extern const u8 gRubyBoardShopDoor_Gfx[][0x180];
 extern const u8 gRubyStageCyndaquil_Gfx[][0x280];
 
-static u8 GetPortraitGfxIndexForSpecies(u16 species)
+static u16 GetPortraitGfxIndexForSpecies(u16 species)
 {
-    if (species > 0xFF)
+    if (species >= NUM_SPECIES)
         return SPECIES_BULBASAUR;
 
     return species;
@@ -483,6 +483,7 @@ void RestoreMainFieldDynamicGraphics(void)
 {
     s16 i;
     s16 var0;
+    u16 portraitGfxIndex;
 
     LoadCatchSpriteGraphics();
     LoadEggSpriteGraphics();
@@ -519,32 +520,35 @@ void RestoreMainFieldDynamicGraphics(void)
             {
                 if (gCurrentPinballGame->evoTargetSpecies >= NUM_SAVE_SPECIES)
                 {
-                    gCurrentPinballGame->portraitGfxIndex[i] = GetPortraitGfxIndexForSpecies(gCurrentPinballGame->evoTargetSpecies);
-                    DmaCopy16(3, gMonPortraitGroupPals[gCurrentPinballGame->portraitGfxIndex[i] / 15] + (gCurrentPinballGame->portraitGfxIndex[i] % 15) * 0x20, 0x050003A0, 0x20);
+                    portraitGfxIndex = GetPortraitGfxIndexForSpecies(gCurrentPinballGame->evoTargetSpecies);
+                    DmaCopy16(3, gMonPortraitGroupPals[portraitGfxIndex / 15] + (portraitGfxIndex % 15) * 0x20, 0x050003A0, 0x20);
                 }
                 else if (gMain_saveData.pokedexFlags[gCurrentPinballGame->evoTargetSpecies] == 0)
                 {
-                    gCurrentPinballGame->portraitGfxIndex[i] = SPECIES_BULBASAUR;
-                    DmaCopy16(3, gMonPortraitGroupPals[gCurrentPinballGame->portraitGfxIndex[i] / 15] + (gCurrentPinballGame->portraitGfxIndex[i] % 15) * 0x20, 0x050003A0, 0x20);
+                    portraitGfxIndex = SPECIES_BULBASAUR;
+                    DmaCopy16(3, gMonPortraitGroupPals[portraitGfxIndex / 15] + (portraitGfxIndex % 15) * 0x20, 0x050003A0, 0x20);
                 }
                 else if (gMain_saveData.pokedexFlags[gCurrentPinballGame->evoTargetSpecies] <= 3)
                 {
-                    gCurrentPinballGame->portraitGfxIndex[i] = GetPortraitGfxIndexForSpecies(gCurrentPinballGame->evoTargetSpecies);
+                    portraitGfxIndex = GetPortraitGfxIndexForSpecies(gCurrentPinballGame->evoTargetSpecies);
                     DmaCopy16(3, gMonPortraitGroupPals[0] + 15 * 0x20, 0x050003A0, 0x20);
                 }
                 else
                 {
-                    gCurrentPinballGame->portraitGfxIndex[i] = GetPortraitGfxIndexForSpecies(gCurrentPinballGame->evoTargetSpecies);
-                    DmaCopy16(3, gMonPortraitGroupPals[gCurrentPinballGame->portraitGfxIndex[i] / 15] + (gCurrentPinballGame->portraitGfxIndex[i] % 15) * 0x20, 0x050003A0, 0x20);
+                    portraitGfxIndex = GetPortraitGfxIndexForSpecies(gCurrentPinballGame->evoTargetSpecies);
+                    DmaCopy16(3, gMonPortraitGroupPals[portraitGfxIndex / 15] + (portraitGfxIndex % 15) * 0x20, 0x050003A0, 0x20);
                 }
             }
             else
             {
-                gCurrentPinballGame->portraitGfxIndex[i] = GetPortraitGfxIndexForSpecies(gCurrentPinballGame->currentSpecies);
-                DmaCopy16(3, gMonPortraitGroupPals[gCurrentPinballGame->portraitGfxIndex[i] / 15] + ((gCurrentPinballGame->portraitGfxIndex[i] % 15) * 0x20), 0x050003A0, 0x20);
+                portraitGfxIndex = GetPortraitGfxIndexForSpecies(gCurrentPinballGame->currentSpecies);
+                DmaCopy16(3, gMonPortraitGroupPals[portraitGfxIndex / 15] + ((portraitGfxIndex % 15) * 0x20), 0x050003A0, 0x20);
             }
+            DmaCopy16(3, gMonPortraitGroupGfx[portraitGfxIndex / 15] + (portraitGfxIndex % 15) * 0x300, 0x06010CA0 + (i * 0x18), 0x300);
+            break;
         case 3:
-            DmaCopy16(3, gMonPortraitGroupGfx[gCurrentPinballGame->portraitGfxIndex[i] / 15] + (gCurrentPinballGame->portraitGfxIndex[i] % 15) * 0x300, 0x06010CA0 + (i * 0x18), 0x300);
+            portraitGfxIndex = GetPortraitGfxIndexForSpecies(gCurrentPinballGame->currentSpecies);
+            DmaCopy16(3, gMonPortraitGroupGfx[portraitGfxIndex / 15] + (portraitGfxIndex % 15) * 0x300, 0x06010CA0 + (i * 0x18), 0x300);
             break;
         case 1:
         case 2:
