@@ -16,6 +16,7 @@ static EWRAM_DATA u8 sGenerationCursor = DEFAULT_GENERATION;
 static EWRAM_DATA u8 sGenerationNextMainState = STATE_FIELD_SELECT;
 
 static void LoadGenerationSelectGraphics(void);
+static void LoadGenerationSelectBackground(void);
 static void HandleGenerationSelectInput(void);
 static void ExitGenerationSelect(void);
 static void RenderGenerationSelectScreen(void);
@@ -25,7 +26,10 @@ static void LoadGenerationSelectFont(void);
 static void DrawGenerationString(const u8 *text, s16 y, s16 x);
 static void DrawGenerationChar(u8 ch, s16 y, s16 x);
 static const u8 *GetGenerationGlyph(u8 ch);
-static bool8 GetGenerationGlyphPixel(const u8 *glyph, s16 row, s16 pixel);
+static bool8 GetGenerationGlyphPixel(const u8 *glyph, s16 row, s16 pixel, s16 yOffset);
+
+extern const u8 gGenerationSelectBackground_Gfx[];
+extern const u16 gGenerationSelectBackground_Pals[];
 
 void GenerationSelectMain(void)
 {
@@ -49,14 +53,14 @@ static void LoadGenerationSelectGraphics(void)
 
     REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_FORCED_BLANK;
     REG_BG0CNT = BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(0) | BGCNT_PRIORITY(0) | BGCNT_TXT256x256;
-    REG_DISPCNT |= DISPCNT_BG0_ON;
+    REG_BG1CNT = BGCNT_CHARBASE(2) | BGCNT_SCREENBASE(1) | BGCNT_PRIORITY(1) | BGCNT_TXT256x256;
+    REG_DISPCNT |= DISPCNT_BG0_ON | DISPCNT_BG1_ON;
     gMain.dispcntBackup = REG_DISPCNT;
 
-    DmaFill16(3, 0x025F, (void *)PLTT, 0x20);
-    ((u16 *)PLTT)[0] = 0x025F;
-    ((u16 *)PLTT)[1] = 0x7FFF;
-    ((u16 *)PLTT)[2] = 0x0000;
-    ((u16 *)PLTT)[3] = 0x03FF;
+    LoadGenerationSelectBackground();
+    ((u16 *)PLTT)[0xF1] = 0x7FFF;
+    ((u16 *)PLTT)[0xF2] = 0x0000;
+    ((u16 *)PLTT)[0xF3] = 0x03FF;
     LoadGenerationSelectFont();
 
     sGenerationCursor = gSelectedGeneration;
@@ -67,6 +71,25 @@ static void LoadGenerationSelectGraphics(void)
     FadeInScreen();
     m4aSongNumStart(MUS_TABLE_SELECT);
     gMain.subState = GENERATION_SELECT_STATE_INPUT;
+}
+
+static void LoadGenerationSelectBackground(void)
+{
+    s16 y;
+    s16 x;
+    u16 *tilemap = (u16 *)BG_SCREEN_ADDR(1);
+
+    DmaCopy16(3, gGenerationSelectBackground_Pals, (void *)PLTT, 0x20);
+    DmaCopy16(3, gGenerationSelectBackground_Gfx, (void *)BG_CHAR_ADDR(2), 0x4B00);
+
+    for (y = 0; y < 20; y++)
+    {
+        for (x = 0; x < 30; x++)
+            tilemap[y * 32 + x] = y * 30 + x;
+
+        tilemap[y * 32 + 30] = 0;
+        tilemap[y * 32 + 31] = 0;
+    }
 }
 
 static void HandleGenerationSelectInput(void)
@@ -133,8 +156,8 @@ static void DrawGenerationSelectText(void)
     s16 i;
 
     DmaFill16(3, 0, gBG0TilemapBuffer, 0x800);
-    DrawGenerationString((u8 *)"SELECT GENERATION", 3, 7);
-    DrawGenerationString((u8 *)"A OK   B BACK", 17, 8);
+    DrawGenerationString((u8 *)"SELECT GENERATION", 2, 7);
+    DrawGenerationString((u8 *)"A OK   B BACK", 16, 8);
 
     for (i = 0; i < GENERATION_COUNT; i++)
         DrawGenerationCell(i, i == sGenerationCursor);
@@ -144,7 +167,7 @@ static void DrawGenerationCell(s16 generation, s16 selected)
 {
     s16 row = generation / 5;
     s16 col = generation % 5;
-    s16 y = 7 + row * 4;
+    s16 y = 6 + row * 4;
     s16 x = 4 + col * 5;
     u8 text[5];
 
@@ -168,7 +191,7 @@ static void LoadGenerationSelectFont(void)
     for (tile = 0; tile < 0x60; tile++)
     {
         const u8 *glyph = GetGenerationGlyph(tile + 32);
-        for (row = 0; row < 8; row++)
+        for (row = 0; row < 16; row++)
         {
             u32 packed = 0;
             s16 pixel;
@@ -180,7 +203,7 @@ static void LoadGenerationSelectFont(void)
                 s16 neighborPixel;
                 u8 color = 0;
 
-                if (GetGenerationGlyphPixel(glyph, row, pixel))
+                if (GetGenerationGlyphPixel(glyph, row, pixel, 3))
                 {
                     color = 1;
                 }
@@ -189,7 +212,7 @@ static void LoadGenerationSelectFont(void)
                     outline = 0;
                     for (neighborRow = row - 1; neighborRow <= row + 1; neighborRow++)
                     {
-                        if (neighborRow < 0 || neighborRow >= 8)
+                        if (neighborRow < 0 || neighborRow >= 16)
                             continue;
 
                         for (neighborPixel = pixel - 1; neighborPixel <= pixel + 1; neighborPixel++)
@@ -197,7 +220,7 @@ static void LoadGenerationSelectFont(void)
                             if (neighborPixel < 0 || neighborPixel >= 8)
                                 continue;
 
-                            if (GetGenerationGlyphPixel(glyph, neighborRow, neighborPixel))
+                            if (GetGenerationGlyphPixel(glyph, neighborRow, neighborPixel, 3))
                                 outline = 1;
                         }
                     }
@@ -213,9 +236,9 @@ static void LoadGenerationSelectFont(void)
     }
 }
 
-static bool8 GetGenerationGlyphPixel(const u8 *glyph, s16 row, s16 pixel)
+static bool8 GetGenerationGlyphPixel(const u8 *glyph, s16 row, s16 pixel, s16 yOffset)
 {
-    row--;
+    row -= yOffset;
 
     if (row < 0 || row >= 8)
         return FALSE;
@@ -237,7 +260,8 @@ static void DrawGenerationChar(u8 ch, s16 y, s16 x)
 {
     if (ch < 32 || ch >= 32 + 0x60)
         ch = ' ';
-    gBG0TilemapBuffer[y * 32 + x] = ch - 32;
+    gBG0TilemapBuffer[y * 32 + x] = ((ch - 32) * 2) | (0xF << 12);
+    gBG0TilemapBuffer[(y + 1) * 32 + x] = ((ch - 32) * 2 + 1) | (0xF << 12);
 }
 
 static const u8 *GetGenerationGlyph(u8 ch)

@@ -1649,6 +1649,12 @@ gOptionsBackground_Gfx:: @ 0x0852A848
 gOptionsBackground_Pals:: @ 0x0852B468
 	.incbin "graphics/options/background.gbapal"
 
+gGenerationSelectBackground_Gfx::
+	.incbin "graphics/options/generation_select_background.4bpp"
+
+gGenerationSelectBackground_Pals::
+	.incbin "graphics/options/generation_select_background.gbapal"
+
 gGBAButtonIcons_Pals:: @ 0x0852B668
 	.incbin "graphics/gba_buttons.gbapal"
 
