@@ -1109,8 +1109,8 @@
       "palette": "102_exeggcute_portrait.gbapal"
     },
     {
-      "gfx_filename": "103_exeggutor_portrait",
-      "palette": "103_exeggutor_portrait.gbapal"
+      "gfx_filename": "103_exeggcutor_portrait",
+      "palette": "103_exeggcutor_portrait.gbapal"
     },
     {
       "gfx_filename": "104_cubone_portrait",
@@ -1173,8 +1173,8 @@
       "palette": "131_lapras_portrait.gbapal"
     },
     {
-      "gfx_filename": "132_lapras_portrait",
-      "palette": "132_lapras_portrait.gbapal"
+      "gfx_filename": "132_ditto_portrait",
+      "palette": "132_ditto_portrait.gbapal"
     },
     {
       "gfx_filename": "133_eevee_portrait",
