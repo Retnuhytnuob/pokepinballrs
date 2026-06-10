@@ -340,7 +340,7 @@ void BuildSpeciesWeightsForCatchEmMode(void)
                 }
                 currentSpecies = GetWildMonForSelectedGeneration(gCurrentPinballGame->area, threeArrows, i);
                 if (gCurrentPinballGame->caughtMonCount == 0
-                 && currentSpecies != SPECIES_TEST_EXTRA
+                 && currentSpecies != SPECIES_DEOXYS
                  && gSpeciesInfo[currentSpecies].evolutionTarget >= SPECIES_NONE)
                 {
                     weight = 0;

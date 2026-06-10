@@ -829,8 +829,8 @@
       "palette": "142_aerodactyl_portrait.gbapal"
     },
     {
-      "gfx_filename": "522_blitzle_portrait",
-      "palette": "522_blitzle_portrait.gbapal"
+      "gfx_filename": "386_deoxys_portrait",
+      "palette": "386_deoxys_portrait.gbapal"
     },
     {
       "gfx_filename": "523_zebstrika_portrait",
@@ -1249,12 +1249,312 @@
       "palette": "151_mew_portrait.gbapal"
     },
     {
+      "gfx_filename": "153_bayleef_portrait",
+      "palette": "153_bayleef_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "154_meganium_portrait",
+      "palette": "154_meganium_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "156_quilava_portrait",
+      "palette": "156_quilava_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "157_typhlosion_portrait",
+      "palette": "157_typhlosion_portrait.gbapal"
+    },
+    {
       "gfx_filename": "159_croconaw_portrait",
       "palette": "159_croconaw_portrait.gbapal"
     },
     {
-      "gfx_filename": "question_mark_portrait",
-      "palette": "question_mark_portrait.gbapal"
+      "gfx_filename": "160_feraligatr_portrait",
+      "palette": "160_feraligatr_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "161_sentret_portrait",
+      "palette": "161_sentret_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "162_furret_portrait",
+      "palette": "162_furret_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "163_hoothoot_portrait",
+      "palette": "163_hoothoot_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "164_noctowl_portrait",
+      "palette": "164_noctowl_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "165_ledyba_portrait",
+      "palette": "165_ledyba_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "166_ledian_portrait",
+      "palette": "166_ledian_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "167_spinarak_portrait",
+      "palette": "167_spinarak_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "168_ariados_portrait",
+      "palette": "168_ariados_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "173_cleffa_portrait",
+      "palette": "173_cleffa_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "175_togepi_portrait",
+      "palette": "175_togepi_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "176_togetic_portrait",
+      "palette": "176_togetic_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "179_mareep_portrait",
+      "palette": "179_mareep_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "180_flaaffy_portrait",
+      "palette": "180_flaaffy_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "181_ampharos_portrait",
+      "palette": "181_ampharos_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "185_sudowoodo_portrait",
+      "palette": "185_sudowoodo_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "186_politoed_portrait",
+      "palette": "186_politoed_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "187_hoppip_portrait",
+      "palette": "187_hoppip_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "188_skiploom_portrait",
+      "palette": "188_skiploom_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "189_jumpluff_portrait",
+      "palette": "189_jumpluff_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "190_aipom_portrait",
+      "palette": "190_aipom_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "191_sunkern_portrait",
+      "palette": "191_sunkern_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "192_sunflora_portrait",
+      "palette": "192_sunflora_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "193_yanma_portrait",
+      "palette": "193_yanma_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "194_wooper_portrait",
+      "palette": "194_wooper_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "195_quagsire_portrait",
+      "palette": "195_quagsire_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "196_espeon_portrait",
+      "palette": "196_espeon_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "197_umbreon_portrait",
+      "palette": "197_umbreon_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "198_murkrow_portrait",
+      "palette": "198_murkrow_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "199_slowking_portrait",
+      "palette": "199_slowking_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "200_misdreavus_portrait",
+      "palette": "200_misdreavus_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "201_unown_portrait",
+      "palette": "201_unown_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "204_pineco_portrait",
+      "palette": "204_pineco_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "205_forretress_portrait",
+      "palette": "205_forretress_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "206_dunsparce_portrait",
+      "palette": "206_dunsparce_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "207_gligar_portrait",
+      "palette": "207_gligar_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "208_steelix_portrait",
+      "palette": "208_steelix_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "209_snubbull_portrait",
+      "palette": "209_snubbull_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "210_granbull_portrait",
+      "palette": "210_granbull_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "211_qwilfish_portrait",
+      "palette": "211_qwilfish_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "212_scizor_portrait",
+      "palette": "212_scizor_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "213_shuckle_portrait",
+      "palette": "213_shuckle_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "215_sneasel_portrait",
+      "palette": "215_sneasel_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "216_teddiursa_portrait",
+      "palette": "216_teddiursa_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "217_ursaring_portrait",
+      "palette": "217_ursaring_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "220_swinub_portrait",
+      "palette": "220_swinub_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "221_piloswine_portrait",
+      "palette": "221_piloswine_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "223_remoraid_portrait",
+      "palette": "223_remoraid_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "224_octillery_portrait",
+      "palette": "224_octillery_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "225_delibird_portrait",
+      "palette": "225_delibird_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "226_mantine_portrait",
+      "palette": "226_mantine_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "228_houndour_portrait",
+      "palette": "228_houndour_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "229_houndoom_portrait",
+      "palette": "229_houndoom_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "233_porygon2_portrait",
+      "palette": "233_porygon2_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "234_stantler_portrait",
+      "palette": "234_stantler_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "235_smeargle_portrait",
+      "palette": "235_smeargle_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "236_tyrogue_portrait",
+      "palette": "236_tyrogue_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "237_hitmontop_portrait",
+      "palette": "237_hitmontop_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "238_smoochum_portrait",
+      "palette": "238_smoochum_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "239_elekid_portrait",
+      "palette": "239_elekid_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "240_magby_portrait",
+      "palette": "240_magby_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "241_miltank_portrait",
+      "palette": "241_miltank_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "242_blissey_portrait",
+      "palette": "242_blissey_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "243_raikou_portrait",
+      "palette": "243_raikou_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "244_entei_portrait",
+      "palette": "244_entei_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "245_suicune_portrait",
+      "palette": "245_suicune_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "246_larvitar_portrait",
+      "palette": "246_larvitar_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "247_pupitar_portrait",
+      "palette": "247_pupitar_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "248_tyranitar_portrait",
+      "palette": "248_tyranitar_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "249_lugia_portrait",
+      "palette": "249_lugia_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "250_ho-oh_portrait",
+      "palette": "250_ho-oh_portrait.gbapal"
+    },
+    {
+      "gfx_filename": "251_celebi_portrait",
+      "palette": "251_celebi_portrait.gbapal"
     }
   ]
 }

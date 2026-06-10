@@ -2461,13 +2461,13 @@ dexEntry205::
 
     .align 2, 0
 dexEntry206::
-    .2byte 5, 2, 2, 0xA, 0, 0, 8, 0xA, 2, 9, 8, 0
-    .dexName "BLITZLE"
-    .dexCategory "ELECTRIC"
-    .dexText "BLITZLE stores electricity in the"
-    .dexText "white stripes on its body."
-    .dexText "When startled, it releases sparks"
-    .dexText "that flash like lightning."
+    .2byte 3, 8, 6, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
+    .dexName "DEOXYS"
+    .dexCategory "DNA"
+    .dexText "Temporary National Dex entry."
+    .dexText "Portrait art has been added."
+    .dexText "Catch art is not used yet."
+    .dexText ""
     .dexText ""
     .dexText ""
 

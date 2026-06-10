@@ -2049,15 +2049,15 @@ const struct PokemonSpecies gSpeciesInfo[NUM_SPECIES] = {
         .evolutionMethod = 0,
         .evolutionTarget = SPECIES_NONE
     },
-    [SPECIES_TEST_EXTRA] = {
-        .speciesIdRS = 310,
+    [SPECIES_DEOXYS] = {
+        .speciesIdRS = 410,
         .nameJapanese = {0},
-        .name = "BLITZLE   ",
-        .catchIndex = 84,
+        .name = "DEOXYS    ",
+        .catchIndex = 0,
         .eggIndex = 0,
         .specialEggFlag = 0,
-        .evolutionMethod = 1,
-        .evolutionTarget = SPECIES_ZEBSTRIKA
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
     },
     [SPECIES_ZEBSTRIKA] = {
         .speciesIdRS = 310,
