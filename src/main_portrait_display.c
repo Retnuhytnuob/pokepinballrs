@@ -84,12 +84,8 @@ void LoadPortraitGraphics(s16 arg0, s16 arg1)
             }
             else if (gMain_saveData.pokedexFlags[gCurrentPinballGame->evoTargetSpecies] == SPECIES_UNSEEN)
             {
-                portraitGfxIndex = SPECIES_BULBASAUR;
-                DmaCopy16(
-                    3,
-                    gMonPortraitGroupPals[portraitGfxIndex / 15] + (portraitGfxIndex % 15) * 0x20,
-                    (void *)0x050003A0,
-                    0x20);
+                portraitGfxIndex = GetPortraitGfxIndexForSpecies(gCurrentPinballGame->evoTargetSpecies);
+                DmaCopy16(3, gMonPortraitGroupPals[portraitGfxIndex / 15] + 15 * 0x20, (void *)0x050003A0, 0x20);
             }
             else if (gMain_saveData.pokedexFlags[gCurrentPinballGame->evoTargetSpecies] < SPECIES_CAUGHT)
             {
