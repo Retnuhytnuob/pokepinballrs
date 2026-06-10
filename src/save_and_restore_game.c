@@ -42,6 +42,17 @@ static u16 GetPortraitGfxIndexForSpecies(u16 species)
 
     return species;
 }
+
+static s16 GetEvolutionTargetPokedexFlag(u16 species)
+{
+    if (species >= NUM_SAVE_SPECIES && species < NUM_SPECIES)
+        return gExtraPokedexFlags[species - NUM_SAVE_SPECIES];
+
+    if (species < NUM_SPECIES)
+        return gMain_saveData.pokedexFlags[species];
+
+    return SPECIES_UNSEEN;
+}
 extern const u8 gRubyBoardShop_Gfx[][0x500];
 
 extern const u8 gSapphireTravelPaint_Gfx[];
@@ -483,6 +494,8 @@ void RestoreMainFieldDynamicGraphics(void)
 {
     s16 i;
     s16 var0;
+    s16 pokedexFlag;
+    s16 useQuestionPortrait;
     u16 portraitGfxIndex;
 
     LoadCatchSpriteGraphics();
@@ -516,19 +529,16 @@ void RestoreMainFieldDynamicGraphics(void)
             gCurrentPinballGame->ball += 0; //TODO: Dumb match is still a match...
             break;
         case 9:
+            useQuestionPortrait = FALSE;
             if (gCurrentPinballGame->evoChainPosition > 0)
             {
-                if (gCurrentPinballGame->evoTargetSpecies >= NUM_SAVE_SPECIES)
+                pokedexFlag = GetEvolutionTargetPokedexFlag(gCurrentPinballGame->evoTargetSpecies);
+                if (pokedexFlag == SPECIES_UNSEEN)
                 {
-                    portraitGfxIndex = GetPortraitGfxIndexForSpecies(gCurrentPinballGame->evoTargetSpecies);
-                    DmaCopy16(3, gMonPortraitGroupPals[portraitGfxIndex / 15] + (portraitGfxIndex % 15) * 0x20, 0x050003A0, 0x20);
+                    useQuestionPortrait = TRUE;
+                    DmaCopy16(3, gPokedexSprites_Pals, 0x050003A0, 0x20);
                 }
-                else if (gMain_saveData.pokedexFlags[gCurrentPinballGame->evoTargetSpecies] == 0)
-                {
-                    portraitGfxIndex = GetPortraitGfxIndexForSpecies(gCurrentPinballGame->evoTargetSpecies);
-                    DmaCopy16(3, gMonPortraitGroupPals[portraitGfxIndex / 15] + 15 * 0x20, 0x050003A0, 0x20);
-                }
-                else if (gMain_saveData.pokedexFlags[gCurrentPinballGame->evoTargetSpecies] <= 3)
+                else if (pokedexFlag < SPECIES_CAUGHT)
                 {
                     portraitGfxIndex = GetPortraitGfxIndexForSpecies(gCurrentPinballGame->evoTargetSpecies);
                     DmaCopy16(3, gMonPortraitGroupPals[0] + 15 * 0x20, 0x050003A0, 0x20);
@@ -544,7 +554,10 @@ void RestoreMainFieldDynamicGraphics(void)
                 portraitGfxIndex = GetPortraitGfxIndexForSpecies(gCurrentPinballGame->currentSpecies);
                 DmaCopy16(3, gMonPortraitGroupPals[portraitGfxIndex / 15] + ((portraitGfxIndex % 15) * 0x20), 0x050003A0, 0x20);
             }
-            DmaCopy16(3, gMonPortraitGroupGfx[portraitGfxIndex / 15] + (portraitGfxIndex % 15) * 0x300, 0x06010CA0 + (i * 0x18), 0x300);
+            if (useQuestionPortrait)
+                DmaCopy16(3, gPokedexSprites_Gfx + 0x5C00, 0x06010CA0 + (i * 0x18), 0x300);
+            else
+                DmaCopy16(3, gMonPortraitGroupGfx[portraitGfxIndex / 15] + (portraitGfxIndex % 15) * 0x300, 0x06010CA0 + (i * 0x18), 0x300);
             break;
         case 3:
             portraitGfxIndex = GetPortraitGfxIndexForSpecies(gCurrentPinballGame->currentSpecies);
