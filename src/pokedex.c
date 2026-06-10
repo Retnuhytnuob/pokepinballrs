@@ -1868,26 +1868,8 @@ void PrintDexNumbersFromListPosition(s16 listPosition)
     {
         species = PokedexListPositionToSpecies(listPosition + i);
 
-        if (species == SPECIES_JIRACHI)
-        {
-            if (GetPokedexFlag(SPECIES_JIRACHI) != SPECIES_UNSEEN)
-            {
-                PrintString(CHAR_2_FONT_1, 2, 8, i * 2 + 10, 1, 2);
-                PrintString(CHAR_0_FONT_1, 2, 9, i * 2 + 10, 1, 2);
-                PrintString(CHAR_1_FONT_1, 2, 10, i * 2 + 10, 1, 2);
-            }
-            else
-            {
-                PrintString(CHAR_SPACE_FONT_1, 2, 8, i * 2 + 10, 1, 2);
-                PrintString(CHAR_SPACE_FONT_1, 2, 9, i * 2 + 10, 1, 2);
-                PrintString(CHAR_SPACE_FONT_1, 2, 10, i * 2 + 10, 1, 2);
-            }
-        }
-        else
-        {
-            for (j = 0; j < DEX_NUM_DIGITS; j++)
-                PrintString(gPokedexEntries[species].dexNum[j] + 32, 2, j + 8, i * 2 + 10, 1, 2);
-        }
+        for (j = 0; j < DEX_NUM_DIGITS; j++)
+            PrintString(gPokedexEntries[species].dexNum[j] + 32, 2, j + 8, i * 2 + 10, 1, 2);
     }
 
     for (i = 0; i < ENTRIES_SHOWN_COUNT; i++)

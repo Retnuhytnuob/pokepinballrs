@@ -207,7 +207,7 @@
 #define SPECIES_TOTODILE        203
 #define SPECIES_AERODACTYL      204
 #define SPECIES_DEOXYS          205
-#define SPECIES_ZEBSTRIKA       206
+#define SPECIES_BLITZLE         206
 #define SPECIES_BULBASAUR         207
 #define SPECIES_IVYSAUR           208
 #define SPECIES_VENUSAUR          209
@@ -388,7 +388,8 @@
 #define SPECIES_LUGIA             384
 #define SPECIES_HO_OH             385
 #define SPECIES_CELEBI            386
-#define SPECIES_NONE            387
+#define SPECIES_ZEBSTRIKA         387
+#define SPECIES_NONE            388
 
 #define BONUS_SPECIES_START SPECIES_CHIKORITA
 #define NUM_BONUS_SPECIES (SPECIES_DEOXYS - SPECIES_CHIKORITA)

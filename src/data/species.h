@@ -2059,15 +2059,15 @@ const struct PokemonSpecies gSpeciesInfo[NUM_SPECIES] = {
         .evolutionMethod = 0,
         .evolutionTarget = SPECIES_NONE
     },
-    [SPECIES_ZEBSTRIKA] = {
+    [SPECIES_BLITZLE] = {
         .speciesIdRS = 310,
         .nameJapanese = {0},
-        .name = "ZEBSTRIKA ",
-        .catchIndex = 0,
+        .name = "BLITZLE   ",
+        .catchIndex = 84,
         .eggIndex = 0,
         .specialEggFlag = 0,
-        .evolutionMethod = 0,
-        .evolutionTarget = SPECIES_NONE
+        .evolutionMethod = 1,
+        .evolutionTarget = SPECIES_ZEBSTRIKA
     },
     [SPECIES_BULBASAUR] = {
         .speciesIdRS = 1,
@@ -3863,6 +3863,16 @@ const struct PokemonSpecies gSpeciesInfo[NUM_SPECIES] = {
         .speciesIdRS = 251,
         .nameJapanese = {0},
         .name = "CELEBI    ",
+        .catchIndex = 0,
+        .eggIndex = 0,
+        .specialEggFlag = 0,
+        .evolutionMethod = 0,
+        .evolutionTarget = SPECIES_NONE
+    },
+    [SPECIES_ZEBSTRIKA] = {
+        .speciesIdRS = 310,
+        .nameJapanese = {0},
+        .name = "ZEBSTRIKA ",
         .catchIndex = 0,
         .eggIndex = 0,
         .specialEggFlag = 0,

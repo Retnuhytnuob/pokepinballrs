@@ -2473,15 +2473,16 @@ dexEntry206::
 
     .align 2, 0
 dexEntry207::
-    .2byte 5, 2, 3, 0xA, 0, 0, 1, 0xA, 1, 9, 5, 0
-    .dexName "ZEBSTRIKA"
-    .dexCategory "THUNDERBOLT"
-    .dexText "ZEBSTRIKA runs like lightning"
-    .dexText "across open grasslands."
-    .dexText "Its mane crackles with electricity"
-    .dexText "when it charges into battle."
+    .2byte 5, 2, 2, 0xA, 0, 0, 8, 0xA, 2, 9, 8, 0
+    .dexName "BLITZLE"
+    .dexCategory "ELECTRIFIED"
+    .dexText "BLITZLE stores electricity in its mane."
+    .dexText "When it discharges, its stripes flash"
+    .dexText "with crackling light."
+    .dexText "It dashes across open fields in"
+    .dexText "sudden bursts."
     .dexText ""
-    .dexText ""
+
     .align 2, 0
 dexEntry208::
     .2byte 0, 0, 1, 0xA, 0, 0, 0, 0xA, 0, 0, 0, 0
@@ -4639,5 +4640,17 @@ dexEntry387::
     .dexText "Portrait and catch art use"
     .dexText "placeholder graphics for now."
     .dexText ""
+    .dexText ""
+    .dexText ""
+
+    .align 2, 0
+dexEntry388::
+    .2byte 5, 2, 3, 0xA, 0, 1, 6, 0xA, 7, 9, 5, 0
+    .dexName "ZEBSTRIKA"
+    .dexCategory "THUNDERBOLT"
+    .dexText "ZEBSTRIKA runs like lightning"
+    .dexText "across open grasslands."
+    .dexText "Its mane crackles with electricity"
+    .dexText "when it charges into battle."
     .dexText ""
     .dexText ""

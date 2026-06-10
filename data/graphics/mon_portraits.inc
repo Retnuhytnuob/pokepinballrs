@@ -218,7 +218,7 @@ gMonPortraitsGroup13_Gfx:: @ 0x0
 	.incbin "graphics/mon_portraits/158_totodile_portrait.4bpp"
 	.incbin "graphics/mon_portraits/142_aerodactyl_portrait.4bpp"
 	.incbin "graphics/mon_portraits/386_deoxys_portrait.4bpp"
-	.incbin "graphics/mon_portraits/523_zebstrika_portrait.4bpp"
+	.incbin "graphics/mon_portraits/522_blitzle_portrait.4bpp"
 	.incbin "graphics/mon_portraits/1_bulbasaur_portrait.4bpp"
 	.incbin "graphics/mon_portraits/2_ivysaur_portrait.4bpp"
 	.incbin "graphics/mon_portraits/3_venusaur_portrait.4bpp"
@@ -411,3 +411,4 @@ gMonPortraitsGroup25_Gfx:: @ 0x0
 	.incbin "graphics/mon_portraits/249_lugia_portrait.4bpp"
 	.incbin "graphics/mon_portraits/250_ho-oh_portrait.4bpp"
 	.incbin "graphics/mon_portraits/251_celebi_portrait.4bpp"
+	.incbin "graphics/mon_portraits/523_zebstrika_portrait.4bpp"
