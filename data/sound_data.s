@@ -1791,8 +1791,8 @@ gUnknown_08532808:: @ 0x08532808
 	voice_directsound_no_resample 60, 0, gDirectSound_0853854C, 255, 89, 0, 89
 
 gPokemonCryToneBank0:: @ 0x08532D6C
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound_compressed gDirectSound_Cry_Bulbasaur
+	voice_directsound_compressed gDirectSound_Cry_Ivysaur
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -2527,6 +2527,14 @@ gMPlayTable:: @ 0x08534DD4
 .include "sound/song_table.inc"
 
 .include "sound/songs/mus_dummy.s"
+
+	.align 2
+gDirectSound_Cry_Bulbasaur::
+	.incbin "sound/direct_sound_samples/cries/cry_001_bulbasaur.bin"
+
+	.align 2
+gDirectSound_Cry_Ivysaur::
+	.incbin "sound/direct_sound_samples/cries/cry_002_ivysaur.bin"
 
 	.align 2
 gDirectSound_08535870:: @ 0x08535870
