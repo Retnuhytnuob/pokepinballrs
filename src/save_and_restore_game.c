@@ -555,9 +555,13 @@ void RestoreMainFieldDynamicGraphics(void)
                 DmaCopy16(3, gMonPortraitGroupPals[portraitGfxIndex / 15] + ((portraitGfxIndex % 15) * 0x20), 0x050003A0, 0x20);
             }
             if (useQuestionPortrait)
+            {
                 DmaCopy16(3, gPokedexSprites_Gfx + 0x5C00, 0x06010CA0 + (i * 0x18), 0x300);
+            }
             else
+            {
                 DmaCopy16(3, gMonPortraitGroupGfx[portraitGfxIndex / 15] + (portraitGfxIndex % 15) * 0x300, 0x06010CA0 + (i * 0x18), 0x300);
+            }
             break;
         case 3:
             portraitGfxIndex = GetPortraitGfxIndexForSpecies(gCurrentPinballGame->currentSpecies);
