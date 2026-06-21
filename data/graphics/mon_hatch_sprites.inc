@@ -42,3 +42,12 @@ gMonHatchSpriteGroup5_Gfx:: @ 0x083E85AC
 	.incbin "graphics/mon_hatch_sprites/horsea_hatch.4bpp"
 	.incbin "graphics/mon_hatch_sprites/bagon_hatch.4bpp"
 	.incbin "graphics/mon_hatch_sprites/pichu_2_hatch.4bpp"
+	.incbin "graphics/mon_hatch_sprites/cleffa_hatch.4bpp"
+	.incbin "graphics/mon_hatch_sprites/elekid_hatch.4bpp"
+	.incbin "graphics/mon_hatch_sprites/magby_hatch.4bpp"
+
+gMonHatchSpriteGroup6_Gfx::
+	.incbin "graphics/mon_hatch_sprites/smoochum_hatch.4bpp"
+	.incbin "graphics/mon_hatch_sprites/swinub_hatch.4bpp"
+	.incbin "graphics/mon_hatch_sprites/togepi_hatch.4bpp"
+	.incbin "graphics/mon_hatch_sprites/tyrogue_hatch.4bpp"

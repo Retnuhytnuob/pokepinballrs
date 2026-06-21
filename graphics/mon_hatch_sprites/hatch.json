@@ -139,6 +139,34 @@
     {
       "gfx_filename": "zubat_hatch",
       "palette": "zubat_hatch.gbapal"
+    },
+    {
+      "gfx_filename": "cleffa_hatch",
+      "palette": "cleffa_hatch.gbapal"
+    },
+    {
+      "gfx_filename": "elekid_hatch",
+      "palette": "elekid_hatch.gbapal"
+    },
+    {
+      "gfx_filename": "magby_hatch",
+      "palette": "magby_hatch.gbapal"
+    },
+    {
+      "gfx_filename": "smoochum_hatch",
+      "palette": "smoochum_hatch.gbapal"
+    },
+    {
+      "gfx_filename": "swinub_hatch",
+      "palette": "swinub_hatch.gbapal"
+    },
+    {
+      "gfx_filename": "togepi_hatch",
+      "palette": "togepi_hatch.gbapal"
+    },
+    {
+      "gfx_filename": "tyrogue_hatch",
+      "palette": "tyrogue_hatch.gbapal"
     }
   ]
 }

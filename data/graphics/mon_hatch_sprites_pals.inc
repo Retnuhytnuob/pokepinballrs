@@ -52,5 +52,14 @@ gMonHatchSpriteGroup5_Pals:: @ 0x144EF4
 	.incbin "graphics/mon_hatch_sprites/horsea_hatch.gbapal"
 	.incbin "graphics/mon_hatch_sprites/bagon_hatch.gbapal"
 	.incbin "graphics/mon_hatch_sprites/pichu_2_hatch.gbapal"
+	.incbin "graphics/mon_hatch_sprites/cleffa_hatch.gbapal"
+	.incbin "graphics/mon_hatch_sprites/elekid_hatch.gbapal"
+	.incbin "graphics/mon_hatch_sprites/magby_hatch.gbapal"
 
 	.incbin "baserom.gba", 0x144F54, 0x1A0 @ 0x1450F4 - 0x144F54
+
+gMonHatchSpriteGroup6_Pals::
+	.incbin "graphics/mon_hatch_sprites/smoochum_hatch.gbapal"
+	.incbin "graphics/mon_hatch_sprites/swinub_hatch.gbapal"
+	.incbin "graphics/mon_hatch_sprites/togepi_hatch.gbapal"
+	.incbin "graphics/mon_hatch_sprites/tyrogue_hatch.gbapal"

@@ -168,3 +168,46 @@ gMonCatchSpriteGroup27_Pal::
 	.incbin "graphics/mon_catch_sprites/catch_mon_150_mewtwo.gbapal"
 gMonCatchSpriteGroup28_Pal::
 	.incbin "graphics/mon_catch_sprites/catch_mon_151_mew.gbapal"
+	.incbin "graphics/mon_catch_sprites/catch_mon_161_sentret.gbapal"
+	.incbin "graphics/mon_catch_sprites/catch_mon_163_hoothoot.gbapal"
+	.incbin "graphics/mon_catch_sprites/catch_mon_165_ledyba.gbapal"
+	.incbin "graphics/mon_catch_sprites/catch_mon_167_spinarak.gbapal"
+gMonCatchSpriteGroup29_Pal::
+	.incbin "graphics/mon_catch_sprites/catch_mon_179_mareep.gbapal"
+	.incbin "graphics/mon_catch_sprites/catch_mon_185_sudowoodo.gbapal"
+	.incbin "graphics/mon_catch_sprites/catch_mon_187_hoppip.gbapal"
+	.incbin "graphics/mon_catch_sprites/catch_mon_190_aipom.gbapal"
+	.incbin "graphics/mon_catch_sprites/catch_mon_191_sunkern.gbapal"
+gMonCatchSpriteGroup30_Pal::
+	.incbin "graphics/mon_catch_sprites/catch_mon_193_yanma.gbapal"
+	.incbin "graphics/mon_catch_sprites/catch_mon_194_wooper.gbapal"
+	.incbin "graphics/mon_catch_sprites/catch_mon_198_murkrow.gbapal"
+	.incbin "graphics/mon_catch_sprites/catch_mon_200_misdreavus.gbapal"
+	.incbin "graphics/mon_catch_sprites/catch_mon_201_unown.gbapal"
+gMonCatchSpriteGroup31_Pal::
+	.incbin "graphics/mon_catch_sprites/catch_mon_204_pineco.gbapal"
+	.incbin "graphics/mon_catch_sprites/catch_mon_206_dunsparce.gbapal"
+	.incbin "graphics/mon_catch_sprites/catch_mon_207_gligar.gbapal"
+	.incbin "graphics/mon_catch_sprites/catch_mon_209_snubbull.gbapal"
+	.incbin "graphics/mon_catch_sprites/catch_mon_211_qwilfish.gbapal"
+gMonCatchSpriteGroup32_Pal::
+	.incbin "graphics/mon_catch_sprites/catch_mon_213_shuckle.gbapal"
+	.incbin "graphics/mon_catch_sprites/catch_mon_215_sneasel.gbapal"
+	.incbin "graphics/mon_catch_sprites/catch_mon_216_teddiursa.gbapal"
+	.incbin "graphics/mon_catch_sprites/catch_mon_223_remoraid.gbapal"
+	.incbin "graphics/mon_catch_sprites/catch_mon_225_delibird.gbapal"
+gMonCatchSpriteGroup33_Pal::
+	.incbin "graphics/mon_catch_sprites/catch_mon_228_houndour.gbapal"
+	.incbin "graphics/mon_catch_sprites/catch_mon_234_stantler.gbapal"
+	.incbin "graphics/mon_catch_sprites/catch_mon_235_smeargle.gbapal"
+	.incbin "graphics/mon_catch_sprites/catch_mon_241_miltank.gbapal"
+	.incbin "graphics/mon_catch_sprites/catch_mon_243_raikou.gbapal"
+gMonCatchSpriteGroup34_Pal::
+	.incbin "graphics/mon_catch_sprites/catch_mon_244_entei.gbapal"
+	.incbin "graphics/mon_catch_sprites/catch_mon_245_suicune.gbapal"
+	.incbin "graphics/mon_catch_sprites/catch_mon_246_larvitar.gbapal"
+	.incbin "graphics/mon_catch_sprites/catch_mon_249_lugia.gbapal"
+	.incbin "graphics/mon_catch_sprites/catch_mon_250_ho-oh.gbapal"
+gMonCatchSpriteGroup35_Pal::
+	.incbin "graphics/mon_catch_sprites/catch_mon_251_celebi.gbapal"
+	.incbin "graphics/mon_catch_sprites/catch_mon_386_deoxys.gbapal"

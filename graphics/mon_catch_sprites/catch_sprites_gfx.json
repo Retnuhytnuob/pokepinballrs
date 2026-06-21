@@ -572,6 +572,150 @@
     {
       "gfx_filename": "catch_mon_151_mew",
       "palette": "catch_mon_151_mew.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_161_sentret",
+      "palette": "catch_mon_161_sentret.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_163_hoothoot",
+      "palette": "catch_mon_163_hoothoot.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_165_ledyba",
+      "palette": "catch_mon_165_ledyba.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_167_spinarak",
+      "palette": "catch_mon_167_spinarak.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_179_mareep",
+      "palette": "catch_mon_179_mareep.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_185_sudowoodo",
+      "palette": "catch_mon_185_sudowoodo.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_187_hoppip",
+      "palette": "catch_mon_187_hoppip.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_190_aipom",
+      "palette": "catch_mon_190_aipom.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_191_sunkern",
+      "palette": "catch_mon_191_sunkern.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_193_yanma",
+      "palette": "catch_mon_193_yanma.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_194_wooper",
+      "palette": "catch_mon_194_wooper.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_198_murkrow",
+      "palette": "catch_mon_198_murkrow.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_200_misdreavus",
+      "palette": "catch_mon_200_misdreavus.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_201_unown",
+      "palette": "catch_mon_201_unown.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_204_pineco",
+      "palette": "catch_mon_204_pineco.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_206_dunsparce",
+      "palette": "catch_mon_206_dunsparce.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_207_gligar",
+      "palette": "catch_mon_207_gligar.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_209_snubbull",
+      "palette": "catch_mon_209_snubbull.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_211_qwilfish",
+      "palette": "catch_mon_211_qwilfish.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_213_shuckle",
+      "palette": "catch_mon_213_shuckle.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_215_sneasel",
+      "palette": "catch_mon_215_sneasel.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_216_teddiursa",
+      "palette": "catch_mon_216_teddiursa.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_223_remoraid",
+      "palette": "catch_mon_223_remoraid.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_225_delibird",
+      "palette": "catch_mon_225_delibird.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_228_houndour",
+      "palette": "catch_mon_228_houndour.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_234_stantler",
+      "palette": "catch_mon_234_stantler.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_235_smeargle",
+      "palette": "catch_mon_235_smeargle.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_241_miltank",
+      "palette": "catch_mon_241_miltank.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_243_raikou",
+      "palette": "catch_mon_243_raikou.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_244_entei",
+      "palette": "catch_mon_244_entei.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_245_suicune",
+      "palette": "catch_mon_245_suicune.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_246_larvitar",
+      "palette": "catch_mon_246_larvitar.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_249_lugia",
+      "palette": "catch_mon_249_lugia.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_250_ho-oh",
+      "palette": "catch_mon_250_ho-oh.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_251_celebi",
+      "palette": "catch_mon_251_celebi.gbapal"
+    },
+    {
+      "gfx_filename": "catch_mon_386_deoxys",
+      "palette": "catch_mon_386_deoxys.gbapal"
     }
   ]
 }

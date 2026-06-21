@@ -599,7 +599,7 @@ gDexAnimationIx:: @ 0x086A61BC
     .2byte  226,   -1,  227,   -1,   -1,   69,   -1,   -1,   70,  228
     .2byte  229,   -1,   71,  230,   -1,   -1,  231,   72,   -1,   73
     .2byte   -1,   -1,   74,   75,   76,   77,   78,   -1,   -1,   -1
-    .2byte   79,   80,   81,   82,   83,   -1,   84,   85,   -1,   -1
+    .2byte   79,   80,   81,   82,   83,  176,   84,   85,   -1,   -1
     .2byte   86,   -1,   -1,   87,   -1,   -1,   88,   -1,   -1,   89
     .2byte   -1,   -1,   90,   -1,   -1,   91,   -1,   92,   -1,   93
     .2byte   -1,   94,   -1,   -1,   95,   -1,   -1,   96,   -1,   97
@@ -610,14 +610,14 @@ gDexAnimationIx:: @ 0x086A61BC
     .2byte  118,  119,  120,  121,  122,  123,  124,  125,  126,  127
     .2byte  128,  129,  130,   -1,   -1,   -1,  131,  132,   -1,  133
     .2byte   -1,  134,  135,  136,  137,  138,   -1,   -1,  139,  140
-    .2byte   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1
-    .2byte   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1
-    .2byte   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1
-    .2byte   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1
-    .2byte   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1
-    .2byte   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1
-    .2byte   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1
-    .2byte   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1
+    .2byte   -1,   -1,   -1,   -1,   -1,   -1,  141,   -1,  142,   -1
+    .2byte  143,   -1,  144,   -1,  233,  238,   -1,  145,   -1,   -1
+    .2byte  146,   -1,  147,   -1,   -1,  148,  149,   -1,  150,  151
+    .2byte   -1,   -1,   -1,  152,   -1,  153,  154,  155,   -1,  156
+    .2byte  157,   -1,  158,   -1,  159,   -1,  160,  161,  162,   -1
+    .2byte  237,   -1,  163,   -1,  164,   -1,  165,   -1,   -1,  166
+    .2byte  167,  239,   -1,  236,  234,  235,  168,   -1,  169,  170
+    .2byte  171,  172,   -1,   -1,  173,  174,  175,   -1
 gPokedexCatchAnimIndices:: @ 0x086A6356
     .2byte    0,    0,    0,    0,    0,    0,    0,    0,    0,    0
     .2byte    0,    0,    0,    0,    0,    0,    0,    0,    0,    0
@@ -655,7 +655,7 @@ gPokedexCatchAnimIndices:: @ 0x086A6356
     .2byte   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1
     .2byte   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1
     .2byte   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1
-    .2byte   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1
+    .2byte    0,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1
     .2byte   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1
     .2byte   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1
 gPokedexListNameVramOffsets:: @ 0x086A64F0
@@ -5390,6 +5390,7 @@ gMonHatchSpriteGroupPals:: @ 0x086B159C
 	.4byte gMonHatchSpriteGroup3_Pals
 	.4byte gMonHatchSpriteGroup4_Pals
 	.4byte gMonHatchSpriteGroup5_Pals
+	.4byte gMonHatchSpriteGroup6_Pals
 
 gMonIconPalettes::
     .4byte gMonCatchSpriteGroup0_Pal
@@ -5421,6 +5422,13 @@ gMonIconPalettes::
     .4byte gMonCatchSpriteGroup26_Pal
     .4byte gMonCatchSpriteGroup27_Pal
     .4byte gMonCatchSpriteGroup28_Pal
+    .4byte gMonCatchSpriteGroup29_Pal
+    .4byte gMonCatchSpriteGroup30_Pal
+    .4byte gMonCatchSpriteGroup31_Pal
+    .4byte gMonCatchSpriteGroup32_Pal
+    .4byte gMonCatchSpriteGroup33_Pal
+    .4byte gMonCatchSpriteGroup34_Pal
+    .4byte gMonCatchSpriteGroup35_Pal
 gUnknown_086B15F8:: @ 0x086B15F8
 .2byte 1
     packed_sprite_oam x=-0x1, y=0x0, affineMode=0x0, objMode=0x0, mosaic=0x0, bpp=0x0, shape=0x0, matrixNum=0x0, hFlip=0x0, vFlip=0x0, size=0x2, tileNum=0x0, priority=0x2, paletteNum=0x0
@@ -13743,6 +13751,7 @@ gMonHatchSpriteGroupGfx:: @ 0x086BB6DC
 	.4byte gMonHatchSpriteGroup3_Gfx
 	.4byte gMonHatchSpriteGroup4_Gfx
 	.4byte gMonHatchSpriteGroup5_Gfx
+	.4byte gMonHatchSpriteGroup6_Gfx
 
 gCatchSpriteGfxPtrs:: @ 0x086BB6F4
     .4byte gMonCatchSpriteGroup0_Gfx
@@ -13774,6 +13783,13 @@ gCatchSpriteGfxPtrs:: @ 0x086BB6F4
     .4byte gMonCatchSpriteGroup26_Gfx
     .4byte gMonCatchSpriteGroup27_Gfx
     .4byte gMonCatchSpriteGroup28_Gfx
+    .4byte gMonCatchSpriteGroup29_Gfx
+    .4byte gMonCatchSpriteGroup30_Gfx
+    .4byte gMonCatchSpriteGroup31_Gfx
+    .4byte gMonCatchSpriteGroup32_Gfx
+    .4byte gMonCatchSpriteGroup33_Gfx
+    .4byte gMonCatchSpriteGroup34_Gfx
+    .4byte gMonCatchSpriteGroup35_Gfx
 gMonPortraitGroupGfx:: @ 0x086BB738
 	.4byte gMonPortraitsGroup0_Gfx
 	.4byte gMonPortraitsGroup1_Gfx

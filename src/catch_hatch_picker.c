@@ -12,6 +12,7 @@ extern const u16 gWildMonLocations[AREA_COUNT][2][WILD_MON_LOCATION_COUNT];
 extern const u16 gWildMonLocationsGen1[AREA_COUNT][2][WILD_MON_LOCATION_COUNT];
 extern const u16 gWildMonLocationsGen2[AREA_COUNT][2][WILD_MON_LOCATION_COUNT];
 extern const u16 gEggLocations[MAIN_FIELD_COUNT][26];
+extern const u16 gEggLocationsGen2[MAIN_FIELD_COUNT][26];
 
 #define EVOLVABLE_PARTY_SPECIES_STORAGE_MAGIC 0x504B4556
 
@@ -111,6 +112,14 @@ static u16 GetWildMonForSelectedGeneration(s16 area, s16 threeArrows, s16 index)
     default:
         return gWildMonLocations[area][threeArrows][index];
     }
+}
+
+static u16 GetEggMonForSelectedGeneration(s16 field, s16 index)
+{
+    if (gSelectedGeneration == GENERATION_2)
+        return gEggLocationsGen2[field][index];
+
+    return gEggLocations[field][index];
 }
 
 static u8 GetSavedPokedexFlag(s16 species)
@@ -470,7 +479,7 @@ void BuildSpeciesWeightsForEggMode(void)
 
     for (i = 0; i < 25; i++)
     {
-        currentSpecies = gEggLocations[gMain.selectedField][i];
+        currentSpecies = GetEggMonForSelectedGeneration(gMain.selectedField, i);
 
         if (currentSpecies == SPECIES_ODDISH)
         {
@@ -495,7 +504,7 @@ void BuildSpeciesWeightsForEggMode(void)
                 }
             }
 
-            currentSpecies = gEggLocations[gMain.selectedField][i];
+            currentSpecies = GetEggMonForSelectedGeneration(gMain.selectedField, i);
             if (gCurrentPinballGame->caughtMonCount == 0)
             {
                 if (gSpeciesInfo[currentSpecies].evolutionTarget >= SPECIES_NONE)
@@ -540,7 +549,7 @@ void PickSpeciesForEggMode(void)
 
         for (i = 0; i < 25 && gCurrentPinballGame->speciesWeights[i] <= rand; i++);
 
-        gCurrentPinballGame->currentSpecies = gEggLocations[gMain.selectedField][i];
+        gCurrentPinballGame->currentSpecies = GetEggMonForSelectedGeneration(gMain.selectedField, i);
     }
 
     gCurrentPinballGame->lastEggSpecies = gCurrentPinballGame->currentSpecies;
