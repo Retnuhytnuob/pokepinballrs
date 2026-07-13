@@ -443,44 +443,6 @@ Comprueba:
 - La PNG nueva es `48x32`, indexada y con maximo 16 colores.
 - Los retratos originales siguen viniendo desde `baserom.gba`.
 
-## 13. Comandos en tu PC / GitHub
-
-Para subir solo la documentacion:
-
-```bash
-git status
-git add MODDING_ADD_AREA.md
-git commit -m "Document adding new areas"
-git push
-```
-
-Para subir tambien una zona nueva real:
-
-```bash
-git status
-git add include/constants/areas.h data/rom_1.s data/mon_locations.inc src/travel_mode.c src/launcher_and_cutscenes.c src/center_capture_hole.c graphics/area_portraits/area_portraits_gfx.json graphics/area_portraits/nueva_zona.png
-git commit -m "Add new area"
-git push
-```
-
-No subas carpetas temporales como:
-
-```text
-_tmp_area_probe/
-```
-
-## 14. Comandos en Codespaces
-
-Despues de subir cambios desde tu PC:
-
-```bash
-git pull
-make clean
-make -j"$(nproc)"
-```
-
-Si compila, prueba la ROM en emulador.
-
 ## Resumen corto
 
 Para una zona nueva normal:

@@ -1,10 +1,5 @@
 # Guia para anadir una especie nueva
 
-Esta rama ya tiene especies extra funcionando: Blitzle como
-`SPECIES_TEST_EXTRA` y Zebstrika como `SPECIES_ZEBSTRIKA`. La idea de esta guia
-es dejar una receta repetible para anadir mas Pokemon sin romper la ROM ni el
-guardado.
-
 ## Estado actual
 
 - El juego original guardaba flags de Pokedex para 205 especies.
@@ -338,26 +333,6 @@ Esta rama usa:
 
 Y funciones auxiliares para que las especies nuevas no dependan de acceder
 directamente al array original.
-
-## 9. Compilar en Codespaces
-
-Despues de subir cambios:
-
-```bash
-git fetch origin
-git reset --hard origin/species-count-audit
-make clean
-make -j"$(nproc)"
-```
-
-Si se cambia solo C/ASM y quieres una prueba rapida:
-
-```bash
-make NODEP=1 -j"$(nproc)"
-```
-
-Para cambios de graficos, usa `make clean` al menos la primera vez, porque los
-PNG generan `.4bpp` y `.gbapal`.
 
 ## 10. Pruebas recomendadas en emulador
 

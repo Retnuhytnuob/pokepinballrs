@@ -162,32 +162,3 @@ graphics/options/background.png
 graphics/options/background.bin
 graphics/options/background.gbapal
 ```
-
-## Comandos PC / GitHub
-
-Para subir cambios de habitats, selector, docs y fondo:
-
-```bash
-git status
-git add data/mon_locations.inc src/generation_select.c src/catch_hatch_picker.c MODDING_GENERATION_SELECT.md graphics/options/generation_select_background.png
-git commit -m "Document generation selector and tune habitats"
-git push
-```
-
-## Comandos Codespaces
-
-Despues de subir:
-
-```bash
-git pull
-make clean
-make -j"$(nproc)"
-```
-
-Si solo cambiaste C/ASM y quieres ir rapido:
-
-```bash
-make NODEP=1 -j"$(nproc)"
-```
-
-Para cambios de PNG o assets, usa `make clean`.
