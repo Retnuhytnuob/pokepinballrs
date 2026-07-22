@@ -18,8 +18,11 @@
 #define AREA_TEST              14
 #define AREA_COUNT              15
 
+// number of slots used by the area roulette wheel at ball launch
 #define AREA_ROULETTE_SLOT_COUNT       7
-#define AREA_ROULETTE_RUIN_SLOT        7
-#define AREA_ROULETTE_TOTAL_SLOT_COUNT 8
+#define AREA_BONUS_RUIN_SLOT_IX        (AREA_ROULETTE_SLOT_COUNT + 0)
+
+// Number of total location slots, including any bonuses
+#define AREA_TABLE_SLOT_COUNT          (AREA_ROULETTE_SLOT_COUNT + 1)
 
 #endif // GUARD_CONSTANTS_AREAS_H
