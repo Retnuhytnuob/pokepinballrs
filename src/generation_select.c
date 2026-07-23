@@ -41,7 +41,6 @@ static const u8 sDisabledGenerationOptions[] = {
     GENERATION_8,
     GENERATION_9,
     GENERATION_10,
-    GENERATION_RANDOM,
 };
 
 void GenerationSelectMain(void)

@@ -12,8 +12,8 @@ tablas de encuentros distintas segun la generacion seleccionada.
 - Gen 1 usa `gWildMonLocationsGen1`.
 - Gen 2 usa `gWildMonLocationsGen2`.
 - Gen 3 usa la tabla original `gWildMonLocations`.
-- Gen 4 a Gen 10 y `RANDOM` aparecen en el selector, pero estan bloqueadas
-  hasta que tengan contenido aprobado.
+- Gen 4 a Gen 10 aparecen en el selector, pero estan bloqueadas hasta que
+  tengan contenido aprobado.
 - Huevos y eventos especiales quedan para mas adelante.
 
 ## Archivos importantes
@@ -73,8 +73,8 @@ sigue pidiendo "dame el Pokemon de esta zona", sin saber de donde sale la tabla.
 
 ## Modo random
 
-La opcion `RANDOM` existe visualmente debajo de las generaciones, pero sigue
-bloqueada hasta definir sus reglas. No genera tablas temporales todavia.
+La opcion `RANDOM` existe visualmente debajo de las generaciones y se puede
+seleccionar. Sus reglas de aparicion se definiran aparte.
 
 ## Como editar habitats
 
