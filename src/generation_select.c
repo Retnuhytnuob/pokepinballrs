@@ -173,10 +173,15 @@ static void DrawGenerationCell(s16 generation, s16 selected)
 
     text[0] = selected ? '[' : ' ';
     text[1] = 'G';
-    if (generation == GENERATION_EXTRA)
-        text[2] = 'X';
+    if (generation == GENERATION_RANDOM)
+    {
+        text[1] = 'R';
+        text[2] = 'N';
+    }
     else
+    {
         text[2] = '1' + generation;
+    }
     text[3] = selected ? ']' : ' ';
     text[4] = '\0';
     DrawGenerationString(text, y, x);

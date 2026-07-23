@@ -12,6 +12,7 @@ tablas de encuentros distintas segun la generacion seleccionada.
 - Gen 1 usa `gWildMonLocationsGen1`.
 - Gen 2 usa `gWildMonLocationsGen2`.
 - Gen 3 usa la tabla original `gWildMonLocations`.
+- La opcion `RN` genera una tabla temporal en RAM para cada partida nueva.
 - Huevos y eventos especiales quedan para mas adelante.
 
 ## Archivos importantes
@@ -55,9 +56,26 @@ La funcion devuelve:
 - `gWildMonLocationsGen1` si se eligio Gen 1.
 - `gWildMonLocationsGen2` si se eligio Gen 2.
 - `gWildMonLocations` si se eligio Gen 3.
+- `sRandomWildMonLocations` si se eligio `RN`.
 
 Esto mantiene el codigo de captura bastante estable, porque el resto del juego
 sigue pidiendo "dame el Pokemon de esta zona", sin saber de donde sale la tabla.
+
+## Modo random
+
+La opcion `RN` usa el ultimo hueco del selector, donde antes se mostraba `GX`.
+Al empezar una partida normal, `InitRandomWildMonLocationsForNewGame` genera
+tablas temporales con la misma forma que las tablas fijas:
+
+```c
+AREA_COUNT x 2 x WILD_MON_LOCATION_COUNT
+```
+
+Cada zona toma candidatos de esa misma zona en Gen 1, Gen 2 y Gen 3. Asi se
+mantiene el tema de habitats, pero cada partida mezcla especies distintas. La
+blacklist esta en `IsSpeciesBlacklistedFromRandomWildMons` y sirve para dejar
+fuera `SPECIES_NONE`, legendarios, miticos, jefes o especies que no queramos
+como encuentros normales.
 
 ## Como editar habitats
 
