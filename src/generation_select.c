@@ -22,6 +22,8 @@ static void ExitGenerationSelect(void);
 static void RenderGenerationSelectScreen(void);
 static void DrawGenerationSelectText(void);
 static void DrawGenerationCell(s16 generation, s16 selected);
+static void DrawRandomCell(s16 selected);
+static bool8 IsGenerationOptionDisabled(u8 generation);
 static void LoadGenerationSelectFont(void);
 static void DrawGenerationString(const u8 *text, s16 y, s16 x);
 static void DrawGenerationChar(u8 ch, s16 y, s16 x);
@@ -30,6 +32,17 @@ static bool8 GetGenerationGlyphPixel(const u8 *glyph, s16 row, s16 pixel, s16 yO
 
 extern const u8 gGenerationSelectBackground_Gfx[];
 extern const u16 gGenerationSelectBackground_Pals[];
+
+static const u8 sDisabledGenerationOptions[] = {
+    GENERATION_4,
+    GENERATION_5,
+    GENERATION_6,
+    GENERATION_7,
+    GENERATION_8,
+    GENERATION_9,
+    GENERATION_10,
+    GENERATION_RANDOM,
+};
 
 void GenerationSelectMain(void)
 {
@@ -63,7 +76,10 @@ static void LoadGenerationSelectGraphics(void)
     ((u16 *)PLTT)[0xF3] = 0x03FF;
     LoadGenerationSelectFont();
 
-    sGenerationCursor = gSelectedGeneration;
+    if (gSelectedGeneration >= GENERATION_SELECT_OPTION_COUNT)
+        sGenerationCursor = DEFAULT_GENERATION;
+    else
+        sGenerationCursor = gSelectedGeneration;
     sGenerationNextMainState = STATE_FIELD_SELECT;
     DrawGenerationSelectText();
     RenderGenerationSelectScreen();
@@ -101,9 +117,16 @@ static void HandleGenerationSelectInput(void)
         DrawGenerationSelectText();
         RenderGenerationSelectScreen();
     }
-    else if (JOY_NEW(DPAD_RIGHT) && sGenerationCursor < GENERATION_COUNT - 1)
+    else if (JOY_NEW(DPAD_RIGHT) && sGenerationCursor < GENERATION_SELECT_OPTION_COUNT - 1)
     {
         sGenerationCursor++;
+        m4aSongNumStart(SE_DEX_INFO_FIELD_SELECT_MOVE);
+        DrawGenerationSelectText();
+        RenderGenerationSelectScreen();
+    }
+    else if (JOY_NEW(DPAD_UP) && sGenerationCursor == GENERATION_RANDOM)
+    {
+        sGenerationCursor = GENERATION_8;
         m4aSongNumStart(SE_DEX_INFO_FIELD_SELECT_MOVE);
         DrawGenerationSelectText();
         RenderGenerationSelectScreen();
@@ -122,13 +145,27 @@ static void HandleGenerationSelectInput(void)
         DrawGenerationSelectText();
         RenderGenerationSelectScreen();
     }
+    else if (JOY_NEW(DPAD_DOWN) && sGenerationCursor < GENERATION_COUNT)
+    {
+        sGenerationCursor = GENERATION_RANDOM;
+        m4aSongNumStart(SE_DEX_INFO_FIELD_SELECT_MOVE);
+        DrawGenerationSelectText();
+        RenderGenerationSelectScreen();
+    }
 
     if (JOY_NEW(A_BUTTON | START_BUTTON))
     {
-        gSelectedGeneration = sGenerationCursor;
-        sGenerationNextMainState = STATE_FIELD_SELECT;
-        m4aSongNumStart(SE_MENU_SELECT);
-        gMain.subState = GENERATION_SELECT_STATE_EXIT;
+        if (IsGenerationOptionDisabled(sGenerationCursor))
+        {
+            m4aSongNumStart(SE_FAILURE);
+        }
+        else
+        {
+            gSelectedGeneration = sGenerationCursor;
+            sGenerationNextMainState = STATE_FIELD_SELECT;
+            m4aSongNumStart(SE_MENU_SELECT);
+            gMain.subState = GENERATION_SELECT_STATE_EXIT;
+        }
     }
     else if (JOY_NEW(B_BUTTON))
     {
@@ -161,6 +198,8 @@ static void DrawGenerationSelectText(void)
 
     for (i = 0; i < GENERATION_COUNT; i++)
         DrawGenerationCell(i, i == sGenerationCursor);
+
+    DrawRandomCell(sGenerationCursor == GENERATION_RANDOM);
 }
 
 static void DrawGenerationCell(s16 generation, s16 selected)
@@ -173,10 +212,9 @@ static void DrawGenerationCell(s16 generation, s16 selected)
 
     text[0] = selected ? '[' : ' ';
     text[1] = 'G';
-    if (generation == GENERATION_RANDOM)
+    if (generation == GENERATION_10)
     {
-        text[1] = 'R';
-        text[2] = 'N';
+        text[2] = 'X';
     }
     else
     {
@@ -185,6 +223,36 @@ static void DrawGenerationCell(s16 generation, s16 selected)
     text[3] = selected ? ']' : ' ';
     text[4] = '\0';
     DrawGenerationString(text, y, x);
+}
+
+static void DrawRandomCell(s16 selected)
+{
+    u8 text[9];
+
+    text[0] = selected ? '[' : ' ';
+    text[1] = 'R';
+    text[2] = 'A';
+    text[3] = 'N';
+    text[4] = 'D';
+    text[5] = 'O';
+    text[6] = 'M';
+    text[7] = selected ? ']' : ' ';
+    text[8] = '\0';
+
+    DrawGenerationString(text, 13, 11);
+}
+
+static bool8 IsGenerationOptionDisabled(u8 generation)
+{
+    s16 i;
+
+    for (i = 0; i < sizeof(sDisabledGenerationOptions); i++)
+    {
+        if (sDisabledGenerationOptions[i] == generation)
+            return TRUE;
+    }
+
+    return FALSE;
 }
 
 static void LoadGenerationSelectFont(void)
@@ -275,11 +343,13 @@ static const u8 *GetGenerationGlyph(u8 ch)
     static const u8 a[8] = {0x38, 0x44, 0x44, 0x7C, 0x44, 0x44, 0x44, 0};
     static const u8 b[8] = {0x78, 0x44, 0x44, 0x78, 0x44, 0x44, 0x78, 0};
     static const u8 c[8] = {0x38, 0x44, 0x40, 0x40, 0x40, 0x44, 0x38, 0};
+    static const u8 d[8] = {0x78, 0x44, 0x44, 0x44, 0x44, 0x44, 0x78, 0};
     static const u8 e[8] = {0x7C, 0x40, 0x40, 0x78, 0x40, 0x40, 0x7C, 0};
     static const u8 g[8] = {0x38, 0x44, 0x40, 0x5C, 0x44, 0x44, 0x38, 0};
     static const u8 i[8] = {0x38, 0x10, 0x10, 0x10, 0x10, 0x10, 0x38, 0};
     static const u8 k[8] = {0x44, 0x48, 0x50, 0x60, 0x50, 0x48, 0x44, 0};
     static const u8 l[8] = {0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x7C, 0};
+    static const u8 m[8] = {0x44, 0x6C, 0x54, 0x54, 0x44, 0x44, 0x44, 0};
     static const u8 n[8] = {0x44, 0x64, 0x54, 0x54, 0x4C, 0x44, 0x44, 0};
     static const u8 o[8] = {0x38, 0x44, 0x44, 0x44, 0x44, 0x44, 0x38, 0};
     static const u8 r[8] = {0x78, 0x44, 0x44, 0x78, 0x50, 0x48, 0x44, 0};
@@ -304,11 +374,13 @@ static const u8 *GetGenerationGlyph(u8 ch)
     case 'A': return a;
     case 'B': return b;
     case 'C': return c;
+    case 'D': return d;
     case 'E': return e;
     case 'G': return g;
     case 'I': return i;
     case 'K': return k;
     case 'L': return l;
+    case 'M': return m;
     case 'N': return n;
     case 'O': return o;
     case 'R': return r;

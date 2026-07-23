@@ -12,7 +12,8 @@ tablas de encuentros distintas segun la generacion seleccionada.
 - Gen 1 usa `gWildMonLocationsGen1`.
 - Gen 2 usa `gWildMonLocationsGen2`.
 - Gen 3 usa la tabla original `gWildMonLocations`.
-- La opcion `RN` genera una tabla temporal en RAM para cada partida nueva.
+- Gen 4 a Gen 10 y `RANDOM` aparecen en el selector, pero estan bloqueadas
+  hasta que tengan contenido aprobado.
 - Huevos y eventos especiales quedan para mas adelante.
 
 ## Archivos importantes
@@ -32,10 +33,20 @@ El flujo principal es:
 
 1. El menu principal entra en `STATE_GENERATION_SELECT`.
 2. `GenerationSelectMain` dibuja la pantalla de seleccion.
-3. El jugador mueve el cursor en una cuadricula de 2x5.
-4. Al pulsar `A` o `START`, se actualiza `gSelectedGeneration`.
+3. El jugador mueve el cursor en una cuadricula de 2x5 y un boton `RANDOM`
+   centrado debajo.
+4. Al pulsar `A` o `START`, si la opcion no esta bloqueada, se actualiza
+   `gSelectedGeneration`.
 5. El juego pasa a `STATE_FIELD_SELECT`.
 6. El selector de tablero Ruby/Sapphire funciona como siempre.
+
+Las opciones bloqueadas estan en `sDisabledGenerationOptions`, dentro de:
+
+```c
+src/generation_select.c
+```
+
+Cuando una generacion se complete, se quita de esa lista para activarla.
 
 ## Como se elige la tabla de encuentros
 
@@ -56,26 +67,14 @@ La funcion devuelve:
 - `gWildMonLocationsGen1` si se eligio Gen 1.
 - `gWildMonLocationsGen2` si se eligio Gen 2.
 - `gWildMonLocations` si se eligio Gen 3.
-- `sRandomWildMonLocations` si se eligio `RN`.
 
 Esto mantiene el codigo de captura bastante estable, porque el resto del juego
 sigue pidiendo "dame el Pokemon de esta zona", sin saber de donde sale la tabla.
 
 ## Modo random
 
-La opcion `RN` usa el ultimo hueco del selector, donde antes se mostraba `GX`.
-Al empezar una partida normal, `InitRandomWildMonLocationsForNewGame` genera
-tablas temporales con la misma forma que las tablas fijas:
-
-```c
-AREA_COUNT x 2 x WILD_MON_LOCATION_COUNT
-```
-
-Cada zona toma candidatos de esa misma zona en Gen 1, Gen 2 y Gen 3. Asi se
-mantiene el tema de habitats, pero cada partida mezcla especies distintas. La
-blacklist esta en `IsSpeciesBlacklistedFromRandomWildMons` y sirve para dejar
-fuera `SPECIES_NONE`, legendarios, miticos, jefes o especies que no queramos
-como encuentros normales.
+La opcion `RANDOM` existe visualmente debajo de las generaciones, pero sigue
+bloqueada hasta definir sus reglas. No genera tablas temporales todavia.
 
 ## Como editar habitats
 

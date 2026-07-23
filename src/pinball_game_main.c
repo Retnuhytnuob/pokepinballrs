@@ -5,7 +5,6 @@
 #include "constants/areas.h"
 #include "constants/fields.h"
 #include "constants/ruby_states.h"
-#include "functions.h"
 
 extern struct PinballGame gPinballGameState;
 
@@ -139,9 +138,6 @@ void PinballGame_State0_49ED4(void)
         ClearBG0Tilemap();
         break;
     }
-
-    if (var0 == 1 && gMain.selectedField < MAIN_FIELD_COUNT)
-        InitRandomWildMonLocationsForNewGame();
 
     gBoardConfig.caughtSpeciesCount = 0;
     for (j = 0; j < NUM_SAVE_SPECIES; j++)
