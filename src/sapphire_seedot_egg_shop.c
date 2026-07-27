@@ -2,6 +2,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "constants/bg_music.h"
+#include "constants/board/sapphire_states.h"
 
 extern const u16 gHatchCaveOamFramesets[40][2][3];
 extern const u16 gSeedotBasketBounceFrames[];
@@ -24,7 +25,7 @@ extern const u8 gSapphireShopSignPalettes[][0x20];
 extern const u8 gSapphireShopSignTileGfx[][0x480];
 
 
-void InitSapphireEggHatchState(void)
+void InitSapphireEggHatchAnimation(void)
 {
     gCurrentPinballGame->eggAnimationPhase = 1;
     gCurrentPinballGame->prevEggAnimFrame = 0;
@@ -51,7 +52,7 @@ void UpdateSapphireEggHatchAnimation(void)
     var3 = 0;
     var1 = 0;
     var2 = 0;
-    group = &gMain.spriteGroups[52];
+    group = &gMain.spriteGroups[SG_SAPPHIRE_HATCH_EGG];
     sp0 = 0;
     switch (gCurrentPinballGame->eggAnimationPhase)
     {
@@ -114,7 +115,7 @@ void UpdateSapphireEggHatchAnimation(void)
             }
 
             if (gCurrentPinballGame->eggAnimFrameIndex == 20)
-                LoadEggSpriteGraphics();
+                LoadMonFieldSpriteGraphics();
 
             if ((gCurrentPinballGame->eggAnimFrameIndex == 8 || gCurrentPinballGame->eggAnimFrameIndex == 27) && gCurrentPinballGame->eggFrameTimer == 0)
                 m4aMPlayAllStop();
@@ -123,7 +124,7 @@ void UpdateSapphireEggHatchAnimation(void)
                 m4aSongNumStart(MUS_EGG_MODE_START);
 
             if (gCurrentPinballGame->eggAnimFrameIndex == 29)
-                RequestBoardStateTransition(5);
+                RequestBoardStateTransition(MAIN_BOARD_STATE_EGG_HATCH_MODE);
 
             if (gCurrentPinballGame->eggAnimFrameIndex == 28)
                 m4aSongNumStart(SE_HATCH_FLOURISH);
@@ -166,8 +167,8 @@ void UpdateSapphireEggHatchAnimation(void)
         gOamBuffer[oamSimple->oamId].y += group->baseY;
     }
 
-    group = &gMain.spriteGroups[51];
-    if (group->available)
+    group = &gMain.spriteGroups[SG_SAPPHIRE_HATCH_MACHINE_LOWER_SEGMENT];
+    if (group->active)
     {
         group->baseX = 192 - gCurrentPinballGame->cameraXOffset;
         if (gCurrentPinballGame->sapphireHatchMachineState > 2 && gMain.modeChangeFlags)
@@ -188,9 +189,9 @@ void UpdateSapphireSeedotCollection(void)
 
     if (gCurrentPinballGame->seedotCollisionTrigger)
     {
-        if (gCurrentPinballGame->boardState != 7)
+        if (gCurrentPinballGame->boardState != MAIN_BOARD_STATE_TRAVEL_MODE)
         {
-            if (gCurrentPinballGame->boardState < 3)
+            if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
             {
                 if (gCurrentPinballGame->seedotCount < 3)
                 {
@@ -202,7 +203,7 @@ void UpdateSapphireSeedotCollection(void)
                     gCurrentPinballGame->seedotCount++;
                     gCurrentPinballGame->seedotDecayTimer = 1800;
                     if (gCurrentPinballGame->seedotCount == 3)
-                        gCurrentPinballGame->seedotModeStartDelay = 1;
+                        gCurrentPinballGame->travelModeStartDelay = 1;
                 }
             }
             else
@@ -220,7 +221,7 @@ void UpdateSapphireSeedotCollection(void)
             }
         }
 
-        gCurrentPinballGame->seedotCollisionTrigger = 0;
+        gCurrentPinballGame->seedotCollisionTrigger = FALSE;
         gCurrentPinballGame->scoreAddedInFrame = 3000;
     }
 
@@ -237,10 +238,10 @@ void UpdateSapphireSeedotCollection(void)
             if (gCurrentPinballGame->seedotAnimTimer[i] < 33)
             {
                 if (gCurrentPinballGame->seedotAnimTimer[i] == 0)
-                    m4aSongNumStart(SE_UNKNOWN_0xE9);
+                    m4aSongNumStart(SE_SEEDOT_FALLING);
 
                 if (gCurrentPinballGame->seedotAnimTimer[i] == 26)
-                    m4aSongNumStart(SE_UNKNOWN_0xEA);
+                    m4aSongNumStart(SE_SEEDOT_LANDS);
 
                 gCurrentPinballGame->seedotAnimTimer[i]++;
                 if (gCurrentPinballGame->seedotAnimTimer[i] < 21)
@@ -264,7 +265,7 @@ void UpdateSapphireSeedotCollection(void)
                 gCurrentPinballGame->seedotState[i] = 2;
                 gCurrentPinballGame->seedotAnimTimer[i] = 0;
                 if (i == 2)
-                    RequestBoardStateTransition(7);
+                    RequestBoardStateTransition(MAIN_BOARD_STATE_TRAVEL_MODE);
             }
             break;
         case 2:
@@ -284,7 +285,7 @@ void UpdateSapphireSeedotCollection(void)
             else if (var0 < 38)
             {
                 if (var0 == 32 && (gMain.modeChangeFlags & MODE_CHANGE_END_OF_GAME) == 0)
-                    m4aSongNumStart(SE_UNKNOWN_0xEB);
+                    m4aSongNumStart(SE_SEEDOT_LEAVES);
 
                 gCurrentPinballGame->seedotSpriteFrame[i] = 6;
                 gCurrentPinballGame->seedotOamFramesetIndex[i] = 3;
@@ -313,17 +314,17 @@ void UpdateSapphireSeedotCollection(void)
         gCurrentPinballGame->basketBounceTimer--;
     }
 
-    if (gCurrentPinballGame->seedotModeStartDelay)
+    if (gCurrentPinballGame->travelModeStartDelay)
     {
-        gCurrentPinballGame->seedotModeStartDelay--;
-        if (gCurrentPinballGame->seedotModeStartDelay == 0)
+        gCurrentPinballGame->travelModeStartDelay--;
+        if (gCurrentPinballGame->travelModeStartDelay == 0)
         {
             if (gCurrentPinballGame->activePortraitType)
-                gCurrentPinballGame->seedotModeStartDelay = 1;
+                gCurrentPinballGame->travelModeStartDelay = 1;
             else
                 gCurrentPinballGame->activePortraitType = 4;
 
-            if (gCurrentPinballGame->seedotModeStartDelay == 0)
+            if (gCurrentPinballGame->travelModeStartDelay == 0)
             {
                 gMain.modeChangeFlags |= MODE_CHANGE_BANNER;
                 gCurrentPinballGame->bannerDelayTimer = 70;
@@ -331,9 +332,9 @@ void UpdateSapphireSeedotCollection(void)
                 gCurrentPinballGame->cameraYScrollTarget = 0;
                 gCurrentPinballGame->cameraYAdjust = 0;
                 gCurrentPinballGame->cameraYScrollSpeed = 0;
-                gCurrentPinballGame->bannerGfxIndex = 4;
-                gCurrentPinballGame->bannerActive = 1;
-                gCurrentPinballGame->bannerPreserveBallState = 0;
+                gCurrentPinballGame->bannerGfxIndex = BANNER_MODE_TRAVEL;
+                gCurrentPinballGame->bannerActive = TRUE;
+                gCurrentPinballGame->holdCameraLockAfterBanner = FALSE;
                 gCurrentPinballGame->bannerDisplayDuration = 120;
                 gCurrentPinballGame->bannerSlidePosition = 0;
                 gCurrentPinballGame->bannerSlideTimer = 50;
@@ -360,7 +361,7 @@ void UpdateSapphireSeedotCollection(void)
         }
         else
         {
-            gCurrentPinballGame->seedotExitSequenceActive = 0;
+            gCurrentPinballGame->seedotExitSequenceActive = FALSE;
             gCurrentPinballGame->seedotExitSequenceTimer = 0;
         }
     }
@@ -391,8 +392,8 @@ void DrawSapphireSeedotAndBasketSprites(void)
     s16 index;
     int var0;
 
-    group = &gMain.spriteGroups[64];
-    if (!group->available)
+    group = &gMain.spriteGroups[SG_SAPPHIRE_SEEDOT_BASKET_BACK];
+    if (!group->active)
         return;
 
     group->baseX = 10 - gCurrentPinballGame->cameraXOffset;
@@ -407,7 +408,7 @@ void DrawSapphireSeedotAndBasketSprites(void)
         gOamBuffer[oamSimple->oamId].y = oamSimple->yOffset + group->baseY;
     }
 
-    group = &gMain.spriteGroups[68];
+    group = &gMain.spriteGroups[SG_SAPPHIRE_SEEDOT_BASKET_FRONT];
     group->baseX = 10 - gCurrentPinballGame->cameraXOffset;
     group->baseY = 298 - gCurrentPinballGame->cameraYOffset;
     oamSimple = &group->oam[0];
@@ -416,7 +417,7 @@ void DrawSapphireSeedotAndBasketSprites(void)
 
     for (j = 0; j < 3; j++)
     {
-        group = &gMain.spriteGroups[65 + j];
+        group = &gMain.spriteGroups[SG_SAPPHIRE_SEEDOT_ENTITY_BASE + j];
 
         var0 = gSeedotBaseXPositions[j] - j;
         group->baseX = var0 - gCurrentPinballGame->cameraXOffset;
@@ -444,9 +445,9 @@ void DrawSapphireSeedotAndBasketSprites(void)
 
 void UpdateSapphireShopSignAnimation(void)
 {
-    if (gCurrentPinballGame->shopTransitionActive == 0)
+    if (!gCurrentPinballGame->shopTransitionActive)
     {
-        if (gCurrentPinballGame->evolutionShopActive == 1)
+        if (gCurrentPinballGame->evolutionShopActive == TRUE)
         {
             if (gCurrentPinballGame->shopAnimTimer < 96)
             {
@@ -485,20 +486,22 @@ void UpdateSapphireShopSignAnimation(void)
 
         if (gCurrentPinballGame->evoArrowProgress > 2)
         {
-            if (gCurrentPinballGame->evolvablePartySize > 0 && gCurrentPinballGame->evolutionShopActive == 0)
+            if (gCurrentPinballGame->evolvablePartySize > 0
+                && !gCurrentPinballGame->evolutionShopActive)
             {
-                gCurrentPinballGame->shopTransitionActive = 1;
+                gCurrentPinballGame->shopTransitionActive = TRUE;
                 gCurrentPinballGame->shopAnimTimer = 0;
-                gCurrentPinballGame->evolutionShopActive = 1;
+                gCurrentPinballGame->evolutionShopActive = TRUE;
             }
         }
         else
         {
-            if (gCurrentPinballGame->boardState != 6 && gCurrentPinballGame->evolutionShopActive == 1)
+            if (gCurrentPinballGame->boardState != MAIN_BOARD_STATE_EVO_MODE
+                && gCurrentPinballGame->evolutionShopActive == TRUE)
             {
-                gCurrentPinballGame->shopTransitionActive = 1;
+                gCurrentPinballGame->shopTransitionActive = TRUE;
                 gCurrentPinballGame->shopAnimTimer = 0;
-                gCurrentPinballGame->evolutionShopActive = 0;
+                gCurrentPinballGame->evolutionShopActive = FALSE;
             }
         }
     }
@@ -511,7 +514,7 @@ void UpdateSapphireShopSignAnimation(void)
         }
         else
         {
-            if (gCurrentPinballGame->evolutionShopActive == 1)
+            if (gCurrentPinballGame->evolutionShopActive == TRUE)
             {
                 if (gCurrentPinballGame->shopAnimTimer < 15)
                     gCurrentPinballGame->shopSignPaletteIndex = 0;
@@ -530,7 +533,7 @@ void UpdateSapphireShopSignAnimation(void)
         gCurrentPinballGame->shopAnimTimer++;
         if (gCurrentPinballGame->shopAnimTimer == 42)
         {
-            gCurrentPinballGame->shopTransitionActive = 0;
+            gCurrentPinballGame->shopTransitionActive = FALSE;
             gCurrentPinballGame->shopAnimTimer = 0;
         }
     }
@@ -543,8 +546,8 @@ void DrawSapphireShopSignSprite(void)
     struct OamDataSimple *oamSimple;
     s16 index;
 
-    group = &gMain.spriteGroups[69];
-    if (group->available)
+    group = &gMain.spriteGroups[SG_SAPPHIRE_MART_SIGN];
+    if (group->active)
     {
         group->baseX = 16 - gCurrentPinballGame->cameraXOffset;
         group->baseY = 115 - gCurrentPinballGame->cameraYOffset;
@@ -570,15 +573,15 @@ void UpdateSapphireEggMachine(void)
     switch (gCurrentPinballGame->sapphireHatchMachineState)
     {
     case 0:
-        if (gCurrentPinballGame->hatchMachineNewHit)
+        if (gCurrentPinballGame->hatchMachineProgressTickSignaled)
         {
-            if (gCurrentPinballGame->boardState < 3)
+            if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
             {
                 if (gCurrentPinballGame->sapphireHatchMachineFrameIx < 3)
                 {
                     gCurrentPinballGame->sapphireHatchMachineFrameIx++;
                     gCurrentPinballGame->scoreAddedInFrame = 20000;
-                    m4aSongNumStart(SE_UNKNOWN_0xDE);
+                    m4aSongNumStart(SE_HATCH_MACHINE_STAGE_ADVANCE);
                 }
                 else
                 {
@@ -588,14 +591,14 @@ void UpdateSapphireEggMachine(void)
                     gCurrentPinballGame->cameraYScrollTarget = 0;
                     gCurrentPinballGame->cameraYAdjust = 0;
                     gCurrentPinballGame->cameraYScrollSpeed = 0;
-                    gCurrentPinballGame->bannerGfxIndex = 0;
-                    gCurrentPinballGame->bannerActive = 1;
-                    gCurrentPinballGame->bannerPreserveBallState = 0;
+                    gCurrentPinballGame->bannerGfxIndex = BANNER_MODE_NONE;
+                    gCurrentPinballGame->bannerActive = TRUE;
+                    gCurrentPinballGame->holdCameraLockAfterBanner = FALSE;
                     gCurrentPinballGame->sapphireHatchMachineState = 1;
                     gCurrentPinballGame->holeAnimFrameCounter = 0;
                     m4aMPlayStop(&gMPlayInfo_BGM);
                     gCurrentPinballGame->scoreAddedInFrame = 200000;
-                    m4aSongNumStart(SE_UNKNOWN_0xDF);
+                    m4aSongNumStart(SE_HATCH_MACHINE_EGG_HATCH);
                 }
             }
             else
@@ -604,13 +607,13 @@ void UpdateSapphireEggMachine(void)
                 {
                     gCurrentPinballGame->sapphireHatchMachineFrameIx++;
                     gCurrentPinballGame->scoreAddedInFrame = 20000;
-                    m4aSongNumStart(SE_UNKNOWN_0xDE);
+                    m4aSongNumStart(SE_HATCH_MACHINE_STAGE_ADVANCE);
                 }
             }
 
             index = gCurrentPinballGame->sapphireHatchMachineFrameIx;
             DmaCopy16(3, &gHoleIndicatorTileGfx[index], (void *)0x600D900, 0x440);
-            gCurrentPinballGame->hatchMachineNewHit = 0;
+            gCurrentPinballGame->hatchMachineProgressTickSignaled = FALSE;
         }
         break;
     case 1:
@@ -630,7 +633,7 @@ void UpdateSapphireEggMachine(void)
         if (gCurrentPinballGame->holeAnimFrameCounter == 60)
         {
             m4aSongNumStart(MUS_EGG_MODE_START);
-            gCurrentPinballGame->catchArrowPaletteActive = 0;
+            gCurrentPinballGame->catchArrowPaletteActive = FALSE;
             gCurrentPinballGame->eggAnimationPhase = 5;
             gCurrentPinballGame->eggAnimFrameIndex = 12;
             gCurrentPinballGame->eggFrameTimer = 0;
@@ -651,7 +654,7 @@ void UpdateSapphireEggMachine(void)
                 gCurrentPinballGame->sapphireHatchMachineState = 4;
 
             if (gCurrentPinballGame->sapphireHatchMachineFrameIx == 6)
-                m4aSongNumStart(SE_UNKNOWN_0xE0);
+                m4aSongNumStart(SE_HATCH_MACHINE_ELEVATOR);
 
             index = gHoleAnimKeyframeData[gCurrentPinballGame->sapphireHatchMachineFrameIx][0];
             DmaCopy16(3, &gHoleIndicatorTileGfx[index], (void *)0x600D900, 0x440);
@@ -669,7 +672,7 @@ void UpdateSapphireEggMachine(void)
         }
         break;
     case 4:
-        if (gCurrentPinballGame->sapphirerubyEggDeliveryState && gCurrentPinballGame->hatchMachineNewHit)
+        if (gCurrentPinballGame->sapphirerubyEggDeliveryState && gCurrentPinballGame->hatchMachineProgressTickSignaled)
         {
             gMain.modeChangeFlags |= MODE_CHANGE_BANNER;
             gCurrentPinballGame->bannerDelayTimer = 0;
@@ -677,19 +680,19 @@ void UpdateSapphireEggMachine(void)
             gCurrentPinballGame->cameraYScrollTarget = 0;
             gCurrentPinballGame->cameraYAdjust = 0;
             gCurrentPinballGame->cameraYScrollSpeed = 0;
-            gCurrentPinballGame->bannerGfxIndex = 0;
-            gCurrentPinballGame->bannerActive = 1;
-            gCurrentPinballGame->bannerPreserveBallState = 0;
+            gCurrentPinballGame->bannerGfxIndex = BANNER_MODE_NONE;
+            gCurrentPinballGame->bannerActive = TRUE;
+            gCurrentPinballGame->holdCameraLockAfterBanner = FALSE;
             gCurrentPinballGame->sapphireHatchMachineState = 5;
             gCurrentPinballGame->holeAnimFrameCounter = 0;
             gCurrentPinballGame->sapphireHatchMachineFrameIx = 10;
-            m4aSongNumStart(SE_UNKNOWN_0xE0);
+            m4aSongNumStart(SE_HATCH_MACHINE_ELEVATOR);
             gCurrentPinballGame->eggAnimationPhase = 1;
             gCurrentPinballGame->portraitOffsetX = 2080;
             gCurrentPinballGame->portraitOffsetY = 960;
         }
 
-        gCurrentPinballGame->hatchMachineNewHit = 0;
+        gCurrentPinballGame->hatchMachineProgressTickSignaled = FALSE;
         break;
     case 5:
         if (gHoleAnimKeyframeData[gCurrentPinballGame->sapphireHatchMachineFrameIx][1] > gCurrentPinballGame->holeAnimFrameCounter)
@@ -708,7 +711,7 @@ void UpdateSapphireEggMachine(void)
         }
 
         if (gCurrentPinballGame->sapphireHatchMachineFrameIx == 14 && gCurrentPinballGame->holeAnimFrameCounter == 10)
-            m4aSongNumStart(SE_UNKNOWN_0xE1);
+            m4aSongNumStart(SE_HATCH_MACHINE_ELEVATOR_TOP);
 
         if (gCurrentPinballGame->portraitOffsetY > 700)
             gCurrentPinballGame->portraitOffsetY -= 5;
@@ -725,8 +728,8 @@ void UpdateSapphireEggMachine(void)
 
     for (i = 0; i < 4; i++)
     {
-        group = &gMain.spriteGroups[47 + i];
-        if (group->available)
+        group = &gMain.spriteGroups[SG_SAPPHIRE_HATCH_MACHINE_LIGHT_SPARK_FX_BASE + i];
+        if (group->active)
         {
             if (gSplashEffectFrameDurations[gCurrentPinballGame->splashEffectFrameIndex[i]][0] > gCurrentPinballGame->splashEffectFrameTimer[i])
             {
@@ -738,7 +741,7 @@ void UpdateSapphireEggMachine(void)
                 gCurrentPinballGame->splashEffectFrameIndex[i]++;
                 if (gCurrentPinballGame->splashEffectFrameIndex[i] == 6)
                 {
-                    group->available = 0;
+                    group->active = FALSE;
                     gCurrentPinballGame->splashEffectFrameIndex[i] = 5;
                 }
             }

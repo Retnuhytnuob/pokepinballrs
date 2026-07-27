@@ -2,6 +2,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "constants/bg_music.h"
+#include "constants/board/ruby_states.h"
 
 extern const u8 *gRubyBallPowerUpLightTilePointers[][3];
 extern const u16 gBallShadowTileIndices[];
@@ -69,7 +70,8 @@ void UpdateRubyBoardAnimations(void)
     if (gCurrentPinballGame->hudSpriteBaseY > 202)
         DrawRubyModeTimerDisplay();
 
-    if (gCurrentPinballGame->saverTimeRemaining && gCurrentPinballGame->ballCatchState == 0)
+    if (gCurrentPinballGame->saverTimeRemaining
+        && gCurrentPinballGame->ballCatchState == NOT_TRAPPED)
         gCurrentPinballGame->saverTimeRemaining--;
 }
 
@@ -179,7 +181,7 @@ void AnimateRubyHoleIndicators(void)
         }
         else
         {
-            gCurrentPinballGame->holeIndicators[0] = 1;
+            gCurrentPinballGame->holeIndicators[0] = TRUE;
             gCurrentPinballGame->holeIndicators[1] = gCurrentPinballGame->holeIndicators[0];
             gCurrentPinballGame->holeIndicators[2] = gCurrentPinballGame->holeIndicators[0];
             gCurrentPinballGame->holeIndicators[3] = gCurrentPinballGame->holeIndicators[0];
@@ -201,20 +203,20 @@ void DrawRubyModeTimerDisplay(void)
 
     if (gCurrentPinballGame->saverTimeRemaining > 300)
     {
-        gCurrentPinballGame->saverLit = 1;
+        gCurrentPinballGame->saverLit = TRUE;
     }
     else
     {
         if (gCurrentPinballGame->saverTimeRemaining)
         {
             if (gCurrentPinballGame->ballCatchState)
-                gCurrentPinballGame->saverLit = 1;
+                gCurrentPinballGame->saverLit = TRUE;
             else
                 gCurrentPinballGame->saverLit = (gMain.fieldFrameCount % 16) / 8;
         }
         else
         {
-            gCurrentPinballGame->saverLit = 0;
+            gCurrentPinballGame->saverLit = FALSE;
         }
     }
 
@@ -304,9 +306,9 @@ void AnimateRubyShopRampArrow(void)
 
     index = 0;
     if (gCurrentPinballGame->shopDoorTargetFrame > 2)
-        gCurrentPinballGame->shopArrowActive = 1;
-    else if (gCurrentPinballGame->boardState)
-        gCurrentPinballGame->shopArrowActive = 0;
+        gCurrentPinballGame->shopArrowActive = TRUE;
+    else if (gCurrentPinballGame->boardState != MAIN_BOARD_STATE_BOARD_INTRO)
+        gCurrentPinballGame->shopArrowActive = FALSE;
 
     if (gCurrentPinballGame->shopArrowActive > 0)
         index = gCurrentPinballGame->evolutionShopActive * 2 + 1 - gCurrentPinballGame->hudBlinkPhase;
@@ -335,9 +337,10 @@ void AnimateRubyCatchProgressArrow(void)
     const u8 **dest;
 
     index = 0;
-    gCurrentPinballGame->catchProgressFlashing = 0;
-    if (gCurrentPinballGame->catchArrowProgress > 1 && gCurrentPinballGame->boardState < 3)
-        gCurrentPinballGame->catchProgressFlashing = 1;
+    gCurrentPinballGame->catchProgressFlashing = FALSE;
+    if (gCurrentPinballGame->catchArrowProgress > 1
+        && gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
+        gCurrentPinballGame->catchProgressFlashing = TRUE;
 
     if (gCurrentPinballGame->catchProgressFlashing > 0)
         index = 1 - gCurrentPinballGame->hudBlinkPhase;
@@ -355,12 +358,12 @@ void AnimateRubyCatchProgressArrow(void)
 
 void AnimateRubyBallPowerUpSequence(void)
 {
-    if (gCurrentPinballGame->ballPowerUpAnimActive == 0)
+    if (!gCurrentPinballGame->ballPowerUpAnimActive)
         return;
 
     if (gCurrentPinballGame->ballShadowTimer)
     {
-        if (gCurrentPinballGame->ballPowerUpOverride == 0)
+        if (!gCurrentPinballGame->ballPowerUpOverride)
         {
             gCurrentPinballGame->ballPowerUpLight[0] = (gMain.fieldFrameCount % 20) / 10;
             gCurrentPinballGame->ballPowerUpLight[1] = gCurrentPinballGame->ballPowerUpLight[0];
@@ -380,22 +383,22 @@ void AnimateRubyBallPowerUpSequence(void)
         MPlayStart(&gMPlayInfo_SE1, &se_ball_upgrade);
 
         if (gCurrentPinballGame->ballShadowTimer == 60)
-            gMain.fieldSpriteGroups[43]->available = 1;
+            gMain.fieldSpriteGroups[FIELD_SG_BALL_UPGRADE_FX]->active = TRUE;
 
         gCurrentPinballGame->ballShadowTileIndex = gBallShadowTileIndices[30 - gCurrentPinballGame->ballShadowTimer / 2];
         gCurrentPinballGame->ballShadowTimer--;
     }
     else
     {
-        gCurrentPinballGame->ballPowerUpAnimActive = 0;
-        if (gCurrentPinballGame->ballPowerUpOverride == 0)
+        gCurrentPinballGame->ballPowerUpAnimActive = FALSE;
+        if (!gCurrentPinballGame->ballPowerUpOverride)
         {
             gCurrentPinballGame->ballPowerUpLight[0] =
                 gCurrentPinballGame->ballPowerUpLight[1] =
-                gCurrentPinballGame->ballPowerUpLight[2] = 0;
+                gCurrentPinballGame->ballPowerUpLight[2] = FALSE;
         }
 
-        gCurrentPinballGame->ballPowerUpOverride = 0;
+        gCurrentPinballGame->ballPowerUpOverride = FALSE;
     }
 }
 
@@ -507,7 +510,7 @@ void DrawRubyEvoArrowProgress(void)
     const u8 **src;
     const u8 **dest;
 
-    if (gCurrentPinballGame->boardState < 3)
+    if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
     {
         if (gCurrentPinballGame->evoArrowProgress == 0)
         {
@@ -576,7 +579,7 @@ void DrawRubyCatchArrowProgress(void)
     const u8 **src;
     const u8 **dest;
 
-    if (gCurrentPinballGame->boardState < 3)
+    if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
     {
         if (gCurrentPinballGame->catchArrowProgress == 0)
         {

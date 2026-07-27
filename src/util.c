@@ -74,7 +74,7 @@ s16 LoadSpriteSets(const struct SpriteSet *const *spriteSets, u16 numSpriteSets,
     for (i = 0; i < numSpriteSets; i++)
     {
         spriteGroup = &spriteGroups[i];
-        if (spriteGroup->available)
+        if (spriteGroup->active)
         {
             u16 curSpriteSetCount = spriteSets[i]->count;
             DmaCopy16(3, spriteSets[i]->oamData, &gOamBuffer[loadedCount], curSpriteSetCount * sizeof(struct OamData));
@@ -102,17 +102,17 @@ void ResetDisplayState(void)
     gMain.modeChangeFlags = MODE_CHANGE_NONE;
     gMain.debugMenuCursorIndex = 0;
     gMain.fieldFrameCount = 0;
-    gMain.pendingModeChangeType = 0;
+    gMain.pendingModeChangeType = MODE_CHANGE_NONE;
     gMain.animationTimer = 0;
     gMain.modeChangeDelayTimer = 0;
     gMain.vCount = 144;
-    gMain.shopPanelActive = 0;
+    gMain.shopPanelActive = FALSE;
     gMain.shopPanelSlideOffset = 0;
-    gMain.blendEnabled = 0;
+    gMain.blendEnabled = FALSE;
     gMain.blendControl = 0;
     gMain.blendAlpha = 0;
     gMain.blendBrightness = 0;
-    gMain.scoreOverlayActive = 0;
+    gMain.scoreOverlayActive = FALSE;
 }
 
 void ClearGraphicsMemory(void)
@@ -152,7 +152,7 @@ void ClearSprites(void)
 
     for (i = 0; i < NUM_SPRITE_GROUPS; i++)
     {
-        gMain.spriteGroups[i].available = 0;
+        gMain.spriteGroups[i].active = FALSE;
         gMain.spriteGroups[i].baseX = 0;
         gMain.spriteGroups[i].baseY = 0;
         for (j = 0; j < MAX_SPRITES_IN_GROUP; j++)
@@ -166,15 +166,15 @@ void ClearSprites(void)
     for (i = 0; i < 128; i++)
     {
         gOamBuffer[i].y = 244;
-        gOamBuffer[i].affineMode = 0;
-        gOamBuffer[i].objMode = 0;
+        gOamBuffer[i].affineMode = ST_OAM_AFFINE_OFF;
+        gOamBuffer[i].objMode = ST_OAM_OBJ_NORMAL;
         gOamBuffer[i].mosaic = 0;
         gOamBuffer[i].bpp = 0;
         gOamBuffer[i].shape = 0;
         gOamBuffer[i].x = 500;
         gOamBuffer[i].matrixNum = 0;
-        gOamBuffer[i].hFlip = 0;
-        gOamBuffer[i].vFlip = 0;
+        gOamBuffer[i].hFlip = FALSE;
+        gOamBuffer[i].vFlip = FALSE;
         gOamBuffer[i].size = 0;
         gOamBuffer[i].tileNum = 0;
         gOamBuffer[i].priority = 0;

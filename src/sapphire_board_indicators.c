@@ -2,6 +2,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "constants/bg_music.h"
+#include "constants/board/sapphire_states.h"
 
 extern const u8 *gSapphirePSquareIndicator[][2];
 extern const u8 *gHatchMachineDrawSegment[][3][2];
@@ -77,7 +78,8 @@ void UpdateSapphireBoardAnimations(void)
     if (gCurrentPinballGame->hudSpriteBaseY >= 8 && gCurrentPinballGame->hudSpriteBaseY < 182)
         AnimatePelipperBumper();
 
-    if (gCurrentPinballGame->saverTimeRemaining && gCurrentPinballGame->ballCatchState == 0)
+    if (gCurrentPinballGame->saverTimeRemaining
+        && gCurrentPinballGame->ballCatchState == NOT_TRAPPED)
         gCurrentPinballGame->saverTimeRemaining--;
 }
 
@@ -206,7 +208,7 @@ void AnimateSapphireHoleIndicators(void)
         }
         else
         {
-            gCurrentPinballGame->holeIndicators[0] = 1;
+            gCurrentPinballGame->holeIndicators[0] = TRUE;
             gCurrentPinballGame->holeIndicators[1] = gCurrentPinballGame->holeIndicators[0];
             gCurrentPinballGame->holeIndicators[2] = gCurrentPinballGame->holeIndicators[0];
             gCurrentPinballGame->holeIndicators[3] = gCurrentPinballGame->holeIndicators[0];
@@ -228,18 +230,18 @@ void DrawSapphireModeTimerDisplay(void)
 
     if (gCurrentPinballGame->saverTimeRemaining > 300)
     {
-        gCurrentPinballGame->saverLit = 1;
+        gCurrentPinballGame->saverLit = TRUE;
     }
     else if (gCurrentPinballGame->saverTimeRemaining)
     {
         if (gCurrentPinballGame->ballCatchState)
-            gCurrentPinballGame->saverLit = 1;
+            gCurrentPinballGame->saverLit = TRUE;
         else
-            gCurrentPinballGame->saverLit = (gMain.fieldFrameCount & 0xF) / 8;
+            gCurrentPinballGame->saverLit = (gMain.fieldFrameCount % 16) / 8;
     }
     else
     {
-        gCurrentPinballGame->saverLit = 0;
+        gCurrentPinballGame->saverLit = FALSE;
     }
 
     src = gSapphireSaverDisplayTilePtrs[gCurrentPinballGame->saverLit];
@@ -390,7 +392,7 @@ void DrawSapphireEvoArrowProgress(void)
     const u8 **src;
     const u8 **dest;
 
-    if (gCurrentPinballGame->boardState < 3)
+    if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
     {
         if (gCurrentPinballGame->evoArrowProgress == 0)
         {
@@ -458,7 +460,7 @@ void DrawSapphireCatchArrowProgress(void)
     const u8 **src;
     const u8 **dest;
 
-    if (gCurrentPinballGame->boardState < 3)
+    if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
     {
         if (gCurrentPinballGame->catchArrowProgress == 0)
         {
@@ -528,9 +530,10 @@ void AnimateSapphireHatchArrowFlash(void)
     const u8 **dest;
 
     index = 0;
-    gCurrentPinballGame->catchProgressFlashing = 0;
-    if (gCurrentPinballGame->catchArrowProgress > 1 && gCurrentPinballGame->boardState < 3)
-        gCurrentPinballGame->catchProgressFlashing = 1;
+    gCurrentPinballGame->catchProgressFlashing = FALSE;
+    if (gCurrentPinballGame->catchArrowProgress > 1
+        && gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
+        gCurrentPinballGame->catchProgressFlashing = TRUE;
 
     if (gCurrentPinballGame->catchProgressFlashing > 0)
         index = 1 - gCurrentPinballGame->hudBlinkPhase;
@@ -567,9 +570,9 @@ void AnimateSapphireShopArrow(void)
 
     index = 0;
     if (gCurrentPinballGame->shopShockWallAnimState == 3)
-        gCurrentPinballGame->shopArrowActive = 1;
-    else if (gCurrentPinballGame->boardState)
-        gCurrentPinballGame->shopArrowActive = 0;
+        gCurrentPinballGame->shopArrowActive = TRUE;
+    else if (gCurrentPinballGame->boardState != MAIN_BOARD_STATE_BOARD_INTRO)
+        gCurrentPinballGame->shopArrowActive = FALSE;
 
     if (gCurrentPinballGame->shopArrowActive > 0)
         index = gCurrentPinballGame->evolutionShopActive * 2 + 1 - gCurrentPinballGame->hudBlinkPhase;
@@ -626,7 +629,7 @@ void AnimateHatchMachineSpinner(void)
             if (gCurrentPinballGame->targetBumperAnimTimers[i] > 0)
             {
                 if (gCurrentPinballGame->targetBumperAnimTimers[i] == 10)
-                    m4aSongNumStart(SE_UNKNOWN_0xDC);
+                    m4aSongNumStart(SE_HATCH_MACHINE_SPINNER_TRIGGER);
 
                 gCurrentPinballGame->targetBumperAnimTimers[i]--;
                 srcIndex = 1;
