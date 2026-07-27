@@ -248,7 +248,7 @@ void RegisterCaptureOrEvolution(s16 evolved)
     }
 }
 
-static inline u32 GetTimeAdjustedRandom()
+static inline u32 GetTimeAdjustedRandom(void)
 {
     return Random() + (gMain.systemFrameCount + gMain.fieldFrameCount);
 }
