@@ -441,6 +441,9 @@ void Pokedex_DetailViewInput(void)
 {
     u16 var0;
 
+    if (Pokedex_CheckDebugCompleteComboPressed())
+        return;
+
     if (gPokedexDetailFrameCount < 0x51)
     {
         gPokedexDetailFrameCount++;
@@ -945,12 +948,18 @@ void Pokedex_CheckDeleteKeyComboPressed(void)
 
 static bool8 Pokedex_CheckDebugCompleteComboPressed(void)
 {
-    if ((JOY_HELD(L_BUTTON) && JOY_NEW(R_BUTTON))
-     || (JOY_HELD(R_BUTTON) && JOY_NEW(L_BUTTON)))
+    if (JOY_HELD(L_BUTTON | R_BUTTON) == (L_BUTTON | R_BUTTON))
     {
+        if (gPokedex_EraseSaveDataAccessCounter < 0)
+            return FALSE;
+
+        gPokedex_EraseSaveDataAccessCounter = -1;
         CompletePokedexForDebug();
         return TRUE;
     }
+
+    if (gPokedex_EraseSaveDataAccessCounter < 0)
+        gPokedex_EraseSaveDataAccessCounter = 0;
 
     return FALSE;
 }
