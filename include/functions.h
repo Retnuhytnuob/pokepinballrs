@@ -722,6 +722,7 @@ extern void SaveFile_LoadGameData(void);
 //extern ? LoadSaveDataFromSram();
 extern void SaveFile_WriteToSram(void);
 extern void SaveFile_SetPokedexFlags(s16, u8);
+extern void SaveFile_DebugCompletePokedex(void);
 extern void SaveFile_ReadSavedGamePresent(void);
 extern void ResetSaveFile(void);
 

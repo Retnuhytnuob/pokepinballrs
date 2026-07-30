@@ -966,15 +966,7 @@ static bool8 Pokedex_CheckDebugCompleteComboPressed(void)
 
 static void CompletePokedexForDebug(void)
 {
-    s16 i;
-
-    for (i = 0; i < NUM_SAVE_SPECIES; i++)
-        gMain_saveData.pokedexFlags[i] = SPECIES_CAUGHT;
-
-    for (i = NUM_SAVE_SPECIES; i < NUM_SPECIES; i++)
-        gExtraPokedexFlags[i - NUM_SAVE_SPECIES] = SPECIES_CAUGHT;
-
-    SaveFile_WriteToSram();
+    SaveFile_DebugCompletePokedex();
     LoadPokedexFlagsFromSave();
 
     gPokedexShowPopupWindow = FALSE;

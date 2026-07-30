@@ -6,6 +6,7 @@
 #include "constants/bg_music.h"
 
 static void TitleScreen_CheckDeleteKeyComboPressed(void);
+static bool8 TitleScreen_CheckDebugPokedexCompleteComboPressed(void);
 static void CheckEReaderAccessCombo(void);
 static void RenderTitlePressStartSprites(void);
 
@@ -186,7 +187,8 @@ void TitleScreen1_WaitForStartButton(void)
         }
 
         TitleScreen_CheckDeleteKeyComboPressed();
-        CheckEReaderAccessCombo();
+        if (!TitleScreen_CheckDebugPokedexCompleteComboPressed())
+            CheckEReaderAccessCombo();
 
         gTitlescreen.idleFramesCounter++;
         if (gTitlescreen.idleFramesCounter > NUM_IDLE_FRAMES)
@@ -372,7 +374,8 @@ void TitleScreen4_MenuInputNoSavedGame(void)
             gMain.subState = SUBSTATE_ANIM_CLOSE_MENU;
         }
 
-        CheckEReaderAccessCombo();
+        if (!TitleScreen_CheckDebugPokedexCompleteComboPressed())
+            CheckEReaderAccessCombo();
     }
 
     RenderTitleMenuNoSavedGame();
@@ -471,7 +474,8 @@ void TitleScreen5_MenuInputSavedGame(void)
             gMain.subState = SUBSTATE_ANIM_CLOSE_MENU;
         }
 
-        CheckEReaderAccessCombo();
+        if (!TitleScreen_CheckDebugPokedexCompleteComboPressed())
+            CheckEReaderAccessCombo();
     }
 
     RenderTitleMenuSavedGame();
@@ -633,6 +637,25 @@ static void TitleScreen_CheckDeleteKeyComboPressed(void)
             gEraseSaveDataAccessStep = 0;
         }
     }
+}
+
+static bool8 TitleScreen_CheckDebugPokedexCompleteComboPressed(void)
+{
+    if (JOY_HELD(L_BUTTON | R_BUTTON) == (L_BUTTON | R_BUTTON))
+    {
+        if (gEReaderAccessCounter < 0)
+            return FALSE;
+
+        gEReaderAccessCounter = -1;
+        SaveFile_DebugCompletePokedex();
+        m4aSongNumStart(SE_MENU_SELECT);
+        return TRUE;
+    }
+
+    if (gEReaderAccessCounter < 0)
+        gEReaderAccessCounter = 0;
+
+    return FALSE;
 }
 
 static void CheckEReaderAccessCombo(void)

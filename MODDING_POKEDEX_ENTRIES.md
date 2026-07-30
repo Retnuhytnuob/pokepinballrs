@@ -51,7 +51,7 @@ Before committing, validate every newly added entry:
 
 ## Debug Review
 
-The Pokedex has a hidden review shortcut:
+The title screen and Pokedex have a hidden review shortcut:
 
 - Press `L + R`.
 - This marks the full Pokedex as caught and saves it.
