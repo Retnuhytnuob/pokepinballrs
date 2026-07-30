@@ -1,4 +1,5 @@
 #include "global.h"
+#include "functions.h"
 #include "main.h"
 #include "m4a.h"
 #include "constants/ereader.h"
@@ -138,6 +139,9 @@ void PinballGame_State0_49ED4(void)
         ClearBG0Tilemap();
         break;
     }
+
+    if (var0 == 1 && gMain.selectedField < MAIN_FIELD_COUNT)
+        InitRandomWildMonLocationsForNewGame();
 
     gBoardConfig.caughtSpeciesCount = 0;
     for (j = 0; j < NUM_SAVE_SPECIES; j++)

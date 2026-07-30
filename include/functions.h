@@ -119,6 +119,7 @@ extern void LoadFieldSelectGraphics(void);
 extern void FieldSelect_State1_8C7C(void);
 extern void FieldSelect_State2_8F64(void);
 extern void GenerationSelectMain(void);
+extern void InitRandomWildMonLocationsForNewGame(void);
 
 // src/high_scores.s
 extern void HighScoresMain(void);
