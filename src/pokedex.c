@@ -41,6 +41,8 @@ static void PokedexListScrollDown(void);
 static void PokedexListScrollUpFast(void);
 static void PokedexListScrollDownFast(void);
 void Pokedex_CheckDeleteKeyComboPressed(void);
+static bool8 Pokedex_CheckDebugCompleteComboPressed(void);
+static void CompletePokedexForDebug(void);
 void UpdateMonSpriteVisibility(void);
 void RefreshMonPreviewSprite(void);
 static s16 Pokedex_ProcessLinkExchange(void);
@@ -249,6 +251,9 @@ void InitPokedexState(void)
 
 void Pokedex_HandleListInput(void)
 {
+    if (Pokedex_CheckDebugCompleteComboPressed())
+        return;
+
     if (JOY_HELD(SELECT_BUTTON))
     {
         gPokedexShowButtonPrompt = FALSE;
@@ -936,6 +941,42 @@ void Pokedex_CheckDeleteKeyComboPressed(void)
             gPokedex_EraseSaveDataAccessStep = 0;
         }
     }
+}
+
+static bool8 Pokedex_CheckDebugCompleteComboPressed(void)
+{
+    if (JOY_HELD(L_BUTTON | R_BUTTON | B_BUTTON) == (L_BUTTON | R_BUTTON | B_BUTTON)
+     && JOY_NEW(SELECT_BUTTON))
+    {
+        CompletePokedexForDebug();
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+static void CompletePokedexForDebug(void)
+{
+    s16 i;
+
+    for (i = 0; i < NUM_SAVE_SPECIES; i++)
+        gMain_saveData.pokedexFlags[i] = SPECIES_CAUGHT;
+
+    for (i = NUM_SAVE_SPECIES; i < NUM_SPECIES; i++)
+        gExtraPokedexFlags[i - NUM_SAVE_SPECIES] = SPECIES_CAUGHT;
+
+    SaveFile_WriteToSram();
+    LoadPokedexFlagsFromSave();
+
+    gPokedexShowPopupWindow = FALSE;
+    gPokedexPopupTypeIndex = POKEDEX_POPUP_TRANSMISSION_CONNECT_PROMPT;
+    gPokedexShowButtonPrompt = TRUE;
+    gPokedexShowAnimSprite = TRUE;
+    gPokedexDescriptionPage = 0;
+    RefreshPokedexListDisplay();
+    UpdateMonSpriteVisibility();
+    RefreshMonPreviewSprite();
+    m4aSongNumStart(SE_MENU_SELECT);
 }
 
 void UpdateMonSpriteVisibility(void)
