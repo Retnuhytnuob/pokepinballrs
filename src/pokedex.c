@@ -945,8 +945,8 @@ void Pokedex_CheckDeleteKeyComboPressed(void)
 
 static bool8 Pokedex_CheckDebugCompleteComboPressed(void)
 {
-    if (JOY_HELD(L_BUTTON | R_BUTTON | B_BUTTON) == (L_BUTTON | R_BUTTON | B_BUTTON)
-     && JOY_NEW(SELECT_BUTTON))
+    if ((JOY_HELD(L_BUTTON) && JOY_NEW(R_BUTTON))
+     || (JOY_HELD(R_BUTTON) && JOY_NEW(L_BUTTON)))
     {
         CompletePokedexForDebug();
         return TRUE;
