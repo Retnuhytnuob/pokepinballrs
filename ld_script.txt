@@ -8,6 +8,7 @@ SECTIONS
 <EWRAM>
         src/generation_select.o(ewram_data);
         src/main_board_catch_hatch_picker.o(ewram_data);
+        src/main_board_catch_hatch_picker.o(.bss);
         /* COMMON starts at ??? */
 <COMMON>
     }
