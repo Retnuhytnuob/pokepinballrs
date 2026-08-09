@@ -31,8 +31,11 @@ extern const s8 gBonusSummaryTextTemplates[][3][20];
 
 #define DEBUG_TOOL_STATE_MAIN_MENU 1
 #define DEBUG_TOOL_STATE_SPECIES_LIST 2
+#define DEBUG_TOOL_STATE_HATCH_LIST 3
 #define DEBUG_TOOL_MENU_FORCE_CATCH 0
 #define DEBUG_TOOL_MENU_FORCE_EVOLUTION 1
+#define DEBUG_TOOL_MENU_FORCE_HATCH 2
+#define DEBUG_TOOL_MENU_COUNT 3
 #define DEBUG_TOOL_TEXT_FIRST_ROW 26
 #define DEBUG_TOOL_TEXT_ALT_FIRST_ROW 60
 #define DEBUG_TOOL_TEXT_ROW_COUNT 2
@@ -43,8 +46,10 @@ static void DebugTools_ClearLineText(u8 *text, s16 length);
 static void DebugTools_RenderTextRow(u8 *text, s16 row);
 static void DebugTools_RenderMenuTitle(s16 row);
 static void DebugTools_RenderCatchTitle(s16 row);
+static void DebugTools_RenderHatchTitle(s16 row);
 static void DebugTools_RenderForceCatchOption(bool8 selected, s16 row);
 static void DebugTools_RenderForceEvolutionOption(bool8 selected, s16 row);
+static void DebugTools_RenderForceHatchOption(bool8 selected, s16 row);
 static void DebugTools_RenderPokemonName(u16 species, s16 row, bool8 selected);
 static void DebugTools_RenderMenuBackdrop(void);
 static void DebugTools_ClearTextRows(void);
@@ -52,9 +57,13 @@ static void DebugTools_FillTextRows(s16 firstRow, u16 tile);
 static void DebugTools_ApplyTextPalette(s16 firstRow);
 static void DebugTools_CloseMenu(bool8 playSound);
 static void DebugTools_OpenSpeciesList(void);
+static void DebugTools_OpenHatchList(void);
 static void DebugTools_StartForcedCatch(void);
 static void DebugTools_StartForcedEvolution(void);
+static void DebugTools_StartForcedHatch(void);
 static bool8 DebugTools_IsSpeciesSelectableForCatch(u16 species);
+static bool8 DebugTools_IsSpeciesSelectableForHatch(u16 species);
+static bool8 DebugTools_IsSpeciesSelectableForCurrentList(u16 species);
 static u16 DebugTools_FindNextSelectableSpecies(u16 species, s16 direction);
 static void DebugTools_MoveSpeciesCursor(s16 direction, s16 steps);
 
@@ -128,6 +137,7 @@ static void DebugTools_RenderAndHandleInput(void)
     switch (gCurrentPinballGame->debugToolState)
     {
     case DEBUG_TOOL_STATE_SPECIES_LIST:
+    case DEBUG_TOOL_STATE_HATCH_LIST:
         if (JOY_NEW(DPAD_UP))
         {
             DebugTools_MoveSpeciesCursor(-1, 1);
@@ -150,7 +160,10 @@ static void DebugTools_RenderAndHandleInput(void)
         }
         else if (JOY_NEW(A_BUTTON))
         {
-            DebugTools_StartForcedCatch();
+            if (gCurrentPinballGame->debugToolState == DEBUG_TOOL_STATE_HATCH_LIST)
+                DebugTools_StartForcedHatch();
+            else
+                DebugTools_StartForcedCatch();
             return;
         }
         else if (JOY_NEW(B_BUTTON | SELECT_BUTTON))
@@ -161,9 +174,22 @@ static void DebugTools_RenderAndHandleInput(void)
         break;
     default:
         gCurrentPinballGame->debugToolState = DEBUG_TOOL_STATE_MAIN_MENU;
-        if (JOY_NEW(DPAD_UP | DPAD_DOWN))
+        if (JOY_NEW(DPAD_UP))
         {
-            gMain.debugMenuCursorIndex ^= 1;
+            if (gMain.debugMenuCursorIndex > 0)
+                gMain.debugMenuCursorIndex--;
+            else
+                gMain.debugMenuCursorIndex = DEBUG_TOOL_MENU_COUNT - 1;
+
+            m4aSongNumStart(SE_MENU_MOVE);
+        }
+        else if (JOY_NEW(DPAD_DOWN))
+        {
+            if (gMain.debugMenuCursorIndex < DEBUG_TOOL_MENU_COUNT - 1)
+                gMain.debugMenuCursorIndex++;
+            else
+                gMain.debugMenuCursorIndex = 0;
+
             m4aSongNumStart(SE_MENU_MOVE);
         }
         else if (JOY_NEW(A_BUTTON))
@@ -173,10 +199,15 @@ static void DebugTools_RenderAndHandleInput(void)
                 DebugTools_OpenSpeciesList();
                 m4aSongNumStart(SE_MENU_SELECT);
             }
-            else
+            else if (gMain.debugMenuCursorIndex == DEBUG_TOOL_MENU_FORCE_EVOLUTION)
             {
                 DebugTools_StartForcedEvolution();
                 return;
+            }
+            else
+            {
+                DebugTools_OpenHatchList();
+                m4aSongNumStart(SE_MENU_SELECT);
             }
         }
         else if (JOY_NEW(B_BUTTON | SELECT_BUTTON))
@@ -245,6 +276,29 @@ static void DebugTools_RenderCatchTitle(s16 row)
     DebugTools_RenderTextRow(text, row);
 }
 
+static void DebugTools_RenderHatchTitle(s16 row)
+{
+    u8 text[20];
+
+    DebugTools_ClearLineText(text, 20);
+    text[0] = 'D';
+    text[1] = 'E';
+    text[2] = 'B';
+    text[3] = 'U';
+    text[4] = 'G';
+    text[6] = 'F';
+    text[7] = 'O';
+    text[8] = 'R';
+    text[9] = 'C';
+    text[10] = 'E';
+    text[12] = 'H';
+    text[13] = 'A';
+    text[14] = 'T';
+    text[15] = 'C';
+    text[16] = 'H';
+    DebugTools_RenderTextRow(text, row);
+}
+
 static void DebugTools_RenderForceCatchOption(bool8 selected, s16 row)
 {
     u8 text[20];
@@ -287,6 +341,25 @@ static void DebugTools_RenderForceEvolutionOption(bool8 selected, s16 row)
     DebugTools_RenderTextRow(text, row);
 }
 
+static void DebugTools_RenderForceHatchOption(bool8 selected, s16 row)
+{
+    u8 text[20];
+
+    DebugTools_ClearLineText(text, 20);
+    text[0] = selected ? '>' : ' ';
+    text[2] = 'F';
+    text[3] = 'O';
+    text[4] = 'R';
+    text[5] = 'C';
+    text[6] = 'E';
+    text[8] = 'H';
+    text[9] = 'A';
+    text[10] = 'T';
+    text[11] = 'C';
+    text[12] = 'H';
+    DebugTools_RenderTextRow(text, row);
+}
+
 static void DebugTools_RenderPokemonName(u16 species, s16 row, bool8 selected)
 {
     s16 i;
@@ -306,9 +379,14 @@ static void DebugTools_RenderMenuBackdrop(void)
 {
     DebugTools_ClearTextRows();
 
-    if (gCurrentPinballGame->debugToolState == DEBUG_TOOL_STATE_SPECIES_LIST)
+    if (gCurrentPinballGame->debugToolState == DEBUG_TOOL_STATE_SPECIES_LIST
+     || gCurrentPinballGame->debugToolState == DEBUG_TOOL_STATE_HATCH_LIST)
     {
-        DebugTools_RenderCatchTitle(0);
+        if (gCurrentPinballGame->debugToolState == DEBUG_TOOL_STATE_HATCH_LIST)
+            DebugTools_RenderHatchTitle(0);
+        else
+            DebugTools_RenderCatchTitle(0);
+
         DebugTools_RenderPokemonName(gCurrentPinballGame->currentSpecies, 1, TRUE);
     }
     else
@@ -316,8 +394,10 @@ static void DebugTools_RenderMenuBackdrop(void)
         DebugTools_RenderMenuTitle(0);
         if (gMain.debugMenuCursorIndex == DEBUG_TOOL_MENU_FORCE_CATCH)
             DebugTools_RenderForceCatchOption(TRUE, 1);
-        else
+        else if (gMain.debugMenuCursorIndex == DEBUG_TOOL_MENU_FORCE_EVOLUTION)
             DebugTools_RenderForceEvolutionOption(TRUE, 1);
+        else
+            DebugTools_RenderForceHatchOption(TRUE, 1);
     }
 
     DebugTools_ApplyTextPalette(DEBUG_TOOL_TEXT_FIRST_ROW);
@@ -373,6 +453,14 @@ static void DebugTools_OpenSpeciesList(void)
     gCurrentPinballGame->debugToolState = DEBUG_TOOL_STATE_SPECIES_LIST;
 }
 
+static void DebugTools_OpenHatchList(void)
+{
+    if (!DebugTools_IsSpeciesSelectableForHatch(gCurrentPinballGame->currentSpecies))
+        gCurrentPinballGame->currentSpecies = SPECIES_WURMPLE;
+
+    gCurrentPinballGame->debugToolState = DEBUG_TOOL_STATE_HATCH_LIST;
+}
+
 static void DebugTools_StartForcedCatch(void)
 {
     gCurrentPinballGame->debugForcedCatchSpecies = gCurrentPinballGame->currentSpecies;
@@ -407,12 +495,54 @@ static void DebugTools_StartForcedEvolution(void)
     m4aSongNumStart(SE_MENU_SELECT);
 }
 
+static void DebugTools_StartForcedHatch(void)
+{
+    gCurrentPinballGame->debugForcedEggSpecies = gCurrentPinballGame->currentSpecies;
+    DebugTools_CloseMenu(FALSE);
+    gCurrentPinballGame->ballCatchState = NOT_TRAPPED;
+    if (gMain.selectedField == FIELD_RUBY)
+    {
+        InitRubyEggHatchAnimation();
+        gCurrentPinballGame->eggCaveState = 3;
+        gCurrentPinballGame->rubyEggDeliveryState = 0;
+        gCurrentPinballGame->eggCaveReEntryFlag = FALSE;
+        gCurrentPinballGame->eggCaveLiftTimer = 0;
+        gCurrentPinballGame->eggCaveExitDelayTimer = 0;
+    }
+    else
+    {
+        gCurrentPinballGame->sapphireHatchMachineState = 1;
+        gCurrentPinballGame->sapphireHatchMachineFrameIx = 0;
+        gCurrentPinballGame->holeAnimFrameCounter = 0;
+        gCurrentPinballGame->hatchMachineProgressTickSignaled = FALSE;
+        InitSapphireEggHatchAnimation();
+    }
+
+    m4aSongNumStart(SE_MENU_SELECT);
+}
+
 static bool8 DebugTools_IsSpeciesSelectableForCatch(u16 species)
 {
     if (species >= SPECIES_NONE)
         return FALSE;
 
     return species == SPECIES_TREECKO || gSpeciesInfo[species].catchIndex != 0;
+}
+
+static bool8 DebugTools_IsSpeciesSelectableForHatch(u16 species)
+{
+    if (species >= SPECIES_NONE)
+        return FALSE;
+
+    return species == SPECIES_WURMPLE || gSpeciesInfo[species].eggIndex != 0;
+}
+
+static bool8 DebugTools_IsSpeciesSelectableForCurrentList(u16 species)
+{
+    if (gCurrentPinballGame->debugToolState == DEBUG_TOOL_STATE_HATCH_LIST)
+        return DebugTools_IsSpeciesSelectableForHatch(species);
+
+    return DebugTools_IsSpeciesSelectableForCatch(species);
 }
 
 static u16 DebugTools_FindNextSelectableSpecies(u16 species, s16 direction)
@@ -432,7 +562,7 @@ static u16 DebugTools_FindNextSelectableSpecies(u16 species, s16 direction)
             if (species >= NUM_SPECIES)
                 species = 0;
         }
-    } while (!DebugTools_IsSpeciesSelectableForCatch(species));
+    } while (!DebugTools_IsSpeciesSelectableForCurrentList(species));
 
     return species;
 }

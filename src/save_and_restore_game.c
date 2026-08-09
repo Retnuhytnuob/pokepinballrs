@@ -211,6 +211,7 @@ void RestoreGameState(u16 arg0)
         gMain.bgOffsets[2] = gCurrentPinballGame->bgOffsets2;
         gMain.bgOffsets[3] = gCurrentPinballGame->bgOffsets3;
         gCurrentPinballGame->debugToolState = 0;
+        gCurrentPinballGame->debugForcedEggSpecies = SPECIES_NONE;
         gCurrentPinballGame->debugForcedCatchSpecies = SPECIES_NONE;
         for (i = 0; i < NUM_EREADER_CARDS; i++)
             gMain.eReaderBonuses[i] = gCurrentPinballGame->eReaderBonuses[i];

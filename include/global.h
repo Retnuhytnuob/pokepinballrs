@@ -847,7 +847,7 @@ struct PinballGame
     /*0x739*/ s8 prevTravelArrowTiles[3];
     /*0x73C*/ u8 arrowProgressPreserved; // TODO: unknown type
     /*0x73D*/ s8 catchModeArrows;   // Affects which encounter table is used per area
-    /*0x73E*/ u8 filler73E[0x2];
+    /*0x73E*/ u16 debugForcedEggSpecies;
     /*0x740*/ u8 debugMenuSelection;
     /*0x741*/ u8 debugToolState;
     /*0x742*/ u16 debugForcedCatchSpecies;

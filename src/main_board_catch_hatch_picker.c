@@ -700,6 +700,14 @@ void PickSpeciesForEggMode(void)
     s16 i;
     u32 rand;
 
+    if (gCurrentPinballGame->debugForcedEggSpecies < SPECIES_NONE)
+    {
+        gCurrentPinballGame->currentSpecies = gCurrentPinballGame->debugForcedEggSpecies;
+        gCurrentPinballGame->debugForcedEggSpecies = SPECIES_NONE;
+        gCurrentPinballGame->lastEggSpecies = gCurrentPinballGame->currentSpecies;
+        return;
+    }
+
     rand = GetTimeAdjustedRandom();
     if (gMain.eReaderBonuses[EREADER_ENCOUNTER_RATE_UP_CARD])
         rand %= 100;

@@ -281,6 +281,7 @@ void InitPinballGameState(void)
     if (gMain.tempField == gMain.selectedField)
     {
         DmaFill16(3, 0, gCurrentPinballGame, sizeof(struct PinballGame));
+        gCurrentPinballGame->debugForcedEggSpecies = SPECIES_NONE;
         gCurrentPinballGame->debugForcedCatchSpecies = SPECIES_NONE;
         if (gMain.selectedField == FIELD_RUBY)
             gCurrentPinballGame->area = AREA_TEST;
