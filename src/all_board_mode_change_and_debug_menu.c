@@ -103,9 +103,9 @@ void DebugTools_TryOpenMenu(void)
 #if DEBUG_TOOLS_ENABLED
     if (JOY_NEW(SELECT_BUTTON)
      && gMain.mainState != STATE_GAME_IDLE
-     && gMain.selectedField < MAIN_FIELD_COUNT
      && !gCurrentPinballGame->startButtonDisabled
-     && !(gMain.modeChangeFlags & (MODE_CHANGE_PAUSE | MODE_CHANGE_END_OF_GAME | MODE_CHANGE_DEBUG)))
+     && !(gMain.modeChangeFlags & (MODE_CHANGE_PAUSE | MODE_CHANGE_END_OF_GAME | MODE_CHANGE_DEBUG))
+     && gMain.gameExitState == 0)
     {
         gMain.modeChangeFlags |= MODE_CHANGE_DEBUG | MODE_CHANGE_PAUSE;
         gMain.debugMenuCursorIndex = DEBUG_TOOL_MENU_FORCE_CATCH;

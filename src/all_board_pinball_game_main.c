@@ -551,6 +551,7 @@ void MainGameFrameUpdate(void)
     s16 i;
 
     UpdateButtonActionsFromJoy();
+    DebugTools_TryOpenMenu();
     CurrentBoardProcPairs_020028D8[1].updateFunc();
     if (gMain.gameExitState == 0 && !(gMain.modeChangeFlags & MODE_CHANGE_PAUSE))
     {
