@@ -34,6 +34,7 @@ extern const s8 gBonusSummaryTextTemplates[][3][20];
 #define DEBUG_TOOL_MENU_FORCE_CATCH 0
 #define DEBUG_TOOL_MENU_FORCE_EVOLUTION 1
 #define DEBUG_TOOL_TEXT_FIRST_ROW 26
+#define DEBUG_TOOL_TEXT_ALT_FIRST_ROW 60
 #define DEBUG_TOOL_TEXT_ROW_COUNT 2
 #define DEBUG_TOOL_SPECIES_VISIBLE_ROWS 5
 
@@ -47,6 +48,8 @@ static void DebugTools_RenderForceEvolutionOption(bool8 selected, s16 row);
 static void DebugTools_RenderPokemonName(u16 species, s16 row, bool8 selected);
 static void DebugTools_RenderMenuBackdrop(void);
 static void DebugTools_ClearTextRows(void);
+static void DebugTools_FillTextRows(s16 firstRow, u16 tile);
+static void DebugTools_ApplyTextPalette(s16 firstRow);
 static void DebugTools_CloseMenu(bool8 playSound);
 static void DebugTools_OpenSpeciesList(void);
 static void DebugTools_StartForcedCatch(void);
@@ -105,6 +108,7 @@ void DebugTools_OpenMenu(void)
     PauseGame();
     m4aSongNumStart(SE_MENU_POPUP_OPEN);
     gMain.newKeys &= ~(SELECT_BUTTON | L_BUTTON | R_BUTTON);
+    DebugTools_RenderMenuBackdrop();
 #endif
 }
 
@@ -198,6 +202,7 @@ static void DebugTools_ClearLineText(u8 *text, s16 length)
 static void DebugTools_RenderTextRow(u8 *text, s16 row)
 {
     DrawTextToTilemap(text, DEBUG_TOOL_TEXT_FIRST_ROW + row, 1);
+    DrawTextToTilemap(text, DEBUG_TOOL_TEXT_ALT_FIRST_ROW + row, 1);
 }
 
 static void DebugTools_RenderMenuTitle(s16 row)
@@ -299,8 +304,6 @@ static void DebugTools_RenderPokemonName(u16 species, s16 row, bool8 selected)
 
 static void DebugTools_RenderMenuBackdrop(void)
 {
-    s16 i;
-
     DebugTools_ClearTextRows();
 
     if (gCurrentPinballGame->debugToolState == DEBUG_TOOL_STATE_SPECIES_LIST)
@@ -317,35 +320,45 @@ static void DebugTools_RenderMenuBackdrop(void)
             DebugTools_RenderForceEvolutionOption(TRUE, 1);
     }
 
-    for (i = DEBUG_TOOL_TEXT_FIRST_ROW * 32;
-         i < (DEBUG_TOOL_TEXT_FIRST_ROW + DEBUG_TOOL_TEXT_ROW_COUNT) * 32;
-         i++)
-        gBG0TilemapBuffer[i] += 0xC100;
+    DebugTools_ApplyTextPalette(DEBUG_TOOL_TEXT_FIRST_ROW);
+    DebugTools_ApplyTextPalette(DEBUG_TOOL_TEXT_ALT_FIRST_ROW);
 
     DmaCopy16(3, gBG0TilemapBuffer, (void *)0x06002000, 0x1000);
 }
 
 static void DebugTools_ClearTextRows(void)
 {
+    DebugTools_FillTextRows(DEBUG_TOOL_TEXT_FIRST_ROW, 0);
+    DebugTools_FillTextRows(DEBUG_TOOL_TEXT_ALT_FIRST_ROW, 0);
+}
+
+static void DebugTools_FillTextRows(s16 firstRow, u16 tile)
+{
     s16 i;
 
-    for (i = DEBUG_TOOL_TEXT_FIRST_ROW * 32;
-         i < (DEBUG_TOOL_TEXT_FIRST_ROW + DEBUG_TOOL_TEXT_ROW_COUNT) * 32;
+    for (i = firstRow * 32;
+         i < (firstRow + DEBUG_TOOL_TEXT_ROW_COUNT) * 32;
          i++)
-        gBG0TilemapBuffer[i] = 0;
+        gBG0TilemapBuffer[i] = tile;
+}
+
+static void DebugTools_ApplyTextPalette(s16 firstRow)
+{
+    s16 i;
+
+    for (i = firstRow * 32;
+         i < (firstRow + DEBUG_TOOL_TEXT_ROW_COUNT) * 32;
+         i++)
+        gBG0TilemapBuffer[i] += 0xC100;
 }
 
 static void DebugTools_CloseMenu(bool8 playSound)
 {
-    s16 i;
-
     gMain.modeChangeFlags &= ~(MODE_CHANGE_DEBUG | MODE_CHANGE_PAUSE);
     gCurrentPinballGame->debugToolState = 0;
     gCurrentPinballGame->debugMenuSelection = 0;
-    for (i = DEBUG_TOOL_TEXT_FIRST_ROW * 32;
-         i < (DEBUG_TOOL_TEXT_FIRST_ROW + DEBUG_TOOL_TEXT_ROW_COUNT) * 32;
-         i++)
-        gBG0TilemapBuffer[i] = 0x1FF;
+    DebugTools_FillTextRows(DEBUG_TOOL_TEXT_FIRST_ROW, 0x1FF);
+    DebugTools_FillTextRows(DEBUG_TOOL_TEXT_ALT_FIRST_ROW, 0x1FF);
     DmaCopy16(3, gBG0TilemapBuffer, (void *)0x06002000, 0x1000);
     UnpauseGame();
     if (playSound)
