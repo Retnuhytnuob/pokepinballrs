@@ -397,6 +397,7 @@ static void DebugTools_StartForcedEvolution(void)
 
     DebugTools_CloseMenu(FALSE);
     gCurrentPinballGame->ballCatchState = TRAP_EVO_SHOP_HOLE;
+    gCurrentPinballGame->evoArrowProgress = 3;
     gCurrentPinballGame->evolutionShopActive = TRUE;
     if (gMain.selectedField == FIELD_RUBY)
         DispatchRubyCatchModeInit();
