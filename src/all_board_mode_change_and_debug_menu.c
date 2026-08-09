@@ -1,8 +1,13 @@
 #include "global.h"
+#include "functions.h"
 #include "m4a.h"
 #include "main.h"
+#include "variables.h"
 #include "constants/bg_music.h"
 #include "constants/board/main_board.h"
+#include "constants/debug.h"
+#include "constants/fields.h"
+#include "constants/species.h"
 
 
 extern s16 gGameOverLetterXOffsets[];
@@ -23,6 +28,28 @@ extern const u8 gBonusStagePal_Dark[];
 extern const u8 gBonusClearTextPal_Lit[];
 extern const u8 gBonusClearTextPal_Dark[];
 extern const s8 gBonusSummaryTextTemplates[][3][20];
+
+#define DEBUG_TOOL_STATE_MAIN_MENU 1
+#define DEBUG_TOOL_STATE_SPECIES_LIST 2
+#define DEBUG_TOOL_MENU_FORCE_CATCH 0
+#define DEBUG_TOOL_MENU_FORCE_EVOLUTION 1
+#define DEBUG_TOOL_TEXT_FIRST_ROW 20
+#define DEBUG_TOOL_TEXT_ROW_COUNT 9
+#define DEBUG_TOOL_SPECIES_VISIBLE_ROWS 5
+#define DEBUG_TOOL_SPECIES_SELECTED_ROW 2
+
+static void DebugTools_RenderAndHandleInput(void);
+static void DebugTools_RenderTextRow(const u8 *text, s16 row);
+static void DebugTools_RenderPokemonName(u16 species, s16 row, bool8 selected);
+static void DebugTools_RenderMenuBackdrop(void);
+static void DebugTools_ClearTextRows(void);
+static void DebugTools_CloseMenu(bool8 playSound);
+static void DebugTools_OpenSpeciesList(void);
+static void DebugTools_StartForcedCatch(void);
+static void DebugTools_StartForcedEvolution(void);
+static bool8 DebugTools_IsSpeciesSelectableForCatch(u16 species);
+static u16 DebugTools_FindNextSelectableSpecies(u16 species, s16 direction);
+static void DebugTools_MoveSpeciesCursor(s16 direction, s16 steps);
 
 // Handle debug system flags
 void BonusStage_HandleModeChangeFlags(void)
@@ -53,10 +80,273 @@ void BonusStage_HandleModeChangeFlags(void)
 
     if (gMain.modeChangeFlags & MODE_CHANGE_DEBUG)
     {
+#if DEBUG_TOOLS_ENABLED
+        DebugTools_RenderAndHandleInput();
+#else
         // debug tool (move ball position, and change ball speed)
         DebugMenu_RenderAndHandleInput();
         gCurrentPinballGame->debugMenuSelection = gMain.debugMenuCursorIndex + 1;
+#endif
         return;
+    }
+}
+
+void DebugTools_TryOpenMenu(void)
+{
+#if DEBUG_TOOLS_ENABLED
+    if (JOY_NEW(SELECT_BUTTON)
+     && gMain.mainState != STATE_GAME_IDLE
+     && gMain.selectedField < MAIN_FIELD_COUNT
+     && gMain.modeChangeDelayTimer == 0
+     && gMain.pendingModeChangeType == MODE_CHANGE_NONE
+     && !gCurrentPinballGame->startButtonDisabled
+     && gCurrentPinballGame->boardState == MAIN_BOARD_STATE_DEFAULT
+     && gCurrentPinballGame->boardTransitionPhase == BOARD_STATE_DISPATCHER_STATE_RUNNING)
+    {
+        gMain.modeChangeFlags |= MODE_CHANGE_DEBUG;
+        gMain.debugMenuCursorIndex = DEBUG_TOOL_MENU_FORCE_CATCH;
+        gCurrentPinballGame->debugToolState = DEBUG_TOOL_STATE_MAIN_MENU;
+        gCurrentPinballGame->debugMenuSelection = 0;
+        gCurrentPinballGame->ballPhysicsState = BALL_PHYSICS_FROZEN;
+        gCurrentPinballGame->ballUpgradeTimerPaused = TRUE;
+        m4aSongNumStart(SE_MENU_POPUP_OPEN);
+    }
+#endif
+}
+
+static void DebugTools_RenderAndHandleInput(void)
+{
+    switch (gCurrentPinballGame->debugToolState)
+    {
+    case DEBUG_TOOL_STATE_SPECIES_LIST:
+        if (JOY_NEW(DPAD_UP))
+        {
+            DebugTools_MoveSpeciesCursor(-1, 1);
+            m4aSongNumStart(SE_MENU_MOVE);
+        }
+        else if (JOY_NEW(DPAD_DOWN))
+        {
+            DebugTools_MoveSpeciesCursor(1, 1);
+            m4aSongNumStart(SE_MENU_MOVE);
+        }
+        else if (JOY_NEW(DPAD_LEFT))
+        {
+            DebugTools_MoveSpeciesCursor(-1, DEBUG_TOOL_SPECIES_VISIBLE_ROWS);
+            m4aSongNumStart(SE_MENU_MOVE);
+        }
+        else if (JOY_NEW(DPAD_RIGHT))
+        {
+            DebugTools_MoveSpeciesCursor(1, DEBUG_TOOL_SPECIES_VISIBLE_ROWS);
+            m4aSongNumStart(SE_MENU_MOVE);
+        }
+        else if (JOY_NEW(A_BUTTON))
+        {
+            DebugTools_StartForcedCatch();
+            return;
+        }
+        else if (JOY_NEW(B_BUTTON | SELECT_BUTTON))
+        {
+            gCurrentPinballGame->debugToolState = DEBUG_TOOL_STATE_MAIN_MENU;
+            m4aSongNumStart(SE_MENU_CANCEL);
+        }
+        break;
+    default:
+        gCurrentPinballGame->debugToolState = DEBUG_TOOL_STATE_MAIN_MENU;
+        if (JOY_NEW(DPAD_UP | DPAD_DOWN))
+        {
+            gMain.debugMenuCursorIndex ^= 1;
+            m4aSongNumStart(SE_MENU_MOVE);
+        }
+        else if (JOY_NEW(A_BUTTON))
+        {
+            if (gMain.debugMenuCursorIndex == DEBUG_TOOL_MENU_FORCE_CATCH)
+            {
+                DebugTools_OpenSpeciesList();
+                m4aSongNumStart(SE_MENU_SELECT);
+            }
+            else
+            {
+                DebugTools_StartForcedEvolution();
+                return;
+            }
+        }
+        else if (JOY_NEW(B_BUTTON | SELECT_BUTTON))
+        {
+            DebugTools_CloseMenu(TRUE);
+            return;
+        }
+        break;
+    }
+
+    DebugTools_RenderMenuBackdrop();
+}
+
+static void DebugTools_RenderTextRow(const u8 *text, s16 row)
+{
+    DrawTextToTilemap((u8 *)text, DEBUG_TOOL_TEXT_FIRST_ROW + row, 1);
+}
+
+static void DebugTools_RenderPokemonName(u16 species, s16 row, bool8 selected)
+{
+    s16 i;
+    u8 text[20];
+
+    for (i = 0; i < 19; i++)
+        text[i] = ' ';
+    text[19] = '\0';
+
+    text[0] = selected ? '>' : ' ';
+    FormatIntToString(species, &text[2], 3, TRUE);
+    for (i = 0; i < 10; i++)
+        text[6 + i] = gSpeciesInfo[species].name[i];
+
+    DebugTools_RenderTextRow(text, row);
+}
+
+static void DebugTools_RenderMenuBackdrop(void)
+{
+    s16 i;
+    u16 species;
+
+    DebugTools_ClearTextRows();
+
+    if (gCurrentPinballGame->debugToolState == DEBUG_TOOL_STATE_SPECIES_LIST)
+    {
+        DebugTools_RenderTextRow((u8 *)"DEBUG FORCE CATCH", 0);
+        species = gCurrentPinballGame->currentSpecies;
+        for (i = 0; i < DEBUG_TOOL_SPECIES_SELECTED_ROW; i++)
+            species = DebugTools_FindNextSelectableSpecies(species, -1);
+
+        for (i = 0; i < DEBUG_TOOL_SPECIES_VISIBLE_ROWS; i++)
+        {
+            DebugTools_RenderPokemonName(species, i + 2, i == DEBUG_TOOL_SPECIES_SELECTED_ROW);
+            species = DebugTools_FindNextSelectableSpecies(species, 1);
+        }
+
+        DebugTools_RenderTextRow((u8 *)"A OK  B BACK", 8);
+    }
+    else
+    {
+        DebugTools_RenderTextRow((u8 *)"DEBUG MENU", 0);
+        DebugTools_RenderTextRow(gMain.debugMenuCursorIndex == DEBUG_TOOL_MENU_FORCE_CATCH
+            ? (u8 *)"> FORCE CATCH"
+            : (u8 *)"  FORCE CATCH", 2);
+        DebugTools_RenderTextRow(gMain.debugMenuCursorIndex == DEBUG_TOOL_MENU_FORCE_EVOLUTION
+            ? (u8 *)"> FORCE EVOLUTION"
+            : (u8 *)"  FORCE EVOLUTION", 3);
+        DebugTools_RenderTextRow((u8 *)"A OK  B CLOSE", 8);
+    }
+
+    for (i = DEBUG_TOOL_TEXT_FIRST_ROW * 32;
+         i < (DEBUG_TOOL_TEXT_FIRST_ROW + DEBUG_TOOL_TEXT_ROW_COUNT) * 32;
+         i++)
+        gBG0TilemapBuffer[i] += 0xC100;
+
+    DmaCopy16(3, gBG0TilemapBuffer, (void *)0x06002000, 0x800);
+}
+
+static void DebugTools_ClearTextRows(void)
+{
+    s16 i;
+
+    for (i = DEBUG_TOOL_TEXT_FIRST_ROW * 32;
+         i < (DEBUG_TOOL_TEXT_FIRST_ROW + DEBUG_TOOL_TEXT_ROW_COUNT) * 32;
+         i++)
+        gBG0TilemapBuffer[i] = 0;
+}
+
+static void DebugTools_CloseMenu(bool8 playSound)
+{
+    s16 i;
+
+    gMain.modeChangeFlags &= ~MODE_CHANGE_DEBUG;
+    gCurrentPinballGame->debugToolState = 0;
+    gCurrentPinballGame->debugMenuSelection = 0;
+    gCurrentPinballGame->ballPhysicsState = BALL_PHYSICS_NORMAL;
+    gCurrentPinballGame->ballUpgradeTimerPaused = FALSE;
+    for (i = DEBUG_TOOL_TEXT_FIRST_ROW * 32;
+         i < (DEBUG_TOOL_TEXT_FIRST_ROW + DEBUG_TOOL_TEXT_ROW_COUNT) * 32;
+         i++)
+        gBG0TilemapBuffer[i] = 0x1FF;
+    DmaCopy16(3, gBG0TilemapBuffer, (void *)0x06002000, 0x800);
+    if (playSound)
+        m4aSongNumStart(SE_MENU_CANCEL);
+}
+
+static void DebugTools_OpenSpeciesList(void)
+{
+    if (!DebugTools_IsSpeciesSelectableForCatch(gCurrentPinballGame->currentSpecies))
+        gCurrentPinballGame->currentSpecies = SPECIES_TREECKO;
+
+    gCurrentPinballGame->debugToolState = DEBUG_TOOL_STATE_SPECIES_LIST;
+}
+
+static void DebugTools_StartForcedCatch(void)
+{
+    gCurrentPinballGame->debugForcedCatchSpecies = gCurrentPinballGame->currentSpecies;
+    DebugTools_CloseMenu(FALSE);
+    gCurrentPinballGame->ballCatchState = NOT_TRAPPED;
+    gCurrentPinballGame->modeAnimTimer = 100;
+    RequestBoardStateTransition(MAIN_BOARD_STATE_CATCH_EM_MODE);
+    m4aSongNumStart(SE_MENU_SELECT);
+}
+
+static void DebugTools_StartForcedEvolution(void)
+{
+    if (gCurrentPinballGame->evolvablePartySize <= 0)
+    {
+        m4aSongNumStart(SE_MENU_CANCEL);
+        return;
+    }
+
+    DebugTools_CloseMenu(FALSE);
+    gCurrentPinballGame->ballCatchState = TRAP_EVO_SHOP_HOLE;
+    gCurrentPinballGame->evolutionShopActive = TRUE;
+    if (gMain.selectedField == FIELD_RUBY)
+        DispatchRubyCatchModeInit();
+    else
+        DispatchSapphireCatchModeInit();
+
+    m4aSongNumStart(SE_MENU_SELECT);
+}
+
+static bool8 DebugTools_IsSpeciesSelectableForCatch(u16 species)
+{
+    if (species >= SPECIES_NONE)
+        return FALSE;
+
+    return species == SPECIES_TREECKO || gSpeciesInfo[species].catchIndex != 0;
+}
+
+static u16 DebugTools_FindNextSelectableSpecies(u16 species, s16 direction)
+{
+    do
+    {
+        if (direction < 0)
+        {
+            if (species == 0)
+                species = NUM_SPECIES - 1;
+            else
+                species--;
+        }
+        else
+        {
+            species++;
+            if (species >= NUM_SPECIES)
+                species = 0;
+        }
+    } while (!DebugTools_IsSpeciesSelectableForCatch(species));
+
+    return species;
+}
+
+static void DebugTools_MoveSpeciesCursor(s16 direction, s16 steps)
+{
+    while (steps > 0)
+    {
+        gCurrentPinballGame->currentSpecies =
+            DebugTools_FindNextSelectableSpecies(gCurrentPinballGame->currentSpecies, direction);
+        steps--;
     }
 }
 

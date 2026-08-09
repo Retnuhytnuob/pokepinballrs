@@ -849,7 +849,8 @@ struct PinballGame
     /*0x73D*/ s8 catchModeArrows;   // Affects which encounter table is used per area
     /*0x73E*/ u8 filler73E[0x2];
     /*0x740*/ u8 debugMenuSelection;
-    /*0x741*/ u8 filler741[0x3];
+    /*0x741*/ u8 debugToolState;
+    /*0x742*/ u16 debugForcedCatchSpecies;
     /*0x744*/ u8 pikaSaverTileIndex[2];
     /*0x746*/ u8 cyndaquilFrame;
     /*0x747*/ u8 portraitRenderMode[2];

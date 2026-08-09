@@ -1,4 +1,5 @@
 #include "global.h"
+#include "functions.h"
 #include "m4a.h"
 #include "main.h"
 #include "constants/bg_music.h"
@@ -80,6 +81,7 @@ void AllBoardProcess_1B_47160(void)
     //Game is not paused
     if (gMain.modeChangeFlags == MODE_CHANGE_NONE)
     {
+        DebugTools_TryOpenMenu();
         gCurrentPinballGame->debugMenuSelection = 0;
         if (gMain.modeChangeDelayTimer != 0)
         {
@@ -99,4 +101,3 @@ void AllBoardProcess_1B_47160(void)
         }
     }
 }
-

@@ -5,6 +5,7 @@
 #include "constants/ereader.h"
 #include "constants/areas.h"
 #include "constants/fields.h"
+#include "constants/species.h"
 #include "constants/board/ruby_states.h"
 
 extern struct PinballGame gPinballGameState;
@@ -280,6 +281,7 @@ void InitPinballGameState(void)
     if (gMain.tempField == gMain.selectedField)
     {
         DmaFill16(3, 0, gCurrentPinballGame, sizeof(struct PinballGame));
+        gCurrentPinballGame->debugForcedCatchSpecies = SPECIES_NONE;
         if (gMain.selectedField == FIELD_RUBY)
             gCurrentPinballGame->area = AREA_TEST;
 

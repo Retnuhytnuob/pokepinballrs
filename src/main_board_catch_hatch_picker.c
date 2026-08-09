@@ -535,6 +535,14 @@ void PickSpeciesForCatchEmMode(void)
     u32 rand;
     u16 specialMons[6];
 
+    if (gCurrentPinballGame->debugForcedCatchSpecies < SPECIES_NONE)
+    {
+        gCurrentPinballGame->currentSpecies = gCurrentPinballGame->debugForcedCatchSpecies;
+        gCurrentPinballGame->debugForcedCatchSpecies = SPECIES_NONE;
+        gCurrentPinballGame->lastCatchSpecies = gCurrentPinballGame->currentSpecies;
+        return;
+    }
+
     if (gMain.eReaderBonuses[EREADER_SPECIAL_GUESTS_CARD])
     {
         gMain.eReaderBonuses[EREADER_SPECIAL_GUESTS_CARD] = FALSE;

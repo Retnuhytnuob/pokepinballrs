@@ -6,6 +6,7 @@
 #include "constants/board/main_board.h"
 #include "constants/board/groudon_states.h"
 #include "constants/board/rayquaza_states.h"
+#include "constants/species.h"
 
 extern u8 gBoardGfxBuffer[];
 extern u8 gBoardBGTileBufferAlt[];
@@ -209,6 +210,8 @@ void RestoreGameState(u16 arg0)
         gMain.bgOffsets[1] = gCurrentPinballGame->bgOffsets1;
         gMain.bgOffsets[2] = gCurrentPinballGame->bgOffsets2;
         gMain.bgOffsets[3] = gCurrentPinballGame->bgOffsets3;
+        gCurrentPinballGame->debugToolState = 0;
+        gCurrentPinballGame->debugForcedCatchSpecies = SPECIES_NONE;
         for (i = 0; i < NUM_EREADER_CARDS; i++)
             gMain.eReaderBonuses[i] = gCurrentPinballGame->eReaderBonuses[i];
 
