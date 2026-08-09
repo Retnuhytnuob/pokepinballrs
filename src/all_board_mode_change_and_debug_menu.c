@@ -39,7 +39,14 @@ extern const s8 gBonusSummaryTextTemplates[][3][20];
 #define DEBUG_TOOL_SPECIES_SELECTED_ROW 2
 
 static void DebugTools_RenderAndHandleInput(void);
-static void DebugTools_RenderTextRow(const u8 *text, s16 row);
+static void DebugTools_ClearLineText(u8 *text, s16 length);
+static void DebugTools_RenderTextRow(u8 *text, s16 row);
+static void DebugTools_RenderMenuTitle(s16 row);
+static void DebugTools_RenderCatchTitle(s16 row);
+static void DebugTools_RenderForceCatchOption(bool8 selected, s16 row);
+static void DebugTools_RenderForceEvolutionOption(bool8 selected, s16 row);
+static void DebugTools_RenderBackPrompt(s16 row);
+static void DebugTools_RenderClosePrompt(s16 row);
 static void DebugTools_RenderPokemonName(u16 species, s16 row, bool8 selected);
 static void DebugTools_RenderMenuBackdrop(void);
 static void DebugTools_ClearTextRows(void);
@@ -181,9 +188,133 @@ static void DebugTools_RenderAndHandleInput(void)
     DebugTools_RenderMenuBackdrop();
 }
 
-static void DebugTools_RenderTextRow(const u8 *text, s16 row)
+static void DebugTools_ClearLineText(u8 *text, s16 length)
 {
-    DrawTextToTilemap((u8 *)text, DEBUG_TOOL_TEXT_FIRST_ROW + row, 1);
+    s16 i;
+
+    for (i = 0; i < length - 1; i++)
+        text[i] = ' ';
+    text[length - 1] = '\0';
+}
+
+static void DebugTools_RenderTextRow(u8 *text, s16 row)
+{
+    DrawTextToTilemap(text, DEBUG_TOOL_TEXT_FIRST_ROW + row, 1);
+}
+
+static void DebugTools_RenderMenuTitle(s16 row)
+{
+    u8 text[20];
+
+    DebugTools_ClearLineText(text, 20);
+    text[0] = 'D';
+    text[1] = 'E';
+    text[2] = 'B';
+    text[3] = 'U';
+    text[4] = 'G';
+    text[6] = 'M';
+    text[7] = 'E';
+    text[8] = 'N';
+    text[9] = 'U';
+    DebugTools_RenderTextRow(text, row);
+}
+
+static void DebugTools_RenderCatchTitle(s16 row)
+{
+    u8 text[20];
+
+    DebugTools_ClearLineText(text, 20);
+    text[0] = 'D';
+    text[1] = 'E';
+    text[2] = 'B';
+    text[3] = 'U';
+    text[4] = 'G';
+    text[6] = 'F';
+    text[7] = 'O';
+    text[8] = 'R';
+    text[9] = 'C';
+    text[10] = 'E';
+    text[12] = 'C';
+    text[13] = 'A';
+    text[14] = 'T';
+    text[15] = 'C';
+    text[16] = 'H';
+    DebugTools_RenderTextRow(text, row);
+}
+
+static void DebugTools_RenderForceCatchOption(bool8 selected, s16 row)
+{
+    u8 text[20];
+
+    DebugTools_ClearLineText(text, 20);
+    text[0] = selected ? '>' : ' ';
+    text[2] = 'F';
+    text[3] = 'O';
+    text[4] = 'R';
+    text[5] = 'C';
+    text[6] = 'E';
+    text[8] = 'C';
+    text[9] = 'A';
+    text[10] = 'T';
+    text[11] = 'C';
+    text[12] = 'H';
+    DebugTools_RenderTextRow(text, row);
+}
+
+static void DebugTools_RenderForceEvolutionOption(bool8 selected, s16 row)
+{
+    u8 text[20];
+
+    DebugTools_ClearLineText(text, 20);
+    text[0] = selected ? '>' : ' ';
+    text[2] = 'F';
+    text[3] = 'O';
+    text[4] = 'R';
+    text[5] = 'C';
+    text[6] = 'E';
+    text[8] = 'E';
+    text[9] = 'V';
+    text[10] = 'O';
+    text[11] = 'L';
+    text[12] = 'U';
+    text[13] = 'T';
+    text[14] = 'I';
+    text[15] = 'O';
+    text[16] = 'N';
+    DebugTools_RenderTextRow(text, row);
+}
+
+static void DebugTools_RenderBackPrompt(s16 row)
+{
+    u8 text[20];
+
+    DebugTools_ClearLineText(text, 20);
+    text[0] = 'A';
+    text[2] = 'O';
+    text[3] = 'K';
+    text[6] = 'B';
+    text[8] = 'B';
+    text[9] = 'A';
+    text[10] = 'C';
+    text[11] = 'K';
+    DebugTools_RenderTextRow(text, row);
+}
+
+static void DebugTools_RenderClosePrompt(s16 row)
+{
+    u8 text[20];
+
+    DebugTools_ClearLineText(text, 20);
+    text[0] = 'A';
+    text[2] = 'O';
+    text[3] = 'K';
+    text[6] = 'B';
+    text[8] = 'C';
+    text[9] = 'L';
+    text[10] = 'O';
+    text[11] = 'S';
+    text[12] = 'E';
+    DebugTools_RenderTextRow(text, row);
 }
 
 static void DebugTools_RenderPokemonName(u16 species, s16 row, bool8 selected)
@@ -191,9 +322,7 @@ static void DebugTools_RenderPokemonName(u16 species, s16 row, bool8 selected)
     s16 i;
     u8 text[20];
 
-    for (i = 0; i < 19; i++)
-        text[i] = ' ';
-    text[19] = '\0';
+    DebugTools_ClearLineText(text, 20);
 
     text[0] = selected ? '>' : ' ';
     FormatIntToString(species, &text[2], 3, TRUE);
@@ -212,7 +341,7 @@ static void DebugTools_RenderMenuBackdrop(void)
 
     if (gCurrentPinballGame->debugToolState == DEBUG_TOOL_STATE_SPECIES_LIST)
     {
-        DebugTools_RenderTextRow((u8 *)"DEBUG FORCE CATCH", 0);
+        DebugTools_RenderCatchTitle(0);
         species = gCurrentPinballGame->currentSpecies;
         for (i = 0; i < DEBUG_TOOL_SPECIES_SELECTED_ROW; i++)
             species = DebugTools_FindNextSelectableSpecies(species, -1);
@@ -223,18 +352,14 @@ static void DebugTools_RenderMenuBackdrop(void)
             species = DebugTools_FindNextSelectableSpecies(species, 1);
         }
 
-        DebugTools_RenderTextRow((u8 *)"A OK  B BACK", 8);
+        DebugTools_RenderBackPrompt(8);
     }
     else
     {
-        DebugTools_RenderTextRow((u8 *)"DEBUG MENU", 0);
-        DebugTools_RenderTextRow(gMain.debugMenuCursorIndex == DEBUG_TOOL_MENU_FORCE_CATCH
-            ? (u8 *)"> FORCE CATCH"
-            : (u8 *)"  FORCE CATCH", 2);
-        DebugTools_RenderTextRow(gMain.debugMenuCursorIndex == DEBUG_TOOL_MENU_FORCE_EVOLUTION
-            ? (u8 *)"> FORCE EVOLUTION"
-            : (u8 *)"  FORCE EVOLUTION", 3);
-        DebugTools_RenderTextRow((u8 *)"A OK  B CLOSE", 8);
+        DebugTools_RenderMenuTitle(0);
+        DebugTools_RenderForceCatchOption(gMain.debugMenuCursorIndex == DEBUG_TOOL_MENU_FORCE_CATCH, 2);
+        DebugTools_RenderForceEvolutionOption(gMain.debugMenuCursorIndex == DEBUG_TOOL_MENU_FORCE_EVOLUTION, 3);
+        DebugTools_RenderClosePrompt(8);
     }
 
     for (i = DEBUG_TOOL_TEXT_FIRST_ROW * 32;
