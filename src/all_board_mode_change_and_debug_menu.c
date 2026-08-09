@@ -105,15 +105,13 @@ void DebugTools_TryOpenMenu(void)
      && gMain.mainState != STATE_GAME_IDLE
      && gMain.selectedField < MAIN_FIELD_COUNT
      && !gCurrentPinballGame->startButtonDisabled
-     && gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_DEFAULT
-     && gCurrentPinballGame->boardTransitionPhase == BOARD_STATE_DISPATCHER_STATE_RUNNING)
+     && !(gMain.modeChangeFlags & (MODE_CHANGE_PAUSE | MODE_CHANGE_END_OF_GAME | MODE_CHANGE_DEBUG)))
     {
-        gMain.modeChangeFlags |= MODE_CHANGE_DEBUG;
+        gMain.modeChangeFlags |= MODE_CHANGE_DEBUG | MODE_CHANGE_PAUSE;
         gMain.debugMenuCursorIndex = DEBUG_TOOL_MENU_FORCE_CATCH;
         gCurrentPinballGame->debugToolState = DEBUG_TOOL_STATE_MAIN_MENU;
         gCurrentPinballGame->debugMenuSelection = 0;
-        gCurrentPinballGame->ballPhysicsState = BALL_PHYSICS_FROZEN;
-        gCurrentPinballGame->ballUpgradeTimerPaused = TRUE;
+        PauseGame();
         m4aSongNumStart(SE_MENU_POPUP_OPEN);
     }
 #endif
@@ -382,16 +380,15 @@ static void DebugTools_CloseMenu(bool8 playSound)
 {
     s16 i;
 
-    gMain.modeChangeFlags &= ~MODE_CHANGE_DEBUG;
+    gMain.modeChangeFlags &= ~(MODE_CHANGE_DEBUG | MODE_CHANGE_PAUSE);
     gCurrentPinballGame->debugToolState = 0;
     gCurrentPinballGame->debugMenuSelection = 0;
-    gCurrentPinballGame->ballPhysicsState = BALL_PHYSICS_NORMAL;
-    gCurrentPinballGame->ballUpgradeTimerPaused = FALSE;
     for (i = DEBUG_TOOL_TEXT_FIRST_ROW * 32;
          i < (DEBUG_TOOL_TEXT_FIRST_ROW + DEBUG_TOOL_TEXT_ROW_COUNT) * 32;
          i++)
         gBG0TilemapBuffer[i] = 0x1FF;
     DmaCopy16(3, gBG0TilemapBuffer, (void *)0x06002000, 0x1000);
+    UnpauseGame();
     if (playSound)
         m4aSongNumStart(SE_MENU_CANCEL);
 }

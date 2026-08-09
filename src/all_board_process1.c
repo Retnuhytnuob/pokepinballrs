@@ -24,6 +24,21 @@ void ClearBG0Tilemap(void)
 
 void AllBoardProcess_1B_47160(void)
 {
+    if (gMain.modeChangeFlags & MODE_CHANGE_DEBUG)
+    {
+        BonusStage_HandleModeChangeFlags();
+        return;
+    }
+
+    if (gMain.modeChangeFlags == MODE_CHANGE_NONE)
+        DebugTools_TryOpenMenu();
+
+    if (gMain.modeChangeFlags & MODE_CHANGE_DEBUG)
+    {
+        BonusStage_HandleModeChangeFlags();
+        return;
+    }
+
     if (JOY_NEW(START_BUTTON) && gMain.mainState != STATE_GAME_IDLE
         && !gCurrentPinballGame->startButtonDisabled)
     {
@@ -78,16 +93,9 @@ void AllBoardProcess_1B_47160(void)
             AnimatePauseMenuOverlay();
     }
 
-    if (gMain.modeChangeFlags & MODE_CHANGE_DEBUG)
-    {
-        BonusStage_HandleModeChangeFlags();
-        return;
-    }
-
     //Game is not paused
     if (gMain.modeChangeFlags == MODE_CHANGE_NONE)
     {
-        DebugTools_TryOpenMenu();
         gCurrentPinballGame->debugMenuSelection = 0;
         if (gMain.modeChangeDelayTimer != 0)
         {
