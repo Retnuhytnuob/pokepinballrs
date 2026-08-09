@@ -78,6 +78,12 @@ void AllBoardProcess_1B_47160(void)
             AnimatePauseMenuOverlay();
     }
 
+    if (gMain.modeChangeFlags & MODE_CHANGE_DEBUG)
+    {
+        BonusStage_HandleModeChangeFlags();
+        return;
+    }
+
     //Game is not paused
     if (gMain.modeChangeFlags == MODE_CHANGE_NONE)
     {

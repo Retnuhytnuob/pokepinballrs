@@ -33,7 +33,7 @@ extern const s8 gBonusSummaryTextTemplates[][3][20];
 #define DEBUG_TOOL_STATE_SPECIES_LIST 2
 #define DEBUG_TOOL_MENU_FORCE_CATCH 0
 #define DEBUG_TOOL_MENU_FORCE_EVOLUTION 1
-#define DEBUG_TOOL_TEXT_FIRST_ROW 20
+#define DEBUG_TOOL_TEXT_FIRST_ROW 44
 #define DEBUG_TOOL_TEXT_ROW_COUNT 9
 #define DEBUG_TOOL_SPECIES_VISIBLE_ROWS 5
 #define DEBUG_TOOL_SPECIES_SELECTED_ROW 2
@@ -104,10 +104,8 @@ void DebugTools_TryOpenMenu(void)
     if (JOY_NEW(SELECT_BUTTON)
      && gMain.mainState != STATE_GAME_IDLE
      && gMain.selectedField < MAIN_FIELD_COUNT
-     && gMain.modeChangeDelayTimer == 0
-     && gMain.pendingModeChangeType == MODE_CHANGE_NONE
      && !gCurrentPinballGame->startButtonDisabled
-     && gCurrentPinballGame->boardState == MAIN_BOARD_STATE_DEFAULT
+     && gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_DEFAULT
      && gCurrentPinballGame->boardTransitionPhase == BOARD_STATE_DISPATCHER_STATE_RUNNING)
     {
         gMain.modeChangeFlags |= MODE_CHANGE_DEBUG;
@@ -367,7 +365,7 @@ static void DebugTools_RenderMenuBackdrop(void)
          i++)
         gBG0TilemapBuffer[i] += 0xC100;
 
-    DmaCopy16(3, gBG0TilemapBuffer, (void *)0x06002000, 0x800);
+    DmaCopy16(3, gBG0TilemapBuffer, (void *)0x06002000, 0x1000);
 }
 
 static void DebugTools_ClearTextRows(void)
@@ -393,7 +391,7 @@ static void DebugTools_CloseMenu(bool8 playSound)
          i < (DEBUG_TOOL_TEXT_FIRST_ROW + DEBUG_TOOL_TEXT_ROW_COUNT) * 32;
          i++)
         gBG0TilemapBuffer[i] = 0x1FF;
-    DmaCopy16(3, gBG0TilemapBuffer, (void *)0x06002000, 0x800);
+    DmaCopy16(3, gBG0TilemapBuffer, (void *)0x06002000, 0x1000);
     if (playSound)
         m4aSongNumStart(SE_MENU_CANCEL);
 }
