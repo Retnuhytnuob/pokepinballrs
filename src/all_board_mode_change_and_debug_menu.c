@@ -364,9 +364,13 @@ static void DebugTools_StartForcedCatch(void)
 {
     gCurrentPinballGame->debugForcedCatchSpecies = gCurrentPinballGame->currentSpecies;
     DebugTools_CloseMenu(FALSE);
-    gCurrentPinballGame->ballCatchState = NOT_TRAPPED;
-    gCurrentPinballGame->modeAnimTimer = 100;
-    RequestBoardStateTransition(MAIN_BOARD_STATE_CATCH_EM_MODE);
+    gCurrentPinballGame->ballCatchState = TRAP_CATCH_HOLE;
+    gCurrentPinballGame->catchArrowProgress = 3;
+    if (gMain.selectedField == FIELD_RUBY)
+        DispatchRubyCatchModeInit();
+    else
+        DispatchSapphireCatchModeInit();
+
     m4aSongNumStart(SE_MENU_SELECT);
 }
 
