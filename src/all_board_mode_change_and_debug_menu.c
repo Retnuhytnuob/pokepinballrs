@@ -33,7 +33,7 @@ extern const s8 gBonusSummaryTextTemplates[][3][20];
 #define DEBUG_TOOL_STATE_SPECIES_LIST 2
 #define DEBUG_TOOL_MENU_FORCE_CATCH 0
 #define DEBUG_TOOL_MENU_FORCE_EVOLUTION 1
-#define DEBUG_TOOL_TEXT_FIRST_ROW 44
+#define DEBUG_TOOL_TEXT_FIRST_ROW 26
 #define DEBUG_TOOL_TEXT_ROW_COUNT 9
 #define DEBUG_TOOL_SPECIES_VISIBLE_ROWS 5
 #define DEBUG_TOOL_SPECIES_SELECTED_ROW 2
@@ -98,22 +98,26 @@ void BonusStage_HandleModeChangeFlags(void)
     }
 }
 
+void DebugTools_OpenMenu(void)
+{
+#if DEBUG_TOOLS_ENABLED
+    gMain.modeChangeFlags |= MODE_CHANGE_DEBUG | MODE_CHANGE_PAUSE;
+    gMain.debugMenuCursorIndex = DEBUG_TOOL_MENU_FORCE_CATCH;
+    gCurrentPinballGame->debugToolState = DEBUG_TOOL_STATE_MAIN_MENU;
+    gCurrentPinballGame->debugMenuSelection = 0;
+    PauseGame();
+    m4aSongNumStart(SE_MENU_POPUP_OPEN);
+#endif
+}
+
 void DebugTools_TryOpenMenu(void)
 {
 #if DEBUG_TOOLS_ENABLED
     if (JOY_NEW(SELECT_BUTTON)
      && gMain.mainState != STATE_GAME_IDLE
      && !gCurrentPinballGame->startButtonDisabled
-     && !(gMain.modeChangeFlags & (MODE_CHANGE_PAUSE | MODE_CHANGE_END_OF_GAME | MODE_CHANGE_DEBUG))
-     && gMain.gameExitState == 0)
-    {
-        gMain.modeChangeFlags |= MODE_CHANGE_DEBUG | MODE_CHANGE_PAUSE;
-        gMain.debugMenuCursorIndex = DEBUG_TOOL_MENU_FORCE_CATCH;
-        gCurrentPinballGame->debugToolState = DEBUG_TOOL_STATE_MAIN_MENU;
-        gCurrentPinballGame->debugMenuSelection = 0;
-        PauseGame();
-        m4aSongNumStart(SE_MENU_POPUP_OPEN);
-    }
+     && !(gMain.modeChangeFlags & (MODE_CHANGE_PAUSE | MODE_CHANGE_END_OF_GAME | MODE_CHANGE_DEBUG)))
+        DebugTools_OpenMenu();
 #endif
 }
 

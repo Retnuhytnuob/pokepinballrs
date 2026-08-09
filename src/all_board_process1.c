@@ -24,6 +24,14 @@ void ClearBG0Tilemap(void)
 
 void AllBoardProcess_1B_47160(void)
 {
+    if ((JOY_NEW(SELECT_BUTTON) || JOY_HELD(L_BUTTON | R_BUTTON) == (L_BUTTON | R_BUTTON))
+        && gMain.mainState != STATE_GAME_IDLE
+        && !gCurrentPinballGame->startButtonDisabled
+        && !(gMain.modeChangeFlags & (MODE_CHANGE_PAUSE | MODE_CHANGE_END_OF_GAME | MODE_CHANGE_DEBUG)))
+    {
+        DebugTools_OpenMenu();
+    }
+
     if (gMain.modeChangeFlags & MODE_CHANGE_DEBUG)
     {
         BonusStage_HandleModeChangeFlags();

@@ -632,6 +632,7 @@ extern void UpdateScrollingBackgroundTiles(void);
 //extern ? AllBoardProcess_1A_47100();
 //extern ? AllBoardProcess_1B_47160();
 extern void BonusStage_HandleModeChangeFlags();
+extern void DebugTools_OpenMenu(void);
 extern void DebugTools_TryOpenMenu(void);
 extern void DebugMenu_RenderAndHandleInput(void);
 extern void GameOverAnimation(void);
