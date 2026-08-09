@@ -34,9 +34,8 @@ extern const s8 gBonusSummaryTextTemplates[][3][20];
 #define DEBUG_TOOL_MENU_FORCE_CATCH 0
 #define DEBUG_TOOL_MENU_FORCE_EVOLUTION 1
 #define DEBUG_TOOL_TEXT_FIRST_ROW 26
-#define DEBUG_TOOL_TEXT_ROW_COUNT 9
+#define DEBUG_TOOL_TEXT_ROW_COUNT 2
 #define DEBUG_TOOL_SPECIES_VISIBLE_ROWS 5
-#define DEBUG_TOOL_SPECIES_SELECTED_ROW 2
 
 static void DebugTools_RenderAndHandleInput(void);
 static void DebugTools_ClearLineText(u8 *text, s16 length);
@@ -45,8 +44,6 @@ static void DebugTools_RenderMenuTitle(s16 row);
 static void DebugTools_RenderCatchTitle(s16 row);
 static void DebugTools_RenderForceCatchOption(bool8 selected, s16 row);
 static void DebugTools_RenderForceEvolutionOption(bool8 selected, s16 row);
-static void DebugTools_RenderBackPrompt(s16 row);
-static void DebugTools_RenderClosePrompt(s16 row);
 static void DebugTools_RenderPokemonName(u16 species, s16 row, bool8 selected);
 static void DebugTools_RenderMenuBackdrop(void);
 static void DebugTools_ClearTextRows(void);
@@ -107,6 +104,7 @@ void DebugTools_OpenMenu(void)
     gCurrentPinballGame->debugMenuSelection = 0;
     PauseGame();
     m4aSongNumStart(SE_MENU_POPUP_OPEN);
+    gMain.newKeys &= ~(SELECT_BUTTON | L_BUTTON | R_BUTTON);
 #endif
 }
 
@@ -284,39 +282,6 @@ static void DebugTools_RenderForceEvolutionOption(bool8 selected, s16 row)
     DebugTools_RenderTextRow(text, row);
 }
 
-static void DebugTools_RenderBackPrompt(s16 row)
-{
-    u8 text[20];
-
-    DebugTools_ClearLineText(text, 20);
-    text[0] = 'A';
-    text[2] = 'O';
-    text[3] = 'K';
-    text[6] = 'B';
-    text[8] = 'B';
-    text[9] = 'A';
-    text[10] = 'C';
-    text[11] = 'K';
-    DebugTools_RenderTextRow(text, row);
-}
-
-static void DebugTools_RenderClosePrompt(s16 row)
-{
-    u8 text[20];
-
-    DebugTools_ClearLineText(text, 20);
-    text[0] = 'A';
-    text[2] = 'O';
-    text[3] = 'K';
-    text[6] = 'B';
-    text[8] = 'C';
-    text[9] = 'L';
-    text[10] = 'O';
-    text[11] = 'S';
-    text[12] = 'E';
-    DebugTools_RenderTextRow(text, row);
-}
-
 static void DebugTools_RenderPokemonName(u16 species, s16 row, bool8 selected)
 {
     s16 i;
@@ -335,31 +300,21 @@ static void DebugTools_RenderPokemonName(u16 species, s16 row, bool8 selected)
 static void DebugTools_RenderMenuBackdrop(void)
 {
     s16 i;
-    u16 species;
 
     DebugTools_ClearTextRows();
 
     if (gCurrentPinballGame->debugToolState == DEBUG_TOOL_STATE_SPECIES_LIST)
     {
         DebugTools_RenderCatchTitle(0);
-        species = gCurrentPinballGame->currentSpecies;
-        for (i = 0; i < DEBUG_TOOL_SPECIES_SELECTED_ROW; i++)
-            species = DebugTools_FindNextSelectableSpecies(species, -1);
-
-        for (i = 0; i < DEBUG_TOOL_SPECIES_VISIBLE_ROWS; i++)
-        {
-            DebugTools_RenderPokemonName(species, i + 2, i == DEBUG_TOOL_SPECIES_SELECTED_ROW);
-            species = DebugTools_FindNextSelectableSpecies(species, 1);
-        }
-
-        DebugTools_RenderBackPrompt(8);
+        DebugTools_RenderPokemonName(gCurrentPinballGame->currentSpecies, 1, TRUE);
     }
     else
     {
         DebugTools_RenderMenuTitle(0);
-        DebugTools_RenderForceCatchOption(gMain.debugMenuCursorIndex == DEBUG_TOOL_MENU_FORCE_CATCH, 2);
-        DebugTools_RenderForceEvolutionOption(gMain.debugMenuCursorIndex == DEBUG_TOOL_MENU_FORCE_EVOLUTION, 3);
-        DebugTools_RenderClosePrompt(8);
+        if (gMain.debugMenuCursorIndex == DEBUG_TOOL_MENU_FORCE_CATCH)
+            DebugTools_RenderForceCatchOption(TRUE, 1);
+        else
+            DebugTools_RenderForceEvolutionOption(TRUE, 1);
     }
 
     for (i = DEBUG_TOOL_TEXT_FIRST_ROW * 32;
