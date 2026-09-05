@@ -163,6 +163,9 @@ struct FlipperState
 #define FLIPPER_FALL_SPEED 2
 #define FLIPPER_MAX_RELEASE_STALL_TICKS 2
 
+
+#define MAX_MINION_COUNT 3 // Spheal, Duskull, etc
+
 struct PinballGame
 {
     /*0x000*/ u32 saveDataValid;
@@ -550,20 +553,20 @@ struct PinballGame
     /*0x392*/ u16 ballRespawnTimer;
     /*0x394*/ s16 bannerSlideYOffset;
     /*0x396*/ s8 minionActiveCount;
-    /*0x397*/ s8 minionSpriteVariant[3];
-    /*0x39A*/ u8 minionNextSpriteVariant[3];
-    /*0x39D*/ s8 minionOamIx[3];
-    /*0x3A0*/ s8 minionState[3];
-    /*0x3A3*/ s8 minionFramesetIx[3]; // Duskull/Sealeo frame index
-    /*0x3A6*/ s8 minionDrawInFrame[3];
-    /*0x3A9*/ s8 minionCanCollide[3];
-    /*0x3AC*/ s8 minionDeathTimer[3];
-    /*0x3B0*/ u16 minionStateTimer[3]; // Duskull/Sealeo state timer
-    /*0x3B6*/ u16 minionTimeAlive[3];
-    /*0x3BC*/ u16 minionEscapeAtTime[3];
+    /*0x397*/ s8 minionSpriteVariant[MAX_MINION_COUNT];
+    /*0x39A*/ u8 minionNextSpriteVariant[MAX_MINION_COUNT];
+    /*0x39D*/ s8 minionOamIx[MAX_MINION_COUNT];
+    /*0x3A0*/ s8 minionState[MAX_MINION_COUNT];
+    /*0x3A3*/ s8 minionFramesetIx[MAX_MINION_COUNT]; // Duskull/Sealeo frame index
+    /*0x3A6*/ s8 minionDrawInFrame[MAX_MINION_COUNT];
+    /*0x3A9*/ s8 minionCanCollide[MAX_MINION_COUNT];
+    /*0x3AC*/ s8 minionDeathTimer[MAX_MINION_COUNT];
+    /*0x3B0*/ u16 minionStateTimer[MAX_MINION_COUNT]; // Duskull/Sealeo state timer
+    /*0x3B6*/ u16 minionTimeAlive[MAX_MINION_COUNT];
+    /*0x3BC*/ u16 minionEscapeAtTime[MAX_MINION_COUNT];
     /*0x3C2*/ u8 filler3C2[0x2];
-    /*0x3C4*/ struct Vector16 minionLogicPosition[3];
-    /*0x3D0*/ struct Vector16 minionCollisionPosition[3];
+    /*0x3C4*/ struct Vector16 minionLogicPosition[MAX_MINION_COUNT];
+    /*0x3D0*/ struct Vector16 minionCollisionPosition[MAX_MINION_COUNT];
     /*0x3DC*/ s8 bossEntityState;
     /*0x3DD*/ s8 bossNextAttackState;
     /*0x3DE*/ s8 kecleonFramesetBase;

@@ -74,7 +74,7 @@ void SphealBoardProcess_3A_42E48(void)
     gCurrentPinballGame->ballDeliveryActive = TRUE;
 
     // Clear minion info, used for Sealeo. (3rd slot not used on this board)
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < MAX_MINION_COUNT; i++)
     {
         gCurrentPinballGame->minionState[i] = SEALEO_ENTITY_STATE_INIT;
         gCurrentPinballGame->minionFramesetIx[i] = 0;
@@ -82,7 +82,7 @@ void SphealBoardProcess_3A_42E48(void)
     }
 
     // Set base info for the 'knockdown' process. spheal/ball being bounced, and into the hoop.
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < MAX_MINION_COUNT; i++)
     {
         gCurrentPinballGame->knockdownTargetIndex[i] = TARGET_SEALEO_LEFT;
         gCurrentPinballGame->knockdownBounceCount[i] = 0;
@@ -91,7 +91,7 @@ void SphealBoardProcess_3A_42E48(void)
     }
 
     // Clear info for the hoop counts, sealeo stun timers, and spheal data
-    for (i = 0; i < 2; i++)
+    for (i = 0; i < SIDE_COUNT; i++)
     {
         gCurrentPinballGame->sphealKnockdownCount[i] = 0;
         gCurrentPinballGame->sphealKnockdownDisplayCount[i] = 0;
@@ -295,7 +295,7 @@ void UpdateSealeoEntityLogic(void)
     if (gCurrentPinballGame->boardState < SPHEAL_BOARD_STATE_ENDING
         && gMain.modeChangeFlags == MODE_CHANGE_NONE)
     {
-        for (i = 0; i < 2; i++)
+        for (i = 0; i < SIDE_COUNT; i++)
         {
             if (gCurrentPinballGame->sealeoStunnedTimer[i] == 23)
             {
@@ -426,7 +426,7 @@ void UpdateSphealEntityLogic(void)
 
     if (gCurrentPinballGame->boardState == SPHEAL_BOARD_STATE_ACTIVE_PHASE && gMain.modeChangeFlags == MODE_CHANGE_NONE)
     {
-        for (i = 0; i < 2; i++)
+        for (i = 0; i < MAX_SPHEAL_COUNT; i++)
         {
             switch (gCurrentPinballGame->sphealEntityState[i])
             {
@@ -855,7 +855,7 @@ void UpdateSphealEntityLogic(void)
     }
 
     // Draw Spheals; set collision position.
-    for (i = 0; i < 2; i++)
+    for (i = 0; i < MAX_SPHEAL_COUNT; i++)
     {
         group = &gMain.spriteGroups[SG_SPHEAL_ENTITY_BASE + i];
         if (group->active)
@@ -870,7 +870,7 @@ void UpdateSphealEntityLogic(void)
             group->baseY = (gCurrentPinballGame->sphealPositionQ8[i].y / 256) - (gCurrentPinballGame->cameraYOffset + 14);
 
             DmaCopy16(3, gSphealFlyingEnemyVariantSprites[sphealFrameIx], (void *)0x06011CA0 + i * 0x120, 0x120);
-            for (j = 0; j < 4; j++)
+            for (j = 0; j < SPHEAL_SPRITE_SEGMENTS; j++)
             {
                 oamSimple = &group->oam[j];
                 dst = (u16*)&gOamBuffer[oamSimple->oamId];
@@ -931,7 +931,7 @@ void UpdateSphealEntityLogic(void)
             group->baseY = (gCurrentPinballGame->sphealPositionQ8[i].y / 256) - (gCurrentPinballGame->cameraYOffset + 14);
 
             DmaCopy16(3, gSphealFlyingEnemyVariantSprites[sphealFrameIx], (void *)0x06011EE0 + i * 0x120, 0x120);
-            for (j = 0; j < 4; j++)
+            for (j = 0; j < SPHEAL_SPRITE_SEGMENTS; j++)
             {
                 oamSimple = &group->oam[j];
                 gOamBuffer[oamSimple->oamId].x = oamSimple->xOffset + group->baseX;
@@ -969,7 +969,7 @@ void UpdateSphealScoreAndDelivery(void)
         group->baseX = 104 - gCurrentPinballGame->cameraXOffset;
         group->baseY = 94 - gCurrentPinballGame->cameraYOffset;
         DmaCopy16(3, gSphealNetFrontGfx[var0], (void *)0x06010B20, 0x180);
-        for (i = 0; i < 2; i++)
+        for (i = 0; i < NET_FRONT_SPRITE_SEGMENTS; i++)
         {
             oamSimple = &group->oam[i];
             gOamBuffer[oamSimple->oamId].x = oamSimple->xOffset + group->baseX;
@@ -1015,7 +1015,7 @@ void SphealBoard_WhiscashDeliversBall(void)
         group->baseY = 154 + offsets[3] - gCurrentPinballGame->cameraYOffset;
         var0 = offsets[0];
         DmaCopy16(3, gWhiscash_Gfx[var0], (void *)0x06012120, 0x460);
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < WHISCASH_SPRITE_SEGMENTS; i++)
         {
             oamSimple = &group->oam[i];
             gOamBuffer[oamSimple->oamId].x = oamSimple->xOffset + group->baseX;
@@ -1088,7 +1088,7 @@ void SphealBoard_PelipperDeliversBall(void)
         group->baseY = (gCurrentPinballGame->pelipperPosY / 10) - (gCurrentPinballGame->cameraYOffset - 110) + (gCurrentPinballGame->pelipperYBobOffset / 10);
         index = gCurrentPinballGame->deliveryAnimFrameIndex;
         DmaCopy16(3, gPelipper_Gfx[index], (void *)0x060125A0, 0x480);
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < PELIPPER_SPRITE_SEGMENTS; i++)
         {
             oamSimple = &group->oam[i];
             gOamBuffer[oamSimple->oamId].x = oamSimple->xOffset + group->baseX;
@@ -1190,7 +1190,7 @@ void UpdateSealeoKnockdownPhysics(void)
     s16 i;
     s16 targetSealeoIx; // 0= left, 1 = right
 
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < MAX_BOUNCABLE_TARGETS; i++)
     {
         switch (gCurrentPinballGame->knockdownPhase[i])
         {
@@ -1220,7 +1220,7 @@ void UpdateSealeoKnockdownPhysics(void)
             break;
         case SPHEAL_KNOCKDOWN_PHASE_PREPARE_BOUNCE:
             targetSealeoIx = gCurrentPinballGame->knockdownTargetIndex[i];
-            if (i == 2)
+            if (i == BALL_BOUNCING_IX)
             {
                 // Ball
                 gCurrentPinballGame->ballPhysicsState = BALL_PHYSICS_MANUAL;
@@ -1235,7 +1235,7 @@ void UpdateSealeoKnockdownPhysics(void)
             break;
         case SPHEAL_KNOCKDOWN_PHASE_VERTICAL_BOUNCE:
             targetSealeoIx = gCurrentPinballGame->knockdownTargetIndex[i];
-            if (i < 2)
+            if (i < BALL_BOUNCING_IX)
             {
                 // Spheals
                 if (targetSealeoIx == TARGET_SEALEO_LEFT)
@@ -1340,7 +1340,7 @@ void UpdateSealeoKnockdownPhysics(void)
             break;
         case SPHEAL_KNOCKDOWN_PHASE_BOUNCE_TO_HOOP:
             targetSealeoIx = gCurrentPinballGame->knockdownTargetIndex[i];
-            if (i < 2)
+            if (i < BALL_BOUNCING_IX)
             {
                 //Spheals
                 gCurrentPinballGame->sphealVelocity[i].y += 12;
@@ -1401,7 +1401,7 @@ void UpdateSealeoKnockdownPhysics(void)
             break;
         case SPHEAL_KNOCKDOWN_PHASE_DROPPED:
             targetSealeoIx = gCurrentPinballGame->knockdownTargetIndex[i];
-            if (i < 2)
+            if (i < BALL_BOUNCING_IX)
             {
                 //Spheals
                 gCurrentPinballGame->sphealVelocity[i].y += 12;
@@ -1481,8 +1481,8 @@ void UpdateSphealResultsScreen(void)
     struct SpriteGroup *group;
     struct OamDataSimple *oamSimple;
     int value;
-    s16 sp0[12];
-    s16 sp18[12];
+    s16 digitChar[12]; // Note 0-9 is digits, 10 is a period
+    s16 characterTileIx[12];
 
     if (gCurrentPinballGame->boardState > SPHEAL_BOARD_STATE_SCORE_DISPLAY)
     {
@@ -1567,42 +1567,42 @@ void UpdateSphealResultsScreen(void)
     }
 
     value = gCurrentPinballGame->sphealKnockdownDisplayCount[0] * SCORE_PER_SPHEAL_IN_NET;
-    sp0[0] = LEAD_DIGIT_10M(value);
-    sp0[1] = DIGIT_1M(value);
-    sp0[2] = 10;
-    sp0[3] = DIGIT_100K(value);
-    sp0[4] = DIGIT_10K(value);
-    sp0[5] = DIGIT_1K(value);
-    sp0[6] = 10;
-    sp0[7] = DIGIT_100S(value);
-    sp0[8] = DIGIT_10S(value);
-    sp0[9] = DIGIT_1S(value);
+    digitChar[0] = LEAD_DIGIT_10M(value);
+    digitChar[1] = DIGIT_1M(value);
+    digitChar[2] = 10;
+    digitChar[3] = DIGIT_100K(value);
+    digitChar[4] = DIGIT_10K(value);
+    digitChar[5] = DIGIT_1K(value);
+    digitChar[6] = 10;
+    digitChar[7] = DIGIT_100S(value);
+    digitChar[8] = DIGIT_10S(value);
+    digitChar[9] = DIGIT_1S(value);
     for (i = 0; i < 9; i++)
     {
-        if (sp0[i] % 10 == 0)
-            sp0[i] = 0x14;
+        if (digitChar[i] % 10 == 0)
+            digitChar[i] = 0x14;
         else
             break;
     }
 
-    sp18[0] = sp0[0] * 2 + 0x2D0;
-    sp18[1] = sp0[1] * 2 + 0x2D0;
-    sp18[2] = sp0[2] * 2 + 0x2D0;
-    sp18[3] = sp0[3] * 2 + 0x2D0;
-    sp18[4] = sp0[4] * 2 + 0x2D0;
-    sp18[5] = sp0[5] * 2 + 0x2D0;
-    sp18[6] = sp0[6] * 2 + 0x2D0;
-    sp18[7] = sp0[7] * 2 + 0x2D0;
-    sp18[8] = sp0[8] * 2 + 0x2D0;
-    sp18[9] = sp0[9] * 2 + 0x2D0;
+    characterTileIx[0] = digitChar[0] * 2 + 0x2D0;
+    characterTileIx[1] = digitChar[1] * 2 + 0x2D0;
+    characterTileIx[2] = digitChar[2] * 2 + 0x2D0;
+    characterTileIx[3] = digitChar[3] * 2 + 0x2D0;
+    characterTileIx[4] = digitChar[4] * 2 + 0x2D0;
+    characterTileIx[5] = digitChar[5] * 2 + 0x2D0;
+    characterTileIx[6] = digitChar[6] * 2 + 0x2D0;
+    characterTileIx[7] = digitChar[7] * 2 + 0x2D0;
+    characterTileIx[8] = digitChar[8] * 2 + 0x2D0;
+    characterTileIx[9] = digitChar[9] * 2 + 0x2D0;
 
     value = gCurrentPinballGame->sphealKnockdownDisplayCount[0];
-    sp0[0] = LEAD_DIGIT_10S(value);
-    sp0[1] = DIGIT_1S(value);
-    if (sp0[0] == 0)
-        sp0[0] = 0x14;
-    sp18[10] = sp0[0] * 2 + 0x2D0;
-    sp18[11] = sp0[1] * 2 + 0x2D0;
+    digitChar[0] = LEAD_DIGIT_10S(value);
+    digitChar[1] = DIGIT_1S(value);
+    if (digitChar[0] == 0)
+        digitChar[0] = 0x14;
+    characterTileIx[10] = digitChar[0] * 2 + 0x2D0;
+    characterTileIx[11] = digitChar[1] * 2 + 0x2D0;
 
     group = &gMain.spriteGroups[SG_SPHEAL_END_SCORE_SPHEALS_SUNK];
     group->baseX = 120;
@@ -1612,46 +1612,46 @@ void UpdateSphealResultsScreen(void)
         oamSimple = &group->oam[i];
         gOamBuffer[oamSimple->oamId].x = oamSimple->xOffset + group->baseX;
         gOamBuffer[oamSimple->oamId].y = oamSimple->yOffset + group->baseY;
-        gOamBuffer[oamSimple->oamId].tileNum = sp18[i];
+        gOamBuffer[oamSimple->oamId].tileNum = characterTileIx[i];
     }
 
     value = gCurrentPinballGame->sphealKnockdownDisplayCount[1] * SCORE_PER_BALL_IN_NET;
-    sp0[0] = LEAD_DIGIT_10M(value);
-    sp0[1] = DIGIT_1M(value);
-    sp0[2] = 10;
-    sp0[3] = DIGIT_100K(value);
-    sp0[4] = DIGIT_10K(value);
-    sp0[5] = DIGIT_1K(value);
-    sp0[6] = 10;
-    sp0[7] = DIGIT_100S(value);
-    sp0[8] = DIGIT_10S(value);
-    sp0[9] = DIGIT_1S(value);
+    digitChar[0] = LEAD_DIGIT_10M(value);
+    digitChar[1] = DIGIT_1M(value);
+    digitChar[2] = 10;
+    digitChar[3] = DIGIT_100K(value);
+    digitChar[4] = DIGIT_10K(value);
+    digitChar[5] = DIGIT_1K(value);
+    digitChar[6] = 10;
+    digitChar[7] = DIGIT_100S(value);
+    digitChar[8] = DIGIT_10S(value);
+    digitChar[9] = DIGIT_1S(value);
     for (i = 0; i < 9; i++)
     {
-        if (sp0[i] % 10 == 0)
-            sp0[i] = 0x14;
+        if (digitChar[i] % 10 == 0)
+            digitChar[i] = 0x14;
         else
             break;
     }
 
-    sp18[0] = sp0[0] * 2 + 0x2D0;
-    sp18[1] = sp0[1] * 2 + 0x2D0;
-    sp18[2] = sp0[2] * 2 + 0x2D0;
-    sp18[3] = sp0[3] * 2 + 0x2D0;
-    sp18[4] = sp0[4] * 2 + 0x2D0;
-    sp18[5] = sp0[5] * 2 + 0x2D0;
-    sp18[6] = sp0[6] * 2 + 0x2D0;
-    sp18[7] = sp0[7] * 2 + 0x2D0;
-    sp18[8] = sp0[8] * 2 + 0x2D0;
-    sp18[9] = sp0[9] * 2 + 0x2D0;
+    characterTileIx[0] = digitChar[0] * 2 + 0x2D0;
+    characterTileIx[1] = digitChar[1] * 2 + 0x2D0;
+    characterTileIx[2] = digitChar[2] * 2 + 0x2D0;
+    characterTileIx[3] = digitChar[3] * 2 + 0x2D0;
+    characterTileIx[4] = digitChar[4] * 2 + 0x2D0;
+    characterTileIx[5] = digitChar[5] * 2 + 0x2D0;
+    characterTileIx[6] = digitChar[6] * 2 + 0x2D0;
+    characterTileIx[7] = digitChar[7] * 2 + 0x2D0;
+    characterTileIx[8] = digitChar[8] * 2 + 0x2D0;
+    characterTileIx[9] = digitChar[9] * 2 + 0x2D0;
 
     value = gCurrentPinballGame->sphealKnockdownDisplayCount[1];
-    sp0[0] = LEAD_DIGIT_10S(value);
-    sp0[1] = DIGIT_1S(value);
-    if (sp0[0] == 0)
-        sp0[0] = 0x14;
-    sp18[10] = sp0[0] * 2 + 0x2D0;
-    sp18[11] = sp0[1] * 2 + 0x2D0;
+    digitChar[0] = LEAD_DIGIT_10S(value);
+    digitChar[1] = DIGIT_1S(value);
+    if (digitChar[0] == 0)
+        digitChar[0] = 0x14;
+    characterTileIx[10] = digitChar[0] * 2 + 0x2D0;
+    characterTileIx[11] = digitChar[1] * 2 + 0x2D0;
 
     group = &gMain.spriteGroups[SG_SPHEAL_END_SCORE_BALLS_SUNK];
     group->baseX = 120;
@@ -1661,45 +1661,45 @@ void UpdateSphealResultsScreen(void)
         oamSimple = &group->oam[i];
         gOamBuffer[oamSimple->oamId].x = oamSimple->xOffset + group->baseX;
         gOamBuffer[oamSimple->oamId].y = oamSimple->yOffset + group->baseY;
-        gOamBuffer[oamSimple->oamId].tileNum = sp18[i];
+        gOamBuffer[oamSimple->oamId].tileNum = characterTileIx[i];
     }
 
     value = gCurrentPinballGame->sphealKnockdownDisplayCount[0] * SCORE_PER_SPHEAL_IN_NET
           + gCurrentPinballGame->sphealKnockdownDisplayCount[1] * SCORE_PER_BALL_IN_NET;
     gCurrentPinballGame->totalBonusScore = value;
-    sp0[0] = LEAD_DIGIT_100M(value);
-    sp0[1] = DIGIT_10M(value);
-    sp0[2] = DIGIT_1M(value);
-    sp0[3] = 10;
-    sp0[4] = DIGIT_100K(value);
-    sp0[5] = DIGIT_10K(value);
-    sp0[6] = DIGIT_1K(value);
-    sp0[7] = 10;
-    sp0[8] = DIGIT_100S(value);
-    sp0[9] = DIGIT_10S(value);
-    sp0[10] = DIGIT_1S(value);
+    digitChar[0] = LEAD_DIGIT_100M(value);
+    digitChar[1] = DIGIT_10M(value);
+    digitChar[2] = DIGIT_1M(value);
+    digitChar[3] = 10;
+    digitChar[4] = DIGIT_100K(value);
+    digitChar[5] = DIGIT_10K(value);
+    digitChar[6] = DIGIT_1K(value);
+    digitChar[7] = 10;
+    digitChar[8] = DIGIT_100S(value);
+    digitChar[9] = DIGIT_10S(value);
+    digitChar[10] = DIGIT_1S(value);
     for (i = 0; i < 10; i++)
     {
-        if (sp0[i] % 10 == 0)
-            sp0[i] = 0x14;
+        if (digitChar[i] % 10 == 0)
+            digitChar[i] = 0x14;
         else
             break;
     }
 
-    sp18[0] = sp0[0] * 2 + 0x2D0;
-    sp18[1] = sp0[1] * 2 + 0x2D0;
-    sp18[2] = sp0[2] * 2 + 0x2D0;
-    sp18[3] = sp0[3] * 2 + 0x2D0;
-    sp18[4] = sp0[4] * 2 + 0x2D0;
-    sp18[5] = sp0[5] * 2 + 0x2D0;
-    sp18[6] = sp0[6] * 2 + 0x2D0;
-    sp18[7] = sp0[7] * 2 + 0x2D0;
-    sp18[8] = sp0[8] * 2 + 0x2D0;
-    sp18[9] = sp0[9] * 2 + 0x2D0;
-    sp18[10] = sp0[10] * 2 + 0x2D0;
+    characterTileIx[0] = digitChar[0] * 2 + 0x2D0;
+    characterTileIx[1] = digitChar[1] * 2 + 0x2D0;
+    characterTileIx[2] = digitChar[2] * 2 + 0x2D0;
+    characterTileIx[3] = digitChar[3] * 2 + 0x2D0;
+    characterTileIx[4] = digitChar[4] * 2 + 0x2D0;
+    characterTileIx[5] = digitChar[5] * 2 + 0x2D0;
+    characterTileIx[6] = digitChar[6] * 2 + 0x2D0;
+    characterTileIx[7] = digitChar[7] * 2 + 0x2D0;
+    characterTileIx[8] = digitChar[8] * 2 + 0x2D0;
+    characterTileIx[9] = digitChar[9] * 2 + 0x2D0;
+    characterTileIx[10] = digitChar[10] * 2 + 0x2D0;
     value = gCurrentPinballGame->ballUpgradeType + 1;
-    sp0[0] = value;
-    sp18[11] = sp0[0] * 2 + 0x2D0;
+    digitChar[0] = value;
+    characterTileIx[11] = digitChar[0] * 2 + 0x2D0;
 
     group = &gMain.spriteGroups[SG_SPHEAL_END_SCORE_TOTAL];
     group->baseX = 120;
@@ -1709,6 +1709,6 @@ void UpdateSphealResultsScreen(void)
         oamSimple = &group->oam[i];
         gOamBuffer[oamSimple->oamId].x = oamSimple->xOffset + group->baseX;
         gOamBuffer[oamSimple->oamId].y = oamSimple->yOffset + group->baseY;
-        gOamBuffer[oamSimple->oamId].tileNum = sp18[i];
+        gOamBuffer[oamSimple->oamId].tileNum = characterTileIx[i];
     }
 }

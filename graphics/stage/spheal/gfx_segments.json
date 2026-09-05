@@ -143,8 +143,50 @@
     },
     {
       "gfx_filename": "spheal_results",
-      "palette": "spheal_board_palset_0.gbapal",
-      "palbank": 8
+      "segments": [
+        {
+          "segfile": "spheal_results_spheal",
+          "oam": true,
+          "oamshape": "spheal_summary_shape.json",
+          "palette": "spheal_board_palset_2_4.gbapal"
+        },
+        {
+          "segfile": "spheal_results_ball",
+          "width": 2,
+          "palette": "spheal_board_palset_2_1.gbapal"
+        },
+        {
+          "segfile": "spheal_results_multiply",
+          "width": 2,
+          "palette": "spheal_board_palset_2_0.gbapal"
+        },
+        {
+          "segfile": "spheal_results_digits",
+          "mwidth": 1,
+          "mheight": 2,
+          "width": 10
+        },
+        {
+          "segfile": "spheal_results_dot",
+          "palette": "spheal_board_palset_2_0.gbapal"
+        },
+        {
+          "segfile": "spheal_results_total",
+          "oam": true,
+          "mwidth": 5,
+          "mheight": 2,
+          "palette": "spheal_board_palset_2_0.gbapal"
+        },
+        {
+          "segfile": "spheal_results_separator",
+          "palette": "spheal_board_palset_2_0.gbapal"
+        },
+        {
+          "segfile": "spheal_results_bar",
+          "width": 15,
+          "palette": "spheal_board_palset_2_0.gbapal"
+        }
+      ]
     }
   ]
 }
