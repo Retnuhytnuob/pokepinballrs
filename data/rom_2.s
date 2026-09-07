@@ -8586,34 +8586,34 @@ gBonusFieldSpriteGroups:: @ 0x086B04AC
     .4byte 0,0,0,0,0,0,0,0,0,0
     .4byte 0,0,0,0,0,0,0,0,0,0
 
-gBoardProcPairs_086B077C:: @ 0x086B077C
-	.4byte AllBoardProcess_1A_47100, AllBoardProcess_1B_47160
-	.4byte AllBoardProcess_2A_4D6C4, MainBoardProcess_2B_4D960
-	.4byte AllBoardProcess_2A_4D6C4, BonusBoardProcess_2B_4DBFC
-	.4byte RubyBoardProcess_3A_19A20, RubyBoardProcess_3B_19B10
-	.4byte SapphireBoardProcess_3A_326F4, SapphireBoardProcess_3B_3276C
-	.4byte DuskullBonus_Setup, DusclopsBoardProcess_3B_33130
-	.4byte KecleonBoardProcess_3A_35860, KecleonBoardProcess_3B_35AA4
-	.4byte KyogreBoardProcess_3A_383E4, KyogreBoardProcess_3B_3869C
-	.4byte GroudonBoardProcess_3A_3B120, GroudonBoardProcess_3B_3B49C
-	.4byte RayquazaBoardProcess_3A_3E79C, RayquazaBoardProcess_3B_3EB2C
-	.4byte SphealBoardProcess_3A_42E48, SphealBoardProcess_3B_43228
-	.4byte AllBoardProcess_4A_19304, MainBoardProcess_4B_19490
-	.4byte AllBoardProcess_4A_19304, BonusBoardProcess_4B_19734
-	.4byte AllBoardProcess_5A_11B9C, MainBoardProcess_5B_11C98
-	.4byte AllBoardProcess_5A_11B9C, BonusBoardProcess_5B_11F88
-	.4byte AllBoardProcess_6A_4CEA8, AllBoardProcess_6B_1333C
-	.4byte nullsub_19, MainBoardProcess_7B_12524
-	.4byte nullsub_19, BonusBoardProcess_7B_12BF8
-	.4byte AllBoardProcess_8A_4CEA8, AllBoardProcess_8B_4CEB4
-	.4byte RubyBoardProcess_0A_50848, RubyBoardProcess_0B_50918
-	.4byte SapphireBoardProcess_0A_50AD4, SapphireBoardProcess_0B_50B80
-	.4byte DusclopsBoardProcess_0A_50D48, DusclopsBoardProcess_0B_50DB8
-	.4byte KecleonBoardProcess_0A_50DE0, nullsub_20
-	.4byte KyogreBoardProcess_0A_50F04, KyogreBoardProcess_0B_50FAC
-	.4byte GroudonBoardProcess_0A_50FD4, GroudonBoardProcess_0B_51068
-	.4byte RayquazaBoardProcess_0A_51090, RayquazaBoardProcess_0B_51128
-	.4byte SphealBoardProcess_0A_51150, SphealBoardProcess_0B_511F8
+gBoardProcPairs:: @ 0x086B077C
+	.4byte InitFrameProcess1_PauseLogic_AllBoards,                  UpdateFrameProcess1_PauseLogic_AllBoards
+	.4byte InitFrameProcess2_CameraShakeDrain_AllBoards,       UpdateFrameProcess2_CameraShakeDrain_MainBoards
+	.4byte InitFrameProcess2_CameraShakeDrain_AllBoards,       UpdateFrameProcess2_CameraShakeDrain_BonusBoards
+	.4byte InitFrameProcess3_BoardLogic_RubyBoard,             UpdateFrameProcess3_BoardLogic_RubyBoard
+	.4byte InitFrameProcess3_BoardLogic_SapphireBoard,         UpdateFrameProcess3_BoardLogic_SapphireBoard
+	.4byte InitFrameProcess3_BoardLogic_DusclopsBoard,         UpdateFrameProcess3_BoardLogic_DusclopsBoard
+	.4byte InitFrameProcess3_BoardLogic_KecleonBoard,          UpdateFrameProcess3_BoardLogic_KecleonBoard
+	.4byte InitFrameProcess3_BoardLogic_KyogreBoard,           UpdateFrameProcess3_BoardLogic_KyogreBoard
+	.4byte InitFrameProcess3_BoardLogic_GroudonBoard,          UpdateFrameProcess3_BoardLogic_GroudonBoard
+	.4byte InitFrameProcess3_BoardLogic_RayquazaBoard,         UpdateFrameProcess3_BoardLogic_RayquazaBoard
+	.4byte InitFrameProcess3_BoardLogic_SphealBoard,           UpdateFrameProcess3_BoardLogic_SphealBoard
+	.4byte InitFrameProcess4_FlipperLogic_AllBoards,           UpdateFrameProcess4_FlipperLogic_MainBoards
+	.4byte InitFrameProcess4_FlipperLogic_AllBoards,           UpdateFrameProcess4_FlipperLogic_BonusBoards
+	.4byte InitFrameProcess5_BallMovement_AllBoards,           UpdateFrameProcess5_BallMovement_MainBoards
+	.4byte InitFrameProcess5_BallMovement_AllBoards,           UpdateFrameProcess5_BallMovement_BonusBoards
+	.4byte InitFrameProcess6_Collision_AllBoards,              UpdateFrameProcess6_Collision_AllBoards
+	.4byte nullsub_19,                                         UpdateFrameProcess7_DrawBall_MainBoards
+	.4byte nullsub_19,                                         UpdateFrameProcess7_DrawBall_BonusBoards
+	.4byte InitFrameProcess8_HudUpdate_AllBoards,              UpdateFrameProcess8_HudUpdate_AllBoards
+	.4byte InitFrameProcess0_DefaultSpriteState_RubyBoard,     UpdateFrameProcess0_DefaultSpriteState_RubyBoard
+	.4byte InitFrameProcess0_DefaultSpriteState_SapphireBoard, UpdateFrameProcess0_DefaultSpriteState_SapphireBoard
+	.4byte InitFrameProcess0_DefaultSpriteState_DusclopsBoard, UpdateFrameProcess0_DefaultSpriteState_DusclopsBoard
+	.4byte InitFrameProcess0_DefaultSpriteState_KecleonBoard,  nullsub_20
+	.4byte InitFrameProcess0_DefaultSpriteState_KyogreBoard,   UpdateFrameProcess0_DefaultSpriteState_KyogreBoard
+	.4byte InitFrameProcess0_DefaultSpriteState_GroudonBoard,  UpdateFrameProcess0_DefaultSpriteState_GroudonBoard
+	.4byte InitFrameProcess0_DefaultSpriteState_RayquazaBoard, UpdateFrameProcess0_DefaultSpriteState_RayquazaBoard
+	.4byte InitFrameProcess0_DefaultSpriteState_SphealBoard,   UpdateFrameProcess0_DefaultSpriteState_SphealBoard
 	.4byte nullsub_19, nullsub_19
 
 gFieldInitFuncs:: @ 0x086B085C

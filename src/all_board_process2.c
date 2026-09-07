@@ -4,7 +4,7 @@
 #include "constants/bg_music.h"
 #include "constants/board/ruby_states.h"
 
-void AllBoardProcess_2A_4D6C4(void)
+void InitFrameProcess2_CameraShakeDrain_AllBoards(void)
 {
     s16 cameraBoardXOffset;
     s16 cameraBoardScrollOffset;
@@ -88,7 +88,7 @@ void AllBoardProcess_2A_4D6C4(void)
     gCurrentPinballGame->cameraLookAhead = 0x1000;
 }
 
-void MainBoardProcess_2B_4D960(void)
+void UpdateFrameProcess2_CameraShakeDrain_MainBoards(void)
 {
     int var0;
     int var1;
@@ -177,7 +177,7 @@ void MainBoardProcess_2B_4D960(void)
     gCurrentPinballGame->cameraYViewport = gCurrentPinballGame->cameraBaseY + gCurrentPinballGame->tiltYOffset + gCurrentPinballGame->cameraScrollOffset + gCurrentPinballGame->cameraYAdjust;
 }
 
-void BonusBoardProcess_2B_4DBFC(void)
+void UpdateFrameProcess2_CameraShakeDrain_BonusBoards(void)
 {
     int var0;
     int var1;

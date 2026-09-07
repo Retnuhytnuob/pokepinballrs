@@ -6,10 +6,10 @@
 #include "constants/bg_music.h"
 #include "constants/board/main_board.h"
 
-void AllBoardProcess_4A_19304(void)
+void InitFrameProcess4_FlipperLogic_AllBoards(void)
 {
     if (gMain.selectedField >= FIELD_BONUS_START)
-        BonusBoardProcess_4B_19734();
+        UpdateFrameProcess4_FlipperLogic_BonusBoards();
 }
 
 void DetermineFlipperBallSide(struct Vector16 arg0)
@@ -48,7 +48,7 @@ void DetermineFlipperBallSide(struct Vector16 arg0)
         gCurrentPinballGame->flipper[SIDE_IX_RIGHT].ballSide = -1;
 }
 
-void MainBoardProcess_4B_19490(void)
+void UpdateFrameProcess4_FlipperLogic_MainBoards(void)
 {
     s16 i;
 
@@ -159,7 +159,7 @@ void UpdateMainBoardFlipperPhysics(void)
     }
 }
 
-void BonusBoardProcess_4B_19734(void)
+void UpdateFrameProcess4_FlipperLogic_BonusBoards(void)
 {
     s16 i;
     s16 priority = 1;

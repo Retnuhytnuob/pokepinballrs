@@ -18,7 +18,7 @@ extern s16 DuskullFramesetData[][3];
 
 
 
-void DuskullBonus_Setup(void)
+void InitFrameProcess3_BoardLogic_DusclopsBoard(void)
 {
     s16 i;
     gCurrentPinballGame->stageTimer = 0;
@@ -79,7 +79,7 @@ void DuskullBonus_Setup(void)
     DmaCopy16(3, gBonusStageObjPal, OBJ_PLTT_SLOT(PAL_IX_9), PLTT_SLOT_SIZE);
 }
 
-void DusclopsBoardProcess_3B_33130(void)
+void UpdateFrameProcess3_BoardLogic_DusclopsBoard(void)
 {
     s16 temp;
     switch (gCurrentPinballGame->boardState)

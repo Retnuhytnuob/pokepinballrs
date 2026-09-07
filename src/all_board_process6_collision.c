@@ -20,12 +20,12 @@ u16 PixelWalkCollisionDetection(struct Vector16*, struct Vector16);
 
 void ComputeFlipperLaunchVelocity(s32 arg0, s16 arg1, struct Vector16* arg2, u16 arg3);
 
-void AllBoardProcess_6A_4CEA8()
+void InitFrameProcess6_Collision_AllBoards()
 {
 	gCurrentPinballGame->collisionCooldownTimer = 60;
 }
 
-void AllBoardProcess_6B_1333C()
+void UpdateFrameProcess6_Collision_AllBoards()
 {
     struct Vector16 ballPosition;
     struct Vector16 var1;

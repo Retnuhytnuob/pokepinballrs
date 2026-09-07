@@ -11,12 +11,12 @@ extern const Palette gTimer_Warning_Pal;
 extern const Palette gTimer_Default_Pal;
 extern const Palette gTimer_Slow_Pal;
 
-void AllBoardProcess_8A_4CEA8(void)
+void InitFrameProcess8_HudUpdate_AllBoards(void)
 {
-    AllBoardProcess_8B_4CEB4();
+    UpdateFrameProcess8_HudUpdate_AllBoards();
 }
 
-void AllBoardProcess_8B_4CEB4(void)
+void UpdateFrameProcess8_HudUpdate_AllBoards(void)
 {
     s16 i, j;
     s16 sp0[12];

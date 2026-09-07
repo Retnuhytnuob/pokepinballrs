@@ -259,29 +259,29 @@ void RestoreGameState(u16 arg0)
     switch (gMain.selectedField)
     {
     case FIELD_RUBY:
-        RubyBoardProcess_0A_50848();
+        InitFrameProcess0_DefaultSpriteState_RubyBoard();
         LoadShopItemGraphics(gCurrentPinballGame->evolutionShopActive);
         break;
     case FIELD_SAPPHIRE:
-        SapphireBoardProcess_0A_50AD4();
+        InitFrameProcess0_DefaultSpriteState_SapphireBoard();
         break;
     case FIELD_DUSCLOPS:
-        DusclopsBoardProcess_0A_50D48();
+        InitFrameProcess0_DefaultSpriteState_DusclopsBoard();
         break;
     case FIELD_KECLEON:
-        KecleonBoardProcess_0A_50DE0();
+        InitFrameProcess0_DefaultSpriteState_KecleonBoard();
         break;
     case FIELD_KYOGRE:
-        KyogreBoardProcess_0A_50F04();
+        InitFrameProcess0_DefaultSpriteState_KyogreBoard();
         break;
     case FIELD_GROUDON:
-        GroudonBoardProcess_0A_50FD4();
+        InitFrameProcess0_DefaultSpriteState_GroudonBoard();
         break;
     case FIELD_RAYQUAZA:
-        RayquazaBoardProcess_0A_51090();
+        InitFrameProcess0_DefaultSpriteState_RayquazaBoard();
         break;
     case FIELD_SPHEAL:
-        SphealBoardProcess_0A_51150();
+        InitFrameProcess0_DefaultSpriteState_SphealBoard();
         break;
     }
 
