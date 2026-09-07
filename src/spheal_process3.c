@@ -1475,6 +1475,10 @@ void AnimateSphealBackground(void)
     DmaCopy16(3, &gBG0TilemapBuffer[0x800], BG_CHAR_SCREEN_ADDR(0,0), BG_SCREEN_SIZE);
 }
 
+
+// Gets the appropriate tile position for the digit, character, or dot used on the spheal results screen
+#define TileIxForSphealResultsChar(digitChar) digitChar * 2 + 0x2D0
+
 void UpdateSphealResultsScreen(void)
 {
     s16 i;
@@ -1482,7 +1486,7 @@ void UpdateSphealResultsScreen(void)
     struct OamDataSimple *oamSimple;
     int value;
     s16 digitChar[12]; // Note 0-9 is digits, 10 is a period
-    s16 characterTileIx[12];
+    u16 characterTileIx[12];
 
     if (gCurrentPinballGame->boardState > SPHEAL_BOARD_STATE_SCORE_DISPLAY)
     {
@@ -1585,24 +1589,24 @@ void UpdateSphealResultsScreen(void)
             break;
     }
 
-    characterTileIx[0] = digitChar[0] * 2 + 0x2D0;
-    characterTileIx[1] = digitChar[1] * 2 + 0x2D0;
-    characterTileIx[2] = digitChar[2] * 2 + 0x2D0;
-    characterTileIx[3] = digitChar[3] * 2 + 0x2D0;
-    characterTileIx[4] = digitChar[4] * 2 + 0x2D0;
-    characterTileIx[5] = digitChar[5] * 2 + 0x2D0;
-    characterTileIx[6] = digitChar[6] * 2 + 0x2D0;
-    characterTileIx[7] = digitChar[7] * 2 + 0x2D0;
-    characterTileIx[8] = digitChar[8] * 2 + 0x2D0;
-    characterTileIx[9] = digitChar[9] * 2 + 0x2D0;
+    characterTileIx[0] = TileIxForSphealResultsChar(digitChar[0]);
+    characterTileIx[1] = TileIxForSphealResultsChar(digitChar[1]);
+    characterTileIx[2] = TileIxForSphealResultsChar(digitChar[2]);
+    characterTileIx[3] = TileIxForSphealResultsChar(digitChar[3]);
+    characterTileIx[4] = TileIxForSphealResultsChar(digitChar[4]);
+    characterTileIx[5] = TileIxForSphealResultsChar(digitChar[5]);
+    characterTileIx[6] = TileIxForSphealResultsChar(digitChar[6]);
+    characterTileIx[7] = TileIxForSphealResultsChar(digitChar[7]);
+    characterTileIx[8] = TileIxForSphealResultsChar(digitChar[8]);
+    characterTileIx[9] = TileIxForSphealResultsChar(digitChar[9]);
 
     value = gCurrentPinballGame->sphealKnockdownDisplayCount[0];
     digitChar[0] = LEAD_DIGIT_10S(value);
     digitChar[1] = DIGIT_1S(value);
     if (digitChar[0] == 0)
         digitChar[0] = 0x14;
-    characterTileIx[10] = digitChar[0] * 2 + 0x2D0;
-    characterTileIx[11] = digitChar[1] * 2 + 0x2D0;
+    characterTileIx[10] = TileIxForSphealResultsChar(digitChar[0]);
+    characterTileIx[11] = TileIxForSphealResultsChar(digitChar[1]);
 
     group = &gMain.spriteGroups[SG_SPHEAL_END_SCORE_SPHEALS_SUNK];
     group->baseX = 120;
@@ -1634,24 +1638,24 @@ void UpdateSphealResultsScreen(void)
             break;
     }
 
-    characterTileIx[0] = digitChar[0] * 2 + 0x2D0;
-    characterTileIx[1] = digitChar[1] * 2 + 0x2D0;
-    characterTileIx[2] = digitChar[2] * 2 + 0x2D0;
-    characterTileIx[3] = digitChar[3] * 2 + 0x2D0;
-    characterTileIx[4] = digitChar[4] * 2 + 0x2D0;
-    characterTileIx[5] = digitChar[5] * 2 + 0x2D0;
-    characterTileIx[6] = digitChar[6] * 2 + 0x2D0;
-    characterTileIx[7] = digitChar[7] * 2 + 0x2D0;
-    characterTileIx[8] = digitChar[8] * 2 + 0x2D0;
-    characterTileIx[9] = digitChar[9] * 2 + 0x2D0;
+    characterTileIx[0] = TileIxForSphealResultsChar(digitChar[0]);
+    characterTileIx[1] = TileIxForSphealResultsChar(digitChar[1]);
+    characterTileIx[2] = TileIxForSphealResultsChar(digitChar[2]);
+    characterTileIx[3] = TileIxForSphealResultsChar(digitChar[3]);
+    characterTileIx[4] = TileIxForSphealResultsChar(digitChar[4]);
+    characterTileIx[5] = TileIxForSphealResultsChar(digitChar[5]);
+    characterTileIx[6] = TileIxForSphealResultsChar(digitChar[6]);
+    characterTileIx[7] = TileIxForSphealResultsChar(digitChar[7]);
+    characterTileIx[8] = TileIxForSphealResultsChar(digitChar[8]);
+    characterTileIx[9] = TileIxForSphealResultsChar(digitChar[9]);
 
     value = gCurrentPinballGame->sphealKnockdownDisplayCount[1];
     digitChar[0] = LEAD_DIGIT_10S(value);
     digitChar[1] = DIGIT_1S(value);
     if (digitChar[0] == 0)
         digitChar[0] = 0x14;
-    characterTileIx[10] = digitChar[0] * 2 + 0x2D0;
-    characterTileIx[11] = digitChar[1] * 2 + 0x2D0;
+    characterTileIx[10] = TileIxForSphealResultsChar(digitChar[0]);
+    characterTileIx[11] = TileIxForSphealResultsChar(digitChar[1]);
 
     group = &gMain.spriteGroups[SG_SPHEAL_END_SCORE_BALLS_SUNK];
     group->baseX = 120;
@@ -1686,20 +1690,20 @@ void UpdateSphealResultsScreen(void)
             break;
     }
 
-    characterTileIx[0] = digitChar[0] * 2 + 0x2D0;
-    characterTileIx[1] = digitChar[1] * 2 + 0x2D0;
-    characterTileIx[2] = digitChar[2] * 2 + 0x2D0;
-    characterTileIx[3] = digitChar[3] * 2 + 0x2D0;
-    characterTileIx[4] = digitChar[4] * 2 + 0x2D0;
-    characterTileIx[5] = digitChar[5] * 2 + 0x2D0;
-    characterTileIx[6] = digitChar[6] * 2 + 0x2D0;
-    characterTileIx[7] = digitChar[7] * 2 + 0x2D0;
-    characterTileIx[8] = digitChar[8] * 2 + 0x2D0;
-    characterTileIx[9] = digitChar[9] * 2 + 0x2D0;
-    characterTileIx[10] = digitChar[10] * 2 + 0x2D0;
+    characterTileIx[0] = TileIxForSphealResultsChar(digitChar[0]);
+    characterTileIx[1] = TileIxForSphealResultsChar(digitChar[1]);
+    characterTileIx[2] = TileIxForSphealResultsChar(digitChar[2]);
+    characterTileIx[3] = TileIxForSphealResultsChar(digitChar[3]);
+    characterTileIx[4] = TileIxForSphealResultsChar(digitChar[4]);
+    characterTileIx[5] = TileIxForSphealResultsChar(digitChar[5]);
+    characterTileIx[6] = TileIxForSphealResultsChar(digitChar[6]);
+    characterTileIx[7] = TileIxForSphealResultsChar(digitChar[7]);
+    characterTileIx[8] = TileIxForSphealResultsChar(digitChar[8]);
+    characterTileIx[9] = TileIxForSphealResultsChar(digitChar[9]);
+    characterTileIx[10] = TileIxForSphealResultsChar(digitChar[10]);
     value = gCurrentPinballGame->ballUpgradeType + 1;
     digitChar[0] = value;
-    characterTileIx[11] = digitChar[0] * 2 + 0x2D0;
+    characterTileIx[11] = TileIxForSphealResultsChar(digitChar[0]);
 
     group = &gMain.spriteGroups[SG_SPHEAL_END_SCORE_TOTAL];
     group->baseX = 120;
