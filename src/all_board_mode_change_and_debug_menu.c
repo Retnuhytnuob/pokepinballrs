@@ -24,7 +24,7 @@ extern const Palette gBallSaver_Ruby_Pal;
 extern const Palette gBallSaver_Sapphire_Pal;
 extern const Palette gEndOfBallBonus_Ruby_Pal;
 extern const Palette gEndOfBallBonus_Sapphire_Pal;
-extern const s8 gBonusSummaryTextTemplates[][3][20];
+extern const s8 gBonusSummaryTextTemplates[][EOB_SUMMARY_LINES][EOB_SUMMARY_CHARS_PER_LINE];
 
 // Handle debug system flags
 void BonusStage_HandleModeChangeFlags(void)
@@ -217,8 +217,8 @@ void EndOfBallSequence(void)
             }
 
             m4aSongNumStart(SE_BONUS_PANEL_SLIDE);
-            for (i = 0; i < 3; i++)
-                for (j = 0; j < 20; j++)
+            for (i = 0; i < EOB_SUMMARY_LINES; i++)
+                for (j = 0; j < EOB_SUMMARY_CHARS_PER_LINE; j++)
                     gCurrentPinballGame->bonusTextRevealMask[i][j] = FALSE;
         }
         else if (gMain.animationTimer == 1)
@@ -584,9 +584,9 @@ void EndOfBallBonusSummary(void)
     userScoreDisplayAdvance = FALSE;
     playTextProgressSound = FALSE;
 
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < EOB_SUMMARY_LINES; i++)
     {
-        for (j = 0; j < 20; j++)
+        for (j = 0; j < EOB_SUMMARY_CHARS_PER_LINE; j++)
         {
             s16 var1 = gCurrentPinballGame->bonusTextContent[i][j];
             if (var1 == 95)
@@ -615,7 +615,7 @@ void EndOfBallBonusSummary(void)
             {
                 gCurrentPinballGame->bonusSummaryTimer = 100;
                 textRevealTimer = 100;
-                gCurrentPinballGame->bonusSummaryPhase = 6;
+                gCurrentPinballGame->bonusSummaryPhase = EOB_BONUS_PHASE_ADD_TO_SCORE;
                 gCurrentPinballGame->bonusSubtotal =
                     gCurrentPinballGame->bonusCatchCount * SCORE_BONUS_PER_CATCH +
                     gCurrentPinballGame->bonusMonEvoCount * SCORE_BONUS_PER_EVO +
@@ -626,15 +626,15 @@ void EndOfBallBonusSummary(void)
                 gCurrentPinballGame->bonusCategoryScore = 0;
                 gMain.animationTimer = 150;
 
-                for (j = 0; j < 20; j++)
+                for (j = 0; j < EOB_SUMMARY_CHARS_PER_LINE; j++)
                     gCurrentPinballGame->bonusTextRevealMask[0][j] = TRUE;
-                for (j = 0; j < 20; j++)
+                for (j = 0; j < EOB_SUMMARY_CHARS_PER_LINE; j++)
                     gCurrentPinballGame->bonusTextRevealMask[1][j] = TRUE;
-                for (j = 0; j < 20; j++)
+                for (j = 0; j < EOB_SUMMARY_CHARS_PER_LINE; j++)
                     gCurrentPinballGame->bonusTextRevealMask[2][j] = TRUE;
 
-                for (i = 0; i < 3; i++)
-                    for (j = 0; j < 20; j++)
+                for (i = 0; i < EOB_SUMMARY_LINES; i++)
+                    for (j = 0; j < EOB_SUMMARY_CHARS_PER_LINE; j++)
                         gCurrentPinballGame->bonusTextContent[i][j] = gBonusSummaryTextTemplates[gCurrentPinballGame->bonusSummaryPhase][i][j];
 
                 userScoreDisplayAdvance = TRUE;
@@ -661,11 +661,11 @@ void EndOfBallBonusSummary(void)
     {
         gCurrentPinballGame->bonusSummaryComplete = 0;
         gCurrentPinballGame->bonusSummaryTimer = 212;
-        gCurrentPinballGame->bonusSummaryPhase = 0;
+        gCurrentPinballGame->bonusSummaryPhase = EOB_BONUS_PHASE_MONS_CAUGHT;
         gCurrentPinballGame->bonusSubtotal = 0;
         gCurrentPinballGame->bonusCategoryScore = 0;
-        for (i = 0; i < 3; i++)
-            for (j = 0; j < 20; j++)
+        for (i = 0; i < EOB_SUMMARY_LINES; i++)
+            for (j = 0; j < EOB_SUMMARY_CHARS_PER_LINE; j++)
                 gCurrentPinballGame->bonusTextContent[i][j] = gBonusSummaryTextTemplates[gCurrentPinballGame->bonusSummaryPhase][i][j];
     }
 
@@ -674,7 +674,7 @@ void EndOfBallBonusSummary(void)
         if (gMain.animationTimer < 150)
             gMain.animationTimer++;
 
-        if (gCurrentPinballGame->bonusSummaryPhase < 5)
+        if (gCurrentPinballGame->bonusSummaryPhase < EOB_BONUS_PHASE_SUBTOTAL_SLIDES_UP)
         {
             if (textRevealTimer < 89)
             {
@@ -685,7 +685,7 @@ void EndOfBallBonusSummary(void)
                 for (i = 0; i <= lineRevealSegment; i++)
                 {
                     j = ((textRevealTimer - i * 24) % 40) / 2;
-                    if (gCurrentPinballGame->bonusSummaryPhase == 0 || i != 2)
+                    if (gCurrentPinballGame->bonusSummaryPhase == EOB_BONUS_PHASE_MONS_CAUGHT || i != 2)
                     {
                         if (!gCurrentPinballGame->bonusTextRevealMask[i][j]
                             && gCurrentPinballGame->bonusTextContent[i][j] != 95)
@@ -715,12 +715,12 @@ void EndOfBallBonusSummary(void)
             {
                 gCurrentPinballGame->bonusSummaryTimer = 212;
                 gCurrentPinballGame->bonusSummaryPhase++;
-                for (i = 0; i < 3; i++)
-                    for (j = 0; j < 20; j++)
+                for (i = 0; i < EOB_SUMMARY_LINES; i++)
+                    for (j = 0; j < EOB_SUMMARY_CHARS_PER_LINE; j++)
                         gCurrentPinballGame->bonusTextContent[i][j] = gBonusSummaryTextTemplates[gCurrentPinballGame->bonusSummaryPhase][i][j];
             }
         }
-        else if (gCurrentPinballGame->bonusSummaryPhase == 5)
+        else if (gCurrentPinballGame->bonusSummaryPhase == EOB_BONUS_PHASE_SUBTOTAL_SLIDES_UP)
         {
             if (textRevealTimer < 17)
             {
@@ -733,15 +733,15 @@ void EndOfBallBonusSummary(void)
                 subtotalSlideYPos = 0;
                 gCurrentPinballGame->bonusSummaryTimer = 212;
                 gCurrentPinballGame->bonusSummaryPhase++;
-                for (j = 0; j < 20; j++)
+                for (j = 0; j < EOB_SUMMARY_CHARS_PER_LINE; j++)
                     gCurrentPinballGame->bonusTextRevealMask[0][j] = TRUE;
-                for (j = 0; j < 20; j++)
+                for (j = 0; j < EOB_SUMMARY_CHARS_PER_LINE; j++)
                     gCurrentPinballGame->bonusTextRevealMask[1][j] = FALSE;
-                for (j = 0; j < 20; j++)
+                for (j = 0; j < EOB_SUMMARY_CHARS_PER_LINE; j++)
                     gCurrentPinballGame->bonusTextRevealMask[2][j] = FALSE;
 
-                for (i = 0; i < 3; i++)
-                    for (j = 0; j < 20; j++)
+                for (i = 0; i < EOB_SUMMARY_LINES; i++)
+                    for (j = 0; j < EOB_SUMMARY_CHARS_PER_LINE; j++)
                         gCurrentPinballGame->bonusTextContent[i][j] = gBonusSummaryTextTemplates[gCurrentPinballGame->bonusSummaryPhase][i][j];
             }
         }
@@ -780,35 +780,35 @@ void EndOfBallBonusSummary(void)
     {
         switch (gCurrentPinballGame->bonusSummaryPhase)
         {
-        case 0:
+        case EOB_BONUS_PHASE_MONS_CAUGHT:
             value = gCurrentPinballGame->bonusCatchCount;
             multiplier = SCORE_BONUS_PER_CATCH;
             break;
-        case 1:
+        case EOB_BONUS_PHASE_MONS_EVOLVED:
             value = gCurrentPinballGame->bonusMonEvoCount;
             multiplier = SCORE_BONUS_PER_EVO;
             break;
-        case 2:
+        case EOB_BONUS_PHASE_TRAVELED_AREAS:
             value = gCurrentPinballGame->travelModeCompletionCount;
             multiplier = SCORE_BONUS_PER_TRAVEL;
             break;
-        case 3:
+        case EOB_BONUS_PHASE_SLOTS_PLAYED:
             value = gCurrentPinballGame->slotsPlayedCount;
             multiplier = SCORE_BONUS_PER_SLOTS_PLAYED;
             break;
-        case 4:
+        case EOB_BONUS_PHASE_PIKA_SAVER:
             value = gCurrentPinballGame->bonusPikaSaverCount;
             multiplier = SCORE_BONUS_PER_PIKA_SAVER;
             break;
-        case 5:
+        case EOB_BONUS_PHASE_SUBTOTAL_SLIDES_UP:
             value = 0;
             multiplier = 0;
             break;
-        case 6:
+        case EOB_BONUS_PHASE_ADD_TO_SCORE:
             break;
         }
 
-        if (gCurrentPinballGame->bonusSummaryPhase < 5)
+        if (gCurrentPinballGame->bonusSummaryPhase < EOB_BONUS_PHASE_SUBTOTAL_SLIDES_UP)
         {
             // Line 0 score display: category count
             for (i = 0; i < 10; i++)
@@ -858,7 +858,7 @@ void EndOfBallBonusSummary(void)
             for (j = 0; j <= i; j++)
                 gCurrentPinballGame->bonusTextContent[2][19 - j] = scoreDigit[j] + DIGIT_TILE_BASE_IX;
         }
-        else if (gCurrentPinballGame->bonusSummaryPhase == 5)
+        else if (gCurrentPinballGame->bonusSummaryPhase == EOB_BONUS_PHASE_SUBTOTAL_SLIDES_UP)
         {
             // Subtotal line (moving up to first row)
             for (i = 0; i < 10; i++)
@@ -959,7 +959,7 @@ void EndOfBallBonusSummary(void)
     if (textRevealTimer >= 90 && textRevealTimer <= 140)
     {
         // Tally section score
-        if (gCurrentPinballGame->bonusSummaryPhase < 5)
+        if (gCurrentPinballGame->bonusSummaryPhase < EOB_BONUS_PHASE_SUBTOTAL_SLIDES_UP)
         {
             // Tally Category score into subtotal
 
@@ -997,7 +997,7 @@ void EndOfBallBonusSummary(void)
             for (j = 0; j <= i; j++)
                 gCurrentPinballGame->bonusTextContent[2][19 - j] = scoreDigit[j] + DIGIT_TILE_BASE_IX;
         }
-        else if (gCurrentPinballGame->bonusSummaryPhase == 6)
+        else if (gCurrentPinballGame->bonusSummaryPhase == EOB_BONUS_PHASE_ADD_TO_SCORE)
         {
             // Tally total bonus score into main score
             gCurrentPinballGame->bonusSummaryComplete = 1;
@@ -1032,7 +1032,7 @@ void EndOfBallBonusSummary(void)
             // Display remaining bonus score total (line 2)
             for (i = 0; i < 11; i++)
                 scoreDigit[i] = 0;
-            for (j = 0; j < 20; j++)
+            for (j = 0; j < EOB_SUMMARY_CHARS_PER_LINE; j++)
                 gCurrentPinballGame->bonusTextContent[2][j] = gBonusSummaryTextTemplates[gCurrentPinballGame->bonusSummaryPhase][2][j];
 
             scoreHi = gCurrentPinballGame->bonusTotalScoreHi;
@@ -1051,7 +1051,7 @@ void EndOfBallBonusSummary(void)
             // No display for leading 0s
             for (i = 10; i > 0 && (scoreDigit[i] <= 0 || scoreDigit[i] == 10); i--) {}
             for (j = 0; j <= i; j++)
-                gCurrentPinballGame->bonusTextContent[2][19 - j] = scoreDigit[j] + DIGIT_TILE_BASE_IX;
+                gCurrentPinballGame->bonusTextContent[2][(EOB_SUMMARY_CHARS_PER_LINE -1) - j] = scoreDigit[j] + DIGIT_TILE_BASE_IX;
         }
     }
 
