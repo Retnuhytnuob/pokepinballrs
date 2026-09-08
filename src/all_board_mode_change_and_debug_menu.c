@@ -96,17 +96,17 @@ void DebugMenu_RenderAndHandleInput(void)
         if (JOY_NEW(DPAD_DOWN) && gMain.debugMenuCursorIndex == 0)
             gMain.debugMenuCursorIndex++;
 
-        if (gCurrentPinballGame->debugMenuSelection == 2)
+        if (gCurrentPinballGame->debugMenuSelection == DEBUG_MODE_TOGGLE_BALL_SPEED)
             DebugToggleBallSpeed();
     }
     else
     {
         switch (gCurrentPinballGame->debugMenuSelection)
         {
-        case 1:
+        case DEBUG_MODE_MOVE_BALL:
             DebugMoveBallPosition();
             break;
-        case 2:
+        case DEBUG_MODE_TOGGLE_BALL_SPEED:
             DebugToggleBallSpeed();
             break;
         }

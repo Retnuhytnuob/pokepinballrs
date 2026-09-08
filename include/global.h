@@ -149,7 +149,7 @@ struct FlipperState
     /*0x05*/ s8 collisionMapFrame;
     /*0x06*/ s8 active; // Indicates flipper 'powered'
     /*0x07*/ u8 stallTicks;
-    /*0x08*/ s8 ballSide;
+    /*0x08*/ s8 ballSide; // Ball is 'Above' (1) or 'Below' (-1) the plane of the flipper
     /*0x09*/ u8 filler9[0x3];
 };
 
@@ -183,8 +183,8 @@ struct PinballGame
     /*0x01F*/ u8 ballPhysicsState;
     /*0x020*/ u8 ballInLaunchChute;
     /*0x021*/ u8 launcherCharging;
-    /*0x022*/ s8 collisionResponseType;
-    /*0x023*/ u8 collisionSurfaceType; // Holds the value of some enum state
+    /*0x022*/ s8 collisionResolutionState;
+    /*0x023*/ u8 collisionBounceBehaviorType; // Holds the value of some enum state
     /*0x024*/ s8 boardLayerDepth;
     /*0x025*/ s8 ballCatchState; // 0=Not caught, 1=Catch mode hole, 2=Egg Hatch Hole, 3=Evo Shop hole, 4=Center hole
     /*0x026*/ u16 collisionCooldownTimer;

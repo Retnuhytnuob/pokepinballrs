@@ -173,7 +173,7 @@ void PinballGame_State0_49ED4(void)
     gBoardConfig.caughtSpeciesCount = 0;
     for (j = 0; j < NUM_SPECIES; j++)
     {
-        if (gMain_saveData.pokedexFlags[j] > SPECIES_SHARED_AND_SEEN)
+        if (gMain_saveData.pokedexFlags[j] > SPECIES_DEX_SHARED_AND_SEEN)
             gBoardConfig.caughtSpeciesCount++;
     }
 
@@ -349,7 +349,7 @@ void SetBallPositionForBonusReturn(void)
 {
     switch (gCurrentPinballGame->bonusReturnState)
     {
-    case 0:
+    case BONUS_RETURN_LOCATION_CENTER_KICKOUT:
         gCurrentPinballGame->ball->positionQ0.x = 119;
         gCurrentPinballGame->ball->positionQ0.y = 279;
         gCurrentPinballGame->ball->velocity.x = 0;
@@ -371,7 +371,7 @@ void SetBallPositionForBonusReturn(void)
         gCurrentPinballGame->cameraBaseX = 0;
         gCurrentPinballGame->cameraBaseY = 215;
         break;
-    case 1:
+    case BONUS_RETURN_LOCATION_WHISCASH:
         gCurrentPinballGame->ball->positionQ0.x = 140;
         gCurrentPinballGame->ball->positionQ0.y = 183;
         gCurrentPinballGame->ball->velocity.x = 0;
@@ -387,7 +387,7 @@ void SetBallPositionForBonusReturn(void)
         gCurrentPinballGame->cameraBaseX = 0;
         gCurrentPinballGame->cameraBaseY = 118;
         break;
-    case 2:
+    case BONUS_RETURN_LOCATION_PELIPPER:
         gCurrentPinballGame->ball->positionQ0.x = -28;
         gCurrentPinballGame->ball->positionQ0.y = -10;
         gCurrentPinballGame->ball->velocity.x = 0;

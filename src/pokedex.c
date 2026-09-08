@@ -327,7 +327,7 @@ void Pokedex_HandleListInput(void)
         {
             gPokedexDetailFrameCount = 0;
 
-            if (gPokedexFlags[gPokedexSelectedMon] >= SPECIES_SHARED)
+            if (gPokedexFlags[gPokedexSelectedMon] >= SPECIES_DEX_SHARED)
             {
                 gPokedexShowButtonPrompt = FALSE;
                 DmaCopy16(3, 0x6000280, gPokedexInfoWindowBackupTiles, 0x200);
@@ -488,7 +488,7 @@ void Pokedex_DetailViewInput(void)
 
     if (JOY_HELD(SELECT_BUTTON))
     {
-        if (gPokedexFlags[gPokedexSelectedMon] == SPECIES_CAUGHT)
+        if (gPokedexFlags[gPokedexSelectedMon] == SPECIES_DEX_CAUGHT)
         {
             if (gDexAnimationIx[gPokedexSelectedMon] == -1)
             {
@@ -925,7 +925,7 @@ void Pokedex_CheckDeleteKeyComboPressed(void)
 
 void UpdateMonSpriteVisibility(void)
 {
-    if (gPokedexFlags[gPokedexSelectedMon] == SPECIES_CAUGHT)
+    if (gPokedexFlags[gPokedexSelectedMon] == SPECIES_DEX_CAUGHT)
     {
         if (gDexAnimationIx[gPokedexSelectedMon] == -1)
         {
@@ -962,7 +962,7 @@ void UpdateMonSpriteVisibility(void)
 
 u8 GetSelectedMonSpriteType(void)
 {
-    if (gPokedexFlags[gPokedexSelectedMon] == SPECIES_CAUGHT && gDexAnimationIx[gPokedexSelectedMon] != -1)
+    if (gPokedexFlags[gPokedexSelectedMon] == SPECIES_DEX_CAUGHT && gDexAnimationIx[gPokedexSelectedMon] != -1)
     {
         if (gDexAnimationIx[gPokedexSelectedMon] < 100)
             return 1;
@@ -1605,10 +1605,10 @@ int MasterReceivePokedexFlags(void)
         for (i = 0; i < 28; i++)
         {
             var0 = (gPokedexLinkChunkIndex - 8) * 28 + i;
-            if (gPokedexFlags[var0] == SPECIES_UNSEEN && arr0[i] == 4)
-                gPokedexFlagExchangeBuffer[var0] = SPECIES_SHARED;
-            else if (gPokedexFlags[var0] == SPECIES_SEEN && arr0[i] == 4)
-                gPokedexFlagExchangeBuffer[var0] = SPECIES_SHARED_AND_SEEN;
+            if (gPokedexFlags[var0] == SPECIES_DEX_UNSEEN && arr0[i] == 4)
+                gPokedexFlagExchangeBuffer[var0] = SPECIES_DEX_SHARED;
+            else if (gPokedexFlags[var0] == SPECIES_DEX_SEEN && arr0[i] == 4)
+                gPokedexFlagExchangeBuffer[var0] = SPECIES_DEX_SHARED_AND_SEEN;
         }
 
         if (gPokedexLinkChunkIndex == 15)
@@ -1694,10 +1694,10 @@ static int ClientReceivePokedexFlags(void)
         for (i = 0; i < 28; i++)
         {
             var0 = (gPokedexLinkChunkIndex - 8) * 28 + i;
-            if (gPokedexFlags[var0] == SPECIES_UNSEEN && arr0[i] == 4)
-                gPokedexFlagExchangeBuffer[var0] = SPECIES_SHARED;
-            else if (gPokedexFlags[var0] == SPECIES_SEEN && arr0[i] == 4)
-                gPokedexFlagExchangeBuffer[var0] = SPECIES_SHARED_AND_SEEN;
+            if (gPokedexFlags[var0] == SPECIES_DEX_UNSEEN && arr0[i] == 4)
+                gPokedexFlagExchangeBuffer[var0] = SPECIES_DEX_SHARED;
+            else if (gPokedexFlags[var0] == SPECIES_DEX_SEEN && arr0[i] == 4)
+                gPokedexFlagExchangeBuffer[var0] = SPECIES_DEX_SHARED_AND_SEEN;
         }
 
         if (gPokedexLinkChunkIndex == 15)
@@ -1724,7 +1724,7 @@ static void PrintSelectedMonDexNum(s16 species)
     var0 = 0;
     if (species == SPECIES_JIRACHI)
     {
-        if (gPokedexFlags[SPECIES_JIRACHI] != SPECIES_UNSEEN)
+        if (gPokedexFlags[SPECIES_JIRACHI] != SPECIES_DEX_UNSEEN)
         {
             PrintString(CHAR_2_FONT_1, 1, 5, 2, 1, 2);
             PrintString(CHAR_0_FONT_1, 1, 6, 2, 1, 2);
@@ -1744,7 +1744,7 @@ static void PrintSelectedMonDexNum(s16 species)
             PrintString(gPokedexEntries[species].dexNum[i] + 32, 1, i + 5, 2, 1, 2);
     }
 
-    if (gPokedexFlags[species] > SPECIES_UNSEEN)
+    if (gPokedexFlags[species] > SPECIES_DEX_UNSEEN)
     {
         for (i = 0; i < POKEMON_NAME_LENGTH; i++)
         {
@@ -1769,7 +1769,7 @@ static void PrintSelectedMonDexNum(s16 species)
             CopyBgTilesRect((void *)&gPokedexTextGlyphs_Gfx[ENGLISH_GLYPHS_START], (void *)0x06004C00 + i * 0x20, 1, 2);
     }
 
-    if (gPokedexFlags[species] == SPECIES_SEEN || gPokedexFlags[species] > SPECIES_SHARED)
+    if (gPokedexFlags[species] == SPECIES_DEX_SEEN || gPokedexFlags[species] > SPECIES_DEX_SHARED)
     {
         for (i = 0; i < POKEMON_CATEGORY_NAME_LENGTH; i++)
         {
@@ -1793,7 +1793,7 @@ static void PrintSelectedMonDexNum(s16 species)
             CopyBgTilesRect((void *)&gPokedexTextGlyphs_Gfx[ENGLISH_GLYPHS_START], (void *)0x06004D00 + i * 0x20, 1, 2);
     }
 
-    if (gPokedexFlags[species] == SPECIES_CAUGHT)
+    if (gPokedexFlags[species] == SPECIES_DEX_CAUGHT)
     {
         PrintString(gPokedexEntries[species].heightWeight[0] + 32, 1, 16, 6, 1, 2);
         PrintString(gPokedexEntries[species].heightWeight[1] + 32, 1, 17, 6, 1, 2);
@@ -1850,7 +1850,7 @@ void PrintDexNumbersFromListPosition(s16 listPosition)
     {
         if (listPosition + i == SPECIES_JIRACHI)
         {
-            if (gPokedexFlags[SPECIES_JIRACHI] != SPECIES_UNSEEN)
+            if (gPokedexFlags[SPECIES_JIRACHI] != SPECIES_DEX_UNSEEN)
             {
                 PrintString(CHAR_2_FONT_1, 2, 8, i * 2 + 10, 1, 2);
                 PrintString(CHAR_0_FONT_1, 2, 9, i * 2 + 10, 1, 2);
@@ -1873,7 +1873,7 @@ void PrintDexNumbersFromListPosition(s16 listPosition)
 
     for (i = 0; i < ENTRIES_SHOWN_COUNT; i++)
     {
-        if (gPokedexFlags[listPosition + i] > SPECIES_UNSEEN)
+        if (gPokedexFlags[listPosition + i] > SPECIES_DEX_UNSEEN)
         {
 			//This manually builds the tiles needed, for kerning reasons.
 			//First 3 bytes point to a tile glyph pair (with an upper and lower half) and
@@ -1914,7 +1914,7 @@ static void PrintCaughtBallFromListPosition(s16 position)
 
     for (i = 0; i < ENTRIES_SHOWN_COUNT; i++)
     {
-        var0 = gPokedexFlags[position + i] == SPECIES_CAUGHT ? CHAR_BALL_CAUGHT : CHAR_BALL_NOT_CAUGHT;
+        var0 = gPokedexFlags[position + i] == SPECIES_DEX_CAUGHT ? CHAR_BALL_CAUGHT : CHAR_BALL_NOT_CAUGHT;
         PrintString(var0, 1, 4, 10 + i * 2, 2, 2);
     }
 }
@@ -1926,20 +1926,20 @@ void LoadMonPortrait(s16 species)
     s16 var2 = species % 15;
     switch (state)
     {
-        case SPECIES_UNSEEN:
+        case SPECIES_DEX_UNSEEN:
             CopyBgTilesRect(gPokedexSprites_Gfx + 0x5C00, (void *)0x06013400, 24, 1);
             DmaCopy16(3, gPokedexSprites_Pals, OBJ_PLTT_SLOT(PAL_IX_BALL), PLTT_SLOT_SIZE);
             break;
-        case SPECIES_SEEN:
+        case SPECIES_DEX_SEEN:
             CopyBgTilesRect(gMonPortraitGroupGfx[var1] + var2 * 0x300, (void *)0x06013400, 24, 1);
             DmaCopy16(3, gMonPortraitGroupPals[0][15], OBJ_PLTT_SLOT(PAL_IX_BALL), PLTT_SLOT_SIZE);
             break;
-        case SPECIES_SHARED:
-        case SPECIES_SHARED_AND_SEEN:
+        case SPECIES_DEX_SHARED:
+        case SPECIES_DEX_SHARED_AND_SEEN:
             CopyBgTilesRect(gMonPortraitGroupGfx[var1] + var2 * 0x300, (void *)0x06013400, 24, 1);
             DarkenPalette(&gMonPortraitGroupPals[var1][var2], OBJ_PLTT_SLOT(PAL_IX_BALL), 0x20, 0xE);
             break;
-        case SPECIES_CAUGHT:
+        case SPECIES_DEX_CAUGHT:
             CopyBgTilesRect(gMonPortraitGroupGfx[var1] + var2 * 0x300, (void *)0x06013400, 24, 1);
             DmaCopy16(3, gMonPortraitGroupPals[var1][var2], OBJ_PLTT_SLOT(PAL_IX_BALL), PLTT_SLOT_SIZE);
             break;
@@ -2379,14 +2379,14 @@ void LoadPokedexFlagsFromSave(void)
     {
         switch (gPokedexFlags[i])
         {
-        case SPECIES_CAUGHT:
+        case SPECIES_DEX_CAUGHT:
             gPokedexNumOwned++;
-        case SPECIES_SEEN:
-        case SPECIES_SHARED_AND_SEEN:
+        case SPECIES_DEX_SEEN:
+        case SPECIES_DEX_SHARED_AND_SEEN:
             gPokedexNumSeen++;
             break;
-        case SPECIES_UNSEEN:
-        case SPECIES_SHARED:
+        case SPECIES_DEX_UNSEEN:
+        case SPECIES_DEX_SHARED:
             break;
         }
     }
@@ -2438,5 +2438,5 @@ void ResetPokedex(void)
     int i;
 
     for (i = 0; i < NUM_SPECIES; i++)
-        gMain_saveData.pokedexFlags[i] = SPECIES_UNSEEN;
+        gMain_saveData.pokedexFlags[i] = SPECIES_DEX_UNSEEN;
 }

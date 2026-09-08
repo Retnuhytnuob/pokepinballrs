@@ -202,4 +202,10 @@ enum EndOfBallBonusPhase{
     EOB_BONUS_PHASE_ADD_TO_SCORE = 6
 };
 
+enum DebugMode{
+    DEBUG_MODE_NONE = 0,
+    DEBUG_MODE_MOVE_BALL = 1,
+    DEBUG_MODE_TOGGLE_BALL_SPEED = 2
+};
+
 #endif // GUARD_CONSTANTS_MAIN_BOARD_H

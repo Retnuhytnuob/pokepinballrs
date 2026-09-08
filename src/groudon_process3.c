@@ -588,7 +588,7 @@ void UpdateGroudonEntityLogic(void)
             {
                 if (gCurrentPinballGame->bossFrameTimer == 0)
                 {
-                    gCurrentPinballGame->boardShakeDirection = 0;
+                    gCurrentPinballGame->boardShakeDirection = TILT_SHAKE_DIRECTION_LEFT;
                     gCurrentPinballGame->boardShakeIntensity = 1;
                     gCurrentPinballGame->impactShakeTimer = 60;
                     PlayRumble(13);

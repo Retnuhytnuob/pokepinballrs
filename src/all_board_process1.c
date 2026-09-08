@@ -80,7 +80,7 @@ void UpdateFrameProcess1_PauseLogic_AllBoards(void)
     //Game is not paused
     if (gMain.modeChangeFlags == MODE_CHANGE_NONE)
     {
-        gCurrentPinballGame->debugMenuSelection = 0;
+        gCurrentPinballGame->debugMenuSelection = DEBUG_MODE_NONE;
         if (gMain.modeChangeDelayTimer != 0)
         {
             gMain.modeChangeDelayTimer--;

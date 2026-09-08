@@ -381,12 +381,12 @@
     const lower = name.toLowerCase();
     if (lower.includes("tiledata")) return "tile";
     if (lower.includes("angledata")) return "angle";
-    if (lower.includes("typedata") || lower.includes("collisiontype")) return "type";
+    if (lower.includes("typedata") || lower.includes("boardLogicCollisionType")) return "type";
     return null;
   }
 
   function detectBaseName(name) {
-    return name.replace(/(tiledata|angledata|typedata|collisiontype).*$/i, "");
+    return name.replace(/(tiledata|angledata|typedata|boardLogicCollisionType).*$/i, "");
   }
 
   async function loadFileSet(fileList) {
@@ -447,7 +447,7 @@
       }
       if (state.typeData.length % SUBCELLS !== 0) {
         ok = false;
-        messages.push("collisionType length is not divisible by 64 cells.");
+        messages.push("boardLogicCollisionType length is not divisible by 64 cells.");
       }
       if (state.angleData.length / SUBCELLS !== state.typeData.length / SUBCELLS) {
         messages.push(`Warning: angle collision tile count (${state.angleData.length / SUBCELLS}) does not match type count (${state.typeData.length / SUBCELLS}).`);
@@ -485,15 +485,15 @@
     return (trigger * 47 + 215) % 360;
   }
 
-  function collisionHue(collisionType) {
+  function collisionHue(boardLogicCollisionType) {
     // Lower nibble: physical collision type.
     // Keep 1/4 distinct, and make 3 immediately recognizable as bounce/red.
-    switch (collisionType) {
+    switch (boardLogicCollisionType) {
       case 0x1: return 26;   // inner wall edge: orange
       case 0x4: return 212;  // outer wall edge: blue
       case 0x3: return 0;    // bouncy surface: red
       case 0x2: return 96;   // other observed: green
-      default: return (collisionType * 39 + 70) % 360;
+      default: return (boardLogicCollisionType * 39 + 70) % 360;
     }
   }
 

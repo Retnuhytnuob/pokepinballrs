@@ -130,11 +130,12 @@ void SaveGameToSram(void)
     WriteAndVerifySramFast((const u8 *)gCurrentPinballGame, (void *)SRAM + 0x544, sizeof(*gCurrentPinballGame));
 }
 
+/// @brief 
+/// @param arg0 1 = restore game SRAM, 2 = load demo, 0 = ?
 void RestoreGameState(u16 arg0)
 {
     s16 i, j;
     s16 var0, var1;
-    int var2;
 
     if (arg0 == 1)
     {
@@ -145,8 +146,8 @@ void RestoreGameState(u16 arg0)
         DmaCopy16(3, gBoardConfig.pinballGame, gCurrentPinballGame, sizeof(*gCurrentPinballGame));
         gCurrentPinballGame->ball = &gCurrentPinballGame->ballStates[0];
         gCurrentPinballGame->cameraBall = &gCurrentPinballGame->ballStates[0];
-        var2 = gMain.idleDemoVariant;
-        if ((var2 & 0x3) == 1)
+
+        if ((gMain.idleDemoVariant % 4) == 1)
         {
             gCurrentPinballGame->pikaSpinMomentum = 0;
             gCurrentPinballGame->kickbackAnimFrameTimer = 0;
@@ -509,12 +510,12 @@ void RestoreMainFieldDynamicGraphics(void)
         case 9:
             if (gCurrentPinballGame->evoChainPosition > 0)
             {
-                if (gMain_saveData.pokedexFlags[gCurrentPinballGame->evoTargetSpecies] == 0)
+                if (gMain_saveData.pokedexFlags[gCurrentPinballGame->evoTargetSpecies] == SPECIES_DEX_UNSEEN)
                 {
                     gCurrentPinballGame->portraitGfxIndex[i] = 205;
                     DmaCopy16(3, gMonPortraitGroupPals[gCurrentPinballGame->portraitGfxIndex[i] / 15][gCurrentPinballGame->portraitGfxIndex[i] % 15], OBJ_PLTT_SLOT(PAL_IX_MON_PORTRAIT), PLTT_SLOT_SIZE);
                 }
-                else if (gMain_saveData.pokedexFlags[gCurrentPinballGame->evoTargetSpecies] <= 3)
+                else if (gMain_saveData.pokedexFlags[gCurrentPinballGame->evoTargetSpecies] < SPECIES_DEX_CAUGHT)
                 {
                     gCurrentPinballGame->portraitGfxIndex[i] = gCurrentPinballGame->evoTargetSpecies;
                     DmaCopy16(3, gMonPortraitGroupPals[0][15], OBJ_PLTT_SLOT(PAL_IX_MON_PORTRAIT), PLTT_SLOT_SIZE);

@@ -22,7 +22,7 @@ s16 CollisionCheck_Ruby(struct Vector16 *ballPosition, u16* collisionAngle) {
     s32 boardLayer;
 
     u32 boardTriggerType;
-    u32 collisionType;
+    u32 boardLogicCollisionType;
 
     hasCollisionImpact = FALSE;
     gCurrentPinballGame->ball->spinAcceleration = SPIN_BOOST_NONE;
@@ -41,16 +41,16 @@ s16 CollisionCheck_Ruby(struct Vector16 *ballPosition, u16* collisionAngle) {
 
     CheckRubyBoardCollision(ballPosition, &boardCollisionAngle, &boardCollisionType);
 
-    collisionType = boardCollisionType & COLLISION_TYPE_MASK;
+    boardLogicCollisionType = boardCollisionType & COLLISION_TYPE_MASK;
     boardTriggerType = boardCollisionType >> 4;
 
-    switch (collisionType)
+    switch (boardLogicCollisionType)
     {
-        case 1:
-        case 4:
-        case 6:
-            gCurrentPinballGame->collisionSurfaceType = (collisionType - 1);
-            gCurrentPinballGame->collisionResponseType = 1;
+        case BOARD_COLLISION_TYPE_NORMAL:
+        case BOARD_COLLISION_TYPE_OUTER_WALL:
+        case BOARD_COLLISION_TYPE_DYNAMIC:
+            gCurrentPinballGame->collisionBounceBehaviorType = boardLogicCollisionType - 1;
+            gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_PIXEL_WALK_CONTINUING;
             *collisionAngle = boardCollisionAngle;
 
             // angle range is "up", with a tiny margin
@@ -87,15 +87,15 @@ s16 CollisionCheck_Ruby(struct Vector16 *ballPosition, u16* collisionAngle) {
             }
             hasCollisionImpact = TRUE;
             break;
-        case 2:
-        case 3:
-            gCurrentPinballGame->collisionSurfaceType = collisionType - 1;
-            gCurrentPinballGame->collisionResponseType = 2;
+        case BOARD_COLLISION_TYPE_BUMPERS:
+        case BOARD_COLLISION_TYPE_SLINGSHOT:
+            gCurrentPinballGame->collisionBounceBehaviorType = boardLogicCollisionType - 1;
+            gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_PIXEL_WALK_ONE_STEP;
             *collisionAngle = boardCollisionAngle & COLLISION_ANGLE_MASK;
             hasCollisionImpact = TRUE;
 
             break;
-        case 5:
+        case BOARD_COLLISION_TYPE_CONDITIONAL:
             gCurrentPinballGame->whiscashState = WHISCASH_STATE_ABSORB_ZONE_HIT;
             gCurrentPinballGame->ballPhysicsState = BALL_PHYSICS_MANUAL;
             boardTriggerType = 0;
@@ -107,7 +107,7 @@ s16 CollisionCheck_Ruby(struct Vector16 *ballPosition, u16* collisionAngle) {
 }
 
 
-void CheckRubyBoardCollision(struct Vector16* ballPosition, u16* collisionAngle, u8* collisionType)
+void CheckRubyBoardCollision(struct Vector16* ballPosition, u16* collisionAngle, u8* boardLogicCollisionType)
 {
     s16 deltaX;
     s16 deltaY;
@@ -150,16 +150,16 @@ void CheckRubyBoardCollision(struct Vector16* ballPosition, u16* collisionAngle,
             // A Ball in the area being sucked in, or already hitting it won't affect it.
             if (gCurrentPinballGame->whiscashState <= WHISCASH_STATE_SITTING)
             {
-                *collisionType = lowerNibble;
+                *boardLogicCollisionType = lowerNibble;
                 gCurrentPinballGame->whiscashState = WHISCASH_STATE_HIT;
                 return;
             }
 
-            *collisionType = 1;
+            *boardLogicCollisionType = BOARD_COLLISION_TYPE_NORMAL;
             return;
         }
 
-        if (COLLISION_TYPE_MASK & *collisionType)
+        if (COLLISION_TYPE_MASK & *boardLogicCollisionType)
             return;
 
         deltaX = ballPosition->x + (u16) gCurrentPinballGame->rubyBumperCollisionPosition[0].x;
@@ -212,7 +212,7 @@ void CheckRubyBoardCollision(struct Vector16* ballPosition, u16* collisionAngle,
             gCurrentPinballGame->pondBumperStates[ix] = 107;
 
         *collisionAngle = maskedResult;
-        *collisionType = lowerNibble;
+        *boardLogicCollisionType = lowerNibble;
 
         if (gCurrentPinballGame->bumperHitCountdown > 0)
             return;
@@ -221,7 +221,7 @@ void CheckRubyBoardCollision(struct Vector16* ballPosition, u16* collisionAngle,
     }
     else
     {
-        if ((*collisionType & COLLISION_TYPE_MASK) == 0)
+        if ((*boardLogicCollisionType & COLLISION_TYPE_MASK) == 0)
         {
             if (gCurrentPinballGame->linooneSideBumperAnimPhase[SIDE_IX_LEFT] > 0)
             {
@@ -232,12 +232,12 @@ void CheckRubyBoardCollision(struct Vector16* ballPosition, u16* collisionAngle,
                 if (deltaX <= 71U && deltaY_alt <= 71U)
                 {
                     *collisionAngle = COLLISION_ANGLE_MASK & gRubyLinooneLeftCollisionMap[(deltaY_alt * 72) + deltaX];
-                    *collisionType = COLLISION_TYPE_MASK & gRubyLinooneLeftCollisionMap[(deltaY_alt * 72) + deltaX];
+                    *boardLogicCollisionType = COLLISION_TYPE_MASK & gRubyLinooneLeftCollisionMap[(deltaY_alt * 72) + deltaX];
 
-                    if (*collisionType & 1)
+                    if (*boardLogicCollisionType & 1)
                     {
                         gCurrentPinballGame->linooneSideBumperHitFlag = SIDE_COLLISION_LEFT;
-                        *collisionType = 6;
+                        *boardLogicCollisionType = BOARD_COLLISION_TYPE_DYNAMIC;
                     }
                 }
             }
@@ -250,12 +250,12 @@ void CheckRubyBoardCollision(struct Vector16* ballPosition, u16* collisionAngle,
                 if (deltaX <= 71U && deltaY <= 71U)
                 {
                     *collisionAngle = COLLISION_ANGLE_MASK & gRubyLinooneRightCollisionMap[(deltaY * 72) + deltaX];
-                    *collisionType = COLLISION_TYPE_MASK & gRubyLinooneRightCollisionMap[(deltaY * 72) + deltaX];
+                    *boardLogicCollisionType = COLLISION_TYPE_MASK & gRubyLinooneRightCollisionMap[(deltaY * 72) + deltaX];
 
-                    if (*collisionType & 1)
+                    if (*boardLogicCollisionType & 1)
                     {
                         gCurrentPinballGame->linooneSideBumperHitFlag = SIDE_COLLISION_RIGHT;
-                        *collisionType = 6;
+                        *boardLogicCollisionType = BOARD_COLLISION_TYPE_DYNAMIC;
                         return;
                     }
                 }
@@ -284,7 +284,7 @@ void ProcessRubyCollisionEvent(u8 triggerType, s16* hasCollisionImpact, u16* col
                 gCurrentPinballGame->ballCatchState= TRAP_EGG_HOLE;
 
             DispatchRubyCatchModeInit();
-            gCurrentPinballGame->collisionResponseType = 7;
+            gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_STOP_BALL;
             *hasCollisionImpact = TRUE;
             return;
         }
@@ -382,8 +382,8 @@ void ProcessRubyCollisionEvent(u8 triggerType, s16* hasCollisionImpact, u16* col
             {
                 gCurrentPinballGame->nuzleafHitFlag = 1;
                 gCurrentPinballGame->nuzleafAnimState = 1;
-                gCurrentPinballGame->collisionSurfaceType = 0;
-                gCurrentPinballGame->collisionResponseType = 2;
+                gCurrentPinballGame->collisionBounceBehaviorType = COLLISION_BOUNCE_BEHAVIOR_TYPE_NORMAL;
+                gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_PIXEL_WALK_ONE_STEP;
                 *collisionAngle = 0xB000;
                 *hasCollisionImpact = TRUE;
             }
@@ -392,8 +392,8 @@ void ProcessRubyCollisionEvent(u8 triggerType, s16* hasCollisionImpact, u16* col
         {
             gCurrentPinballGame->nuzleafHitFlag = 2;
             gCurrentPinballGame->nuzleafAnimState = 3;
-            gCurrentPinballGame->collisionSurfaceType = 0;
-            gCurrentPinballGame->collisionResponseType = 2;
+            gCurrentPinballGame->collisionBounceBehaviorType = COLLISION_BOUNCE_BEHAVIOR_TYPE_NORMAL;
+            gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_PIXEL_WALK_ONE_STEP;
             *collisionAngle = 0xA000;
             *hasCollisionImpact = TRUE;
             gCurrentPinballGame->ball->velocity.x = 0;
@@ -689,8 +689,8 @@ void ProcessRubyCollisionEvent(u8 triggerType, s16* hasCollisionImpact, u16* col
                 if (gCurrentPinballGame->shopDoorTargetFrame > 2U)
                     return;
 
-                gCurrentPinballGame->collisionSurfaceType = 0;
-                gCurrentPinballGame->collisionResponseType = 2;
+                gCurrentPinballGame->collisionBounceBehaviorType = COLLISION_BOUNCE_BEHAVIOR_TYPE_NORMAL;
+                gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_PIXEL_WALK_ONE_STEP;
                 *collisionAngle = 0xB000;
                 *hasCollisionImpact = TRUE;
 
@@ -708,8 +708,8 @@ void ProcessRubyCollisionEvent(u8 triggerType, s16* hasCollisionImpact, u16* col
                 // Ramp prize
                 if (gCurrentPinballGame->nuzleafAnimState <= 4)
                 {
-                    gCurrentPinballGame->collisionSurfaceType = 0;
-                    gCurrentPinballGame->collisionResponseType = 2;
+                    gCurrentPinballGame->collisionBounceBehaviorType = COLLISION_BOUNCE_BEHAVIOR_TYPE_NORMAL;
+                    gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_PIXEL_WALK_ONE_STEP;
                     *collisionAngle = 0xF800;
                     *hasCollisionImpact = TRUE;
                 }
@@ -786,8 +786,8 @@ void ProcessRubyCollisionEvent(u8 triggerType, s16* hasCollisionImpact, u16* col
         gCurrentPinballGame->eggCaveState++;
 
         gCurrentPinballGame->cyndaquilCollisionEnabled = FALSE;
-        gCurrentPinballGame->collisionSurfaceType = 0;
-        gCurrentPinballGame->collisionResponseType = 2;
+        gCurrentPinballGame->collisionBounceBehaviorType = COLLISION_BOUNCE_BEHAVIOR_TYPE_NORMAL;
+        gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_PIXEL_WALK_ONE_STEP;
 
         *collisionAngle = 0xD000;
         *hasCollisionImpact = TRUE;
@@ -807,8 +807,8 @@ void ProcessRubyCollisionEvent(u8 triggerType, s16* hasCollisionImpact, u16* col
 
         gCurrentPinballGame->eggCaveState++;
         gCurrentPinballGame->cyndaquilCollisionEnabled = FALSE;
-        gCurrentPinballGame->collisionSurfaceType = 0;
-        gCurrentPinballGame->collisionResponseType = 2;
+        gCurrentPinballGame->collisionBounceBehaviorType = COLLISION_BOUNCE_BEHAVIOR_TYPE_NORMAL;
+        gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_PIXEL_WALK_ONE_STEP;
         *collisionAngle = 0xCC00;
         *hasCollisionImpact = TRUE;
 
@@ -824,8 +824,8 @@ void ProcessRubyCollisionEvent(u8 triggerType, s16* hasCollisionImpact, u16* col
             {
                 if (gCurrentPinballGame->eggCaveState == 2)
                 {
-                    gCurrentPinballGame->collisionSurfaceType = 0;
-                    gCurrentPinballGame->collisionResponseType = 2;
+                    gCurrentPinballGame->collisionBounceBehaviorType = COLLISION_BOUNCE_BEHAVIOR_TYPE_NORMAL;
+                    gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_PIXEL_WALK_ONE_STEP;
                     *collisionAngle = 0xC800;
                     *hasCollisionImpact = TRUE;
                     gCurrentPinballGame->eggCaveState++;
@@ -837,8 +837,8 @@ void ProcessRubyCollisionEvent(u8 triggerType, s16* hasCollisionImpact, u16* col
                 }
                 else if (gCurrentPinballGame->eggCaveState == 3)
                 {
-                    gCurrentPinballGame->collisionSurfaceType = 0;
-                    gCurrentPinballGame->collisionResponseType = 2;
+                    gCurrentPinballGame->collisionBounceBehaviorType = COLLISION_BOUNCE_BEHAVIOR_TYPE_NORMAL;
+                    gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_PIXEL_WALK_ONE_STEP;
                     *collisionAngle = 0xC800;
                     *hasCollisionImpact = TRUE;
 
@@ -853,8 +853,8 @@ void ProcessRubyCollisionEvent(u8 triggerType, s16* hasCollisionImpact, u16* col
         {
             gCurrentPinballGame->eggCaveState++;
             gCurrentPinballGame->cyndaquilCollisionEnabled = FALSE;
-            gCurrentPinballGame->collisionSurfaceType = 0;
-            gCurrentPinballGame->collisionResponseType = 2;
+            gCurrentPinballGame->collisionBounceBehaviorType = COLLISION_BOUNCE_BEHAVIOR_TYPE_NORMAL;
+            gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_PIXEL_WALK_ONE_STEP;
             *collisionAngle = 0xC800;
             *hasCollisionImpact = TRUE;
 

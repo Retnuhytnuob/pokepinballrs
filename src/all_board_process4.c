@@ -12,9 +12,9 @@ void InitFrameProcess4_FlipperLogic_AllBoards(void)
         UpdateFrameProcess4_FlipperLogic_BonusBoards();
 }
 
-void DetermineFlipperBallSide(struct Vector16 arg0)
+void DetermineFlipperBallSide(struct Vector16 ballPos)
 {
-    s16 check;
+    s16 checkBallRelativeYPos;
     struct FlipperLineSegment *line;
     struct Vector16 point1, point2;
 
@@ -25,9 +25,9 @@ void DetermineFlipperBallSide(struct Vector16 arg0)
     point2.x = line->x2 + 0x53;
     point2.y = line->y2 + gBoardConfig.fieldLayout.flipperBaseY;
 
-    check = (point2.y - point1.y) * (arg0.x - point1.x) * 30 / (point2.x - point1.x) + (point1.y - arg0.y) * 30;
+    checkBallRelativeYPos = (point2.y - point1.y) * (ballPos.x - point1.x) * 30 / (point2.x - point1.x) + (point1.y - ballPos.y) * 30;
 
-    if (check >= 0)
+    if (checkBallRelativeYPos >= 0)
         gCurrentPinballGame->flipper[SIDE_IX_LEFT].ballSide = 1;
     else
         gCurrentPinballGame->flipper[SIDE_IX_LEFT].ballSide = -1;
@@ -40,9 +40,9 @@ void DetermineFlipperBallSide(struct Vector16 arg0)
     point2.x = 0x9C - line->x2;
     point2.y = line->y2 + gBoardConfig.fieldLayout.flipperBaseY;
 
-    check = (point2.y - point1.y) * (arg0.x - point1.x) * 30 / (point2.x - point1.x) + (point1.y - arg0.y) * 30;
+    checkBallRelativeYPos = (point2.y - point1.y) * (ballPos.x - point1.x) * 30 / (point2.x - point1.x) + (point1.y - ballPos.y) * 30;
 
-    if (check >= 0)
+    if (checkBallRelativeYPos >= 0)
         gCurrentPinballGame->flipper[SIDE_IX_RIGHT].ballSide = 1;
     else
         gCurrentPinballGame->flipper[SIDE_IX_RIGHT].ballSide = -1;

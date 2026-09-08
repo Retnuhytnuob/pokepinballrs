@@ -14,7 +14,7 @@ s16 CollisionCheck_Spheal(struct Vector16 *ballPosition, u16 *collisionAngle)
     s32 tileMapPage;
     s32 boardLayer;
     s16 collisionTileIndex;
-    u8 collisionType, boardTriggerType;
+    u8 boardLogicCollisionType, boardTriggerType;
 
     hasCollisionImpact = FALSE;
     gCurrentPinballGame->ball->spinAcceleration = SPIN_BOOST_NONE;
@@ -33,15 +33,15 @@ s16 CollisionCheck_Spheal(struct Vector16 *ballPosition, u16 *collisionAngle)
 
     CheckSphealEntityCollision(ballPosition, &boardCollisionAngle, &boardCollisionType);
 
-    collisionType = boardCollisionType & COLLISION_TYPE_MASK;
+    boardLogicCollisionType = boardCollisionType & COLLISION_TYPE_MASK;
     boardTriggerType = boardCollisionType >> 4;
-    switch (collisionType)
+    switch (boardLogicCollisionType)
     {
-        case 1:
-        case 4:
-        case 6:
-            gCurrentPinballGame->collisionSurfaceType = collisionType - 1;
-            gCurrentPinballGame->collisionResponseType = 1;
+        case BOARD_COLLISION_TYPE_NORMAL:
+        case BOARD_COLLISION_TYPE_OUTER_WALL:
+        case BOARD_COLLISION_TYPE_DYNAMIC:
+            gCurrentPinballGame->collisionBounceBehaviorType = boardLogicCollisionType - 1;
+            gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_PIXEL_WALK_CONTINUING;
             *collisionAngle = boardCollisionAngle;
             if (*collisionAngle >= ANGLE_UP_RANGE_MIN && *collisionAngle <= ANGLE_UP_RANGE_MAX)
             {
@@ -75,10 +75,10 @@ s16 CollisionCheck_Spheal(struct Vector16 *ballPosition, u16 *collisionAngle)
             }
             hasCollisionImpact = TRUE;
             break;
-        case 2:
-        case 3:
-            gCurrentPinballGame->collisionSurfaceType = 0;
-            gCurrentPinballGame->collisionResponseType = 1;
+        case BOARD_COLLISION_TYPE_BUMPERS:
+        case BOARD_COLLISION_TYPE_SLINGSHOT:
+            gCurrentPinballGame->collisionBounceBehaviorType = COLLISION_BOUNCE_BEHAVIOR_TYPE_NORMAL;
+            gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_PIXEL_WALK_CONTINUING;
             *collisionAngle = boardCollisionAngle & COLLISION_ANGLE_MASK;
 
             if (gCurrentPinballGame->ball->positionQ0.x < 120)
@@ -88,7 +88,7 @@ s16 CollisionCheck_Spheal(struct Vector16 *ballPosition, u16 *collisionAngle)
 
             hasCollisionImpact = TRUE;
             break;
-        case 5:
+        case BOARD_COLLISION_TYPE_CONDITIONAL:
             boardTriggerType = 4;
             break;
     }
@@ -97,7 +97,7 @@ s16 CollisionCheck_Spheal(struct Vector16 *ballPosition, u16 *collisionAngle)
     return hasCollisionImpact;
 }
 
-void CheckSphealEntityCollision(struct Vector16 *ballPosition, u16 *collisionAngle, u8 *collisionType)
+void CheckSphealEntityCollision(struct Vector16 *ballPosition, u16 *collisionAngle, u8 *boardLogicCollisionType)
 {
     s16 i;
     s16 deltaX, deltaY;
@@ -108,7 +108,7 @@ void CheckSphealEntityCollision(struct Vector16 *ballPosition, u16 *collisionAng
 
         if (gCurrentPinballGame->sphealEntityCollisionType[i] == SPHEAL_COLLISION_TYPE_SWIMMING)
         {
-            if ((*collisionType & COLLISION_TYPE_MASK) != 0)
+            if ((*boardLogicCollisionType & COLLISION_TYPE_MASK) != BOARD_COLLISION_TYPE_NONE)
                 continue;
 
             deltaX = ballPosition->x - gCurrentPinballGame->sphealEntityCollisionPos[i].x;
@@ -125,15 +125,15 @@ void CheckSphealEntityCollision(struct Vector16 *ballPosition, u16 *collisionAng
                 continue;
 
             *collisionAngle = upperReadFromRom;
-            *collisionType = lowerReadFromRom;
-            *collisionType = 6;
+            *boardLogicCollisionType = lowerReadFromRom;
+            *boardLogicCollisionType = BOARD_COLLISION_TYPE_DYNAMIC;
             gCurrentPinballGame->sphealEntityState[i] = SPHEAL_ENTITY_STATE_HIT;
         }
         else if (gCurrentPinballGame->sphealEntityCollisionType[i] != SPHEAL_COLLISION_TYPE_INACTIVE)
         {
             //Handles ramp and 'walk down' collisions
 
-            if ((*collisionType & COLLISION_TYPE_MASK) != 0)
+            if ((*boardLogicCollisionType & COLLISION_TYPE_MASK) != BOARD_COLLISION_TYPE_NONE)
                 continue;
 
             deltaX = ballPosition->x - gCurrentPinballGame->sphealEntityCollisionPos[i].x;
@@ -147,8 +147,8 @@ void CheckSphealEntityCollision(struct Vector16 *ballPosition, u16 *collisionAng
                 continue;
 
             *collisionAngle = upperReadFromRom;
-            *collisionType = lowerReadFromRom;
-            *collisionType = 6;
+            *boardLogicCollisionType = lowerReadFromRom;
+            *boardLogicCollisionType = BOARD_COLLISION_TYPE_DYNAMIC;
             if (gCurrentPinballGame->sphealEntityCollisionType[i] == SPHEAL_COLLISION_TYPE_ON_RAMP)
             {
                 gCurrentPinballGame->sphealEntityState[i] = SPHEAL_ENTITY_STATE_HIT;

@@ -12,8 +12,15 @@ void IdlePinballGameMain(void)
 
 void PinballGameIdle0_19048(void)
 {
+    enum DemoVariant{
+        DEMO_VARIANT_0 = 0,
+        DEMO_VARIANT_1 = 1,
+        DEMO_VARIANT_2 = 2,
+        DEMO_VARIANT_3 = 3
+    };
+
     s16 i;
-    s16 demoVariant;
+    u16 demoVariant;
     s8 demoFieldVariant;
 
     gMain.idleFrameCounter = 0;
@@ -27,25 +34,25 @@ void PinballGameIdle0_19048(void)
         gMain.idleDemoVariant = (Random() + gMain.systemFrameCount) % 30;
 
     demoVariant = gMain.idleDemoVariant;
-    demoFieldVariant = demoVariant & 3;
+    demoFieldVariant = demoVariant % 4;
     switch (demoFieldVariant)
     {
-    case 0:
+    case DEMO_VARIANT_0:
         gBoardConfig.idleDemoDuration = 0xA14;
         gBoardConfig.replayInputData = &gIdleBoardConfig0;
         gBoardConfig.pinballGame = &gIdleBoardGameState0;
         break;
-    case 1:
+    case DEMO_VARIANT_1:
         gBoardConfig.idleDemoDuration = 0xF00;
         gBoardConfig.replayInputData = &gIdleBoardConfig1;
         gBoardConfig.pinballGame = &gIdleBoardGameState1;
         break;
-    case 2:
+    case DEMO_VARIANT_2:
         gBoardConfig.idleDemoDuration = 0xD20;
         gBoardConfig.replayInputData = &gIdleBoardConfig2;
         gBoardConfig.pinballGame = &gIdleBoardGameState2;
         break;
-    case 3:
+    case DEMO_VARIANT_3:
         gBoardConfig.idleDemoDuration = 0xE4C;
         gBoardConfig.replayInputData = &gIdleBoardConfig3;
         gBoardConfig.pinballGame = &gIdleBoardGameState3;
@@ -56,16 +63,16 @@ void PinballGameIdle0_19048(void)
 
     switch (demoFieldVariant)
     {
-    case 0:
+    case DEMO_VARIANT_0:
         m4aSongNumStart(MUS_FIELD_RUBY);
         break;
-    case 1:
+    case DEMO_VARIANT_1:
         m4aSongNumStart(MUS_FIELD_SAPPHIRE);
         break;
-    case 2:
+    case DEMO_VARIANT_2:
         m4aSongNumStart(MUS_FIELD_RUBY);
         break;
-    case 3:
+    case DEMO_VARIANT_3:
         m4aSongNumStart(MUS_FIELD_SAPPHIRE);
         break;
     }

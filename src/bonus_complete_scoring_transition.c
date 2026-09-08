@@ -64,12 +64,12 @@ void ProcessBonusBannerAndScoring(void)
     struct SpriteGroup *group;
     struct OamDataSimple *oamSimple;
     s16 var0;
-    int var1;
-    s16 sp0[8];
-    s16 var2;
+    int bonusScore;
+    s16 scoreCharacter[8];
+    s16 scoreMultTileIx;
 
     var0 = 8;
-    var1 = 0;
+    bonusScore = 0;
     group = &gMain.spriteGroups[SG_BONUS_COMPLETE_BANNER];
     if (gCurrentPinballGame->bannerSlideYOffset > 0)
     {
@@ -84,28 +84,28 @@ void ProcessBonusBannerAndScoring(void)
         if (gCurrentPinballGame->boardState == DUSCLOPS_BOARD_STATE_SCORE_PHASE
             && gCurrentPinballGame->stageTimer < 180)
             var0 = (gCurrentPinballGame->stageTimer % 24) / 12 + 8;
-        var1 = SCORE_DUSCLOPS_BONUS_COMPLETE;
+        bonusScore = SCORE_DUSCLOPS_BONUS_COMPLETE;
         break;
     case FIELD_KECLEON:
         if (gCurrentPinballGame->boardState == KECLEON_BOARD_STATE_SCORING && gCurrentPinballGame->stageTimer < 180)
             var0 = (gCurrentPinballGame->stageTimer % 24) / 12 + 8;
-        var1 = SCORE_KECLEON_BONUS_COMPLETE;
+        bonusScore = SCORE_KECLEON_BONUS_COMPLETE;
         break;
     case FIELD_KYOGRE:
         if (gCurrentPinballGame->boardState == LEGENDARY_BOARD_STATE_SUCCESS_SCORING && gCurrentPinballGame->stageTimer < 180)
             var0 = (gCurrentPinballGame->stageTimer % 24) / 12 + 8;
-        var1 = SCORE_KYOGRE_BONUS_COMPLETE;
+        bonusScore = SCORE_KYOGRE_BONUS_COMPLETE;
         break;
     case FIELD_GROUDON:
         if (gCurrentPinballGame->boardState == LEGENDARY_BOARD_STATE_SUCCESS_SCORING
             && gCurrentPinballGame->stageTimer < 180)
             var0 = (gCurrentPinballGame->stageTimer % 24) / 12 + 8;
-        var1 = SCORE_GROUDON_BONUS_COMPLETE;
+        bonusScore = SCORE_GROUDON_BONUS_COMPLETE;
         break;
     case FIELD_RAYQUAZA:
         if (gCurrentPinballGame->boardState == LEGENDARY_BOARD_STATE_SUCCESS_SCORING && gCurrentPinballGame->stageTimer < 180)
             var0 = (gCurrentPinballGame->stageTimer % 24) / 12 + 8;
-        var1 = SCORE_RAYQUAZA_BONUS_COMPLETE;
+        bonusScore = SCORE_RAYQUAZA_BONUS_COMPLETE;
         break;
     }
 
@@ -136,56 +136,56 @@ void ProcessBonusBannerAndScoring(void)
         }
     }
 
-    sp0[0] = LEAD_DIGIT_10M(var1);
-    sp0[1] = DIGIT_1M(var1);
-    sp0[2] = DIGIT_100K(var1);
-    sp0[3] = DIGIT_10K(var1);
-    sp0[4] = DIGIT_1K(var1);
-    sp0[5] = DIGIT_100S(var1);
-    sp0[6] = DIGIT_10S(var1);
-    sp0[7] = DIGIT_1S(var1);;
+    scoreCharacter[0] = LEAD_DIGIT_10M(bonusScore);
+    scoreCharacter[1] = DIGIT_1M(bonusScore);
+    scoreCharacter[2] = DIGIT_100K(bonusScore);
+    scoreCharacter[3] = DIGIT_10K(bonusScore);
+    scoreCharacter[4] = DIGIT_1K(bonusScore);
+    scoreCharacter[5] = DIGIT_100S(bonusScore);
+    scoreCharacter[6] = DIGIT_10S(bonusScore);
+    scoreCharacter[7] = DIGIT_1S(bonusScore);;
 
     switch (gMain.selectedField)
     {
     case FIELD_DUSCLOPS:
         for (i = 0; i < 8; i++)
         {
-            DmaCopy16(3, &gDusclopsBonusClear_Gfx[(sp0[i] + 0x70) * 0x40], (void *)0x06017000 + ((i * 2) + 12) * 0x20, 0x40);
+            DmaCopy16(3, &gDusclopsBonusClear_Gfx[(scoreCharacter[i] + 0x70) * 0x40], (void *)0x06017000 + ((i * 2) + 12) * 0x20, 0x40);
         }
-        var2 = gCurrentPinballGame->ballUpgradeType + 0x71;
-        DmaCopy16(3, &gDusclopsBonusClear_Gfx[var2 * 0x40], (void *)0x06017380, 0x40);
+        scoreMultTileIx = gCurrentPinballGame->ballUpgradeType + 0x71;
+        DmaCopy16(3, &gDusclopsBonusClear_Gfx[scoreMultTileIx * 0x40], (void *)0x06017380, 0x40);
         break;
     case FIELD_KECLEON:
         for (i = 0; i < 8; i++)
         {
-            DmaCopy16(3, &gKecleonBonusClear_Gfx[(sp0[i] + 0x70) * 0x40], (void *)0x06017000 + ((i * 2) + 12) * 0x20, 0x40);
+            DmaCopy16(3, &gKecleonBonusClear_Gfx[(scoreCharacter[i] + 0x70) * 0x40], (void *)0x06017000 + ((i * 2) + 12) * 0x20, 0x40);
         }
-        var2 = gCurrentPinballGame->ballUpgradeType + 0x71;
-        DmaCopy16(3, &gKecleonBonusClear_Gfx[var2 * 0x40], (void *)0x06017380, 0x40);
+        scoreMultTileIx = gCurrentPinballGame->ballUpgradeType + 0x71;
+        DmaCopy16(3, &gKecleonBonusClear_Gfx[scoreMultTileIx * 0x40], (void *)0x06017380, 0x40);
         break;
     case FIELD_KYOGRE:
         for (i = 0; i < 8; i++)
         {
-            DmaCopy16(3, &gKyogreBonusClear_Gfx[(sp0[i] + 0x70) * 0x40], (void *)0x06017000 + ((i * 2) + 12) * 0x20, 0x40);
+            DmaCopy16(3, &gKyogreBonusClear_Gfx[(scoreCharacter[i] + 0x70) * 0x40], (void *)0x06017000 + ((i * 2) + 12) * 0x20, 0x40);
         }
-        var2 = gCurrentPinballGame->ballUpgradeType + 0x71;
-        DmaCopy16(3, &gKyogreBonusClear_Gfx[var2 * 0x40], (void *)0x06017380, 0x40);
+        scoreMultTileIx = gCurrentPinballGame->ballUpgradeType + 0x71;
+        DmaCopy16(3, &gKyogreBonusClear_Gfx[scoreMultTileIx * 0x40], (void *)0x06017380, 0x40);
         break;
     case FIELD_GROUDON:
         for (i = 0; i < 8; i++)
         {
-            DmaCopy16(3, &gGroudonBonusClear_Gfx[(sp0[i] + 0x70) * 0x40], (void *)0x06017000 + ((i * 2) + 12) * 0x20, 0x40);
+            DmaCopy16(3, &gGroudonBonusClear_Gfx[(scoreCharacter[i] + 0x70) * 0x40], (void *)0x06017000 + ((i * 2) + 12) * 0x20, 0x40);
         }
-        var2 = gCurrentPinballGame->ballUpgradeType + 0x71;
-        DmaCopy16(3, &gGroudonBonusClear_Gfx[var2* 0x40], (void *)0x06017380, 0x40);
+        scoreMultTileIx = gCurrentPinballGame->ballUpgradeType + 0x71;
+        DmaCopy16(3, &gGroudonBonusClear_Gfx[scoreMultTileIx* 0x40], (void *)0x06017380, 0x40);
         break;
     case FIELD_RAYQUAZA:
         for (i = 0; i < 8; i++)
         {
-            DmaCopy16(3, &gRayquazaBonusClear_Gfx[(sp0[i] + 0x70) * 0x40], (void *)0x06017000 + ((i * 2) + 12) * 0x20, 0x40);
+            DmaCopy16(3, &gRayquazaBonusClear_Gfx[(scoreCharacter[i] + 0x70) * 0x40], (void *)0x06017000 + ((i * 2) + 12) * 0x20, 0x40);
         }
-        var2 = gCurrentPinballGame->ballUpgradeType + 0x71;
-        DmaCopy16(3, &gRayquazaBonusClear_Gfx[var2 * 0x40], (void *)0x06017380, 0x40);
+        scoreMultTileIx = gCurrentPinballGame->ballUpgradeType + 0x71;
+        DmaCopy16(3, &gRayquazaBonusClear_Gfx[scoreMultTileIx * 0x40], (void *)0x06017380, 0x40);
         break;
     }
 }

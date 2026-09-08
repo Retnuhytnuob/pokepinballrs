@@ -6263,7 +6263,7 @@ gBounceBackForceMagnitudes:: @ 0x086ACDF4
 	.2byte 0x0000, 0x00F0, 0x008C, 0x00C8
 	.2byte 0,0,0,0,0,0,0,0
 
-@ suspected as board level collision detection logic; one per board; 
+@ suspected as board level collision detection logic; one per board;
 @ similar contents for boards decompiled.
 BoardCollisionFuncts_086ACE0C:: @ 0x086ACE0C
 	.4byte CollisionCheck_Ruby, CollisionCheck_Sapphire;
