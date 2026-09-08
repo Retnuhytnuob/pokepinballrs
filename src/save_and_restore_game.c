@@ -503,11 +503,11 @@ void RestoreMainFieldDynamicGraphics(void)
     {
         switch (gCurrentPinballGame->portraitRenderMode[i])
         {
-        case 0:
+        case PORTRAIT_STATE_CURRENT_LOCATION:
             DmaCopy16(3, gLocationPortraitGfx[gCurrentPinballGame->portraitGfxIndex[i]], 0x06010CA0 + (i * 0x300), 0x300);
             gCurrentPinballGame->ball += 0; //TODO: Dumb match is still a match...
             break;
-        case 9:
+        case PORTRAIT_STATE_EVO_PREVIEW:
             if (gCurrentPinballGame->evoChainPosition > 0)
             {
                 if (gMain_saveData.pokedexFlags[gCurrentPinballGame->evoTargetSpecies] == SPECIES_DEX_UNSEEN)
@@ -531,15 +531,15 @@ void RestoreMainFieldDynamicGraphics(void)
                 gCurrentPinballGame->portraitGfxIndex[i] = gCurrentPinballGame->currentSpecies;
                 DmaCopy16(3, gMonPortraitGroupPals[gCurrentPinballGame->portraitGfxIndex[i] / 15][gCurrentPinballGame->portraitGfxIndex[i] % 15], OBJ_PLTT_SLOT(PAL_IX_LOCATION_PORTRAIT), PLTT_SLOT_SIZE);
             }
-        case 3:
+        case PORTRAIT_STATE_POKEMON_DISPLAY:
             DmaCopy16(3, gMonPortraitGroupGfx[gCurrentPinballGame->portraitGfxIndex[i] / 15] + (gCurrentPinballGame->portraitGfxIndex[i] % 15) * 0x300, 0x06010CA0 + (i * 0x18), 0x300);
             break;
-        case 1:
-        case 2:
-        case 4:
-        case 6:
-        case 7:
-        case 8:
+        case PORTRAIT_STATE_SLOT_START_CARD:
+        case PORTRAIT_STATE_ROULETTE_WHEEL:
+        case PORTRAIT_STATE_TRAVEL_RAMP_INDICATOR:
+        case PORTRAIT_STATE_SHOP_SELECTOR:
+        case PORTRAIT_STATE_CONFIRMATION_PROMPT:
+        case PORTRAIT_STATE_ROULETTE_OUTCOME:
             DmaCopy16(3, gPortraitAnimFrameGraphics[gCurrentPinballGame->portraitGfxIndex[i]], 0x06010CA0 + (i * 0x300), 0x300);
             break;
         }
@@ -549,8 +549,8 @@ void RestoreMainFieldDynamicGraphics(void)
     {
         switch (gCurrentPinballGame->boardSubState)
         {
-        case 7:
-        case 8:
+        case CATCH_EM_SUBSTATE_ANIMATE_MON_APPEAR:
+        case CATCH_EM_SUBSTATE_SETUP_CATCH_HIT_COUNT:
             if ((u32) gCurrentPinballGame->captureFlashTimer > 4)
             {
                 DmaCopy16(3, gCatchSpriteFlashGfx, 0x06010CA0, 0x480);
@@ -560,7 +560,7 @@ void RestoreMainFieldDynamicGraphics(void)
                 DmaCopy16(3, gCatchSpriteGfxBuffer, 0x06010CA0, 0x480);
             }
             break;
-        case 9:
+        case CATCH_EM_SUBSTATE_CATCH_HIT_PHASE:
             if (gCurrentPinballGame->captureSequenceTimer <= 31)
             {
                 if (gCurrentPinballGame->captureFlashTimer > 4)
@@ -580,7 +580,7 @@ void RestoreMainFieldDynamicGraphics(void)
     {
         switch (gCurrentPinballGame->boardSubState)
         {
-        case 2:
+        case JIRACHI_CATCH_SUBSTATE_SETUP_CATCH_HIT_COUNT:
             if (gCurrentPinballGame->captureFlashTimer > 4U)
             {
                 DmaCopy16(3, gCatchSpriteFlashGfx, 0x06010CA0, 0x480);
@@ -590,7 +590,7 @@ void RestoreMainFieldDynamicGraphics(void)
                 DmaCopy16(3, gCatchSpriteGfxBuffer, 0x06010CA0, 0x480);
             }
             break;
-        case 3:
+        case JIRACHI_CATCH_SUBSTATE_CATCH_HIT_PHASE:
             if (gCurrentPinballGame->captureSequenceTimer <= 31)
             {
                 if (gCurrentPinballGame->captureFlashTimer > 4U)
