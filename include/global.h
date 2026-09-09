@@ -750,7 +750,7 @@ struct PinballGame
     /*0x5FC*/ s16 cameraScrollOffset;
     /*0x5FE*/ s16 cameraScrollTarget;
     /*0x600*/ u16 mainBoardCountdownTimer;
-    /*0x602*/ s8 hatchRevealPhase;
+    /*0x602*/ s8 catchTilesBurstPhase;
     /*0x603*/ s8 revealFramesetIndex;
     /*0x604*/ u16 revealAnimFrameCounter;
     /*0x606*/ u16 particleAnimTimer;
