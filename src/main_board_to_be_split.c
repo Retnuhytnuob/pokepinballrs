@@ -3,6 +3,7 @@
 #include "main.h"
 #include "constants/bg_music.h"
 #include "constants/board/main_board.h"
+#include "constants/board/ruby_states.h"
 #include "constants/board/sapphire_states.h"
 
 #define HATCH_MODE_SAVER_TIME TICKS_FOR_TIME(0,30)
@@ -1277,7 +1278,7 @@ void InitRubyEggHatchAnimation(void)
     gCurrentPinballGame->prevEggAnimFrame = 0;
     gCurrentPinballGame->eggAnimFrameIndex = 0;
     gCurrentPinballGame->eggFrameTimer = 0;
-    gCurrentPinballGame->eggCaveState = 0;
+    gCurrentPinballGame->cyndaquilPosition = CYNDAQUIL_POSITION_LOW_GUARD;
     gCurrentPinballGame->eggCaveReEntryFlag = FALSE;
 }
 
@@ -1444,11 +1445,11 @@ void UpdateHatchCave(void)
     var0 = gMain.systemFrameCount % 36;
     gCurrentPinballGame->cyndaquilFrame = 0;
     gCurrentPinballGame->cyndaquilCollisionEnabled = TRUE;
-    if (gCurrentPinballGame->eggCaveState < 3)
+    if (gCurrentPinballGame->cyndaquilPosition < CYNDAQUIL_POSITION_CAVE_ENTRANCE)
     {
         gCurrentPinballGame->cyndaquilFrame = gCyndaquilFrameIndices[var0 / 6];
-        gCurrentPinballGame->cyndaquilCaveSpriteX = gCyndaquilCavePositions[gCurrentPinballGame->eggCaveState].x;
-        gCurrentPinballGame->cyndaquilCaveSpriteY = gCyndaquilCavePositions[gCurrentPinballGame->eggCaveState].y;
+        gCurrentPinballGame->cyndaquilCaveSpriteX = gCyndaquilCavePositions[gCurrentPinballGame->cyndaquilPosition].x;
+        gCurrentPinballGame->cyndaquilCaveSpriteY = gCyndaquilCavePositions[gCurrentPinballGame->cyndaquilPosition].y;
         group->baseX = gCurrentPinballGame->cyndaquilCaveSpriteX - gCurrentPinballGame->cameraXOffset;
         group->baseY = gCurrentPinballGame->cyndaquilCaveSpriteY - gCurrentPinballGame->cameraYOffset;
         if (var0 % 6 == 0)
@@ -1456,7 +1457,7 @@ void UpdateHatchCave(void)
             DmaCopy16(3, gRubyStageCyndaquil_Gfx[gCurrentPinballGame->cyndaquilFrame], (void *)0x06013300, 0x280);
         }
     }
-    else if (gCurrentPinballGame->eggCaveState == 3)
+    else if (gCurrentPinballGame->cyndaquilPosition == CYNDAQUIL_POSITION_CAVE_ENTRANCE)
     {
         if (gCurrentPinballGame->rubyEggDeliveryState != 2)
         {
@@ -1509,7 +1510,7 @@ void UpdateHatchCave(void)
                 else
                 {
                     InitRubyEggHatchAnimation();
-                    gCurrentPinballGame->eggCaveState = 0;
+                    gCurrentPinballGame->cyndaquilPosition = CYNDAQUIL_POSITION_LOW_GUARD;
                     gCurrentPinballGame->rubyEggDeliveryState = 0;
                 }
             }
@@ -1526,13 +1527,13 @@ void UpdateHatchCave(void)
             }
         }
 
-        gCurrentPinballGame->cyndaquilCaveSpriteX = gCyndaquilCavePositions[gCurrentPinballGame->eggCaveState].x;
-        gCurrentPinballGame->cyndaquilCaveSpriteY = gCyndaquilCavePositions[gCurrentPinballGame->eggCaveState].y - gCurrentPinballGame->eggCaveLiftTimer / 3;
+        gCurrentPinballGame->cyndaquilCaveSpriteX = gCyndaquilCavePositions[gCurrentPinballGame->cyndaquilPosition].x;
+        gCurrentPinballGame->cyndaquilCaveSpriteY = gCyndaquilCavePositions[gCurrentPinballGame->cyndaquilPosition].y - gCurrentPinballGame->eggCaveLiftTimer / 3;
         group->baseX = gCurrentPinballGame->cyndaquilCaveSpriteX - gCurrentPinballGame->cameraXOffset;
         group->baseY = gCurrentPinballGame->cyndaquilCaveSpriteY - gCurrentPinballGame->cameraYOffset;
         if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
         {
-            if (gCurrentPinballGame->eggCaveState == 3 && gCurrentPinballGame->rubyEggDeliveryState != 2)
+            if (gCurrentPinballGame->cyndaquilPosition == CYNDAQUIL_POSITION_CAVE_ENTRANCE && gCurrentPinballGame->rubyEggDeliveryState != 2)
                 gCurrentPinballGame->catchArrowPaletteActive = TRUE;
             else
                 gCurrentPinballGame->catchArrowPaletteActive = FALSE;

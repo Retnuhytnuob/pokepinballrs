@@ -5,6 +5,7 @@
 #include "constants/board/main_board.h"
 #include "constants/board/groudon_states.h"
 #include "constants/board/rayquaza_states.h"
+#include "constants/board/ruby_states.h"
 #include "constants/board/sapphire_states.h"
 
 extern u8 gBoardGfxBuffer[];
@@ -628,7 +629,7 @@ void RestoreRubyBoardTileGraphics(void)
 
     var0 = gCurrentPinballGame->shopDoorCurrentFrame & 0xF;
     DmaCopy16(3, gRubyBoardShopDoor_Gfx[var0], (void *)0x6013180, 0x180);
-    if (gCurrentPinballGame->eggCaveState < 3)
+    if (gCurrentPinballGame->cyndaquilPosition < CYNDAQUIL_POSITION_CAVE_ENTRANCE)
         gCurrentPinballGame->cyndaquilFrame = 0;
     else
         gCurrentPinballGame->cyndaquilFrame = 1;

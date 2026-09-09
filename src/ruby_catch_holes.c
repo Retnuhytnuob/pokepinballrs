@@ -241,9 +241,9 @@ void AnimateSharpedoCatchSequence(void)
 void InitRubyEggHatchMode(void)
 {
     gCurrentPinballGame->scoreAddedInFrame = SCORE_HATCH_CAVE_CATCH;
-    if (gCurrentPinballGame->eggCaveState == 3)
+    if (gCurrentPinballGame->cyndaquilPosition == CYNDAQUIL_POSITION_CAVE_ENTRANCE)
     {
-        gCurrentPinballGame->eggCaveState = 4;
+        gCurrentPinballGame->cyndaquilPosition = CYNDAQUIL_POSITION_IN_CAVE;
         m4aSongNumStart(SE_CYNDAQUIL_EGG_GUARD_HIT);
         PlayRumble(7);
         gCurrentPinballGame->modeAnimTimer = 500;
@@ -319,7 +319,7 @@ void AnimateRubyEggHatchSequence(void)
 
         if (gCurrentPinballGame->rubyEggDeliveryState == 2)
         {
-            gCurrentPinballGame->eggCaveState = 3;
+            gCurrentPinballGame->cyndaquilPosition = CYNDAQUIL_POSITION_CAVE_ENTRANCE;
             gCurrentPinballGame->eggCaveLiftTimer = 0x30;
             gCurrentPinballGame->eggCaveExitDelayTimer = 0x1E;
         }

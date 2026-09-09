@@ -453,7 +453,7 @@ struct PinballGame
     /*0x2D6*/ u16 cyndaquilCaveSpriteY;
     /*0x2D8*/ s8 cyndaquilCollisionEnabled;
     /*0x2D9*/ s8 eggCaveReEntryFlag;
-    /*0x2DA*/ s8 eggCaveState;
+    /*0x2DA*/ s8 cyndaquilPosition;
     /*0x2DB*/ u8 filler2DB[0x3];
     /*0x2DE*/ u16 eggCaveLiftTimer;
     /*0x2E0*/ u16 eggCaveExitDelayTimer;
