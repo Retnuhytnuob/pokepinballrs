@@ -1581,7 +1581,7 @@ void CleanupEggModeState(void)
     if (gMain.selectedField == FIELD_RUBY)
         gCurrentPinballGame->rubyEggDeliveryState = 1;
     else
-        gCurrentPinballGame->sapphirerubyEggDeliveryState = 1;
+        gCurrentPinballGame->sapphireReadyForNewEgg = TRUE;
 
     gCurrentPinballGame->creatureHitCount = 0;
     LoadPortraitGraphics(PORTRAIT_STATE_CURRENT_LOCATION, PORTRAIT_MAIN_SLOT);

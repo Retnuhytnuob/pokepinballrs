@@ -510,7 +510,7 @@ struct PinballGame
     /*0x336*/ u16 seedotAnimTimer[3];
     /*0x33C*/ u16 seedotYOffset[3];
     /*0x342*/ s8 hatchMachineActive; // Turns off while launching, Reenabled when ball touches ramp
-    /*0x343*/ s8 sapphirerubyEggDeliveryState;
+    /*0x343*/ s8 sapphireReadyForNewEgg;
     /*0x344*/ s8 hatchMachineProgressTickSignaled;
     /*0x345*/ s8 sapphireHatchMachineFrameIx;
     /*0x346*/ s8 sapphireHatchMachineState; // 0-6

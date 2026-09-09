@@ -673,7 +673,7 @@ void UpdateSapphireHatchMachine(void)
         }
         break;
     case HATCH_MACHINE_STATE_EMPTY:
-        if (gCurrentPinballGame->sapphirerubyEggDeliveryState && gCurrentPinballGame->hatchMachineProgressTickSignaled)
+        if (gCurrentPinballGame->sapphireReadyForNewEgg && gCurrentPinballGame->hatchMachineProgressTickSignaled)
         {
             gMain.modeChangeFlags |= MODE_CHANGE_BANNER;
             gCurrentPinballGame->bannerDelayTimer = 0;
@@ -723,7 +723,7 @@ void UpdateSapphireHatchMachine(void)
         gCurrentPinballGame->sapphireHatchMachineFrameIx = 0;
         gCurrentPinballGame->holeAnimFrameCounter = 0;
         gCurrentPinballGame->sapphireHatchMachineState = HATCH_MACHINE_STATE_INCUBATION_LIGHTS;
-        gCurrentPinballGame->sapphirerubyEggDeliveryState = 0;
+        gCurrentPinballGame->sapphireReadyForNewEgg = FALSE;
         break;
     }
 
