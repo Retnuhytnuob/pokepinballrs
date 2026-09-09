@@ -61,13 +61,13 @@ void UpdateSapphireBoardEntityRendering(void)
     if (gCurrentPinballGame->cameraYViewport < 0x5a)
     {
         UpdateSapphireEggHatchAnimation();
-        UpdateSapphireEggMachine();
+        UpdateSapphireHatchMachine();
     }
 
     if (gCurrentPinballGame->boardState < MAIN_BOARD_STATE_BOSS_HOLE_ACTIVE)
     {
         if (gCurrentPinballGame->sapphireHatchMachineFrameIx == 3 &&
-            gCurrentPinballGame->sapphireHatchMachineState == 0)
+            gCurrentPinballGame->sapphireHatchMachineState == HATCH_MACHINE_STATE_INCUBATION_LIGHTS)
         {
             gCurrentPinballGame->catchArrowPaletteActive = TRUE;
         }

@@ -3,6 +3,7 @@
 #include "main.h"
 #include "constants/bg_music.h"
 #include "constants/board/main_board.h"
+#include "constants/board/sapphire_states.h"
 
 #define HATCH_MODE_SAVER_TIME TICKS_FOR_TIME(0,30)
 
@@ -1734,7 +1735,7 @@ void UpdateEggMode(void)
             priority = 1;
             if (gCurrentPinballGame->waypointSubTimer == 0)
             {
-                gCurrentPinballGame->sapphireHatchMachineState = 3;
+                gCurrentPinballGame->sapphireHatchMachineState = HATCH_MACHINE_STATE_ELEVATOR_DECENDS;
                 m4aSongNumStart(SE_MON_LANDS_ON_HATCH_MACHINE_TOP);
             }
             var0 = 0;

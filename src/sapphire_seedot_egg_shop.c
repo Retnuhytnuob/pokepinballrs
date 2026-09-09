@@ -170,7 +170,7 @@ void UpdateSapphireEggHatchAnimation(void)
     if (group->active)
     {
         group->baseX = 192 - gCurrentPinballGame->cameraXOffset;
-        if (gCurrentPinballGame->sapphireHatchMachineState > 2 && gMain.modeChangeFlags)
+        if (gCurrentPinballGame->sapphireHatchMachineState > HATCH_MACHINE_STATE_MON_HATCHED && gMain.modeChangeFlags)
             group->baseY = 56 - gCurrentPinballGame->cameraYOffset;
         else
             group->baseY = 200;
@@ -562,7 +562,7 @@ void DrawSapphireShopSignSprite(void)
     }
 }
 
-void UpdateSapphireEggMachine(void)
+void UpdateSapphireHatchMachine(void)
 {
     s16 i, j;
     struct SpriteGroup *group;
@@ -571,7 +571,7 @@ void UpdateSapphireEggMachine(void)
 
     switch (gCurrentPinballGame->sapphireHatchMachineState)
     {
-    case 0:
+    case HATCH_MACHINE_STATE_INCUBATION_LIGHTS:
         if (gCurrentPinballGame->hatchMachineProgressTickSignaled)
         {
             if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
@@ -593,7 +593,7 @@ void UpdateSapphireEggMachine(void)
                     gCurrentPinballGame->bannerGfxIndex = BANNER_MODE_NONE;
                     gCurrentPinballGame->bannerActive = TRUE;
                     gCurrentPinballGame->holdCameraLockAfterBanner = FALSE;
-                    gCurrentPinballGame->sapphireHatchMachineState = 1;
+                    gCurrentPinballGame->sapphireHatchMachineState = HATCH_MACHINE_STATE_ACTIVATED_LIGHT_CROSS;
                     gCurrentPinballGame->holeAnimFrameCounter = 0;
                     m4aMPlayStop(&gMPlayInfo_BGM);
                     gCurrentPinballGame->scoreAddedInFrame = SCORE_HATCH_MACHINE_EGG_HATCH;
@@ -615,7 +615,7 @@ void UpdateSapphireEggMachine(void)
             gCurrentPinballGame->hatchMachineProgressTickSignaled = FALSE;
         }
         break;
-    case 1:
+    case HATCH_MACHINE_STATE_ACTIVATED_LIGHT_CROSS:
         if (gCurrentPinballGame->holeAnimFrameCounter < 270)
         {
             index = (gCurrentPinballGame->holeAnimFrameCounter % 60) / 30 + 4;
@@ -625,7 +625,7 @@ void UpdateSapphireEggMachine(void)
         {
             index = 0;
             DmaCopy16(3, &gHatchMachineElevator_Gfx[index], (void *)0x600D900, 0x440);
-            gCurrentPinballGame->sapphireHatchMachineState = 2;
+            gCurrentPinballGame->sapphireHatchMachineState = HATCH_MACHINE_STATE_MON_HATCHED;
             gCurrentPinballGame->sapphireHatchMachineFrameIx = 0;
         }
 
@@ -640,7 +640,7 @@ void UpdateSapphireEggMachine(void)
 
         gCurrentPinballGame->holeAnimFrameCounter++;
         break;
-    case 3:
+    case HATCH_MACHINE_STATE_ELEVATOR_DECENDS:
         if (gHoleAnimKeyframeData[gCurrentPinballGame->sapphireHatchMachineFrameIx][1] > gCurrentPinballGame->holeAnimFrameCounter)
         {
             gCurrentPinballGame->holeAnimFrameCounter++;
@@ -650,7 +650,7 @@ void UpdateSapphireEggMachine(void)
             gCurrentPinballGame->holeAnimFrameCounter = 0;
             gCurrentPinballGame->sapphireHatchMachineFrameIx++;
             if (gCurrentPinballGame->sapphireHatchMachineFrameIx == 10)
-                gCurrentPinballGame->sapphireHatchMachineState = 4;
+                gCurrentPinballGame->sapphireHatchMachineState = HATCH_MACHINE_STATE_EMPTY;
 
             if (gCurrentPinballGame->sapphireHatchMachineFrameIx == 6)
                 m4aSongNumStart(SE_HATCH_MACHINE_ELEVATOR);
@@ -666,11 +666,11 @@ void UpdateSapphireEggMachine(void)
         else
         {
             gCurrentPinballGame->walkMonYPos += 6;
-            if (gCurrentPinballGame->sapphireHatchMachineState == 4)
+            if (gCurrentPinballGame->sapphireHatchMachineState == HATCH_MACHINE_STATE_EMPTY)
                 gCurrentPinballGame->walkMonYPos = gCurrentPinballGame->walkMonYPos + 20;
         }
         break;
-    case 4:
+    case HATCH_MACHINE_STATE_EMPTY:
         if (gCurrentPinballGame->sapphirerubyEggDeliveryState && gCurrentPinballGame->hatchMachineProgressTickSignaled)
         {
             gMain.modeChangeFlags |= MODE_CHANGE_BANNER;
@@ -682,7 +682,7 @@ void UpdateSapphireEggMachine(void)
             gCurrentPinballGame->bannerGfxIndex = BANNER_MODE_NONE;
             gCurrentPinballGame->bannerActive = TRUE;
             gCurrentPinballGame->holdCameraLockAfterBanner = FALSE;
-            gCurrentPinballGame->sapphireHatchMachineState = 5;
+            gCurrentPinballGame->sapphireHatchMachineState = HATCH_MACHINE_STATE_EGG_RISING;
             gCurrentPinballGame->holeAnimFrameCounter = 0;
             gCurrentPinballGame->sapphireHatchMachineFrameIx = 10;
             m4aSongNumStart(SE_HATCH_MACHINE_ELEVATOR);
@@ -693,7 +693,7 @@ void UpdateSapphireEggMachine(void)
 
         gCurrentPinballGame->hatchMachineProgressTickSignaled = FALSE;
         break;
-    case 5:
+    case HATCH_MACHINE_STATE_EGG_RISING:
         if (gHoleAnimKeyframeData[gCurrentPinballGame->sapphireHatchMachineFrameIx][1] > gCurrentPinballGame->holeAnimFrameCounter)
         {
             gCurrentPinballGame->holeAnimFrameCounter++;
@@ -703,7 +703,7 @@ void UpdateSapphireEggMachine(void)
             gCurrentPinballGame->holeAnimFrameCounter = 0;
             gCurrentPinballGame->sapphireHatchMachineFrameIx++;
             if (gCurrentPinballGame->sapphireHatchMachineFrameIx == 15)
-                gCurrentPinballGame->sapphireHatchMachineState = 6;
+                gCurrentPinballGame->sapphireHatchMachineState = HATCH_MACHINE_STATE_RESET;
 
             index = gHoleAnimKeyframeData[gCurrentPinballGame->sapphireHatchMachineFrameIx][0];
             DmaCopy16(3, gHatchMachineElevator_Gfx[index], (void *)0x600D900, 0x440);
@@ -717,10 +717,10 @@ void UpdateSapphireEggMachine(void)
         else
             gCurrentPinballGame->portraitOffsetY = 700;
         break;
-    case 6:
+    case HATCH_MACHINE_STATE_RESET:
         gCurrentPinballGame->sapphireHatchMachineFrameIx = 0;
         gCurrentPinballGame->holeAnimFrameCounter = 0;
-        gCurrentPinballGame->sapphireHatchMachineState = 0;
+        gCurrentPinballGame->sapphireHatchMachineState = HATCH_MACHINE_STATE_INCUBATION_LIGHTS;
         gCurrentPinballGame->sapphirerubyEggDeliveryState = 0;
         break;
     }
