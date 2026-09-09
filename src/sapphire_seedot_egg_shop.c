@@ -4,7 +4,7 @@
 #include "constants/bg_music.h"
 #include "constants/board/sapphire_states.h"
 
-extern const u16 gHatchCaveOamFramesets[40][2][3];
+extern const u16 gEggOamFramestates[40][2][3];
 extern const u16 gSeedotBasketBounceFrames[];
 extern const u8 gSapphireStageBasket_Gfx[][0x280];
 extern const u8 gSapphireBoardSeedot_Gfx[][0x180];
@@ -26,7 +26,7 @@ extern const u8 gSapphireShopSignTileGfx[][0x480];
 
 void InitSapphireEggHatchAnimation(void)
 {
-    gCurrentPinballGame->eggAnimationPhase = 1;
+    gCurrentPinballGame->eggAnimationPhase = EGG_ANIM_PHASE_STILL;
     gCurrentPinballGame->prevEggAnimFrame = 0;
     gCurrentPinballGame->eggAnimFrameIndex = 0;
     gCurrentPinballGame->eggFrameTimer = 0;
@@ -43,40 +43,42 @@ void UpdateSapphireEggHatchAnimation(void)
     const u16 *src;
     s16 sp0;
     s16 index;
-    s16 var1;
-    s16 var2;
-    s16 var3;
+    s16 startFrameOfNextPhase;
+    s16 nextPhase;
+    s16 lastFrameOfPhase;
     int var0;
 
-    var3 = 0;
-    var1 = 0;
-    var2 = 0;
+    lastFrameOfPhase = 0;
+    startFrameOfNextPhase = 0;
+    nextPhase = 0;
     group = &gMain.spriteGroups[SG_SAPPHIRE_HATCH_EGG];
     sp0 = 0;
+    
+    //Note: Sapphire board jumps straight from 'Still' to 'Hatch shakes'
     switch (gCurrentPinballGame->eggAnimationPhase)
     {
-    case 0:
-    case 1:
+    case EGG_ANIM_PHASE_OFF_BOARD:
+    case EGG_ANIM_PHASE_STILL:
         break;
-    case 2:
-        var3 = 4;
-        var1 = 4;
-        var2 = 3;
+    case EGG_ANIM_PHASE_CYNDAQUIL_ENTERS_BALL_JUMP:
+        lastFrameOfPhase = 4;
+        startFrameOfNextPhase = 4;
+        nextPhase = EGG_ANIM_PHASE_HATCH_CAVE_GLOW;
         break;
-    case 3:
-        var3 = 8;
-        var1 = 4;
-        var2 = 3;
+    case EGG_ANIM_PHASE_HATCH_CAVE_GLOW:
+        lastFrameOfPhase = 8;
+        startFrameOfNextPhase = 4;
+        nextPhase = EGG_ANIM_PHASE_HATCH_CAVE_GLOW;
         break;
-    case 4:
-        var3 = 12;
-        var1 = 12;
-        var2 = 5;
+    case EGG_ANIM_PHASE_EGG_JUMPS:
+        lastFrameOfPhase = 12;
+        startFrameOfNextPhase = 12;
+        nextPhase = EGG_ANIM_PHASE_HATCH_SHAKES;
         break;
-    case 5:
-        var3 = 33;
-        var1 = 0;
-        var2 = 0;
+    case EGG_ANIM_PHASE_HATCH_SHAKES:
+        lastFrameOfPhase = 33;
+        startFrameOfNextPhase = 0;
+        nextPhase = EGG_ANIM_PHASE_OFF_BOARD;
         break;
     }
 
@@ -87,7 +89,7 @@ void UpdateSapphireEggHatchAnimation(void)
         gCurrentPinballGame->prevEggAnimFrame = gCurrentPinballGame->eggAnimFrameIndex;
     }
 
-    if (gCurrentPinballGame->eggAnimationPhase > 1)
+    if (gCurrentPinballGame->eggAnimationPhase > EGG_ANIM_PHASE_STILL)
     {
         if (gEggAnimationFrameData[gCurrentPinballGame->eggAnimFrameIndex][1] > gCurrentPinballGame->eggFrameTimer)
         {
@@ -97,10 +99,10 @@ void UpdateSapphireEggHatchAnimation(void)
         {
             gCurrentPinballGame->eggAnimFrameIndex++;
             gCurrentPinballGame->eggFrameTimer = 0;
-            if (gCurrentPinballGame->eggAnimFrameIndex >= var3)
+            if (gCurrentPinballGame->eggAnimFrameIndex >= lastFrameOfPhase)
             {
-                gCurrentPinballGame->eggAnimFrameIndex = var1;
-                gCurrentPinballGame->eggAnimationPhase = var2;
+                gCurrentPinballGame->eggAnimFrameIndex = startFrameOfNextPhase;
+                gCurrentPinballGame->eggAnimationPhase = nextPhase;
             }
 
             if (gCurrentPinballGame->eggAnimFrameIndex == 18)
@@ -133,7 +135,7 @@ void UpdateSapphireEggHatchAnimation(void)
     }
 
     group->baseX = gCurrentPinballGame->portraitOffsetX / 10 - gCurrentPinballGame->cameraXOffset;
-    if (gCurrentPinballGame->eggAnimationPhase > 0)
+    if (gCurrentPinballGame->eggAnimationPhase > EGG_ANIM_PHASE_OFF_BOARD)
     {
         if (gCurrentPinballGame->eggAnimFrameIndex == 32 && gCurrentPinballGame->eggFrameTimer > 208)
         {
@@ -157,7 +159,7 @@ void UpdateSapphireEggHatchAnimation(void)
     {
         oamSimple = &group->oam[i];
         dst = (u16*)&gOamBuffer[oamSimple->oamId];
-        src = gHatchCaveOamFramesets[sp0][i];
+        src = gEggOamFramestates[sp0][i];
         *dst++ = *src++;
         *dst++ = *src++;
         *dst++ = *src++;
@@ -633,7 +635,7 @@ void UpdateSapphireHatchMachine(void)
         {
             m4aSongNumStart(MUS_EGG_MODE_START);
             gCurrentPinballGame->catchArrowPaletteActive = FALSE;
-            gCurrentPinballGame->eggAnimationPhase = 5;
+            gCurrentPinballGame->eggAnimationPhase = EGG_ANIM_PHASE_HATCH_SHAKES;
             gCurrentPinballGame->eggAnimFrameIndex = 12;
             gCurrentPinballGame->eggFrameTimer = 0;
         }
@@ -686,7 +688,7 @@ void UpdateSapphireHatchMachine(void)
             gCurrentPinballGame->holeAnimFrameCounter = 0;
             gCurrentPinballGame->sapphireHatchMachineFrameIx = 10;
             m4aSongNumStart(SE_HATCH_MACHINE_ELEVATOR);
-            gCurrentPinballGame->eggAnimationPhase = 1;
+            gCurrentPinballGame->eggAnimationPhase = EGG_ANIM_PHASE_STILL;
             gCurrentPinballGame->portraitOffsetX = 2080;
             gCurrentPinballGame->portraitOffsetY = 960;
         }

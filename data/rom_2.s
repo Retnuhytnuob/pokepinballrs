@@ -6441,6 +6441,7 @@ gShopCursorToItemMap:: @ 0x086AD2DE
 	.2byte 0x0003, 0x0016, 0x0004;
 
 gEggAnimationFrameData:: @ 0x086AD2EE
+    @ sapphireEggOamIx, frameTimer, CaveOamIx, EggTileIx
 	.2byte   0,   1,   0,   0
 	.2byte   2,   7,   1,   0
 	.2byte   3,   7,   2,   0
@@ -11744,7 +11745,7 @@ gCatchCreatureOamFramesets:: @ 0x086B4B0E
     packed_sprite_oam x=0x10, y=0xC, spriteSize=SPRITE_SIZE_8x8, tileNum=0x9d, priority=0x1, paletteNum=PAL_IX_CATCH_MON
 
 
-gHatchCaveOamFramesets:: @ 0x086B4D4E
+gEggOamFramestates:: @ 0x086B4D4E
     packed_sprite_oam x=-0x10, y=-0x28, spriteSize=SPRITE_SIZE_32x32, tileNum=0xe7, priority=0x1, paletteNum=PAL_IX_HATCH_EGG
     packed_sprite_oam x=-0x10, y=-0x28, spriteSize=SPRITE_SIZE_32x32, tileNum=0xe7, priority=0x1, paletteNum=PAL_IX_HATCH_EGG
     packed_sprite_oam x=-0x10, y=-0x28, spriteSize=SPRITE_SIZE_32x32, tileNum=0xe7, priority=0x1, paletteNum=PAL_IX_HATCH_EGG

@@ -21,7 +21,7 @@ extern const u16 gCyndaquilFrameIndices[];
 extern const struct Vector16 gCyndaquilCavePositions[];
 extern const u8 gRubyStageCyndaquil_Gfx[][0x280];
 extern const u8 gRubyBoardHatchCave_Gfx[][0x480];
-extern const u16 gHatchCaveOamFramesets[40][2][3];
+extern const u16 gEggOamFramestates[40][2][3];
 extern const u8 gSpaceTileGfx[0x40];
 extern const u8 gAlphabetTilesGfx[][0x40];
 extern const s16 gCaughtTextChars[];
@@ -855,7 +855,7 @@ void InitTotodileEggDelivery(void)
     gCurrentPinballGame->totodileDeliveryFrame = 0;
     gCurrentPinballGame->totodileDeliveryTimer = 0;
     gMain.spriteGroups[SG_RUBY_TOTODILE_EGG_DELIVERY].active = TRUE;
-    gCurrentPinballGame->eggAnimationPhase = 1;
+    gCurrentPinballGame->eggAnimationPhase = EGG_ANIM_PHASE_STILL;
     gCurrentPinballGame->portraitOffsetX = 240;
     gCurrentPinballGame->portraitOffsetY = 160;
     gCurrentPinballGame->activeFxType = FX_TOTODILE_EGG_DELIVERY;
@@ -938,7 +938,7 @@ void InitAerodactylEggDelivery(void)
     gCurrentPinballGame->eggDeliveryVelX = -36;
     gCurrentPinballGame->eggDeliveryVelY = 60;
     gMain.spriteGroups[SG_RUBY_AERODACTLY_EGG_DELIVERY].active = TRUE;
-    gCurrentPinballGame->eggAnimationPhase = 1;
+    gCurrentPinballGame->eggAnimationPhase = EGG_ANIM_PHASE_STILL;
     gCurrentPinballGame->portraitOffsetX = gCurrentPinballGame->eggDeliveryX / 20 - gFlyingCreatureCameraOffsets[0].x;
     gCurrentPinballGame->portraitOffsetY = gCurrentPinballGame->eggDeliveryY / 20 - gFlyingCreatureCameraOffsets[0].y;
     gCurrentPinballGame->activeFxType = FX_AERODACTYL_EGG_DELIVERY;
@@ -1274,7 +1274,7 @@ void AnimateWasCaughtBanner(void)
 
 void InitRubyEggHatchAnimation(void)
 {
-    gCurrentPinballGame->eggAnimationPhase = 1;
+    gCurrentPinballGame->eggAnimationPhase = EGG_ANIM_PHASE_STILL;
     gCurrentPinballGame->prevEggAnimFrame = 0;
     gCurrentPinballGame->eggAnimFrameIndex = 0;
     gCurrentPinballGame->eggFrameTimer = 0;
@@ -1289,43 +1289,43 @@ void UpdateRubyEggHatchAnimation(void)
     struct OamDataSimple *oamSimple;
     u16 *dst;
     const u16 *src;
-    s16 var0;
-    s16 var1;
-    s16 var2;
-    s16 var3;
+    s16 lastFrameOfPhase;
+    s16 startFrameOfNextPhase;
+    s16 nextPhase;
+    s16 caveFrameIx;
     s16 priority;
     s16 index;
 
     priority = 1;
-    var0 = 0;
-    var1 = 0;
-    var2 = 0;
+    lastFrameOfPhase = 0;
+    startFrameOfNextPhase = 0;
+    nextPhase = 0;
     group = &gMain.spriteGroups[SG_RUBY_HATCH_EGG];
-    var3 = 0;
+    caveFrameIx = 0;
     switch (gCurrentPinballGame->eggAnimationPhase)
     {
-    case 0:
-    case 1:
+    case EGG_ANIM_PHASE_OFF_BOARD:
+    case EGG_ANIM_PHASE_STILL:
         break;
-    case 2:
-        var0 = 4;
-        var1 = 4;
-        var2 = 3;
+    case EGG_ANIM_PHASE_CYNDAQUIL_ENTERS_BALL_JUMP:
+        lastFrameOfPhase = 4;
+        startFrameOfNextPhase = 4;
+        nextPhase = EGG_ANIM_PHASE_HATCH_CAVE_GLOW;
         break;
-    case 3:
-        var0 = 8;
-        var1 = 4;
-        var2 = 3;
+    case EGG_ANIM_PHASE_HATCH_CAVE_GLOW:
+        lastFrameOfPhase = 8;
+        startFrameOfNextPhase = 4;
+        nextPhase = EGG_ANIM_PHASE_HATCH_CAVE_GLOW;
         break;
-    case 4:
-        var0 = 12;
-        var1 = 12;
-        var2 = 5;
+    case EGG_ANIM_PHASE_EGG_JUMPS:
+        lastFrameOfPhase = 12;
+        startFrameOfNextPhase = 12;
+        nextPhase = EGG_ANIM_PHASE_HATCH_SHAKES;
         break;
-    case 5:
-        var0 = 33;
-        var1 = 0;
-        var2 = 0;
+    case EGG_ANIM_PHASE_HATCH_SHAKES:
+        lastFrameOfPhase = 33;
+        startFrameOfNextPhase = 0;
+        nextPhase = EGG_ANIM_PHASE_OFF_BOARD;
         break;
     }
 
@@ -1338,7 +1338,7 @@ void UpdateRubyEggHatchAnimation(void)
         gCurrentPinballGame->prevEggAnimFrame = gCurrentPinballGame->eggAnimFrameIndex;
     }
 
-    if (gCurrentPinballGame->eggAnimationPhase > 1)
+    if (gCurrentPinballGame->eggAnimationPhase > EGG_ANIM_PHASE_STILL)
     {
         if (gEggAnimationFrameData[gCurrentPinballGame->eggAnimFrameIndex][1] > gCurrentPinballGame->eggFrameTimer)
         {
@@ -1348,10 +1348,10 @@ void UpdateRubyEggHatchAnimation(void)
         {
             gCurrentPinballGame->eggAnimFrameIndex++;
             gCurrentPinballGame->eggFrameTimer = 0;
-            if (gCurrentPinballGame->eggAnimFrameIndex >= var0)
+            if (gCurrentPinballGame->eggAnimFrameIndex >= lastFrameOfPhase)
             {
-                gCurrentPinballGame->eggAnimFrameIndex = var1;
-                gCurrentPinballGame->eggAnimationPhase = var2;
+                gCurrentPinballGame->eggAnimFrameIndex = startFrameOfNextPhase;
+                gCurrentPinballGame->eggAnimationPhase = nextPhase;
             }
 
             if (gCurrentPinballGame->eggAnimFrameIndex == 18)
@@ -1380,13 +1380,13 @@ void UpdateRubyEggHatchAnimation(void)
                 m4aSongNumStart(SE_HATCH_FLOURISH);
         }
 
-        var3 = gEggAnimationFrameData[gCurrentPinballGame->eggAnimFrameIndex][0];
+        caveFrameIx = gEggAnimationFrameData[gCurrentPinballGame->eggAnimFrameIndex][0];
     }
 
     gCurrentPinballGame->eggBasePosX = 88 - gCurrentPinballGame->cameraXOffset;
     gCurrentPinballGame->eggBasePosY = 144 - gCurrentPinballGame->cameraYOffset;
     group->baseX = gCurrentPinballGame->eggBasePosX + gCurrentPinballGame->portraitOffsetX;
-    if (gCurrentPinballGame->eggAnimationPhase > 0)
+    if (gCurrentPinballGame->eggAnimationPhase > EGG_ANIM_PHASE_OFF_BOARD)
     {
         if (gCurrentPinballGame->eggAnimFrameIndex == 32 && gCurrentPinballGame->eggFrameTimer > 208)
         {
@@ -1410,7 +1410,7 @@ void UpdateRubyEggHatchAnimation(void)
     {
         oamSimple = &group->oam[i];
         dst = (u16*)&gOamBuffer[oamSimple->oamId];
-        src = gHatchCaveOamFramesets[var3][i];
+        src = gEggOamFramestates[caveFrameIx][i];
         *dst++ = *src++;
         *dst++ = *src++;
         *dst++ = *src++;
@@ -1461,9 +1461,9 @@ void UpdateHatchCave(void)
     {
         if (gCurrentPinballGame->rubyEggDeliveryState != 2)
         {
-            if (gCurrentPinballGame->eggAnimationPhase == 1)
+            if (gCurrentPinballGame->eggAnimationPhase == EGG_ANIM_PHASE_STILL)
             {
-                gCurrentPinballGame->eggAnimationPhase = 2;
+                gCurrentPinballGame->eggAnimationPhase = EGG_ANIM_PHASE_CYNDAQUIL_ENTERS_BALL_JUMP;
                 gCurrentPinballGame->cyndaquilFrame = 1;
                 DmaCopy16(3, gRubyStageCyndaquil_Gfx[gCurrentPinballGame->cyndaquilFrame], (void *)0x06013300, 0x280);
                 gMain.modeChangeFlags |= MODE_CHANGE_BANNER;
@@ -1551,10 +1551,10 @@ void UpdateHatchCave(void)
     }
     else
     {
-        if (gCurrentPinballGame->eggAnimationPhase == 3)
+        if (gCurrentPinballGame->eggAnimationPhase == EGG_ANIM_PHASE_HATCH_CAVE_GLOW)
         {
             gCurrentPinballGame->catchArrowPaletteActive = FALSE;
-            gCurrentPinballGame->eggAnimationPhase = 4;
+            gCurrentPinballGame->eggAnimationPhase = EGG_ANIM_PHASE_EGG_JUMPS;
             gCurrentPinballGame->eggAnimFrameIndex = 8;
             gCurrentPinballGame->eggFrameTimer = 0;
         }
