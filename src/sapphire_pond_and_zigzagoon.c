@@ -3,6 +3,7 @@
 #include "main.h"
 #include "constants/bg_music.h"
 #include "constants/board/main_board.h"
+#include "constants/board/sapphire_states.h"
 
 extern const s16 gPelipperIdleFrameIndices[];
 extern const s16 gPelipperSwallowAnimData[][3];
@@ -369,12 +370,12 @@ void UpdateZigzagoonEntity(void)
 
     switch (gCurrentPinballGame->zigzagoonState)
     {
-    case 0:
+    case ZIGZAGOON_STATE_SITTING:
         gCurrentPinballGame->zigzagoonGfxFrame = (gCurrentPinballGame->globalAnimFrameCounter % 50) / 25 + 2;
         gCurrentPinballGame->zigzagoonOamFrame = gCurrentPinballGame->zigzagoonGfxFrame + 1;
         gCurrentPinballGame->zigzagoonShockWallActive = FALSE;
         break;
-    case 1:
+    case ZIGZAGOON_STATE_PRIMED:
         var0 = gCurrentPinballGame->globalAnimFrameCounter % 33;
         if (var0 < 13)
         {
@@ -400,11 +401,11 @@ void UpdateZigzagoonEntity(void)
         if (gCurrentPinballGame->ballCatchState != TRAP_CENTER_HOLE)
             gCurrentPinballGame->zigzagoonShockWallActive = FALSE;
         break;
-    case 2:
+    case ZIGZAGOON_STATE_SIGNALED:
         gCurrentPinballGame->zigzagoonShockWallActive = FALSE;
         gCurrentPinballGame->zigzagoonAnimKeyframeIndex = 0;
         gCurrentPinballGame->sapphireBumperAnimFrame = 0;
-        gCurrentPinballGame->zigzagoonState = 3;
+        gCurrentPinballGame->zigzagoonState = ZIGZAGOON_STATE_LEAPING;
         gCurrentPinballGame->zigzagoonFxFrame = 0;
         gMain.spriteGroups[SG_SAPPHIRE_ZIGZAGOON_TRAIL_FX].active = TRUE;
         gCurrentPinballGame->activeFxType = FX_ZIGZAGOON_ROULETTE_STOP;
@@ -412,7 +413,7 @@ void UpdateZigzagoonEntity(void)
         m4aSongNumStart(SE_ZIGZAGOON_ROULETTE_STOP);
         gCurrentPinballGame->scoreAddedInFrame = SCORE_ZIGZAGOON_ROULETTE_STOP;
         break;
-    case 3:
+    case ZIGZAGOON_STATE_LEAPING:
         if (gZigzagoonAnimKeyframes[gCurrentPinballGame->zigzagoonAnimKeyframeIndex][1] > gCurrentPinballGame->sapphireBumperAnimFrame)
         {
             gCurrentPinballGame->sapphireBumperAnimFrame++;
@@ -424,7 +425,7 @@ void UpdateZigzagoonEntity(void)
             if (gCurrentPinballGame->zigzagoonAnimKeyframeIndex > 16)
             {
                 gCurrentPinballGame->zigzagoonAnimKeyframeIndex = 16;
-                gCurrentPinballGame->zigzagoonState = 4;
+                gCurrentPinballGame->zigzagoonState = ZIGZAGOON_STATE_RETURN_TO_NORMAL;
             }
         }
 
@@ -435,10 +436,10 @@ void UpdateZigzagoonEntity(void)
         else
             gCurrentPinballGame->zigzagoonFxFrame = 0;
         break;
-    case 4:
+    case ZIGZAGOON_STATE_RETURN_TO_NORMAL:
         gCurrentPinballGame->activeFxType = FX_NONE;
         gMain.spriteGroups[SG_SAPPHIRE_ZIGZAGOON_TRAIL_FX].active = FALSE;
-        gCurrentPinballGame->zigzagoonState = 0;
+        gCurrentPinballGame->zigzagoonState = ZIGZAGOON_STATE_SITTING;
         break;
     }
 }

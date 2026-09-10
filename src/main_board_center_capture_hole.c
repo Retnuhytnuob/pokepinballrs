@@ -6,7 +6,7 @@
 #include "constants/board/bonus_board.h"
 #include "constants/anglemath.h"
 #include "inline_load_lighting_pal.h"
-
+#include "constants/board/sapphire_states.h"
 
 extern struct SongHeader se_roulette_tick;
 extern struct SongHeader se_mon_catch_ball_woosh;
@@ -135,7 +135,7 @@ void RunRouletteWheel(void)
                     || JOY_NEW(A_BUTTON))
                 && gCurrentPinballGame->zigzagoonShockWallActive)
             {
-                gCurrentPinballGame->zigzagoonState = 2;
+                gCurrentPinballGame->zigzagoonState = ZIGZAGOON_STATE_SIGNALED;
                 if (gCurrentPinballGame->rouletteSubOffset < 17)
                     gCurrentPinballGame->modeOutcomeValues[1] = gCurrentPinballGame->modeOutcomeValues[0];
 
@@ -172,7 +172,7 @@ void RunRouletteWheel(void)
             gCurrentPinballGame->rouletteSpinSpeed = (Random() % 200) + 100;
             if (gMain.selectedField == FIELD_SAPPHIRE)
             {
-                if (gCurrentPinballGame->zigzagoonState == 1)
+                if (gCurrentPinballGame->zigzagoonState == ZIGZAGOON_STATE_PRIMED)
                 {
                     gCurrentPinballGame->rouletteSpinSpeed = 320;
                     gCurrentPinballGame->zigzagoonShockWallActive = TRUE;

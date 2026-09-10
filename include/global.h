@@ -437,7 +437,7 @@ struct PinballGame
     /*0x2B8*/ u16 chikoritaProjectileVelX;
     /*0x2BA*/ u16 chikoritaProjectileUnused;
     /*0x2BC*/ u16 chikoritaProjectileTimer;
-    /*0x2BE*/ s8 gulpinCurrentLevel;
+    /*0x2BE*/ s8 gulpinDisplayedLevel;
     /*0x2C0*/ u16 gulpinAnimFrameTimer;
     /*0x2C2*/ s8 gulpinAnimFrameIndex;
     /*0x2C3*/ s8 totodileDeliveryFrame;
@@ -790,10 +790,10 @@ struct PinballGame
     /*0x6B4*/ u32 bonusTotalScoreLo;
     /*0x6B8*/ u32 bonusTotalScoreHi;
     /*0x6BC*/ s8 travelRolloverTriggerHitZone;
-    /*0x6BD*/ s8 seedotCount;
-    /*0x6BE*/ s8 seedotExitSequenceActive;
+    /*0x6BD*/ s8 travelTrackerCount; //Gulpin and Seedot stack
+    /*0x6BE*/ s8 travelTrackerExitSequenceActive;
     /*0x6BF*/ u8 filler6BF[0x1];
-    /*0x6C0*/ u16 seedotExitSequenceTimer;
+    /*0x6C0*/ u16 travelTrackerExitSequenceTimer;
     /*0x6C2*/ u16 travelModeStartDelay;
     /*0x6C4*/ s8 portraitDisplayState;
     /*0x6C5*/ s8 catchTileRevealState;

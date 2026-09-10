@@ -13,16 +13,16 @@ extern const Palette gTimer_Default_Pal[];
 void CleanupTravelModeState(void)
 {
     gCurrentPinballGame->travelRolloverTriggerHitZone = TRAVEL_ROLLOVER_TRIGGER_HIT_ZONE_NONE;
-    gCurrentPinballGame->seedotCount = 0;
+    gCurrentPinballGame->travelTrackerCount = 0;
     if (gMain.selectedField == FIELD_RUBY)
     {
-        gCurrentPinballGame->gulpinCurrentLevel = 0;
+        gCurrentPinballGame->gulpinDisplayedLevel = 0;
         gCurrentPinballGame->gulpinAnimFrameIndex = 0;
         gCurrentPinballGame->gulpinAnimFrameTimer = 0;
     }
 
-    gCurrentPinballGame->seedotExitSequenceActive = TRUE;
-    gCurrentPinballGame->seedotExitSequenceTimer = 0;
+    gCurrentPinballGame->travelTrackerExitSequenceActive = TRUE;
+    gCurrentPinballGame->travelTrackerExitSequenceTimer = 0;
     LoadPortraitGraphics(PORTRAIT_STATE_CURRENT_LOCATION, PORTRAIT_MAIN_SLOT);
     gCurrentPinballGame->portraitDisplayState = PORTRAIT_DISPLAY_MODE_BOARD_CENTER;
     gMain.fieldSpriteGroups[FIELD_SG_CENTER_HOLE_GRAVITY_FX]->active = FALSE;
@@ -80,9 +80,9 @@ void UpdateTravelMode(void)
             if (gCurrentPinballGame->stageTimer < 35)
                 m4aSongNumStart(MUS_TRAVEL_MODE);
 
-            gCurrentPinballGame->seedotCount = 0;
-            gCurrentPinballGame->seedotExitSequenceActive = TRUE;
-            gCurrentPinballGame->seedotExitSequenceTimer = 0;
+            gCurrentPinballGame->travelTrackerCount = 0;
+            gCurrentPinballGame->travelTrackerExitSequenceActive = TRUE;
+            gCurrentPinballGame->travelTrackerExitSequenceTimer = 0;
         }
 
         var0 = (gCurrentPinballGame->stageTimer % 40) / 10;

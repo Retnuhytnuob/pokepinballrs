@@ -284,10 +284,10 @@ void ProcessSapphireCollisionEvent(u8 triggerType, u16* hasCollisionImpact, u16*
                     else
                     {
                         // Zigzagoon button
-                        if (gCurrentPinballGame->zigzagoonState == 0)
-                            gCurrentPinballGame->zigzagoonState = 1;
+                        if (gCurrentPinballGame->zigzagoonState == ZIGZAGOON_STATE_SITTING)
+                            gCurrentPinballGame->zigzagoonState = ZIGZAGOON_STATE_PRIMED;
                         else
-                            gCurrentPinballGame->zigzagoonState = 0;
+                            gCurrentPinballGame->zigzagoonState = ZIGZAGOON_STATE_SITTING;
 
                         gCurrentPinballGame->ball->velocity.y /=2;
                         gCurrentPinballGame->scoreAddedInFrame = SCORE_ZIGZAGOON_READY_BUTTON;

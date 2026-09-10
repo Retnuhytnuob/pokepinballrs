@@ -192,30 +192,30 @@ void UpdateSapphireSeedotCollection(void)
         {
             if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
             {
-                if (gCurrentPinballGame->seedotCount < 3)
+                if (gCurrentPinballGame->travelTrackerCount < 3)
                 {
-                    gCurrentPinballGame->seedotYOffset[gCurrentPinballGame->seedotCount] = -100;
-                    gCurrentPinballGame->seedotOamFramesetIndex[gCurrentPinballGame->seedotCount] = 0;
-                    gCurrentPinballGame->seedotAnimTimer[gCurrentPinballGame->seedotCount] = 0;
-                    gCurrentPinballGame->seedotState[gCurrentPinballGame->seedotCount] = 1;
-                    gCurrentPinballGame->seedotAnimTimer[gCurrentPinballGame->seedotCount] = 0;
-                    gCurrentPinballGame->seedotCount++;
+                    gCurrentPinballGame->seedotYOffset[gCurrentPinballGame->travelTrackerCount] = -100;
+                    gCurrentPinballGame->seedotOamFramesetIndex[gCurrentPinballGame->travelTrackerCount] = 0;
+                    gCurrentPinballGame->seedotAnimTimer[gCurrentPinballGame->travelTrackerCount] = 0;
+                    gCurrentPinballGame->seedotState[gCurrentPinballGame->travelTrackerCount] = SEEDOT_STATE_DROPPING_IN;
+                    gCurrentPinballGame->seedotAnimTimer[gCurrentPinballGame->travelTrackerCount] = 0;
+                    gCurrentPinballGame->travelTrackerCount++;
                     gCurrentPinballGame->seedotDecayTimer = 1800;
-                    if (gCurrentPinballGame->seedotCount == 3)
+                    if (gCurrentPinballGame->travelTrackerCount == 3)
                         gCurrentPinballGame->travelModeStartDelay = 1;
                 }
             }
             else
             {
-                if (gCurrentPinballGame->seedotCount < 2)
+                if (gCurrentPinballGame->travelTrackerCount < 2)
                 {
-                    gCurrentPinballGame->seedotYOffset[gCurrentPinballGame->seedotCount] = -100;
-                    gCurrentPinballGame->seedotOamFramesetIndex[gCurrentPinballGame->seedotCount] = 0;
-                    gCurrentPinballGame->seedotAnimTimer[gCurrentPinballGame->seedotCount] = 0;
-                    gCurrentPinballGame->seedotState[gCurrentPinballGame->seedotCount] = 1;
-                    gCurrentPinballGame->seedotAnimTimer[gCurrentPinballGame->seedotCount] = 0;
+                    gCurrentPinballGame->seedotYOffset[gCurrentPinballGame->travelTrackerCount] = -100;
+                    gCurrentPinballGame->seedotOamFramesetIndex[gCurrentPinballGame->travelTrackerCount] = 0;
+                    gCurrentPinballGame->seedotAnimTimer[gCurrentPinballGame->travelTrackerCount] = 0;
+                    gCurrentPinballGame->seedotState[gCurrentPinballGame->travelTrackerCount] = SEEDOT_STATE_DROPPING_IN;
+                    gCurrentPinballGame->seedotAnimTimer[gCurrentPinballGame->travelTrackerCount] = 0;
                     gCurrentPinballGame->seedotDecayTimer = 1800;
-                    gCurrentPinballGame->seedotCount++;
+                    gCurrentPinballGame->travelTrackerCount++;
                 }
             }
         }
@@ -228,12 +228,12 @@ void UpdateSapphireSeedotCollection(void)
     {
         switch (gCurrentPinballGame->seedotState[i])
         {
-        case 0:
+        case SEEDOT_STATE_OFF_BOARD:
             gCurrentPinballGame->seedotYOffset[i] = -100;
             gCurrentPinballGame->seedotOamFramesetIndex[i] = 0;
             gCurrentPinballGame->seedotAnimTimer[i] = 0;
             break;
-        case 1:
+        case SEEDOT_STATE_DROPPING_IN:
             if (gCurrentPinballGame->seedotAnimTimer[i] < 33)
             {
                 if (gCurrentPinballGame->seedotAnimTimer[i] == 0)
@@ -261,20 +261,20 @@ void UpdateSapphireSeedotCollection(void)
             }
             else
             {
-                gCurrentPinballGame->seedotState[i] = 2;
+                gCurrentPinballGame->seedotState[i] = SEEDOT_STATE_WAITING;
                 gCurrentPinballGame->seedotAnimTimer[i] = 0;
                 if (i == 2)
                     RequestBoardStateTransition(MAIN_BOARD_STATE_TRAVEL_MODE);
             }
             break;
-        case 2:
+        case SEEDOT_STATE_WAITING:
             gCurrentPinballGame->seedotSpriteFrame[i] = (((gCurrentPinballGame->globalAnimFrameCounter % 32) / 16) * 2) + 1;
             if (gCurrentPinballGame->seedotSpriteFrame[i] == 1)
                 gCurrentPinballGame->seedotYOffset[i] = -2;
             else
                 gCurrentPinballGame->seedotYOffset[i] = 0;
             break;
-        case 3:
+        case SEEDOT_STATE_LEAVING:
             var0 = gCurrentPinballGame->seedotAnimTimer[i];
             if (var0 < 32)
             {
@@ -299,7 +299,7 @@ void UpdateSapphireSeedotCollection(void)
             }
             else
             {
-                gCurrentPinballGame->seedotState[i] = 0;
+                gCurrentPinballGame->seedotState[i] = SEEDOT_STATE_OFF_BOARD;
             }
 
             gCurrentPinballGame->seedotAnimTimer[i]++;
@@ -344,24 +344,24 @@ void UpdateSapphireSeedotCollection(void)
             }
         }
     }
-    if (gCurrentPinballGame->seedotExitSequenceActive)
+    if (gCurrentPinballGame->travelTrackerExitSequenceActive)
     {
-        var0 = gCurrentPinballGame->seedotExitSequenceTimer++;
+        var0 = gCurrentPinballGame->travelTrackerExitSequenceTimer++;
         if (var0 <= 60)
         {
             if (var0 % 30 == 0)
             {
-                if (gCurrentPinballGame->seedotState[var0 / 30] == 2)
+                if (gCurrentPinballGame->seedotState[var0 / 30] == SEEDOT_STATE_WAITING)
                 {
-                    gCurrentPinballGame->seedotState[var0 / 30] = 3;
+                    gCurrentPinballGame->seedotState[var0 / 30] = SEEDOT_STATE_LEAVING;
                     gCurrentPinballGame->seedotAnimTimer[var0 / 30] = 0;
                 }
             }
         }
         else
         {
-            gCurrentPinballGame->seedotExitSequenceActive = FALSE;
-            gCurrentPinballGame->seedotExitSequenceTimer = 0;
+            gCurrentPinballGame->travelTrackerExitSequenceActive = FALSE;
+            gCurrentPinballGame->travelTrackerExitSequenceTimer = 0;
         }
     }
 
@@ -370,11 +370,11 @@ void UpdateSapphireSeedotCollection(void)
         gCurrentPinballGame->seedotDecayTimer--;
         if (gCurrentPinballGame->seedotDecayTimer == 0)
         {
-            if (gCurrentPinballGame->seedotCount == 1 || gCurrentPinballGame->seedotCount == 2)
+            if (gCurrentPinballGame->travelTrackerCount == 1 || gCurrentPinballGame->travelTrackerCount == 2)
             {
-                gCurrentPinballGame->seedotCount--;
-                gCurrentPinballGame->seedotState[gCurrentPinballGame->seedotCount] = 3;
-                gCurrentPinballGame->seedotAnimTimer[gCurrentPinballGame->seedotCount] = 0;
+                gCurrentPinballGame->travelTrackerCount--;
+                gCurrentPinballGame->seedotState[gCurrentPinballGame->travelTrackerCount] = SEEDOT_STATE_LEAVING;
+                gCurrentPinballGame->seedotAnimTimer[gCurrentPinballGame->travelTrackerCount] = 0;
                 gCurrentPinballGame->seedotDecayTimer = 1800;
             }
         }
@@ -420,7 +420,7 @@ void DrawSapphireSeedotAndBasketSprites(void)
 
         var0 = gSeedotBaseXPositions[j] - j;
         group->baseX = var0 - gCurrentPinballGame->cameraXOffset;
-        if (gCurrentPinballGame->seedotState[j] > 0)
+        if (gCurrentPinballGame->seedotState[j] > SEEDOT_STATE_OFF_BOARD)
             group->baseY = gCurrentPinballGame->seedotYOffset[j] + 292 - gCurrentPinballGame->cameraYOffset;
         else
             group->baseY = 200;
