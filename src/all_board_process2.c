@@ -3,6 +3,7 @@
 #include "main.h"
 #include "constants/bg_music.h"
 #include "constants/board/ruby_states.h"
+#include "constants/board/main_board.h"
 
 void AllBoardProcess_2A_4D6C4(void)
 {
@@ -425,13 +426,13 @@ void ProcessMainBoardBallDrainAndLaunch(void)
         && gCurrentPinballGame->ballInLaunchChute)
     {
         gCurrentPinballGame->launcherCharging = TRUE;
-        gCurrentPinballGame->spoinkEntityState = 1;
+        gCurrentPinballGame->spoinkEntityState = SPOINK_STATE_COMPRESSING;
     }
 
     if (gCurrentPinballGame->launcherCharging
         && gCurrentPinballGame->releasedButtonActions[PINBALL_INPUT_RIGHT_FLIPPER])
     {
-        gCurrentPinballGame->spoinkEntityState = 3;
+        gCurrentPinballGame->spoinkEntityState = SPOINK_STATE_RELEASING;
         if (gCurrentPinballGame->ballInLaunchChute)
         {
             PlayRumble(7);
