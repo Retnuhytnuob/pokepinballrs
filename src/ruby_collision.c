@@ -414,7 +414,7 @@ void ProcessRubyCollisionEvent(u8 triggerType, s16* hasCollisionImpact, u16* col
             // Evo ramp upper rollover
             if (gCurrentPinballGame->ballCollisionZone == RUBY_ZONE_EVO_LANE_BOTTOM)
             {
-                if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE
+                if (BoardNotInActivityMode
                     && gCurrentPinballGame->evoArrowProgress <= 2)
                 {
                     if (gCurrentPinballGame->evoArrowProgress == 0)
@@ -537,7 +537,7 @@ void ProcessRubyCollisionEvent(u8 triggerType, s16* hasCollisionImpact, u16* col
             if (gCurrentPinballGame->ballCollisionZone == RUBY_ZONE_GET_LANE_BOTTOM)
             {
                 // coming from lower Get lane rollover
-                if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE
+                if (BoardNotInActivityMode
                     && gCurrentPinballGame->catchArrowProgress <= 2)
                 {
                     if (gCurrentPinballGame->catchArrowProgress == 0)
@@ -694,7 +694,7 @@ void ProcessRubyCollisionEvent(u8 triggerType, s16* hasCollisionImpact, u16* col
                 *collisionAngle = 0xB000;
                 *hasCollisionImpact = TRUE;
 
-                if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE
+                if (BoardNotInActivityMode
                     && gCurrentPinballGame->shopDoorOpenLevel <= 2)
                 {
                     gCurrentPinballGame->shopDoorOpenLevel = 3;
@@ -817,7 +817,7 @@ void ProcessRubyCollisionEvent(u8 triggerType, s16* hasCollisionImpact, u16* col
         PlayRumble(7);
         return;
     case RUBY_TRIGGER_CYNDAQUIL_HIGH_POSITION:
-        if (gCurrentPinballGame->boardState > MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE
+        if (BoardInActivityMode
             && gCurrentPinballGame->boardState != MAIN_BOARD_STATE_EGG_HATCH_MODE)
         {
             if (gCurrentPinballGame->eggCaveExitDelayTimer == 0)

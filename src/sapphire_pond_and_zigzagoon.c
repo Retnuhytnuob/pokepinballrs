@@ -60,7 +60,7 @@ void UpdatePelipperPondEntity(void)
         gCurrentPinballGame->pelipperPosY = 0;
         gCurrentPinballGame->pelipperSwallowAnimIndex = 0;
         gCurrentPinballGame->pelipperSwallowSubTimer = 0;
-        if (gCurrentPinballGame->boardState > MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
+        if (BoardInActivityMode)
         {
             gCurrentPinballGame->pelipperState = PELIPPER_STATE_NORMAL;
             frameId = 0;

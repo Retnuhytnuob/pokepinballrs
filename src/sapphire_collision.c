@@ -215,7 +215,7 @@ void ProcessSapphireCollisionEvent(u8 triggerType, u16* hasCollisionImpact, u16*
                     if (gCurrentPinballGame->ball->positionQ0.x < 74)
                     {
                         // Plusle's button
-                        if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE
+                        if (BoardNotInActivityMode
                             && gCurrentPinballGame->shopGuardianState[PLUSLE_TARGET_BUTTON_IX] < SHOP_GAURDIAN_STATE_LOWER_WALL_FOR_EVO_MODE)
                         {
                             if (gCurrentPinballGame->shopGuardianState[PLUSLE_TARGET_BUTTON_IX] == SHOP_GAURDIAN_STATE_KNOCKED_DOWN)
@@ -239,7 +239,7 @@ void ProcessSapphireCollisionEvent(u8 triggerType, u16* hasCollisionImpact, u16*
                     else if (gCurrentPinballGame->ball->positionQ0.x < 116)
                     {
                         // Minun's button
-                        if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE
+                        if (BoardNotInActivityMode
                             && gCurrentPinballGame->shopGuardianState[MINUN_TARGET_BUTTON_IX] < SHOP_GAURDIAN_STATE_LOWER_WALL_FOR_EVO_MODE)
                         {
                             if (gCurrentPinballGame->shopGuardianState[MINUN_TARGET_BUTTON_IX] == SHOP_GAURDIAN_STATE_KNOCKED_DOWN)
@@ -380,7 +380,7 @@ void ProcessSapphireCollisionEvent(u8 triggerType, u16* hasCollisionImpact, u16*
                     // Upper Evo lane rollover
                     if (gCurrentPinballGame->ballCollisionZone == SAPPHIRE_ZONE_EVO_LANE_BOTTOM)
                     {
-                        if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE
+                        if (BoardNotInActivityMode
                             && gCurrentPinballGame->evoArrowProgress < 3)
                         {
                             if (gCurrentPinballGame->evoArrowProgress == 0)
@@ -452,7 +452,7 @@ void ProcessSapphireCollisionEvent(u8 triggerType, u16* hasCollisionImpact, u16*
                     // Get lane upper rollover
                     if (gCurrentPinballGame->ballCollisionZone == SAPPHIRE_ZONE_GET_LANE_BOTTOM)
                     {
-                        if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE
+                        if (BoardNotInActivityMode
                             && gCurrentPinballGame->catchArrowProgress < 3)
                         {
                             if (gCurrentPinballGame->catchArrowProgress == 0)

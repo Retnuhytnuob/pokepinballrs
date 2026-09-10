@@ -366,7 +366,7 @@ void UpdateLinooneSideBumpers(void)
         {
             if (gCurrentPinballGame->boardState != MAIN_BOARD_STATE_TRAVEL_MODE)
             {
-                if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE) {
+                if (BoardNotInActivityMode) {
                     if (gCurrentPinballGame->travelTrackerCount < 3)
                     {
                         gCurrentPinballGame->travelTrackerCount++;

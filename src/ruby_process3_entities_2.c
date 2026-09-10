@@ -164,7 +164,7 @@ void SelectRubyShopDoorState(void)
 {
     if (gCurrentPinballGame->ballCatchState != TRAP_EVO_SHOP_HOLE)
     {
-        if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
+        if (BoardNotInActivityMode)
         {
             if (!gCurrentPinballGame->evolutionShopActive)
                 gCurrentPinballGame->shopDoorTargetFrame = gCurrentPinballGame->shopDoorOpenLevel & 0xF;
@@ -287,7 +287,7 @@ void RubyPond_EntityLogic(void)
     if (gCurrentPinballGame->shouldProcessWhiscash)
     {
         // If board is currently in one of the modes (catch/etc) force reset to the 3 chinchou
-        if (gCurrentPinballGame->boardState > MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
+        if (BoardInActivityMode)
             gCurrentPinballGame->rubyPondContentsChanging = TRUE;
 
         // Don't immediately force change state if Wishcash is actively doing something
@@ -549,7 +549,7 @@ void RubyPond_EntityLogic(void)
                     // of pond states first.
                     gCurrentPinballGame->pondSwitchesSinceLastWhiscash++;
                     if (gCurrentPinballGame->pondSwitchesSinceLastWhiscash < MIN_POND_SWITCHES_BEFORE_WHISCASH_AVAILABLE ||
-                        gCurrentPinballGame->boardState > MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
+                        BoardInActivityMode)
                     {
                         frameDecidedNextPondState = (gMain.systemFrameCount % 5) + 1;
                         if (gCurrentPinballGame->rubyPondState == frameDecidedNextPondState)

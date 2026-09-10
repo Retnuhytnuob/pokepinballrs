@@ -190,7 +190,7 @@ void UpdateSapphireSeedotCollection(void)
     {
         if (gCurrentPinballGame->boardState != MAIN_BOARD_STATE_TRAVEL_MODE)
         {
-            if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
+            if (BoardNotInActivityMode)
             {
                 if (gCurrentPinballGame->travelTrackerCount < 3)
                 {
@@ -574,7 +574,7 @@ void UpdateSapphireEggMachine(void)
     case 0:
         if (gCurrentPinballGame->hatchMachineProgressTickSignaled)
         {
-            if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
+            if (BoardNotInActivityMode)
             {
                 if (gCurrentPinballGame->sapphireHatchMachineFrameIx < 3)
                 {

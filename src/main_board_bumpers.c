@@ -175,7 +175,7 @@ void UpdateSapphireShopGateLogic(void)
         gCurrentPinballGame->shockWallHitTimer--;
     }
 
-    if (gCurrentPinballGame->boardState > MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
+    if (BoardInActivityMode)
     {
         if (gCurrentPinballGame->boardState != MAIN_BOARD_STATE_EVO_MODE)
         {

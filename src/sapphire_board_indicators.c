@@ -392,7 +392,7 @@ void DrawSapphireEvoArrowProgress(void)
     const u8 **src;
     const u8 **dest;
 
-    if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
+    if (BoardNotInActivityMode)
     {
         if (gCurrentPinballGame->evoArrowProgress == 0)
         {
@@ -460,7 +460,7 @@ void DrawSapphireCatchArrowProgress(void)
     const u8 **src;
     const u8 **dest;
 
-    if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
+    if (BoardNotInActivityMode)
     {
         if (gCurrentPinballGame->catchArrowProgress == 0)
         {
@@ -532,7 +532,7 @@ void AnimateSapphireHatchArrowFlash(void)
     index = 0;
     gCurrentPinballGame->catchProgressFlashing = FALSE;
     if (gCurrentPinballGame->catchArrowProgress > 1
-        && gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
+        && BoardNotInActivityMode)
         gCurrentPinballGame->catchProgressFlashing = TRUE;
 
     if (gCurrentPinballGame->catchProgressFlashing > 0)

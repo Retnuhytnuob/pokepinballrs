@@ -101,7 +101,7 @@ void HandleBoardStateTransitionTeardown(void)
         gCurrentPinballGame->nextBoardState > MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
         ResetCatchState(0);
 
-    if (gCurrentPinballGame->boardState > MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
+    if (BoardInActivityMode)
         return;
 
     if (gCurrentPinballGame->nextBoardState == MAIN_BOARD_STATE_BOSS_HOLE_ACTIVE)

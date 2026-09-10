@@ -1529,7 +1529,7 @@ void UpdateHatchCave(void)
         gCurrentPinballGame->cyndaquilCaveSpriteY = gCyndaquilCavePositions[gCurrentPinballGame->eggCaveState].y - gCurrentPinballGame->eggCaveLiftTimer / 3;
         group->baseX = gCurrentPinballGame->cyndaquilCaveSpriteX - gCurrentPinballGame->cameraXOffset;
         group->baseY = gCurrentPinballGame->cyndaquilCaveSpriteY - gCurrentPinballGame->cameraYOffset;
-        if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
+        if (BoardNotInActivityMode)
         {
             if (gCurrentPinballGame->eggCaveState == 3 && gCurrentPinballGame->rubyEggDeliveryState != 2)
                 gCurrentPinballGame->catchArrowPaletteActive = TRUE;

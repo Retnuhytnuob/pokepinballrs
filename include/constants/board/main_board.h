@@ -29,6 +29,9 @@ enum MainBoardState{
     MAIN_BOARD_STATE_JIRACHI_CATCH_MODE = 8,
 };
 
+#define BoardInActivityMode     gCurrentPinballGame->boardState > MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE
+#define BoardNotInActivityMode  gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE
+
 
 enum BoardIntroSubstates{
     BOARD_INTRO_SUBSTATE_INIT = 0,
