@@ -318,8 +318,8 @@ void ProcessRubyCollisionEvent(u8 triggerType, s16* hasCollisionImpact, u16* col
             gCurrentPinballGame->boardLayerDepth = 2;
         }
 
-        if (gCurrentPinballGame->nuzleafAnimState == 6)
-            gCurrentPinballGame->nuzleafAnimState = 7;
+        if (gCurrentPinballGame->nuzleafEntityState == NUZLEAF_STATE_READY_TO_RESET)
+            gCurrentPinballGame->nuzleafEntityState = NUZLEAF_STATE_RESET_AT_LOWER_POSITION;
 
         if (gCurrentPinballGame->shopDoorTargetFrame & 0xF0 )
             gCurrentPinballGame->shopDoorTargetFrame = 0;
@@ -381,7 +381,7 @@ void ProcessRubyCollisionEvent(u8 triggerType, s16* hasCollisionImpact, u16* col
             if (gCurrentPinballGame->nuzleafHitFlag == 0)
             {
                 gCurrentPinballGame->nuzleafHitFlag = 1;
-                gCurrentPinballGame->nuzleafAnimState = 1;
+                gCurrentPinballGame->nuzleafEntityState = NUZLEAF_STATE_HIT_ON_RAMP;
                 gCurrentPinballGame->collisionSurfaceType = 0;
                 gCurrentPinballGame->collisionResponseType = 2;
                 *collisionAngle = 0xB000;
@@ -391,7 +391,7 @@ void ProcessRubyCollisionEvent(u8 triggerType, s16* hasCollisionImpact, u16* col
         else if (gCurrentPinballGame->nuzleafHitFlag == 1)
         {
             gCurrentPinballGame->nuzleafHitFlag = 2;
-            gCurrentPinballGame->nuzleafAnimState = 3;
+            gCurrentPinballGame->nuzleafEntityState = NUZLEAF_STATE_HIT_AT_EDGE;
             gCurrentPinballGame->collisionSurfaceType = 0;
             gCurrentPinballGame->collisionResponseType = 2;
             *collisionAngle = 0xA000;
@@ -706,7 +706,7 @@ void ProcessRubyCollisionEvent(u8 triggerType, s16* hasCollisionImpact, u16* col
             }
             else {
                 // Ramp prize
-                if (gCurrentPinballGame->nuzleafAnimState <= 4)
+                if (gCurrentPinballGame->nuzleafEntityState <= NUZLEAF_STATE_TEETERING)
                 {
                     gCurrentPinballGame->collisionSurfaceType = 0;
                     gCurrentPinballGame->collisionResponseType = 2;
@@ -714,8 +714,8 @@ void ProcessRubyCollisionEvent(u8 triggerType, s16* hasCollisionImpact, u16* col
                     *hasCollisionImpact = TRUE;
                 }
 
-                if (gCurrentPinballGame->nuzleafAnimState == 5)
-                    gCurrentPinballGame->nuzleafAnimState = 6;
+                if (gCurrentPinballGame->nuzleafEntityState == NUZLEAF_STATE_HANGS_OVER_GAP)
+                    gCurrentPinballGame->nuzleafEntityState = NUZLEAF_STATE_READY_TO_RESET;
 
                 if (gCurrentPinballGame->rampPrizeType == 0)
                     return;

@@ -82,7 +82,7 @@ enum ShopGuardianState{
     SHOP_GAURDIAN_STATE_UNREACHABLE = 5
 };
 
-enum ShockWallANimState{
+enum ShockWallAnimState{
     SHOCK_WALL_ANIM_STATE_FULL_GATE = 0,
     SHOCK_WALL_ANIM_STATE_PLUSLE_GATE = 1,
     SHOCK_WALL_ANIM_STATE_MINUN_GATE = 2,

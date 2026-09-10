@@ -472,7 +472,7 @@ struct PinballGame
     /*0x2F8*/ s8 ballPowerUpOverride;
     /*0x2F9*/ s8 nuzleafPositionIndex;
     /*0x2FA*/ s8 nuzleafHitFlag;
-    /*0x2FB*/ s8 nuzleafAnimState;
+    /*0x2FB*/ s8 nuzleafEntityState;
     /*0x2FC*/ s8 nuzleafGfxTileIndex;
     /*0x2FD*/ s8 nuzleafFrameIndex;
     /*0x2FE*/ u16 nuzleafFrameTimer;
