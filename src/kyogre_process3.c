@@ -49,7 +49,7 @@ void KyogreBoardProcess_3A_383E4(void)
     gCurrentPinballGame->eventTimerType = EVENT_TIMER_MODE_NONE;
     gCurrentPinballGame->eventTimer = gCurrentPinballGame->timerBonus + KYOGRE_MODE_TIME;
     gCurrentPinballGame->timerBonus = 0;
-    if (gCurrentPinballGame->numCompletedBonusStages % 5 == 3)
+    if (gCurrentPinballGame->numCompletedBonusStages % BONUS_STAGE_LOOP_COUNT == BONUS_STAGE_LOOP_SECOND_SIMPLE_CLEARED)
         gCurrentPinballGame->legendaryHitsRequired = 18;
     else
         gCurrentPinballGame->legendaryHitsRequired = 15;
@@ -494,7 +494,7 @@ void UpdateKyogreEntityLogic(void)
     case KYOGRE_ENTITY_STATE_SUFFICIENT_HITS:
         gCurrentPinballGame->eventTimerType = EVENT_TIMER_MODE_COMPLETED;
 
-        if (gCurrentPinballGame->numCompletedBonusStages % 5 == 3)
+        if (gCurrentPinballGame->numCompletedBonusStages % BONUS_STAGE_LOOP_COUNT == BONUS_STAGE_LOOP_SECOND_SIMPLE_CLEARED)
         {
             // catch kyogre
             gCurrentPinballGame->bossEntityState = KYOGRE_ENTITY_STATE_CAPTURE;

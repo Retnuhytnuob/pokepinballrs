@@ -138,6 +138,18 @@ struct Main
     
 };
 
+enum bonusStageLoop{
+    BONUS_STAGE_LOOP_START = 0,             // Going into Kecleon/Dusclops
+    BONUS_STAGE_LOOP_FIRST_SIMPLE_CLEARED,  // Going into Groudon/Kyogre
+    BONUS_STAGE_LOOP_FIRST_BOSS_CLEARED,    // Going into 2nd Kecleon/Dusclops
+    BONUS_STAGE_LOOP_SECOND_SIMPLE_CLEARED, // Going into 2nd Groudon/Kyogre
+    BONUS_STAGE_LOOP_SECOND_BOSS_CLEARED,   // Going into Rayquaza
+    BONUS_STAGE_LOOP_COUNT
+};
+
+#define StartOfEvenBonusLoop (gCurrentPinballGame->numCompletedBonusStages / BONUS_STAGE_LOOP_COUNT) % 2 == 0
+#define RayquazaCatchChanceTrip gCurrentPinballGame->numCompletedBonusStages % (2*BONUS_STAGE_LOOP_COUNT) == BONUS_STAGE_LOOP_COUNT + BONUS_STAGE_LOOP_SECOND_BOSS_CLEARED
+
 extern struct Main gMain;
 extern u32 IntrMain_Buffer[0x200];
 extern u32 IntrMain[];

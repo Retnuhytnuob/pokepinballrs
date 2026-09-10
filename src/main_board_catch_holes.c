@@ -281,14 +281,14 @@ void UpdateShopEntryAnimation(s16 arg0)
             {
                 if (gMain.selectedField == FIELD_RUBY)
                 {
-                    if ((gCurrentPinballGame->numCompletedBonusStages / 5) % 2 == 0)
+                    if (StartOfEvenBonusLoop)
                         m4aSongNumStart(MUS_FIELD_RUBY);
                     else
                         m4aSongNumStart(MUS_FIELD_RUBY2);
                 }
                 else
                 {
-                    if ((gCurrentPinballGame->numCompletedBonusStages / 5) % 2 == 0)
+                    if (StartOfEvenBonusLoop)
                         m4aSongNumStart(MUS_FIELD_SAPPHIRE);
                     else
                         m4aSongNumStart(MUS_FIELD_SAPPHIRE2);

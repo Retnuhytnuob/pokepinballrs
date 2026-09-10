@@ -46,34 +46,34 @@ void InitRouletteWheel(void)
         {
             if (gMain.selectedField == FIELD_RUBY)
             {
-                switch (gCurrentPinballGame->numCompletedBonusStages % 5)
+                switch (gCurrentPinballGame->numCompletedBonusStages % BONUS_STAGE_LOOP_COUNT)
                 {
-                case 0:
-                case 2:
+                case BONUS_STAGE_LOOP_START:
+                case BONUS_STAGE_LOOP_FIRST_BOSS_CLEARED:
                     gCurrentPinballGame->rouletteSlotValues[i] = PRIZE_START_BONUS_MODE_KECLEON;
                     break;
-                case 1:
-                case 3:
+                case BONUS_STAGE_LOOP_FIRST_SIMPLE_CLEARED:
+                case BONUS_STAGE_LOOP_SECOND_SIMPLE_CLEARED:
                     gCurrentPinballGame->rouletteSlotValues[i] = PRIZE_START_BONUS_MODE_GROUDON;
                     break;
-                case 4:
+                case BONUS_STAGE_LOOP_SECOND_BOSS_CLEARED:
                     gCurrentPinballGame->rouletteSlotValues[i] = PRIZE_START_BONUS_MODE_RAYQUAZA;
                     break;
                 }
             }
             else
             {
-                switch (gCurrentPinballGame->numCompletedBonusStages % 5)
+                switch (gCurrentPinballGame->numCompletedBonusStages % BONUS_STAGE_LOOP_COUNT)
                 {
-                case 0:
-                case 2:
+                case BONUS_STAGE_LOOP_START:
+                case BONUS_STAGE_LOOP_FIRST_BOSS_CLEARED:
                     gCurrentPinballGame->rouletteSlotValues[i] = PRIZE_START_BONUS_MODE_DUSKULL;
                     break;
-                case 1:
-                case 3:
+                case BONUS_STAGE_LOOP_FIRST_SIMPLE_CLEARED:
+                case BONUS_STAGE_LOOP_SECOND_SIMPLE_CLEARED:
                     gCurrentPinballGame->rouletteSlotValues[i] = PRIZE_START_BONUS_MODE_KYOGRE;
                     break;
-                case 4:
+                case BONUS_STAGE_LOOP_SECOND_BOSS_CLEARED:
                     gCurrentPinballGame->rouletteSlotValues[i] = PRIZE_START_BONUS_MODE_RAYQUAZA;
                     break;
                 }

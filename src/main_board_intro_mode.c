@@ -151,7 +151,7 @@ void UpdateBoardIntroMode(void)
                 gCurrentPinballGame->rouletteSpinSpeed--;
                 if (gMain.eReaderBonuses[EREADER_RUIN_AREA_CARD])
                 {
-                    gCurrentPinballGame->numCompletedBonusStages = 4;
+                    gCurrentPinballGame->numCompletedBonusStages = BONUS_STAGE_LOOP_SECOND_BOSS_CLEARED;
                     if (gCurrentPinballGame->rouletteSpinSpeed < 24)
                     {
                         gCurrentPinballGame->rouletteSpinSpeed = 24;

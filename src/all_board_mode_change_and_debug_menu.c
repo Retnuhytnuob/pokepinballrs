@@ -249,15 +249,15 @@ void EndOfBallSequence(void)
             gCurrentPinballGame->boardCollisionConfigChanged = FALSE;
             if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_BOSS_HOLE_ACTIVE)
             {
-                switch (gCurrentPinballGame->numCompletedBonusStages % 5)
+                switch (gCurrentPinballGame->numCompletedBonusStages % BONUS_STAGE_LOOP_COUNT)
                 {
-                case 0:
-                case 2:
+                case BONUS_STAGE_LOOP_START:
+                case BONUS_STAGE_LOOP_FIRST_BOSS_CLEARED:
                     m4aSongNumStart(MUS_BONUS_CHANCE);
                     break;
-                case 1:
-                case 3:
-                case 4:
+                case BONUS_STAGE_LOOP_FIRST_SIMPLE_CLEARED:
+                case BONUS_STAGE_LOOP_SECOND_SIMPLE_CLEARED:
+                case BONUS_STAGE_LOOP_SECOND_BOSS_CLEARED:
                     m4aSongNumStart(MUS_BONUS_CHANCE_LEGENDARY);
                     break;
                 }

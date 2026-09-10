@@ -43,14 +43,14 @@ void AllBoardProcess_2A_4D6C4(void)
         gMain.bgOffsets[1].yOffset = gCurrentPinballGame->cameraBaseY + gCurrentPinballGame->cameraScrollOffset;
         if (gMain.selectedField == FIELD_RUBY)
         {
-            if ((gCurrentPinballGame->numCompletedBonusStages / 5) % 2 == 0)
+            if (StartOfEvenBonusLoop)
                 m4aSongNumStart(MUS_FIELD_RUBY);
             else
                 m4aSongNumStart(MUS_FIELD_RUBY2);
         }
         else
         {
-            if ((gCurrentPinballGame->numCompletedBonusStages / 5) % 2 == 0)
+            if (StartOfEvenBonusLoop)
                 m4aSongNumStart(MUS_FIELD_SAPPHIRE);
             else
                 m4aSongNumStart(MUS_FIELD_SAPPHIRE2);

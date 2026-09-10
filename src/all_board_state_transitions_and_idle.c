@@ -39,15 +39,13 @@ void BoardStateDispatcher(void)
 
 void InitFieldIdle(void)
 {
-    s16 num1;
     u8 num2;
 
     if (gCurrentPinballGame->prevBoardState >= MAIN_BOARD_STATE_DEFAULT)
     {
         if (gMain.selectedField == FIELD_RUBY)
         {
-            num1 = gCurrentPinballGame->numCompletedBonusStages / 5;
-            if ((num1 & 1) == 0)
+            if (StartOfEvenBonusLoop)
             {
                 m4aSongNumStart(MUS_FIELD_RUBY);
             }
@@ -58,8 +56,7 @@ void InitFieldIdle(void)
         }
         else
         {
-            num1 = gCurrentPinballGame->numCompletedBonusStages / 5;
-            if ((num1 & 1) == 0)
+            if (StartOfEvenBonusLoop)
             {
                 m4aSongNumStart(MUS_FIELD_SAPPHIRE);
             }

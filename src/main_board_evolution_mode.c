@@ -138,7 +138,7 @@ void UpdateEvolutionMode(void)
             for (i = index; i < 5; i++)
                 gCurrentPinballGame->evoItemShufflePool[i] = gCurrentPinballGame->evoItemShufflePool[i + 1];
 
-            if (gMain.selectedField == FIELD_SAPPHIRE && gCurrentPinballGame->numCompletedBonusStages < 5)
+            if (gMain.selectedField == FIELD_SAPPHIRE && gCurrentPinballGame->numCompletedBonusStages < BONUS_STAGE_LOOP_COUNT)
             {
                 for (i = 0; i < 3; i++)
                 {

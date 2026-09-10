@@ -37,7 +37,7 @@ void RayquazaBoardProcess_3A_3E79C(void)
     gCurrentPinballGame->stageTimer = 0;
     gCurrentPinballGame->boardSubState = BONUS_BOARD_SUBSTATE_ACTIVE;
     gCurrentPinballGame->boardState = LEGENDARY_BOARD_STATE_INTRO;
-    if (gCurrentPinballGame->numCompletedBonusStages % 10 == 9)
+    if (RayquazaCatchChanceTrip)
         gCurrentPinballGame->legendaryHitsRequired = 18;
     else
         gCurrentPinballGame->legendaryHitsRequired = 15;
@@ -564,7 +564,7 @@ void UpdateRayquazaEntityLogic(void)
         break;
     case RAYQUAZA_ENTITY_STATE_SUFFICIENT_HITS:
         gCurrentPinballGame->eventTimerType = EVENT_TIMER_MODE_COMPLETED;
-        if (gCurrentPinballGame->numCompletedBonusStages % 10 == 9)
+        if (RayquazaCatchChanceTrip)
         {
             // Catch Rayquaza
             gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_CAPTURE;
