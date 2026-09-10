@@ -4,6 +4,7 @@
 #include "constants/ereader.h"
 #include "constants/fields.h"
 #include "constants/board/ruby_states.h"
+#include "constants/board/sapphire_states.h"
 
 extern struct PinballGame gPinballGameState;
 
@@ -393,7 +394,7 @@ void SetBallPositionForBonusReturn(void)
         gCurrentPinballGame->ballPhysicsState = BALL_PHYSICS_MANUAL;
         gCurrentPinballGame->trapAnimState = 0;
         gCurrentPinballGame->pelipperFrameTimer = 0;
-        gCurrentPinballGame->pelipperState = 7;
+        gCurrentPinballGame->pelipperState = PELIPPER_STATE_SET_SWOOP_FROM_TOP_LEFT;
         gCurrentPinballGame->cameraBaseX = 0;
         gCurrentPinballGame->cameraBaseY = 0;
         break;

@@ -442,7 +442,7 @@ void GivePrize(void)
         {
             gCurrentPinballGame->bumperHitsSinceReset = 100;
             gCurrentPinballGame->pelipperFrameTimer = 1800;
-            gCurrentPinballGame->pelipperState = 1;
+            gCurrentPinballGame->pelipperState = PELIPPER_STATE_WATCHING_RAMP;
         }
         break;
     case PRIZE_1M_POINTS:

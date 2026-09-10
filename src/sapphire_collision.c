@@ -265,7 +265,7 @@ void ProcessSapphireCollisionEvent(u8 triggerType, u16* hasCollisionImpact, u16*
                     {
                         // Bonus Multiplier Addition button
                         gCurrentPinballGame->pelipperFrameTimer = 1800;
-                        gCurrentPinballGame->pelipperState = 1;
+                        gCurrentPinballGame->pelipperState = PELIPPER_STATE_WATCHING_RAMP;
 
                         if (gCurrentPinballGame->progressLevel < 99)
                             gCurrentPinballGame->progressLevel++;
@@ -668,14 +668,14 @@ void ProcessSapphireCollisionEvent(u8 triggerType, u16* hasCollisionImpact, u16*
         case SAPPHIRE_TRIGGER_PELIPPER_ENTITY_TRIGGER:
             if (gCurrentPinballGame->ball->positionQ0.y < 80)
             {
-                if (gCurrentPinballGame->pelipperState == 1)
-                    gCurrentPinballGame->pelipperState = 2;
+                if (gCurrentPinballGame->pelipperState == PELIPPER_STATE_WATCHING_RAMP)
+                    gCurrentPinballGame->pelipperState = PELIPPER_STATE_OPENED_MOUTH;
             }
             else
             {
-                if (gCurrentPinballGame->pelipperState == 2)
+                if (gCurrentPinballGame->pelipperState == PELIPPER_STATE_OPENED_MOUTH)
                 {
-                    gCurrentPinballGame->pelipperState = 3;
+                    gCurrentPinballGame->pelipperState = PELIPPER_STATE_CLOSING_MOUTH;
                     gCurrentPinballGame->pelipperFrameTimer = 0;
                 }
             }

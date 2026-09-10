@@ -24,12 +24,12 @@ extern struct SongHeader se_pelipper_wing_flap;
 
 void DecrementPelipperTimer(void)
 {
-    if (gCurrentPinballGame->pelipperState == 1)
+    if (gCurrentPinballGame->pelipperState == PELIPPER_STATE_WATCHING_RAMP)
     {
         if (gCurrentPinballGame->pelipperFrameTimer)
             gCurrentPinballGame->pelipperFrameTimer--;
         else
-            gCurrentPinballGame->pelipperState = 0;
+            gCurrentPinballGame->pelipperState = PELIPPER_STATE_NORMAL;
     }
 }
 
@@ -40,36 +40,36 @@ void UpdatePelipperPondEntity(void)
     struct OamDataSimple *oamSimple;
     u16 *dst;
     const u16 *src;
-    s16 var_sl;
-    s16 sp0;
+    s16 frameId;
+    s16 framesetIx;
     s16 index;
 
-    var_sl = 0;
-    sp0 = 0;
+    frameId = 0;
+    framesetIx = 0;
     switch (gCurrentPinballGame->pelipperState)
     {
-    case 0:
+    case PELIPPER_STATE_NORMAL:
         gCurrentPinballGame->pelipperYBobOffset = 0;
-        var_sl = (gCurrentPinballGame->globalAnimFrameCounter % 50) / 25;
+        frameId = (gCurrentPinballGame->globalAnimFrameCounter % 50) / 25;
         gCurrentPinballGame->pelipperPosX = 0;
         gCurrentPinballGame->pelipperPosY = 0;
         break;
-    case 1:
-        var_sl = gPelipperIdleFrameIndices[(gCurrentPinballGame->globalAnimFrameCounter % 40) / 10];
+    case PELIPPER_STATE_WATCHING_RAMP:
+        frameId = gPelipperIdleFrameIndices[(gCurrentPinballGame->globalAnimFrameCounter % 40) / 10];
         gCurrentPinballGame->pelipperPosX = 0;
         gCurrentPinballGame->pelipperPosY = 0;
         gCurrentPinballGame->pelipperSwallowAnimIndex = 0;
         gCurrentPinballGame->pelipperSwallowSubTimer = 0;
         if (gCurrentPinballGame->boardState > MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
         {
-            gCurrentPinballGame->pelipperState = 0;
-            var_sl = 0;
+            gCurrentPinballGame->pelipperState = PELIPPER_STATE_NORMAL;
+            frameId = 0;
         }
         break;
-    case 2:
-        var_sl = 4;
+    case PELIPPER_STATE_OPENED_MOUTH:
+        frameId = 4;
         break;
-    case 3:
+    case PELIPPER_STATE_CLOSING_MOUTH:
         if (gCurrentPinballGame->pelipperFrameTimer < 3)
         {
             if (gCurrentPinballGame->pelipperFrameTimer == 0)
@@ -81,25 +81,25 @@ void UpdatePelipperPondEntity(void)
                 gCurrentPinballGame->ball->spinSpeed = 0;
                 m4aSongNumStart(SE_PELIPPER_BALL_GRAB);
                 PlayRumble(7);
-                gCurrentPinballGame->scoreAddedInFrame = SCORE_PELLIPER_BALL_GRAB;
+                gCurrentPinballGame->scoreAddedInFrame = SCORE_PELIPPER_BALL_GRAB;
             }
 
             gCurrentPinballGame->ball->positionQ0.x = 156;
             gCurrentPinballGame->ball->positionQ0.y = 121 + gCurrentPinballGame->pelipperFrameTimer * 2;
-            var_sl = 4;
+            frameId = 4;
         }
         else if (gCurrentPinballGame->pelipperFrameTimer < 23)
         {
             gCurrentPinballGame->ball->positionQ0.x = 157;
             gCurrentPinballGame->ball->positionQ0.y = 134;
             gCurrentPinballGame->ball->ballHidden = TRUE;
-            var_sl = 5;
+            frameId = 5;
         }
         else
         {
-            gCurrentPinballGame->pelipperState = 4;
+            gCurrentPinballGame->pelipperState = PELIPPER_STATE_TAKEOFF;
             gCurrentPinballGame->pelipperFrameTimer = 0;
-            var_sl = 2;
+            frameId = 2;
         }
 
         gCurrentPinballGame->ball->positionQ1.x = gCurrentPinballGame->ball->positionQ0.x * 2;
@@ -109,7 +109,7 @@ void UpdatePelipperPondEntity(void)
         gCurrentPinballGame->pelipperFrameTimer++;
         gCurrentPinballGame->pelipperSfxTimer = 0;
         break;
-    case 4:
+    case PELIPPER_STATE_TAKEOFF:
         if (gPelipperSwallowAnimData[gCurrentPinballGame->pelipperSwallowAnimIndex][2] > gCurrentPinballGame->pelipperSwallowSubTimer)
         {
             gCurrentPinballGame->pelipperSwallowSubTimer++;
@@ -121,7 +121,7 @@ void UpdatePelipperPondEntity(void)
             if (gCurrentPinballGame->pelipperSwallowAnimIndex == 21)
             {
                 gCurrentPinballGame->pelipperSwallowAnimIndex = 20;
-                gCurrentPinballGame->pelipperState = 5;
+                gCurrentPinballGame->pelipperState = PELIPPER_STATE_FLY_OFF_BOARD;
                 gCurrentPinballGame->pelipperFrameTimer = 0;
             }
 
@@ -129,12 +129,12 @@ void UpdatePelipperPondEntity(void)
                 m4aSongNumStart(SE_PELIPPER_WING_FLAP);
         }
 
-        sp0 = gPelipperSwallowAnimData[gCurrentPinballGame->pelipperSwallowAnimIndex][0];
-        var_sl = gPelipperSwallowAnimData[gCurrentPinballGame->pelipperSwallowAnimIndex][1];
+        framesetIx = gPelipperSwallowAnimData[gCurrentPinballGame->pelipperSwallowAnimIndex][0];
+        frameId = gPelipperSwallowAnimData[gCurrentPinballGame->pelipperSwallowAnimIndex][1];
         if (gCurrentPinballGame->pelipperSfxTimer++ % 35 == 34)
             m4aSongNumStart(SE_PELIPPER_WING_FLAP);
         break;
-    case 5:
+    case PELIPPER_STATE_FLY_OFF_BOARD:
         if (gCurrentPinballGame->pelipperFrameTimer == 0)
         {
             gCurrentPinballGame->pelipperPosX = -360;
@@ -142,7 +142,7 @@ void UpdatePelipperPondEntity(void)
         }
 
         index = (gCurrentPinballGame->pelipperFrameTimer % 26) / 2;
-        var_sl = gPelipperFlyAnimTable[index][0];
+        frameId = gPelipperFlyAnimTable[index][0];
         gCurrentPinballGame->pelipperYBobOffset = gPelipperFlyAnimTable[index][1] * 10;
         gCurrentPinballGame->pelipperFlyVelX = -12;
         gCurrentPinballGame->pelipperFlyVelY = -10;
@@ -160,23 +160,23 @@ void UpdatePelipperPondEntity(void)
             if (gCurrentPinballGame->bumperHitsSinceReset > 99)
             {
                 gCurrentPinballGame->bumperHitsSinceReset = 0;
-                gCurrentPinballGame->pelipperState = 6;
+                gCurrentPinballGame->pelipperState = PELIPPER_STATE_WARP_TO_SPHEAL_BOARD;
                 gCurrentPinballGame->pelipperFrameTimer = 65;
                 m4aMPlayAllStop();
             }
             else
             {
                 gCurrentPinballGame->pelipperFrameTimer = 0;
-                gCurrentPinballGame->pelipperState = 7;
+                gCurrentPinballGame->pelipperState = PELIPPER_STATE_SET_SWOOP_FROM_TOP_LEFT;
             }
         }
 
         if (gCurrentPinballGame->pelipperSfxTimer++ % 35 == 34)
             m4aSongNumStart(SE_PELIPPER_WING_FLAP);
         break;
-    case 6:
+    case PELIPPER_STATE_WARP_TO_SPHEAL_BOARD:
         gCurrentPinballGame->startButtonDisabled = TRUE;
-        var_sl = gPelipperFlyAnimTable[0][0];
+        frameId = gPelipperFlyAnimTable[0][0];
         if (gCurrentPinballGame->pelipperFrameTimer == 65)
         {
             m4aSongNumStart(SE_WARP);
@@ -197,18 +197,18 @@ void UpdatePelipperPondEntity(void)
             }
         }
         break;
-    case 7:
+    case PELIPPER_STATE_SET_SWOOP_FROM_TOP_LEFT:
         gCurrentPinballGame->pelipperPosX = -1880;
         gCurrentPinballGame->pelipperPosY = -800;
         gCurrentPinballGame->pelipperFlyVelX = 82;
         gCurrentPinballGame->pelipperFlyVelY = 0;
         gCurrentPinballGame->pelipperFrameTimer = 0;
-        gCurrentPinballGame->pelipperState = 8;
-        var_sl = 13;
-        sp0 = 9;
+        gCurrentPinballGame->pelipperState = PELIPPER_STATE_SWOOP;
+        frameId = 13;
+        framesetIx = 9;
         break;
-    case 8:
-        var_sl = (gCurrentPinballGame->pelipperFrameTimer % 24) / 6 + 13;
+    case PELIPPER_STATE_SWOOP:
+        frameId = (gCurrentPinballGame->pelipperFrameTimer % 24) / 6 + 13;
         gCurrentPinballGame->pelipperYBobOffset = MulSin(240, gCurrentPinballGame->pelipperFrameTimer * 0x400);
         if (gCurrentPinballGame->pelipperFrameTimer == 0)
             m4aSongNumStart(SE_PELIPPER_SWOOSH);
@@ -221,7 +221,7 @@ void UpdatePelipperPondEntity(void)
         else if (gCurrentPinballGame->pelipperFrameTimer >= 70)
         {
             gCurrentPinballGame->pelipperFrameTimer = 0;
-            gCurrentPinballGame->pelipperState = 9;
+            gCurrentPinballGame->pelipperState = PELIPPER_STATE_FLY_IN_FROM_RIGHT;
             gCurrentPinballGame->pelipperPosX = 1200;
             gCurrentPinballGame->pelipperPosY = -1000;
             m4aSongNumStart(SE_PELIPPER_WING_FLAP);
@@ -276,12 +276,12 @@ void UpdatePelipperPondEntity(void)
             }
         }
 
-        sp0 = 9;
+        framesetIx = 9;
         gCurrentPinballGame->pelipperFrameTimer++;
         break;
-    case 9:
+    case PELIPPER_STATE_FLY_IN_FROM_RIGHT:
         index = (gCurrentPinballGame->pelipperFrameTimer % 26) / 2;
-        var_sl = gPelipperFlyAnimTable[index][0] + 4;
+        frameId = gPelipperFlyAnimTable[index][0] + 4;
         gCurrentPinballGame->pelipperYBobOffset = gPelipperFlyAnimTable[index][1];
         gCurrentPinballGame->pelipperFlyVelX = -12;
         gCurrentPinballGame->pelipperFlyVelY = 10;
@@ -293,7 +293,7 @@ void UpdatePelipperPondEntity(void)
         else
         {
             gCurrentPinballGame->pelipperFrameTimer = 0;
-            gCurrentPinballGame->pelipperState = 10;
+            gCurrentPinballGame->pelipperState = PELIPPER_STATE_RETURN_TO_NORMAL;
             MPlayStart(&gMPlayInfo_SE1, &se_pelipper_wing_flap);
         }
 
@@ -302,24 +302,24 @@ void UpdatePelipperPondEntity(void)
 
         gCurrentPinballGame->pelipperFrameTimer++;
         break;
-    case 10:
+    case PELIPPER_STATE_RETURN_TO_NORMAL:
         gCurrentPinballGame->pelipperYBobOffset = 0;
-        gCurrentPinballGame->pelipperState = 0;
+        gCurrentPinballGame->pelipperState = PELIPPER_STATE_NORMAL;
         gCurrentPinballGame->pelipperFrameTimer = 0;
-        var_sl = 0;
+        frameId = 0;
         break;
     }
 
     if (group->active)
     {
-        DmaCopy16(3, gPelipper_Gfx[var_sl], (void *)0x060122A0, 0x480);
+        DmaCopy16(3, gPelipper_Gfx[frameId], (void *)0x060122A0, 0x480);
         group->baseX = gCurrentPinballGame->pelipperPosX / 10 + 146 - gCurrentPinballGame->cameraXOffset;
         group->baseY = gCurrentPinballGame->pelipperPosY / 10 + 110 - gCurrentPinballGame->cameraYOffset + gCurrentPinballGame->pelipperYBobOffset / 10;
         for (i = 0; i < 4; i++)
         {
             oamSimple = &group->oam[i];
             dst = (u16*)&gOamBuffer[oamSimple->oamId];
-            src = gPelipperPondSpritesheetOam[sp0][i];
+            src = gPelipperPondSpritesheetOam[framesetIx][i];
             *dst++ = *src++;
             *dst++ = *src++;
             *dst++ = *src++;
