@@ -592,5 +592,5 @@ void ResetBoardStateOnDeath(void)
 
     }
 
-    gCurrentPinballGame->makuhitaPunchState = 0;
+    gCurrentPinballGame->makuhitaState = MAKUHITA_STATE_INACTIVE;
 }

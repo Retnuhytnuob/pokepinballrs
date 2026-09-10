@@ -326,7 +326,7 @@ void UpdateGulpinBossState(void)
     }
 }
 
-void UpdateRubySideBumperAnimation(void)
+void UpdateLinooneSideBumpers(void)
 {
     s16 i;
 
@@ -409,10 +409,10 @@ void UpdateRubySideBumperAnimation(void)
         }
         else
         {
-            if (gCurrentPinballGame->makuhitaPunchState == 0)
-                gCurrentPinballGame->makuhitaPunchState = 1;
+            if (gCurrentPinballGame->makuhitaState == MAKUHITA_STATE_INACTIVE)
+                gCurrentPinballGame->makuhitaState = MAKUHITA_STATE_NEUTRAL_READY;
             else
-                gCurrentPinballGame->makuhitaPunchState = 0;
+                gCurrentPinballGame->makuhitaState = MAKUHITA_STATE_INACTIVE;
         }
 
         gCurrentPinballGame->linooneSideBumperExtensionsPending[SIDE_IX_LEFT] = 0;

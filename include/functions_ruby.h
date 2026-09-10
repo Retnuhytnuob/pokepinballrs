@@ -14,7 +14,7 @@ extern void UpdateGulpinBossState(void);
 
 extern void UpdateMakuhitaEntity(void);
 extern void DrawRubySideBumperSprites(void);
-extern void UpdateRubySideBumperAnimation(void);
+extern void UpdateLinooneSideBumpers(void);
 extern void UpdateRubyBoardEntityRendering(void);
 extern void UpdateRubyBoardEntityLogic(void);
 extern void HandleRubyFlipperButtonInput(void);
