@@ -93,7 +93,7 @@ void UpdateSapphireBoardEntityRendering(void)
     }
     if (gCurrentPinballGame->cameraYViewport < 0xCA)
     {
-        DrawSapphireBumperSprites();
+        DrawSapphireShopGuards();
     }
     if (gCurrentPinballGame->cameraYViewport < 0xDC)
     {
@@ -138,7 +138,7 @@ void UpdateSapphireBoardEntityLogic(void)
     UpdateSapphireShopSignAnimation();
 
     if (!(gMain.modeChangeFlags & MODE_CHANGE_END_OF_GAME))
-        UpdateSapphireBumperLogic();
+        UpdateSapphireShopGateLogic();
 }
 
 void DispatchSapphireCatchModeInit(void)
@@ -220,9 +220,9 @@ void UpdateSapphireEvolutionShopSequence(void)
         {
             for (i = 0; i < 2; i++)
             {
-                gCurrentPinballGame->sapphireBumperAnimKeyframe[i] = 10;
-                gCurrentPinballGame->sapphireBumperAnimSubTimer[i] = 0;
-                gCurrentPinballGame->sapphireMartGateBumperState[i] = 4;
+                gCurrentPinballGame->shopGuardianAnimFrames[i] = 10;
+                gCurrentPinballGame->shopGuardianAnimFrameTimer[i] = 0;
+                gCurrentPinballGame->shopGuardianState[i] = SHOP_GAURDIAN_STATE_CELEBRATING_EVO_AVAILABLE;
             }
         }
     }

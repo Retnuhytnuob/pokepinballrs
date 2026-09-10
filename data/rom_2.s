@@ -7157,7 +7157,7 @@ gZigzagoonAnimKeyframes:: @ 0x086AE496
 	.2byte 20,  5,  5
 	.2byte  3, 14,  2
 
-gSapphireBumperAnimFrames:: @ 0x086AE4FC
+gShopGuardianAnimFramesetData:: @ 0x086AE4FC
 	.2byte  0, 17
 	.2byte  1, 19
 	.2byte  2, 17

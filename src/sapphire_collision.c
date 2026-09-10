@@ -214,17 +214,17 @@ void ProcessSapphireCollisionEvent(u8 triggerType, u16* hasCollisionImpact, u16*
                 {
                     if (gCurrentPinballGame->ball->positionQ0.x < 74)
                     {
-                        // Minun's button
+                        // Plusle's button
                         if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE
-                            && gCurrentPinballGame->sapphireMartGateBumperState[1] < 3)
+                            && gCurrentPinballGame->shopGuardianState[PLUSLE_TARGET_BUTTON_IX] < SHOP_GAURDIAN_STATE_LOWER_WALL_FOR_EVO_MODE)
                         {
-                            if (gCurrentPinballGame->sapphireMartGateBumperState[1] == 1)
-                                gCurrentPinballGame->sapphireBumperAnimKeyframe[1] = 6;
+                            if (gCurrentPinballGame->shopGuardianState[PLUSLE_TARGET_BUTTON_IX] == SHOP_GAURDIAN_STATE_KNOCKED_DOWN)
+                                gCurrentPinballGame->shopGuardianAnimFrames[PLUSLE_TARGET_BUTTON_IX] = 6;
                             else
-                                gCurrentPinballGame->sapphireBumperAnimKeyframe[1] = 4;
+                                gCurrentPinballGame->shopGuardianAnimFrames[PLUSLE_TARGET_BUTTON_IX] = 4;
 
-                            gCurrentPinballGame->sapphireBumperAnimSubTimer[1] = 0;
-                            gCurrentPinballGame->sapphireMartGateBumperState[1] = 1;
+                            gCurrentPinballGame->shopGuardianAnimFrameTimer[PLUSLE_TARGET_BUTTON_IX] = 0;
+                            gCurrentPinballGame->shopGuardianState[PLUSLE_TARGET_BUTTON_IX] = SHOP_GAURDIAN_STATE_KNOCKED_DOWN;
                             PlayRumble(7);
 
                             gCurrentPinballGame->ball->velocity.x /= 2;
@@ -238,17 +238,17 @@ void ProcessSapphireCollisionEvent(u8 triggerType, u16* hasCollisionImpact, u16*
                     }
                     else if (gCurrentPinballGame->ball->positionQ0.x < 116)
                     {
-                        // Plusle's button
+                        // Minun's button
                         if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE
-                            && gCurrentPinballGame->sapphireMartGateBumperState[0] < 3)
+                            && gCurrentPinballGame->shopGuardianState[MINUN_TARGET_BUTTON_IX] < SHOP_GAURDIAN_STATE_LOWER_WALL_FOR_EVO_MODE)
                         {
-                            if (gCurrentPinballGame->sapphireMartGateBumperState[0] == 1)
-                                gCurrentPinballGame->sapphireBumperAnimKeyframe[0] = 6;
+                            if (gCurrentPinballGame->shopGuardianState[MINUN_TARGET_BUTTON_IX] == SHOP_GAURDIAN_STATE_KNOCKED_DOWN)
+                                gCurrentPinballGame->shopGuardianAnimFrames[MINUN_TARGET_BUTTON_IX] = 6;
                             else
-                                gCurrentPinballGame->sapphireBumperAnimKeyframe[0] = 4;
+                                gCurrentPinballGame->shopGuardianAnimFrames[MINUN_TARGET_BUTTON_IX] = 4;
 
-                            gCurrentPinballGame->sapphireBumperAnimSubTimer[0] = 0;
-                            gCurrentPinballGame->sapphireMartGateBumperState[0] = 1;
+                            gCurrentPinballGame->shopGuardianAnimFrameTimer[MINUN_TARGET_BUTTON_IX] = 0;
+                            gCurrentPinballGame->shopGuardianState[MINUN_TARGET_BUTTON_IX] = SHOP_GAURDIAN_STATE_KNOCKED_DOWN;
 
                             PlayRumble(7);
 
@@ -329,9 +329,9 @@ void ProcessSapphireCollisionEvent(u8 triggerType, u16* hasCollisionImpact, u16*
             }
             break;
         case SAPPHIRE_TRIGGER_SHOCK_WALL:
-            if (gCurrentPinballGame->shopShockWallAnimState != 3)
+            if (gCurrentPinballGame->shopShockWallAnimState != SHOCK_WALL_ANIM_STATE_NONE)
             {
-                gCurrentPinballGame->shopBumperHitTimer = 17;
+                gCurrentPinballGame->shockWallHitTimer = 17;
                 gCurrentPinballGame->collisionSurfaceType = 0;
                 gCurrentPinballGame->collisionResponseType = 2;
                 *collisionAngle = 0xD800;

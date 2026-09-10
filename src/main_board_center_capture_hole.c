@@ -368,8 +368,8 @@ void GivePrize(void)
                 gCurrentPinballGame->outcomeFrameCounter = 149;
                 gCurrentPinballGame->evolutionShopActive = TRUE;
                 UpdateShopEntryAnimation(1);
-                gCurrentPinballGame->sapphireMartGateBumperState[0] = 3;
-                gCurrentPinballGame->sapphireMartGateBumperState[1] = 3;
+                gCurrentPinballGame->shopGuardianState[MINUN_TARGET_BUTTON_IX] = SHOP_GAURDIAN_STATE_LOWER_WALL_FOR_EVO_MODE;
+                gCurrentPinballGame->shopGuardianState[PLUSLE_TARGET_BUTTON_IX] = SHOP_GAURDIAN_STATE_LOWER_WALL_FOR_EVO_MODE;
             }
 
             if (gCurrentPinballGame->outcomeFrameCounter == 170)

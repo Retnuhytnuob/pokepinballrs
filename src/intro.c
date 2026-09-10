@@ -21,7 +21,7 @@
 
 void IntroScene3Treecko_InitVars(void);
 void IntroScene3Treecko_RenderPokeball(void);
-void IntroScene4PlussleMinun_InitVars(void);
+void IntroScene4PlusleMinun_InitVars(void);
 void IntroScene5Mudkip_InitVars(void);
 extern void IntroScene5Mudkip_RenderAllSprites(void);
 void IntroScene6Chinchou_InitVars(void);
@@ -985,7 +985,7 @@ void IntroScene3Treecko_25_ResetTilemap(void)
     gIntroSceneIndex++;
 }
 
-void IntroScene4PlussleMinun_26_LoadTealWhiteBackground(void)
+void IntroScene4PlusleMinun_26_LoadTealWhiteBackground(void)
 {
     REG_DISPCNT = DISPCNT_MODE_0;
     REG_BG0CNT = BGCNT_TXT512x512 | BGCNT_SCREENBASE(12) | BGCNT_PRIORITY(0);
@@ -995,14 +995,14 @@ void IntroScene4PlussleMinun_26_LoadTealWhiteBackground(void)
     REG_BG3CNT = BGCNT_TXT256x256 | BGCNT_SCREENBASE(30) | BGCNT_PRIORITY(3);
     REG_DISPCNT |= DISPCNT_BG3_ON;
 
-    DmaCopy16(3, gIntroScene4PlussleMinun_BG0Tiles, BG_CHAR_SCREEN_ADDR(1,4), 4*BG_SCREEN_SIZE);
-    DmaCopy16(3, gIntroScene4PlussleMinun_BG1Tiles, BG_CHAR_SCREEN_ADDR(3,2), 4*BG_SCREEN_SIZE);
-    DmaCopy16(3, gIntroScene4PlussleMinun_BG3Tilemap, BG_CHAR_SCREEN_ADDR(3,6), BG_SCREEN_SIZE);
-    DmaCopy16(3, gIntroScene4PlussleMinunSprites_Gfx, BG_CHAR_ADDR(0), BG_CHAR_SIZE);
-    DmaCopy16(3, gIntroScene4PlussleMinun_Pal, BG_PLTT_SLOT(PAL_IX_0), 3*PLTT_SLOT_SIZE);
+    DmaCopy16(3, gIntroScene4PlusleMinun_BG0Tiles, BG_CHAR_SCREEN_ADDR(1,4), 4*BG_SCREEN_SIZE);
+    DmaCopy16(3, gIntroScene4PlusleMinun_BG1Tiles, BG_CHAR_SCREEN_ADDR(3,2), 4*BG_SCREEN_SIZE);
+    DmaCopy16(3, gIntroScene4PlusleMinun_BG3Tilemap, BG_CHAR_SCREEN_ADDR(3,6), BG_SCREEN_SIZE);
+    DmaCopy16(3, gIntroScene4PlusleMinunSprites_Gfx, BG_CHAR_ADDR(0), BG_CHAR_SIZE);
+    DmaCopy16(3, gIntroScene4PlusleMinun_Pal, BG_PLTT_SLOT(PAL_IX_0), 3*PLTT_SLOT_SIZE);
     gMain.dispcntBackup = REG_DISPCNT;
 
-    IntroScene4PlussleMinun_InitVars();
+    IntroScene4PlusleMinun_InitVars();
     gMain.bgOffsets[0].xOffset = gIntroBGParams[0].posX;
     gMain.bgOffsets[0].yOffset = gIntroBGParams[0].posY;
     gMain.bgOffsets[1].xOffset = gIntroBGParams[1].posX;
@@ -1015,7 +1015,7 @@ void IntroScene4PlussleMinun_26_LoadTealWhiteBackground(void)
     gIntroSceneIndex += 2;
 }
 
-void IntroScene4PlussleMinun_InitVars(void)
+void IntroScene4PlusleMinun_InitVars(void)
 {
     gIntroBGParams[0].posX = 0x1C;
     gIntroBGParams[0].posY = 0xFF20;
@@ -1037,7 +1037,7 @@ void nullsub_9(void)
 {
 }
 
-void IntroScene4PlussleMinun_28_PlusleMinunTextScroll(void)
+void IntroScene4PlusleMinun_28_PlusleMinunTextScroll(void)
 {
     gIntroBGParams[0].posY += gIntroBGParams[0].velY;
     gIntroBGParams[1].posY += gIntroBGParams[1].velY;
@@ -1069,9 +1069,9 @@ void nullsub_10(void)
 {
 }
 
-void IntroScene4PlussleMinun_30_FlashWhite(void)
+void IntroScene4PlusleMinun_30_FlashWhite(void)
 {
-    // TODO Near duplicate of IntroScene4PlussleMinun_28_PlusleMinunTextScroll
+    // TODO Near duplicate of IntroScene4PlusleMinun_28_PlusleMinunTextScroll
     gIntroBGParams[0].posY += gIntroBGParams[0].velY;
     gIntroBGParams[1].posY += gIntroBGParams[1].velY;
     gIntroBGParams[2].posX--;
@@ -1095,7 +1095,7 @@ void IntroScene4PlussleMinun_30_FlashWhite(void)
     gIntroSceneIndex++;
 }
 
-void IntroScene4PlussleMinun_31_ResetTilemap(void)
+void IntroScene4PlusleMinun_31_ResetTilemap(void)
 {
     // TODO Duplicate of IntroScene3Treecko_25_ResetTilemap?
     ClearBgTilemapAndOffsets();

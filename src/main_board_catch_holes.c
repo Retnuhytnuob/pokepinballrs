@@ -217,7 +217,7 @@ void UpdateShopEntryAnimation(s16 arg0)
                     m4aSongNumStart(SE_EVO_SELECTION_CONFIRM);
 
                     gCurrentPinballGame->shopDoorOpenLevel = 19;
-                    gCurrentPinballGame->sapphireBumperLitCountdown = 30;
+                    gCurrentPinballGame->shopGuardianReadyCountdown = 30;
                 }
                 else
                     m4aSongNumStart(SE_FAILURE);

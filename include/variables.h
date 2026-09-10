@@ -371,11 +371,11 @@ extern s32 gIntroScaleY;
 
 extern const struct SpriteSet *const gIntroScene3Treecko_SpriteSets[];
 extern const struct SpriteSet *const gIntroScene5Mudkip_SpriteSets[];
-extern const Palette gIntroScene4PlussleMinun_Pal[];
-extern u8 gIntroScene4PlussleMinun_BG3Tilemap[];
-extern u8 gIntroScene4PlussleMinunSprites_Gfx[];
-extern u8 gIntroScene4PlussleMinun_BG0Tiles[];
-extern u8 gIntroScene4PlussleMinun_BG1Tiles[];
+extern const Palette gIntroScene4PlusleMinun_Pal[];
+extern u8 gIntroScene4PlusleMinun_BG3Tilemap[];
+extern u8 gIntroScene4PlusleMinunSprites_Gfx[];
+extern u8 gIntroScene4PlusleMinun_BG0Tiles[];
+extern u8 gIntroScene4PlusleMinun_BG1Tiles[];
 
 extern u16 gTextTilemapBuffer[];
 

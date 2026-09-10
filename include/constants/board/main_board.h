@@ -29,6 +29,7 @@ enum MainBoardState{
     MAIN_BOARD_STATE_JIRACHI_CATCH_MODE = 8,
 };
 
+
 enum BoardIntroSubstates{
     BOARD_INTRO_SUBSTATE_INIT = 0,
     BOARD_INTRO_SUBSTATE_SETUP_GRAPHICS = 1,

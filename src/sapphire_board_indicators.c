@@ -569,7 +569,7 @@ void AnimateSapphireShopArrow(void)
     const u8 **dest;
 
     index = 0;
-    if (gCurrentPinballGame->shopShockWallAnimState == 3)
+    if (gCurrentPinballGame->shopShockWallAnimState == SHOCK_WALL_ANIM_STATE_NONE)
         gCurrentPinballGame->shopArrowActive = TRUE;
     else if (gCurrentPinballGame->boardState != MAIN_BOARD_STATE_BOARD_INTRO)
         gCurrentPinballGame->shopArrowActive = FALSE;

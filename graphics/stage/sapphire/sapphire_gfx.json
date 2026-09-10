@@ -233,7 +233,7 @@
           "palbank": 10
         },
         {
-          "segfile": "intro_sprite_plussle",
+          "segfile": "intro_sprite_plusle",
           "width": 4,
           "palette": "sapphire_board_palset_0.gbapal",
           "palbank": 10
@@ -284,7 +284,7 @@
           "palbank": 10
         },
         {
-          "segfile": "intro_sprite_plussle_charge",
+          "segfile": "intro_sprite_plusle_charge",
           "width": 4,
           "palette": "sapphire_board_palset_0.gbapal",
           "palbank": 10
