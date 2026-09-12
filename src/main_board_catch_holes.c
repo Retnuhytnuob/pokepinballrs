@@ -217,7 +217,7 @@ void UpdateShopEntryAnimation(s16 arg0)
                     m4aSongNumStart(SE_EVO_SELECTION_CONFIRM);
 
                     gCurrentPinballGame->shopDoorOpenLevel = 19;
-                    gCurrentPinballGame->sapphireBumperLitCountdown = 30;
+                    gCurrentPinballGame->shopGuardianReadyCountdown = 30;
                 }
                 else
                     m4aSongNumStart(SE_FAILURE);
@@ -281,14 +281,14 @@ void UpdateShopEntryAnimation(s16 arg0)
             {
                 if (gMain.selectedField == FIELD_RUBY)
                 {
-                    if ((gCurrentPinballGame->numCompletedBonusStages / 5) % 2 == 0)
+                    if (StartOfEvenBonusLoop)
                         m4aSongNumStart(MUS_FIELD_RUBY);
                     else
                         m4aSongNumStart(MUS_FIELD_RUBY2);
                 }
                 else
                 {
-                    if ((gCurrentPinballGame->numCompletedBonusStages / 5) % 2 == 0)
+                    if (StartOfEvenBonusLoop)
                         m4aSongNumStart(MUS_FIELD_SAPPHIRE);
                     else
                         m4aSongNumStart(MUS_FIELD_SAPPHIRE2);

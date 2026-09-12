@@ -94,7 +94,7 @@ void UpdateRubyBoardEntityLogic(void)
     RubyPond_EntityLogic();
     UpdateRubyCatchModeAnimation();
     UpdatePikachuChargeCounter();
-    UpdateRubySideBumperAnimation();
+    UpdateLinooneSideBumpers();
     if (gCurrentPinballGame->mainBoardCountdownTimer != 0)
     {
         gCurrentPinballGame->mainBoardCountdownTimer--;

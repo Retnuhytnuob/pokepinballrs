@@ -18,69 +18,69 @@ void UpdateMakuhitaEntity(void)
     s16 index;
 
     index = 0;
-    switch (gCurrentPinballGame->makuhitaPunchState)
+    switch (gCurrentPinballGame->makuhitaState)
     {
-    case 0:
+    case MAKUHITA_STATE_INACTIVE:
         index = (gCurrentPinballGame->makuhitaAnimCounter % 36) / 18;
         gCurrentPinballGame->makuhitaAnimCounter++;
         gCurrentPinballGame->makuhitaPunchTriggeredFlag = FALSE;
         break;
-    case 1:
+    case MAKUHITA_STATE_NEUTRAL_READY:
         index = (gCurrentPinballGame->makuhitaAnimCounter % 36) / 18 + 2;
         gCurrentPinballGame->makuhitaAnimCounter++;
         if (gCurrentPinballGame->makuhitaPunchTriggeredFlag)
         {
-            gCurrentPinballGame->makuhitaPunchState = 2;
+            gCurrentPinballGame->makuhitaState = MAKUHITA_STATE_LEFT_PUNCH;
             gCurrentPinballGame->makuhitaAnimCounter = 0;
         }
         gCurrentPinballGame->makuhitaPunchTriggeredFlag = FALSE;
         break;
-    case 2:
+    case MAKUHITA_STATE_LEFT_PUNCH:
         index = (gCurrentPinballGame->makuhitaAnimCounter % 9) / 3 + 4;
         gCurrentPinballGame->makuhitaAnimCounter++;
         if (gCurrentPinballGame->makuhitaAnimCounter == 9)
         {
-             gCurrentPinballGame->makuhitaPunchState = 3;
+             gCurrentPinballGame->makuhitaState = MAKUHITA_STATE_READY_FOR_RIGHT_PUNCH;
             gCurrentPinballGame->makuhitaAnimCounter = 0;
         }
         break;
-    case 3:
+    case MAKUHITA_STATE_READY_FOR_RIGHT_PUNCH:
         index = (gCurrentPinballGame->makuhitaAnimCounter % 36) / 18 + 2;
         gCurrentPinballGame->makuhitaAnimCounter++;
         if (gCurrentPinballGame->makuhitaAnimCounter > 65)
         {
-            gCurrentPinballGame->makuhitaPunchState = 1;
+            gCurrentPinballGame->makuhitaState = MAKUHITA_STATE_NEUTRAL_READY;
             gCurrentPinballGame->makuhitaAnimCounter = 0;
         }
 
         if (gCurrentPinballGame->makuhitaAnimCounter > 6 && gCurrentPinballGame->makuhitaPunchTriggeredFlag)
         {
-            gCurrentPinballGame->makuhitaPunchState = 4;
+            gCurrentPinballGame->makuhitaState = MAKUHITA_STATE_RIGHT_PUNCH;
             gCurrentPinballGame->makuhitaAnimCounter = 0;
             gCurrentPinballGame->makuhitaPunchTriggeredFlag = FALSE;
         }
         break;
-    case 4:
+    case MAKUHITA_STATE_RIGHT_PUNCH:
         index = (gCurrentPinballGame->makuhitaAnimCounter % 9) / 3 + 7;
         gCurrentPinballGame->makuhitaAnimCounter++;
         if (gCurrentPinballGame->makuhitaAnimCounter == 9)
         {
-            gCurrentPinballGame->makuhitaPunchState = 5;
+            gCurrentPinballGame->makuhitaState = MAKUHITA_STATE_READY_FOR_LEFT_PUNCH;
             gCurrentPinballGame->makuhitaAnimCounter = 0;
         }
         break;
-    case 5:
+    case MAKUHITA_STATE_READY_FOR_LEFT_PUNCH:
         index = (gCurrentPinballGame->makuhitaAnimCounter % 36) / 18 + 2;
         gCurrentPinballGame->makuhitaAnimCounter++;
         if (gCurrentPinballGame->makuhitaAnimCounter > 65)
         {
-            gCurrentPinballGame->makuhitaPunchState = 1;
+            gCurrentPinballGame->makuhitaState = MAKUHITA_STATE_NEUTRAL_READY;
             gCurrentPinballGame->makuhitaAnimCounter = 0;
         }
 
         if (gCurrentPinballGame->makuhitaAnimCounter > 6 && gCurrentPinballGame->makuhitaPunchTriggeredFlag)
         {
-            gCurrentPinballGame->makuhitaPunchState = 2;
+            gCurrentPinballGame->makuhitaState = MAKUHITA_STATE_LEFT_PUNCH;
             gCurrentPinballGame->makuhitaAnimCounter = 0;
             gCurrentPinballGame->makuhitaPunchTriggeredFlag = FALSE;
         }
@@ -90,7 +90,7 @@ void UpdateMakuhitaEntity(void)
     group = &gMain.spriteGroups[SG_RUBY_MAKUHITA_PUNCH_CONTACT_FX];
     if (group->active)
     {
-        if (gCurrentPinballGame->makuhitaPunchState < 3)
+        if (gCurrentPinballGame->makuhitaState < MAKUHITA_STATE_READY_FOR_RIGHT_PUNCH)
         {
             group->baseX = 188 - gCurrentPinballGame->cameraXOffset;
             group->baseY = 281 - gCurrentPinballGame->cameraYOffset;
@@ -113,7 +113,7 @@ void UpdateMakuhitaEntity(void)
         gOamBuffer[oamSimple->oamId].y = oamSimple->yOffset + group->baseY;
     }
 
-    if (gCurrentPinballGame->makuhitaPunchState == 4 || gCurrentPinballGame->makuhitaPunchState == 2)
+    if (gCurrentPinballGame->makuhitaState == MAKUHITA_STATE_RIGHT_PUNCH || gCurrentPinballGame->makuhitaState == MAKUHITA_STATE_LEFT_PUNCH)
     {
         x = gCurrentPinballGame->ball->positionQ0.x - 190;
         y = gCurrentPinballGame->ball->positionQ0.y - 285;

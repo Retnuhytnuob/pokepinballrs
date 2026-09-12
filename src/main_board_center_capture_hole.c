@@ -6,7 +6,7 @@
 #include "constants/board/bonus_board.h"
 #include "constants/anglemath.h"
 #include "inline_load_lighting_pal.h"
-
+#include "constants/board/sapphire_states.h"
 
 extern struct SongHeader se_roulette_tick;
 extern struct SongHeader se_mon_catch_ball_woosh;
@@ -46,34 +46,34 @@ void InitRouletteWheel(void)
         {
             if (gMain.selectedField == FIELD_RUBY)
             {
-                switch (gCurrentPinballGame->numCompletedBonusStages % 5)
+                switch (gCurrentPinballGame->numCompletedBonusStages % BONUS_STAGE_LOOP_COUNT)
                 {
-                case 0:
-                case 2:
+                case BONUS_STAGE_LOOP_START:
+                case BONUS_STAGE_LOOP_FIRST_BOSS_CLEARED:
                     gCurrentPinballGame->rouletteSlotValues[i] = PRIZE_START_BONUS_MODE_KECLEON;
                     break;
-                case 1:
-                case 3:
+                case BONUS_STAGE_LOOP_FIRST_SIMPLE_CLEARED:
+                case BONUS_STAGE_LOOP_SECOND_SIMPLE_CLEARED:
                     gCurrentPinballGame->rouletteSlotValues[i] = PRIZE_START_BONUS_MODE_GROUDON;
                     break;
-                case 4:
+                case BONUS_STAGE_LOOP_SECOND_BOSS_CLEARED:
                     gCurrentPinballGame->rouletteSlotValues[i] = PRIZE_START_BONUS_MODE_RAYQUAZA;
                     break;
                 }
             }
             else
             {
-                switch (gCurrentPinballGame->numCompletedBonusStages % 5)
+                switch (gCurrentPinballGame->numCompletedBonusStages % BONUS_STAGE_LOOP_COUNT)
                 {
-                case 0:
-                case 2:
+                case BONUS_STAGE_LOOP_START:
+                case BONUS_STAGE_LOOP_FIRST_BOSS_CLEARED:
                     gCurrentPinballGame->rouletteSlotValues[i] = PRIZE_START_BONUS_MODE_DUSKULL;
                     break;
-                case 1:
-                case 3:
+                case BONUS_STAGE_LOOP_FIRST_SIMPLE_CLEARED:
+                case BONUS_STAGE_LOOP_SECOND_SIMPLE_CLEARED:
                     gCurrentPinballGame->rouletteSlotValues[i] = PRIZE_START_BONUS_MODE_KYOGRE;
                     break;
-                case 4:
+                case BONUS_STAGE_LOOP_SECOND_BOSS_CLEARED:
                     gCurrentPinballGame->rouletteSlotValues[i] = PRIZE_START_BONUS_MODE_RAYQUAZA;
                     break;
                 }
@@ -135,7 +135,7 @@ void RunRouletteWheel(void)
                     || JOY_NEW(A_BUTTON))
                 && gCurrentPinballGame->zigzagoonShockWallActive)
             {
-                gCurrentPinballGame->zigzagoonState = 2;
+                gCurrentPinballGame->zigzagoonState = ZIGZAGOON_STATE_SIGNALED;
                 if (gCurrentPinballGame->rouletteSubOffset < 17)
                     gCurrentPinballGame->modeOutcomeValues[1] = gCurrentPinballGame->modeOutcomeValues[0];
 
@@ -172,7 +172,7 @@ void RunRouletteWheel(void)
             gCurrentPinballGame->rouletteSpinSpeed = (Random() % 200) + 100;
             if (gMain.selectedField == FIELD_SAPPHIRE)
             {
-                if (gCurrentPinballGame->zigzagoonState == 1)
+                if (gCurrentPinballGame->zigzagoonState == ZIGZAGOON_STATE_PRIMED)
                 {
                     gCurrentPinballGame->rouletteSpinSpeed = 320;
                     gCurrentPinballGame->zigzagoonShockWallActive = TRUE;
@@ -368,8 +368,8 @@ void GivePrize(void)
                 gCurrentPinballGame->outcomeFrameCounter = 149;
                 gCurrentPinballGame->evolutionShopActive = TRUE;
                 UpdateShopEntryAnimation(1);
-                gCurrentPinballGame->sapphireMartGateBumperState[0] = 3;
-                gCurrentPinballGame->sapphireMartGateBumperState[1] = 3;
+                gCurrentPinballGame->shopGuardianState[MINUN_TARGET_BUTTON_IX] = SHOP_GAURDIAN_STATE_LOWER_WALL_FOR_EVO_MODE;
+                gCurrentPinballGame->shopGuardianState[PLUSLE_TARGET_BUTTON_IX] = SHOP_GAURDIAN_STATE_LOWER_WALL_FOR_EVO_MODE;
             }
 
             if (gCurrentPinballGame->outcomeFrameCounter == 170)
@@ -442,7 +442,7 @@ void GivePrize(void)
         {
             gCurrentPinballGame->bumperHitsSinceReset = 100;
             gCurrentPinballGame->pelipperFrameTimer = 1800;
-            gCurrentPinballGame->pelipperState = 1;
+            gCurrentPinballGame->pelipperState = PELIPPER_STATE_WATCHING_RAMP;
         }
         break;
     case PRIZE_1M_POINTS:

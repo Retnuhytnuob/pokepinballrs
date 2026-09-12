@@ -437,7 +437,7 @@ struct PinballGame
     /*0x2B8*/ u16 chikoritaProjectileVelX;
     /*0x2BA*/ u16 chikoritaProjectileUnused;
     /*0x2BC*/ u16 chikoritaProjectileTimer;
-    /*0x2BE*/ s8 gulpinCurrentLevel;
+    /*0x2BE*/ s8 gulpinDisplayedLevel;
     /*0x2C0*/ u16 gulpinAnimFrameTimer;
     /*0x2C2*/ s8 gulpinAnimFrameIndex;
     /*0x2C3*/ s8 totodileDeliveryFrame;
@@ -472,11 +472,11 @@ struct PinballGame
     /*0x2F8*/ s8 ballPowerUpOverride;
     /*0x2F9*/ s8 nuzleafPositionIndex;
     /*0x2FA*/ s8 nuzleafHitFlag;
-    /*0x2FB*/ s8 nuzleafAnimState;
+    /*0x2FB*/ s8 nuzleafEntityState;
     /*0x2FC*/ s8 nuzleafGfxTileIndex;
     /*0x2FD*/ s8 nuzleafFrameIndex;
     /*0x2FE*/ u16 nuzleafFrameTimer;
-    /*0x300*/ s8 makuhitaPunchState;
+    /*0x300*/ s8 makuhitaState;
     /*0x301*/ s8 makuhitaPunchTriggeredFlag;
     /*0x302*/ s8 makuhitaHitAnimationTimer;
     /*0x303*/ s8 unk303;
@@ -524,12 +524,12 @@ struct PinballGame
     /*0x35E*/ u16 splashEffectFrameTimer[4];
     /*0x366*/ s8 shopShockWallAnimState;
     /*0x367*/ s8 eggHatchShockWallOverride;
-    /*0x368*/ u16 shopBumperHitTimer;
-    /*0x36A*/ s8 sapphireMartGateBumperState[2];
-    /*0x36C*/ s8 sapphireBumperAnimKeyframe[2];
-    /*0x36E*/ u16 sapphireBumperAnimSubTimer[2];
-    /*0x372*/ u16 sapphireBumperHitFxTimer[2];
-    /*0x376*/ u16 sapphireBumperLitCountdown;
+    /*0x368*/ u16 shockWallHitTimer;
+    /*0x36A*/ s8 shopGuardianState[2];
+    /*0x36C*/ s8 shopGuardianAnimFrames[2];
+    /*0x36E*/ u16 shopGuardianAnimFrameTimer[2];
+    /*0x372*/ u16 shopGuardianTargetHitFxTimer[2];
+    /*0x376*/ u16 shopGuardianReadyCountdown;
     /*0x378*/ s8 zigzagoonState;
     /*0x379*/ s8 zigzagoonGfxFrame;
     /*0x37A*/ s8 zigzagoonOamFrame;
@@ -790,10 +790,10 @@ struct PinballGame
     /*0x6B4*/ u32 bonusTotalScoreLo;
     /*0x6B8*/ u32 bonusTotalScoreHi;
     /*0x6BC*/ s8 travelRolloverTriggerHitZone;
-    /*0x6BD*/ s8 seedotCount;
-    /*0x6BE*/ s8 seedotExitSequenceActive;
+    /*0x6BD*/ s8 travelTrackerCount; //Gulpin and Seedot stack
+    /*0x6BE*/ s8 travelTrackerExitSequenceActive;
     /*0x6BF*/ u8 filler6BF[0x1];
-    /*0x6C0*/ u16 seedotExitSequenceTimer;
+    /*0x6C0*/ u16 travelTrackerExitSequenceTimer;
     /*0x6C2*/ u16 travelModeStartDelay;
     /*0x6C4*/ s8 portraitDisplayState;
     /*0x6C5*/ s8 catchTileRevealState;

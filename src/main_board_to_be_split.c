@@ -192,19 +192,19 @@ void InitBonusStageSelect(void)
 {
     if (gMain.selectedField == FIELD_RUBY)
     {
-        switch (gCurrentPinballGame->numCompletedBonusStages % 5)
+        switch (gCurrentPinballGame->numCompletedBonusStages % BONUS_STAGE_LOOP_COUNT)
         {
-        case 0:
-        case 2:
+        case BONUS_STAGE_LOOP_START:
+        case BONUS_STAGE_LOOP_FIRST_BOSS_CLEARED:
             gCurrentPinballGame->modeOutcomeValues[0] = 42;
             gCurrentPinballGame->nextBonusField = FIELD_KECLEON;
             break;
-        case 1:
-        case 3:
+        case BONUS_STAGE_LOOP_FIRST_SIMPLE_CLEARED:
+        case BONUS_STAGE_LOOP_SECOND_SIMPLE_CLEARED:
             gCurrentPinballGame->modeOutcomeValues[0] = 44;
             gCurrentPinballGame->nextBonusField = FIELD_GROUDON;
             break;
-        case 4:
+        case BONUS_STAGE_LOOP_SECOND_BOSS_CLEARED:
             gCurrentPinballGame->modeOutcomeValues[0] = 45;
             gCurrentPinballGame->nextBonusField = FIELD_RAYQUAZA;
             break;
@@ -212,19 +212,19 @@ void InitBonusStageSelect(void)
     }
     else
     {
-        switch (gCurrentPinballGame->numCompletedBonusStages % 5)
+        switch (gCurrentPinballGame->numCompletedBonusStages % BONUS_STAGE_LOOP_COUNT)
         {
-        case 0:
-        case 2:
+        case BONUS_STAGE_LOOP_START:
+        case BONUS_STAGE_LOOP_FIRST_BOSS_CLEARED:
             gCurrentPinballGame->modeOutcomeValues[0] = 41;
             gCurrentPinballGame->nextBonusField = FIELD_DUSCLOPS;
             break;
-        case 1:
-        case 3:
+        case BONUS_STAGE_LOOP_FIRST_SIMPLE_CLEARED:
+        case BONUS_STAGE_LOOP_SECOND_SIMPLE_CLEARED:
             gCurrentPinballGame->modeOutcomeValues[0] = 43;
             gCurrentPinballGame->nextBonusField = FIELD_KYOGRE;
             break;
-        case 4:
+        case BONUS_STAGE_LOOP_SECOND_BOSS_CLEARED:
             gCurrentPinballGame->modeOutcomeValues[0] = 45;
             gCurrentPinballGame->nextBonusField = FIELD_RAYQUAZA;
             break;
@@ -272,15 +272,15 @@ void UpdateBonusStageSelect(void)
             }
             else if (gCurrentPinballGame->stageTimer == 8)
             {
-                switch (gCurrentPinballGame->numCompletedBonusStages % 5)
+                switch (gCurrentPinballGame->numCompletedBonusStages % BONUS_STAGE_LOOP_COUNT)
                 {
-                case 0:
-                case 2:
+                case BONUS_STAGE_LOOP_START:
+                case BONUS_STAGE_LOOP_FIRST_BOSS_CLEARED:
                     m4aSongNumStart(MUS_BONUS_CHANCE);
                     break;
-                case 1:
-                case 3:
-                case 4:
+                case BONUS_STAGE_LOOP_FIRST_SIMPLE_CLEARED:
+                case BONUS_STAGE_LOOP_SECOND_SIMPLE_CLEARED:
+                case BONUS_STAGE_LOOP_SECOND_BOSS_CLEARED:
                     m4aSongNumStart(MUS_BONUS_CHANCE_LEGENDARY);
                     break;
                 }
@@ -1531,7 +1531,7 @@ void UpdateHatchCave(void)
         gCurrentPinballGame->cyndaquilCaveSpriteY = gCyndaquilCavePositions[gCurrentPinballGame->cyndaquilPosition].y - gCurrentPinballGame->eggCaveLiftTimer / 3;
         group->baseX = gCurrentPinballGame->cyndaquilCaveSpriteX - gCurrentPinballGame->cameraXOffset;
         group->baseY = gCurrentPinballGame->cyndaquilCaveSpriteY - gCurrentPinballGame->cameraYOffset;
-        if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
+        if (BoardNotInActivityMode)
         {
             if (gCurrentPinballGame->cyndaquilPosition == CYNDAQUIL_POSITION_CAVE_ENTRANCE && gCurrentPinballGame->rubyEggDeliveryState != 2)
                 gCurrentPinballGame->catchArrowPaletteActive = TRUE;

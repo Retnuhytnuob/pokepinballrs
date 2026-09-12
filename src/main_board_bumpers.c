@@ -3,10 +3,11 @@
 #include "main.h"
 #include "constants/bg_music.h"
 #include "constants/board/main_board.h"
+#include "constants/board/sapphire_states.h"
 
 extern const u8 gSapphireBoardShopShockWall_Gfx[][0x80];
 
-extern const s16 gSapphireBumperAnimFrames[][2];
+extern const s16 gShopGuardianAnimFramesetData[][2];
 extern const s16 gBumperMosaicValues[];
 extern const u8 gSapphireBumperLeft_Gfx[][0x300];
 extern const u8 gSapphireBumperLeftHit_Gfx[][0x200];
@@ -14,7 +15,7 @@ extern const u8 gSapphireBumperRight_Gfx[][0x300];
 extern const u8 gSapphireBumperRightHit_Gfx[][0x200];
 extern const u8 gPondBumper_Gfx[][0x200];
 
-void UpdateSapphireBumperLogic(void)
+void UpdateSapphireShopGateLogic(void)
 {
     s16 i;
     u32 mosaicVal;
@@ -22,135 +23,135 @@ void UpdateSapphireBumperLogic(void)
     for (i = 0; i < 2; i++)
     {
         // Mart gate buttons
-        switch (gCurrentPinballGame->sapphireMartGateBumperState[i])
+        switch (gCurrentPinballGame->shopGuardianState[i])
         {
-        case 0:
-            if (gSapphireBumperAnimFrames[gCurrentPinballGame->sapphireBumperAnimKeyframe[i]][1] > gCurrentPinballGame->sapphireBumperAnimSubTimer[i])
+        case SHOP_GAURDIAN_STATE_PROTECTING:
+            if (gShopGuardianAnimFramesetData[gCurrentPinballGame->shopGuardianAnimFrames[i]][1] > gCurrentPinballGame->shopGuardianAnimFrameTimer[i])
             {
-                gCurrentPinballGame->sapphireBumperAnimSubTimer[i]++;
+                gCurrentPinballGame->shopGuardianAnimFrameTimer[i]++;
             }
             else
             {
-                gCurrentPinballGame->sapphireBumperAnimKeyframe[i]++;
-                gCurrentPinballGame->sapphireBumperAnimSubTimer[i] = 0;
-                if (gCurrentPinballGame->sapphireBumperAnimKeyframe[i] > 3)
-                    gCurrentPinballGame->sapphireBumperAnimKeyframe[i] = 0;
+                gCurrentPinballGame->shopGuardianAnimFrames[i]++;
+                gCurrentPinballGame->shopGuardianAnimFrameTimer[i] = 0;
+                if (gCurrentPinballGame->shopGuardianAnimFrames[i] > 3)
+                    gCurrentPinballGame->shopGuardianAnimFrames[i] = 0;
             }
 
-            if (gCurrentPinballGame->sapphireBumperHitFxTimer[i] < 152)
-                gCurrentPinballGame->sapphireBumperHitFxTimer[i]++;
+            if (gCurrentPinballGame->shopGuardianTargetHitFxTimer[i] < 152)
+                gCurrentPinballGame->shopGuardianTargetHitFxTimer[i]++;
             else
-                gCurrentPinballGame->sapphireBumperHitFxTimer[i] = 0;
+                gCurrentPinballGame->shopGuardianTargetHitFxTimer[i] = 0;
             break;
-        case 1:
-            if (gSapphireBumperAnimFrames[gCurrentPinballGame->sapphireBumperAnimKeyframe[i]][1] > gCurrentPinballGame->sapphireBumperAnimSubTimer[i])
+        case SHOP_GAURDIAN_STATE_KNOCKED_DOWN:
+            if (gShopGuardianAnimFramesetData[gCurrentPinballGame->shopGuardianAnimFrames[i]][1] > gCurrentPinballGame->shopGuardianAnimFrameTimer[i])
             {
-                gCurrentPinballGame->sapphireBumperAnimSubTimer[i]++;
+                gCurrentPinballGame->shopGuardianAnimFrameTimer[i]++;
             }
             else
             {
-                gCurrentPinballGame->sapphireBumperAnimKeyframe[i]++;
-                gCurrentPinballGame->sapphireBumperAnimSubTimer[i] = 0;
-                if (gCurrentPinballGame->sapphireBumperAnimKeyframe[i] == 5)
+                gCurrentPinballGame->shopGuardianAnimFrames[i]++;
+                gCurrentPinballGame->shopGuardianAnimFrameTimer[i] = 0;
+                if (gCurrentPinballGame->shopGuardianAnimFrames[i] == 5)
                 {
                     m4aSongNumStart(SE_SAPPHIRE_MART_GATE_TRIGGER);
                     gCurrentPinballGame->scoreAddedInFrame = SCORE_SAPPHIRE_SHOP_GATE_TRIGGER_ACTIVATED;
                 }
             }
 
-            if (gCurrentPinballGame->sapphireBumperAnimKeyframe[i] == 6)
+            if (gCurrentPinballGame->shopGuardianAnimFrames[i] == 6)
             {
-                if (gCurrentPinballGame->sapphireBumperLitCountdown)
+                if (gCurrentPinballGame->shopGuardianReadyCountdown)
                 {
-                    if (gCurrentPinballGame->sapphireBumperLitCountdown == 1)
+                    if (gCurrentPinballGame->shopGuardianReadyCountdown == 1)
                     {
-                        gCurrentPinballGame->sapphireBumperAnimKeyframe[i] = 7;
-                        gCurrentPinballGame->sapphireMartGateBumperState[i] = 2;
+                        gCurrentPinballGame->shopGuardianAnimFrames[i] = 7;
+                        gCurrentPinballGame->shopGuardianState[i] = SHOP_GAURDIAN_STATE_PREPARING_WALL;
                     }
                 }
 
-                gCurrentPinballGame->sapphireBumperAnimSubTimer[i] = 0;
+                gCurrentPinballGame->shopGuardianAnimFrameTimer[i] = 0;
             }
 
-            gCurrentPinballGame->sapphireBumperHitFxTimer[i] = 20;
+            gCurrentPinballGame->shopGuardianTargetHitFxTimer[i] = 20;
             break;
-        case 2:
-            if (gSapphireBumperAnimFrames[gCurrentPinballGame->sapphireBumperAnimKeyframe[i]][1] > gCurrentPinballGame->sapphireBumperAnimSubTimer[i])
+        case SHOP_GAURDIAN_STATE_PREPARING_WALL:
+            if (gShopGuardianAnimFramesetData[gCurrentPinballGame->shopGuardianAnimFrames[i]][1] > gCurrentPinballGame->shopGuardianAnimFrameTimer[i])
             {
-                gCurrentPinballGame->sapphireBumperAnimSubTimer[i]++;
+                gCurrentPinballGame->shopGuardianAnimFrameTimer[i]++;
             }
             else
             {
-                gCurrentPinballGame->sapphireBumperAnimKeyframe[i]++;
-                gCurrentPinballGame->sapphireBumperAnimSubTimer[i] = 0;
-                if (gCurrentPinballGame->sapphireBumperAnimKeyframe[i] == 8)
+                gCurrentPinballGame->shopGuardianAnimFrames[i]++;
+                gCurrentPinballGame->shopGuardianAnimFrameTimer[i] = 0;
+                if (gCurrentPinballGame->shopGuardianAnimFrames[i] == 8)
                     m4aSongNumStart(SE_SAPPHIRE_MART_GATE_REPLACED);
 
-                if (gCurrentPinballGame->sapphireBumperAnimKeyframe[i] > 8)
+                if (gCurrentPinballGame->shopGuardianAnimFrames[i] > 8)
                 {
-                    gCurrentPinballGame->sapphireBumperAnimKeyframe[i] = 0;
-                    gCurrentPinballGame->sapphireMartGateBumperState[i] = 0;
+                    gCurrentPinballGame->shopGuardianAnimFrames[i] = 0;
+                    gCurrentPinballGame->shopGuardianState[i] = SHOP_GAURDIAN_STATE_PROTECTING;
                 }
             }
 
-            gCurrentPinballGame->sapphireBumperHitFxTimer[i] = 20;
+            gCurrentPinballGame->shopGuardianTargetHitFxTimer[i] = 20;
             break;
-        case 3:
-            gCurrentPinballGame->sapphireBumperAnimKeyframe[i] = 9;
-            gCurrentPinballGame->sapphireBumperAnimSubTimer[i] = 0;
-            gCurrentPinballGame->sapphireMartGateBumperState[i] = 4;
-            gCurrentPinballGame->sapphireBumperHitFxTimer[i] = 20;
+        case SHOP_GAURDIAN_STATE_LOWER_WALL_FOR_EVO_MODE:
+            gCurrentPinballGame->shopGuardianAnimFrames[i] = 9;
+            gCurrentPinballGame->shopGuardianAnimFrameTimer[i] = 0;
+            gCurrentPinballGame->shopGuardianState[i] = SHOP_GAURDIAN_STATE_CELEBRATING_EVO_AVAILABLE;
+            gCurrentPinballGame->shopGuardianTargetHitFxTimer[i] = 20;
             break;
-        case 4:
-            if (gSapphireBumperAnimFrames[gCurrentPinballGame->sapphireBumperAnimKeyframe[i]][1] > gCurrentPinballGame->sapphireBumperAnimSubTimer[i])
+        case SHOP_GAURDIAN_STATE_CELEBRATING_EVO_AVAILABLE:
+            if (gShopGuardianAnimFramesetData[gCurrentPinballGame->shopGuardianAnimFrames[i]][1] > gCurrentPinballGame->shopGuardianAnimFrameTimer[i])
             {
-                gCurrentPinballGame->sapphireBumperAnimSubTimer[i]++;
+                gCurrentPinballGame->shopGuardianAnimFrameTimer[i]++;
             }
             else
             {
-                gCurrentPinballGame->sapphireBumperAnimKeyframe[i]++;
-                gCurrentPinballGame->sapphireBumperAnimSubTimer[i] = 0;
-                if (gCurrentPinballGame->sapphireBumperAnimKeyframe[i] > 17)
+                gCurrentPinballGame->shopGuardianAnimFrames[i]++;
+                gCurrentPinballGame->shopGuardianAnimFrameTimer[i] = 0;
+                if (gCurrentPinballGame->shopGuardianAnimFrames[i] > 17)
                 {
                     if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_EVO_MODE)
                     {
-                        gCurrentPinballGame->sapphireBumperAnimKeyframe[i] = 0;
-                        gCurrentPinballGame->sapphireMartGateBumperState[i] = 0;
+                        gCurrentPinballGame->shopGuardianAnimFrames[i] = 0;
+                        gCurrentPinballGame->shopGuardianState[i] = SHOP_GAURDIAN_STATE_PROTECTING;
                     }
                     else
                     {
-                        gCurrentPinballGame->sapphireBumperAnimKeyframe[i] = 9;
+                        gCurrentPinballGame->shopGuardianAnimFrames[i] = 9;
                     }
                 }
             }
 
-            gCurrentPinballGame->sapphireBumperHitFxTimer[i] = 20;
+            gCurrentPinballGame->shopGuardianTargetHitFxTimer[i] = 20;
             break;
-        case 5:
-            if (gSapphireBumperAnimFrames[gCurrentPinballGame->sapphireBumperAnimKeyframe[i]][1] > gCurrentPinballGame->sapphireBumperAnimSubTimer[i])
+        case SHOP_GAURDIAN_STATE_UNREACHABLE:
+            if (gShopGuardianAnimFramesetData[gCurrentPinballGame->shopGuardianAnimFrames[i]][1] > gCurrentPinballGame->shopGuardianAnimFrameTimer[i])
             {
-                gCurrentPinballGame->sapphireBumperAnimSubTimer[i]++;
+                gCurrentPinballGame->shopGuardianAnimFrameTimer[i]++;
             }
             else
             {
-                gCurrentPinballGame->sapphireBumperAnimKeyframe[i]++;
-                gCurrentPinballGame->sapphireBumperAnimSubTimer[i] = 0;
-                if (gCurrentPinballGame->sapphireBumperAnimKeyframe[i] > 17)
+                gCurrentPinballGame->shopGuardianAnimFrames[i]++;
+                gCurrentPinballGame->shopGuardianAnimFrameTimer[i] = 0;
+                if (gCurrentPinballGame->shopGuardianAnimFrames[i] > 17)
                 {
-                    gCurrentPinballGame->sapphireMartGateBumperState[i] = 0;
-                    gCurrentPinballGame->sapphireBumperAnimKeyframe[i] = 0;
+                    gCurrentPinballGame->shopGuardianState[i] = SHOP_GAURDIAN_STATE_PROTECTING;
+                    gCurrentPinballGame->shopGuardianAnimFrames[i] = 0;
                 }
             }
 
-            gCurrentPinballGame->sapphireBumperHitFxTimer[i] = 20;
+            gCurrentPinballGame->shopGuardianTargetHitFxTimer[i] = 20;
             break;
         }
     }
 
     if (gCurrentPinballGame->ballCatchState != TRAP_EVO_SHOP_HOLE)
     {
-        if (gCurrentPinballGame->sapphireBumperLitCountdown)
-            gCurrentPinballGame->sapphireBumperLitCountdown--;
+        if (gCurrentPinballGame->shopGuardianReadyCountdown)
+            gCurrentPinballGame->shopGuardianReadyCountdown--;
     }
 
     if (gCurrentPinballGame->altBallCameraTimer)
@@ -160,31 +161,31 @@ void UpdateSapphireBumperLogic(void)
             gCurrentPinballGame->cameraBall = gCurrentPinballGame->ballStates;
     }
 
-    if (gCurrentPinballGame->shopBumperHitTimer)
+    if (gCurrentPinballGame->shockWallHitTimer)
     {
-        if (gCurrentPinballGame->shopBumperHitTimer == 17)
+        if (gCurrentPinballGame->shockWallHitTimer == 17)
         {
             m4aSongNumStart(SE_SAPPHIRE_MART_GATE_HIT);
             gCurrentPinballGame->scoreAddedInFrame = SCORE_SAPPHIRE_SHOP_GATE_HIT;
             PlayRumble(13);
         }
 
-        mosaicVal = gBumperMosaicValues[gCurrentPinballGame->shopBumperHitTimer / 3];
+        mosaicVal = gBumperMosaicValues[gCurrentPinballGame->shockWallHitTimer / 3];
         REG_MOSAIC = (mosaicVal << 12) | (mosaicVal << 8) | (mosaicVal << 4) | (mosaicVal << 0);
-        gCurrentPinballGame->shopBumperHitTimer--;
+        gCurrentPinballGame->shockWallHitTimer--;
     }
 
-    if (gCurrentPinballGame->boardState > MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
+    if (BoardInActivityMode)
     {
         if (gCurrentPinballGame->boardState != MAIN_BOARD_STATE_EVO_MODE)
         {
             for (i = 0; i < 2; i++)
             {
-                if (gCurrentPinballGame->sapphireMartGateBumperState[i])
+                if (gCurrentPinballGame->shopGuardianState[i] != SHOP_GAURDIAN_STATE_PROTECTING)
                 {
-                    gCurrentPinballGame->sapphireMartGateBumperState[i] = 0;
-                    gCurrentPinballGame->sapphireBumperAnimKeyframe[i] = 0;
-                    gCurrentPinballGame->sapphireBumperAnimSubTimer[i] = 0;
+                    gCurrentPinballGame->shopGuardianState[i] = SHOP_GAURDIAN_STATE_PROTECTING;
+                    gCurrentPinballGame->shopGuardianAnimFrames[i] = 0;
+                    gCurrentPinballGame->shopGuardianAnimFrameTimer[i] = 0;
                 }
             }
         }
@@ -193,26 +194,26 @@ void UpdateSapphireBumperLogic(void)
     {
         if (gCurrentPinballGame->evolvablePartySize > 0)
         {
-            if (gCurrentPinballGame->sapphireMartGateBumperState[0] < 3)
+            if (gCurrentPinballGame->shopGuardianState[MINUN_TARGET_BUTTON_IX] < SHOP_GAURDIAN_STATE_LOWER_WALL_FOR_EVO_MODE)
             {
-                gCurrentPinballGame->sapphireMartGateBumperState[0] = 3;
-                gCurrentPinballGame->sapphireMartGateBumperState[1] = 3;
+                gCurrentPinballGame->shopGuardianState[MINUN_TARGET_BUTTON_IX] = SHOP_GAURDIAN_STATE_LOWER_WALL_FOR_EVO_MODE;
+                gCurrentPinballGame->shopGuardianState[PLUSLE_TARGET_BUTTON_IX] = SHOP_GAURDIAN_STATE_LOWER_WALL_FOR_EVO_MODE;
             }
         }
     }
     else
     {
-        if (gCurrentPinballGame->sapphireMartGateBumperState[0] > 2)
+        if (gCurrentPinballGame->shopGuardianState[MINUN_TARGET_BUTTON_IX] > SHOP_GAURDIAN_STATE_PREPARING_WALL)
         {
-            gCurrentPinballGame->sapphireMartGateBumperState[0] = 0;
-            gCurrentPinballGame->sapphireBumperAnimKeyframe[0] = 0;
-            gCurrentPinballGame->sapphireMartGateBumperState[1] = 0;
-            gCurrentPinballGame->sapphireBumperAnimKeyframe[1] = 0;
+            gCurrentPinballGame->shopGuardianState[MINUN_TARGET_BUTTON_IX] = SHOP_GAURDIAN_STATE_PROTECTING;
+            gCurrentPinballGame->shopGuardianAnimFrames[MINUN_TARGET_BUTTON_IX] = 0;
+            gCurrentPinballGame->shopGuardianState[PLUSLE_TARGET_BUTTON_IX] = SHOP_GAURDIAN_STATE_PROTECTING;
+            gCurrentPinballGame->shopGuardianAnimFrames[PLUSLE_TARGET_BUTTON_IX] = 0;
         }
     }
 }
 
-void DrawSapphireBumperSprites(void)
+void DrawSapphireShopGuards(void)
 {
     s16 i;
     struct SpriteGroup *group;
@@ -225,7 +226,7 @@ void DrawSapphireBumperSprites(void)
 
     group->baseX = 68 - gCurrentPinballGame->cameraXOffset;
     group->baseY = 144 - gCurrentPinballGame->cameraYOffset;
-    index = gSapphireBumperAnimFrames[gCurrentPinballGame->sapphireBumperAnimKeyframe[0]][0];
+    index = gShopGuardianAnimFramesetData[gCurrentPinballGame->shopGuardianAnimFrames[MINUN_TARGET_BUTTON_IX]][0];
     DmaCopy16(3, &gSapphireBumperLeft_Gfx[index], (void *)0x06012DA0, 0x280);
     for (i = 0; i < 2; i++)
     {
@@ -236,10 +237,10 @@ void DrawSapphireBumperSprites(void)
 
     group = &gMain.spriteGroups[SG_SAPPHIRE_MINUN_ELECTRICITY_FX];
     group->baseX = 68 - gCurrentPinballGame->cameraXOffset;
-    if (gCurrentPinballGame->sapphireBumperHitFxTimer[0] < 14)
+    if (gCurrentPinballGame->shopGuardianTargetHitFxTimer[MINUN_TARGET_BUTTON_IX] < 14)
     {
         group->baseY = 144 - gCurrentPinballGame->cameraYOffset;
-        index = gCurrentPinballGame->sapphireBumperHitFxTimer[0] / 2;
+        index = gCurrentPinballGame->shopGuardianTargetHitFxTimer[MINUN_TARGET_BUTTON_IX] / 2;
         DmaCopy16(3, &gSapphireBumperLeftHit_Gfx[index], (void *)0x06014720, 0x180);
     }
     else
@@ -254,7 +255,7 @@ void DrawSapphireBumperSprites(void)
     group = &gMain.spriteGroups[SG_SAPPHIRE_PLUSLE];
     group->baseX = 36 - gCurrentPinballGame->cameraXOffset;
     group->baseY = 163 - gCurrentPinballGame->cameraYOffset;
-    index = gSapphireBumperAnimFrames[gCurrentPinballGame->sapphireBumperAnimKeyframe[1]][0];
+    index = gShopGuardianAnimFramesetData[gCurrentPinballGame->shopGuardianAnimFrames[PLUSLE_TARGET_BUTTON_IX]][0];
     DmaCopy16(3, &gSapphireBumperRight_Gfx[index], (void *)0x060130A0, 0x280);
     for (i = 0; i < 2; i++)
     {
@@ -265,10 +266,10 @@ void DrawSapphireBumperSprites(void)
 
     group = &gMain.spriteGroups[SG_SAPPHIRE_PLUSLE_ELECTRICITY_FX];
     group->baseX = 36 - gCurrentPinballGame->cameraXOffset;
-    if (gCurrentPinballGame->sapphireBumperHitFxTimer[1] < 14)
+    if (gCurrentPinballGame->shopGuardianTargetHitFxTimer[PLUSLE_TARGET_BUTTON_IX] < 14)
     {
         group->baseY = 163 - gCurrentPinballGame->cameraYOffset;
-        index = gCurrentPinballGame->sapphireBumperHitFxTimer[1] / 2;
+        index = gCurrentPinballGame->shopGuardianTargetHitFxTimer[PLUSLE_TARGET_BUTTON_IX] / 2;
         DmaCopy16(3, &gSapphireBumperRightHit_Gfx[index], (void *)0x06014920, 0x180);
     }
     else
@@ -285,25 +286,25 @@ void DrawSapphireBumperSprites(void)
     group->baseY = 186 - gCurrentPinballGame->cameraYOffset;
     if (gCurrentPinballGame->eggHatchShockWallOverride)
     {
-        gCurrentPinballGame->shopShockWallAnimState = 3;
+        gCurrentPinballGame->shopShockWallAnimState = SHOCK_WALL_ANIM_STATE_NONE;
     }
-    else if (gCurrentPinballGame->sapphireMartGateBumperState[0])
+    else if (gCurrentPinballGame->shopGuardianState[MINUN_TARGET_BUTTON_IX] != SHOP_GAURDIAN_STATE_PROTECTING)
     {
-        if (gCurrentPinballGame->sapphireMartGateBumperState[1])
-            gCurrentPinballGame->shopShockWallAnimState = 3;
+        if (gCurrentPinballGame->shopGuardianState[PLUSLE_TARGET_BUTTON_IX] != SHOP_GAURDIAN_STATE_PROTECTING)
+            gCurrentPinballGame->shopShockWallAnimState = SHOCK_WALL_ANIM_STATE_NONE;
         else
-            gCurrentPinballGame->shopShockWallAnimState = 2;
+            gCurrentPinballGame->shopShockWallAnimState = SHOCK_WALL_ANIM_STATE_MINUN_GATE;
     }
-    else if (gCurrentPinballGame->sapphireMartGateBumperState[1])
+    else if (gCurrentPinballGame->shopGuardianState[PLUSLE_TARGET_BUTTON_IX] != SHOP_GAURDIAN_STATE_PROTECTING)
     {
-        gCurrentPinballGame->shopShockWallAnimState = 1;
+        gCurrentPinballGame->shopShockWallAnimState = SHOCK_WALL_ANIM_STATE_PLUSLE_GATE;
     }
     else
     {
-        gCurrentPinballGame->shopShockWallAnimState = 0;
+        gCurrentPinballGame->shopShockWallAnimState = SHOCK_WALL_ANIM_STATE_FULL_GATE;
     }
 
-    if (gCurrentPinballGame->shopShockWallAnimState < 3)
+    if (gCurrentPinballGame->shopShockWallAnimState < SHOCK_WALL_ANIM_STATE_NONE)
         index = gCurrentPinballGame->shopShockWallAnimState * 3 + (gCurrentPinballGame->globalAnimFrameCounter % 30) / 10;
     else
         index = 9;

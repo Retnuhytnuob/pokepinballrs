@@ -145,12 +145,12 @@ gIntroSceneFuncs:: @ 0x080792E0
 	.4byte IntroScene3Treecko_24_FlashWhite
 	.4byte IntroScene3Treecko_25_ResetTilemap
 
-	.4byte IntroScene4PlussleMinun_26_LoadTealWhiteBackground
+	.4byte IntroScene4PlusleMinun_26_LoadTealWhiteBackground
 	.4byte nullsub_9
-	.4byte IntroScene4PlussleMinun_28_PlusleMinunTextScroll
+	.4byte IntroScene4PlusleMinun_28_PlusleMinunTextScroll
 	.4byte nullsub_10
-	.4byte IntroScene4PlussleMinun_30_FlashWhite @ 30
-	.4byte IntroScene4PlussleMinun_31_ResetTilemap
+	.4byte IntroScene4PlusleMinun_30_FlashWhite @ 30
+	.4byte IntroScene4PlusleMinun_31_ResetTilemap
 
 	.4byte IntroScene5Mudkip_32_LoadMudkipBallScene
 	.4byte IntroScene5Mudkip_33_MoveMudkipBallSplit
@@ -501,20 +501,20 @@ gIntroScene3TreeckoTreecko_Gfx:: @ 0x080DF520
 	.incbin "graphics/intro/scene3treecko/treecko.4bpp"
 	.space 0x20
 
-gIntroScene4PlussleMinun_Pal:: @ 0x080E1540
-	.incbin "graphics/intro/scene4plussleminun/scene.gbapal"
+gIntroScene4PlusleMinun_Pal:: @ 0x080E1540
+	.incbin "graphics/intro/scene4plusleminun/scene.gbapal"
 
-gIntroScene4PlussleMinun_BG3Tilemap:: @ 0x080E1740
-	.incbin "graphics/intro/scene4plussleminun/bg3_text_tilemap.bin"
+gIntroScene4PlusleMinun_BG3Tilemap:: @ 0x080E1740
+	.incbin "graphics/intro/scene4plusleminun/bg3_text_tilemap.bin"
 
-gIntroScene4PlussleMinunSprites_Gfx:: @ 0x080E1F40
-	.incbin "graphics/intro/scene4plussleminun/tiles.4bpp"
+gIntroScene4PlusleMinunSprites_Gfx:: @ 0x080E1F40
+	.incbin "graphics/intro/scene4plusleminun/tiles.4bpp"
 
-gIntroScene4PlussleMinun_BG0Tiles:: @ 0x080E5F60
-	.incbin "graphics/intro/scene4plussleminun/bg0_minun_tilemap.bin"
+gIntroScene4PlusleMinun_BG0Tiles:: @ 0x080E5F60
+	.incbin "graphics/intro/scene4plusleminun/bg0_minun_tilemap.bin"
 
-gIntroScene4PlussleMinun_BG1Tiles:: @ 0x080E7F60
-	.incbin "graphics/intro/scene4plussleminun/bg1_plussle_tilemap.bin"
+gIntroScene4PlusleMinun_BG1Tiles:: @ 0x080E7F60
+	.incbin "graphics/intro/scene4plusleminun/bg1_plusle_tilemap.bin"
 
 gIntroScene5Mudkip_Pal:: @ 0x080E9F60
 	.incbin "graphics/intro/scene5mudkip/scene.gbapal"

@@ -29,6 +29,10 @@ enum MainBoardState{
     MAIN_BOARD_STATE_JIRACHI_CATCH_MODE = 8,
 };
 
+#define BoardInActivityMode     gCurrentPinballGame->boardState > MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE
+#define BoardNotInActivityMode  gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE
+
+
 enum BoardIntroSubstates{
     BOARD_INTRO_SUBSTATE_INIT = 0,
     BOARD_INTRO_SUBSTATE_SETUP_GRAPHICS = 1,
@@ -123,6 +127,14 @@ enum TravelRolloverTriggerHitZone{
     TRAVEL_ROLLOVER_TRIGGER_HIT_ZONE_NONE = 0,
     TRAVEL_ROLLOVER_TRIGGER_HIT_ZONE_LEFT = 1,
     TRAVEL_ROLLOVER_TRIGGER_HIT_ZONE_RIGHT = 2,
+};
+
+enum SpoinkLauncherState{
+    SPOINK_STATE_NORMAL = 0,
+    SPOINK_STATE_COMPRESSING = 1,
+    SPOINK_STATE_COMPRESSED = 2,
+    SPOINK_STATE_RELEASING = 3,
+    SPOINK_STATE_REBOUND = 4
 };
 
 enum JirachiCatchSubstates{

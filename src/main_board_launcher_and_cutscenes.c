@@ -195,7 +195,7 @@ void UpdateSpoinkAnimation(void)
 
     switch (gCurrentPinballGame->spoinkEntityState)
     {
-    case 0:
+    case SPOINK_STATE_NORMAL:
         gCurrentPinballGame->spoinkAnimFrameIx = 0;
         gCurrentPinballGame->spoinkAnimFrameTimer = 0;
         if (gCurrentPinballGame->ballTouchingSpoink)
@@ -205,7 +205,7 @@ void UpdateSpoinkAnimation(void)
 
         gCurrentPinballGame->ballTouchingSpoink = FALSE;
         break;
-    case 1:
+    case SPOINK_STATE_COMPRESSING:
         if (gCurrentPinballGame->spoinkAnimFrameTimer < 5)
         {
             if (gCurrentPinballGame->spoinkAnimFrameTimer < 2)
@@ -226,12 +226,12 @@ void UpdateSpoinkAnimation(void)
         }
         else
         {
-            gCurrentPinballGame->spoinkEntityState = 2;
+            gCurrentPinballGame->spoinkEntityState = SPOINK_STATE_COMPRESSED;
             gCurrentPinballGame->spoinkAnimFrameIx = 4;
             gCurrentPinballGame->spoinkAnimFrameTimer = 0;
         }
         break;
-    case 2:
+    case SPOINK_STATE_COMPRESSED:
         if (gSpoinkAnimFrameset[gCurrentPinballGame->spoinkAnimFrameIx][1] <= gCurrentPinballGame->spoinkAnimFrameTimer)
         {
             gCurrentPinballGame->spoinkAnimFrameTimer = 0;
@@ -244,13 +244,13 @@ void UpdateSpoinkAnimation(void)
             gCurrentPinballGame->spoinkAnimFrameTimer++;
         }
         break;
-    case 3:
+    case SPOINK_STATE_RELEASING:
         gCurrentPinballGame->spoinkAnimFrameIx = 8;
         gCurrentPinballGame->spoinkAnimFrameTimer = 0;
-        gCurrentPinballGame->spoinkEntityState = 4;
+        gCurrentPinballGame->spoinkEntityState = SPOINK_STATE_REBOUND;
         gCurrentPinballGame->spoinkPullbackYDistance = 0;
         break;
-    case 4:
+    case SPOINK_STATE_REBOUND:
         if (gSpoinkAnimFrameset[gCurrentPinballGame->spoinkAnimFrameIx][1] > gCurrentPinballGame->spoinkAnimFrameTimer)
         {
             gCurrentPinballGame->spoinkAnimFrameTimer++;
@@ -262,7 +262,7 @@ void UpdateSpoinkAnimation(void)
             if (gCurrentPinballGame->spoinkAnimFrameIx > 0x13)
             {
                 gCurrentPinballGame->spoinkAnimFrameIx = 0;
-                gCurrentPinballGame->spoinkEntityState = 0;
+                gCurrentPinballGame->spoinkEntityState = SPOINK_STATE_NORMAL;
             }
         }
         break;

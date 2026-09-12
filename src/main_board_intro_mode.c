@@ -3,6 +3,7 @@
 #include "main.h"
 #include "constants/bg_music.h"
 #include "constants/board/ruby_states.h"
+#include "constants/board/main_board.h"
 
 #define BALL_FIRST_LAUNCH_SAVER_TIME TICKS_FOR_TIME(1,0)
 
@@ -138,7 +139,7 @@ void UpdateBoardIntroMode(void)
                         gCurrentPinballGame->rouletteSpinSpeed = 1;
 
                     gCurrentPinballGame->rouletteInitialSpeed = gCurrentPinballGame->rouletteSpinSpeed;
-                    gCurrentPinballGame->spoinkEntityState = 1;
+                    gCurrentPinballGame->spoinkEntityState = SPOINK_STATE_COMPRESSING;
                     gCurrentPinballGame->launcherCharging = TRUE;
                     gCurrentPinballGame->saverTimeRemaining = BALL_FIRST_LAUNCH_SAVER_TIME;
                     gCurrentPinballGame->rubyPondState = RUBY_POND_STATE_CHINCHOU_COUNTERCLOCKWISE;
@@ -150,7 +151,7 @@ void UpdateBoardIntroMode(void)
                 gCurrentPinballGame->rouletteSpinSpeed--;
                 if (gMain.eReaderBonuses[EREADER_RUIN_AREA_CARD])
                 {
-                    gCurrentPinballGame->numCompletedBonusStages = 4;
+                    gCurrentPinballGame->numCompletedBonusStages = BONUS_STAGE_LOOP_SECOND_BOSS_CLEARED;
                     if (gCurrentPinballGame->rouletteSpinSpeed < 24)
                     {
                         gCurrentPinballGame->rouletteSpinSpeed = 24;

@@ -25,7 +25,7 @@ extern const u8 gWhiscash_Gfx[][0x480];
 extern const u8 gRubyBoardShopDoor_Gfx[][0x180];
 
 extern const s16 gNuzleafAnimFrameData[50][3];
-extern const s16 gNuzleafPositions[][2];
+extern const s16 gNuzleafPositions[][2]; // Would be a Vector16, if it didn't impact compilation.
 extern const u8 gRubyStageNuzleaf_Gfx[][0x280];
 extern const u16 gNuzleafOamData[58][6];
 
@@ -43,23 +43,23 @@ void UpdateNuzleafEntity(void)
     group = &gMain.spriteGroups[SG_RUBY_NUZLEAF];
     nextTileIx = 0;
     oamIx = 0;
-    switch (gCurrentPinballGame->nuzleafAnimState)
+    switch (gCurrentPinballGame->nuzleafEntityState)
     {
-    case 0:
+    case NUZLEAF_STATE_IDLE_CYCLE:
         nextTileIx = (gMain.systemFrameCount % 36) / 18;
         oamIx = nextTileIx;
         break;
-    case 1:
+    case NUZLEAF_STATE_HIT_ON_RAMP:
         gCurrentPinballGame->nuzleafFrameTimer = 0;
         gCurrentPinballGame->nuzleafFrameIndex = 0;
-        gCurrentPinballGame->nuzleafAnimState = 2;
+        gCurrentPinballGame->nuzleafEntityState = NUZLEAF_STATE_KNOCKED_BACK;
         oamIx = gNuzleafAnimFrameData[gCurrentPinballGame->nuzleafFrameIndex][0];
         nextTileIx = gNuzleafAnimFrameData[gCurrentPinballGame->nuzleafFrameIndex][2];
         m4aSongNumStart(SE_NUZLEAF_HIT);
         PlayRumble(7);
         gCurrentPinballGame->scoreAddedInFrame = SCORE_NUZLEAF_LOWER_HIT;
         break;
-    case 2:
+    case NUZLEAF_STATE_KNOCKED_BACK:
         if (gNuzleafAnimFrameData[gCurrentPinballGame->nuzleafFrameIndex][1] > gCurrentPinballGame->nuzleafFrameTimer)
         {
             gCurrentPinballGame->nuzleafFrameTimer++;
@@ -70,7 +70,7 @@ void UpdateNuzleafEntity(void)
             gCurrentPinballGame->nuzleafFrameIndex++;
             if (gCurrentPinballGame->nuzleafFrameIndex == 7)
             {
-                gCurrentPinballGame->nuzleafAnimState = 0;
+                gCurrentPinballGame->nuzleafEntityState = NUZLEAF_STATE_IDLE_CYCLE;
                 gCurrentPinballGame->nuzleafFrameIndex = 0;
                 gCurrentPinballGame->nuzleafPositionIndex = 1;
             }
@@ -78,17 +78,17 @@ void UpdateNuzleafEntity(void)
         oamIx = gNuzleafAnimFrameData[gCurrentPinballGame->nuzleafFrameIndex][0];
         nextTileIx = gNuzleafAnimFrameData[gCurrentPinballGame->nuzleafFrameIndex][2];
         break;
-    case 3:
+    case NUZLEAF_STATE_HIT_AT_EDGE:
         gCurrentPinballGame->nuzleafFrameTimer = 0;
         gCurrentPinballGame->nuzleafFrameIndex = 7;
-        gCurrentPinballGame->nuzleafAnimState = 4;
+        gCurrentPinballGame->nuzleafEntityState = NUZLEAF_STATE_TEETERING;
         oamIx = gNuzleafAnimFrameData[gCurrentPinballGame->nuzleafFrameIndex][0];
         nextTileIx = gNuzleafAnimFrameData[gCurrentPinballGame->nuzleafFrameIndex][2];
         m4aSongNumStart(SE_NUZLEAF_HIT);
         PlayRumble(7);
         gCurrentPinballGame->scoreAddedInFrame = SCORE_NUZLEAF_UPPER_HIT;
         break;
-    case 4:
+    case NUZLEAF_STATE_TEETERING:
         if (gNuzleafAnimFrameData[gCurrentPinballGame->nuzleafFrameIndex][1] > gCurrentPinballGame->nuzleafFrameTimer)
         {
             gCurrentPinballGame->nuzleafFrameTimer++;
@@ -99,7 +99,7 @@ void UpdateNuzleafEntity(void)
             gCurrentPinballGame->nuzleafFrameIndex++;
             if (gCurrentPinballGame->nuzleafFrameIndex == 18)
             {
-                gCurrentPinballGame->nuzleafAnimState = 5;
+                gCurrentPinballGame->nuzleafEntityState = NUZLEAF_STATE_HANGS_OVER_GAP;
                 m4aSongNumStart(SE_NUZLEAF_FORMS_BRIDGE);
             }
         }
@@ -110,8 +110,8 @@ void UpdateNuzleafEntity(void)
         oamIx = gNuzleafAnimFrameData[gCurrentPinballGame->nuzleafFrameIndex][0];
         nextTileIx = gNuzleafAnimFrameData[gCurrentPinballGame->nuzleafFrameIndex][2];
         break;
-    case 5:
-    case 6:
+    case NUZLEAF_STATE_HANGS_OVER_GAP:
+    case NUZLEAF_STATE_READY_TO_RESET:
         if (gNuzleafAnimFrameData[gCurrentPinballGame->nuzleafFrameIndex][1] > gCurrentPinballGame->nuzleafFrameTimer)
         {
             gCurrentPinballGame->nuzleafFrameTimer++;
@@ -127,12 +127,12 @@ void UpdateNuzleafEntity(void)
         oamIx = gNuzleafAnimFrameData[gCurrentPinballGame->nuzleafFrameIndex][0];
         nextTileIx = gNuzleafAnimFrameData[gCurrentPinballGame->nuzleafFrameIndex][2];
         break;
-    case 7:
+    case NUZLEAF_STATE_RESET_AT_LOWER_POSITION:
         gCurrentPinballGame->nuzleafHitFlag = 0;
         gCurrentPinballGame->nuzleafPositionIndex = 0;
         gCurrentPinballGame->nuzleafFrameTimer = 0;
         gCurrentPinballGame->nuzleafFrameIndex = 0;
-        gCurrentPinballGame->nuzleafAnimState = 0;
+        gCurrentPinballGame->nuzleafEntityState = NUZLEAF_STATE_IDLE_CYCLE;
         gCurrentPinballGame->nuzleafFrameIndex = 24;
         oamIx = gNuzleafAnimFrameData[gCurrentPinballGame->nuzleafFrameIndex][0];
         nextTileIx = gNuzleafAnimFrameData[gCurrentPinballGame->nuzleafFrameIndex][2];
@@ -164,7 +164,7 @@ void SelectRubyShopDoorState(void)
 {
     if (gCurrentPinballGame->ballCatchState != TRAP_EVO_SHOP_HOLE)
     {
-        if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
+        if (BoardNotInActivityMode)
         {
             if (!gCurrentPinballGame->evolutionShopActive)
                 gCurrentPinballGame->shopDoorTargetFrame = gCurrentPinballGame->shopDoorOpenLevel & 0xF;
@@ -287,7 +287,7 @@ void RubyPond_EntityLogic(void)
     if (gCurrentPinballGame->shouldProcessWhiscash)
     {
         // If board is currently in one of the modes (catch/etc) force reset to the 3 chinchou
-        if (gCurrentPinballGame->boardState > MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
+        if (BoardInActivityMode)
             gCurrentPinballGame->rubyPondContentsChanging = TRUE;
 
         // Don't immediately force change state if Wishcash is actively doing something
@@ -549,7 +549,7 @@ void RubyPond_EntityLogic(void)
                     // of pond states first.
                     gCurrentPinballGame->pondSwitchesSinceLastWhiscash++;
                     if (gCurrentPinballGame->pondSwitchesSinceLastWhiscash < MIN_POND_SWITCHES_BEFORE_WHISCASH_AVAILABLE ||
-                        gCurrentPinballGame->boardState > MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
+                        BoardInActivityMode)
                     {
                         frameDecidedNextPondState = (gMain.systemFrameCount % 5) + 1;
                         if (gCurrentPinballGame->rubyPondState == frameDecidedNextPondState)

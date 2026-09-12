@@ -39,15 +39,13 @@ void BoardStateDispatcher(void)
 
 void InitFieldIdle(void)
 {
-    s16 num1;
     u8 num2;
 
     if (gCurrentPinballGame->prevBoardState >= MAIN_BOARD_STATE_DEFAULT)
     {
         if (gMain.selectedField == FIELD_RUBY)
         {
-            num1 = gCurrentPinballGame->numCompletedBonusStages / 5;
-            if ((num1 & 1) == 0)
+            if (StartOfEvenBonusLoop)
             {
                 m4aSongNumStart(MUS_FIELD_RUBY);
             }
@@ -58,8 +56,7 @@ void InitFieldIdle(void)
         }
         else
         {
-            num1 = gCurrentPinballGame->numCompletedBonusStages / 5;
-            if ((num1 & 1) == 0)
+            if (StartOfEvenBonusLoop)
             {
                 m4aSongNumStart(MUS_FIELD_SAPPHIRE);
             }
@@ -101,7 +98,7 @@ void HandleBoardStateTransitionTeardown(void)
         gCurrentPinballGame->nextBoardState > MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
         ResetCatchState(0);
 
-    if (gCurrentPinballGame->boardState > MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE)
+    if (BoardInActivityMode)
         return;
 
     if (gCurrentPinballGame->nextBoardState == MAIN_BOARD_STATE_BOSS_HOLE_ACTIVE)

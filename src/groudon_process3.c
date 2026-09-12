@@ -40,7 +40,7 @@ void InitFrameProcess3_BoardLogic_GroudonBoard(void)
     gCurrentPinballGame->stageTimer = 0;
     gCurrentPinballGame->boardSubState = BONUS_BOARD_SUBSTATE_ACTIVE;
     gCurrentPinballGame->boardState = LEGENDARY_BOARD_STATE_INTRO;
-    if (gCurrentPinballGame->numCompletedBonusStages % 5 == 3)
+    if (gCurrentPinballGame->numCompletedBonusStages % BONUS_STAGE_LOOP_COUNT == BONUS_STAGE_LOOP_SECOND_SIMPLE_CLEARED)
         gCurrentPinballGame->legendaryHitsRequired = 18;
     else
         gCurrentPinballGame->legendaryHitsRequired = 15;
@@ -602,7 +602,7 @@ void UpdateGroudonEntityLogic(void)
 
         // Alternating completions lead to escape vs catch
         // This will happen on the 4th/9th/etc board. ( %5 == 3 completed)
-        if (gCurrentPinballGame->numCompletedBonusStages % 5 == 3)
+        if (gCurrentPinballGame->numCompletedBonusStages % BONUS_STAGE_LOOP_COUNT == BONUS_STAGE_LOOP_SECOND_SIMPLE_CLEARED)
         {
             // catch groudon
             gCurrentPinballGame->bossEntityState = GROUDON_ENTITY_STATE_CAPTURE;

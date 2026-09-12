@@ -214,17 +214,17 @@ void ProcessSapphireCollisionEvent(u8 triggerType, u16* hasCollisionImpact, u16*
                 {
                     if (gCurrentPinballGame->ball->positionQ0.x < 74)
                     {
-                        // Minun's button
-                        if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE
-                            && gCurrentPinballGame->sapphireMartGateBumperState[1] < 3)
+                        // Plusle's button
+                        if (BoardNotInActivityMode
+                            && gCurrentPinballGame->shopGuardianState[PLUSLE_TARGET_BUTTON_IX] < SHOP_GAURDIAN_STATE_LOWER_WALL_FOR_EVO_MODE)
                         {
-                            if (gCurrentPinballGame->sapphireMartGateBumperState[1] == 1)
-                                gCurrentPinballGame->sapphireBumperAnimKeyframe[1] = 6;
+                            if (gCurrentPinballGame->shopGuardianState[PLUSLE_TARGET_BUTTON_IX] == SHOP_GAURDIAN_STATE_KNOCKED_DOWN)
+                                gCurrentPinballGame->shopGuardianAnimFrames[PLUSLE_TARGET_BUTTON_IX] = 6;
                             else
-                                gCurrentPinballGame->sapphireBumperAnimKeyframe[1] = 4;
+                                gCurrentPinballGame->shopGuardianAnimFrames[PLUSLE_TARGET_BUTTON_IX] = 4;
 
-                            gCurrentPinballGame->sapphireBumperAnimSubTimer[1] = 0;
-                            gCurrentPinballGame->sapphireMartGateBumperState[1] = 1;
+                            gCurrentPinballGame->shopGuardianAnimFrameTimer[PLUSLE_TARGET_BUTTON_IX] = 0;
+                            gCurrentPinballGame->shopGuardianState[PLUSLE_TARGET_BUTTON_IX] = SHOP_GAURDIAN_STATE_KNOCKED_DOWN;
                             PlayRumble(7);
 
                             gCurrentPinballGame->ball->velocity.x /= 2;
@@ -238,17 +238,17 @@ void ProcessSapphireCollisionEvent(u8 triggerType, u16* hasCollisionImpact, u16*
                     }
                     else if (gCurrentPinballGame->ball->positionQ0.x < 116)
                     {
-                        // Plusle's button
-                        if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE
-                            && gCurrentPinballGame->sapphireMartGateBumperState[0] < 3)
+                        // Minun's button
+                        if (BoardNotInActivityMode
+                            && gCurrentPinballGame->shopGuardianState[MINUN_TARGET_BUTTON_IX] < SHOP_GAURDIAN_STATE_LOWER_WALL_FOR_EVO_MODE)
                         {
-                            if (gCurrentPinballGame->sapphireMartGateBumperState[0] == 1)
-                                gCurrentPinballGame->sapphireBumperAnimKeyframe[0] = 6;
+                            if (gCurrentPinballGame->shopGuardianState[MINUN_TARGET_BUTTON_IX] == SHOP_GAURDIAN_STATE_KNOCKED_DOWN)
+                                gCurrentPinballGame->shopGuardianAnimFrames[MINUN_TARGET_BUTTON_IX] = 6;
                             else
-                                gCurrentPinballGame->sapphireBumperAnimKeyframe[0] = 4;
+                                gCurrentPinballGame->shopGuardianAnimFrames[MINUN_TARGET_BUTTON_IX] = 4;
 
-                            gCurrentPinballGame->sapphireBumperAnimSubTimer[0] = 0;
-                            gCurrentPinballGame->sapphireMartGateBumperState[0] = 1;
+                            gCurrentPinballGame->shopGuardianAnimFrameTimer[MINUN_TARGET_BUTTON_IX] = 0;
+                            gCurrentPinballGame->shopGuardianState[MINUN_TARGET_BUTTON_IX] = SHOP_GAURDIAN_STATE_KNOCKED_DOWN;
 
                             PlayRumble(7);
 
@@ -265,7 +265,7 @@ void ProcessSapphireCollisionEvent(u8 triggerType, u16* hasCollisionImpact, u16*
                     {
                         // Bonus Multiplier Addition button
                         gCurrentPinballGame->pelipperFrameTimer = 1800;
-                        gCurrentPinballGame->pelipperState = 1;
+                        gCurrentPinballGame->pelipperState = PELIPPER_STATE_WATCHING_RAMP;
 
                         if (gCurrentPinballGame->progressLevel < 99)
                             gCurrentPinballGame->progressLevel++;
@@ -284,10 +284,10 @@ void ProcessSapphireCollisionEvent(u8 triggerType, u16* hasCollisionImpact, u16*
                     else
                     {
                         // Zigzagoon button
-                        if (gCurrentPinballGame->zigzagoonState == 0)
-                            gCurrentPinballGame->zigzagoonState = 1;
+                        if (gCurrentPinballGame->zigzagoonState == ZIGZAGOON_STATE_SITTING)
+                            gCurrentPinballGame->zigzagoonState = ZIGZAGOON_STATE_PRIMED;
                         else
-                            gCurrentPinballGame->zigzagoonState = 0;
+                            gCurrentPinballGame->zigzagoonState = ZIGZAGOON_STATE_SITTING;
 
                         gCurrentPinballGame->ball->velocity.y /=2;
                         gCurrentPinballGame->scoreAddedInFrame = SCORE_ZIGZAGOON_READY_BUTTON;
@@ -329,9 +329,9 @@ void ProcessSapphireCollisionEvent(u8 triggerType, u16* hasCollisionImpact, u16*
             }
             break;
         case SAPPHIRE_TRIGGER_SHOCK_WALL:
-            if (gCurrentPinballGame->shopShockWallAnimState != 3)
+            if (gCurrentPinballGame->shopShockWallAnimState != SHOCK_WALL_ANIM_STATE_NONE)
             {
-                gCurrentPinballGame->shopBumperHitTimer = 17;
+                gCurrentPinballGame->shockWallHitTimer = 17;
                 gCurrentPinballGame->collisionBounceBehaviorType = COLLISION_BOUNCE_BEHAVIOR_TYPE_NORMAL;
                 gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_PIXEL_WALK_ONE_STEP;
                 *collisionAngle = 0xD800;
@@ -380,7 +380,7 @@ void ProcessSapphireCollisionEvent(u8 triggerType, u16* hasCollisionImpact, u16*
                     // Upper Evo lane rollover
                     if (gCurrentPinballGame->ballCollisionZone == SAPPHIRE_ZONE_EVO_LANE_BOTTOM)
                     {
-                        if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE
+                        if (BoardNotInActivityMode
                             && gCurrentPinballGame->evoArrowProgress < 3)
                         {
                             if (gCurrentPinballGame->evoArrowProgress == 0)
@@ -452,7 +452,7 @@ void ProcessSapphireCollisionEvent(u8 triggerType, u16* hasCollisionImpact, u16*
                     // Get lane upper rollover
                     if (gCurrentPinballGame->ballCollisionZone == SAPPHIRE_ZONE_GET_LANE_BOTTOM)
                     {
-                        if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE
+                        if (BoardNotInActivityMode
                             && gCurrentPinballGame->catchArrowProgress < 3)
                         {
                             if (gCurrentPinballGame->catchArrowProgress == 0)
@@ -668,14 +668,14 @@ void ProcessSapphireCollisionEvent(u8 triggerType, u16* hasCollisionImpact, u16*
         case SAPPHIRE_TRIGGER_PELIPPER_ENTITY_TRIGGER:
             if (gCurrentPinballGame->ball->positionQ0.y < 80)
             {
-                if (gCurrentPinballGame->pelipperState == 1)
-                    gCurrentPinballGame->pelipperState = 2;
+                if (gCurrentPinballGame->pelipperState == PELIPPER_STATE_WATCHING_RAMP)
+                    gCurrentPinballGame->pelipperState = PELIPPER_STATE_OPENED_MOUTH;
             }
             else
             {
-                if (gCurrentPinballGame->pelipperState == 2)
+                if (gCurrentPinballGame->pelipperState == PELIPPER_STATE_OPENED_MOUTH)
                 {
-                    gCurrentPinballGame->pelipperState = 3;
+                    gCurrentPinballGame->pelipperState = PELIPPER_STATE_CLOSING_MOUTH;
                     gCurrentPinballGame->pelipperFrameTimer = 0;
                 }
             }

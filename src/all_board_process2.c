@@ -3,6 +3,7 @@
 #include "main.h"
 #include "constants/bg_music.h"
 #include "constants/board/ruby_states.h"
+#include "constants/board/main_board.h"
 
 void InitFrameProcess2_CameraShakeDrain_AllBoards(void)
 {
@@ -42,14 +43,14 @@ void InitFrameProcess2_CameraShakeDrain_AllBoards(void)
         gMain.bgOffsets[1].yOffset = gCurrentPinballGame->cameraBaseY + gCurrentPinballGame->cameraScrollOffset;
         if (gMain.selectedField == FIELD_RUBY)
         {
-            if ((gCurrentPinballGame->numCompletedBonusStages / 5) % 2 == 0)
+            if (StartOfEvenBonusLoop)
                 m4aSongNumStart(MUS_FIELD_RUBY);
             else
                 m4aSongNumStart(MUS_FIELD_RUBY2);
         }
         else
         {
-            if ((gCurrentPinballGame->numCompletedBonusStages / 5) % 2 == 0)
+            if (StartOfEvenBonusLoop)
                 m4aSongNumStart(MUS_FIELD_SAPPHIRE);
             else
                 m4aSongNumStart(MUS_FIELD_SAPPHIRE2);
@@ -425,13 +426,13 @@ void ProcessMainBoardBallDrainAndLaunch(void)
         && gCurrentPinballGame->ballInLaunchChute)
     {
         gCurrentPinballGame->launcherCharging = TRUE;
-        gCurrentPinballGame->spoinkEntityState = 1;
+        gCurrentPinballGame->spoinkEntityState = SPOINK_STATE_COMPRESSING;
     }
 
     if (gCurrentPinballGame->launcherCharging
         && gCurrentPinballGame->releasedButtonActions[PINBALL_INPUT_RIGHT_FLIPPER])
     {
-        gCurrentPinballGame->spoinkEntityState = 3;
+        gCurrentPinballGame->spoinkEntityState = SPOINK_STATE_RELEASING;
         if (gCurrentPinballGame->ballInLaunchChute)
         {
             PlayRumble(7);
@@ -592,5 +593,5 @@ void ResetBoardStateOnDeath(void)
 
     }
 
-    gCurrentPinballGame->makuhitaPunchState = 0;
+    gCurrentPinballGame->makuhitaState = MAKUHITA_STATE_INACTIVE;
 }

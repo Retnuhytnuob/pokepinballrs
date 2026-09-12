@@ -196,25 +196,25 @@ void UpdateGulpinBossState(void)
     struct SpriteGroup *group;
     struct OamDataSimple *oamSimple;
     u16 *dst;
-    const s16 *var0;
+    const s16 *gulpinFramesetData;
     s16 index;
 
-    var0 = gGulpinAnimData[gCurrentPinballGame->gulpinAnimFrameIndex];
+    gulpinFramesetData = gGulpinAnimData[gCurrentPinballGame->gulpinAnimFrameIndex];
     group = &gMain.spriteGroups[SG_RUBY_GULPIN_STACK];
     group->baseX = 9 - gCurrentPinballGame->cameraXOffset;
     group->baseY = 288 - gCurrentPinballGame->cameraYOffset;
-    if (gCurrentPinballGame->gulpinCurrentLevel > gCurrentPinballGame->seedotCount)
+    if (gCurrentPinballGame->gulpinDisplayedLevel > gCurrentPinballGame->travelTrackerCount)
     {
-        if (gCurrentPinballGame->seedotExitSequenceActive)
+        if (gCurrentPinballGame->travelTrackerExitSequenceActive)
         {
-            if (gCurrentPinballGame->seedotExitSequenceTimer == 0)
+            if (gCurrentPinballGame->travelTrackerExitSequenceTimer == 0)
             {
                 gCurrentPinballGame->gulpinAnimFrameIndex = 59;
                 gCurrentPinballGame->gulpinAnimFrameTimer = 0;
-                gCurrentPinballGame->seedotExitSequenceTimer++;
+                gCurrentPinballGame->travelTrackerExitSequenceTimer++;
             }
 
-            if (var0[1] > gCurrentPinballGame->gulpinAnimFrameTimer)
+            if (gulpinFramesetData[1] > gCurrentPinballGame->gulpinAnimFrameTimer)
             {
                 gCurrentPinballGame->gulpinAnimFrameTimer++;
             }
@@ -225,9 +225,9 @@ void UpdateGulpinBossState(void)
                 if (gCurrentPinballGame->gulpinAnimFrameIndex == 84)
                 {
                     gCurrentPinballGame->gulpinAnimFrameIndex = 0;
-                    gCurrentPinballGame->seedotExitSequenceActive = FALSE;
-                    gCurrentPinballGame->seedotExitSequenceTimer = 0;
-                    gCurrentPinballGame->gulpinCurrentLevel = 0;
+                    gCurrentPinballGame->travelTrackerExitSequenceActive = FALSE;
+                    gCurrentPinballGame->travelTrackerExitSequenceTimer = 0;
+                    gCurrentPinballGame->gulpinDisplayedLevel = 0;
                 }
 
                 if (gCurrentPinballGame->gulpinAnimFrameIndex == 60 || gCurrentPinballGame->gulpinAnimFrameIndex == 69 || gCurrentPinballGame->gulpinAnimFrameIndex == 78)
@@ -235,39 +235,39 @@ void UpdateGulpinBossState(void)
             }
         }
     }
-    else if (gCurrentPinballGame->gulpinCurrentLevel < gCurrentPinballGame->seedotCount)
+    else if (gCurrentPinballGame->gulpinDisplayedLevel < gCurrentPinballGame->travelTrackerCount)
     {
-        if (var0[1] <= gCurrentPinballGame->gulpinAnimFrameTimer)
+        if (gulpinFramesetData[1] <= gCurrentPinballGame->gulpinAnimFrameTimer)
         {
             gCurrentPinballGame->gulpinAnimFrameTimer = 1;
             gCurrentPinballGame->gulpinAnimFrameIndex++;
-            if (gCurrentPinballGame->seedotCount == 1)
+            if (gCurrentPinballGame->travelTrackerCount == 1)
             {
                 if (gCurrentPinballGame->gulpinAnimFrameIndex == 9)
                 {
-                    gCurrentPinballGame->gulpinCurrentLevel = 1;
+                    gCurrentPinballGame->gulpinDisplayedLevel = 1;
                     gCurrentPinballGame->gulpinAnimFrameIndex = 84;
                 }
 
                 if (gCurrentPinballGame->gulpinAnimFrameIndex == 6)
                     m4aSongNumStart(SE_GULPIN_LANDS_OR_LEAVES);
             }
-            else if (gCurrentPinballGame->seedotCount == 2)
+            else if (gCurrentPinballGame->travelTrackerCount == 2)
             {
                 if (gCurrentPinballGame->gulpinAnimFrameIndex == 23)
                 {
-                    gCurrentPinballGame->gulpinCurrentLevel = 2;
+                    gCurrentPinballGame->gulpinDisplayedLevel = 2;
                     gCurrentPinballGame->gulpinAnimFrameIndex = 95;
                 }
 
                 if (gCurrentPinballGame->gulpinAnimFrameIndex == 20)
                     m4aSongNumStart(SE_GULPIN_LANDS_OR_LEAVES);
             }
-            else if (gCurrentPinballGame->seedotCount == 3)
+            else if (gCurrentPinballGame->travelTrackerCount == 3)
             {
                 if (gCurrentPinballGame->gulpinAnimFrameIndex == 35)
                 {
-                    gCurrentPinballGame->gulpinCurrentLevel = 3;
+                    gCurrentPinballGame->gulpinDisplayedLevel = 3;
                     gCurrentPinballGame->gulpinAnimFrameIndex = 35;
                     RequestBoardStateTransition(MAIN_BOARD_STATE_TRAVEL_MODE);
                 }
@@ -281,9 +281,9 @@ void UpdateGulpinBossState(void)
             gCurrentPinballGame->gulpinAnimFrameTimer++;
         }
     }
-    else if (gCurrentPinballGame->seedotCount)
+    else if (gCurrentPinballGame->travelTrackerCount)
     {
-        if (var0[1] > gCurrentPinballGame->gulpinAnimFrameTimer)
+        if (gulpinFramesetData[1] > gCurrentPinballGame->gulpinAnimFrameTimer)
         {
             gCurrentPinballGame->gulpinAnimFrameTimer++;
         }
@@ -291,17 +291,17 @@ void UpdateGulpinBossState(void)
         {
             gCurrentPinballGame->gulpinAnimFrameTimer = 1;
             gCurrentPinballGame->gulpinAnimFrameIndex++;
-            if (gCurrentPinballGame->seedotCount == 1)
+            if (gCurrentPinballGame->travelTrackerCount == 1)
             {
                 if (gCurrentPinballGame->gulpinAnimFrameIndex == 95)
                     gCurrentPinballGame->gulpinAnimFrameIndex = 84;
             }
-            else if (gCurrentPinballGame->seedotCount == 2)
+            else if (gCurrentPinballGame->travelTrackerCount == 2)
             {
                 if (gCurrentPinballGame->gulpinAnimFrameIndex == 109)
                     gCurrentPinballGame->gulpinAnimFrameIndex = 95;
             }
-            else if (gCurrentPinballGame->seedotCount == 3)
+            else if (gCurrentPinballGame->travelTrackerCount == 3)
             {
                 if (gCurrentPinballGame->gulpinAnimFrameIndex == 60)
                     gCurrentPinballGame->gulpinAnimFrameIndex = 35;
@@ -309,10 +309,10 @@ void UpdateGulpinBossState(void)
         }
     }
 
-    index = var0[0];
-    DmaCopy16(3, gRubyStageGulpin_Gfx[var0[2]], (void *)0x06013B80, 0x180);
-    DmaCopy16(3, gRubyStageGulpin_Gfx[var0[3]], (void *)0x06013A00, 0x180);
-    DmaCopy16(3, gRubyStageGulpin_Gfx[var0[4]], (void *)0x06013880, 0x180);
+    index = gulpinFramesetData[0];
+    DmaCopy16(3, gRubyStageGulpin_Gfx[gulpinFramesetData[2]], (void *)0x06013B80, 0x180);
+    DmaCopy16(3, gRubyStageGulpin_Gfx[gulpinFramesetData[3]], (void *)0x06013A00, 0x180);
+    DmaCopy16(3, gRubyStageGulpin_Gfx[gulpinFramesetData[4]], (void *)0x06013880, 0x180);
     for (i = 0; i < 6; i++)
     {
         oamSimple = &group->oam[i];
@@ -326,7 +326,7 @@ void UpdateGulpinBossState(void)
     }
 }
 
-void UpdateRubySideBumperAnimation(void)
+void UpdateLinooneSideBumpers(void)
 {
     s16 i;
 
@@ -366,21 +366,21 @@ void UpdateRubySideBumperAnimation(void)
         {
             if (gCurrentPinballGame->boardState != MAIN_BOARD_STATE_TRAVEL_MODE)
             {
-                if (gCurrentPinballGame->boardState <= MAIN_BOARD_STATE_BONUS_HOLE_ACTIVE) {
-                    if (gCurrentPinballGame->seedotCount < 3)
+                if (BoardNotInActivityMode) {
+                    if (gCurrentPinballGame->travelTrackerCount < 3)
                     {
-                        gCurrentPinballGame->seedotCount++;
-                        if (gCurrentPinballGame->seedotCount == 1)
+                        gCurrentPinballGame->travelTrackerCount++;
+                        if (gCurrentPinballGame->travelTrackerCount == 1)
                         {
                             gCurrentPinballGame->gulpinAnimFrameIndex = 0;
                             gCurrentPinballGame->gulpinAnimFrameTimer = 0;
                         }
-                        else if (gCurrentPinballGame->seedotCount == 2)
+                        else if (gCurrentPinballGame->travelTrackerCount == 2)
                         {
                             gCurrentPinballGame->gulpinAnimFrameIndex = 12;
                             gCurrentPinballGame->gulpinAnimFrameTimer = 0;
                         }
-                        else if (gCurrentPinballGame->seedotCount == 3)
+                        else if (gCurrentPinballGame->travelTrackerCount == 3)
                         {
                             gCurrentPinballGame->gulpinAnimFrameIndex = 24;
                             gCurrentPinballGame->gulpinAnimFrameTimer = 0;
@@ -390,15 +390,15 @@ void UpdateRubySideBumperAnimation(void)
                 }
                 else
                 {
-                    if (gCurrentPinballGame->seedotCount < 2)
+                    if (gCurrentPinballGame->travelTrackerCount < 2)
                     {
-                        gCurrentPinballGame->seedotCount++;
-                        if (gCurrentPinballGame->seedotCount == 1)
+                        gCurrentPinballGame->travelTrackerCount++;
+                        if (gCurrentPinballGame->travelTrackerCount == 1)
                         {
                             gCurrentPinballGame->gulpinAnimFrameIndex = 0;
                             gCurrentPinballGame->gulpinAnimFrameTimer = 0;
                         }
-                        else if (gCurrentPinballGame->seedotCount == 2)
+                        else if (gCurrentPinballGame->travelTrackerCount == 2)
                         {
                             gCurrentPinballGame->gulpinAnimFrameIndex = 12;
                             gCurrentPinballGame->gulpinAnimFrameTimer = 0;
@@ -409,10 +409,10 @@ void UpdateRubySideBumperAnimation(void)
         }
         else
         {
-            if (gCurrentPinballGame->makuhitaPunchState == 0)
-                gCurrentPinballGame->makuhitaPunchState = 1;
+            if (gCurrentPinballGame->makuhitaState == MAKUHITA_STATE_INACTIVE)
+                gCurrentPinballGame->makuhitaState = MAKUHITA_STATE_NEUTRAL_READY;
             else
-                gCurrentPinballGame->makuhitaPunchState = 0;
+                gCurrentPinballGame->makuhitaState = MAKUHITA_STATE_INACTIVE;
         }
 
         gCurrentPinballGame->linooneSideBumperExtensionsPending[SIDE_IX_LEFT] = 0;

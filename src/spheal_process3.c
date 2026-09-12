@@ -3,6 +3,7 @@
 #include "main.h"
 #include "constants/bg_music.h"
 #include "constants/board/spheal_states.h"
+#include "constants/board/sapphire_states.h"
 
 #define SPHEAL_MODE_TIME TICKS_FOR_TIME(2,0)
 
@@ -1105,7 +1106,7 @@ void SphealBoard_PelipperDeliversBall(void)
             gCurrentPinballGame->pelipperFlyVelX = -82;
             gCurrentPinballGame->pelipperFlyVelY = 0;
             gCurrentPinballGame->pelipperFrameTimer = 0;
-            gCurrentPinballGame->pelipperState = 8;
+            gCurrentPinballGame->pelipperState = PELIPPER_STATE_SWOOP;
             gCurrentPinballGame->deliveryAnimFrameIndex = 13;
             gMain.spriteGroups[SG_SPHEAL_PELIPPER_ENTITY].active = TRUE;
             gCurrentPinballGame->cameraLocked = TRUE;
