@@ -879,6 +879,8 @@ void HighScore_ReloadAfterLink(void)
     gMain.subState++;
 }
 
+/// @brief Merged = result of merging 2 sets of high scores via link cable.
+/// @param  
 void HighScore_ShowMergedScores(void)
 {
     switch (gHighScoreScreenState.nextSubState)

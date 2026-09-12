@@ -13,10 +13,10 @@ extern const u16 gKyogreWaterBackgroundTilemap[];
 extern const Palette gKyogreIntroShorePalette[];
 extern const Palette gKyogreIntroIcePalette[];
 extern const u8 gKyogreSplashSpriteFrames[][0xC0];
-extern const u8 gKyogreWhirlpoolSpriteFrames[][0x3C0];
+extern const u8 gKyogreFreeze_Gfx[][0x3C0];
 extern const u8 gKyogreBodySprites_First15[][0x580];
 extern const u8 gKyogreBodySprites_After15[][0x4C0];
-extern const u8 gKyogreWhirlpoolMinionSprites[][0x200];
+extern const u8 gKyogreWhirlpoolTrap_Gfx[][0x200];
 extern struct SongHeader se_kyogre_hit;
 extern struct SongHeader se_kyogre_breach_surface;
 extern struct SongHeader se_kyogre_dive;
@@ -1015,7 +1015,7 @@ void UpdateKyogreFieldEntities(void)
             group->baseY = 200;
 
         index = gKyogrefreezeTrapAnimFrameset[gCurrentPinballGame->freezeTrapAnimFrame][2];
-        DmaCopy16(3, gKyogreWhirlpoolSpriteFrames[index], (void *)0x060124E0, 0x3C0);
+        DmaCopy16(3, gKyogreFreeze_Gfx[index], (void *)0x060124E0, 0x3C0);
         var0 = gKyogrefreezeTrapAnimFrameset[gCurrentPinballGame->freezeTrapAnimFrame][0];
         for (i = 0; i < 4; i++)
         {
@@ -1210,7 +1210,7 @@ void UpdateKyogreFieldEntities(void)
             }
         }
 
-        DmaCopy16(3, gKyogreWhirlpoolMinionSprites[index], (void *)(0x06011520 + i * 0x200), 0x200);
+        DmaCopy16(3, gKyogreWhirlpoolTrap_Gfx[index], (void *)(0x06011520 + i * 0x200), 0x200);
         if (group->active)
         {
             if (gCurrentPinballGame->vortexEntityState[i] > KYOGRE_WHIRLPOOL_PHASE_INIT)

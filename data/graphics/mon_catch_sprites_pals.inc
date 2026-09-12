@@ -1,6 +1,5 @@
-@ Palettes are striped: the five mons' frame 0 palettes, then their frame 1
-@ palettes, then their frame 2. LoadCatchSpriteGraphics reads slot i*5 + mon
-@ for frame i, and slot 15 of group 0 as the shared fourth bank.
+@ Banks of 16, 5 mons each. First 5 are the mon's normal color, while the
+@ next 10 are used for a few frames in the hit/catch scenes.
 
 gMonCatchSpriteGroup0_Pal:: @ 0x081AEBE4
 	.incbin "graphics/mon_catch_sprites/catch_mon_01_treecko_0.gbapal"

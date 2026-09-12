@@ -384,7 +384,7 @@ extern u8 gIntroScene5Mudkip_BG2Tilemap[];
 extern u8 gIntroScene5Mudkip_BG1Tiles[];
 extern u8 gIntroScene5Mudkip_BG3Tilemap[];
 extern u8 gIntroScene5MudkipText_Gfx[];
-extern u8 gIntroScene5Mudkip_BG0Tiles[];
+extern u8 gIntroScene5Mudkip_BG0Tilemap[];
 extern u8 gIntroScene5MudkipSprites_Gfx[];
 extern s16 gIntroScene5Mudkip_TileOffsets[];
 

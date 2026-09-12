@@ -9,10 +9,10 @@ extern const u8 gSapphireBoardShopShockWall_Gfx[][0x80];
 
 extern const s16 gShopGuardianAnimFramesetData[][2];
 extern const s16 gBumperMosaicValues[];
-extern const u8 gSapphireBumperLeft_Gfx[][0x300];
-extern const u8 gSapphireBumperLeftHit_Gfx[][0x200];
-extern const u8 gSapphireBumperRight_Gfx[][0x300];
-extern const u8 gSapphireBumperRightHit_Gfx[][0x200];
+extern const u8 gSapphireMinun_Gfx[][0x300];
+extern const u8 gSapphireMinunHeadElectricity_Gfx[][0x200];
+extern const u8 gSapphirePlusle_Gfx[][0x300];
+extern const u8 gSapphirePlusleHeadElectricity_Gfx[][0x200];
 extern const u8 gPondBumper_Gfx[][0x200];
 
 void UpdateSapphireShopGateLogic(void)
@@ -227,7 +227,7 @@ void DrawSapphireShopGuards(void)
     group->baseX = 68 - gCurrentPinballGame->cameraXOffset;
     group->baseY = 144 - gCurrentPinballGame->cameraYOffset;
     index = gShopGuardianAnimFramesetData[gCurrentPinballGame->shopGuardianAnimFrames[MINUN_TARGET_BUTTON_IX]][0];
-    DmaCopy16(3, &gSapphireBumperLeft_Gfx[index], (void *)0x06012DA0, 0x280);
+    DmaCopy16(3, &gSapphireMinun_Gfx[index], (void *)0x06012DA0, 0x280);
     for (i = 0; i < 2; i++)
     {
         oamSimple = &group->oam[i];
@@ -241,7 +241,7 @@ void DrawSapphireShopGuards(void)
     {
         group->baseY = 144 - gCurrentPinballGame->cameraYOffset;
         index = gCurrentPinballGame->shopGuardianTargetHitFxTimer[MINUN_TARGET_BUTTON_IX] / 2;
-        DmaCopy16(3, &gSapphireBumperLeftHit_Gfx[index], (void *)0x06014720, 0x180);
+        DmaCopy16(3, &gSapphireMinunHeadElectricity_Gfx[index], (void *)0x06014720, 0x180);
     }
     else
     {
@@ -256,7 +256,7 @@ void DrawSapphireShopGuards(void)
     group->baseX = 36 - gCurrentPinballGame->cameraXOffset;
     group->baseY = 163 - gCurrentPinballGame->cameraYOffset;
     index = gShopGuardianAnimFramesetData[gCurrentPinballGame->shopGuardianAnimFrames[PLUSLE_TARGET_BUTTON_IX]][0];
-    DmaCopy16(3, &gSapphireBumperRight_Gfx[index], (void *)0x060130A0, 0x280);
+    DmaCopy16(3, &gSapphirePlusle_Gfx[index], (void *)0x060130A0, 0x280);
     for (i = 0; i < 2; i++)
     {
         oamSimple = &group->oam[i];
@@ -270,7 +270,7 @@ void DrawSapphireShopGuards(void)
     {
         group->baseY = 163 - gCurrentPinballGame->cameraYOffset;
         index = gCurrentPinballGame->shopGuardianTargetHitFxTimer[PLUSLE_TARGET_BUTTON_IX] / 2;
-        DmaCopy16(3, &gSapphireBumperRightHit_Gfx[index], (void *)0x06014920, 0x180);
+        DmaCopy16(3, &gSapphirePlusleHeadElectricity_Gfx[index], (void *)0x06014920, 0x180);
     }
     else
     {

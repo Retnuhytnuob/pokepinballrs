@@ -1115,7 +1115,7 @@ void IntroScene5Mudkip_32_LoadMudkipBallScene(void)
     REG_BG3CNT = BGCNT_TXT256x256 | BGCNT_SCREENBASE(30) | BGCNT_PRIORITY(3);
     REG_DISPCNT |= DISPCNT_BG3_ON;
 
-    DmaCopy16(3, gIntroScene5Mudkip_BG0Tiles, BG_CHAR_SCREEN_ADDR(1,4), BG_SCREEN_SIZE);
+    DmaCopy16(3, gIntroScene5Mudkip_BG0Tilemap, BG_CHAR_SCREEN_ADDR(1,4), BG_SCREEN_SIZE);
     DmaCopy16(3, gIntroScene5Mudkip_BG1Tiles, BG_CHAR_SCREEN_ADDR(1,6), 2*BG_SCREEN_SIZE);
     DmaCopy16(3, gIntroScene5Mudkip_BG2Tilemap, BG_CHAR_SCREEN_ADDR(3,4), 2*BG_SCREEN_SIZE);
     DmaCopy16(3, gIntroScene5Mudkip_BG3Tilemap, BG_CHAR_SCREEN_ADDR(3,6), BG_SCREEN_SIZE);

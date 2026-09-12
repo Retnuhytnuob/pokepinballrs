@@ -59,7 +59,7 @@ extern const u8 gKyogreBonusClear_Gfx[0x2000];
 extern const u8 gGroudonAttackFx_Gfx[0x2000];
 extern const u8 gGroudonBonusClear_Gfx[0x2000];
 extern const u8 gRayquazaSkyBackgroundGfx[0x2800];
-extern const u8 gRayquazaWindBoardGfx[0x1C00];
+extern const u8 gRayquazaFlyby_Gfx[0x1C00];
 extern const u8 gRayquazaBonusClear_Gfx[0x2000];
 extern const u8 gRayquazaSpriteSheet[0x860];
 extern const u8 gSphealResultsScreenGfx[0x800];
@@ -485,7 +485,7 @@ void RestoreMainFieldDynamicGraphics(void)
     for (i = 0; i < SIDE_COUNT; i++)
     {
         var0 = gCurrentPinballGame->flipper[i].position / 2;
-        DmaCopy16(3, gFlipperTileGraphics[var0], ((i * 0x200) + 0x06010000), 0x200);
+        DmaCopy16(3, gFlipper_Gfx[var0], ((i * 0x200) + 0x06010000), 0x200);
     }
 
     var0 = gCurrentPinballGame->ball->spinAngle / 0x1000;
@@ -716,7 +716,7 @@ void RestoreRayquazaBonusGraphics(void)
     }
     else if (gCurrentPinballGame->boardState == LEGENDARY_BOARD_STATE_BATTLE_PHASE)
     {
-        DmaCopy16(3, gRayquazaWindBoardGfx, (void *)0x6015800, 0x1C00);
+        DmaCopy16(3, gRayquazaFlyby_Gfx, (void *)0x6015800, 0x1C00);
     }
     else
     {

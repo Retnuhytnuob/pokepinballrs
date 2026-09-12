@@ -11,7 +11,7 @@ extern const s16 gLightningGrabAnimFrameIndices[];
 extern const u8 gRayquazaBonusClear_Gfx[];
 extern const u8 gRayquazaSkyBackgroundGfx[];
 extern const u8 gRayquazaTornadoGfx[][0x280];
-extern const u8 gRayquazaWindBoardGfx[];
+extern const u8 gRayquazaFlyby_Gfx[];
 extern const u8 gRayquazaSpriteSheet[];
 extern const u8 gRayquazaBodyVariantTiles[][0x800];
 extern const s16 gScreenShakeOscillationValues[];
@@ -495,7 +495,7 @@ void UpdateRayquazaEntityLogic(void)
         else
         {
             gCurrentPinballGame->bossEntityState = RAYQUAZA_ENTITY_STATE_FLYBY;
-            DmaCopy16(3, gRayquazaWindBoardGfx, (void *)0x06015800, 0x1C00);
+            DmaCopy16(3, gRayquazaFlyby_Gfx, (void *)0x06015800, 0x1C00);
             if (gCurrentPinballGame->windAttackCount & 1)
             {
                 gMain.spriteGroups[SG_RAYQUAZA_ENTITY_FLYBY_RIGHT].active = TRUE;
