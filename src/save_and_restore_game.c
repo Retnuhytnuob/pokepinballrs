@@ -5,6 +5,8 @@
 #include "constants/board/main_board.h"
 #include "constants/board/groudon_states.h"
 #include "constants/board/rayquaza_states.h"
+#include "constants/board/ruby_states.h"
+#include "constants/board/sapphire_states.h"
 
 extern u8 gBoardGfxBuffer[];
 extern u8 gBoardBGTileBufferAlt[];
@@ -627,7 +629,7 @@ void RestoreRubyBoardTileGraphics(void)
 
     var0 = gCurrentPinballGame->shopDoorCurrentFrame & 0xF;
     DmaCopy16(3, gRubyBoardShopDoor_Gfx[var0], (void *)0x6013180, 0x180);
-    if (gCurrentPinballGame->eggCaveState < 3)
+    if (gCurrentPinballGame->cyndaquilPosition < CYNDAQUIL_POSITION_CAVE_ENTRANCE)
         gCurrentPinballGame->cyndaquilFrame = 0;
     else
         gCurrentPinballGame->cyndaquilFrame = 1;
@@ -643,22 +645,22 @@ void RestoreSapphireBoardTileGraphics(void)
 
     switch (gCurrentPinballGame->sapphireHatchMachineState)
     {
-    case 0:
-    case 1:
-    case 2:
+    case HATCH_MACHINE_STATE_INCUBATION_LIGHTS:
+    case HATCH_MACHINE_STATE_ACTIVATED_LIGHT_CROSS:
+    case HATCH_MACHINE_STATE_MON_HATCHED:
         index = gCurrentPinballGame->sapphireHatchMachineFrameIx;
         DmaCopy16(3, gHatchMachineElevator_Gfx[index], (void *)0x600D900, 0x440);
         break;
-    case 3:
-    case 4:
+    case HATCH_MACHINE_STATE_ELEVATOR_DECENDS:
+    case HATCH_MACHINE_STATE_EMPTY:
         index = 15;
         DmaCopy16(3, gHatchMachineElevator_Gfx[index], (void *)0x600D900, 0x440);
         break;
-    case 5:
+    case HATCH_MACHINE_STATE_EGG_RISING:
         index = gHoleAnimKeyframeData[gCurrentPinballGame->sapphireHatchMachineFrameIx][0];
         DmaCopy16(3, gHatchMachineElevator_Gfx[index], (void *)0x600D900, 0x440);
         break;
-    case 6:
+    case HATCH_MACHINE_STATE_RESET:
         break;
     }
 }

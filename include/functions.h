@@ -567,7 +567,7 @@ extern void UpdateSapphireSeedotCollection();
 extern void DrawSapphireSeedotAndBasketSprites();
 extern void UpdateSapphireShopSignAnimation();
 extern void DrawSapphireShopSignSprite(void);
-extern void UpdateSapphireEggMachine();
+extern void UpdateSapphireHatchMachine();
 extern void DrawBoardEdgeBanner(void);
 extern void RestoreBoardObjPalettes(s16);
 extern void RegisterCaptureOrEvolution(s16);

@@ -181,31 +181,31 @@ void RevealCatchTilesBurst(void)
     u16 *dst;
     s16 tileFrameIx;
 
-    switch (gCurrentPinballGame->hatchRevealPhase)
+    switch (gCurrentPinballGame->catchTilesBurstPhase)
     {
-    case 0:
+    case CATCH_TILE_BURST_PHASE_WAITING:
         if (gCurrentPinballGame->revealAnimFrameCounter < 60)
         {
             gCurrentPinballGame->revealAnimFrameCounter++;
         }
         else
         {
-            gCurrentPinballGame->hatchRevealPhase++;
+            gCurrentPinballGame->catchTilesBurstPhase++;
             gCurrentPinballGame->revealAnimFrameCounter = 0;
         }
         gMain.blendControl = 0xCE;
         break;
-    case 1:
+    case CATCH_TILE_BURST_PHASE_LOAD_LIGHTNING_GFX:
         gCurrentPinballGame->activeFxType = FX_CATCH_TILE_BURST_1;
         DmaCopy16(3, gCatchTile_BurstStart_Gfx, (void *)0x06015800, 0x2000);
         DmaCopy16(3, gCatchTile_BurstStart_Pal, OBJ_PLTT_SLOT(PAL_IX_CATCH_TILE_FX), PLTT_SLOT_SIZE);
         gMain.fieldSpriteGroups[FIELD_SG_CATCH_BURST_LIGHTNING_STRIKE]->active = TRUE;
         m4aSongNumStart(SE_CATCH_ALL_REVEAL_LIGHTNING);
-        gCurrentPinballGame->hatchRevealPhase++;
+        gCurrentPinballGame->catchTilesBurstPhase++;
         gCurrentPinballGame->revealAnimFrameCounter = 0;
         gCurrentPinballGame->revealFramesetIndex = 0;
         break;
-    case 2:
+    case CATCH_TILE_BURST_PHASE_LIGHTNING_STRIKE:
         if (gCatchTile_RevealSparkleTimings[gCurrentPinballGame->revealFramesetIndex] > gCurrentPinballGame->revealAnimFrameCounter)
         {
             gCurrentPinballGame->revealAnimFrameCounter++;
@@ -217,7 +217,7 @@ void RevealCatchTilesBurst(void)
             if (gCurrentPinballGame->revealFramesetIndex > 7)
             {
                 gCurrentPinballGame->revealFramesetIndex = 7;
-                gCurrentPinballGame->hatchRevealPhase++;
+                gCurrentPinballGame->catchTilesBurstPhase++;
                 gMain.fieldSpriteGroups[FIELD_SG_CATCH_BURST_LIGHTNING_STRIKE]->active = FALSE;
             }
         }
@@ -241,16 +241,16 @@ void RevealCatchTilesBurst(void)
             gOamBuffer[oamSimple->oamId].y += group->baseY;
         }
         break;
-    case 3:
+    case CATCH_TILE_BURST_PHASE_LOAD_TILE_GFX:
         gCurrentPinballGame->activeFxType = FX_CATCH_TILE_BURST_2;
         DmaCopy16(3, gCatchTile_BurstStage2_Gfx, (void *)0x06015800, 0x800);
         DmaCopy16(3, gCatchTile_BurstStage2_Pal, OBJ_PLTT_SLOT(PAL_IX_CATCH_TILE_FX), PLTT_SLOT_SIZE);
         gMain.fieldSpriteGroups[FIELD_SG_CATCH_BURST_TILE_FLASH_FX]->active = TRUE;
-        gCurrentPinballGame->hatchRevealPhase++;
+        gCurrentPinballGame->catchTilesBurstPhase++;
         gCurrentPinballGame->revealAnimFrameCounter = 0;
         gCurrentPinballGame->startButtonDisabled = TRUE;
         break;
-    case 4:
+    case CATCH_TILE_BURST_PHASE_TILE_FLASH:
         tileFrameIx = gCurrentPinballGame->revealAnimFrameCounter / 2;
         if (gCurrentPinballGame->revealAnimFrameCounter < 15)
         {
@@ -259,7 +259,7 @@ void RevealCatchTilesBurst(void)
         else
         {
             gMain.fieldSpriteGroups[FIELD_SG_CATCH_BURST_TILE_FLASH_FX]->active = FALSE;
-            gCurrentPinballGame->hatchRevealPhase++;
+            gCurrentPinballGame->catchTilesBurstPhase++;
             gCurrentPinballGame->revealAnimFrameCounter = 0;
             gCurrentPinballGame->revealFramesetIndex = 0;
         }
@@ -282,15 +282,15 @@ void RevealCatchTilesBurst(void)
             gOamBuffer[oamSimple->oamId].y += group->baseY;
         }
         break;
-    case 5:
+    case CATCH_TILE_BURST_PHASE_LOAD_TILE_SHARD_GFX:
         gCurrentPinballGame->activeFxType = FX_CATCH_TILE_BURST_3;
         DmaCopy16(3, gCatchTile_BurstStage3_Gfx, (void *)0x06015800, 0x2000);
         DmaCopy16(3, gCatchTile_BurstStage3_Pal, OBJ_PLTT_SLOT(PAL_IX_CATCH_TILE_FX), PLTT_SLOT_SIZE);
-        gCurrentPinballGame->hatchRevealPhase++;
+        gCurrentPinballGame->catchTilesBurstPhase++;
         InitBurstTileParticles();
         m4aSongNumStart(SE_CATCH_ALL_REVEAL_SHATTER);
         break;
-    case 6:
+    case CATCH_TILE_BURST_PHASE_TILE_SHARDS_FLY_TOWARDS_SCREEN:
         gMain.blendBrightness = 0;
         gMain.blendControl = ((REG_DISPCNT & (DISPCNT_OBJ_ON | DISPCNT_BG_ALL_ON)) >> 8) | 0xA0;
         if (gCurrentPinballGame->revealAnimFrameCounter < 73)
@@ -315,7 +315,7 @@ void RevealCatchTilesBurst(void)
         }
         else
         {
-            gCurrentPinballGame->hatchRevealPhase++;
+            gCurrentPinballGame->catchTilesBurstPhase++;
             gCurrentPinballGame->revealAnimFrameCounter = 0;
             gCurrentPinballGame->revealFramesetIndex = 0;
         }
@@ -326,15 +326,15 @@ void RevealCatchTilesBurst(void)
                 UpdateBurstTileParticles();
         }
         break;
-    case 7:
+    case CATCH_TILE_BURST_PHASE_LOAD_ELECTRIC_GFX:
         gCurrentPinballGame->activeFxType = FX_CATCH_TILE_BURST_4;
         DmaCopy16(3, gCatchTile_BurstStage4_Gfx, (void *)0x06015800, 0x1800);
         DmaCopy16(3, gCatchTile_BurstStage4_Pal, OBJ_PLTT_SLOT(PAL_IX_CATCH_TILE_FX), PLTT_SLOT_SIZE);
         gMain.fieldSpriteGroups[FIELD_SG_CATCH_BURST_PANEL_ELECTRIFY_FX]->active = TRUE;
-        gCurrentPinballGame->hatchRevealPhase++;
+        gCurrentPinballGame->catchTilesBurstPhase++;
         gCurrentPinballGame->startButtonDisabled = FALSE;
         break;
-    case 8:
+    case CATCH_TILE_BURST_PHASE_ELECTRIC_ZAPS:
         if (gCatchTile_RevealFinalTimings[gCurrentPinballGame->revealFramesetIndex] > gCurrentPinballGame->revealAnimFrameCounter)
         {
             gCurrentPinballGame->revealAnimFrameCounter++;

@@ -17,7 +17,7 @@ void RubyBoardProcess_3A_19A20(void)
 
     gCurrentPinballGame->cyndaquilCaveSpriteX = 73;
     gCurrentPinballGame->cyndaquilCaveSpriteY = 154;
-    gCurrentPinballGame->eggCaveState = 0;
+    gCurrentPinballGame->cyndaquilPosition = CYNDAQUIL_POSITION_LOW_GUARD;
     UpdateHatchCave();
     RubyPond_EntityLogic();
 

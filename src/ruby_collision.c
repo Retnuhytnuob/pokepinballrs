@@ -780,10 +780,10 @@ void ProcessRubyCollisionEvent(u8 triggerType, s16* hasCollisionImpact, u16* col
         if (gCurrentPinballGame->collisionCooldownTimer != 0)
             return;
 
-        if (gCurrentPinballGame->eggCaveState != 0)
+        if (gCurrentPinballGame->cyndaquilPosition != CYNDAQUIL_POSITION_LOW_GUARD)
             return;
 
-        gCurrentPinballGame->eggCaveState++;
+        gCurrentPinballGame->cyndaquilPosition++;
 
         gCurrentPinballGame->cyndaquilCollisionEnabled = FALSE;
         gCurrentPinballGame->collisionSurfaceType = 0;
@@ -802,10 +802,10 @@ void ProcessRubyCollisionEvent(u8 triggerType, s16* hasCollisionImpact, u16* col
         if (gCurrentPinballGame->collisionCooldownTimer != 0)
             return;
 
-        if (gCurrentPinballGame->eggCaveState != 1)
+        if (gCurrentPinballGame->cyndaquilPosition != CYNDAQUIL_POSITION_MID_GUARD)
             return;
 
-        gCurrentPinballGame->eggCaveState++;
+        gCurrentPinballGame->cyndaquilPosition++;
         gCurrentPinballGame->cyndaquilCollisionEnabled = FALSE;
         gCurrentPinballGame->collisionSurfaceType = 0;
         gCurrentPinballGame->collisionResponseType = 2;
@@ -822,20 +822,20 @@ void ProcessRubyCollisionEvent(u8 triggerType, s16* hasCollisionImpact, u16* col
         {
             if (gCurrentPinballGame->eggCaveExitDelayTimer == 0)
             {
-                if (gCurrentPinballGame->eggCaveState == 2)
+                if (gCurrentPinballGame->cyndaquilPosition == CYNDAQUIL_POSITION_HIGH_GUARD)
                 {
                     gCurrentPinballGame->collisionSurfaceType = 0;
                     gCurrentPinballGame->collisionResponseType = 2;
                     *collisionAngle = 0xC800;
                     *hasCollisionImpact = TRUE;
-                    gCurrentPinballGame->eggCaveState++;
+                    gCurrentPinballGame->cyndaquilPosition++;
 
                     m4aSongNumStart(SE_CYNDAQUIL_EGG_GUARD_HIT);
                     gCurrentPinballGame->scoreAddedInFrame = SCORE_CYNDAQUIL_HIT;
                     PlayRumble(7);
                     return;
                 }
-                else if (gCurrentPinballGame->eggCaveState == 3)
+                else if (gCurrentPinballGame->cyndaquilPosition == CYNDAQUIL_POSITION_CAVE_ENTRANCE)
                 {
                     gCurrentPinballGame->collisionSurfaceType = 0;
                     gCurrentPinballGame->collisionResponseType = 2;
@@ -849,9 +849,9 @@ void ProcessRubyCollisionEvent(u8 triggerType, s16* hasCollisionImpact, u16* col
                 }
             }
         }
-        else if (gCurrentPinballGame->cyndaquilCollisionEnabled && gCurrentPinballGame->eggCaveState == 2)
+        else if (gCurrentPinballGame->cyndaquilCollisionEnabled && gCurrentPinballGame->cyndaquilPosition == CYNDAQUIL_POSITION_HIGH_GUARD)
         {
-            gCurrentPinballGame->eggCaveState++;
+            gCurrentPinballGame->cyndaquilPosition++;
             gCurrentPinballGame->cyndaquilCollisionEnabled = FALSE;
             gCurrentPinballGame->collisionSurfaceType = 0;
             gCurrentPinballGame->collisionResponseType = 2;

@@ -453,7 +453,7 @@ struct PinballGame
     /*0x2D6*/ u16 cyndaquilCaveSpriteY;
     /*0x2D8*/ s8 cyndaquilCollisionEnabled;
     /*0x2D9*/ s8 eggCaveReEntryFlag;
-    /*0x2DA*/ s8 eggCaveState;
+    /*0x2DA*/ s8 cyndaquilPosition;
     /*0x2DB*/ u8 filler2DB[0x3];
     /*0x2DE*/ u16 eggCaveLiftTimer;
     /*0x2E0*/ u16 eggCaveExitDelayTimer;
@@ -510,7 +510,7 @@ struct PinballGame
     /*0x336*/ u16 seedotAnimTimer[3];
     /*0x33C*/ u16 seedotYOffset[3];
     /*0x342*/ s8 hatchMachineActive; // Turns off while launching, Reenabled when ball touches ramp
-    /*0x343*/ s8 sapphirerubyEggDeliveryState;
+    /*0x343*/ s8 sapphireReadyForNewEgg;
     /*0x344*/ s8 hatchMachineProgressTickSignaled;
     /*0x345*/ s8 sapphireHatchMachineFrameIx;
     /*0x346*/ s8 sapphireHatchMachineState; // 0-6
@@ -750,7 +750,7 @@ struct PinballGame
     /*0x5FC*/ s16 cameraScrollOffset;
     /*0x5FE*/ s16 cameraScrollTarget;
     /*0x600*/ u16 mainBoardCountdownTimer;
-    /*0x602*/ s8 hatchRevealPhase;
+    /*0x602*/ s8 catchTilesBurstPhase;
     /*0x603*/ s8 revealFramesetIndex;
     /*0x604*/ u16 revealAnimFrameCounter;
     /*0x606*/ u16 particleAnimTimer;

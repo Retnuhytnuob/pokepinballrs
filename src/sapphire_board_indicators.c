@@ -622,7 +622,7 @@ void AnimateHatchMachineSpinner(void)
     const u8 **src;
     const u8 **dest;
 
-    if (gCurrentPinballGame->sapphireHatchMachineState != 3)
+    if (gCurrentPinballGame->sapphireHatchMachineState != HATCH_MACHINE_STATE_ELEVATOR_DECENDS)
     {
         for (i = 0; i < 10; i++)
         {
