@@ -243,7 +243,7 @@ void EndOfBallSequence(void)
             gCurrentPinballGame->travelModeCompletionCount = 0;
             gCurrentPinballGame->slotsPlayedCount = 0;
             gCurrentPinballGame->bonusPikaSaverCount = 0;
-            gCurrentPinballGame->bonusMultiplier = 0;
+            gCurrentPinballGame->endOfBallBonusMultiplier = 0;
             InitBallState(0);
             SetBoardCollisionConfig(0);
             gCurrentPinballGame->boardCollisionConfigChanged = FALSE;
@@ -901,7 +901,7 @@ void EndOfBallBonusSummary(void)
             // Line 1 score display: bonus multiplier
             for (i = 0; i < 10; i++)
                 scoreDigit[i] = 0;
-            value = gCurrentPinballGame->bonusMultiplier;
+            value = gCurrentPinballGame->endOfBallBonusMultiplier;
             scoreDigit[5] = DIGIT_100K(value);
             scoreDigit[4] = DIGIT_10K(value);
             scoreDigit[3] = DIGIT_1K(value) + DIGIT_TILE_WITH_COMMA_OFFSET;
@@ -918,7 +918,7 @@ void EndOfBallBonusSummary(void)
                 scoreDigit[i] = 0;
             value = 0;
             scoreHi = 0;
-            while (gCurrentPinballGame->bonusMultiplier != 0)
+            while (gCurrentPinballGame->endOfBallBonusMultiplier != 0)
             {
                 // Note: tallied in a loop, rather than a base multiplication to prevent integer overflow.
                 value += gCurrentPinballGame->bonusSubtotal;
@@ -927,7 +927,7 @@ void EndOfBallBonusSummary(void)
                     value -= (2 * SCORE_HI_STEP);
                     scoreHi += 2;
                 }
-                gCurrentPinballGame->bonusMultiplier--;
+                gCurrentPinballGame->endOfBallBonusMultiplier--;
             }
 
             if (value / SCORE_HI_STEP > 0)

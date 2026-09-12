@@ -359,7 +359,7 @@ void IntroScene1Torchic_04_LargeSparkle(void)
         if (++gIntroSpriteEntities[0].frameTimer > 1)
         {
             gIntroSpriteEntities[0].visible = FALSE;
-            DarkenPalette(&gIntroScene1TorchicSprites_Pals[14], BG_PLTT_SLOT(PAL_IX_7), 0x20, 0);
+            DarkenPalette(&gIntroScene1TorchicSprites_Pals[14], (void*) BG_PLTT_SLOT(PAL_IX_7), 0x20, 0);
             m4aSongNumStart(MUS_OPENING);
             gIntroSceneIndex++;
         }
@@ -2236,14 +2236,14 @@ void IntroScene9BallFlight_62_MoveBallSkyFadeWhite(void)
             gIntroObjWhiteFlash = 32;
     }
 
-    BrightenPalette(gIntroScene9BallFlight_Pal, OBJ_PLTT_SLOT(PAL_IX_0), 0x20, gIntroObjWhiteFlash);
+    BrightenPalette(gIntroScene9BallFlight_Pal, (void*)OBJ_PLTT_SLOT(PAL_IX_0), 0x20, gIntroObjWhiteFlash);
     if (gIntroFrameCounter > 136)
     {
         gIntroBGWhiteFlash += 2;
         if (gIntroBGWhiteFlash > 32)
             gIntroBGWhiteFlash = 0x20;
 
-        BrightenPalette(gIntroScene9BallFlight_Pal, BG_PLTT_SLOT(PAL_IX_0), 0x40, gIntroBGWhiteFlash);
+        BrightenPalette(gIntroScene9BallFlight_Pal, (void*)BG_PLTT_SLOT(PAL_IX_0), 0x40, gIntroBGWhiteFlash);
     }
 
     gIntroBGParams[0].posX -= 0x24;

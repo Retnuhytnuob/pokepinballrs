@@ -1937,7 +1937,7 @@ void LoadMonPortrait(s16 species)
         case SPECIES_DEX_SHARED:
         case SPECIES_DEX_SHARED_AND_SEEN:
             CopyBgTilesRect(gMonPortraitGroupGfx[var1] + var2 * 0x300, (void *)0x06013400, 24, 1);
-            DarkenPalette(&gMonPortraitGroupPals[var1][var2], OBJ_PLTT_SLOT(PAL_IX_BALL), 0x20, 0xE);
+            DarkenPalette(&gMonPortraitGroupPals[var1][var2], (void*)OBJ_PLTT_SLOT(PAL_IX_BALL), 0x20, 0xE);
             break;
         case SPECIES_DEX_CAUGHT:
             CopyBgTilesRect(gMonPortraitGroupGfx[var1] + var2 * 0x300, (void *)0x06013400, 24, 1);

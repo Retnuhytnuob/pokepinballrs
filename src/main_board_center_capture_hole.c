@@ -489,9 +489,9 @@ void GivePrize(void)
     case PRIZE_BONUS_MULT_PLUS_5:
         if (gCurrentPinballGame->outcomeFrameCounter == 70)
         {
-            gCurrentPinballGame->progressLevel += gCurrentPinballGame->prizeId - 35;
-            if (gCurrentPinballGame->progressLevel > 99)
-                gCurrentPinballGame->progressLevel = 99;
+            gCurrentPinballGame->bonusMultTracker += gCurrentPinballGame->prizeId - 35;
+            if (gCurrentPinballGame->bonusMultTracker > 99)
+                gCurrentPinballGame->bonusMultTracker = 99;
         }
         break;
     case PRIZE_START_BONUS_MODE_DUSKULL:

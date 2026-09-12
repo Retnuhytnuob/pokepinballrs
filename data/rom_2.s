@@ -3,6 +3,7 @@
 #include "constants/fields.h"
 #include "constants/species.h"
 #include "constants/bg_music.h"
+#include "gba/defines.h"
 #include "gba/io_reg.h"
 #include "gba/oam_types.h"
 #include "constants/global.h"
@@ -8858,7 +8859,7 @@ gSapphireProgressDigitTilePtrs:: @ 0x086B0E9C
     .4byte gSapphireProgressDigit7_TensTop, gSapphireProgressDigit7_TensBot, gSapphireProgressDigit7_OnesTop, gSapphireProgressDigit7_OnesBot
     .4byte gSapphireProgressDigit8_TensTop, gSapphireProgressDigit8_TensBot, gSapphireProgressDigit8_OnesTop, gSapphireProgressDigit8_OnesBot
     .4byte gSapphireProgressDigit9_TensTop, gSapphireProgressDigit9_TensBot, gSapphireProgressDigit9_OnesTop, gSapphireProgressDigit9_OnesBot
-    .4byte 0x0600B220, 0x0600B620, 0x0600B240, 0x0600B640
+    .4byte BG_ADDR_FOR_BOARD_WRAP(23, 17), BG_ADDR_FOR_BOARD_WRAP(24, 17), BG_ADDR_FOR_BOARD_WRAP(23, 18), BG_ADDR_FOR_BOARD_WRAP(24, 18)
 
 gRotatingBackgroundTilePtrs:: @ 0x086B0F4C
     @ 5 sets of 4

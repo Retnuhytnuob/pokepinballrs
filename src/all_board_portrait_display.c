@@ -131,6 +131,7 @@ void LoadPortraitGraphics(s16 displayMode, s16 picIx)
         gCurrentPinballGame->portraitGfxIndex[picIx] = ptr[0];
         index = ptr[2] * 16;
         DmaCopy16(3, gPortraitAnimFrameGraphics[gCurrentPinballGame->portraitGfxIndex[picIx]], (void *)0x06010CA0 + picIx * 0x300, 0x300);
+
         if (gCurrentPinballGame->coins < ptr[3] ||
             (
                 (gShopCursorToItemMap[gCurrentPinballGame->shopItemCursor] == PRIZE_PICHU_SAVER

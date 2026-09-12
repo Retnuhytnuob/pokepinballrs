@@ -315,5 +315,5 @@ void SetBoardArrowState(s16 arg0)
         gCurrentPinballGame->catchArrowProgress = 2;
     }
 
-    gCurrentPinballGame->progressLevel = 1;
+    gCurrentPinballGame->bonusMultTracker = 1;
 }
