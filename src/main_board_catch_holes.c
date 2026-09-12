@@ -561,51 +561,51 @@ void UpdateShopEntryAnimation(s16 arg0)
                     {
                         switch (gCurrentPinballGame->evoTargetSpecies)
                         {
-                        case 14:
+                        case SPECIES_SILCOON:
                             if (gCurrentPinballGame->evoFormAlternateTimer == 50)
                             {
                                 gCurrentPinballGame->evoFormAlternateTimer = 0;
-                                gCurrentPinballGame->evoTargetSpecies = 16;
+                                gCurrentPinballGame->evoTargetSpecies = SPECIES_CASCOON;
                                 LoadPokemonNameGraphics();
                             }
                             break;
-                        case 16:
+                        case SPECIES_CASCOON:
                             if (gCurrentPinballGame->evoFormAlternateTimer == 50)
                             {
                                 gCurrentPinballGame->evoFormAlternateTimer = 0;
-                                gCurrentPinballGame->evoTargetSpecies = 14;
+                                gCurrentPinballGame->evoTargetSpecies = SPECIES_SILCOON;
                                 LoadPokemonNameGraphics();
                             }
                             break;
-                        case 89:
+                        case SPECIES_VILEPLUME:
                             if (gCurrentPinballGame->evoFormAlternateTimer == 50)
                             {
                                 gCurrentPinballGame->evoFormAlternateTimer = 0;
-                                gCurrentPinballGame->evoTargetSpecies = 90;
+                                gCurrentPinballGame->evoTargetSpecies = SPECIES_BELLOSSOM;
                                 LoadPokemonNameGraphics();
                             }
                             break;
-                        case 90:
+                        case SPECIES_BELLOSSOM:
                             if (gCurrentPinballGame->evoFormAlternateTimer == 50)
                             {
                                 gCurrentPinballGame->evoFormAlternateTimer = 0;
-                                gCurrentPinballGame->evoTargetSpecies = 89;
+                                gCurrentPinballGame->evoTargetSpecies = SPECIES_VILEPLUME;
                                 LoadPokemonNameGraphics();
                             }
                             break;
-                        case 176:
+                        case SPECIES_HUNTAIL:
                             if (gCurrentPinballGame->evoFormAlternateTimer == 50)
                             {
                                 gCurrentPinballGame->evoFormAlternateTimer = 0;
-                                gCurrentPinballGame->evoTargetSpecies = 177;
+                                gCurrentPinballGame->evoTargetSpecies = SPECIES_GOREBYSS;
                                 LoadPokemonNameGraphics();
                             }
                             break;
-                        case 177:
+                        case SPECIES_GOREBYSS:
                             if (gCurrentPinballGame->evoFormAlternateTimer == 50)
                             {
                                 gCurrentPinballGame->evoFormAlternateTimer = 0;
-                                gCurrentPinballGame->evoTargetSpecies = 176;
+                                gCurrentPinballGame->evoTargetSpecies = SPECIES_HUNTAIL;
                                 LoadPokemonNameGraphics();
                             }
                             break;
@@ -814,7 +814,7 @@ void TransitionToBonusField(void)
     gCurrentPinballGame->trapAnimState = 0;
     gCurrentPinballGame->ballCatchState = NOT_TRAPPED;
 
-    if (gCurrentPinballGame->bonusReturnState == 0)
+    if (gCurrentPinballGame->bonusReturnState == BONUS_RETURN_LOCATION_CENTER_KICKOUT)
     {
         gCurrentPinballGame->evoItemCount = 0;
         gCurrentPinballGame->evoBlinkTimer = 0;

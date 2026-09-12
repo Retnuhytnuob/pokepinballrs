@@ -52,7 +52,7 @@ extern const u16 gKecleonLowerBodyOamData[126][2][3];
 extern const u16 gKecleonUpperBodyOamData[126][2][3];
 extern const struct SpriteSet *gKecleonBoardSpriteSets[];
 
-void KecleonBoardProcess_3A_35860(void)
+void InitFrameProcess3_BoardLogic_KecleonBoard(void)
 {
     s16 i;
 
@@ -116,7 +116,7 @@ void KecleonBoardProcess_3A_35860(void)
     DmaCopy16(3, gBonusStageObjPal, OBJ_PLTT_SLOT(PAL_IX_9), PLTT_SLOT_SIZE);
 }
 
-void KecleonBoardProcess_3B_35AA4(void)
+void UpdateFrameProcess3_BoardLogic_KecleonBoard(void)
 {
     SortKecleonSpritesByY();
     switch (gCurrentPinballGame->boardState)

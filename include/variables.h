@@ -9,11 +9,11 @@
 #include "constants/high_scores.h"
 #include "constants/pinball_game.h"
 
-#define SPECIES_UNSEEN 0
-#define SPECIES_SEEN 1
-#define SPECIES_SHARED 2
-#define SPECIES_SHARED_AND_SEEN 3
-#define SPECIES_CAUGHT 4
+#define SPECIES_DEX_UNSEEN 0
+#define SPECIES_DEX_SEEN 1
+#define SPECIES_DEX_SHARED 2
+#define SPECIES_DEX_SHARED_AND_SEEN 3
+#define SPECIES_DEX_CAUGHT 4
 
 // Place all external variable declarations in this file
 

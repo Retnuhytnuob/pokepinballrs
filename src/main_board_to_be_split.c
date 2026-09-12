@@ -357,7 +357,7 @@ void UpdateBonusStageSelect(void)
         {
             gCurrentPinballGame->stageTimer = 0;
             gCurrentPinballGame->boardSubState = DEFAULT_MODE_SUBSTATE_INIT;
-            gCurrentPinballGame->bonusReturnState = 0;
+            gCurrentPinballGame->bonusReturnState = BONUS_RETURN_LOCATION_CENTER_KICKOUT;
             TransitionToBonusField();
         }
         break;

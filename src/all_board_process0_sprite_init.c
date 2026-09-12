@@ -2,7 +2,7 @@
 #include "main.h"
 
 
-void RubyBoardProcess_0A_50848(void)
+void InitFrameProcess0_DefaultSpriteState_RubyBoard(void)
 {
     s16 i;
     struct SpriteGroup *group;
@@ -32,7 +32,7 @@ void RubyBoardProcess_0A_50848(void)
         gMain.spriteGroups);
 }
 
-void RubyBoardProcess_0B_50918(void)
+void UpdateFrameProcess0_DefaultSpriteState_RubyBoard(void)
 {
     s16 i;
 
@@ -98,7 +98,7 @@ void RubyBoardProcess_0B_50918(void)
         gMain.spriteGroups);
 }
 
-void SapphireBoardProcess_0A_50AD4(void)
+void InitFrameProcess0_DefaultSpriteState_SapphireBoard(void)
 {
     s16 i;
 
@@ -121,7 +121,7 @@ void SapphireBoardProcess_0A_50AD4(void)
                    gMain.spriteGroups);
 }
 
-void SapphireBoardProcess_0B_50B80(void)
+void UpdateFrameProcess0_DefaultSpriteState_SapphireBoard(void)
 {
     s16 i;
 
@@ -186,7 +186,7 @@ void SapphireBoardProcess_0B_50B80(void)
     LoadSpriteSets(gFieldSpriteSets[gMain.selectedField].spriteSets, gFieldSpriteSets[gMain.selectedField].numSpriteSets, gMain.spriteGroups);
 }
 
-void DusclopsBoardProcess_0A_50D48(void)
+void InitFrameProcess0_DefaultSpriteState_DusclopsBoard(void)
 {
     s16 i;
 
@@ -205,14 +205,14 @@ void DusclopsBoardProcess_0A_50D48(void)
                    gMain.spriteGroups);
 }
 
-void DusclopsBoardProcess_0B_50DB8(void)
+void UpdateFrameProcess0_DefaultSpriteState_DusclopsBoard(void)
 {
     LoadSpriteSets(gFieldSpriteSets[gMain.selectedField].spriteSets,
                    gFieldSpriteSets[gMain.selectedField].numSpriteSets,
                    gMain.spriteGroups);
 }
 
-void KecleonBoardProcess_0A_50DE0(void)
+void InitFrameProcess0_DefaultSpriteState_KecleonBoard(void)
 {
     s16 i;
 
@@ -260,7 +260,7 @@ void KecleonBoardProcess_0A_50DE0(void)
 void nullsub_20(void)
 {}
 
-void KyogreBoardProcess_0A_50F04()
+void InitFrameProcess0_DefaultSpriteState_KyogreBoard()
 {
     s16 i;
 
@@ -287,14 +287,14 @@ void KyogreBoardProcess_0A_50F04()
                    gMain.spriteGroups);
 }
 
-void KyogreBoardProcess_0B_50FAC(void)
+void UpdateFrameProcess0_DefaultSpriteState_KyogreBoard(void)
 {
     LoadSpriteSets(gFieldSpriteSets[gMain.selectedField].spriteSets,
                    gFieldSpriteSets[gMain.selectedField].numSpriteSets,
                    gMain.spriteGroups);
 }
 
-void GroudonBoardProcess_0A_50FD4(void)
+void InitFrameProcess0_DefaultSpriteState_GroudonBoard(void)
 {
     s16 i;
 
@@ -319,14 +319,14 @@ void GroudonBoardProcess_0A_50FD4(void)
                    gMain.spriteGroups);
 }
 
-void GroudonBoardProcess_0B_51068(void)
+void UpdateFrameProcess0_DefaultSpriteState_GroudonBoard(void)
 {
     LoadSpriteSets(gFieldSpriteSets[gMain.selectedField].spriteSets,
                    gFieldSpriteSets[gMain.selectedField].numSpriteSets,
                    gMain.spriteGroups);
 }
 
-void RayquazaBoardProcess_0A_51090(void)
+void InitFrameProcess0_DefaultSpriteState_RayquazaBoard(void)
 {
     s16 i;
 
@@ -350,14 +350,14 @@ void RayquazaBoardProcess_0A_51090(void)
                    gMain.spriteGroups);
 }
 
-void RayquazaBoardProcess_0B_51128(void)
+void UpdateFrameProcess0_DefaultSpriteState_RayquazaBoard(void)
 {
     LoadSpriteSets(gFieldSpriteSets[gMain.selectedField].spriteSets,
                    gFieldSpriteSets[gMain.selectedField].numSpriteSets,
                    gMain.spriteGroups);
 }
 
-void SphealBoardProcess_0A_51150(void)
+void InitFrameProcess0_DefaultSpriteState_SphealBoard(void)
 {
     s16 i;
 
@@ -383,7 +383,7 @@ void SphealBoardProcess_0A_51150(void)
                    gMain.spriteGroups);
 }
 
-void SphealBoardProcess_0B_511F8(void)
+void UpdateFrameProcess0_DefaultSpriteState_SphealBoard(void)
 {
     LoadSpriteSets(gFieldSpriteSets[gMain.selectedField].spriteSets,
                    gFieldSpriteSets[gMain.selectedField].numSpriteSets,

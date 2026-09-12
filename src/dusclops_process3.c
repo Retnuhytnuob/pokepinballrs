@@ -18,7 +18,7 @@ extern s16 DuskullFramesetData[][3];
 
 
 
-void DuskullBonus_Setup(void)
+void InitFrameProcess3_BoardLogic_DusclopsBoard(void)
 {
     s16 i;
     gCurrentPinballGame->stageTimer = 0;
@@ -79,7 +79,7 @@ void DuskullBonus_Setup(void)
     DmaCopy16(3, gBonusStageObjPal, OBJ_PLTT_SLOT(PAL_IX_9), PLTT_SLOT_SIZE);
 }
 
-void DusclopsBoardProcess_3B_33130(void)
+void UpdateFrameProcess3_BoardLogic_DusclopsBoard(void)
 {
     s16 temp;
     switch (gCurrentPinballGame->boardState)
@@ -677,7 +677,7 @@ void DusclopsPhase_ProcessEntityLogicAndGraphics(void)
 
             if (gCurrentPinballGame->bossFramesetIndex == DUSCLOPS_FRAME_INTRO_FOOTSTEP_LEFT)
             {
-                gCurrentPinballGame->boardShakeDirection = 0;
+                gCurrentPinballGame->boardShakeDirection = TILT_SHAKE_DIRECTION_LEFT;
                 gCurrentPinballGame->boardShakeIntensity = 1;
                 m4aSongNumStart(SE_DUSCLOPS_MOVE);
                 PlayRumble(8);
@@ -685,7 +685,7 @@ void DusclopsPhase_ProcessEntityLogicAndGraphics(void)
 
             if (gCurrentPinballGame->bossFramesetIndex == DUSCLOPS_FRAME_INTRO_FOOTSTEP_RIGHT)
             {
-                gCurrentPinballGame->boardShakeDirection = 1;
+                gCurrentPinballGame->boardShakeDirection = TILT_SHAKE_DIRECTION_RIGHT;
                 gCurrentPinballGame->boardShakeIntensity = 1;
                 m4aSongNumStart(SE_DUSCLOPS_MOVE);
                 PlayRumble(8);
@@ -777,7 +777,7 @@ void DusclopsPhase_ProcessEntityLogicAndGraphics(void)
 
             if (gCurrentPinballGame->bossFramesetIndex == DUSCLOPS_FRAME_LEFT_FOOT_LANDS)
             {
-                gCurrentPinballGame->boardShakeDirection = 0;
+                gCurrentPinballGame->boardShakeDirection = TILT_SHAKE_DIRECTION_LEFT;
                 gCurrentPinballGame->boardShakeIntensity = 1;
                 m4aSongNumStart(SE_DUSCLOPS_MOVE);
                 PlayRumble(8);
@@ -785,7 +785,7 @@ void DusclopsPhase_ProcessEntityLogicAndGraphics(void)
 
             if (gCurrentPinballGame->bossFramesetIndex == DUSCLOPS_FRAME_RIGHT_FOOT_LANDS)
             {
-                gCurrentPinballGame->boardShakeDirection = 1;
+                gCurrentPinballGame->boardShakeDirection = TILT_SHAKE_DIRECTION_RIGHT;
                 gCurrentPinballGame->boardShakeIntensity = 1;
                 m4aSongNumStart(SE_DUSCLOPS_MOVE);
                 PlayRumble(8);

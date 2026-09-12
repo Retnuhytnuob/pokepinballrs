@@ -12,7 +12,7 @@ s16 CollisionCheck_Rayquaza(struct Vector16 *ballPosition, u16 *collisionAngle)
     u8 boardCollisionType;
     u16 hasCollisionImpact;
     u32 boardTriggerType;
-    u32 collisionType;
+    u32 boardLogicCollisionType;
 
     hasCollisionImpact = FALSE;
     gCurrentPinballGame->ball->spinAcceleration = SPIN_BOOST_NONE;
@@ -41,16 +41,16 @@ s16 CollisionCheck_Rayquaza(struct Vector16 *ballPosition, u16 *collisionAngle)
     }
 
     CheckRayquazaEntityCollision(ballPosition, &boardCollisionAngle, &boardCollisionType);
-    collisionType = boardCollisionType & COLLISION_TYPE_MASK;
+    boardLogicCollisionType = boardCollisionType & COLLISION_TYPE_MASK;
     boardTriggerType = boardCollisionType >> 4;
 
-    switch (collisionType)
+    switch (boardLogicCollisionType)
     {
-        case 1:
-        case 4:
-        case 6:
-            gCurrentPinballGame->collisionSurfaceType = collisionType - 1;
-            gCurrentPinballGame->collisionResponseType = 1;
+        case BOARD_COLLISION_TYPE_NORMAL:
+        case BOARD_COLLISION_TYPE_OUTER_WALL:
+        case BOARD_COLLISION_TYPE_DYNAMIC:
+            gCurrentPinballGame->collisionBounceBehaviorType = boardLogicCollisionType - 1;
+            gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_PIXEL_WALK_CONTINUING;
             *collisionAngle = boardCollisionAngle;
             if (*collisionAngle >= ANGLE_UP_RANGE_MIN && *collisionAngle <= ANGLE_UP_RANGE_MAX)
             {
@@ -83,14 +83,14 @@ s16 CollisionCheck_Rayquaza(struct Vector16 *ballPosition, u16 *collisionAngle)
             }
             hasCollisionImpact = TRUE;
             break;
-        case 2:
-        case 3:
-            gCurrentPinballGame->collisionSurfaceType = collisionType - 1;
-            gCurrentPinballGame->collisionResponseType = 2;
+        case BOARD_COLLISION_TYPE_BUMPERS:
+        case BOARD_COLLISION_TYPE_SLINGSHOT:
+            gCurrentPinballGame->collisionBounceBehaviorType = boardLogicCollisionType - 1;
+            gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_PIXEL_WALK_ONE_STEP;
             *collisionAngle = boardCollisionAngle & COLLISION_ANGLE_MASK;
             hasCollisionImpact = TRUE;
             break;
-        case 5:
+        case BOARD_COLLISION_TYPE_CONDITIONAL:
             boardTriggerType = 4;
             break;
     }
@@ -99,7 +99,7 @@ s16 CollisionCheck_Rayquaza(struct Vector16 *ballPosition, u16 *collisionAngle)
     return hasCollisionImpact;
 }
 
-void CheckRayquazaEntityCollision(struct Vector16 *ballPosition, u16 *collisionAngle, u8 *collisionType)
+void CheckRayquazaEntityCollision(struct Vector16 *ballPosition, u16 *collisionAngle, u8 *boardLogicCollisionType)
 {
     s16 deltaX;
     s16 deltaY;
@@ -108,7 +108,7 @@ void CheckRayquazaEntityCollision(struct Vector16 *ballPosition, u16 *collisionA
 
     if (gCurrentPinballGame->boardEntityCollisionMode != 1)
         return;
-    if (*collisionType & COLLISION_TYPE_MASK)
+    if (*boardLogicCollisionType & COLLISION_TYPE_MASK)
         return;
 
     deltaX = ballPosition->x - gCurrentPinballGame->bossCollisionX;
@@ -120,12 +120,12 @@ void CheckRayquazaEntityCollision(struct Vector16 *ballPosition, u16 *collisionA
     maskedResult = gRayquazaBodyCollisionMap[(deltaY * 0x80) + deltaX] & COLLISION_ANGLE_MASK;
     lowerNibble = gRayquazaBodyCollisionMap[(deltaY * 0x80) + deltaX] & COLLISION_TYPE_MASK;
 
-    if (lowerNibble == 0)
+    if (lowerNibble == BOARD_COLLISION_TYPE_NONE)
         return;
 
     gCurrentPinballGame->bossHitFlashTimer = 9;
     *collisionAngle = maskedResult;
-    *collisionType = lowerNibble;
+    *boardLogicCollisionType = lowerNibble;
 }
 
 void ProcessRayquazaCollisionEvent(u8 triggerType, u16 *hasCollisionImpact, u16 *collisionAngle)

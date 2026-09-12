@@ -9,7 +9,7 @@
 
 extern void HandleSapphireFlipperButtonInput(void);
 
-void SapphireBoardProcess_3A_326F4(void)
+void InitFrameProcess3_BoardLogic_SapphireBoard(void)
 {
     gCurrentPinballGame->catchModeArrows = 2;
     gCurrentPinballGame->pikachuSpinFrame = 0;
@@ -32,7 +32,7 @@ void SapphireBoardProcess_3A_326F4(void)
     DrawBoardEdgeBanner();
 }
 
-void SapphireBoardProcess_3B_3276C(void)
+void UpdateFrameProcess3_BoardLogic_SapphireBoard(void)
 {
     BoardStateDispatcher();
     UpdateSapphireBoardEntityRendering();

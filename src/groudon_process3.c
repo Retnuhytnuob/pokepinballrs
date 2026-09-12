@@ -33,7 +33,7 @@ extern const u16 gGroudonProjectileAttackOamData[12][6][3];
 extern const u16 gGroudonMainBodyOamData[166][19][3];
 extern const u16 gGroudonFirePillarOamData[58][10][3];
 
-void GroudonBoardProcess_3A_3B120(void)
+void InitFrameProcess3_BoardLogic_GroudonBoard(void)
 {
     s16 i;
 
@@ -135,7 +135,7 @@ void GroudonBoardProcess_3A_3B120(void)
     DmaCopy16(3, gBonusStageObjPal, OBJ_PLTT_SLOT(PAL_IX_9), PLTT_SLOT_SIZE);
 }
 
-void GroudonBoardProcess_3B_3B49C(void)
+void UpdateFrameProcess3_BoardLogic_GroudonBoard(void)
 {
     switch (gCurrentPinballGame->boardState)
     {
@@ -588,7 +588,7 @@ void UpdateGroudonEntityLogic(void)
             {
                 if (gCurrentPinballGame->bossFrameTimer == 0)
                 {
-                    gCurrentPinballGame->boardShakeDirection = 0;
+                    gCurrentPinballGame->boardShakeDirection = TILT_SHAKE_DIRECTION_LEFT;
                     gCurrentPinballGame->boardShakeIntensity = 1;
                     gCurrentPinballGame->impactShakeTimer = 60;
                     PlayRumble(13);

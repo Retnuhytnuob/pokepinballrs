@@ -70,7 +70,7 @@ gTitleRestartDebounce: @ 0x20028A5
 	.space 0x3
 gPaletteFadeRGBCache: @ 0x020028A8
 	.space 0x30
-CurrentBoardProcPairs_020028D8: @ 0x020028D8
+CurrentBoardProcPairs: @ 0x020028D8
 	.space 0x48
 gOptionsData: @ 0x02002920
 	.space 0x12

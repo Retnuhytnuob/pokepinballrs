@@ -11,12 +11,12 @@ extern const Palette gTimer_Warning_Pal;
 extern const Palette gTimer_Default_Pal;
 extern const Palette gTimer_Slow_Pal;
 
-void AllBoardProcess_8A_4CEA8(void)
+void InitFrameProcess8_HudUpdate_AllBoards(void)
 {
-    AllBoardProcess_8B_4CEB4();
+    UpdateFrameProcess8_HudUpdate_AllBoards();
 }
 
-void AllBoardProcess_8B_4CEB4(void)
+void UpdateFrameProcess8_HudUpdate_AllBoards(void)
 {
     s16 i, j;
     s16 sp0[12];
@@ -102,8 +102,8 @@ void AllBoardProcess_8B_4CEB4(void)
     }
     for (j = i; j < 12; j++)
     {
-        gBG0TilemapBuffer[0x7C1 + (j - i)] = sp0[j] * 2 - 0x3EA0;
-        gBG0TilemapBuffer[0x7E1 + (j - i)] = sp0[j] * 2 - 0x3E9F;
+        gBG0TilemapBuffer[0x7C1 + (j - i)] = sp0[j] * 2 - 0x3EA0 +0;
+        gBG0TilemapBuffer[0x7E1 + (j - i)] = sp0[j] * 2 - 0x3EA0 +1;
     }
 
     if (gCurrentPinballGame->caughtMonCount > 999)
@@ -113,12 +113,12 @@ void AllBoardProcess_8B_4CEB4(void)
     sp0[0] = DIGIT_1S(gCurrentPinballGame->caughtMonCount);
     gBG0TilemapBuffer[0x7D1] = 0xC17E;
     gBG0TilemapBuffer[0x7F1] = 0xC17F;
-    gBG0TilemapBuffer[0x7D2] = (sp0[2] + 5) * 2 - 0x3EA0;
-    gBG0TilemapBuffer[0x7F2] = (sp0[2] + 5) * 2 - 0x3E9F;
-    gBG0TilemapBuffer[0x7D3] = (sp0[1] + 5) * 2 - 0x3EA0;
-    gBG0TilemapBuffer[0x7F3] = (sp0[1] + 5) * 2 - 0x3E9F;
-    gBG0TilemapBuffer[0x7D4] = (sp0[0] + 5) * 2 - 0x3EA0;
-    gBG0TilemapBuffer[0x7F4] = (sp0[0] + 5) * 2 - 0x3E9F;
+    gBG0TilemapBuffer[0x7D2] = (sp0[2] + 5) * 2 - 0x3EA0 +0;
+    gBG0TilemapBuffer[0x7F2] = (sp0[2] + 5) * 2 - 0x3EA0 +1;
+    gBG0TilemapBuffer[0x7D3] = (sp0[1] + 5) * 2 - 0x3EA0 +0;
+    gBG0TilemapBuffer[0x7F3] = (sp0[1] + 5) * 2 - 0x3EA0 +1;
+    gBG0TilemapBuffer[0x7D4] = (sp0[0] + 5) * 2 - 0x3EA0 +0;
+    gBG0TilemapBuffer[0x7F4] = (sp0[0] + 5) * 2 - 0x3EA0 +1;
 
     if (gCurrentPinballGame->coins > 99)
         gCurrentPinballGame->coins = 99;
@@ -126,17 +126,17 @@ void AllBoardProcess_8B_4CEB4(void)
     sp0[0] = DIGIT_1S(gCurrentPinballGame->coins);
     gBG0TilemapBuffer[0x7D6] = 0xC19C;
     gBG0TilemapBuffer[0x7F6] = 0xC19D;
-    gBG0TilemapBuffer[0x7D7] = (sp0[1] + 5) * 2 - 0x3EA0;
-    gBG0TilemapBuffer[0x7F7] = (sp0[1] + 5) * 2 - 0x3E9F;
-    gBG0TilemapBuffer[0x7D8] = (sp0[0] + 5) * 2 - 0x3EA0;
-    gBG0TilemapBuffer[0x7F8] = (sp0[0] + 5) * 2 - 0x3E9F;
+    gBG0TilemapBuffer[0x7D7] = (sp0[1] + 5) * 2 - 0x3EA0 +0;
+    gBG0TilemapBuffer[0x7F7] = (sp0[1] + 5) * 2 - 0x3EA0 +1;
+    gBG0TilemapBuffer[0x7D8] = (sp0[0] + 5) * 2 - 0x3EA0 +0;
+    gBG0TilemapBuffer[0x7F8] = (sp0[0] + 5) * 2 - 0x3EA0 +1;
 
     if (gCurrentPinballGame->numLives > 9)
         gCurrentPinballGame->numLives = 9;
     gBG0TilemapBuffer[0x7DA] = 0xC180;
     gBG0TilemapBuffer[0x7FA] = 0xC181;
-    gBG0TilemapBuffer[0x7DB] = (gCurrentPinballGame->numLives + 5) * 2 - 0x3EA0;
-    gBG0TilemapBuffer[0x7FB] = (gCurrentPinballGame->numLives + 5) * 2 - 0x3E9F;
+    gBG0TilemapBuffer[0x7DB] = (gCurrentPinballGame->numLives + 5) * 2 - 0x3EA0 +0;
+    gBG0TilemapBuffer[0x7FB] = (gCurrentPinballGame->numLives + 5) * 2 - 0x3EA0 +1;
 
     if (gCurrentPinballGame->chargeFillValue == 13)
     {
@@ -207,8 +207,8 @@ void ProcessEventTimer(void)
         {
             for (i = 0; i < 4; i++)
             {
-                gBG0TilemapBuffer[i + 0x179] = timerDisplayChar[i] * 2 - 0x3EC0;
-                gBG0TilemapBuffer[i + 0x199] = timerDisplayChar[i] * 2 - 0x3EBF;
+                gBG0TilemapBuffer[i + 0x179] = timerDisplayChar[i] * 2 - 0x3EC0 + 0;
+                gBG0TilemapBuffer[i + 0x199] = timerDisplayChar[i] * 2 - 0x3EC0 + 1;
             }
         }
         DmaCopy16(3, &gBG0TilemapBuffer[0x160], (void *)0x060022C0, 0x80);

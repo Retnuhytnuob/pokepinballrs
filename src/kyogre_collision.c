@@ -15,7 +15,7 @@ s16 CollisionCheck_Kyogre(struct Vector16 *ballPosition, u16 *collisionAngle)
     s32 boardLayer;
 
     u32 boardTriggerType;
-    u32 collisionType;
+    u32 boardLogicCollisionType;
 
     hasCollisionImpact = FALSE;
     gCurrentPinballGame->ball->spinAcceleration = SPIN_BOOST_NONE;
@@ -41,16 +41,16 @@ s16 CollisionCheck_Kyogre(struct Vector16 *ballPosition, u16 *collisionAngle)
     }
 
     CheckKyogreEntityCollision(ballPosition, &boardCollisionAngle, &boardCollisionType);
-    collisionType = boardCollisionType & COLLISION_TYPE_MASK;
+    boardLogicCollisionType = boardCollisionType & COLLISION_TYPE_MASK;
     boardTriggerType = boardCollisionType >> 4;
 
-    switch (collisionType)
+    switch (boardLogicCollisionType)
     {
-        case 1:
-        case 4:
-        case 6:
-            gCurrentPinballGame->collisionSurfaceType = collisionType - 1;
-            gCurrentPinballGame->collisionResponseType = 1;
+        case BOARD_COLLISION_TYPE_NORMAL:
+        case BOARD_COLLISION_TYPE_OUTER_WALL:
+        case BOARD_COLLISION_TYPE_DYNAMIC:
+            gCurrentPinballGame->collisionBounceBehaviorType = boardLogicCollisionType - 1;
+            gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_PIXEL_WALK_CONTINUING;
             *collisionAngle = boardCollisionAngle;
             if (*collisionAngle >= ANGLE_UP_RANGE_MIN && *collisionAngle <= ANGLE_UP_RANGE_MAX)
             {
@@ -86,14 +86,14 @@ s16 CollisionCheck_Kyogre(struct Vector16 *ballPosition, u16 *collisionAngle)
             }
             hasCollisionImpact = TRUE;
             break;
-        case 2:
-        case 3:
-            gCurrentPinballGame->collisionSurfaceType = collisionType - 1;
-            gCurrentPinballGame->collisionResponseType = 2;
+        case BOARD_COLLISION_TYPE_BUMPERS:
+        case BOARD_COLLISION_TYPE_SLINGSHOT:
+            gCurrentPinballGame->collisionBounceBehaviorType = boardLogicCollisionType - 1;
+            gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_PIXEL_WALK_ONE_STEP;
             *collisionAngle = boardCollisionAngle & COLLISION_ANGLE_MASK;
             hasCollisionImpact = TRUE;
             break;
-        case 5:
+        case BOARD_COLLISION_TYPE_CONDITIONAL:
             boardTriggerType = 4;
             break;
     }
@@ -102,16 +102,16 @@ s16 CollisionCheck_Kyogre(struct Vector16 *ballPosition, u16 *collisionAngle)
     return hasCollisionImpact;
 }
 
-void CheckKyogreEntityCollision(struct Vector16 *ballPosition, u16 *collisionAngle, u8 *collisionType)
+void CheckKyogreEntityCollision(struct Vector16 *ballPosition, u16 *collisionAngle, u8 *boardLogicCollisionType)
 {
     s16 deltaX;
     s16 deltaY;
-    u16 arrayValue;
+    u16 lowerNibble;
     u16 maskedResult;
 
     if (gCurrentPinballGame->boardEntityCollisionMode == KYOGRE_COLLISION_MODE_TOP_POSITION)
     {
-        if (*collisionType & COLLISION_TYPE_MASK)
+        if (*boardLogicCollisionType & COLLISION_TYPE_MASK)
             return;
 
         deltaX = ballPosition->x - gCurrentPinballGame->bossCollisionX;
@@ -121,18 +121,18 @@ void CheckKyogreEntityCollision(struct Vector16 *ballPosition, u16 *collisionAng
             return;
 
         maskedResult = gKyogreForm1CollisionMap[(deltaY * 0x78) + deltaX] & COLLISION_ANGLE_MASK;
-        arrayValue = gKyogreForm1CollisionMap[(deltaY * 0x78) + deltaX] & COLLISION_TYPE_MASK;
+        lowerNibble = gKyogreForm1CollisionMap[(deltaY * 0x78) + deltaX] & COLLISION_TYPE_MASK;
 
-        if (arrayValue == 0)
+        if (lowerNibble == 0)
             return;
 
         gCurrentPinballGame->bossHitFlashTimer = 8;
         *collisionAngle = maskedResult;
-        *collisionType = 6;
+        *boardLogicCollisionType = BOARD_COLLISION_TYPE_DYNAMIC;
     }
     else if (gCurrentPinballGame->boardEntityCollisionMode == KYOGRE_COLLISION_MODE_EMERGING_FROM_WATER)
     {
-        if (*collisionType & COLLISION_TYPE_MASK)
+        if (*boardLogicCollisionType & COLLISION_TYPE_MASK)
             return;
 
         deltaX = ballPosition->x - gCurrentPinballGame->bossCollisionX;
@@ -142,18 +142,18 @@ void CheckKyogreEntityCollision(struct Vector16 *ballPosition, u16 *collisionAng
             return;
 
         maskedResult = gKyogreForm2CollisionMap[(deltaY * 0x60) + deltaX] & COLLISION_ANGLE_MASK;
-        arrayValue = gKyogreForm2CollisionMap[(deltaY * 0x60) + deltaX] & COLLISION_TYPE_MASK;
+        lowerNibble = gKyogreForm2CollisionMap[(deltaY * 0x60) + deltaX] & COLLISION_TYPE_MASK;
 
-        if (arrayValue == 0)
+        if (lowerNibble == 0)
             return;
 
         gCurrentPinballGame->bossHitFlashTimer = 8;
         *collisionAngle = maskedResult;
-        *collisionType = 6;
+        *boardLogicCollisionType = BOARD_COLLISION_TYPE_DYNAMIC;
     }
     else if (gCurrentPinballGame->boardEntityCollisionMode == KYOGRE_COLLISION_MODE_JUMPING)
     {
-        if (*collisionType & COLLISION_TYPE_MASK)
+        if (*boardLogicCollisionType & COLLISION_TYPE_MASK)
             return;
 
         deltaX = ballPosition->x - gCurrentPinballGame->bossCollisionX;
@@ -163,14 +163,14 @@ void CheckKyogreEntityCollision(struct Vector16 *ballPosition, u16 *collisionAng
             return;
 
         maskedResult = gKyogreForm3CollisionMap[(deltaY * 0x60) + deltaX] & COLLISION_ANGLE_MASK;
-        arrayValue = gKyogreForm3CollisionMap[(deltaY * 0x60) + deltaX] & COLLISION_TYPE_MASK;
+        lowerNibble = gKyogreForm3CollisionMap[(deltaY * 0x60) + deltaX] & COLLISION_TYPE_MASK;
 
-        if (arrayValue == 0)
+        if (lowerNibble == 0)
             return;
 
         gCurrentPinballGame->bossHitFlashTimer = 8;
         *collisionAngle = maskedResult;
-        *collisionType = 6;
+        *boardLogicCollisionType = BOARD_COLLISION_TYPE_DYNAMIC;
     }
 }
 

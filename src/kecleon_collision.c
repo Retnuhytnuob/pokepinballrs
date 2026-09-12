@@ -14,7 +14,7 @@ s16 CollisionCheck_Kecleon(struct Vector16 *ballPosition, u16 *collisionAngle)
     s32 boardLayer;
 
     u32 boardTriggerType;
-    u32 collisionType;
+    u32 boardLogicCollisionType;
 
     hasCollisionImpact = FALSE;
     gCurrentPinballGame->ball->spinAcceleration = SPIN_BOOST_NONE;
@@ -32,26 +32,26 @@ s16 CollisionCheck_Kecleon(struct Vector16 *ballPosition, u16 *collisionAngle)
     boardCollisionType = gBoardConfig.fieldLayout.collision.typeData[boardLayer + tileMapPage][collisionTileIndex * 64 + vec2.y * 8 + vec2.x];
 
     CheckKecleonEntityCollision(ballPosition, &boardCollisionAngle, &boardCollisionType);
-    collisionType = boardCollisionType & COLLISION_TYPE_MASK;
+    boardLogicCollisionType = boardCollisionType & COLLISION_TYPE_MASK;
     boardTriggerType = boardCollisionType >> 4;
 
-    switch (collisionType)
+    switch (boardLogicCollisionType)
     {
-        case 1:
-        case 4:
-        case 6:
-            gCurrentPinballGame->collisionSurfaceType = collisionType - 1;
-            gCurrentPinballGame->collisionResponseType = 1;
+        case BOARD_COLLISION_TYPE_NORMAL:
+        case BOARD_COLLISION_TYPE_OUTER_WALL:
+        case BOARD_COLLISION_TYPE_DYNAMIC:
+            gCurrentPinballGame->collisionBounceBehaviorType = boardLogicCollisionType - 1;
+            gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_PIXEL_WALK_CONTINUING;
             *collisionAngle = boardCollisionAngle;
 
             // Note: missing the 'up range/bounce' seen in other collision files. Possible minor bug?
 
             hasCollisionImpact = TRUE;
             break;
-        case 2:
-        case 3:
-            gCurrentPinballGame->collisionSurfaceType = 0;
-            gCurrentPinballGame->collisionResponseType = 1;
+        case BOARD_COLLISION_TYPE_BUMPERS:
+        case BOARD_COLLISION_TYPE_SLINGSHOT:
+            gCurrentPinballGame->collisionBounceBehaviorType = COLLISION_BOUNCE_BEHAVIOR_TYPE_NORMAL;
+            gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_PIXEL_WALK_CONTINUING;
             *collisionAngle = boardCollisionAngle & COLLISION_ANGLE_MASK;
             hasCollisionImpact = TRUE;
             if (gCurrentPinballGame->kecleonBoardHitState == 0)
@@ -65,7 +65,7 @@ s16 CollisionCheck_Kecleon(struct Vector16 *ballPosition, u16 *collisionAngle)
             }
             gCurrentPinballGame->kecleonCollisionY = 40;
             break;
-        case 5:
+        case BOARD_COLLISION_TYPE_CONDITIONAL:
             boardTriggerType = 4;
             break;
     }
@@ -75,7 +75,7 @@ s16 CollisionCheck_Kecleon(struct Vector16 *ballPosition, u16 *collisionAngle)
 }
 
 // This handles the ball hitting the kecleon
-void CheckKecleonEntityCollision(struct Vector16 *ballPosition, u16 *collisionAngle, u8 *collisionType)
+void CheckKecleonEntityCollision(struct Vector16 *ballPosition, u16 *collisionAngle, u8 *boardLogicCollisionType)
 {
     s16 deltaX;
     s16 deltaY;
@@ -83,7 +83,7 @@ void CheckKecleonEntityCollision(struct Vector16 *ballPosition, u16 *collisionAn
 
     if (gCurrentPinballGame->boardEntityCollisionMode == KECLEON_COLLISION_MODE_STANDING)
     {
-        if (*collisionType & COLLISION_TYPE_MASK)
+        if (*boardLogicCollisionType & COLLISION_TYPE_MASK)
             return;
 
         deltaX = ballPosition->x - gCurrentPinballGame->bossCollisionX;
@@ -107,7 +107,7 @@ void CheckKecleonEntityCollision(struct Vector16 *ballPosition, u16 *collisionAn
     {
         u16 maskedResult;
 
-        if (*collisionType & COLLISION_TYPE_MASK)
+        if (*boardLogicCollisionType & COLLISION_TYPE_MASK)
             return;
 
         deltaX = ballPosition->x - gCurrentPinballGame->bossCollisionX;
@@ -128,7 +128,7 @@ void CheckKecleonEntityCollision(struct Vector16 *ballPosition, u16 *collisionAn
 
         gCurrentPinballGame->bossEntityState = KECLEON_ENTITY_STATE_HIT_WHILE_DOWN;
         *collisionAngle = maskedResult;
-        *collisionType = 6;
+        *boardLogicCollisionType = BOARD_COLLISION_TYPE_DYNAMIC;
     }
 }
 

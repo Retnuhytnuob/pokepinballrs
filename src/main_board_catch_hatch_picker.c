@@ -20,7 +20,7 @@ void RegisterCaptureOrEvolution(s16 evolved)
     if (!evolved)
     {
         if (gMain.mainState != STATE_GAME_IDLE)
-            SaveFile_SetPokedexFlags(gCurrentPinballGame->currentSpecies, SPECIES_CAUGHT);
+            SaveFile_SetPokedexFlags(gCurrentPinballGame->currentSpecies, SPECIES_DEX_CAUGHT);
 
         if (gSpeciesInfo[gCurrentPinballGame->currentSpecies].evolutionMethod != 0)
         {
@@ -54,14 +54,14 @@ void RegisterCaptureOrEvolution(s16 evolved)
         {
             if ((gMain.systemFrameCount & 1) == 0)
             {
-                if (gMain_saveData.pokedexFlags[SPECIES_SILCOON] < SPECIES_CAUGHT)
+                if (gMain_saveData.pokedexFlags[SPECIES_SILCOON] < SPECIES_DEX_CAUGHT)
                     gCurrentPinballGame->currentSpecies = SPECIES_SILCOON;
                 else
                     gCurrentPinballGame->currentSpecies = SPECIES_CASCOON;
             }
             else
             {
-                if (gMain_saveData.pokedexFlags[SPECIES_CASCOON] < SPECIES_CAUGHT)
+                if (gMain_saveData.pokedexFlags[SPECIES_CASCOON] < SPECIES_DEX_CAUGHT)
                     gCurrentPinballGame->currentSpecies = SPECIES_CASCOON;
                 else
                     gCurrentPinballGame->currentSpecies = SPECIES_SILCOON;
@@ -78,14 +78,14 @@ void RegisterCaptureOrEvolution(s16 evolved)
         {
             if ((gMain.systemFrameCount & 1) == 0)
             {
-                if (gMain_saveData.pokedexFlags[SPECIES_HUNTAIL] < SPECIES_CAUGHT)
+                if (gMain_saveData.pokedexFlags[SPECIES_HUNTAIL] < SPECIES_DEX_CAUGHT)
                     gCurrentPinballGame->currentSpecies = SPECIES_HUNTAIL;
                 else
                     gCurrentPinballGame->currentSpecies = SPECIES_GOREBYSS;
             }
             else
             {
-                if (gMain_saveData.pokedexFlags[SPECIES_GOREBYSS] < SPECIES_CAUGHT)
+                if (gMain_saveData.pokedexFlags[SPECIES_GOREBYSS] < SPECIES_DEX_CAUGHT)
                     gCurrentPinballGame->currentSpecies = SPECIES_GOREBYSS;
                 else
                     gCurrentPinballGame->currentSpecies = SPECIES_HUNTAIL;
@@ -95,7 +95,7 @@ void RegisterCaptureOrEvolution(s16 evolved)
         {
             gCurrentPinballGame->currentSpecies = SPECIES_SHEDINJA;
             if (gMain.mainState != STATE_GAME_IDLE)
-                SaveFile_SetPokedexFlags(SPECIES_SHEDINJA, SPECIES_CAUGHT);
+                SaveFile_SetPokedexFlags(SPECIES_SHEDINJA, SPECIES_DEX_CAUGHT);
 
             gCurrentPinballGame->currentSpecies = SPECIES_NINJASK;
         }
@@ -106,7 +106,7 @@ void RegisterCaptureOrEvolution(s16 evolved)
         }
 
         if (gMain.mainState != STATE_GAME_IDLE)
-            SaveFile_SetPokedexFlags(gCurrentPinballGame->currentSpecies, SPECIES_CAUGHT);
+            SaveFile_SetPokedexFlags(gCurrentPinballGame->currentSpecies, SPECIES_DEX_CAUGHT);
 
         if (gSpeciesInfo[gCurrentPinballGame->currentSpecies].evolutionMethod != 0)
         {
@@ -185,14 +185,14 @@ void BuildSpeciesWeightsForCatchEmMode(void)
             case SPECIES_WOBBUFFET:
                 if (gMain.eReaderBonuses[EREADER_ENCOUNTER_RATE_UP_CARD])
                 {
-                    if (gMain_saveData.pokedexFlags[currentSpecies] < SPECIES_SHARED)
+                    if (gMain_saveData.pokedexFlags[currentSpecies] < SPECIES_DEX_SHARED)
                         weight = 2;
                     else
                         weight = 4;
                 }
                 else
                 {
-                    if (gMain_saveData.pokedexFlags[currentSpecies] < SPECIES_SHARED)
+                    if (gMain_saveData.pokedexFlags[currentSpecies] < SPECIES_DEX_SHARED)
                         weight = 1;
                     else
                         weight = 2;
@@ -262,7 +262,7 @@ void PickSpeciesForCatchEmMode(void)
         rand %= NUM_BONUS_SPECIES;
         for (i = 0; i < NUM_BONUS_SPECIES; i++)
         {
-            if (gMain_saveData.pokedexFlags[BONUS_SPECIES_START + ((i + rand) % NUM_BONUS_SPECIES)] < SPECIES_CAUGHT)
+            if (gMain_saveData.pokedexFlags[BONUS_SPECIES_START + ((i + rand) % NUM_BONUS_SPECIES)] < SPECIES_DEX_CAUGHT)
                 break;
         }
 
@@ -286,41 +286,41 @@ void PickSpeciesForCatchEmMode(void)
             if (gMain_saveData.pokedexFlags[SPECIES_AERODACTYL])
             {
                 specialMons[numSpecialMons++] = SPECIES_AERODACTYL;
-                if (gMain_saveData.pokedexFlags[SPECIES_AERODACTYL] < SPECIES_CAUGHT)
+                if (gMain_saveData.pokedexFlags[SPECIES_AERODACTYL] < SPECIES_DEX_CAUGHT)
                     gCurrentPinballGame->currentSpecies = SPECIES_AERODACTYL;
             }
 
             if (gMain_saveData.pokedexFlags[SPECIES_CHIKORITA])
             {
                 specialMons[numSpecialMons++] = SPECIES_CHIKORITA;
-                if (gMain_saveData.pokedexFlags[SPECIES_CHIKORITA] < SPECIES_CAUGHT)
+                if (gMain_saveData.pokedexFlags[SPECIES_CHIKORITA] < SPECIES_DEX_CAUGHT)
                     gCurrentPinballGame->currentSpecies = SPECIES_CHIKORITA;
             }
 
             if (gMain_saveData.pokedexFlags[SPECIES_TOTODILE])
             {
                 specialMons[numSpecialMons++] = SPECIES_TOTODILE;
-                if (gMain_saveData.pokedexFlags[SPECIES_TOTODILE] < SPECIES_CAUGHT)
+                if (gMain_saveData.pokedexFlags[SPECIES_TOTODILE] < SPECIES_DEX_CAUGHT)
                     gCurrentPinballGame->currentSpecies = SPECIES_TOTODILE;
             }
 
             if (gMain_saveData.pokedexFlags[SPECIES_CYNDAQUIL])
             {
                 specialMons[numSpecialMons++] = SPECIES_CYNDAQUIL;
-                if (gMain_saveData.pokedexFlags[SPECIES_CYNDAQUIL] < SPECIES_CAUGHT)
+                if (gMain_saveData.pokedexFlags[SPECIES_CYNDAQUIL] < SPECIES_DEX_CAUGHT)
                     gCurrentPinballGame->currentSpecies = SPECIES_CYNDAQUIL;
             }
 
             if (gMain.selectedField == FIELD_RUBY)
             {
                 specialMons[numSpecialMons++] = SPECIES_LATIOS;
-                if (gMain_saveData.pokedexFlags[SPECIES_LATIOS] < SPECIES_CAUGHT)
+                if (gMain_saveData.pokedexFlags[SPECIES_LATIOS] < SPECIES_DEX_CAUGHT)
                     gCurrentPinballGame->currentSpecies = SPECIES_LATIOS;
             }
             else
             {
                 specialMons[numSpecialMons++] = SPECIES_LATIAS;
-                if (gMain_saveData.pokedexFlags[SPECIES_LATIAS] < SPECIES_CAUGHT)
+                if (gMain_saveData.pokedexFlags[SPECIES_LATIAS] < SPECIES_DEX_CAUGHT)
                     gCurrentPinballGame->currentSpecies = SPECIES_LATIAS;
             }
 
