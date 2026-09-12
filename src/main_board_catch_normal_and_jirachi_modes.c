@@ -145,7 +145,7 @@ void UpdateCatchEmMode(void)
         LoadPortraitGraphics(PORTRAIT_STATE_POKEMON_DISPLAY,
             PORTRAIT_MAIN_SLOT);
         gCurrentPinballGame->catchTileRevealState = CATCH_TILE_REVEAL_NONE;
-        gCurrentPinballGame->hatchRevealPhase = 0;
+        gCurrentPinballGame->catchTilesBurstPhase = 0;
         gCurrentPinballGame->boardSubState++;
         for (i = 0; i < 6; i++)
             gCurrentPinballGame->catchTilePalette[i] = PAL_IX_MON_SHADOW_PORTRAIT;

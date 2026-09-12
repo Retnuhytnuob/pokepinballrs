@@ -5,7 +5,7 @@
 #include "constants/board/ruby_states.h"
 #include "constants/board/main_board.h"
 
-void AllBoardProcess_2A_4D6C4(void)
+void InitFrameProcess2_CameraShakeDrain_AllBoards(void)
 {
     s16 cameraBoardXOffset;
     s16 cameraBoardScrollOffset;
@@ -89,7 +89,7 @@ void AllBoardProcess_2A_4D6C4(void)
     gCurrentPinballGame->cameraLookAhead = 0x1000;
 }
 
-void MainBoardProcess_2B_4D960(void)
+void UpdateFrameProcess2_CameraShakeDrain_MainBoards(void)
 {
     int var0;
     int var1;
@@ -178,7 +178,7 @@ void MainBoardProcess_2B_4D960(void)
     gCurrentPinballGame->cameraYViewport = gCurrentPinballGame->cameraBaseY + gCurrentPinballGame->tiltYOffset + gCurrentPinballGame->cameraScrollOffset + gCurrentPinballGame->cameraYAdjust;
 }
 
-void BonusBoardProcess_2B_4DBFC(void)
+void UpdateFrameProcess2_CameraShakeDrain_BonusBoards(void)
 {
     int var0;
     int var1;
@@ -300,7 +300,7 @@ void ProcessTiltInput(void)
         if (gCurrentPinballGame->newButtonActions[PINBALL_INPUT_TILT_LEFT]
             && gCurrentPinballGame->boardShakeTimer == 0)
         {
-            gCurrentPinballGame->boardShakeDirection = 0;
+            gCurrentPinballGame->boardShakeDirection = TILT_SHAKE_DIRECTION_LEFT;
             if (gCurrentPinballGame->boardShakeIntensity == 0)
             {
                 gCurrentPinballGame->boardShakeIntensity = 4;
@@ -312,7 +312,7 @@ void ProcessTiltInput(void)
         if (gCurrentPinballGame->newButtonActions[PINBALL_INPUT_TILT_RIGHT]
             && gCurrentPinballGame->boardShakeTimer == 0)
         {
-            gCurrentPinballGame->boardShakeDirection = 1;
+            gCurrentPinballGame->boardShakeDirection = TILT_SHAKE_DIRECTION_RIGHT;
             if (gCurrentPinballGame->boardShakeIntensity == 0)
             {
                 gCurrentPinballGame->boardShakeIntensity = 4;
@@ -324,7 +324,7 @@ void ProcessTiltInput(void)
         if (gCurrentPinballGame->newButtonActions[PINBALL_INPUT_TILT_UP]
             && gCurrentPinballGame->boardShakeTimer == 0)
         {
-            gCurrentPinballGame->boardShakeDirection = 2;
+            gCurrentPinballGame->boardShakeDirection = TILT_SHAKE_DIRECTION_UP;
             if (gCurrentPinballGame->boardShakeIntensity == 0)
             {
                 gCurrentPinballGame->boardShakeIntensity = 4;
@@ -341,19 +341,19 @@ void ProcessTiltInput(void)
         {
             switch (gCurrentPinballGame->boardShakeDirection)
             {
-            case 0:
+            case TILT_SHAKE_DIRECTION_LEFT:
                 gCurrentPinballGame->tiltShakeAmplitude[0] = 6;
                 gCurrentPinballGame->tiltShakeVelocity[0] = -1;
                 gCurrentPinballGame->tiltShakeAmplitude[2] = 6;
                 gCurrentPinballGame->tiltShakeVelocity[2] = 1;
                 break;
-            case 1:
+            case TILT_SHAKE_DIRECTION_RIGHT:
                 gCurrentPinballGame->tiltShakeAmplitude[1] = 6;
                 gCurrentPinballGame->tiltShakeVelocity[1] = 1;
                 gCurrentPinballGame->tiltShakeAmplitude[3] = 6;
                 gCurrentPinballGame->tiltShakeVelocity[3] = 1;
                 break;
-            case 2:
+            case TILT_SHAKE_DIRECTION_UP:
                 gCurrentPinballGame->tiltShakeAmplitude[2] = 6;
                 gCurrentPinballGame->tiltShakeVelocity[2] = 1;
                 gCurrentPinballGame->tiltShakeAmplitude[3] = 0;

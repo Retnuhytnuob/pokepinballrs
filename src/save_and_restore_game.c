@@ -5,6 +5,8 @@
 #include "constants/board/main_board.h"
 #include "constants/board/groudon_states.h"
 #include "constants/board/rayquaza_states.h"
+#include "constants/board/ruby_states.h"
+#include "constants/board/sapphire_states.h"
 
 extern u8 gBoardGfxBuffer[];
 extern u8 gBoardBGTileBufferAlt[];
@@ -130,11 +132,12 @@ void SaveGameToSram(void)
     WriteAndVerifySramFast((const u8 *)gCurrentPinballGame, (void *)SRAM + 0x544, sizeof(*gCurrentPinballGame));
 }
 
+/// @brief 
+/// @param arg0 1 = restore game SRAM, 2 = load demo, 0 = ?
 void RestoreGameState(u16 arg0)
 {
     s16 i, j;
     s16 var0, var1;
-    int var2;
 
     if (arg0 == 1)
     {
@@ -145,8 +148,8 @@ void RestoreGameState(u16 arg0)
         DmaCopy16(3, gBoardConfig.pinballGame, gCurrentPinballGame, sizeof(*gCurrentPinballGame));
         gCurrentPinballGame->ball = &gCurrentPinballGame->ballStates[0];
         gCurrentPinballGame->cameraBall = &gCurrentPinballGame->ballStates[0];
-        var2 = gMain.idleDemoVariant;
-        if ((var2 & 0x3) == 1)
+
+        if ((gMain.idleDemoVariant % 4) == 1)
         {
             gCurrentPinballGame->pikaSpinMomentum = 0;
             gCurrentPinballGame->kickbackAnimFrameTimer = 0;
@@ -259,29 +262,29 @@ void RestoreGameState(u16 arg0)
     switch (gMain.selectedField)
     {
     case FIELD_RUBY:
-        RubyBoardProcess_0A_50848();
+        InitFrameProcess0_DefaultSpriteState_RubyBoard();
         LoadShopItemGraphics(gCurrentPinballGame->evolutionShopActive);
         break;
     case FIELD_SAPPHIRE:
-        SapphireBoardProcess_0A_50AD4();
+        InitFrameProcess0_DefaultSpriteState_SapphireBoard();
         break;
     case FIELD_DUSCLOPS:
-        DusclopsBoardProcess_0A_50D48();
+        InitFrameProcess0_DefaultSpriteState_DusclopsBoard();
         break;
     case FIELD_KECLEON:
-        KecleonBoardProcess_0A_50DE0();
+        InitFrameProcess0_DefaultSpriteState_KecleonBoard();
         break;
     case FIELD_KYOGRE:
-        KyogreBoardProcess_0A_50F04();
+        InitFrameProcess0_DefaultSpriteState_KyogreBoard();
         break;
     case FIELD_GROUDON:
-        GroudonBoardProcess_0A_50FD4();
+        InitFrameProcess0_DefaultSpriteState_GroudonBoard();
         break;
     case FIELD_RAYQUAZA:
-        RayquazaBoardProcess_0A_51090();
+        InitFrameProcess0_DefaultSpriteState_RayquazaBoard();
         break;
     case FIELD_SPHEAL:
-        SphealBoardProcess_0A_51150();
+        InitFrameProcess0_DefaultSpriteState_SphealBoard();
         break;
     }
 
@@ -502,19 +505,19 @@ void RestoreMainFieldDynamicGraphics(void)
     {
         switch (gCurrentPinballGame->portraitRenderMode[i])
         {
-        case 0:
+        case PORTRAIT_STATE_CURRENT_LOCATION:
             DmaCopy16(3, gLocationPortraitGfx[gCurrentPinballGame->portraitGfxIndex[i]], 0x06010CA0 + (i * 0x300), 0x300);
             gCurrentPinballGame->ball += 0; //TODO: Dumb match is still a match...
             break;
-        case 9:
+        case PORTRAIT_STATE_EVO_PREVIEW:
             if (gCurrentPinballGame->evoChainPosition > 0)
             {
-                if (gMain_saveData.pokedexFlags[gCurrentPinballGame->evoTargetSpecies] == 0)
+                if (gMain_saveData.pokedexFlags[gCurrentPinballGame->evoTargetSpecies] == SPECIES_DEX_UNSEEN)
                 {
                     gCurrentPinballGame->portraitGfxIndex[i] = 205;
                     DmaCopy16(3, gMonPortraitGroupPals[gCurrentPinballGame->portraitGfxIndex[i] / 15][gCurrentPinballGame->portraitGfxIndex[i] % 15], OBJ_PLTT_SLOT(PAL_IX_MON_PORTRAIT), PLTT_SLOT_SIZE);
                 }
-                else if (gMain_saveData.pokedexFlags[gCurrentPinballGame->evoTargetSpecies] <= 3)
+                else if (gMain_saveData.pokedexFlags[gCurrentPinballGame->evoTargetSpecies] < SPECIES_DEX_CAUGHT)
                 {
                     gCurrentPinballGame->portraitGfxIndex[i] = gCurrentPinballGame->evoTargetSpecies;
                     DmaCopy16(3, gMonPortraitGroupPals[0][15], OBJ_PLTT_SLOT(PAL_IX_MON_PORTRAIT), PLTT_SLOT_SIZE);
@@ -530,15 +533,15 @@ void RestoreMainFieldDynamicGraphics(void)
                 gCurrentPinballGame->portraitGfxIndex[i] = gCurrentPinballGame->currentSpecies;
                 DmaCopy16(3, gMonPortraitGroupPals[gCurrentPinballGame->portraitGfxIndex[i] / 15][gCurrentPinballGame->portraitGfxIndex[i] % 15], OBJ_PLTT_SLOT(PAL_IX_LOCATION_PORTRAIT), PLTT_SLOT_SIZE);
             }
-        case 3:
+        case PORTRAIT_STATE_POKEMON_DISPLAY:
             DmaCopy16(3, gMonPortraitGroupGfx[gCurrentPinballGame->portraitGfxIndex[i] / 15] + (gCurrentPinballGame->portraitGfxIndex[i] % 15) * 0x300, 0x06010CA0 + (i * 0x18), 0x300);
             break;
-        case 1:
-        case 2:
-        case 4:
-        case 6:
-        case 7:
-        case 8:
+        case PORTRAIT_STATE_SLOT_START_CARD:
+        case PORTRAIT_STATE_ROULETTE_WHEEL:
+        case PORTRAIT_STATE_TRAVEL_RAMP_INDICATOR:
+        case PORTRAIT_STATE_SHOP_SELECTOR:
+        case PORTRAIT_STATE_CONFIRMATION_PROMPT:
+        case PORTRAIT_STATE_ROULETTE_OUTCOME:
             DmaCopy16(3, gPortraitAnimFrameGraphics[gCurrentPinballGame->portraitGfxIndex[i]], 0x06010CA0 + (i * 0x300), 0x300);
             break;
         }
@@ -548,8 +551,8 @@ void RestoreMainFieldDynamicGraphics(void)
     {
         switch (gCurrentPinballGame->boardSubState)
         {
-        case 7:
-        case 8:
+        case CATCH_EM_SUBSTATE_ANIMATE_MON_APPEAR:
+        case CATCH_EM_SUBSTATE_SETUP_CATCH_HIT_COUNT:
             if ((u32) gCurrentPinballGame->captureFlashTimer > 4)
             {
                 DmaCopy16(3, gCatchSpriteFlashGfx, 0x06010CA0, 0x480);
@@ -559,7 +562,7 @@ void RestoreMainFieldDynamicGraphics(void)
                 DmaCopy16(3, gCatchSpriteGfxBuffer, 0x06010CA0, 0x480);
             }
             break;
-        case 9:
+        case CATCH_EM_SUBSTATE_CATCH_HIT_PHASE:
             if (gCurrentPinballGame->captureSequenceTimer <= 31)
             {
                 if (gCurrentPinballGame->captureFlashTimer > 4)
@@ -579,7 +582,7 @@ void RestoreMainFieldDynamicGraphics(void)
     {
         switch (gCurrentPinballGame->boardSubState)
         {
-        case 2:
+        case JIRACHI_CATCH_SUBSTATE_SETUP_CATCH_HIT_COUNT:
             if (gCurrentPinballGame->captureFlashTimer > 4U)
             {
                 DmaCopy16(3, gCatchSpriteFlashGfx, 0x06010CA0, 0x480);
@@ -589,7 +592,7 @@ void RestoreMainFieldDynamicGraphics(void)
                 DmaCopy16(3, gCatchSpriteGfxBuffer, 0x06010CA0, 0x480);
             }
             break;
-        case 3:
+        case JIRACHI_CATCH_SUBSTATE_CATCH_HIT_PHASE:
             if (gCurrentPinballGame->captureSequenceTimer <= 31)
             {
                 if (gCurrentPinballGame->captureFlashTimer > 4U)
@@ -627,7 +630,7 @@ void RestoreRubyBoardTileGraphics(void)
 
     var0 = gCurrentPinballGame->shopDoorCurrentFrame & 0xF;
     DmaCopy16(3, gRubyBoardShopDoor_Gfx[var0], (void *)0x6013180, 0x180);
-    if (gCurrentPinballGame->eggCaveState < 3)
+    if (gCurrentPinballGame->cyndaquilPosition < CYNDAQUIL_POSITION_CAVE_ENTRANCE)
         gCurrentPinballGame->cyndaquilFrame = 0;
     else
         gCurrentPinballGame->cyndaquilFrame = 1;
@@ -643,22 +646,22 @@ void RestoreSapphireBoardTileGraphics(void)
 
     switch (gCurrentPinballGame->sapphireHatchMachineState)
     {
-    case 0:
-    case 1:
-    case 2:
+    case HATCH_MACHINE_STATE_INCUBATION_LIGHTS:
+    case HATCH_MACHINE_STATE_ACTIVATED_LIGHT_CROSS:
+    case HATCH_MACHINE_STATE_MON_HATCHED:
         index = gCurrentPinballGame->sapphireHatchMachineFrameIx;
         DmaCopy16(3, gHatchMachineElevator_Gfx[index], (void *)0x600D900, 0x440);
         break;
-    case 3:
-    case 4:
+    case HATCH_MACHINE_STATE_ELEVATOR_DECENDS:
+    case HATCH_MACHINE_STATE_EMPTY:
         index = 15;
         DmaCopy16(3, gHatchMachineElevator_Gfx[index], (void *)0x600D900, 0x440);
         break;
-    case 5:
+    case HATCH_MACHINE_STATE_EGG_RISING:
         index = gHoleAnimKeyframeData[gCurrentPinballGame->sapphireHatchMachineFrameIx][0];
         DmaCopy16(3, gHatchMachineElevator_Gfx[index], (void *)0x600D900, 0x440);
         break;
-    case 6:
+    case HATCH_MACHINE_STATE_RESET:
         break;
     }
 }

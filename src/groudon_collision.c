@@ -11,7 +11,7 @@ s16 CollisionCheck_Groudon(struct Vector16 *ballPosition, u16 *collisionAngle)
     u8 boardCollisionType;
     u16 hasCollisionImpact;
     u32 boardTriggerType;
-    u32 collisionType;
+    u32 boardLogicCollisionType;
 
     hasCollisionImpact = FALSE;
     gCurrentPinballGame->ball->spinAcceleration = SPIN_BOOST_NONE;
@@ -39,16 +39,16 @@ s16 CollisionCheck_Groudon(struct Vector16 *ballPosition, u16 *collisionAngle)
     }
 
     CheckGroudonEntityCollision(ballPosition, &boardCollisionAngle, &boardCollisionType);
-    collisionType = boardCollisionType & COLLISION_TYPE_MASK;
+    boardLogicCollisionType = boardCollisionType & COLLISION_TYPE_MASK;
     boardTriggerType = boardCollisionType >> 4;
 
-    switch (collisionType)
+    switch (boardLogicCollisionType)
     {
-        case 1:
-        case 4:
-        case 6:
-            gCurrentPinballGame->collisionSurfaceType = collisionType - 1;
-            gCurrentPinballGame->collisionResponseType = 1;
+        case BOARD_COLLISION_TYPE_NORMAL:
+        case BOARD_COLLISION_TYPE_OUTER_WALL:
+        case BOARD_COLLISION_TYPE_DYNAMIC:
+            gCurrentPinballGame->collisionBounceBehaviorType = boardLogicCollisionType - 1;
+            gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_PIXEL_WALK_CONTINUING;
             *collisionAngle = boardCollisionAngle;
             if (*collisionAngle >= ANGLE_UP_RANGE_MIN && *collisionAngle <= ANGLE_UP_RANGE_MAX)
             {
@@ -81,14 +81,14 @@ s16 CollisionCheck_Groudon(struct Vector16 *ballPosition, u16 *collisionAngle)
             }
             hasCollisionImpact = TRUE;
             break;
-        case 2:
-        case 3:
-            gCurrentPinballGame->collisionSurfaceType = collisionType - 1;
-            gCurrentPinballGame->collisionResponseType = 2;
+        case BOARD_COLLISION_TYPE_BUMPERS:
+        case BOARD_COLLISION_TYPE_SLINGSHOT:
+            gCurrentPinballGame->collisionBounceBehaviorType = boardLogicCollisionType - 1;
+            gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_PIXEL_WALK_ONE_STEP;
             *collisionAngle = boardCollisionAngle & COLLISION_ANGLE_MASK;
             hasCollisionImpact = TRUE;
             break;
-        case 5:
+        case BOARD_COLLISION_TYPE_CONDITIONAL:
             boardTriggerType = 4;
             break;
     }
@@ -97,7 +97,7 @@ s16 CollisionCheck_Groudon(struct Vector16 *ballPosition, u16 *collisionAngle)
     return hasCollisionImpact;
 }
 
-void CheckGroudonEntityCollision(struct Vector16 *ballPosition, u16 *collisionAngle, u8 *collisionType)
+void CheckGroudonEntityCollision(struct Vector16 *ballPosition, u16 *collisionAngle, u8 *boardLogicCollisionType)
 {
     s16 deltaX;
     s16 deltaY;
@@ -108,7 +108,7 @@ void CheckGroudonEntityCollision(struct Vector16 *ballPosition, u16 *collisionAn
 
     if (gCurrentPinballGame->boardEntityCollisionMode == GROUDON_COLLISION_MODE_ACTIVE)
     {
-        if ((*collisionType & COLLISION_TYPE_MASK) == 0)
+        if ((*boardLogicCollisionType & COLLISION_TYPE_MASK) == BOARD_COLLISION_TYPE_NONE)
         {
             deltaX = ballPosition->x - gCurrentPinballGame->bossCollisionX;
             deltaY = ballPosition->y - gCurrentPinballGame->bossCollisionY;
@@ -124,7 +124,7 @@ void CheckGroudonEntityCollision(struct Vector16 *ballPosition, u16 *collisionAn
                         gCurrentPinballGame->bossHitFlashTimer = 0x27;
 
                     *collisionAngle = maskedResult;
-                    *collisionType = lowerNibble;
+                    *boardLogicCollisionType = lowerNibble;
                 }
             }
         }
@@ -134,7 +134,7 @@ void CheckGroudonEntityCollision(struct Vector16 *ballPosition, u16 *collisionAn
     {
         if (gCurrentPinballGame->boulderCollisionPos[i].x <= 0)
             continue;
-        if ((*collisionType & COLLISION_TYPE_MASK) != 0)
+        if ((*boardLogicCollisionType & COLLISION_TYPE_MASK) != BOARD_COLLISION_TYPE_NONE)
             continue;
 
         deltaX = ballPosition->x - gCurrentPinballGame->boulderCollisionPos[i].x;
@@ -150,7 +150,7 @@ void CheckGroudonEntityCollision(struct Vector16 *ballPosition, u16 *collisionAn
             continue;
 
         *collisionAngle = maskedResult;
-        *collisionType = 6;
+        *boardLogicCollisionType = BOARD_COLLISION_TYPE_DYNAMIC;
         gCurrentPinballGame->boulderHitFlag[i] = TRUE;
     }
 
@@ -158,7 +158,7 @@ void CheckGroudonEntityCollision(struct Vector16 *ballPosition, u16 *collisionAn
     {
         if (gCurrentPinballGame->firePillarCollisionPos[i].x <= 0)
             continue;
-        if ((*collisionType & COLLISION_TYPE_MASK) != 0)
+        if ((*boardLogicCollisionType & COLLISION_TYPE_MASK) != BOARD_COLLISION_TYPE_NONE)
             continue;
 
         deltaX = ballPosition->x - gCurrentPinballGame->firePillarCollisionPos[i].x;
@@ -174,7 +174,7 @@ void CheckGroudonEntityCollision(struct Vector16 *ballPosition, u16 *collisionAn
             continue;
 
         *collisionAngle = maskedResult;
-        *collisionType = 6;
+        *boardLogicCollisionType = BOARD_COLLISION_TYPE_DYNAMIC;
         gCurrentPinballGame->firePillarHitTimer[i] = 8;
     }
 }

@@ -18,7 +18,7 @@ s16 CollisionCheck_Sapphire(struct Vector16 *ballPosition, u16* collisionAngle) 
     s32 boardLayer;
 
     u32 boardTriggerType;
-    u8 collisionType;
+    u8 boardLogicCollisionType;
 
     hasCollisionImpact = FALSE;
     gCurrentPinballGame->ball->spinAcceleration = SPIN_BOOST_NONE;
@@ -37,15 +37,15 @@ s16 CollisionCheck_Sapphire(struct Vector16 *ballPosition, u16* collisionAngle) 
 
     CheckSapphireBumperCollision(ballPosition, &boardCollisionAngle, &boardCollisionType);
 
-    collisionType = boardCollisionType & COLLISION_TYPE_MASK;
+    boardLogicCollisionType = boardCollisionType & COLLISION_TYPE_MASK;
     boardTriggerType = boardCollisionType >> 4;
 
-    switch (collisionType)
+    switch (boardLogicCollisionType)
     {
-    case 1:
-    case 4:
-        gCurrentPinballGame->collisionSurfaceType = collisionType - 1;
-        gCurrentPinballGame->collisionResponseType = 1;
+    case BOARD_COLLISION_TYPE_NORMAL:
+    case BOARD_COLLISION_TYPE_OUTER_WALL:
+        gCurrentPinballGame->collisionBounceBehaviorType = boardLogicCollisionType - 1;
+        gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_PIXEL_WALK_CONTINUING;
         *collisionAngle = boardCollisionAngle;
         if (*collisionAngle >= ANGLE_UP_RANGE_MIN && *collisionAngle <= ANGLE_UP_RANGE_MAX)
         {
@@ -81,10 +81,10 @@ s16 CollisionCheck_Sapphire(struct Vector16 *ballPosition, u16* collisionAngle) 
         }
         hasCollisionImpact = TRUE;
         break;
-    case 3:
-    case 2:
-        gCurrentPinballGame->collisionSurfaceType = collisionType - 1;
-        gCurrentPinballGame->collisionResponseType = 2;
+    case BOARD_COLLISION_TYPE_SLINGSHOT:
+    case BOARD_COLLISION_TYPE_BUMPERS:
+        gCurrentPinballGame->collisionBounceBehaviorType = boardLogicCollisionType - 1;
+        gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_PIXEL_WALK_ONE_STEP;
         *collisionAngle = boardCollisionAngle & COLLISION_ANGLE_MASK;
         hasCollisionImpact = TRUE;
         break;
@@ -94,7 +94,7 @@ s16 CollisionCheck_Sapphire(struct Vector16 *ballPosition, u16* collisionAngle) 
     return hasCollisionImpact;
 }
 
-void CheckSapphireBumperCollision(struct Vector16 *ballPosition, s16 *collisionAngle, u8 *collisionType) {
+void CheckSapphireBumperCollision(struct Vector16 *ballPosition, s16 *collisionAngle, u8 *boardLogicCollisionType) {
 
     s16 deltaX;
     s16 deltaY;
@@ -147,7 +147,7 @@ void CheckSapphireBumperCollision(struct Vector16 *ballPosition, s16 *collisionA
         gCurrentPinballGame->pondBumperStates[ix] = 6;
 
         *collisionAngle = maskedResult;
-        *collisionType = lowerNibble;
+        *boardLogicCollisionType = lowerNibble;
 
         if (gCurrentPinballGame->bumperHitCountdown <= 0)
             gCurrentPinballGame->bumperHitCountdown = 2;
@@ -175,7 +175,7 @@ void ProcessSapphireCollisionEvent(u8 triggerType, u16* hasCollisionImpact, u16*
                     gCurrentPinballGame->ballCatchState = TRAP_EVO_SHOP_HOLE;
 
                 DispatchSapphireCatchModeInit();
-                gCurrentPinballGame->collisionResponseType = 7;
+                gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_STOP_BALL;
                 *hasCollisionImpact = TRUE;
             }
             break;
@@ -332,8 +332,8 @@ void ProcessSapphireCollisionEvent(u8 triggerType, u16* hasCollisionImpact, u16*
             if (gCurrentPinballGame->shopShockWallAnimState != SHOCK_WALL_ANIM_STATE_NONE)
             {
                 gCurrentPinballGame->shockWallHitTimer = 17;
-                gCurrentPinballGame->collisionSurfaceType = 0;
-                gCurrentPinballGame->collisionResponseType = 2;
+                gCurrentPinballGame->collisionBounceBehaviorType = COLLISION_BOUNCE_BEHAVIOR_TYPE_NORMAL;
+                gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_PIXEL_WALK_ONE_STEP;
                 *collisionAngle = 0xD800;
                 *hasCollisionImpact = TRUE;
             }

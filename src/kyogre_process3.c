@@ -39,7 +39,7 @@ extern const u16 gKyogrefreezeTrapOamData[28][4][3];
 extern const u16 gKyogreMainBodyOamData[66][10][3];
 
 
-void KyogreBoardProcess_3A_383E4(void)
+void InitFrameProcess3_BoardLogic_KyogreBoard(void)
 {
     s16 i;
 
@@ -116,7 +116,7 @@ void KyogreBoardProcess_3A_383E4(void)
     DmaCopy16(3, gBonusStageObjPal, OBJ_PLTT_SLOT(PAL_IX_9), PLTT_SLOT_SIZE);
 }
 
-void KyogreBoardProcess_3B_3869C(void)
+void UpdateFrameProcess3_BoardLogic_KyogreBoard(void)
 {
     switch (gCurrentPinballGame->boardState)
     {

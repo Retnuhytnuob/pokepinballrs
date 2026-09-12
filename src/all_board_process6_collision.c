@@ -18,86 +18,86 @@ void ApplyTiltEffectOnCollision(struct Vector16 *arg0, struct Vector16 *arg1, u1
 void ProcessBonusTrapPhysics(void);
 u16 PixelWalkCollisionDetection(struct Vector16*, struct Vector16);
 
-void ComputeFlipperLaunchVelocity(s32 arg0, s16 arg1, struct Vector16* arg2, u16 arg3);
+void ComputeFlipperLaunchVelocity(s32 arg0, s16 flipperIx, struct Vector16* arg2, u16 arg3);
 
-void AllBoardProcess_6A_4CEA8()
+void InitFrameProcess6_Collision_AllBoards()
 {
 	gCurrentPinballGame->collisionCooldownTimer = 60;
 }
 
-void AllBoardProcess_6B_1333C()
+void UpdateFrameProcess6_Collision_AllBoards()
 {
     struct Vector16 ballPosition;
-    struct Vector16 var1;
-    struct Vector16 var2;
+    struct Vector16 tiltVelocityDelta;
+    struct Vector16 collisionVelocity;
     s16 i;
-    u16 r7;
+    u16 collisionAngle;
 
-    r7 = DetectBallCollision(&ballPosition);
-    switch (gCurrentPinballGame->collisionResponseType)
+    collisionAngle = DetectBallCollision(&ballPosition);
+    switch (gCurrentPinballGame->collisionResolutionState)
     {
-        case 7:
+        case COLLISION_RESOLUTION_STATE_STOP_BALL:
             gCurrentPinballGame->ball->velocity.x = 0;
             gCurrentPinballGame->ball->velocity.y = 0;
             break;
-        case 1:
-            ApplyTiltEffectOnCollision(&ballPosition, &var1, r7);
-            ComputeWallReflection(r7, &gCurrentPinballGame->ball->velocity, &var2);
+        case COLLISION_RESOLUTION_STATE_PIXEL_WALK_CONTINUING:
+            ApplyTiltEffectOnCollision(&ballPosition, &tiltVelocityDelta, collisionAngle);
+            ComputeWallReflection(collisionAngle, &gCurrentPinballGame->ball->velocity, &collisionVelocity);
             for (i = 0; i < 9; i++)
             {
-                if (gWallCollisionPositionCorrection[i].angleThreshold <= r7)
+                if (gWallCollisionPositionCorrection[i].angleThreshold <= collisionAngle)
                 {
                     ballPosition.x += gWallCollisionPositionCorrection[i].correctionX;
                     ballPosition.y += gWallCollisionPositionCorrection[i].correctionY;
                     break;
                 }
             }
-            gCurrentPinballGame->ball->velocity.x = var2.x + var1.x;
-            gCurrentPinballGame->ball->velocity.y = var2.y + var1.y;
+            gCurrentPinballGame->ball->velocity.x = collisionVelocity.x + tiltVelocityDelta.x;
+            gCurrentPinballGame->ball->velocity.y = collisionVelocity.y + tiltVelocityDelta.y;
             break;
-        case 6:
-            ApplyTiltEffectOnCollision(&ballPosition, &var1,r7);
-            ComputeWallReflection(r7, &gCurrentPinballGame->ball->velocity, &var2);
-            gCurrentPinballGame->ball->velocity.x = var2.x + var1.x;
-            gCurrentPinballGame->ball->velocity.y = var2.y + var1.y;
+        case COLLISION_RESOLUTION_STATE_UNUSED:
+            ApplyTiltEffectOnCollision(&ballPosition, &tiltVelocityDelta,collisionAngle);
+            ComputeWallReflection(collisionAngle, &gCurrentPinballGame->ball->velocity, &collisionVelocity);
+            gCurrentPinballGame->ball->velocity.x = collisionVelocity.x + tiltVelocityDelta.x;
+            gCurrentPinballGame->ball->velocity.y = collisionVelocity.y + tiltVelocityDelta.y;
             break;
-        case 2:
-            ApplyTiltEffectOnCollision(&ballPosition, &var1, r7);
-            ComputeWallReflection(r7, &gCurrentPinballGame->ball->velocity, &var2);
+        case COLLISION_RESOLUTION_STATE_PIXEL_WALK_ONE_STEP:
+            ApplyTiltEffectOnCollision(&ballPosition, &tiltVelocityDelta, collisionAngle);
+            ComputeWallReflection(collisionAngle, &gCurrentPinballGame->ball->velocity, &collisionVelocity);
             for (i = 0; i < 9; i++)
             {
-                if (gWallCollisionPositionCorrection[i].angleThreshold <= r7)
+                if (gWallCollisionPositionCorrection[i].angleThreshold <= collisionAngle)
                 {
                     ballPosition.x += gWallCollisionPositionCorrection[i].correctionX;
                     ballPosition.y += gWallCollisionPositionCorrection[i].correctionY;
                     break;
                 }
             }
-            gCurrentPinballGame->ball->velocity.x = var2.x + var1.x;
-            gCurrentPinballGame->ball->velocity.y = var2.y + var1.y;
+            gCurrentPinballGame->ball->velocity.x = collisionVelocity.x + tiltVelocityDelta.x;
+            gCurrentPinballGame->ball->velocity.y = collisionVelocity.y + tiltVelocityDelta.y;
             break;
-        case 3:
-            ApplyTiltEffectOnCollision(&ballPosition, &var1, r7);
+        case COLLISION_RESOLUTION_STATE_LEFT_FLIPPER:
+            ApplyTiltEffectOnCollision(&ballPosition, &tiltVelocityDelta, collisionAngle);
             ballPosition.x -= (gBoardConfig.fieldLayout.leftFlipperOriginX * 2);
             ballPosition.y -= (gBoardConfig.fieldLayout.flipperOriginY * 2);
             if (!gCurrentPinballGame->flipper[SIDE_IX_LEFT].bounceApplied)
             {
-                ComputeWallReflection(r7, &gCurrentPinballGame->ball->velocity, &var2);
+                ComputeWallReflection(collisionAngle, &gCurrentPinballGame->ball->velocity, &collisionVelocity);
                 gCurrentPinballGame->flipper[SIDE_IX_LEFT].bounceApplied = TRUE;
             }
             else
             {
-                var2.x = gCurrentPinballGame->ball->velocity.x;
-                var2.y = gCurrentPinballGame->ball->velocity.y;
+                collisionVelocity.x = gCurrentPinballGame->ball->velocity.x;
+                collisionVelocity.y = gCurrentPinballGame->ball->velocity.y;
             }
-            ComputeFlipperBounce(&ballPosition, &var2, SIDE_IX_LEFT);
-            gCurrentPinballGame->ball->velocity.x = var2.x + var1.x;
-            gCurrentPinballGame->ball->velocity.y = var2.y + var1.y;
-            if (gCurrentPinballGame->collisionResponseType == 5)
+            ComputeFlipperBounce(&ballPosition, &collisionVelocity, SIDE_IX_LEFT);
+            gCurrentPinballGame->ball->velocity.x = collisionVelocity.x + tiltVelocityDelta.x;
+            gCurrentPinballGame->ball->velocity.y = collisionVelocity.y + tiltVelocityDelta.y;
+            if (gCurrentPinballGame->collisionResolutionState == COLLISION_RESOLUTION_STATE_PASSIVE_FLIPPER_COLLISION)
             {
                 for (i = 0; i < 4; i++)
                 {
-                    if (gFlipperCollisionAngleCorrection[i].angleThreshold <= r7)
+                    if (gFlipperCollisionAngleCorrection[i].angleThreshold <= collisionAngle)
                     {
                         ballPosition.x += gFlipperCollisionAngleCorrection[i].correctionX;
                         ballPosition.y += gFlipperCollisionAngleCorrection[i].correctionY;
@@ -108,31 +108,31 @@ void AllBoardProcess_6B_1333C()
             ballPosition.x += gBoardConfig.fieldLayout.leftFlipperOriginX * 2;
             ballPosition.y += gBoardConfig.fieldLayout.flipperOriginY * 2;
             break;
-        case 4:
-            ApplyTiltEffectOnCollision(&ballPosition, &var1, r7);
+        case COLLISION_RESOLUTION_STATE_RIGHT_FLIPPER:
+            ApplyTiltEffectOnCollision(&ballPosition, &tiltVelocityDelta, collisionAngle);
             ballPosition.x -= (gBoardConfig.fieldLayout.rightFlipperOriginX * 2);
             ballPosition.y -= (gBoardConfig.fieldLayout.flipperOriginY * 2);
             if (!gCurrentPinballGame->flipper[SIDE_IX_RIGHT].bounceApplied)
             {
-                ComputeWallReflection(r7, &gCurrentPinballGame->ball->velocity, &var2);
+                ComputeWallReflection(collisionAngle, &gCurrentPinballGame->ball->velocity, &collisionVelocity);
                 gCurrentPinballGame->flipper[SIDE_IX_RIGHT].bounceApplied = TRUE;
             }
             else
             {
-                var2.x = gCurrentPinballGame->ball->velocity.x;
-                var2.y = gCurrentPinballGame->ball->velocity.y;
+                collisionVelocity.x = gCurrentPinballGame->ball->velocity.x;
+                collisionVelocity.y = gCurrentPinballGame->ball->velocity.y;
             }
             ballPosition.x = 0x5f - ballPosition.x;
-            var2.x = -var2.x;
-            ComputeFlipperBounce(&ballPosition, &var2, SIDE_IX_RIGHT);
-            var2.x = -var2.x;
-            gCurrentPinballGame->ball->velocity.x = var2.x + var1.x;
-            gCurrentPinballGame->ball->velocity.y = var2.y + var1.y;
-            if (gCurrentPinballGame->collisionResponseType == 5)
+            collisionVelocity.x = -collisionVelocity.x;
+            ComputeFlipperBounce(&ballPosition, &collisionVelocity, SIDE_IX_RIGHT);
+            collisionVelocity.x = -collisionVelocity.x;
+            gCurrentPinballGame->ball->velocity.x = collisionVelocity.x + tiltVelocityDelta.x;
+            gCurrentPinballGame->ball->velocity.y = collisionVelocity.y + tiltVelocityDelta.y;
+            if (gCurrentPinballGame->collisionResolutionState == COLLISION_RESOLUTION_STATE_PASSIVE_FLIPPER_COLLISION)
             {
                 for (i = 0; i < 4; i++)
                 {
-                    if (gFlipperCollisionAngleCorrection[i].angleThreshold <= r7)
+                    if (gFlipperCollisionAngleCorrection[i].angleThreshold <= collisionAngle)
                     {
                         ballPosition.x -= gFlipperCollisionAngleCorrection[i].correctionX;
                         ballPosition.y += gFlipperCollisionAngleCorrection[i].correctionY;
@@ -166,7 +166,7 @@ void AllBoardProcess_6B_1333C()
                 ProcessBonusTrapPhysics();
             }
     }
-    if (gCurrentPinballGame->collisionResponseType != 0)
+    if (gCurrentPinballGame->collisionResolutionState != COLLISION_RESOLUTION_STATE_NONE)
     {
         gCurrentPinballGame->ball->positionQ1.x = ballPosition.x;
         gCurrentPinballGame->ball->positionQ1.y = ballPosition.y;
@@ -177,36 +177,37 @@ void AllBoardProcess_6B_1333C()
 
 u16 DetectBallCollision(struct Vector16* ballPosition)
 {
-    u16 retVal;
-    struct Vector16 test;
-    test.x = gCurrentPinballGame->ball->positionQ1.x - gCurrentPinballGame->ball->prevPositionQ1.x;
-    test.y = gCurrentPinballGame->ball->positionQ1.y - gCurrentPinballGame->ball->prevPositionQ1.y;
+    u16 retCollisionAngle;
+    struct Vector16 movementDelta;
+    movementDelta.x = gCurrentPinballGame->ball->positionQ1.x - gCurrentPinballGame->ball->prevPositionQ1.x;
+    movementDelta.y = gCurrentPinballGame->ball->positionQ1.y - gCurrentPinballGame->ball->prevPositionQ1.y;
     ballPosition->x = gCurrentPinballGame->ball->prevPositionQ1.x;
     ballPosition->y = gCurrentPinballGame->ball->prevPositionQ1.y;
-    retVal = PixelWalkCollisionDetection(ballPosition, test);
+    retCollisionAngle = PixelWalkCollisionDetection(ballPosition, movementDelta);
 
     gCurrentPinballGame->tiltInputCounterX = 0;
     gCurrentPinballGame->tiltInputCounterY = 0;
 
-    if (!gCurrentPinballGame->collisionResponseType && (gCurrentPinballGame->tiltTargetXOffset || gCurrentPinballGame->tiltTargetYOffset))
+    if (gCurrentPinballGame->collisionResolutionState == COLLISION_RESOLUTION_STATE_NONE
+        && (gCurrentPinballGame->tiltTargetXOffset || gCurrentPinballGame->tiltTargetYOffset))
     {
         ballPosition->x = gCurrentPinballGame->ball->positionQ1.x;
         ballPosition->y = gCurrentPinballGame->ball->positionQ1.y;
-        test.x = gCurrentPinballGame->tiltTargetXOffset;
-        test.y = gCurrentPinballGame->tiltTargetYOffset;
-        retVal = PixelWalkCollisionDetection(ballPosition, test);
+        movementDelta.x = gCurrentPinballGame->tiltTargetXOffset;
+        movementDelta.y = gCurrentPinballGame->tiltTargetYOffset;
+        retCollisionAngle = PixelWalkCollisionDetection(ballPosition, movementDelta);
         gCurrentPinballGame->tiltInputCounterX = ballPosition->x - gCurrentPinballGame->ball->positionQ1.x;
         gCurrentPinballGame->tiltInputCounterY = ballPosition->y - gCurrentPinballGame->ball->positionQ1.y;
     }
-    return retVal;
+    return retCollisionAngle;
 }
 
-void ApplyTiltEffectOnCollision(struct Vector16 *ballPosition, struct Vector16 *arg1, u16 angle)
+void ApplyTiltEffectOnCollision(struct Vector16 *ballPosition, struct Vector16 *tiltVelocityDelta, u16 angle)
 {
     s16 cos;
 
-    arg1->x = 0;
-    arg1->y = 0;
+    tiltVelocityDelta->x = 0;
+    tiltVelocityDelta->y = 0;
     if (gCurrentPinballGame->tiltTargetXOffset)
     {
         ballPosition->x -= gCurrentPinballGame->tiltInputCounterX;
@@ -215,7 +216,7 @@ void ApplyTiltEffectOnCollision(struct Vector16 *ballPosition, struct Vector16 *
             cos = Cos(angle);
             if (cos < 0)
             {
-                arg1->x = MulCos(70, angle);
+                tiltVelocityDelta->x = MulCos(70, angle);
                 gCurrentPinballGame->tiltLockoutTimer = 1;
             }
         }
@@ -224,7 +225,7 @@ void ApplyTiltEffectOnCollision(struct Vector16 *ballPosition, struct Vector16 *
             cos = Cos(angle);
             if (cos > 0)
             {
-                arg1->x = MulCos(70, angle);
+                tiltVelocityDelta->x = MulCos(70, angle);
                 gCurrentPinballGame->tiltLockoutTimer = 1;
             }
         }
@@ -236,20 +237,20 @@ void ApplyTiltEffectOnCollision(struct Vector16 *ballPosition, struct Vector16 *
         if (gCurrentPinballGame->ball->positionQ0.y > 364)
         {
             if (gCurrentPinballGame->tiltTargetXOffset == 0)
-                arg1->y = MulSin(-130, angle);
+                tiltVelocityDelta->y = MulSin(-130, angle);
             else
-                arg1->y = MulNegSinSpecial(100, angle);
+                tiltVelocityDelta->y = MulNegSinSpecial(100, angle);
         }
         else
         {
             if (gCurrentPinballGame->tiltTargetXOffset == 0)
-                arg1->y = MulNegSinSpecial(100, angle);
+                tiltVelocityDelta->y = MulNegSinSpecial(100, angle);
             else
-                arg1->y = MulSin(-75, angle);
+                tiltVelocityDelta->y = MulSin(-75, angle);
 
-            if (arg1->y >= 90)
+            if (tiltVelocityDelta->y >= 90)
                 gCurrentPinballGame->ball->velocity.x /= 4;
-            else if (arg1->y >= 70)
+            else if (tiltVelocityDelta->y >= 70)
                 gCurrentPinballGame->ball->velocity.x /= 4;
         }
 
@@ -263,53 +264,54 @@ void ApplyTiltEffectOnCollision(struct Vector16 *ballPosition, struct Vector16 *
     }
 }
 
-void ComputeFlipperBounce(struct Vector16* ballPosition, struct Vector16* arg1, s16 flipperIx)
+void ComputeFlipperBounce(struct Vector16* ballPosition, struct Vector16* collisionVelocity, s16 flipperIx)
 {
-    struct Vector16 r7;
-    u16 r4;
-    s16 sp0;
+    struct Vector16 flipperRelativeBallPosition;
+    u16 flipperCollisionAngle;
+    s16 collisionAngle;
     s16 sp12;
     bool32 flag;
     s16 i;
-    int temp;
+    int flipperRelativeBallDistance;
     int xx, yy;
-    struct Vector16 r5 = { ballPosition->x * 128, ballPosition->y * 128 };
-    struct Vector16 sp4 = { arg1->x, arg1->y };
+    struct Vector16 ballPosition_Q7 = { ballPosition->x * 128, ballPosition->y * 128 };
+    struct Vector16 velocity = { collisionVelocity->x, collisionVelocity->y };
 
     for (;;)
     {
         sp12 = gCurrentPinballGame->flipper[flipperIx].position - gCurrentPinballGame->flipper[flipperIx].prevPosition;
-        
+
         if ((sp12 *= gCurrentPinballGame->flipper[flipperIx].ballSide) > 0)
         {
             if (gCurrentPinballGame->flipper[flipperIx].collisionFrameIndex < 7)
-                r4 = gFlipperCollisionAngles[gCurrentPinballGame->flipper[flipperIx].collisionMapFrame - 1][0] +  ANGLE_90;
+                flipperCollisionAngle = gFlipperCollisionAngles[gCurrentPinballGame->flipper[flipperIx].collisionMapFrame - 1][0] +  ANGLE_90;
             else
-                r4 = gFlipperCollisionAngles[gCurrentPinballGame->flipper[flipperIx].collisionMapFrame + 1][1] + -ANGLE_90; // This changes compilation, apparently
+                flipperCollisionAngle = gFlipperCollisionAngles[gCurrentPinballGame->flipper[flipperIx].collisionMapFrame + 1][1] + -ANGLE_90; // This changes compilation, apparently
         }
         else
         {
             break;
         }
 
-        r7.x = r5.x - 22 * 128;
-        r7.y = r5.y - 48 * 128;
+        flipperRelativeBallPosition.x = ballPosition_Q7.x - 22 * 128;
+        flipperRelativeBallPosition.y = ballPosition_Q7.y - 48 * 128;
 
-        xx = r7.x * r7.x;
-        yy = r7.y * r7.y;
-        temp = xx + yy - 0x240000;
-        temp = Sqrt(temp * 4) / 2;
-        ComputeFlipperLaunchVelocity(temp, flipperIx, &sp4, r4);
+        xx = flipperRelativeBallPosition.x * flipperRelativeBallPosition.x;
+        yy = flipperRelativeBallPosition.y * flipperRelativeBallPosition.y;
+        flipperRelativeBallDistance = xx + yy - 0x240000;
+        flipperRelativeBallDistance = Sqrt(flipperRelativeBallDistance * 4) / 2;
+        ComputeFlipperLaunchVelocity(flipperRelativeBallDistance, flipperIx, &velocity, flipperCollisionAngle);
 
-        if (sp4.x > 0x1C2)
-            sp4.x = 0x1C2;
-        else if (sp4.x < -0x1C2)
-            sp4.x = -0x1C2;
+        // Cap horizontal speed
+        if (velocity.x > 0x1C2)
+            velocity.x = 0x1C2;
+        else if (velocity.x < -0x1C2)
+            velocity.x = -0x1C2;
 
-        r5.x += sp4.x;
-        r5.y += sp4.y;
-        ballPosition->x = r5.x / 128;
-        ballPosition->y = r5.y / 128;
+        ballPosition_Q7.x += velocity.x;
+        ballPosition_Q7.y += velocity.y;
+        ballPosition->x = ballPosition_Q7.x / 128;
+        ballPosition->y = ballPosition_Q7.y / 128;
         flag = FALSE;
 
         if (ballPosition->x < 50)
@@ -317,7 +319,7 @@ void ComputeFlipperBounce(struct Vector16* ballPosition, struct Vector16* arg1, 
 
         for (i = gCurrentPinballGame->gravityStrengthIndex; i < 4; i++)
         {
-            if (LookupFlipperCollisionMap(*ballPosition, i + 1, &sp0, flipperIx))
+            if (LookupFlipperCollisionMap(*ballPosition, i + 1, &collisionAngle, flipperIx))
             {
                 flag = TRUE;
                 break;
@@ -330,19 +332,19 @@ void ComputeFlipperBounce(struct Vector16* ballPosition, struct Vector16* arg1, 
 
     if (sp12 <= 0)
     {
-        gCurrentPinballGame->collisionResponseType = 5;
+        gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_PASSIVE_FLIPPER_COLLISION;
     }
     else
     {
-        arg1->x = sp4.x;
-        arg1->y = sp4.y;
+        collisionVelocity->x = velocity.x;
+        collisionVelocity->y = velocity.y;
     }
 }
 
-void ComputeWallReflection(u16 arg0, struct Vector16 *arg1, struct Vector16 *arg2)
+void ComputeWallReflection(u16 collisionAngle, struct Vector16 *inputVelocity, struct Vector16 *outputVelocity)
 {
-    u16 angleOfFlippedArg1;
-    s32 angleDelta, adjustedAngle;
+    u16 incomingVelocityAngle;
+    s32 collisionAngleDelta, adjustedAngle;
     s16 angleSign;
 
     u16 halfMag;
@@ -357,20 +359,20 @@ void ComputeWallReflection(u16 arg0, struct Vector16 *arg1, struct Vector16 *arg
     struct Vector32 tempVec;
     struct Vector16 tempVec2;
 
-    angleOfFlippedArg1 = ArcTan2(-arg1->x, arg1->y);
+    incomingVelocityAngle = ArcTan2(-inputVelocity->x, inputVelocity->y);
 
-    vxSquared = (arg1->x * arg1->x) + (arg1->y * arg1->y);
+    vxSquared = (inputVelocity->x * inputVelocity->x) + (inputVelocity->y * inputVelocity->y);
     halfMag = Sqrt(vxSquared * 4) /2;
 
     // Determine smallest angle difference and its direction
-    if (angleOfFlippedArg1 > arg0)
+    if (incomingVelocityAngle > collisionAngle)
     {
-        angleDelta = angleOfFlippedArg1 - arg0;
+        collisionAngleDelta = incomingVelocityAngle - collisionAngle;
         angleSign = -1;
     }
     else
     {
-        angleDelta = arg0 - angleOfFlippedArg1;
+        collisionAngleDelta = collisionAngle - incomingVelocityAngle;
         angleSign = 1;
     }
 
@@ -380,14 +382,14 @@ void ComputeWallReflection(u16 arg0, struct Vector16 *arg1, struct Vector16 *arg
     //0x10000 = 360 degrees
 
     //Clamps to the closest 180, with direction
-    if (angleDelta > ANGLE_180)
+    if (collisionAngleDelta > ANGLE_180)
     {
-        angleDelta = ANGLE_360 - angleDelta;
+        collisionAngleDelta = ANGLE_360 - collisionAngleDelta;
         angleSign = -angleSign;
     }
 
     //Adds a 90 degree offset based on the delta factor
-    adjustedAngle = arg0 + angleSign * ANGLE_90;
+    adjustedAngle = collisionAngle + angleSign * ANGLE_90;
 
     // Apply signed adjustedAngle to stay in 0..0xFFFF
     if (adjustedAngle < 0)
@@ -395,11 +397,11 @@ void ComputeWallReflection(u16 arg0, struct Vector16 *arg1, struct Vector16 *arg
 
     // Project a curved arg2 delta based on half the magnitude
     // Note: the trigonometric functions return s16, typically scaled by 0x1000 or more
-    lateralMag = MulSin(halfMag, angleDelta);
-    forwardMag = MulCos(halfMag, angleDelta);
+    lateralMag = MulSin(halfMag, collisionAngleDelta);
+    forwardMag = MulCos(halfMag, collisionAngleDelta);
 
     // 'wall' sound if collision angle is high enough
-    if (Cos(angleDelta)  > 0x1F3F)
+    if (Cos(collisionAngleDelta)  > 0x1F3F)
     {
         if (forwardMag > 0x46)
             m4aSongNumStart(SE_WALL_HIT);
@@ -432,8 +434,8 @@ void ComputeWallReflection(u16 arg0, struct Vector16 *arg1, struct Vector16 *arg
     tempVec.x = MulCos(forwardMag, arg0) + MulCos(lateralMag, adjustedAngle);
     tempVec.y = MulSin(-forwardMag, arg0) + MulSin(-lateralMag, adjustedAngle);
 */
-    tempVec.x =  forwardMag * Cos(arg0);
-    tempVec.y = -forwardMag * Sin(arg0);
+    tempVec.x =  forwardMag * Cos(collisionAngle);
+    tempVec.y = -forwardMag * Sin(collisionAngle);
 
     tempVec.x =  lateralMag * Cos(adjustedAngle) + tempVec.x;
     tempVec.y = -lateralMag * Sin(adjustedAngle) + tempVec.y;
@@ -480,13 +482,13 @@ void ComputeWallReflection(u16 arg0, struct Vector16 *arg1, struct Vector16 *arg
         tempVec.y = MulSin(-halfMag2, finalAngle);
     }
 
-    ApplyBounceBackForce(arg0, &tempVec, angleOfFlippedArg1);
+    ApplyBounceBackForce(collisionAngle, &tempVec, incomingVelocityAngle);
 
-    arg2->x = tempVec.x;
-    arg2->y = tempVec.y;
+    outputVelocity->x = tempVec.x;
+    outputVelocity->y = tempVec.y;
 }
 
-void ApplyBounceBackForce(u16 arg0, struct Vector32 *arg1, u16 arg2)
+void ApplyBounceBackForce(u16 collisionAngle, struct Vector32 *outputVelocity, u16 incomingVelocityAngle)
 {
     s32 squaredSpeed;
     s16 x, y;
@@ -498,19 +500,19 @@ void ApplyBounceBackForce(u16 arg0, struct Vector32 *arg1, u16 arg2)
     y = gCurrentPinballGame->ball->velocity.y;
     squaredSpeed = (x * x) + (y * y);
 
-    if (gCurrentPinballGame->collisionSurfaceType == 2)
+    if (gCurrentPinballGame->collisionBounceBehaviorType == COLLISION_BOUNCE_BEHAVIOR_TYPE_SLINGSHOT)
     {
         if (gCurrentPinballGame->ball->positionQ1.x > 0xE0)
         {
             s32 value = -0x2A1C;
-            var0 = value + arg2;
-            arg0 = 0x6a1c;
+            var0 = value + incomingVelocityAngle;
+            collisionAngle = 0x6a1c;
         }
         else
         {
             s32 value = 0x55e4;
-            var0 = value - arg2;
-            arg0 = 0x15e4;
+            var0 = value - incomingVelocityAngle;
+            collisionAngle = 0x15e4;
         }
 
         if (var0 >= 0 && var0 <= 0x1200 && squaredSpeed < 0x4000)
@@ -520,20 +522,20 @@ void ApplyBounceBackForce(u16 arg0, struct Vector32 *arg1, u16 arg2)
         }
         else
         {
-            arg1->x = arg1->x / 5;
-            arg1->y = arg1->y / 5;
+            outputVelocity->x = outputVelocity->x / 5;
+            outputVelocity->y = outputVelocity->y / 5;
 
             gCurrentPinballGame->ball->spinSpeed = (gCurrentPinballGame->ball->spinSpeed * 4) / 10;
 
             if ( gCurrentPinballGame->ballSpeed > 0)
             {
-                tempVec.x = MulCos(230, arg0);
-                tempVec.y = MulSin(-230, arg0);
+                tempVec.x = MulCos(230, collisionAngle);
+                tempVec.y = MulSin(-230, collisionAngle);
             }
             else
             {
-                tempVec.x = MulCos(285, arg0);
-                tempVec.y = MulSin(-285, arg0);
+                tempVec.x = MulCos(285, collisionAngle);
+                tempVec.y = MulSin(-285, collisionAngle);
             }
 
             gCurrentPinballGame->slingshotHitAnimTimer = 4;
@@ -545,40 +547,40 @@ void ApplyBounceBackForce(u16 arg0, struct Vector32 *arg1, u16 arg2)
     }
     else
     {
-        if (gCurrentPinballGame->collisionSurfaceType == 1)
+        if (gCurrentPinballGame->collisionBounceBehaviorType == COLLISION_BOUNCE_BEHAVIOR_TYPE_BUMPER)
         {
-            arg1->x = arg1->x / 5;
-            arg1->y = arg1->y / 5;
+            outputVelocity->x = outputVelocity->x / 5;
+            outputVelocity->y = outputVelocity->y / 5;
 
-            if (arg0 > 0xA000 && arg0 < 0xE000)
+            if (collisionAngle > 0xA000 && collisionAngle < 0xE000)
             {
-                tempVec.x = MulCos(60, arg0);
-                tempVec.y = MulSin(-60, arg0);
+                tempVec.x = MulCos(60, collisionAngle);
+                tempVec.y = MulSin(-60, collisionAngle);
             }
-            else if (arg0 >= 0x1000 && arg0 <= 0x7000)
+            else if (collisionAngle >= 0x1000 && collisionAngle <= 0x7000)
             {
-                tempVec.x = MulCos(240, arg0);
-                tempVec.y = MulSin(-240, arg0);
+                tempVec.x = MulCos(240, collisionAngle);
+                tempVec.y = MulSin(-240, collisionAngle);
             }
             else
             {
-                tempVec.x = MulCos(120, arg0);
-                tempVec.y = MulSin(-120, arg0);
+                tempVec.x = MulCos(120, collisionAngle);
+                tempVec.y = MulSin(-120, collisionAngle);
             }
         }
         else
         {
-            tempVec.x = MulCos(gBounceBackForceMagnitudes[gCurrentPinballGame->collisionSurfaceType], arg0);
-            tempVec.y = MulSin(-gBounceBackForceMagnitudes[gCurrentPinballGame->collisionSurfaceType], arg0);
+            tempVec.x = MulCos(gBounceBackForceMagnitudes[gCurrentPinballGame->collisionBounceBehaviorType], collisionAngle);
+            tempVec.y = MulSin(-gBounceBackForceMagnitudes[gCurrentPinballGame->collisionBounceBehaviorType], collisionAngle);
         }
     }
 
-    arg1->x = arg1->x + tempVec.x;
-    arg1->y = arg1->y + tempVec.y;
+    outputVelocity->x = outputVelocity->x + tempVec.x;
+    outputVelocity->y = outputVelocity->y + tempVec.y;
 
     if (gCurrentPinballGame->captureState != MON_CAPTURE_SPECIAL_STATE_INACTIVE)
     {
-        s16 x2 = arg1->x;
+        s16 x2 = outputVelocity->x;
         s16 xSign = 1;
         u16 angle;
         if (gCurrentPinballGame->captureState == MON_CAPTURE_SPECIAL_STATE_MON_HIT_IN_CATCH_MODE)
@@ -598,44 +600,44 @@ void ApplyBounceBackForce(u16 arg0, struct Vector32 *arg1, u16 arg2)
         }
 
         if (x2 < 0x100)
-            arg1->x = xSign * 256;
+            outputVelocity->x = xSign * 256;
 
         gCurrentPinballGame->ball->spinSpeed = 0;
-        angle = ArcTan2(arg1->x, -arg1->y);
-        arg1->x = MulCos(squaredSpeed, angle);
-        arg1->y = MulSin(-squaredSpeed, angle);
+        angle = ArcTan2(outputVelocity->x, -outputVelocity->y);
+        outputVelocity->x = MulCos(squaredSpeed, angle);
+        outputVelocity->y = MulSin(-squaredSpeed, angle);
     }
 }
 
-u16 PixelWalkCollisionDetection(struct Vector16* ballPosition, struct Vector16 arg1) {
-    struct Vector16 r8;
+u16 PixelWalkCollisionDetection(struct Vector16* ballPosition, struct Vector16 movementDelta) {
+    struct Vector16 stepDirection;
 
     u32 toggleShiftMode;
     s16 (*boardCollisionFunc)(struct Vector16*, u16*);
     u16 collisionAngle;
 
-    r8.x = 1;
-    r8.y = 1;
+    stepDirection.x = 1;
+    stepDirection.y = 1;
 
-    if (arg1.x < 0)
+    if (movementDelta.x < 0)
     {
-        r8.x = -1;
-        arg1.x = -arg1.x;
+        stepDirection.x = -1;
+        movementDelta.x = -movementDelta.x;
     }
 
-    if (arg1.y < 0)
+    if (movementDelta.y < 0)
     {
-        r8.y = -1;
-        arg1.y =  -arg1.y ;
+        stepDirection.y = -1;
+        movementDelta.y =  -movementDelta.y ;
     }
 
-    if (arg1.x  > arg1.y)
+    if (movementDelta.x  > movementDelta.y)
         toggleShiftMode = FALSE;
     else
         toggleShiftMode = TRUE;
 
-    gCurrentPinballGame->collisionResponseType = 0;
-    gCurrentPinballGame->collisionSurfaceType = 0;
+    gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_NONE;
+    gCurrentPinballGame->collisionBounceBehaviorType = COLLISION_BOUNCE_BEHAVIOR_TYPE_NORMAL;
 
     boardCollisionFunc = BoardCollisionFuncts_086ACE0C[gMain.selectedField];
 
@@ -643,9 +645,11 @@ u16 PixelWalkCollisionDetection(struct Vector16* ballPosition, struct Vector16 a
     {
         if(boardCollisionFunc(ballPosition, &collisionAngle) != 0)
         {
-            if (gCurrentPinballGame->collisionResponseType == 1)
+            if (gCurrentPinballGame->collisionResolutionState == COLLISION_RESOLUTION_STATE_PIXEL_WALK_CONTINUING)
             {
-                if (gCurrentPinballGame->collisionSurfaceType == 3)
+                // Prevent Wall penetration. When an outer wall collision is detected, find an associated inner wall
+                // collision point, and continue from there.
+                if (gCurrentPinballGame->collisionBounceBehaviorType == COLLISION_BOUNCE_BEHAVIOR_TYPE_OUTER_WALL)
                 {
                     u16 j;
                     u16 sp2_testRes;
@@ -658,7 +662,7 @@ u16 PixelWalkCollisionDetection(struct Vector16* ballPosition, struct Vector16 a
 
                         boardCollisionFunc(&sp4_testPos, &sp2_testRes);
 
-                        if (gCurrentPinballGame->collisionResponseType == 1 && gCurrentPinballGame->collisionSurfaceType == 0)
+                        if (gCurrentPinballGame->collisionResolutionState == COLLISION_RESOLUTION_STATE_PIXEL_WALK_CONTINUING && gCurrentPinballGame->collisionBounceBehaviorType == COLLISION_BOUNCE_BEHAVIOR_TYPE_NORMAL)
                         {
                             ballPosition->x = sp4_testPos.x;
                             ballPosition->y = sp4_testPos.y;
@@ -675,7 +679,7 @@ u16 PixelWalkCollisionDetection(struct Vector16* ballPosition, struct Vector16 a
         }
         else
         {
-            gCurrentPinballGame->collisionResponseType = 0;
+            gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_NONE;
 
             if (CheckFlipperCollision(ballPosition, &collisionAngle) != 0
                 || (gCurrentPinballGame->catchMonCollisionEnabled
@@ -683,21 +687,21 @@ u16 PixelWalkCollisionDetection(struct Vector16* ballPosition, struct Vector16 a
                 break;
         }
 
-        if (!(arg1.x > 0 || arg1.y > 0))
+        if (!(movementDelta.x > 0 || movementDelta.y > 0))
             break;
 
         if (!toggleShiftMode)
         {
-            ballPosition->x = r8.x + ballPosition->x;
-            arg1.x--;
-            if (arg1.y > 0)
+            ballPosition->x = stepDirection.x + ballPosition->x;
+            movementDelta.x--;
+            if (movementDelta.y > 0)
                 toggleShiftMode = TRUE;
         }
         else
         {
-            ballPosition->y = ballPosition->y + r8.y;
-            arg1.y--;
-            if (arg1.x > 0)
+            ballPosition->y = ballPosition->y + stepDirection.y;
+            movementDelta.y--;
+            if (movementDelta.x > 0)
                 toggleShiftMode = FALSE;
         }
     } while(1);
@@ -724,7 +728,7 @@ u16 CheckFlipperCollision(struct Vector16* ballPosition, u16* collisionAngle)
         {
             if(LookupFlipperCollisionMap(leftFlipperBallRelativePosition, gCurrentPinballGame->gravityStrengthIndex + 1, collisionAngle, SIDE_IX_LEFT))
             {
-                gCurrentPinballGame->collisionResponseType = 3;
+                gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_LEFT_FLIPPER;
                 hasCollisionImpact = TRUE;
             }
         }
@@ -736,7 +740,7 @@ u16 CheckFlipperCollision(struct Vector16* ballPosition, u16* collisionAngle)
                 rightFlipperBallRelativePosition.x = 95 - rightFlipperBallRelativePosition.x;
                 if (LookupFlipperCollisionMap(rightFlipperBallRelativePosition, gCurrentPinballGame->gravityStrengthIndex + 1, collisionAngle, SIDE_IX_RIGHT))
                 {
-                    gCurrentPinballGame->collisionResponseType = 4;
+                    gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_RIGHT_FLIPPER;
                     hasCollisionImpact = TRUE;
                 }
             }
@@ -764,8 +768,8 @@ u16 CheckCatchTargetCollision(struct Vector16 *ballPosition, u16 *collisionAngle
             var0 = gCatchTargetCollisionBitmap[ix];
             if (var0 & 0x80)
             {
-                gCurrentPinballGame->collisionResponseType = 2;
-                gCurrentPinballGame->collisionSurfaceType = 3;
+                gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_PIXEL_WALK_ONE_STEP;
+                gCurrentPinballGame->collisionBounceBehaviorType = COLLISION_BOUNCE_BEHAVIOR_TYPE_OUTER_WALL;
                 //Todo: fakematch; used to swap register order
                 *collisionAngle = (var0 & 0x7F & var0) * 512;
                 gCurrentPinballGame->captureSequenceFrame = 20;
@@ -837,24 +841,24 @@ u16 CheckCatchTargetCollision(struct Vector16 *ballPosition, u16 *collisionAngle
 
 void ProcessBonusTrapPhysics(void)
 {
-    struct Vector16 vec1;
-    struct Vector32 vec2;
+    struct Vector16 centerTargetRelativeDistance;
+    struct Vector32 gravityForceAngle;
     int squaredDistance;
     u16 angle;
     u8 temp_adjust;
 
-    vec1.x = gCurrentPinballGame->ball->positionQ1.x - 238;
-    vec1.y = gCurrentPinballGame->ball->positionQ1.y - 558;
-    squaredDistance = (vec1.x * vec1.x) + (vec1.y * vec1.y);
+    centerTargetRelativeDistance.x = gCurrentPinballGame->ball->positionQ1.x - 238;
+    centerTargetRelativeDistance.y = gCurrentPinballGame->ball->positionQ1.y - 558;
+    squaredDistance = (centerTargetRelativeDistance.x * centerTargetRelativeDistance.x) + (centerTargetRelativeDistance.y * centerTargetRelativeDistance.y);
 
     if (squaredDistance < 1764 && (gCurrentPinballGame->gravityStrengthIndex & 1) == 0)
     {
-        angle = ArcTan2(-vec1.x, vec1.y);
+        angle = ArcTan2(-centerTargetRelativeDistance.x, centerTargetRelativeDistance.y);
         temp_adjust = 30;
-        vec2.x = MulCos(temp_adjust, angle);
-        vec2.y = MulSin(-temp_adjust, angle);
-        gCurrentPinballGame->ball->velocity.x = ((vec2.x * 100) + (98 * gCurrentPinballGame->ball->velocity.x)) / 100;
-        gCurrentPinballGame->ball->velocity.y = ((vec2.y * 100) + (98 * gCurrentPinballGame->ball->velocity.y)) / 100;
+        gravityForceAngle.x = MulCos(temp_adjust, angle);
+        gravityForceAngle.y = MulSin(-temp_adjust, angle);
+        gCurrentPinballGame->ball->velocity.x = ((gravityForceAngle.x * 100) + (98 * gCurrentPinballGame->ball->velocity.x)) / 100;
+        gCurrentPinballGame->ball->velocity.y = ((gravityForceAngle.y * 100) + (98 * gCurrentPinballGame->ball->velocity.y)) / 100;
     }
 
     if (gCurrentPinballGame->collisionMapScrollY < 20)
@@ -892,7 +896,7 @@ void ProcessBonusTrapPhysics(void)
             else
                 DispatchSapphireCatchModeInit();
 
-            gCurrentPinballGame->collisionResponseType = 7;
+            gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_STOP_BALL;
             gCurrentPinballGame->ball->scale = 0x80;
         }
     }
@@ -931,7 +935,7 @@ u16 LookupFlipperCollisionMap(struct Vector16 relPos, s16 gravityStrength, u16 *
     return hasCollisionImpact;
 }
 
-void ComputeFlipperLaunchVelocity(s32 arg0, s16 flipperIx, struct Vector16* arg2, u16 arg3)
+void ComputeFlipperLaunchVelocity(s32 flipperRelativeBallDistance, s16 flipperIx, struct Vector16* collisionVelocity, u16 flipperCollisionAngle)
 {
     u16 angle;
     
@@ -948,19 +952,19 @@ void ComputeFlipperLaunchVelocity(s32 arg0, s16 flipperIx, struct Vector16* arg2
 
             temp_r2 = gCurrentPinballGame->flipper[flipperIx].collisionMapFrame;
             temp_r5 = (temp_r2 - 2) * 25;
-            arg0 -= temp_r5;
+            flipperRelativeBallDistance -= temp_r5;
 
-            if (arg0 < 2850)
+            if (flipperRelativeBallDistance < 2850)
             {
-                var0 = 0x4800 - (arg0 - 2600) * 2048 / 600;
-                scale = (arg0 - 2600) * 128 / 300 + 120;
+                var0 = 0x4800 - (flipperRelativeBallDistance - 2600) * 2048 / 600;
+                scale = (flipperRelativeBallDistance - 2600) * 128 / 300 + 120;
             }
             else
             {
                 var0 =
                     gFlipperLaunchVelocityParams[temp_r2][0] -
-                    ((gFlipperLaunchVelocityParams[temp_r2][1] * (arg0 -2600)) / 5400);
-                scale = ((arg0 -2600) * 348 / 5400) + 406;
+                    ((gFlipperLaunchVelocityParams[temp_r2][1] * (flipperRelativeBallDistance -2600)) / 5400);
+                scale = ((flipperRelativeBallDistance -2600) * 348 / 5400) + 406;
             }
 
             if (flipperIx != SIDE_IX_LEFT)
@@ -976,11 +980,11 @@ void ComputeFlipperLaunchVelocity(s32 arg0, s16 flipperIx, struct Vector16* arg2
         gCurrentPinballGame->flipperLaunchPending = TRUE;
 
         if (flipperIx)
-            arg2->x = -gCurrentPinballGame->flipperLaunchVelocity.x;
+            collisionVelocity->x = -gCurrentPinballGame->flipperLaunchVelocity.x;
         else
-            arg2->x = gCurrentPinballGame->flipperLaunchVelocity.x;
+            collisionVelocity->x = gCurrentPinballGame->flipperLaunchVelocity.x;
 
-        arg2->y = gCurrentPinballGame->flipperLaunchVelocity.y;
+        collisionVelocity->y = gCurrentPinballGame->flipperLaunchVelocity.y;
     }
     else
     {
@@ -988,15 +992,15 @@ void ComputeFlipperLaunchVelocity(s32 arg0, s16 flipperIx, struct Vector16* arg2
         s32 scale;
         u16 angle2;
 
-        scale = arg0 / 20;
-        vec1.x = MulCos(scale, arg3);
-        vec1.y = MulNegSinSpecial(scale, arg3);
+        scale = flipperRelativeBallDistance / 20;
+        vec1.x = MulCos(scale, flipperCollisionAngle);
+        vec1.y = MulNegSinSpecial(scale, flipperCollisionAngle);
 
-        arg2->x = vec1.x + arg2->x * 3 / 2;
-        arg2->y = vec1.y + arg2->y * 3 / 2;
+        collisionVelocity->x = vec1.x + collisionVelocity->x * 3 / 2;
+        collisionVelocity->y = vec1.y + collisionVelocity->y * 3 / 2;
 
-        angle2 = ArcTan2(arg2->x, -arg2->y);
-        arg2->x = MulCos(scale, angle2);
-        arg2->y = MulSin(-scale, angle2);
+        angle2 = ArcTan2(collisionVelocity->x, -collisionVelocity->y);
+        collisionVelocity->x = MulCos(scale, angle2);
+        collisionVelocity->y = MulSin(-scale, angle2);
     }
 }

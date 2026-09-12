@@ -391,7 +391,7 @@ void RubyPond_EntityLogic(void)
                 if (gCurrentPinballGame->whiscashStateTimer == 0)
                 {
                     gCurrentPinballGame->nextBonusField = FIELD_SPHEAL;
-                    gCurrentPinballGame->bonusReturnState = 1;
+                    gCurrentPinballGame->bonusReturnState = BONUS_RETURN_LOCATION_WHISCASH;
                     gCurrentPinballGame->arrowProgressPreserved = gCurrentPinballGame->evoArrowProgress;
                     gCurrentPinballGame->catchModeArrows = gCurrentPinballGame->catchArrowProgress;
                     TransitionToBonusField();

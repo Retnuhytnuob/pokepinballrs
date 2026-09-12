@@ -30,9 +30,9 @@ struct BoardProcessPair
  Initial load (first frame on board) goes in order.
  After that, step 0 (sprite loading) moves after step 1 for Bonus Board, and after step 2 for main boards
  */
-extern struct BoardProcessPair CurrentBoardProcPairs_020028D8[9];
+extern struct BoardProcessPair CurrentBoardProcPairs[PER_FRAME_PROCESS_PHASE_COUNT];
 
-extern const struct BoardProcessPair gBoardProcPairs_086B077C[];
+extern const struct BoardProcessPair gBoardProcPairs[];
 extern const VoidFunc gFieldInitFuncs[];
 extern struct SpriteGroup *gMainFieldSpriteGroups[][60];
 extern struct SpriteGroup *gBonusFieldSpriteGroups[][30];
@@ -59,9 +59,16 @@ void PinballGameMain(void)
 
 void PinballGame_State0_49ED4(void)
 {
+    enum {
+        LOAD_MODE_CONTINUE_FROM_SAVE = 0,
+        LOAD_MODE_1 = 1, // ?? TODO: Needs conditions identified to name this state. E-reader stage select?
+        LOAD_MODE_MAIN_FIELD = 2,
+        LOAD_MODE_BONUS_FIELD = 3
+    };
+
     s16 i, j;
     s16 numRngAdvances;
-    s16 var0;
+    s16 loadMode;
 
     numRngAdvances = gMain.systemFrameCount % 16;
     for (i = 0; i < numRngAdvances; i++)
@@ -72,17 +79,17 @@ void PinballGame_State0_49ED4(void)
     ResetDisplayState();
     gMain.gameExitState = 0;
     if (gMain.continueFromSave)
-        var0 = 0;
+        loadMode = LOAD_MODE_CONTINUE_FROM_SAVE;
     else if (gMain.tempField == gMain.selectedField)
-        var0 = 1;
+        loadMode = LOAD_MODE_1;
     else if (gMain.selectedField < MAIN_FIELD_COUNT)
-        var0 = 2;
+        loadMode = LOAD_MODE_MAIN_FIELD;
     else
-        var0 = 3;
+        loadMode = LOAD_MODE_BONUS_FIELD;
 
-    switch (var0)
+    switch (loadMode)
     {
-    case 0:
+    case LOAD_MODE_CONTINUE_FROM_SAVE:
         SetupDisplayRegistersForField();
         InitPinballGameState();
         loadFieldBoardGraphics();
@@ -95,8 +102,8 @@ void PinballGame_State0_49ED4(void)
             DmaCopy16(3, gBall_Pals[gCurrentPinballGame->ballUpgradeType], OBJ_PLTT_SLOT(PAL_IX_BALL), PLTT_SLOT_SIZE);
 
         ConfigureBoardProcessesForField();
-        for (i = 0; i < 9; i++)
-            CurrentBoardProcPairs_020028D8[i].initFunc();
+        for (i = 0; i < PER_FRAME_PROCESS_PHASE_COUNT; i++)
+            CurrentBoardProcPairs[i].initFunc();
 
         m4aMPlayAllStop();
         ClearBG0Tilemap();
@@ -118,7 +125,7 @@ void PinballGame_State0_49ED4(void)
         else if (gMain.selectedField == FIELD_GROUDON)
             HideGroudonShockwaveSprite();
         break;
-    case 1:
+    case LOAD_MODE_1:
         SetupDisplayRegistersForField();
         InitPinballGameState();
         loadFieldBoardGraphics();
@@ -131,12 +138,12 @@ void PinballGame_State0_49ED4(void)
             DmaCopy16(3, gBall_Pals[gCurrentPinballGame->ballUpgradeType], OBJ_PLTT_SLOT(PAL_IX_BALL), PLTT_SLOT_SIZE);
 
         ConfigureBoardProcessesForField();
-        for (i = 0; i < 9; i++)
-            CurrentBoardProcPairs_020028D8[i].initFunc();
+        for (i = 0; i < PER_FRAME_PROCESS_PHASE_COUNT; i++)
+            CurrentBoardProcPairs[i].initFunc();
 
         ClearBG0Tilemap();
         break;
-    case 2:
+    case LOAD_MODE_MAIN_FIELD:
         SetupDisplayRegistersForField();
         SetBallPositionForBonusReturn();
         RestoreGameState(0);
@@ -148,7 +155,7 @@ void PinballGame_State0_49ED4(void)
         LoadPortraitGraphics(PORTRAIT_STATE_CURRENT_LOCATION, PORTRAIT_MAIN_SLOT);
         gCurrentPinballGame->portraitDisplayState = PORTRAIT_DISPLAY_MODE_BOARD_CENTER;
         break;
-    case 3:
+    case LOAD_MODE_BONUS_FIELD:
         SetupDisplayRegistersForField();
         InitPinballGameState();
         loadFieldBoardGraphics();
@@ -157,8 +164,8 @@ void PinballGame_State0_49ED4(void)
             OBJ_PLTT,
             OBJ_PLTT_SIZE);
         ConfigureBoardProcessesForField();
-        for (i = 0; i < 9; i++)
-            CurrentBoardProcPairs_020028D8[i].initFunc();
+        for (i = 0; i < PER_FRAME_PROCESS_PHASE_COUNT; i++)
+            CurrentBoardProcPairs[i].initFunc();
 
         ClearBG0Tilemap();
         break;
@@ -167,7 +174,7 @@ void PinballGame_State0_49ED4(void)
     gBoardConfig.caughtSpeciesCount = 0;
     for (j = 0; j < NUM_SPECIES; j++)
     {
-        if (gMain_saveData.pokedexFlags[j] > SPECIES_SHARED_AND_SEEN)
+        if (gMain_saveData.pokedexFlags[j] > SPECIES_DEX_SHARED_AND_SEEN)
             gBoardConfig.caughtSpeciesCount++;
     }
 
@@ -176,20 +183,20 @@ void PinballGame_State0_49ED4(void)
     gCurrentPinballGame->startButtonDisabled = FALSE;
     gMain.blendEnabled = TRUE;
 
-    switch (var0)
+    switch (loadMode)
     {
-    case 0:
+    case LOAD_MODE_CONTINUE_FROM_SAVE:
         if (gMain.mainState != STATE_GAME_IDLE && gCurrentPinballGame->savedBgmSongHeader && gMPlayInfo_BGM.status < 0)
             MPlayStart(&gMPlayInfo_BGM, gCurrentPinballGame->savedBgmSongHeader);
         if (gMain.selectedField < MAIN_FIELD_COUNT)
             RestoreBoardObjPalettes(gCurrentPinballGame->paletteDimmingIx);
         break;
-    case 1:
-    case 2:
+    case LOAD_MODE_1:
+    case LOAD_MODE_MAIN_FIELD:
         gMain.blendControl = 0xCE;
         gMain.blendBrightness = 0;
         break;
-    case 3:
+    case LOAD_MODE_BONUS_FIELD:
         break;
     }
 
@@ -343,7 +350,7 @@ void SetBallPositionForBonusReturn(void)
 {
     switch (gCurrentPinballGame->bonusReturnState)
     {
-    case 0:
+    case BONUS_RETURN_LOCATION_CENTER_KICKOUT:
         gCurrentPinballGame->ball->positionQ0.x = 119;
         gCurrentPinballGame->ball->positionQ0.y = 279;
         gCurrentPinballGame->ball->velocity.x = 0;
@@ -365,7 +372,7 @@ void SetBallPositionForBonusReturn(void)
         gCurrentPinballGame->cameraBaseX = 0;
         gCurrentPinballGame->cameraBaseY = 215;
         break;
-    case 1:
+    case BONUS_RETURN_LOCATION_WHISCASH:
         gCurrentPinballGame->ball->positionQ0.x = 140;
         gCurrentPinballGame->ball->positionQ0.y = 183;
         gCurrentPinballGame->ball->velocity.x = 0;
@@ -381,7 +388,7 @@ void SetBallPositionForBonusReturn(void)
         gCurrentPinballGame->cameraBaseX = 0;
         gCurrentPinballGame->cameraBaseY = 118;
         break;
-    case 2:
+    case BONUS_RETURN_LOCATION_PELIPPER:
         gCurrentPinballGame->ball->positionQ0.x = -28;
         gCurrentPinballGame->ball->positionQ0.y = -10;
         gCurrentPinballGame->ball->velocity.x = 0;
@@ -421,81 +428,81 @@ void SetBallPositionForBonusReturn(void)
 
 void ConfigureBoardProcessesForField(void)
 {
-    CurrentBoardProcPairs_020028D8[1] = gBoardProcPairs_086B077C[0];
-    CurrentBoardProcPairs_020028D8[8] = gBoardProcPairs_086B077C[18];
-    CurrentBoardProcPairs_020028D8[6] = gBoardProcPairs_086B077C[15];
+    CurrentBoardProcPairs[PER_FRAME_PROCESS_PAUSE_LOGIC] = gBoardProcPairs[0];
+    CurrentBoardProcPairs[PER_FRAME_PROCESS_HUD_UPDATE] = gBoardProcPairs[18];
+    CurrentBoardProcPairs[PER_FRAME_PROCESS_COLLISION] = gBoardProcPairs[15];
     switch (gMain.selectedField)
     {
     case FIELD_RUBY:
-        CurrentBoardProcPairs_020028D8[3] = gBoardProcPairs_086B077C[3];
-        CurrentBoardProcPairs_020028D8[7] = gBoardProcPairs_086B077C[16];
-        CurrentBoardProcPairs_020028D8[0] = gBoardProcPairs_086B077C[19];
-        CurrentBoardProcPairs_020028D8[4] = gBoardProcPairs_086B077C[11];
-        CurrentBoardProcPairs_020028D8[2] = gBoardProcPairs_086B077C[1];
-        CurrentBoardProcPairs_020028D8[5] = gBoardProcPairs_086B077C[13];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_BOARD_LOGIC] = gBoardProcPairs[3];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_DRAW_BALL] = gBoardProcPairs[16];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_DEFAULT_SPRITE_STATES] = gBoardProcPairs[19];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_FLIPPER_LOGIC] = gBoardProcPairs[11];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_CAMERA_SHAKE_AND_DRAIN] = gBoardProcPairs[1];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_BALL_MOVEMENT] = gBoardProcPairs[13];
         gMain.fieldSpriteGroups = gMainFieldSpriteGroups[gMain.selectedField];
         break;
     case FIELD_SAPPHIRE:
-        CurrentBoardProcPairs_020028D8[3] = gBoardProcPairs_086B077C[4];
-        CurrentBoardProcPairs_020028D8[7] = gBoardProcPairs_086B077C[16];
-        CurrentBoardProcPairs_020028D8[0] = gBoardProcPairs_086B077C[20];
-        CurrentBoardProcPairs_020028D8[4] = gBoardProcPairs_086B077C[11];
-        CurrentBoardProcPairs_020028D8[2] = gBoardProcPairs_086B077C[1];
-        CurrentBoardProcPairs_020028D8[5] = gBoardProcPairs_086B077C[13];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_BOARD_LOGIC] = gBoardProcPairs[4];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_DRAW_BALL] = gBoardProcPairs[16];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_DEFAULT_SPRITE_STATES] = gBoardProcPairs[20];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_FLIPPER_LOGIC] = gBoardProcPairs[11];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_CAMERA_SHAKE_AND_DRAIN] = gBoardProcPairs[1];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_BALL_MOVEMENT] = gBoardProcPairs[13];
         gMain.fieldSpriteGroups = gMainFieldSpriteGroups[gMain.selectedField];
         break;
     case FIELD_DUSCLOPS:
-        CurrentBoardProcPairs_020028D8[3] = gBoardProcPairs_086B077C[5];
-        CurrentBoardProcPairs_020028D8[7] = gBoardProcPairs_086B077C[17];
-        CurrentBoardProcPairs_020028D8[0] = gBoardProcPairs_086B077C[21];
-        CurrentBoardProcPairs_020028D8[4] = gBoardProcPairs_086B077C[12];
-        CurrentBoardProcPairs_020028D8[2] = gBoardProcPairs_086B077C[2];
-        CurrentBoardProcPairs_020028D8[5] = gBoardProcPairs_086B077C[14];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_BOARD_LOGIC] = gBoardProcPairs[5];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_DRAW_BALL] = gBoardProcPairs[17];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_DEFAULT_SPRITE_STATES] = gBoardProcPairs[21];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_FLIPPER_LOGIC] = gBoardProcPairs[12];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_CAMERA_SHAKE_AND_DRAIN] = gBoardProcPairs[2];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_BALL_MOVEMENT] = gBoardProcPairs[14];
         gMain.fieldSpriteGroups = gBonusFieldSpriteGroups[gMain.selectedField - FIELD_BONUS_START];
         break;
     case FIELD_KECLEON:
-        CurrentBoardProcPairs_020028D8[3] = gBoardProcPairs_086B077C[6];
-        CurrentBoardProcPairs_020028D8[7] = gBoardProcPairs_086B077C[17];
-        CurrentBoardProcPairs_020028D8[0] = gBoardProcPairs_086B077C[22];
-        CurrentBoardProcPairs_020028D8[4] = gBoardProcPairs_086B077C[12];
-        CurrentBoardProcPairs_020028D8[2] = gBoardProcPairs_086B077C[2];
-        CurrentBoardProcPairs_020028D8[5] = gBoardProcPairs_086B077C[14];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_BOARD_LOGIC] = gBoardProcPairs[6];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_DRAW_BALL] = gBoardProcPairs[17];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_DEFAULT_SPRITE_STATES] = gBoardProcPairs[22];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_FLIPPER_LOGIC] = gBoardProcPairs[12];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_CAMERA_SHAKE_AND_DRAIN] = gBoardProcPairs[2];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_BALL_MOVEMENT] = gBoardProcPairs[14];
         gMain.fieldSpriteGroups = gBonusFieldSpriteGroups[gMain.selectedField - FIELD_BONUS_START];
         break;
     case FIELD_KYOGRE:
-        CurrentBoardProcPairs_020028D8[3] = gBoardProcPairs_086B077C[7];
-        CurrentBoardProcPairs_020028D8[7] = gBoardProcPairs_086B077C[17];
-        CurrentBoardProcPairs_020028D8[0] = gBoardProcPairs_086B077C[23];
-        CurrentBoardProcPairs_020028D8[4] = gBoardProcPairs_086B077C[12];
-        CurrentBoardProcPairs_020028D8[2] = gBoardProcPairs_086B077C[2];
-        CurrentBoardProcPairs_020028D8[5] = gBoardProcPairs_086B077C[14];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_BOARD_LOGIC] = gBoardProcPairs[7];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_DRAW_BALL] = gBoardProcPairs[17];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_DEFAULT_SPRITE_STATES] = gBoardProcPairs[23];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_FLIPPER_LOGIC] = gBoardProcPairs[12];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_CAMERA_SHAKE_AND_DRAIN] = gBoardProcPairs[2];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_BALL_MOVEMENT] = gBoardProcPairs[14];
         gMain.fieldSpriteGroups = gBonusFieldSpriteGroups[gMain.selectedField - FIELD_BONUS_START];
         break;
     case FIELD_GROUDON:
-        CurrentBoardProcPairs_020028D8[3] = gBoardProcPairs_086B077C[8];
-        CurrentBoardProcPairs_020028D8[7] = gBoardProcPairs_086B077C[17];
-        CurrentBoardProcPairs_020028D8[0] = gBoardProcPairs_086B077C[24];
-        CurrentBoardProcPairs_020028D8[4] = gBoardProcPairs_086B077C[12];
-        CurrentBoardProcPairs_020028D8[2] = gBoardProcPairs_086B077C[2];
-        CurrentBoardProcPairs_020028D8[5] = gBoardProcPairs_086B077C[14];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_BOARD_LOGIC] = gBoardProcPairs[8];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_DRAW_BALL] = gBoardProcPairs[17];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_DEFAULT_SPRITE_STATES] = gBoardProcPairs[24];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_FLIPPER_LOGIC] = gBoardProcPairs[12];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_CAMERA_SHAKE_AND_DRAIN] = gBoardProcPairs[2];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_BALL_MOVEMENT] = gBoardProcPairs[14];
         gMain.fieldSpriteGroups = gBonusFieldSpriteGroups[gMain.selectedField - FIELD_BONUS_START];
         break;
     case FIELD_RAYQUAZA:
-        CurrentBoardProcPairs_020028D8[3] = gBoardProcPairs_086B077C[9];
-        CurrentBoardProcPairs_020028D8[7] = gBoardProcPairs_086B077C[17];
-        CurrentBoardProcPairs_020028D8[0] = gBoardProcPairs_086B077C[25];
-        CurrentBoardProcPairs_020028D8[4] = gBoardProcPairs_086B077C[12];
-        CurrentBoardProcPairs_020028D8[2] = gBoardProcPairs_086B077C[2];
-        CurrentBoardProcPairs_020028D8[5] = gBoardProcPairs_086B077C[14];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_BOARD_LOGIC] = gBoardProcPairs[9];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_DRAW_BALL] = gBoardProcPairs[17];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_DEFAULT_SPRITE_STATES] = gBoardProcPairs[25];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_FLIPPER_LOGIC] = gBoardProcPairs[12];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_CAMERA_SHAKE_AND_DRAIN] = gBoardProcPairs[2];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_BALL_MOVEMENT] = gBoardProcPairs[14];
         gMain.fieldSpriteGroups = gBonusFieldSpriteGroups[gMain.selectedField - FIELD_BONUS_START];
         break;
     case FIELD_SPHEAL:
-        CurrentBoardProcPairs_020028D8[3] = gBoardProcPairs_086B077C[10];
-        CurrentBoardProcPairs_020028D8[7] = gBoardProcPairs_086B077C[17];
-        CurrentBoardProcPairs_020028D8[0] = gBoardProcPairs_086B077C[26];
-        CurrentBoardProcPairs_020028D8[4] = gBoardProcPairs_086B077C[12];
-        CurrentBoardProcPairs_020028D8[2] = gBoardProcPairs_086B077C[2];
-        CurrentBoardProcPairs_020028D8[5] = gBoardProcPairs_086B077C[14];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_BOARD_LOGIC] = gBoardProcPairs[10];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_DRAW_BALL] = gBoardProcPairs[17];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_DEFAULT_SPRITE_STATES] = gBoardProcPairs[26];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_FLIPPER_LOGIC] = gBoardProcPairs[12];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_CAMERA_SHAKE_AND_DRAIN] = gBoardProcPairs[2];
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_BALL_MOVEMENT] = gBoardProcPairs[14];
         gMain.fieldSpriteGroups = gBonusFieldSpriteGroups[gMain.selectedField - FIELD_BONUS_START];
         break;
     }
@@ -567,13 +574,13 @@ void MainGameFrameUpdate(void)
     s16 i;
 
     UpdateButtonActionsFromJoy();
-    CurrentBoardProcPairs_020028D8[1].updateFunc();
+    CurrentBoardProcPairs[PER_FRAME_PROCESS_PAUSE_LOGIC].updateFunc();
     if (gMain.gameExitState == 0 && !(gMain.modeChangeFlags & MODE_CHANGE_PAUSE))
     {
-        CurrentBoardProcPairs_020028D8[2].updateFunc();
-        CurrentBoardProcPairs_020028D8[0].updateFunc();
-        CurrentBoardProcPairs_020028D8[3].updateFunc();
-        CurrentBoardProcPairs_020028D8[4].updateFunc();
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_CAMERA_SHAKE_AND_DRAIN].updateFunc();
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_DEFAULT_SPRITE_STATES].updateFunc();
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_BOARD_LOGIC].updateFunc();
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_FLIPPER_LOGIC].updateFunc();
         if (gMain.modeChangeFlags)
         {
             if (gCurrentPinballGame->ballPhysicsState == BALL_PHYSICS_NORMAL)
@@ -581,7 +588,7 @@ void MainGameFrameUpdate(void)
                 for (i = 0; i < 4; i++)
                 {
                     gCurrentPinballGame->gravityStrengthIndex = i;
-                    CurrentBoardProcPairs_020028D8[6].updateFunc();
+                    CurrentBoardProcPairs[PER_FRAME_PROCESS_COLLISION].updateFunc();
                 }
             }
         }
@@ -596,7 +603,7 @@ void MainGameFrameUpdate(void)
                     for (i = 0; i < 4; i++)
                     {
                         gCurrentPinballGame->gravityStrengthIndex = i;
-                        CurrentBoardProcPairs_020028D8[5].updateFunc();
+                        CurrentBoardProcPairs[PER_FRAME_PROCESS_BALL_MOVEMENT].updateFunc();
                     }
                 }
             }
@@ -605,14 +612,14 @@ void MainGameFrameUpdate(void)
                 for (i = 0; i < 4; i++)
                 {
                     gCurrentPinballGame->gravityStrengthIndex = i;
-                    CurrentBoardProcPairs_020028D8[5].updateFunc();
-                    CurrentBoardProcPairs_020028D8[6].updateFunc();
+                    CurrentBoardProcPairs[PER_FRAME_PROCESS_BALL_MOVEMENT].updateFunc();
+                    CurrentBoardProcPairs[PER_FRAME_PROCESS_COLLISION].updateFunc();
                 }
             }
         }
 
-        CurrentBoardProcPairs_020028D8[7].updateFunc();
-        CurrentBoardProcPairs_020028D8[8].updateFunc();
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_DRAW_BALL].updateFunc();
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_HUD_UPDATE].updateFunc();
     }
 
     UpdateScrollingBackgroundTiles();
@@ -623,13 +630,13 @@ void IdleGameFrameUpdate(void)
     s16 i;
 
     ReplayButtonActionsFromRecording();
-    CurrentBoardProcPairs_020028D8[1].updateFunc();
+    CurrentBoardProcPairs[PER_FRAME_PROCESS_PAUSE_LOGIC].updateFunc();
     if (!(gMain.modeChangeFlags & MODE_CHANGE_PAUSE))
     {
-        CurrentBoardProcPairs_020028D8[2].updateFunc();
-        CurrentBoardProcPairs_020028D8[0].updateFunc();
-        CurrentBoardProcPairs_020028D8[3].updateFunc();
-        CurrentBoardProcPairs_020028D8[4].updateFunc();
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_CAMERA_SHAKE_AND_DRAIN].updateFunc();
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_DEFAULT_SPRITE_STATES].updateFunc();
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_BOARD_LOGIC].updateFunc();
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_FLIPPER_LOGIC].updateFunc();
         if (gMain.modeChangeFlags)
         {
             if (gCurrentPinballGame->ballPhysicsState == BALL_PHYSICS_NORMAL)
@@ -637,7 +644,7 @@ void IdleGameFrameUpdate(void)
                 for (i = 0; i < 4; i++)
                 {
                     gCurrentPinballGame->gravityStrengthIndex = i;
-                    CurrentBoardProcPairs_020028D8[6].updateFunc();
+                    CurrentBoardProcPairs[PER_FRAME_PROCESS_COLLISION].updateFunc();
                 }
             }
         }
@@ -652,7 +659,7 @@ void IdleGameFrameUpdate(void)
                     for (i = 0; i < 4; i++)
                     {
                         gCurrentPinballGame->gravityStrengthIndex = i;
-                        CurrentBoardProcPairs_020028D8[5].updateFunc();
+                        CurrentBoardProcPairs[PER_FRAME_PROCESS_BALL_MOVEMENT].updateFunc();
                     }
                 }
             }
@@ -661,14 +668,14 @@ void IdleGameFrameUpdate(void)
                 for (i = 0; i < 4; i++)
                 {
                     gCurrentPinballGame->gravityStrengthIndex = i;
-                    CurrentBoardProcPairs_020028D8[5].updateFunc();
-                    CurrentBoardProcPairs_020028D8[6].updateFunc();
+                    CurrentBoardProcPairs[PER_FRAME_PROCESS_BALL_MOVEMENT].updateFunc();
+                    CurrentBoardProcPairs[PER_FRAME_PROCESS_COLLISION].updateFunc();
                 }
             }
         }
 
-        CurrentBoardProcPairs_020028D8[7].updateFunc();
-        CurrentBoardProcPairs_020028D8[8].updateFunc();
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_DRAW_BALL].updateFunc();
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_HUD_UPDATE].updateFunc();
     }
 
     UpdateScrollingBackgroundTiles();
@@ -691,14 +698,14 @@ void BonusFieldFrameUpdate(void)
     s16 i;
 
     UpdateButtonActionsFromJoy();
-    CurrentBoardProcPairs_020028D8[1].updateFunc();
+    CurrentBoardProcPairs[PER_FRAME_PROCESS_PAUSE_LOGIC].updateFunc();
     if (gMain.modeChangeFlags & MODE_CHANGE_PAUSE)
         return;
 
-    CurrentBoardProcPairs_020028D8[0].updateFunc();
-    CurrentBoardProcPairs_020028D8[2].updateFunc();
-    CurrentBoardProcPairs_020028D8[3].updateFunc();
-    CurrentBoardProcPairs_020028D8[4].updateFunc();
+    CurrentBoardProcPairs[PER_FRAME_PROCESS_DEFAULT_SPRITE_STATES].updateFunc();
+    CurrentBoardProcPairs[PER_FRAME_PROCESS_CAMERA_SHAKE_AND_DRAIN].updateFunc();
+    CurrentBoardProcPairs[PER_FRAME_PROCESS_BOARD_LOGIC].updateFunc();
+    CurrentBoardProcPairs[PER_FRAME_PROCESS_FLIPPER_LOGIC].updateFunc();
     if (gMain.modeChangeFlags & ~MODE_CHANGE_EXPIRED_BONUS)
     {
         if (gCurrentPinballGame->ballPhysicsState == BALL_PHYSICS_NORMAL)
@@ -708,7 +715,7 @@ void BonusFieldFrameUpdate(void)
                 gCurrentPinballGame->activeBallIndex = 0;
                 gCurrentPinballGame->ball = &gCurrentPinballGame->ballStates[0];
                 gCurrentPinballGame->gravityStrengthIndex = i;
-                CurrentBoardProcPairs_020028D8[6].updateFunc();
+                CurrentBoardProcPairs[PER_FRAME_PROCESS_COLLISION].updateFunc();
             }
         }
     }
@@ -731,7 +738,7 @@ void BonusFieldFrameUpdate(void)
                     gCurrentPinballGame->activeBallIndex = 0;
                     gCurrentPinballGame->ball = &gCurrentPinballGame->ballStates[0];
                     gCurrentPinballGame->gravityStrengthIndex = i;
-                    CurrentBoardProcPairs_020028D8[5].updateFunc();
+                    CurrentBoardProcPairs[PER_FRAME_PROCESS_BALL_MOVEMENT].updateFunc();
                 }
             }
         }
@@ -742,14 +749,14 @@ void BonusFieldFrameUpdate(void)
                 gCurrentPinballGame->activeBallIndex = 0;
                 gCurrentPinballGame->ball = &gCurrentPinballGame->ballStates[0];
                 gCurrentPinballGame->gravityStrengthIndex = i;
-                CurrentBoardProcPairs_020028D8[5].updateFunc();
-                CurrentBoardProcPairs_020028D8[6].updateFunc();
+                CurrentBoardProcPairs[PER_FRAME_PROCESS_BALL_MOVEMENT].updateFunc();
+                CurrentBoardProcPairs[PER_FRAME_PROCESS_COLLISION].updateFunc();
             }
         }
     }
 
-    CurrentBoardProcPairs_020028D8[7].updateFunc();
-    CurrentBoardProcPairs_020028D8[8].updateFunc();
+    CurrentBoardProcPairs[PER_FRAME_PROCESS_DRAW_BALL].updateFunc();
+    CurrentBoardProcPairs[PER_FRAME_PROCESS_HUD_UPDATE].updateFunc();
 }
 
 void IdleBonusFieldFrameUpdate(void)
@@ -759,10 +766,10 @@ void IdleBonusFieldFrameUpdate(void)
     ReplayButtonActionsFromRecording();
     if (!(gMain.modeChangeFlags & MODE_CHANGE_PAUSE))
     {
-        CurrentBoardProcPairs_020028D8[0].updateFunc();
-        CurrentBoardProcPairs_020028D8[2].updateFunc();
-        CurrentBoardProcPairs_020028D8[3].updateFunc();
-        CurrentBoardProcPairs_020028D8[4].updateFunc();
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_DEFAULT_SPRITE_STATES].updateFunc();
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_CAMERA_SHAKE_AND_DRAIN].updateFunc();
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_BOARD_LOGIC].updateFunc();
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_FLIPPER_LOGIC].updateFunc();
         if (gMain.modeChangeFlags & ~MODE_CHANGE_EXPIRED_BONUS)
         {
             if (gCurrentPinballGame->ballPhysicsState == BALL_PHYSICS_NORMAL)
@@ -772,7 +779,7 @@ void IdleBonusFieldFrameUpdate(void)
                     gCurrentPinballGame->activeBallIndex = 0;
                     gCurrentPinballGame->ball = &gCurrentPinballGame->ballStates[0];
                     gCurrentPinballGame->gravityStrengthIndex = i;
-                    CurrentBoardProcPairs_020028D8[6].updateFunc();
+                    CurrentBoardProcPairs[PER_FRAME_PROCESS_COLLISION].updateFunc();
                 }
             }
         }
@@ -795,7 +802,7 @@ void IdleBonusFieldFrameUpdate(void)
                         gCurrentPinballGame->activeBallIndex = 0;
                         gCurrentPinballGame->ball = &gCurrentPinballGame->ballStates[0];
                         gCurrentPinballGame->gravityStrengthIndex = i;
-                        CurrentBoardProcPairs_020028D8[5].updateFunc();
+                        CurrentBoardProcPairs[PER_FRAME_PROCESS_BALL_MOVEMENT].updateFunc();
                     }
                 }
             }
@@ -806,14 +813,14 @@ void IdleBonusFieldFrameUpdate(void)
                     gCurrentPinballGame->activeBallIndex = 0;
                     gCurrentPinballGame->ball = &gCurrentPinballGame->ballStates[0];
                     gCurrentPinballGame->gravityStrengthIndex = i;
-                    CurrentBoardProcPairs_020028D8[5].updateFunc();
-                    CurrentBoardProcPairs_020028D8[6].updateFunc();
+                    CurrentBoardProcPairs[PER_FRAME_PROCESS_BALL_MOVEMENT].updateFunc();
+                    CurrentBoardProcPairs[PER_FRAME_PROCESS_COLLISION].updateFunc();
                 }
             }
         }
 
-        CurrentBoardProcPairs_020028D8[7].updateFunc();
-        CurrentBoardProcPairs_020028D8[8].updateFunc();
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_DRAW_BALL].updateFunc();
+        CurrentBoardProcPairs[PER_FRAME_PROCESS_HUD_UPDATE].updateFunc();
     }
 
     if ((gMain.systemFrameCount % 32) / 16 > 0)

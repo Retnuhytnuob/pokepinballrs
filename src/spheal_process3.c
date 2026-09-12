@@ -37,7 +37,7 @@ extern const u16 gSphealFramesetData[][3];
 extern const u16 gSphealFlyingEnemyOamData[126][4][3];
 
 
-void SphealBoardProcess_3A_42E48(void)
+void InitFrameProcess3_BoardLogic_SphealBoard(void)
 {
     s16 i;
     s16 frame;
@@ -147,7 +147,7 @@ void SphealBoardProcess_3A_42E48(void)
     DmaCopy16(3, gBonusStageObjPal, OBJ_PLTT_SLOT(PAL_IX_9), PLTT_SLOT_SIZE);
 }
 
-void SphealBoardProcess_3B_43228(void)
+void UpdateFrameProcess3_BoardLogic_SphealBoard(void)
 {
     switch (gCurrentPinballGame->boardState)
     {

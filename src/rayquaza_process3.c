@@ -25,7 +25,7 @@ extern const u16 gRayquazaLightningStrikeOamData[12][7][3];
 extern const u16 gRayquazaLightningChargeRingOamData[10][3][3];
 extern const u16 gRayquazaMainBodyOamData[212][3];
 
-void RayquazaBoardProcess_3A_3E79C(void)
+void InitFrameProcess3_BoardLogic_RayquazaBoard(void)
 {
     s16 i;
     s16 frame;
@@ -135,7 +135,7 @@ void RayquazaBoardProcess_3A_3E79C(void)
     DmaCopy16(3, gBonusStageObjPal, OBJ_PLTT_SLOT(PAL_IX_9), PLTT_SLOT_SIZE);
 }
 
-void RayquazaBoardProcess_3B_3EB2C(void)
+void UpdateFrameProcess3_BoardLogic_RayquazaBoard(void)
 {
     switch (gCurrentPinballGame->boardState)
     {

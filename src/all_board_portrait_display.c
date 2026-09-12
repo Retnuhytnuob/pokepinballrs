@@ -68,7 +68,7 @@ void LoadPortraitGraphics(s16 displayMode, s16 picIx)
     case PORTRAIT_STATE_EVO_PREVIEW:
         if (gCurrentPinballGame->evoChainPosition > 0)
         {
-            if (gMain_saveData.pokedexFlags[gCurrentPinballGame->evoTargetSpecies] == SPECIES_UNSEEN)
+            if (gMain_saveData.pokedexFlags[gCurrentPinballGame->evoTargetSpecies] == SPECIES_DEX_UNSEEN)
             {
                 gCurrentPinballGame->portraitGfxIndex[picIx] = SPECIES_NONE;
                 DmaCopy16(
@@ -77,7 +77,7 @@ void LoadPortraitGraphics(s16 displayMode, s16 picIx)
                     OBJ_PLTT_SLOT(PAL_IX_CATCH_MON),
                     PLTT_SLOT_SIZE);
             }
-            else if (gMain_saveData.pokedexFlags[gCurrentPinballGame->evoTargetSpecies] < SPECIES_CAUGHT)
+            else if (gMain_saveData.pokedexFlags[gCurrentPinballGame->evoTargetSpecies] < SPECIES_DEX_CAUGHT)
             {
                 gCurrentPinballGame->portraitGfxIndex[picIx] = gCurrentPinballGame->evoTargetSpecies;
                 DmaCopy16(3, gMonPortraitGroupPals[0][15], OBJ_PLTT_SLOT(PAL_IX_CATCH_MON), PLTT_SLOT_SIZE);

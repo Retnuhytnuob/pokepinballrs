@@ -14,7 +14,7 @@ s16 CollisionCheck_Dusclops(struct Vector16* ballPosition, u16* collisionAngle) 
     s32 boardLayer;
 
     u32 boardTriggerType;
-    u32 collisionType;
+    u32 boardLogicCollisionType;
 
     hasCollisionImpact = FALSE;
     gCurrentPinballGame->ball->spinAcceleration = SPIN_BOOST_NONE;
@@ -31,16 +31,16 @@ s16 CollisionCheck_Dusclops(struct Vector16* ballPosition, u16* collisionAngle) 
     boardCollisionType = gBoardConfig.fieldLayout.collision.typeData[boardLayer + tileMapPage][collisionTileIndex * 64 + vec2.y * 8 + vec2.x];
 
     CheckDusclopsEntitiesCollision(ballPosition, &boardCollisionAngle, &boardCollisionType);
-    collisionType = boardCollisionType & COLLISION_TYPE_MASK;
+    boardLogicCollisionType = boardCollisionType & COLLISION_TYPE_MASK;
     boardTriggerType = boardCollisionType >> 4;
 
-    switch (collisionType)
+    switch (boardLogicCollisionType)
     {
-        case 1:
-        case 4:
-        case 6:
-            gCurrentPinballGame->collisionSurfaceType = collisionType - 1;
-            gCurrentPinballGame->collisionResponseType = 1;
+        case BOARD_COLLISION_TYPE_NORMAL:
+        case BOARD_COLLISION_TYPE_OUTER_WALL:
+        case BOARD_COLLISION_TYPE_DYNAMIC:
+            gCurrentPinballGame->collisionBounceBehaviorType = boardLogicCollisionType - 1;
+            gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_PIXEL_WALK_CONTINUING;
             *collisionAngle = boardCollisionAngle;
             if (*collisionAngle >= ANGLE_UP_RANGE_MIN && *collisionAngle <= ANGLE_UP_RANGE_MAX)
             {
@@ -76,14 +76,14 @@ s16 CollisionCheck_Dusclops(struct Vector16* ballPosition, u16* collisionAngle) 
             }
             hasCollisionImpact = TRUE;
             break;
-        case 2:
-        case 3:
-            gCurrentPinballGame->collisionSurfaceType = collisionType - 1;
-            gCurrentPinballGame->collisionResponseType = 2;
+        case BOARD_COLLISION_TYPE_BUMPERS:
+        case BOARD_COLLISION_TYPE_SLINGSHOT:
+            gCurrentPinballGame->collisionBounceBehaviorType = boardLogicCollisionType - 1;
+            gCurrentPinballGame->collisionResolutionState = COLLISION_RESOLUTION_STATE_PIXEL_WALK_ONE_STEP;
             *collisionAngle = boardCollisionAngle & COLLISION_ANGLE_MASK;
             hasCollisionImpact = TRUE;
             break;
-        case 5:
+        case BOARD_COLLISION_TYPE_CONDITIONAL:
             boardTriggerType = 4;
             break;
     }
@@ -92,7 +92,7 @@ s16 CollisionCheck_Dusclops(struct Vector16* ballPosition, u16* collisionAngle) 
     return hasCollisionImpact;
 }
 
-void CheckDusclopsEntitiesCollision(struct Vector16 *ballPosition, s16* collisionAngle, u8* collisionType) {
+void CheckDusclopsEntitiesCollision(struct Vector16 *ballPosition, s16* collisionAngle, u8* boardLogicCollisionType) {
     s16 deltaX;
     s16 deltaY;
     u16 maskedResult;
@@ -104,7 +104,7 @@ void CheckDusclopsEntitiesCollision(struct Vector16 *ballPosition, s16* collisio
 
     if(gCurrentPinballGame->boardEntityCollisionMode == DUSCLOPS_ENTITY_COLLISION_MODE_DUSCLOPS)
     {
-        if (*collisionType != 0)
+        if (*boardLogicCollisionType != BOARD_COLLISION_TYPE_NONE)
             return;
 
         deltaX = ballPosition->x -gCurrentPinballGame->bossCollisionX;
@@ -122,9 +122,9 @@ void CheckDusclopsEntitiesCollision(struct Vector16 *ballPosition, s16* collisio
         //Can be hit when ready to absorb (2) or when walking (3)
         temp = gCurrentPinballGame->bossEntityState -3;
         if (temp <= 1U)
-            *collisionType = 1;
+            *boardLogicCollisionType = BOARD_COLLISION_TYPE_NORMAL;
         else
-            *collisionType = lowerNibble;
+            *boardLogicCollisionType = lowerNibble;
 
         gCurrentPinballGame->bossEntityState = DUSCLOPS_ENTITY_STATE_HIT;
         *collisionAngle = maskedResult;
@@ -134,7 +134,7 @@ void CheckDusclopsEntitiesCollision(struct Vector16 *ballPosition, s16* collisio
 
     if(gCurrentPinballGame->boardEntityCollisionMode == DUSCLOPS_ENTITY_COLLISION_MODE_DUSKULL)
     {
-        if (*collisionType != 0)
+        if (*boardLogicCollisionType != BOARD_COLLISION_TYPE_NONE)
             return;
 
         if (gCurrentPinballGame->minionCanCollide[0] )
@@ -193,7 +193,7 @@ void CheckDusclopsEntitiesCollision(struct Vector16 *ballPosition, s16* collisio
         if (lowerNibble != 0)
         {
             *collisionAngle = maskedResult;
-            *collisionType = 6;
+            *boardLogicCollisionType = BOARD_COLLISION_TYPE_DYNAMIC;
         }
         return;
     }

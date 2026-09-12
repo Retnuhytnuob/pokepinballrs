@@ -771,46 +771,46 @@ void CaptureButtonConfigInput(void)
 void InitCustomButtonConfigDisplay(void)
 {
     int i, j;
-    u8 var0;
+    u8 tileId;
     for (i = 0; i < 5; i++)
     {
         for (j = 0; j < 2; j++)
         {
             switch (gMain_saveData_customButtonConfig[i][j])
             {
-            case 0x1:
-                var0 = 0;
+            case A_BUTTON:
+                tileId = 0;
                 break;
-            case 0x2:
-                var0 = 1;
+            case B_BUTTON:
+                tileId = 1;
                 break;
-            case 0x4:
-                var0 = 2;
+            case SELECT_BUTTON:
+                tileId = 2;
                 break;
-            case 0x10:
-                var0 = 4;
+            case DPAD_RIGHT:
+                tileId = 4;
                 break;
-            case 0x20:
-                var0 = 5;
+            case DPAD_LEFT:
+                tileId = 5;
                 break;
-            case 0x40:
-                var0 = 6;
+            case DPAD_UP:
+                tileId = 6;
                 break;
-            case 0x80:
-                var0 = 7;
+            case DPAD_DOWN:
+                tileId = 7;
                 break;
-            case 0x100:
-                var0 = 8;
+            case R_BUTTON:
+                tileId = 8;
                 break;
-            case 0x200:
-                var0 = 9;
+            case L_BUTTON:
+                tileId = 9;
                 break;
-            case 0x8:
+            case START_BUTTON:
             default:
-                var0 = 10;
+                tileId = 10;
                 break;
             }
-            gCustomButtonConfigTileIds[i * 2 + j] = var0;
+            gCustomButtonConfigTileIds[i * 2 + j] = tileId;
         }
     }
 }

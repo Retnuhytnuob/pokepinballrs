@@ -190,7 +190,7 @@ void UpdatePelipperPondEntity(void)
             if (gCurrentPinballGame->pelipperFrameTimer == 0)
             {
                 gCurrentPinballGame->nextBonusField = FIELD_SPHEAL;
-                gCurrentPinballGame->bonusReturnState = 2;
+                gCurrentPinballGame->bonusReturnState = BONUS_RETURN_LOCATION_PELIPPER;
                 gCurrentPinballGame->arrowProgressPreserved = gCurrentPinballGame->evoArrowProgress;
                 gCurrentPinballGame->catchModeArrows = gCurrentPinballGame->catchArrowProgress;
                 TransitionToBonusField();

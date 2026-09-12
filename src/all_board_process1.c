@@ -5,7 +5,7 @@
 #include "constants/board/main_board.h"
 
 
-void AllBoardProcess_1A_47100(void)
+void InitFrameProcess1_PauseLogic_AllBoards(void)
 {
     gCurrentPinballGame->bonusSummarySlideY = 128;
 }
@@ -21,7 +21,7 @@ void ClearBG0Tilemap(void)
 }
 
 
-void AllBoardProcess_1B_47160(void)
+void UpdateFrameProcess1_PauseLogic_AllBoards(void)
 {
     if (JOY_NEW(START_BUTTON) && gMain.mainState != STATE_GAME_IDLE
         && !gCurrentPinballGame->startButtonDisabled)
@@ -80,7 +80,7 @@ void AllBoardProcess_1B_47160(void)
     //Game is not paused
     if (gMain.modeChangeFlags == MODE_CHANGE_NONE)
     {
-        gCurrentPinballGame->debugMenuSelection = 0;
+        gCurrentPinballGame->debugMenuSelection = DEBUG_MODE_NONE;
         if (gMain.modeChangeDelayTimer != 0)
         {
             gMain.modeChangeDelayTimer--;

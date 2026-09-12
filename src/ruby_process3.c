@@ -6,7 +6,7 @@
 #include "constants/bg_music.h"
 #include "constants/board/ruby_states.h"
 
-void RubyBoardProcess_3A_19A20(void)
+void InitFrameProcess3_BoardLogic_RubyBoard(void)
 {
     gCurrentPinballGame->catchModeArrows = 2;
     UpdateNuzleafEntity();
@@ -17,7 +17,7 @@ void RubyBoardProcess_3A_19A20(void)
 
     gCurrentPinballGame->cyndaquilCaveSpriteX = 73;
     gCurrentPinballGame->cyndaquilCaveSpriteY = 154;
-    gCurrentPinballGame->eggCaveState = 0;
+    gCurrentPinballGame->cyndaquilPosition = CYNDAQUIL_POSITION_LOW_GUARD;
     UpdateHatchCave();
     RubyPond_EntityLogic();
 
@@ -44,7 +44,7 @@ void RubyBoardProcess_3A_19A20(void)
     DrawBoardEdgeBanner();
 }
 
-void RubyBoardProcess_3B_19B10(void)
+void UpdateFrameProcess3_BoardLogic_RubyBoard(void)
 {
     BoardStateDispatcher();
     UpdateRubyBoardEntityRendering();

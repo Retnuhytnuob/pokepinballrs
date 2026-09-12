@@ -9,7 +9,7 @@
 
 extern void HandleSapphireFlipperButtonInput(void);
 
-void SapphireBoardProcess_3A_326F4(void)
+void InitFrameProcess3_BoardLogic_SapphireBoard(void)
 {
     gCurrentPinballGame->catchModeArrows = 2;
     gCurrentPinballGame->pikachuSpinFrame = 0;
@@ -32,7 +32,7 @@ void SapphireBoardProcess_3A_326F4(void)
     DrawBoardEdgeBanner();
 }
 
-void SapphireBoardProcess_3B_3276C(void)
+void UpdateFrameProcess3_BoardLogic_SapphireBoard(void)
 {
     BoardStateDispatcher();
     UpdateSapphireBoardEntityRendering();
@@ -61,13 +61,13 @@ void UpdateSapphireBoardEntityRendering(void)
     if (gCurrentPinballGame->cameraYViewport < 0x5a)
     {
         UpdateSapphireEggHatchAnimation();
-        UpdateSapphireEggMachine();
+        UpdateSapphireHatchMachine();
     }
 
     if (gCurrentPinballGame->boardState < MAIN_BOARD_STATE_BOSS_HOLE_ACTIVE)
     {
         if (gCurrentPinballGame->sapphireHatchMachineFrameIx == 3 &&
-            gCurrentPinballGame->sapphireHatchMachineState == 0)
+            gCurrentPinballGame->sapphireHatchMachineState == HATCH_MACHINE_STATE_INCUBATION_LIGHTS)
         {
             gCurrentPinballGame->catchArrowPaletteActive = TRUE;
         }

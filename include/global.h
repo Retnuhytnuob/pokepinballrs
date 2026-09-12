@@ -149,7 +149,7 @@ struct FlipperState
     /*0x05*/ s8 collisionMapFrame;
     /*0x06*/ s8 active; // Indicates flipper 'powered'
     /*0x07*/ u8 stallTicks;
-    /*0x08*/ s8 ballSide;
+    /*0x08*/ s8 ballSide; // Ball is 'Above' (1) or 'Below' (-1) the plane of the flipper
     /*0x09*/ u8 filler9[0x3];
 };
 
@@ -186,8 +186,8 @@ struct PinballGame
     /*0x01F*/ u8 ballPhysicsState;
     /*0x020*/ u8 ballInLaunchChute;
     /*0x021*/ u8 launcherCharging;
-    /*0x022*/ s8 collisionResponseType;
-    /*0x023*/ u8 collisionSurfaceType; // Holds the value of some enum state
+    /*0x022*/ s8 collisionResolutionState;
+    /*0x023*/ u8 collisionBounceBehaviorType; // Holds the value of some enum state
     /*0x024*/ s8 boardLayerDepth;
     /*0x025*/ s8 ballCatchState; // 0=Not caught, 1=Catch mode hole, 2=Egg Hatch Hole, 3=Evo Shop hole, 4=Center hole
     /*0x026*/ u16 collisionCooldownTimer;
@@ -453,7 +453,7 @@ struct PinballGame
     /*0x2D6*/ u16 cyndaquilCaveSpriteY;
     /*0x2D8*/ s8 cyndaquilCollisionEnabled;
     /*0x2D9*/ s8 eggCaveReEntryFlag;
-    /*0x2DA*/ s8 eggCaveState;
+    /*0x2DA*/ s8 cyndaquilPosition;
     /*0x2DB*/ u8 filler2DB[0x3];
     /*0x2DE*/ u16 eggCaveLiftTimer;
     /*0x2E0*/ u16 eggCaveExitDelayTimer;
@@ -510,7 +510,7 @@ struct PinballGame
     /*0x336*/ u16 seedotAnimTimer[3];
     /*0x33C*/ u16 seedotYOffset[3];
     /*0x342*/ s8 hatchMachineActive; // Turns off while launching, Reenabled when ball touches ramp
-    /*0x343*/ s8 sapphirerubyEggDeliveryState;
+    /*0x343*/ s8 sapphireReadyForNewEgg;
     /*0x344*/ s8 hatchMachineProgressTickSignaled;
     /*0x345*/ s8 sapphireHatchMachineFrameIx;
     /*0x346*/ s8 sapphireHatchMachineState; // 0-6
@@ -750,7 +750,7 @@ struct PinballGame
     /*0x5FC*/ s16 cameraScrollOffset;
     /*0x5FE*/ s16 cameraScrollTarget;
     /*0x600*/ u16 mainBoardCountdownTimer;
-    /*0x602*/ s8 hatchRevealPhase;
+    /*0x602*/ s8 catchTilesBurstPhase;
     /*0x603*/ s8 revealFramesetIndex;
     /*0x604*/ u16 revealAnimFrameCounter;
     /*0x606*/ u16 particleAnimTimer;

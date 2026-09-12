@@ -5,19 +5,19 @@
 #include "m4a.h"
 #include "constants/board/center_screen_states.h"
 
-extern void MainBoardProcess_7B_12524(void);
-extern void BonusBoardProcess_7B_12BF8(void);
+extern void UpdateFrameProcess7_DrawBall_MainBoards(void);
+extern void UpdateFrameProcess7_DrawBall_BonusBoards(void);
 extern void RunMonCaptureSequence(void);
 
 
-void AllBoardProcess_5A_11B9C(void)
+void InitFrameProcess5_BallMovement_AllBoards(void)
 {
     s16 i;
     if ( !gMain.isBonusField )
     {
         gCurrentPinballGame->ball = &gCurrentPinballGame->ballStates[0];
         InitBallState(0);
-        MainBoardProcess_7B_12524();
+        UpdateFrameProcess7_DrawBall_MainBoards();
     }
     else
     {
@@ -26,7 +26,7 @@ void AllBoardProcess_5A_11B9C(void)
             gCurrentPinballGame->ball = &gCurrentPinballGame->ballStates[i];
             InitBallState(i);
         }
-        BonusBoardProcess_7B_12BF8();
+        UpdateFrameProcess7_DrawBall_BonusBoards();
     }
 }
 
@@ -75,7 +75,7 @@ extern const u16 gGravityDeltas_Light[4];
     currentBall->positionQ8.y += velocity.y;                   \
 }
 
-void MainBoardProcess_5B_11C98(void)
+void UpdateFrameProcess5_BallMovement_MainBoards(void)
 {
     struct Vector16 velocity;
     struct BallState *currentBall;
@@ -161,7 +161,7 @@ void MainBoardProcess_5B_11C98(void)
     currentBall->spinAngle += currentBall->spinSpeed;
 }
 
-void BonusBoardProcess_5B_11F88(void)
+void UpdateFrameProcess5_BallMovement_BonusBoards(void)
 {
     struct Vector16 velocity;
     struct BallState *currentBall;
