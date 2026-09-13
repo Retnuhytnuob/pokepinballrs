@@ -8713,21 +8713,21 @@ gRubySaverTilePointers:: @ 0x086B0A90
     @ third set has destination address
     .4byte gRubySaverRow0Tile_Off, gRubySaverRow1Tile_Off, gRubySaverRow2Tile_Off, gRubySaverRow3Tile_Off
     .4byte gRubySaverRow0Tile_On, gRubySaverRow1Tile_On, gRubySaverRow2Tile_On, gRubySaverRow3Tile_On
-    .4byte 0x0600AD80, 0x0600B180, 0x0600B5A0, 0x0600BA00
+    .4byte BG_ADDR_FOR_BOARD_WRAP(44, 12), BG_ADDR_FOR_BOARD_WRAP(45, 12), BG_ADDR_FOR_BOARD_WRAP(46, 13), BG_ADDR_FOR_BOARD_WRAP(47, 16)
 
 gRubyHatchArrowTilePointer:: @ 0x086B0AC0
     @ 3 sets of 4
     @ third set has destination address
     .4byte gRubyHatchArrowRow0Tile_Off, gRubyHatchArrowRow1Tile_Off, gRubyHatchArrowRow2Tile_Off, gRubyHatchArrowRow3Tile_Off
     .4byte gRubyHatchArrowRow0Tile_On, gRubyHatchArrowRow1Tile_On, gRubyHatchArrowRow2Tile_On, gRubyHatchArrowRow3Tile_On
-    .4byte 0x0600B960, 0x0600BD60, 0x0600C160, 0x0600C560
+    .4byte BG_ADDR_FOR_BOARD_WRAP(25, 11), BG_ADDR_FOR_BOARD_WRAP(26, 11), BG_ADDR_FOR_BOARD_WRAP(27, 11), BG_ADDR_FOR_BOARD_WRAP(28, 11)
 
 gRubyBumperArrowTilePointer:: @ 0x086B0AF0
     @ 3 sets of 4
     @ third set has destination address
     .4byte gRubyBumperArrowRow0Tile_Off, gRubyBumperArrowRow1Tile_Off, gRubyBumperArrowRow2Tile_Off, gRubyBumperArrowRow3Tile_Off
     .4byte gRubyBumperArrowRow0Tile_On, gRubyBumperArrowRow1Tile_On, gRubyBumperArrowRow2Tile_On, gRubyBumperArrowRow3Tile_On
-    .4byte 0x0600B620, 0x0600B9E0, 0x0600BDE0, 0x0600C1E0
+    .4byte BG_ADDR_FOR_BOARD_WRAP(24, 17), BG_ADDR_FOR_BOARD_WRAP(25, 15), BG_ADDR_FOR_BOARD_WRAP(26, 15), BG_ADDR_FOR_BOARD_WRAP(27, 15)
 
 gRubyShopRampArrowTilePointsers:: @ 0x086B0B20
     @ 5 sets of 4
@@ -8738,29 +8738,29 @@ gRubyShopRampArrowTilePointsers:: @ 0x086B0B20
     .4byte gRubyMartArrow_R0_On,  gRubyMartArrow_R1_On,  gRubyMartArrow_R2_On,  gRubyMartArrow_R3_On
     .4byte gRubyEvoArrow_R0_Off,  gRubyEvoArrow_R1_Off,  gRubyEvoArrow_R2_Off,  gRubyEvoArrow_R3_Off
     .4byte gRubyEvoArrow_R0_On,   gRubyEvoArrow_R1_On,   gRubyEvoArrow_R2_On,   gRubyEvoArrow_R3_On
-    .4byte 0x0600C620, 0x0600CA20, 0x0600CE20, 0x0600D220
+    .4byte BG_ADDR_FOR_BOARD_WRAP(28, 17), BG_ADDR_FOR_BOARD_WRAP(29, 17), BG_ADDR_FOR_BOARD_WRAP(30, 17), BG_ADDR_FOR_BOARD_WRAP(31, 17)
 
 gRubyBallPowerUpLightTilePointers:: @ 0x086B0B70
     @ 3 sets of 3
     @ third value has the destination address
-    .4byte gRubyBallPowerUpLight0off, gRubyBallPowerUpLight0on, 0x060085C0
-    .4byte gRubyBallPowerUpLight1off, gRubyBallPowerUpLight1on, 0x06008600
-    .4byte gRubyBallPowerUpLight2off, gRubyBallPowerUpLight2on, 0x06008660
+    .4byte gRubyBallPowerUpLight0off, gRubyBallPowerUpLight0on, BG_ADDR_FOR_BOARD_WRAP(12, 14)
+    .4byte gRubyBallPowerUpLight1off, gRubyBallPowerUpLight1on, BG_ADDR_FOR_BOARD_WRAP(12, 16)
+    .4byte gRubyBallPowerUpLight2off, gRubyBallPowerUpLight2on, BG_ADDR_FOR_BOARD_WRAP(12, 19)
 
 gRubyCatchArrowTilePointer:: @ 0x086B0B94
     @ 3 sets of 4
     @ third set has the destination address
 	.4byte gRubyCatchArrowRow0Tile_Off, gRubyCatchArrowRow1Tile_Off, gRubyCatchArrowRow2Tile_Off, gRubyCatchArrowRow3Tile_Off
     .4byte gRubyCatchArrowRow0Tile_On, gRubyCatchArrowRow1Tile_On, gRubyCatchArrowRow2Tile_On, gRubyCatchArrowRow3Tile_On
-    .4byte 0x0600D2A0, 0x0600D660, 0x06008260, 0x06008660
+    .4byte BG_ADDR_FOR_BOARD_WRAP(31, 21), BG_ADDR_FOR_BOARD_WRAP(32, 19), BG_ADDR_FOR_BOARD_WRAP(33, 19), BG_ADDR_FOR_BOARD_WRAP(34, 19)
 
 gRubyHoleIndicatorTilePointers:: @ 0x086B0BC4
     @ 4 sets of 4
     @ third value has the destination; fouth value blank.
-    .4byte gRubyHoleLightH_Off, gRubyHoleLightH_On, 0x0600A460, 0
-    .4byte gRubyHoleLightO_Off, gRubyHoleLightO_On, 0x0600A4C0, 0
-    .4byte gRubyHoleLightL_Off, gRubyHoleLightL_On, 0x0600A6C0, 0
-    .4byte gRubyHoleLightE_Off, gRubyHoleLightE_On, 0x0600A720, 0
+    .4byte gRubyHoleLightH_Off, gRubyHoleLightH_On, BG_ADDR_FOR_BOARD_WRAP(42, 3), 0
+    .4byte gRubyHoleLightO_Off, gRubyHoleLightO_On, BG_ADDR_FOR_BOARD_WRAP(42, 6), 0
+    .4byte gRubyHoleLightL_Off, gRubyHoleLightL_On, BG_ADDR_FOR_BOARD_WRAP(42, 22), 0
+    .4byte gRubyHoleLightE_Off, gRubyHoleLightE_On, BG_ADDR_FOR_BOARD_WRAP(42, 25), 0
 
 gRubyEvoArrowTilePtrs:: @ 0x086B0C04
     @ 3 sets of 5 sets of 3
@@ -8769,19 +8769,19 @@ gRubyEvoArrowTilePtrs:: @ 0x086B0C04
     .4byte gRubyEvo_EArrow_Top0, gRubyEvo_EArrow_Mid0, gRubyEvo_EArrow_Bot0
     .4byte gRubyEvo_EArrow_Top1, gRubyEvo_EArrow_Mid1, gRubyEvo_EArrow_Bot1
     .4byte gRubyEvo_EArrow_Top2, gRubyEvo_EArrow_Mid2, gRubyEvo_EArrow_Bot2
-    .4byte 0x0600D080, 0x0600D480, 0x06008080
+    .4byte BG_ADDR_FOR_BOARD_WRAP(31, 4), BG_ADDR_FOR_BOARD_WRAP(32, 4), BG_ADDR_FOR_BOARD_WRAP(33, 4)
 
     .4byte gRubyEvo_VArrow_Top0, gRubyEvo_VArrow_Mid0, gRubyEvo_VArrow_Bot0
     .4byte gRubyEvo_VArrow_Top1, gRubyEvo_VArrow_Mid1, gRubyEvo_VArrow_Bot1
     .4byte gRubyEvo_VArrow_Top2, gRubyEvo_VArrow_Mid2, gRubyEvo_VArrow_Bot2
     .4byte gRubyEvo_VArrow_Top3, gRubyEvo_VArrow_Mid3, gRubyEvo_VArrow_Bot3
-    .4byte 0x060080A0, 0x060084A0, 0x060088A0
+    .4byte BG_ADDR_FOR_BOARD_WRAP(33, 5), BG_ADDR_FOR_BOARD_WRAP(34, 5), BG_ADDR_FOR_BOARD_WRAP(35, 5)
 
     .4byte gRubyEvo_OArrow_Top0, gRubyEvo_OArrow_Mid0, gRubyEvo_OArrow_Bot0
     .4byte gRubyEvo_OArrow_Top0, gRubyEvo_OArrow_Mid0, gRubyEvo_OArrow_Bot0
     .4byte gRubyEvo_OArrow_Top1, gRubyEvo_OArrow_Mid1, gRubyEvo_OArrow_Bot1
     .4byte gRubyEvo_OArrow_Top2, gRubyEvo_OArrow_Mid2, gRubyEvo_OArrow_Bot2
-    .4byte 0x060088C0, 0x06008CC0, 0x060090C0
+    .4byte BG_ADDR_FOR_BOARD_WRAP(35, 6), BG_ADDR_FOR_BOARD_WRAP(36, 6), BG_ADDR_FOR_BOARD_WRAP(37, 6)
 
 gRubyCoinRewardTilePtrs:: @ 0x086B0CB8
     @ 3 sets of 5 sets of 3
@@ -8790,19 +8790,19 @@ gRubyCoinRewardTilePtrs:: @ 0x086B0CB8
     .4byte gRubyCoinArrow_0825DF10, gRubyCoinArrow_0825E310, gRubyCoinArrow_0825E710
     .4byte gRubyCoinArrow_0825DF70, gRubyCoinArrow_0825E370, gRubyCoinArrow_0825E770
     .4byte gRubyCoinArrow_0825DFD0, gRubyCoinArrow_0825E3D0, gRubyCoinArrow_0825E7D0
-    .4byte 0x0600B4E0, 0x0600B8E0, 0x0600BCE0
+    .4byte BG_ADDR_FOR_BOARD_WRAP(24, 7), BG_ADDR_FOR_BOARD_WRAP(25, 7), BG_ADDR_FOR_BOARD_WRAP(26, 7)
 
     .4byte gRubyCoinArrow_0825E030, gRubyCoinArrow_0825E430, gRubyCoinArrow_0825E830
     .4byte gRubyCoinArrow_0825E090, gRubyCoinArrow_0825E490, gRubyCoinArrow_0825E890
     .4byte gRubyCoinArrow_0825E0F0, gRubyCoinArrow_0825E4F0, gRubyCoinArrow_0825E8F0
     .4byte gRubyCoinArrow_0825E150, gRubyCoinArrow_0825E550, gRubyCoinArrow_0825E950
-    .4byte 0x0600BCE0, 0x0600C0E0, 0x0600C4E0
+    .4byte BG_ADDR_FOR_BOARD_WRAP(26, 7), BG_ADDR_FOR_BOARD_WRAP(27, 7), BG_ADDR_FOR_BOARD_WRAP(28, 7)
 
     .4byte gRubyCoinArrow_0825E1B0, gRubyCoinArrow_0825E5B0, gRubyCoinArrow_0825E9B0
     .4byte gRubyCoinArrow_0825E1B0, gRubyCoinArrow_0825E5B0, gRubyCoinArrow_0825E9B0
     .4byte gRubyCoinArrow_0825E210, gRubyCoinArrow_0825E610, gRubyCoinArrow_0825EA10
     .4byte gRubyCoinArrow_0825E270, gRubyCoinArrow_0825E670, gRubyCoinArrow_0825EA70
-    .4byte 0x0600C500, 0x0600C900, 0x0600CD00
+    .4byte BG_ADDR_FOR_BOARD_WRAP(28, 8), BG_ADDR_FOR_BOARD_WRAP(29, 8), BG_ADDR_FOR_BOARD_WRAP(30, 8)
 
 gRubyGetArrowTilePtrs:: @ 0x086B0D6C
     @ 3 sets of 5 sets of 3
@@ -8811,19 +8811,19 @@ gRubyGetArrowTilePtrs:: @ 0x086B0D6C
     .4byte gRubyGetArrow_0825EB10, gRubyGetArrow_0825EF10, gRubyGetArrow_0825F310
     .4byte gRubyGetArrow_0825EB70, gRubyGetArrow_0825EF70, gRubyGetArrow_0825F370
     .4byte gRubyGetArrow_0825EBD0, gRubyGetArrow_0825EFD0, gRubyGetArrow_0825F3D0
-    .4byte 0x0600D2E0, 0x0600D6E0, 0x060082E0
+    .4byte BG_ADDR_FOR_BOARD_WRAP(31, 23), BG_ADDR_FOR_BOARD_WRAP(32, 23), BG_ADDR_FOR_BOARD_WRAP(33, 23)
 
     .4byte gRubyGetArrow_0825EC50, gRubyGetArrow_0825F050, gRubyGetArrow_0825F430
     .4byte gRubyGetArrow_0825ECB0, gRubyGetArrow_0825F0B0, gRubyGetArrow_0825F490
     .4byte gRubyGetArrow_0825ED10, gRubyGetArrow_0825F110, gRubyGetArrow_0825F4F0
     .4byte gRubyGetArrow_0825ED70, gRubyGetArrow_0825F170, gRubyGetArrow_0825F550
-    .4byte 0x060082E0, 0x060086E0, 0x06008AC0
+    .4byte BG_ADDR_FOR_BOARD_WRAP(33, 23), BG_ADDR_FOR_BOARD_WRAP(34, 23), BG_ADDR_FOR_BOARD_WRAP(35, 22)
 
     .4byte gRubyGetArrow_0825EDD0, gRubyGetArrow_0825F1B0, gRubyGetArrow_0825F5B0
     .4byte gRubyGetArrow_0825EDD0, gRubyGetArrow_0825F1B0, gRubyGetArrow_0825F5B0
     .4byte gRubyGetArrow_0825EE30, gRubyGetArrow_0825F210, gRubyGetArrow_0825F610
     .4byte gRubyGetArrow_0825EE90, gRubyGetArrow_0825F270, gRubyGetArrow_0825F670
-    .4byte 0x06008AC0, 0x06008EA0, 0x060092A0
+    .4byte BG_ADDR_FOR_BOARD_WRAP(35, 22), BG_ADDR_FOR_BOARD_WRAP(36, 21), BG_ADDR_FOR_BOARD_WRAP(37, 21)
 
 gBallUpgradeFx_TileIndicies:: @ 0x086B0E20
     @ 31 values (ix 0 - 30) used, then padding
@@ -8844,7 +8844,7 @@ gSapphirePSquareIndicator:: @ 0x086B0E6C
     .4byte gSapphirePSquareFrame2Top, gSapphirePSquareFrame2Bot
     .4byte gSapphirePSquareFrame3Top, gSapphirePSquareFrame3Bot
     .4byte gSapphirePSquareFrame4Top, gSapphirePSquareFrame4Bot
-    .4byte 0x0600A640, 0x0600AA40
+    .4byte BG_ADDR_FOR_BOARD_WRAP(20, 18), BG_ADDR_FOR_BOARD_WRAP(21, 18)
 
 gSapphireProgressDigitTilePtrs:: @ 0x086B0E9C
 	@ 11 sets of 4
@@ -8868,61 +8868,61 @@ gRotatingBackgroundTilePtrs:: @ 0x086B0F4C
     .4byte gWailmerWaterFrame1Row0, gWailmerWaterFrame1Row1, gWailmerWaterFrame1Row2, gWailmerWaterFrame1Row3
     .4byte gWailmerWaterFrame2Row0, gWailmerWaterFrame2Row1, gWailmerWaterFrame2Row2, gWailmerWaterFrame2Row3
     .4byte gWailmerWaterFrame1Row0, gWailmerWaterFrame1Row1, gWailmerWaterFrame1Row2, gWailmerWaterFrame1Row3
-    .4byte 0x0600AEA0, 0x0600B2A0, 0x0600B6A0, 0x0600BAA0
+    .4byte BG_ADDR_FOR_BOARD_WRAP(22, 21), BG_ADDR_FOR_BOARD_WRAP(23, 21), BG_ADDR_FOR_BOARD_WRAP(24, 21), BG_ADDR_FOR_BOARD_WRAP(25, 21)
 
 gHatchMachineDrawSegment:: @ 0x086B0F9C
     @ 10 sets of 3 sets of 2
     @ third set has destination address
     .4byte gHatchMachineSeg0IdleA, gHatchMachineSeg0IdleB
     .4byte gHatchMachineSeg0HitA, gHatchMachineSeg0HitB
-    .4byte 0x0600DD40, 0x0600DD80
+    .4byte BG_TILE_ADDR(TILE_INDEX(3, 7, 10)), BG_TILE_ADDR(TILE_INDEX(3, 7, 12))
 
     .4byte gHatchMachineSeg1IdleA, gHatchMachineSeg1IdleB
     .4byte gHatchMachineSeg1HitA, gHatchMachineSeg1HitB
-    .4byte 0x0600DDC0, 0x0600DE00
+    .4byte BG_TILE_ADDR(TILE_INDEX(3, 7, 14)), BG_TILE_ADDR(TILE_INDEX(3, 7, 16))
 
     .4byte gHatchMachineSeg2IdleA, gHatchMachineSeg2IdleB
     .4byte gHatchMachineSeg2HitA, gHatchMachineSeg2HitB
-    .4byte 0x0600D9C0, 0x0600DAC0
+    .4byte BG_TILE_ADDR(TILE_INDEX(3, 6, 14)), BG_TILE_ADDR(TILE_INDEX(3, 6, 22))
 
     .4byte gHatchMachineSeg3Idle, gHatchMachineSeg3Idle
     .4byte gHatchMachineSeg3Hit, gHatchMachineSeg3Hit
-    .4byte 0x0600DE40, 0x0600DE40
+    .4byte BG_TILE_ADDR(TILE_INDEX(3, 7, 18)), BG_TILE_ADDR(TILE_INDEX(3, 7, 18))
 
     .4byte gHatchMachineSeg4IdleA, gHatchMachineSeg4IdleB
     .4byte gHatchMachineSeg4HitA, gHatchMachineSeg4HitB
-    .4byte 0x0600D900, 0x0600DA00
+    .4byte BG_TILE_ADDR(TILE_INDEX(3, 6, 8)), BG_TILE_ADDR(TILE_INDEX(3, 6, 16))
 
     .4byte gHatchMachineSeg5IdleA, gHatchMachineSeg5IdleB
     .4byte gHatchMachineSeg5HitA, gHatchMachineSeg5HitB
-    .4byte 0x0600DE80, 0x0600DEC0
+    .4byte BG_TILE_ADDR(TILE_INDEX(3, 7, 20)), BG_TILE_ADDR(TILE_INDEX(3, 7, 22))
 
     .4byte gHatchMachineSeg6IdleA, gHatchMachineSeg6IdleB
     .4byte gHatchMachineSeg6HitA, gHatchMachineSeg6HitB
-    .4byte 0x0600DF00, 0x0600DF40
+    .4byte BG_TILE_ADDR(TILE_INDEX(3, 7, 24)), BG_TILE_ADDR(TILE_INDEX(3, 7, 26))
 
     .4byte gHatchMachineSeg7IdleA, gHatchMachineSeg7IdleB
     .4byte gHatchMachineSeg7HitA, gHatchMachineSeg7HitB
-    .4byte 0x0600DF80, 0x0600DFC0
+    .4byte BG_TILE_ADDR(TILE_INDEX(3, 7, 28)), BG_TILE_ADDR(TILE_INDEX(3, 7, 30))
 
     .4byte gHatchMachineSeg8IdleA, gHatchMachineSeg8IdleB
     .4byte gHatchMachineSeg8HitA, gHatchMachineSeg8HitB
-    .4byte 0x0600E000, 0x0600E040
+    .4byte BG_TILE_ADDR(TILE_INDEX(3, 8, 0)), BG_TILE_ADDR(TILE_INDEX(3, 8, 2))
 
     .4byte gHatchMachineSeg9IdleA, gHatchMachineSeg9IdleB
     .4byte gHatchMachineSeg9HitA, gHatchMachineSeg9HitB
-    .4byte 0x0600E080, 0x0600E0C0
+    .4byte BG_TILE_ADDR(TILE_INDEX(3, 8, 4)), BG_TILE_ADDR(TILE_INDEX(3, 8, 6))
 
 gSapphireSlingshotTilePtrs:: @ 0x086B108C
     @ 2 sets (sides) of 3 sets of 5
     @ third set has destination address
     .4byte gSapphire_LSlingshot_Off_R0, gSapphire_LSlingshot_Off_R1, gSapphire_LSlingshot_Off_R2, gSapphire_LSlingshot_Off_R3, gSapphire_LSlingshot_Off_R4
     .4byte gSapphire_LSlingshot_On_R0, gSapphire_LSlingshot_On_R1, gSapphire_LSlingshot_On_R2, gSapphire_LSlingshot_On_R3, gSapphire_LSlingshot_On_R4
-    .4byte 0x0600E100, 0x0600E120, 0x0600E160, 0x0600E1C0, 0x0600E220
+    .4byte BG_TILE_ADDR(TILE_INDEX(3, 8, 8)), BG_TILE_ADDR(TILE_INDEX(3, 8, 9)), BG_TILE_ADDR(TILE_INDEX(3, 8, 11)), BG_TILE_ADDR(TILE_INDEX(3, 8, 14)), BG_TILE_ADDR(TILE_INDEX(3, 8, 17))
 
     .4byte gSapphire_RSlingshot_Off_R0, gSapphire_RSlingshot_Off_R1, gSapphire_RSlingshot_Off_R2, gSapphire_RSlingshot_Off_R3, gSapphire_RSlingshot_Off_R4
     .4byte gSapphire_RSlingshot_On_R0, gSapphire_RSlingshot_On_R1, gSapphire_RSlingshot_On_R2, gSapphire_RSlingshot_On_R3, gSapphire_RSlingshot_On_R4
-    .4byte 0x0600E260, 0x0600E280, 0x0600E2C0, 0x0600E320, 0x0600E380
+    .4byte BG_TILE_ADDR(TILE_INDEX(3, 8, 19)), BG_TILE_ADDR(TILE_INDEX(3, 8, 20)), BG_TILE_ADDR(TILE_INDEX(3, 8, 22)), BG_TILE_ADDR(TILE_INDEX(3, 8, 25)), BG_TILE_ADDR(TILE_INDEX(3, 8, 28))
 
 gSapphireTrapIndicatorTilePtrs:: @ 0x086B1104
     @ 4 sets of 2
@@ -8930,7 +8930,7 @@ gSapphireTrapIndicatorTilePtrs:: @ 0x086B1104
     .4byte gSapphireTrapIndicatorState0Top, gSapphireTrapIndicatorState0Bot
     .4byte gSapphireTrapIndicatorState1Top, gSapphireTrapIndicatorState1Bot
     .4byte gSapphireTrapIndicatorState2Top, gSapphireTrapIndicatorState2Bot
-    .4byte 0x060081C0, 0x060085C0
+    .4byte BG_ADDR_FOR_BOARD_WRAP(33, 14), BG_ADDR_FOR_BOARD_WRAP(34, 14)
 
 gSapphireCatchLightTilePtrs:: @ 0x086B1124
     @ 3 sets of 7 sets of 2
