@@ -8645,18 +8645,18 @@ gRubySlingshotTilePointers:: @ 0x086B08D4
     @ Third set of 5 is the destination address.
 	.4byte gRuby_LSlingshot_Off_R0, gRuby_LSlingshot_Off_R1, gRuby_LSlingshot_Off_R2, gRuby_LSlingshot_Off_R3, gRuby_LSlingshot_Off_R4
     .4byte gRuby_LSlingshot_On_R0,  gRuby_LSlingshot_On_R1,  gRuby_LSlingshot_On_R2,  gRuby_LSlingshot_On_R3,  gRuby_LSlingshot_On_R4
-    .4byte 0x0600DA00, 0x0600DA20, 0x0600DA60, 0x0600DAC0, 0x0600DB20
+    .4byte BG_TILE_ADDR(TILE_INDEX(3, 6, 16)), BG_TILE_ADDR(TILE_INDEX(3, 6, 17)), BG_TILE_ADDR(TILE_INDEX(3, 6, 19)), BG_TILE_ADDR(TILE_INDEX(3, 6, 22)), BG_TILE_ADDR(TILE_INDEX(3, 6, 25))
 
     .4byte gRuby_RSlingshot_Off_R0, gRuby_RSlingshot_Off_R1, gRuby_RSlingshot_Off_R2, gRuby_RSlingshot_Off_R3, gRuby_RSlingshot_Off_R4
     .4byte gRuby_RSlingshot_On_R0, gRuby_RSlingshot_On_R1, gRuby_RSlingshot_On_R2, gRuby_RSlingshot_On_R3, gRuby_RSlingshot_On_R4
-    .4byte 0x0600DB60, 0x0600DB80, 0x0600DBC0, 0x0600DC20, 0x0600DC80
+    .4byte BG_TILE_ADDR(TILE_INDEX(3, 6, 27)), BG_TILE_ADDR(TILE_INDEX(3, 6, 28)), BG_TILE_ADDR(TILE_INDEX(3, 6, 30)), BG_TILE_ADDR(TILE_INDEX(3, 7, 1)), BG_TILE_ADDR(TILE_INDEX(3, 7, 4))
 
 gShopItemTilePointers:: @ 0x086B094C
     @ Arranged into 3 sets of 3.
     @ Third set is the destination address.
 	.4byte gRubyShopSignMartPiece0, gRubyShopSignMartPiece1, gRubyShopSignMartPiece2
     .4byte gRubyShopSignCenterPiece0, gRubyShopSignCenterPiece1, gRubyShopSignCenterPiece2
-    .4byte 0x0600D860, 0x0600D920, 0x0600D9E0
+    .4byte BG_TILE_ADDR(TILE_INDEX(3, 6, 3)), BG_TILE_ADDR(TILE_INDEX(3, 6, 9)), BG_TILE_ADDR(TILE_INDEX(3, 6, 15))
 
 gRubyProgressDigitTilePointers:: @ 0x086B0970
     @ 11 sets of 2.
@@ -8671,7 +8671,7 @@ gRubyProgressDigitTilePointers:: @ 0x086B0970
     .4byte gRubyProgressDigit7_Tens, gRubyProgressDigit7_Ones
     .4byte gRubyProgressDigit8_Tens, gRubyProgressDigit8_Ones
     .4byte gRubyProgressDigit9_Tens, gRubyProgressDigit9_Ones
-    .4byte 0x0600D820, 0x0600D840
+    .4byte BG_TILE_ADDR(TILE_INDEX(3, 6, 1)), BG_TILE_ADDR(TILE_INDEX(3, 6, 2))
 
 gRubyTrapIndicatorTilePointers:: @ 0x086B09C8
     @ 4 sets of 2
@@ -8679,7 +8679,7 @@ gRubyTrapIndicatorTilePointers:: @ 0x086B09C8
     .4byte gRubyTrapIndicatorState0Top, gRubyTrapIndicatorState0Bot
     .4byte gRubyTrapIndicatorState1Top, gRubyTrapIndicatorState1Bot
     .4byte gRubyTrapIndicatorState2Top, gRubyTrapIndicatorState2Bot
-    .4byte 0x060081C0, 0x060085C0
+    .4byte BG_ADDR_FOR_BOARD_WRAP(33, 14), BG_ADDR_FOR_BOARD_WRAP(34, 14)
 
 gRubyCatchLightTilePointers:: @ 0x086B09E8
     @ 3 sets of 7 sets of 2
@@ -8690,7 +8690,7 @@ gRubyCatchLightTilePointers:: @ 0x086B09E8
     .4byte gRubyCatchLightSlot0State3Top, gRubyCatchLightSlot0State3Bot
     .4byte gRubyCatchLightSlot0State4Top, gRubyCatchLightSlot0State4Bot
     .4byte gRubyCatchLightSlot0State5Top, gRubyCatchLightSlot0State5Bot
-    .4byte 0x0600A180, 0x0600A580
+    .4byte BG_ADDR_FOR_BOARD_WRAP(41, 12), BG_ADDR_FOR_BOARD_WRAP(42, 12)
 
     .4byte gRubyCatchLightState0Top, gRubyCatchLightState0Bot
     .4byte gRubyCatchLightState1Top, gRubyCatchLightState1Bot
@@ -8698,7 +8698,7 @@ gRubyCatchLightTilePointers:: @ 0x086B09E8
     .4byte gRubyCatchLightSlot1State3Top, gRubyCatchLightSlot1State3Bot
     .4byte gRubyCatchLightSlot1State4Top, gRubyCatchLightSlot1State4Bot
     .4byte gRubyCatchLightSlot1State5Top, gRubyCatchLightSlot1State5Bot
-    .4byte 0x0600A1C0, 0x0600A5C0
+    .4byte BG_ADDR_FOR_BOARD_WRAP(41, 14), BG_ADDR_FOR_BOARD_WRAP(42, 14)
 
     .4byte gRubyCatchLightState0Top, gRubyCatchLightState0Bot
     .4byte gRubyCatchLightState1Top, gRubyCatchLightState1Bot
@@ -8706,7 +8706,7 @@ gRubyCatchLightTilePointers:: @ 0x086B09E8
     .4byte gRubyCatchLightSlot2State3Top, gRubyCatchLightSlot2State3Bot
     .4byte gRubyCatchLightSlot2State4Top, gRubyCatchLightSlot2State4Bot
     .4byte gRubyCatchLightSlot2State5Top, gRubyCatchLightSlot2State5Bot
-    .4byte 0x0600A200, 0x0600A600
+    .4byte BG_ADDR_FOR_BOARD_WRAP(41, 16), BG_ADDR_FOR_BOARD_WRAP(42, 16)
 
 gRubySaverTilePointers:: @ 0x086B0A90
     @ 3 sets of 4

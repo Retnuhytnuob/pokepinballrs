@@ -181,11 +181,11 @@ void FullCatchStateCleanup(void)
     gCurrentPinballGame->bonusTrapEnabled = FALSE;
     LoadPortraitGraphics(PORTRAIT_STATE_CURRENT_LOCATION, PORTRAIT_MAIN_SLOT);
     gCurrentPinballGame->portraitDisplayState = PORTRAIT_DISPLAY_MODE_BOARD_CENTER;
-    gCurrentPinballGame->evoItemCount = 0;
-    gCurrentPinballGame->evoBlinkTimer = 0;
-    gCurrentPinballGame->catchLights[0] = 0;
-    gCurrentPinballGame->catchLights[1] = 0;
-    gCurrentPinballGame->catchLights[2] = 0;
+    gCurrentPinballGame->monProgressTowardsBonusCount = 0;
+    gCurrentPinballGame->modeProgressBlinkTimer = 0;
+    gCurrentPinballGame->modeProgressLights[MODE_LAMP_LEFT] = MODE_PROGRESS_LAMP_BALL_UNLIT;
+    gCurrentPinballGame->modeProgressLights[MODE_LAMP_CENTER] = MODE_PROGRESS_LAMP_BALL_UNLIT;
+    gCurrentPinballGame->modeProgressLights[MODE_LAMP_RIGHT] = MODE_PROGRESS_LAMP_BALL_UNLIT;
 }
 
 void InitBonusStageSelect(void)
@@ -1588,10 +1588,10 @@ void CleanupEggModeState(void)
     gCurrentPinballGame->portraitDisplayState = PORTRAIT_DISPLAY_MODE_BOARD_CENTER;
     for (i = 0; i < 3; i++)
     {
-        if (i < gCurrentPinballGame->evoItemCount)
-            gCurrentPinballGame->catchLights[i] = 1;
+        if (i < gCurrentPinballGame->monProgressTowardsBonusCount)
+            gCurrentPinballGame->modeProgressLights[i] = MODE_PROGRESS_LAMP_BALL_LIT;
         else
-            gCurrentPinballGame->catchLights[i] = 0;
+            gCurrentPinballGame->modeProgressLights[i] = MODE_PROGRESS_LAMP_BALL_UNLIT;
     }
 }
 
@@ -2014,7 +2014,7 @@ void UpdateEggMode(void)
         }
         else
         {
-            if (gCurrentPinballGame->catchLights[2] == 1)
+            if (gCurrentPinballGame->modeProgressLights[MODE_LAMP_RIGHT] == MODE_PROGRESS_LAMP_BALL_LIT)
                 RequestBoardStateTransition(MAIN_BOARD_STATE_BOSS_HOLE_ACTIVE);
             else
                 RequestBoardStateTransition(MAIN_BOARD_STATE_DEFAULT);

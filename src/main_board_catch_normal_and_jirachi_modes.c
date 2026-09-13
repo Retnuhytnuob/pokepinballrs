@@ -56,10 +56,10 @@ void CleanupCatchEmState(void)
 
     for (i = 0; i < 3; i++)
     {
-        if (i < gCurrentPinballGame->evoItemCount)
-            gCurrentPinballGame->catchLights[i] = 1;
+        if (i < gCurrentPinballGame->monProgressTowardsBonusCount)
+            gCurrentPinballGame->modeProgressLights[i] = MODE_PROGRESS_LAMP_BALL_LIT;
         else
-            gCurrentPinballGame->catchLights[i] = 0;
+            gCurrentPinballGame->modeProgressLights[i] = MODE_PROGRESS_LAMP_BALL_UNLIT;
     }
 }
 
@@ -257,10 +257,10 @@ void UpdateCatchEmMode(void)
         DmaCopy16(3, gCatchSpritePalettes, OBJ_PLTT_SLOT(PAL_IX_MON_PORTRAIT), PLTT_SLOT_SIZE);
         gCurrentPinballGame->catchTargetX = 118;
         gCurrentPinballGame->catchTargetY = 264;
-        gCurrentPinballGame->evoBlinkTimer = 0;
-        gCurrentPinballGame->catchLights[0] = 2;
-        gCurrentPinballGame->catchLights[1] = 2;
-        gCurrentPinballGame->catchLights[2] = 2;
+        gCurrentPinballGame->modeProgressBlinkTimer = 0;
+        gCurrentPinballGame->modeProgressLights[MODE_LAMP_LEFT] = MODE_PROGRESS_LAMP_CATCH_UNLIT;
+        gCurrentPinballGame->modeProgressLights[MODE_LAMP_CENTER] = MODE_PROGRESS_LAMP_CATCH_UNLIT;
+        gCurrentPinballGame->modeProgressLights[MODE_LAMP_RIGHT] = MODE_PROGRESS_LAMP_CATCH_UNLIT;
         DrawCatchMonBoardSprite();
         gCurrentPinballGame->catchMonCollisionEnabled = TRUE;
         gCurrentPinballGame->boardSubState++;
@@ -295,7 +295,7 @@ void UpdateCatchEmMode(void)
         }
         else
         {
-            if (gCurrentPinballGame->catchLights[2] == 1)
+            if (gCurrentPinballGame->modeProgressLights[MODE_LAMP_RIGHT] == MODE_PROGRESS_LAMP_BALL_LIT)
                 RequestBoardStateTransition(MAIN_BOARD_STATE_BOSS_HOLE_ACTIVE);
             else
                 RequestBoardStateTransition(MAIN_BOARD_STATE_DEFAULT);
@@ -441,10 +441,10 @@ void UpdateJirachiBonus(void)
     case JIRACHI_CATCH_SUBSTATE_SETUP_CATCH_HIT_COUNT:
         DmaCopy16(3, gCaptureHit_Pal, OBJ_PLTT_SLOT(PAL_IX_MON_SHADOW_PORTRAIT), PLTT_SLOT_SIZE);
         DmaCopy16(3, gCatchSpritePalettes, OBJ_PLTT_SLOT(PAL_IX_CATCH_MON), PLTT_SLOT_SIZE);
-        gCurrentPinballGame->evoBlinkTimer = 0;
-        gCurrentPinballGame->catchLights[0] = 2;
-        gCurrentPinballGame->catchLights[1] = 2;
-        gCurrentPinballGame->catchLights[2] = 2;
+        gCurrentPinballGame->modeProgressBlinkTimer = 0;
+        gCurrentPinballGame->modeProgressLights[MODE_LAMP_LEFT] = MODE_PROGRESS_LAMP_CATCH_UNLIT;
+        gCurrentPinballGame->modeProgressLights[MODE_LAMP_CENTER] = MODE_PROGRESS_LAMP_CATCH_UNLIT;
+        gCurrentPinballGame->modeProgressLights[MODE_LAMP_RIGHT] = MODE_PROGRESS_LAMP_CATCH_UNLIT;
         gCurrentPinballGame->catchMonCollisionEnabled = TRUE;
         gMain.fieldSpriteGroups[FIELD_SG_CATCH_MON_ENTITY]->active = TRUE;
         DmaCopy16(3, gCatchSpriteGfxBuffer, (void *)0x06010CA0, 0x480);
@@ -558,7 +558,7 @@ void UpdateJirachiBonus(void)
         }
         else
         {
-            if (gCurrentPinballGame->catchLights[2] == 1)
+            if (gCurrentPinballGame->modeProgressLights[MODE_LAMP_RIGHT] == MODE_PROGRESS_LAMP_BALL_LIT)
                 RequestBoardStateTransition(MAIN_BOARD_STATE_BOSS_HOLE_ACTIVE);
             else
                 RequestBoardStateTransition(MAIN_BOARD_STATE_DEFAULT);

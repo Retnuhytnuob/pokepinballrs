@@ -572,10 +572,10 @@ void RunMonCaptureSequence(void)
     case 1:
         if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_CATCH_EM_MODE)
         {
-            gCurrentPinballGame->evoBlinkTimer = 0;
-            gCurrentPinballGame->catchLights[0] = 2;
-            gCurrentPinballGame->catchLights[1] = 2;
-            gCurrentPinballGame->catchLights[2] = 2;
+            gCurrentPinballGame->modeProgressBlinkTimer = 0;
+            gCurrentPinballGame->modeProgressLights[MODE_LAMP_LEFT] = MODE_PROGRESS_LAMP_CATCH_UNLIT;
+            gCurrentPinballGame->modeProgressLights[MODE_LAMP_CENTER] = MODE_PROGRESS_LAMP_CATCH_UNLIT;
+            gCurrentPinballGame->modeProgressLights[MODE_LAMP_RIGHT] = MODE_PROGRESS_LAMP_CATCH_UNLIT;
         }
 
         gCurrentPinballGame->ball->oamPriority = 0;
@@ -1268,19 +1268,19 @@ void RunMonCaptureSequence(void)
 
             for (i = 0; i <= 2; i++)
             {
-                if (i < gCurrentPinballGame->evoItemCount)
-                    gCurrentPinballGame->catchLights[i] = 1;
+                if (i < gCurrentPinballGame->monProgressTowardsBonusCount)
+                    gCurrentPinballGame->modeProgressLights[i] = MODE_PROGRESS_LAMP_BALL_LIT;
                 else
-                    gCurrentPinballGame->catchLights[i] = 0;
+                    gCurrentPinballGame->modeProgressLights[i] = MODE_PROGRESS_LAMP_BALL_UNLIT;
             }
 
-            if (gCurrentPinballGame->evoItemCount <= 2)
+            if (gCurrentPinballGame->monProgressTowardsBonusCount <= 2)
             {
-                gCurrentPinballGame->evoCatchLightSlot1 = gCurrentPinballGame->evoItemCount;
-                gCurrentPinballGame->evoCatchLightSlot2 = gCurrentPinballGame->evoItemCount;
-                gCurrentPinballGame->catchLights[gCurrentPinballGame->evoCatchLightSlot1] = 1;
-                gCurrentPinballGame->evoBlinkTimer = 120;
-                gCurrentPinballGame->evoItemCount++;
+                gCurrentPinballGame->evoCatchLightSlot1 = gCurrentPinballGame->monProgressTowardsBonusCount;
+                gCurrentPinballGame->evoCatchLightSlot2 = gCurrentPinballGame->monProgressTowardsBonusCount;
+                gCurrentPinballGame->modeProgressLights[gCurrentPinballGame->evoCatchLightSlot1] = MODE_PROGRESS_LAMP_BALL_LIT;
+                gCurrentPinballGame->modeProgressBlinkTimer = 120;
+                gCurrentPinballGame->monProgressTowardsBonusCount++;
             }
 
             gCurrentPinballGame->caughtMonCount++;

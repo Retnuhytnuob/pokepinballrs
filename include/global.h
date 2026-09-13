@@ -838,11 +838,11 @@ struct PinballGame
     /*0x718*/ s8 ballPowerUpLight[3];
     /*0x71B*/ s8 ballPowerUpAnimActive;
     /*0x71C*/ u8 gBallUpgradeFxTimer;
-    /*0x71D*/ s8 catchLights[3];
-    /*0x720*/ u8 evoBlinkTimer;
+    /*0x71D*/ s8 modeProgressLights[3]; // 3 Pokeballs, "Catch!", and "Evo" light under portrait
+    /*0x720*/ u8 modeProgressBlinkTimer; // 3 Pokeballs, "Catch!", and "Evo" light under portrait
     /*0x721*/ s8 evoCatchLightSlot1;
     /*0x722*/ s8 evoCatchLightSlot2;
-    /*0x723*/ s8 evoItemCount;
+    /*0x723*/ s8 monProgressTowardsBonusCount;
     /*0x724*/ u16 saverTimeRemaining;
     /*0x726*/ s8 saverLit;
     /*0x727*/ u8 filler727[0x1];

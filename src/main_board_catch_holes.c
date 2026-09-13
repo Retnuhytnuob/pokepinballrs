@@ -705,10 +705,10 @@ void UpdateShopEntryAnimation(s16 arg0)
                 gMain.fieldSpriteGroups[FIELD_SG_MAIN_SHOP_ARROWS]->active = FALSE;
                 gMain.fieldSpriteGroups[FIELD_SG_MAIN_SHOP_PORTRAIT_OVERLAY]->active = FALSE;
 
-                gCurrentPinballGame->evoBlinkTimer = 0;
-                gCurrentPinballGame->catchLights[0] = 4;
-                gCurrentPinballGame->catchLights[1] = 4;
-                gCurrentPinballGame->catchLights[2] = 4;
+                gCurrentPinballGame->modeProgressBlinkTimer = 0;
+                gCurrentPinballGame->modeProgressLights[MODE_LAMP_LEFT] = MODE_PROGRESS_LAMP_EVO_UNLIT;
+                gCurrentPinballGame->modeProgressLights[MODE_LAMP_CENTER] = MODE_PROGRESS_LAMP_EVO_UNLIT;
+                gCurrentPinballGame->modeProgressLights[MODE_LAMP_RIGHT] = MODE_PROGRESS_LAMP_EVO_UNLIT;
 
                 HidePokemonNameDisplay();
                 gCurrentPinballGame->activeFxType = FX_NONE;
@@ -816,11 +816,11 @@ void TransitionToBonusField(void)
 
     if (gCurrentPinballGame->bonusReturnState == BONUS_RETURN_LOCATION_CENTER_KICKOUT)
     {
-        gCurrentPinballGame->evoItemCount = 0;
-        gCurrentPinballGame->evoBlinkTimer = 0;
-        gCurrentPinballGame->catchLights[0] = 0;
-        gCurrentPinballGame->catchLights[1] = 0;
-        gCurrentPinballGame->catchLights[2] = 0;
+        gCurrentPinballGame->monProgressTowardsBonusCount = 0;
+        gCurrentPinballGame->modeProgressBlinkTimer = 0;
+        gCurrentPinballGame->modeProgressLights[MODE_LAMP_LEFT] = MODE_PROGRESS_LAMP_BALL_UNLIT;
+        gCurrentPinballGame->modeProgressLights[MODE_LAMP_CENTER] = MODE_PROGRESS_LAMP_BALL_UNLIT;
+        gCurrentPinballGame->modeProgressLights[MODE_LAMP_RIGHT] = MODE_PROGRESS_LAMP_BALL_UNLIT;
     }
     m4aMPlayAllStop();
     DisableVBlankInterrupts();
