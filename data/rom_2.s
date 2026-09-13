@@ -6900,7 +6900,7 @@ gGulpinAnimData:: @ 0x086ADA6E
 	.2byte 71,  4, 1, 4, 0
 	.2byte 72,  4, 1, 5, 0
 
-gSideBumperGfxFrameIndices:: @ 0x086ADEB0
+gLinooneBumperGfxFrameIndices:: @ 0x086ADEB0
 	.2byte 0, 200
     .2byte 0,  28
     .2byte 0,  44

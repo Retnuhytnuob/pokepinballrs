@@ -4,8 +4,8 @@
 #include "constants/bg_music.h"
 #include "constants/board/ruby_states.h"
 
-extern const u8 gSideBumperGfx[][0x100];
-extern const u16 gSideBumperGfxFrameIndices[][2];
+extern const u8 gLinooneBumperGfx[][0x100];
+extern const u16 gLinooneBumperGfxFrameIndices[][2];
 
 extern const s16 gGulpinAnimData[][5];
 extern const u16 gGulpinOamData[146][18];
@@ -334,7 +334,7 @@ void UpdateLinooneSideBumpers(void)
     {
         if (gCurrentPinballGame->linooneSideBumperExtensionsPending[i] > 0)
         {
-            if (gSideBumperGfxFrameIndices[gCurrentPinballGame->linooneSideBumperAnimPhase[i]][1] > gCurrentPinballGame->linooneSideBumperAnimTimer[i])
+            if (gLinooneBumperGfxFrameIndices[gCurrentPinballGame->linooneSideBumperAnimPhase[i]][1] > gCurrentPinballGame->linooneSideBumperAnimTimer[i])
             {
                 gCurrentPinballGame->linooneSideBumperAnimTimer[i]++;
             }
@@ -439,8 +439,8 @@ void DrawRubySideBumperSprites(void)
 
     for (i = 0; i < SIDE_COUNT; i++)
     {
-        index = gSideBumperGfxFrameIndices[gCurrentPinballGame->linooneSideBumperAnimPhase[i]][0];
-        DmaCopy16(3, gSideBumperGfx[index], (void *)0x06012A20 + i * 0x100, 0x100);
+        index = gLinooneBumperGfxFrameIndices[gCurrentPinballGame->linooneSideBumperAnimPhase[i]][0];
+        DmaCopy16(3, gLinooneBumperGfx[index], (void *)0x06012A20 + i * 0x100, 0x100);
         group = &gMain.spriteGroups[SG_RUBY_LINOONE_LEFT + i];
         if (group->active)
         {

@@ -1015,7 +1015,7 @@ extern u16 gGroudonBodyCollisionMap[0x3800];
 extern u16 gGroudonProjectileCollisionMap[0x2A80];
 extern const u16 gSphealRampCollisionMap[0x1000];
 extern const u16 gSphealFrozenIceCollisionMap[0x1000];
-extern u8 gFlipperTileGraphics[][0x200];
+extern u8 gFlipper_Gfx[][0x200];
 extern u16 gDusclopsBoardDusclopsAppearFx_Gfx[];
 extern u16 gDusclopsBoardDusclops_Gfx[];
 extern u8 gDusclopsBoardDusclopsBallGrabSwirl_Gfx[];

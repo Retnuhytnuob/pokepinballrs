@@ -17,7 +17,7 @@ extern const u16 gShopSignLoopFrames[][5];
 extern const s16 gHoleAnimKeyframeData[][2];
 extern const u8 gHatchMachineElevator_Gfx[][0x440];
 
-extern const u8 gSplashEffectTileGfx[][0x100];
+extern const u8 gHatchMachineSparkleFx_Gfx[][0x100];
 extern struct Vector16 gSplashEffectPositions[];
 extern const s16 gSplashEffectTileIndices[][2];
 extern const Palette gSapphireShopSign_Pals[];
@@ -748,7 +748,7 @@ void UpdateSapphireHatchMachine(void)
             }
 
             index = gSplashEffectTileIndices[gCurrentPinballGame->splashEffectFrameIndex[i]][0];
-            DmaCopy16(3, &gSplashEffectTileGfx[index], (void *)0x060140a0 + i * 0x100, 0x100);
+            DmaCopy16(3, &gHatchMachineSparkleFx_Gfx[index], (void *)0x060140a0 + i * 0x100, 0x100);
             group->baseX = gSplashEffectPositions[gCurrentPinballGame->splashEffectPositionIndex[i]].x - gCurrentPinballGame->cameraXOffset;
             group->baseY = gSplashEffectPositions[gCurrentPinballGame->splashEffectPositionIndex[i]].y - gCurrentPinballGame->cameraYOffset;
             for (j = 0; j < 3; j++)

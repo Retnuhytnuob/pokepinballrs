@@ -1,6 +1,5 @@
-@ Each group is a 16-palette block, but LoadMonFieldSpriteGraphics and the pokedex both
-@ index it as eggIndex % 6, so only the first six are ever read. The rest is unused grey
-@ filler with nothing in the ROM pointing at it, so it goes in as raw palette data.
+@ Each group is a 16-palette block, but only the first six in each block are read.
+@ This may have been done this way to match the catch sprites, which have a separate color for certain hit/catch frames
 
 gMonHatchSpriteGroup0_Pals:: @ 0x1444F4
 	.incbin "graphics/mon_hatch_sprites/wurmple_hatch.gbapal"
