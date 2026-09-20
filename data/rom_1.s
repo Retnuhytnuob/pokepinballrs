@@ -1603,7 +1603,7 @@ gBallSpawnGlowTiles_Type1:: @ 0x083BF16C
 gSpoinkEntity_Gfx:: @ 0x083C076C
 	.incbin "graphics/stage/main/spoink_launcher.4bpp"
 
-gKyogreSplashSpriteFrames:: @ 0x083C13AC
+gKyogreSurfacingFx_Gfx:: @ 0x083C13AC
 	.incbin "graphics/stage/kyogre/surfacing_fx_frames.4bpp"
 
 gKyogreFreeze_Gfx:: @ 0x083C1A6C
@@ -1779,11 +1779,11 @@ gHatchMachineElevator_Gfx:: @ 0x08490A4C
 gDusclopsBoardDusclopsAppearFx_Gfx:: @ 0x08494E4C
 	.incbin "graphics/stage/dusclops/dusclops_appear_fx.4bpp";
 
-gKyogreBodySprites_First15:: @ 0x0849664C
-	.incbin "graphics/stage/kyogre/body_first15.4bpp"
+gKyogreTopPosition_Gfx:: @ 0x0849664C
+	.incbin "graphics/stage/kyogre/kyogre_top.4bpp"
 
-gKyogreBodySprites_After15:: @ 0x0849B8CC
-	.incbin "graphics/stage/kyogre/body_after15.4bpp"
+gKyogreBreach_Gfx:: @ 0x0849B8CC
+	.incbin "graphics/stage/kyogre/kyogre_breach.4bpp"
 
 gGroudonAttackFx_Gfx:: @ 0x0849F1CC
 	.incbin "graphics/stage/groudon/board_fx.4bpp"
