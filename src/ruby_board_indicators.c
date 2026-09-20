@@ -15,7 +15,7 @@ extern const u8 *gRubyHoleIndicatorTilePointers[][4];
 extern const u8 *gRubyCatchLightTilePointers[][7][2];
 extern const u8 *gRubyTrapIndicatorTilePointers[][2];
 extern const u8 *gRubyProgressDigitTilePointers[][2];
-extern const u8 *gShopItemTilePointers[][3];
+extern const u8 *gRubyShopSignTilePointers[][3];
 extern const s16 gRubySlingshotAnimIndices[];
 extern const u8 *gRubySlingshotTilePointers[2][3][5];
 extern const u8 *gRubyCoinRewardTilePtrs[][5][3];
@@ -107,8 +107,8 @@ void LoadShopItemGraphics(s16 arg0)
     const u8 **src;
     const u8 **dest;
 
-    src = gShopItemTilePointers[arg0];
-    dest = gShopItemTilePointers[2];
+    src = gRubyShopSignTilePointers[arg0];
+    dest = gRubyShopSignTilePointers[2];
     DmaCopy16(3, src[0], dest[0], 0xC0);
     DmaCopy16(3, src[1], dest[1], 0xC0);
     DmaCopy16(3, src[2], dest[2], 0x20);

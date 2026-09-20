@@ -3,6 +3,7 @@
 #include "main.h"
 #include "constants/bg_music.h"
 #include "constants/board/sapphire_states.h"
+#include "constants/mem_layout/sapphire.h"
 
 extern const u16 gEggOamFramestates[40][2][3];
 extern const u16 gSeedotBasketBounceFrames[];
@@ -613,7 +614,7 @@ void UpdateSapphireHatchMachine(void)
             }
 
             index = gCurrentPinballGame->sapphireHatchMachineFrameIx;
-            DmaCopy16(3, &gHatchMachineElevator_Gfx[index], BG_TILE_ADDR(TILE_INDEX(3, 6, 8)), 0x440);
+            DmaCopy16(3, &gHatchMachineElevator_Gfx[index], BG_VRAM_ADDR_HATCH_MACHINE_ALL_TILES, SIZE_OF_VRAM_HATCH_MACHINE_ALL_TILES);
             gCurrentPinballGame->hatchMachineProgressTickSignaled = FALSE;
         }
         break;
@@ -621,12 +622,12 @@ void UpdateSapphireHatchMachine(void)
         if (gCurrentPinballGame->holeAnimFrameCounter < 270)
         {
             index = (gCurrentPinballGame->holeAnimFrameCounter % 60) / 30 + 4;
-            DmaCopy16(3, &gHatchMachineElevator_Gfx[index], BG_TILE_ADDR(TILE_INDEX(3, 6, 8)), 0x440);
+            DmaCopy16(3, &gHatchMachineElevator_Gfx[index], BG_VRAM_ADDR_HATCH_MACHINE_ALL_TILES, SIZE_OF_VRAM_HATCH_MACHINE_ALL_TILES);
         }
         else
         {
             index = 0;
-            DmaCopy16(3, &gHatchMachineElevator_Gfx[index], BG_TILE_ADDR(TILE_INDEX(3, 6, 8)), 0x440);
+            DmaCopy16(3, &gHatchMachineElevator_Gfx[index], BG_VRAM_ADDR_HATCH_MACHINE_ALL_TILES, SIZE_OF_VRAM_HATCH_MACHINE_ALL_TILES);
             gCurrentPinballGame->sapphireHatchMachineState = HATCH_MACHINE_STATE_MON_HATCHED;
             gCurrentPinballGame->sapphireHatchMachineFrameIx = 0;
         }
@@ -658,7 +659,7 @@ void UpdateSapphireHatchMachine(void)
                 m4aSongNumStart(SE_HATCH_MACHINE_ELEVATOR);
 
             index = gHoleAnimKeyframeData[gCurrentPinballGame->sapphireHatchMachineFrameIx][0];
-            DmaCopy16(3, &gHatchMachineElevator_Gfx[index], BG_TILE_ADDR(TILE_INDEX(3, 6, 8)), 0x440);
+            DmaCopy16(3, &gHatchMachineElevator_Gfx[index], BG_VRAM_ADDR_HATCH_MACHINE_ALL_TILES, SIZE_OF_VRAM_HATCH_MACHINE_ALL_TILES);
         }
 
         if (gCurrentPinballGame->sapphireHatchMachineFrameIx < 6)
@@ -708,7 +709,7 @@ void UpdateSapphireHatchMachine(void)
                 gCurrentPinballGame->sapphireHatchMachineState = HATCH_MACHINE_STATE_RESET;
 
             index = gHoleAnimKeyframeData[gCurrentPinballGame->sapphireHatchMachineFrameIx][0];
-            DmaCopy16(3, gHatchMachineElevator_Gfx[index], BG_TILE_ADDR(TILE_INDEX(3, 6, 8)), 0x440);
+            DmaCopy16(3, gHatchMachineElevator_Gfx[index], BG_VRAM_ADDR_HATCH_MACHINE_ALL_TILES, SIZE_OF_VRAM_HATCH_MACHINE_ALL_TILES);
         }
 
         if (gCurrentPinballGame->sapphireHatchMachineFrameIx == 14 && gCurrentPinballGame->holeAnimFrameCounter == 10)

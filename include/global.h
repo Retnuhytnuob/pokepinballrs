@@ -217,7 +217,7 @@ struct PinballGame
     /*0x05C*/ s16 flipperLaunchPending;
     /*0x05E*/ u8 filler5E[0x2];
     /*0x060*/ struct Vector16 flipperLaunchVelocity;
-    /*0x064*/ s16 ballLaunchSpeed;
+    /*0x064*/ s16 prevScrollYTileIx;
     /*0x066*/ u16 activeBallIndex;
     /*0x068*/ s16 cameraYViewport;
     /*0x06A*/ s16 hudSpriteBaseY;
@@ -243,7 +243,7 @@ struct PinballGame
     /*0x0C6*/ u16 jirachiCenterY;
     /*0x0C8*/ u8 fillerC8[0x2];
     /*0x0CA*/ s16 scrollEffectX;
-    /*0x0CC*/ s16 scrollEffectY;
+    /*0x0CC*/ s16 scrollEffectYpx;
     /*0x0CE*/ u16 unkCE;
     /*0x0D0*/ struct Vector16 ballTrailPosition[5];
     /*0x0E4*/ u8 activeFxType;
@@ -895,7 +895,7 @@ struct PinballGame
     /*0x1106*/volatile u16 pauseBlendControl;
     /*0x1108*/volatile u16 pauseBlendAlpha;
     /*0x110A*/volatile u16 pauseBlendBrightness;
-    /*0x110C*/u16 pausecutsceneBackdropBarActive;
+    /*0x110C*/u16 pauseCutsceneBackdropBarActive;
     /*0x110E*/u16 pauseVCount;
     // Values preserved from before pause (restored when unpausing)
     /*0x1110*/volatile u16 savedBlendControl;

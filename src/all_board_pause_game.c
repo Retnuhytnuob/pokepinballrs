@@ -43,7 +43,7 @@ void PauseGame(void)
     gCurrentPinballGame->pauseBlendControl = gMain.blendControl;
     gCurrentPinballGame->pauseBlendAlpha = gMain.blendAlpha;
     gCurrentPinballGame->pauseBlendBrightness = gMain.blendBrightness;
-    gCurrentPinballGame->pausecutsceneBackdropBarActive = gMain.cutsceneBackdropBarActive;
+    gCurrentPinballGame->pauseCutsceneBackdropBarActive = gMain.cutsceneBackdropBarActive;
     gCurrentPinballGame->pauseVCount = gMain.vCount;
     DmaCopy16(3, OBJ_PLTT, gCurrentPinballGame->pauseObjPalette, OBJ_PLTT_SIZE);
     for (i = 0; i < PALETTES_PER_BANK; i++)
@@ -86,7 +86,7 @@ void UnpauseGame(void)
     gMain.blendControl = gCurrentPinballGame->pauseBlendControl;
     gMain.blendAlpha = gCurrentPinballGame->pauseBlendAlpha;
     gMain.blendBrightness = gCurrentPinballGame->pauseBlendBrightness;
-    gMain.cutsceneBackdropBarActive = gCurrentPinballGame->pausecutsceneBackdropBarActive;
+    gMain.cutsceneBackdropBarActive = gCurrentPinballGame->pauseCutsceneBackdropBarActive;
     gMain.vCount = gCurrentPinballGame->pauseVCount;
     DmaCopy16(3, gCurrentPinballGame->pauseObjPalette, OBJ_PLTT, OBJ_PLTT_SIZE);
     if (gCurrentPinballGame->savedBgmSongHeader)

@@ -8,8 +8,10 @@
 #include "constants/board/ruby_states.h"
 #include "constants/board/sapphire_states.h"
 #include "constants/mem_layout/spheal.h"
+#include "constants/mem_layout/ruby.h"
+#include "constants/mem_layout/sapphire.h"
 
-extern u8 gBoardGfxBuffer[];
+extern u8 gBoardBGTileBuffer[];
 extern u8 gBoardBGTileBufferAlt[];
 extern const u8 gMainBoardBallSave_Gfx[];
 extern const u8 gMainBoardEndOfBall_Gfx[];
@@ -119,7 +121,7 @@ void SaveGameStateSnapshot(s16 arg0)
     gCurrentPinballGame->savedBlendControl = gCurrentPinballGame->pauseBlendControl;
     gCurrentPinballGame->savedBlendAlpha = gCurrentPinballGame->pauseBlendAlpha;
     gCurrentPinballGame->savedBlendBrightness = gCurrentPinballGame->pauseBlendBrightness;
-    gCurrentPinballGame->savedcutsceneBackdropBarActive = gCurrentPinballGame->pausecutsceneBackdropBarActive;
+    gCurrentPinballGame->savedcutsceneBackdropBarActive = gCurrentPinballGame->pauseCutsceneBackdropBarActive;
     gCurrentPinballGame->savedVCount = gCurrentPinballGame->pauseVCount;
     gCurrentPinballGame->ballSpeed = gMain_saveData.ballSpeed;
 
@@ -138,7 +140,7 @@ void SaveGameToSram(void)
 void RestoreGameState(u16 arg0)
 {
     s16 i, j;
-    s16 var0, var1;
+    s16 var0, scrollYTileIx;
 
     if (arg0 == 1)
     {
@@ -216,16 +218,16 @@ void RestoreGameState(u16 arg0)
     {
         for (i = 0; i < 22; i++)
         {
-            var0 = i + gCurrentPinballGame->ballLaunchSpeed;
-            var1 = (i + 10 + gCurrentPinballGame->ballLaunchSpeed) % 22;
+            var0 = i + gCurrentPinballGame->prevScrollYTileIx;
+            scrollYTileIx = (i + 10 + gCurrentPinballGame->prevScrollYTileIx) % 22;
             if (var0 < 32)
             {
-                DmaCopy16(3, &gBoardGfxBuffer[var0 * 0x400], (void *)BG_TILE_ADDR(TILE_INDEX(2,var1,0)), 0x400);
+                DmaCopy16(3, &gBoardBGTileBuffer[var0 * 0x400], (void *) BG_VRAM_ADDR_MAIN_SCROLL_SEGMENT_TILES + scrollYTileIx * MEM_SIZE_OF_TILE_ROW, MEM_SIZE_OF_TILE_ROW);
             }
             else
             {
                 var0 -= 32;
-                DmaCopy16(3, &gBoardBGTileBufferAlt[var0 * 0x400], (void *)BG_TILE_ADDR(TILE_INDEX(2,var1,0)), 0x400);
+                DmaCopy16(3, &gBoardBGTileBufferAlt[var0 * 0x400], (void *)BG_VRAM_ADDR_MAIN_SCROLL_SEGMENT_TILES + scrollYTileIx * MEM_SIZE_OF_TILE_ROW, MEM_SIZE_OF_TILE_ROW);
             }
         }
     }
@@ -653,16 +655,16 @@ void RestoreSapphireBoardTileGraphics(void)
     case HATCH_MACHINE_STATE_ACTIVATED_LIGHT_CROSS:
     case HATCH_MACHINE_STATE_MON_HATCHED:
         index = gCurrentPinballGame->sapphireHatchMachineFrameIx;
-        DmaCopy16(3, gHatchMachineElevator_Gfx[index], BG_TILE_ADDR(TILE_INDEX(3, 6, 8)), 0x440);
+        DmaCopy16(3, gHatchMachineElevator_Gfx[index], BG_VRAM_ADDR_HATCH_MACHINE_ALL_TILES, SIZE_OF_VRAM_HATCH_MACHINE_ALL_TILES);
         break;
     case HATCH_MACHINE_STATE_ELEVATOR_DECENDS:
     case HATCH_MACHINE_STATE_EMPTY:
         index = 15;
-        DmaCopy16(3, gHatchMachineElevator_Gfx[index], BG_TILE_ADDR(TILE_INDEX(3, 6, 8)), 0x440);
+        DmaCopy16(3, gHatchMachineElevator_Gfx[index], BG_VRAM_ADDR_HATCH_MACHINE_ALL_TILES, SIZE_OF_VRAM_HATCH_MACHINE_ALL_TILES);
         break;
     case HATCH_MACHINE_STATE_EGG_RISING:
         index = gHoleAnimKeyframeData[gCurrentPinballGame->sapphireHatchMachineFrameIx][0];
-        DmaCopy16(3, gHatchMachineElevator_Gfx[index], BG_TILE_ADDR(TILE_INDEX(3, 6, 8)), 0x440);
+        DmaCopy16(3, gHatchMachineElevator_Gfx[index], BG_VRAM_ADDR_HATCH_MACHINE_ALL_TILES, SIZE_OF_VRAM_HATCH_MACHINE_ALL_TILES);
         break;
     case HATCH_MACHINE_STATE_RESET:
         break;

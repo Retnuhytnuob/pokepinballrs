@@ -8,6 +8,8 @@
 #include "gba/oam_types.h"
 #include "constants/global.h"
 #include "constants/palette_mappings.h"
+#include "constants/mem_layout/ruby.h"
+#include "constants/mem_layout/sapphire.h"
 	.include "asm/macros.inc"
 
 .align 2
@@ -8642,18 +8644,18 @@ gRubySlingshotTilePointers:: @ 0x086B08D4
     @ Third set of 5 is the destination address.
 	.4byte gRuby_LSlingshot_Off_R0, gRuby_LSlingshot_Off_R1, gRuby_LSlingshot_Off_R2, gRuby_LSlingshot_Off_R3, gRuby_LSlingshot_Off_R4
     .4byte gRuby_LSlingshot_On_R0,  gRuby_LSlingshot_On_R1,  gRuby_LSlingshot_On_R2,  gRuby_LSlingshot_On_R3,  gRuby_LSlingshot_On_R4
-    .4byte BG_TILE_ADDR(TILE_INDEX(3, 6, 16)), BG_TILE_ADDR(TILE_INDEX(3, 6, 17)), BG_TILE_ADDR(TILE_INDEX(3, 6, 19)), BG_TILE_ADDR(TILE_INDEX(3, 6, 22)), BG_TILE_ADDR(TILE_INDEX(3, 6, 25))
+    .4byte BG_VRAM_ADDR_RUBY_LSLINGSHOT_ROW0_TILES, BG_VRAM_ADDR_RUBY_LSLINGSHOT_ROW1_TILES, BG_VRAM_ADDR_RUBY_LSLINGSHOT_ROW2_TILES, BG_VRAM_ADDR_RUBY_LSLINGSHOT_ROW3_TILES, BG_VRAM_ADDR_RUBY_LSLINGSHOT_ROW4_TILES
 
     .4byte gRuby_RSlingshot_Off_R0, gRuby_RSlingshot_Off_R1, gRuby_RSlingshot_Off_R2, gRuby_RSlingshot_Off_R3, gRuby_RSlingshot_Off_R4
     .4byte gRuby_RSlingshot_On_R0, gRuby_RSlingshot_On_R1, gRuby_RSlingshot_On_R2, gRuby_RSlingshot_On_R3, gRuby_RSlingshot_On_R4
-    .4byte BG_TILE_ADDR(TILE_INDEX(3, 6, 27)), BG_TILE_ADDR(TILE_INDEX(3, 6, 28)), BG_TILE_ADDR(TILE_INDEX(3, 6, 30)), BG_TILE_ADDR(TILE_INDEX(3, 7, 1)), BG_TILE_ADDR(TILE_INDEX(3, 7, 4))
+    .4byte BG_VRAM_ADDR_RUBY_RSLINGSHOT_ROW0_TILES, BG_VRAM_ADDR_RUBY_RSLINGSHOT_ROW1_TILES, BG_VRAM_ADDR_RUBY_RSLINGSHOT_ROW2_TILES, BG_VRAM_ADDR_RUBY_RSLINGSHOT_ROW3_TILES, BG_VRAM_ADDR_RUBY_RSLINGSHOT_ROW4_TILES
 
-gShopItemTilePointers:: @ 0x086B094C
+gRubyShopSignTilePointers:: @ 0x086B094C
     @ Arranged into 3 sets of 3.
     @ Third set is the destination address.
 	.4byte gRubyShopSignMartPiece0, gRubyShopSignMartPiece1, gRubyShopSignMartPiece2
     .4byte gRubyShopSignCenterPiece0, gRubyShopSignCenterPiece1, gRubyShopSignCenterPiece2
-    .4byte BG_TILE_ADDR(TILE_INDEX(3, 6, 3)), BG_TILE_ADDR(TILE_INDEX(3, 6, 9)), BG_TILE_ADDR(TILE_INDEX(3, 6, 15))
+    .4byte BG_VRAM_ADDR_RUBY_SHOP_SIGN_ROW0_TILES, BG_VRAM_ADDR_RUBY_SHOP_SIGN_ROW1_TILES, BG_VRAM_ADDR_RUBY_SHOP_SIGN_ROW2_TILES
 
 gRubyProgressDigitTilePointers:: @ 0x086B0970
     @ 11 sets of 2.
@@ -8668,7 +8670,7 @@ gRubyProgressDigitTilePointers:: @ 0x086B0970
     .4byte gRubyProgressDigit7_Tens, gRubyProgressDigit7_Ones
     .4byte gRubyProgressDigit8_Tens, gRubyProgressDigit8_Ones
     .4byte gRubyProgressDigit9_Tens, gRubyProgressDigit9_Ones
-    .4byte BG_TILE_ADDR(TILE_INDEX(3, 6, 1)), BG_TILE_ADDR(TILE_INDEX(3, 6, 2))
+    .4byte BG_VRAM_ADDR_RUBY_BMULT_SIGN_ROW0_TILES, BG_VRAM_ADDR_RUBY_BMULT_SIGN_ROW1_TILES
 
 gRubyTrapIndicatorTilePointers:: @ 0x086B09C8
     @ 4 sets of 2
@@ -8872,54 +8874,54 @@ gHatchMachineDrawSegment:: @ 0x086B0F9C
     @ third set has destination address
     .4byte gHatchMachineSeg0IdleA, gHatchMachineSeg0IdleB
     .4byte gHatchMachineSeg0HitA, gHatchMachineSeg0HitB
-    .4byte BG_TILE_ADDR(TILE_INDEX(3, 7, 10)), BG_TILE_ADDR(TILE_INDEX(3, 7, 12))
+    .4byte BG_VRAM_ADDR_HATCH_MACHINE_SEG0_ROW0_TILES, BG_VRAM_ADDR_HATCH_MACHINE_SEG0_ROW1_TILES
 
     .4byte gHatchMachineSeg1IdleA, gHatchMachineSeg1IdleB
     .4byte gHatchMachineSeg1HitA, gHatchMachineSeg1HitB
-    .4byte BG_TILE_ADDR(TILE_INDEX(3, 7, 14)), BG_TILE_ADDR(TILE_INDEX(3, 7, 16))
+    .4byte BG_VRAM_ADDR_HATCH_MACHINE_SEG1_ROW0_TILES, BG_VRAM_ADDR_HATCH_MACHINE_SEG1_ROW1_TILES
 
     .4byte gHatchMachineSeg2IdleA, gHatchMachineSeg2IdleB
     .4byte gHatchMachineSeg2HitA, gHatchMachineSeg2HitB
-    .4byte BG_TILE_ADDR(TILE_INDEX(3, 6, 14)), BG_TILE_ADDR(TILE_INDEX(3, 6, 22))
+    .4byte BG_VRAM_ADDR_HATCH_MACHINE_SEG2_ROW0_TILES, BG_VRAM_ADDR_HATCH_MACHINE_SEG2_ROW1_TILES
 
     .4byte gHatchMachineSeg3Idle, gHatchMachineSeg3Idle
     .4byte gHatchMachineSeg3Hit, gHatchMachineSeg3Hit
-    .4byte BG_TILE_ADDR(TILE_INDEX(3, 7, 18)), BG_TILE_ADDR(TILE_INDEX(3, 7, 18))
+    .4byte BG_VRAM_ADDR_HATCH_MACHINE_SEG3_TILES, BG_VRAM_ADDR_HATCH_MACHINE_SEG3_TILES
 
     .4byte gHatchMachineSeg4IdleA, gHatchMachineSeg4IdleB
     .4byte gHatchMachineSeg4HitA, gHatchMachineSeg4HitB
-    .4byte BG_TILE_ADDR(TILE_INDEX(3, 6, 8)), BG_TILE_ADDR(TILE_INDEX(3, 6, 16))
+    .4byte BG_VRAM_ADDR_HATCH_MACHINE_SEG4_ROW0_TILES, BG_VRAM_ADDR_HATCH_MACHINE_SEG4_ROW1_TILES
 
     .4byte gHatchMachineSeg5IdleA, gHatchMachineSeg5IdleB
     .4byte gHatchMachineSeg5HitA, gHatchMachineSeg5HitB
-    .4byte BG_TILE_ADDR(TILE_INDEX(3, 7, 20)), BG_TILE_ADDR(TILE_INDEX(3, 7, 22))
+    .4byte BG_VRAM_ADDR_HATCH_MACHINE_SEG5_ROW0_TILES, BG_VRAM_ADDR_HATCH_MACHINE_SEG5_ROW1_TILES
 
     .4byte gHatchMachineSeg6IdleA, gHatchMachineSeg6IdleB
     .4byte gHatchMachineSeg6HitA, gHatchMachineSeg6HitB
-    .4byte BG_TILE_ADDR(TILE_INDEX(3, 7, 24)), BG_TILE_ADDR(TILE_INDEX(3, 7, 26))
+    .4byte BG_VRAM_ADDR_HATCH_MACHINE_SEG6_ROW0_TILES, BG_VRAM_ADDR_HATCH_MACHINE_SEG6_ROW1_TILES
 
     .4byte gHatchMachineSeg7IdleA, gHatchMachineSeg7IdleB
     .4byte gHatchMachineSeg7HitA, gHatchMachineSeg7HitB
-    .4byte BG_TILE_ADDR(TILE_INDEX(3, 7, 28)), BG_TILE_ADDR(TILE_INDEX(3, 7, 30))
+    .4byte BG_VRAM_ADDR_HATCH_MACHINE_SEG7_ROW0_TILES, BG_VRAM_ADDR_HATCH_MACHINE_SEG7_ROW1_TILES
 
     .4byte gHatchMachineSeg8IdleA, gHatchMachineSeg8IdleB
     .4byte gHatchMachineSeg8HitA, gHatchMachineSeg8HitB
-    .4byte BG_TILE_ADDR(TILE_INDEX(3, 8, 0)), BG_TILE_ADDR(TILE_INDEX(3, 8, 2))
+    .4byte BG_VRAM_ADDR_HATCH_MACHINE_SEG8_ROW0_TILES, BG_VRAM_ADDR_HATCH_MACHINE_SEG8_ROW1_TILES
 
     .4byte gHatchMachineSeg9IdleA, gHatchMachineSeg9IdleB
     .4byte gHatchMachineSeg9HitA, gHatchMachineSeg9HitB
-    .4byte BG_TILE_ADDR(TILE_INDEX(3, 8, 4)), BG_TILE_ADDR(TILE_INDEX(3, 8, 6))
+    .4byte BG_VRAM_ADDR_HATCH_MACHINE_SEG9_ROW0_TILES, BG_VRAM_ADDR_HATCH_MACHINE_SEG9_ROW1_TILES
 
 gSapphireSlingshotTilePtrs:: @ 0x086B108C
     @ 2 sets (sides) of 3 sets of 5
     @ third set has destination address
     .4byte gSapphire_LSlingshot_Off_R0, gSapphire_LSlingshot_Off_R1, gSapphire_LSlingshot_Off_R2, gSapphire_LSlingshot_Off_R3, gSapphire_LSlingshot_Off_R4
     .4byte gSapphire_LSlingshot_On_R0, gSapphire_LSlingshot_On_R1, gSapphire_LSlingshot_On_R2, gSapphire_LSlingshot_On_R3, gSapphire_LSlingshot_On_R4
-    .4byte BG_TILE_ADDR(TILE_INDEX(3, 8, 8)), BG_TILE_ADDR(TILE_INDEX(3, 8, 9)), BG_TILE_ADDR(TILE_INDEX(3, 8, 11)), BG_TILE_ADDR(TILE_INDEX(3, 8, 14)), BG_TILE_ADDR(TILE_INDEX(3, 8, 17))
+    .4byte BG_VRAM_ADDR_SAPPHIRE_LSLINGSHOT_ROW0_TILES, BG_VRAM_ADDR_SAPPHIRE_LSLINGSHOT_ROW1_TILES, BG_VRAM_ADDR_SAPPHIRE_LSLINGSHOT_ROW2_TILES, BG_VRAM_ADDR_SAPPHIRE_LSLINGSHOT_ROW3_TILES, BG_VRAM_ADDR_SAPPHIRE_LSLINGSHOT_ROW4_TILES
 
     .4byte gSapphire_RSlingshot_Off_R0, gSapphire_RSlingshot_Off_R1, gSapphire_RSlingshot_Off_R2, gSapphire_RSlingshot_Off_R3, gSapphire_RSlingshot_Off_R4
     .4byte gSapphire_RSlingshot_On_R0, gSapphire_RSlingshot_On_R1, gSapphire_RSlingshot_On_R2, gSapphire_RSlingshot_On_R3, gSapphire_RSlingshot_On_R4
-    .4byte BG_TILE_ADDR(TILE_INDEX(3, 8, 19)), BG_TILE_ADDR(TILE_INDEX(3, 8, 20)), BG_TILE_ADDR(TILE_INDEX(3, 8, 22)), BG_TILE_ADDR(TILE_INDEX(3, 8, 25)), BG_TILE_ADDR(TILE_INDEX(3, 8, 28))
+    .4byte BG_VRAM_ADDR_SAPPHIRE_RSLINGSHOT_ROW0_TILES, BG_VRAM_ADDR_SAPPHIRE_RSLINGSHOT_ROW1_TILES, BG_VRAM_ADDR_SAPPHIRE_RSLINGSHOT_ROW2_TILES, BG_VRAM_ADDR_SAPPHIRE_RSLINGSHOT_ROW3_TILES, BG_VRAM_ADDR_SAPPHIRE_RSLINGSHOT_ROW4_TILES
 
 gSapphireTrapIndicatorTilePtrs:: @ 0x086B1104
     @ 4 sets of 2

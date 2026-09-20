@@ -243,7 +243,7 @@ gMainCallback: @ 0x200FB9C
 	.space 0x4
 gVCountIntrFuncShadow: @ 0x200FBA0
 	.space 0x10
-gBoardGfxBuffer: @ 0x0200FBB0
+gBoardBGTileBuffer: @ 0x0200FBB0
 	.space 0x8020
 gVBlankIntrFuncShadow: @ 0x2017BD0
 	.space 0x4

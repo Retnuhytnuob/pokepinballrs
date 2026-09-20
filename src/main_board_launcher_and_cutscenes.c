@@ -331,7 +331,7 @@ void RunEvolutionCutscene(void)
             gMain.fieldSpriteGroups[FIELD_SG_EVOLUTION_LIGHTNING]->active = TRUE;
         }
 
-        if (gCurrentPinballGame->scrollEffectY < 236)
+        if (gCurrentPinballGame->scrollEffectYpx < 236)
             gCurrentPinballGame->cameraYAdjust = gCurrentPinballGame->stageTimer / 2;;
 
         if (gCurrentPinballGame->stageTimer > 35)

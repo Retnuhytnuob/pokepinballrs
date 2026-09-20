@@ -423,8 +423,8 @@ void SetBallPositionForBonusReturn(void)
     gMain.bgOffsets[1].yOffset = gCurrentPinballGame->cameraBaseY;
     gMain.bgOffsets[0].yOffset = 80;
 
-    gCurrentPinballGame->scrollEffectY = gMain.bgOffsets[3].yOffset;
-    gCurrentPinballGame->ballLaunchSpeed = gMain.bgOffsets[3].yOffset / 8;
+    gCurrentPinballGame->scrollEffectYpx = gMain.bgOffsets[3].yOffset;
+    gCurrentPinballGame->prevScrollYTileIx = gMain.bgOffsets[3].yOffset / 8;
 }
 
 void ConfigureBoardProcessesForField(void)
