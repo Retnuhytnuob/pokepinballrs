@@ -572,7 +572,7 @@ struct PinballGame
     /*0x3DC*/ s8 bossEntityState;
     /*0x3DD*/ s8 bossNextAttackState;
     /*0x3DE*/ s8 kecleonFramesetBase;
-    /*0x3DF*/ s8 bossVulnerable;
+    /*0x3DF*/ s8 bossNextFrameId;
     /*0x3E0*/ s8 dusclopsWalkFootIndex;
     /*0x3E1*/ s8 bossMovementPhase;
     /*0x3E2*/ s16 bossFramesetIndex;

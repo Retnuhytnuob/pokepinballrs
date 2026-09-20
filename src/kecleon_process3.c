@@ -72,7 +72,7 @@ void InitFrameProcess3_BoardLogic_KecleonBoard(void)
     gCurrentPinballGame->bossEntityState = KECLEON_ENTITY_STATE_SPAWN;
     gCurrentPinballGame->bossPositionX = 750;
     gCurrentPinballGame->bossPositionY = 360;
-    gCurrentPinballGame->bossVulnerable = 3;
+    gCurrentPinballGame->bossNextFrameId = 3;
     gCurrentPinballGame->bonusModeHitCount = 0;
     gCurrentPinballGame->boardEntityCollisionMode = KECLEON_COLLISION_MODE_NONE;
     gCurrentPinballGame->bannerSlideYOffset = 0;
@@ -776,7 +776,7 @@ void RenderKecleonSprites(void)
 {
     s16 i;
     struct SpriteGroup *spriteGroup;
-    s16 sp0;
+    s16 frameId;
     s16 sp4;
     struct OamDataSimple *oamSimple;
     u16 *dst;
@@ -790,9 +790,9 @@ void RenderKecleonSprites(void)
     if (!spriteGroup->active)
         return;
 
-    sp0 = gCurrentPinballGame->bossVulnerable;
-    gCurrentPinballGame->bossVulnerable = gKecleonAnimFramesetTable[gCurrentPinballGame->bossFramesetIndex][2];
-    DmaCopy16(3, gKecleonStageKecleon_Gfx[sp0], OBJ_TILE_ADDR(TILE_INDEX(0, 2, 9)), 0x280);
+    frameId = gCurrentPinballGame->bossNextFrameId;
+    gCurrentPinballGame->bossNextFrameId = gKecleonAnimFramesetTable[gCurrentPinballGame->bossFramesetIndex][2];
+    DmaCopy16(3, gKecleonStageKecleon_Gfx[frameId], OBJ_TILE_ADDR(TILE_INDEX(0, 2, 9)), 0x280);
     sp4 = gKecleonAnimFramesetTable[gCurrentPinballGame->bossFramesetIndex][0];
     spriteGroup->baseX = gCurrentPinballGame->bossPositionX / 10 + baseX - gCurrentPinballGame->cameraXOffset;
     spriteGroup->baseY = gCurrentPinballGame->bossPositionY / 10 + baseY - gCurrentPinballGame->cameraYOffset;
@@ -840,7 +840,7 @@ void RenderKecleonSprites(void)
         {
             gOamBuffer[oamSimple->oamId].x += spriteGroup->baseX;
             gOamBuffer[oamSimple->oamId].y += spriteGroup->baseY;
-            if (gCurrentPinballGame->bossVulnerable == 20) {
+            if (gCurrentPinballGame->bossNextFrameId == 20) {
                 if(gCurrentPinballGame->bossFrameTimer < 10)
                     gOamBuffer[oamSimple->oamId].paletteNum = PAL_IX_10;
                 else
@@ -877,7 +877,7 @@ void RenderKecleonSprites(void)
         {
             gOamBuffer[oamSimple->oamId].x += spriteGroup->baseX;
             gOamBuffer[oamSimple->oamId].y += spriteGroup->baseY;
-            if (sp0 == 20)
+            if (frameId == 20)
             {
                 if (gCurrentPinballGame->bossFrameTimer < 10)
                     gOamBuffer[oamSimple->oamId].paletteNum = PAL_IX_11;

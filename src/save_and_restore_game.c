@@ -772,7 +772,7 @@ void RestoreSphealBonusGraphics(void)
     for (i = 0; i < 0x800; i++)
         gBG0TilemapBuffer[i] = 0x1FF;
 
-    DmaCopy16(3, gSphealResultsScreenGfx, OBJ_TILE_ADDR(TILE_INDEX(1, 6, 0)), 0x800);
+    DmaCopy16(3, gSphealResultsScreenGfx, OBJ_VRAM_ADDR_SPHEAL_SUMMARY_TILES, SIZE_OF_VRAM_SPHEAL_SUMMARY_TILES);
 }
 
 void nullsub_18(void)

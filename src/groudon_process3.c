@@ -64,7 +64,7 @@ void InitFrameProcess3_BoardLogic_GroudonBoard(void)
     gCurrentPinballGame->bossEntityState = GROUDON_ENTITY_STATE_SPAWN;
     gCurrentPinballGame->bossNextAttackState = 0;
     gCurrentPinballGame->kecleonFramesetBase = 0;
-    gCurrentPinballGame->bossVulnerable = 0;
+    gCurrentPinballGame->bossNextFrameId = 0;
     gCurrentPinballGame->dusclopsWalkFootIndex = 0;
     gCurrentPinballGame->bossFramesetIndex = 0;
     gCurrentPinballGame->bossMovementPhase = 0;

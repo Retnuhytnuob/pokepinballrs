@@ -58,7 +58,7 @@ void InitFrameProcess3_BoardLogic_DusclopsBoard(void)
 
     gCurrentPinballGame->bossEntityState = DUSCLOPS_ENTITY_STATE_INIT;
     gCurrentPinballGame->kecleonFramesetBase = 0;
-    gCurrentPinballGame->bossVulnerable = 0;
+    gCurrentPinballGame->bossNextFrameId = 0;
     gCurrentPinballGame->dusclopsWalkFootIndex = 0;
     gCurrentPinballGame->bossFramesetIndex = 0;
     gCurrentPinballGame->bossFrameTimer = 0;

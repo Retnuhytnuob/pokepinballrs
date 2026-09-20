@@ -7299,7 +7299,7 @@ DuclopsFramesetData:: @ 0x086AE68E
 
 gKecleonAnimFramesetTable:: @ 0x086AE718
 @ 114 framesets of 3 u16: OAM animation frame index, how many game frames to
-@ hold it, and the value copied into bossVulnerable (an s8 state id that the
+@ hold it, and the value copied into bossNextFrameId (an s8 state id that the
 @ process code compares against specific values, not a boolean).
 	.2byte  0,   7,  0
 	.2byte  1,   7,  1
@@ -7522,7 +7522,7 @@ gKyogreFadeInPaletteProgression:: @ 0x086AEAE0
 
 gKyogreAnimFramesetTable:: @ 0x086AEAF8
 @ 114 framesets of 3 u16: OAM animation frame index, how many game frames to
-@ hold it, and the value copied into bossVulnerable (an s8 state id that the
+@ hold it, and the value copied into bossNextFrameId (an s8 state id that the
 @ process code compares against specific values, not a boolean).
 	.2byte  0,  18,  0
 	.2byte  1,  18,  1
@@ -7893,7 +7893,7 @@ gGroudonBgSpriteBaseTileNums:: @ 0x086AF3C6
 
 gRayquazaAnimFramesetTable:: @ 0x086AF3CC
 @ 148 framesets of 3 u16: OAM animation frame index, how many game frames to
-@ hold it, and the value copied into bossVulnerable (an s8 state id that the
+@ hold it, and the value copied into bossNextFrameId (an s8 state id that the
 @ process code compares against specific values, not a boolean).
 	.2byte   0,  4,  0
 	.2byte   1,  4,  0
