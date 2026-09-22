@@ -8,7 +8,8 @@
 #define BG_VRAM_ADDR_KYOGRE_LAYER_2_TILEMAP   BG_TILE_ADDR(TILE_INDEX(0,2,0))
 // Tile_Index(0,8,0) - Tile(0,11,31) shared, for BG0 hud layer/debug
 
-
+// Tiles
+// BG TILE_INDEX(1, 10, 0) - BG TILE_INDEX(1, 12, 31) shared for hud
 
 #define OBJ_VRAM_ADDR_KYOGRE_TILES          OBJ_TILE_ADDR(TILE_INDEX(0, 3, 29))
 #define SIZE_OF_VRAM_KYOGRE_TOP_TILES       44 * TILE_SIZE_4BPP
@@ -27,10 +28,5 @@
 #define OBJ_VRAM_ADDR_KYOGRE_BANNER_TILES   OBJ_TILE_ADDR(TILE_INDEX(1, 6, 0))
 #define SIZE_OF_VRAM_KYOGRE_BANNER_TILES    8 * MEM_SIZE_OF_TILE_ROW
 
-
-
-// Tiles
-
-// BG TILE_INDEX(1, 10, 0) - BG TILE_INDEX(1, 12, 31) shared for hud
 
 #endif
