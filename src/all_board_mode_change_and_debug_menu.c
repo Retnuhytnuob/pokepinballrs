@@ -157,7 +157,7 @@ void GameOverAnimation(void)
 
     if (gMain.animationTimer == 3600)
     {
-        DmaCopy16(3, gMainBoardGameOverText_Gfx, OBJ_TILE_ADDR(TILE_INDEX(1, 6, 0)), 0x400);
+        DmaCopy16(3, gMainBoardGameOverText_Gfx, OBJ_VRAM_ADDR_FX_BASE, 0x400);
         gMain.fieldSpriteGroups[FIELD_SG_GAME_OVER_TEXT]->active = TRUE;
         for (i = 0; i < 8; i++)
         {
@@ -207,7 +207,7 @@ void EndOfBallSequence(void)
             gMain.spriteGroups[SG_END_OF_BALL_BONUS_TEXT_LINE_0].active = TRUE;
             gMain.spriteGroups[SG_END_OF_BALL_BONUS_TEXT_LINE_1].active = TRUE;
             gMain.spriteGroups[SG_END_OF_BALL_BONUS_TEXT_LINE_2].active = TRUE;
-            DmaCopy16(3, gMainBoardEndOfBall_Gfx, OBJ_TILE_ADDR(TILE_INDEX(1, 6, 0)), 0x2800);
+            DmaCopy16(3, gMainBoardEndOfBall_Gfx, OBJ_VRAM_ADDR_FX_BASE, 0x2800);
             if (gMain.selectedField == FIELD_RUBY)
             {
                 DmaCopy16(3, gEndOfBallBonus_Ruby_Pal, OBJ_PLTT_SLOT(PAL_IX_BANNER), PLTT_SLOT_SIZE);
@@ -456,14 +456,14 @@ void BallSaverAnimation(void)
             gMain.spriteGroups[SG_BALL_SAVE_LATI_ARM].active = TRUE;
             if (gMain.selectedField == FIELD_RUBY)
             {
-                DmaCopy16(3, gMainBoardBallSave_Gfx, OBJ_TILE_ADDR(TILE_INDEX(1, 6, 0)), 0x2400);
+                DmaCopy16(3, gMainBoardBallSave_Gfx, OBJ_VRAM_ADDR_FX_BASE, 0x2400);
                 DmaCopy16(3, gMainBoardBallSaveLatios_Gfx, OBJ_TILE_ADDR(TILE_INDEX(1, 10, 0)), 0x800);
                 DmaCopy16(3, gMainBoardBallSaveLatiosArm_Gfx, OBJ_TILE_ADDR(TILE_INDEX(1, 12, 0)), 0xC0);
                 DmaCopy16(3, gBallSaver_Ruby_Pal, OBJ_PLTT_SLOT(PAL_IX_LATI_BALL_SAVER), PLTT_SLOT_SIZE);
             }
             else
             {
-                DmaCopy16(3, gMainBoardBallSave_Gfx, OBJ_TILE_ADDR(TILE_INDEX(1, 6, 0)), 0x2400);
+                DmaCopy16(3, gMainBoardBallSave_Gfx, OBJ_VRAM_ADDR_FX_BASE, 0x2400);
                 DmaCopy16(3, gBallSaver_Sapphire_Pal, OBJ_PLTT_SLOT(PAL_IX_LATI_BALL_SAVER), PLTT_SLOT_SIZE);
             }
 

@@ -369,7 +369,7 @@ void HandleRubyBumperHit(void)
                             gCurrentPinballGame->bannerSlidePosition = -2500;
                             gCurrentPinballGame->bannerSlideTimer = 50;
                             gCurrentPinballGame->bannerSlideVelocity = 0;
-                            DmaCopy16(3, gModeBannerTilemaps[7], OBJ_TILE_ADDR(TILE_INDEX(1, 6, 0)), 0x2400);
+                            DmaCopy16(3, gModeBannerTilemaps[7], OBJ_VRAM_ADDR_FX_BASE, SIZE_OF_VRAM_MODE_BANNER_LOAD_TILES);
                             DmaCopy16(3, gModeBanner_Pals[7], OBJ_PLTT_SLOT(PAL_IX_BANNER), PLTT_SLOT_SIZE);
                             gMain.blendControl = 0xCE;
                         }

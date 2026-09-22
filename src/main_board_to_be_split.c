@@ -860,7 +860,7 @@ void InitTotodileEggDelivery(void)
     gCurrentPinballGame->portraitOffsetY = 160;
     gCurrentPinballGame->activeFxType = FX_TOTODILE_EGG_DELIVERY;
     DmaCopy16(3, gTotodile_Pal, OBJ_PLTT_SLOT(PAL_IX_RUBY_EGG_DELIVERER), PLTT_SLOT_SIZE);
-    DmaCopy16(3, gTotodileEggDelivery_Gfx, OBJ_TILE_ADDR(TILE_INDEX(1, 6, 0)), 0xCA0);
+    DmaCopy16(3, gTotodileEggDelivery_Gfx, OBJ_VRAM_ADDR_FX_BASE, 0xCA0);
 }
 
 void AnimateTotodileEggDelivery(void)
@@ -943,7 +943,7 @@ void InitAerodactylEggDelivery(void)
     gCurrentPinballGame->portraitOffsetY = gCurrentPinballGame->eggDeliveryY / 20 - gFlyingCreatureCameraOffsets[0].y;
     gCurrentPinballGame->activeFxType = FX_AERODACTYL_EGG_DELIVERY;
     DmaCopy16(3, gAerodactlyFlight_Pal, OBJ_PLTT_SLOT(PAL_IX_RUBY_EGG_DELIVERER), PLTT_SLOT_SIZE);
-    DmaCopy16(3, gAerodactlyFlight_Gfx, OBJ_TILE_ADDR(TILE_INDEX(1, 6, 0)), 0x1000);
+    DmaCopy16(3, gAerodactlyFlight_Gfx, OBJ_VRAM_ADDR_FX_BASE, 0x1000);
 }
 
 void AnimateAerodactylEggDelivery(void)
@@ -1019,13 +1019,13 @@ void LoadPokemonNameGraphics(void)
     {
         if (gSpeciesInfo[gCurrentPinballGame->currentSpecies].name[i] == ' ')
         {
-            DmaCopy16(3, gSpaceTileGfx, OBJ_TILE_ADDR(TILE_INDEX(1, 6, 0)) + i * 0x40, 0x40);
+            DmaCopy16(3, gSpaceTileGfx, OBJ_VRAM_ADDR_FX_BASE + i * 0x40, 0x40);
             gCurrentPinballGame->nameSpacingOffset += 4;
         }
         else
         {
             index = gSpeciesInfo[gCurrentPinballGame->currentSpecies].name[i] - 'A';
-            DmaCopy16(3, gAlphabetTilesGfx[index], OBJ_TILE_ADDR(TILE_INDEX(1, 6, 0)) + i * 0x40, 0x40);
+            DmaCopy16(3, gAlphabetTilesGfx[index], OBJ_VRAM_ADDR_FX_BASE + i * 0x40, 0x40);
         }
     }
 }
@@ -1070,13 +1070,13 @@ void InitWasCaughtBanner(void)
     {
         if (gSpeciesInfo[gCurrentPinballGame->currentSpecies].name[i] == ' ')
         {
-            DmaCopy16(3, gSpaceTileGfx, OBJ_TILE_ADDR(TILE_INDEX(1, 6, 0)) + i * 0x40, 0x40);
+            DmaCopy16(3, gSpaceTileGfx, OBJ_VRAM_ADDR_FX_BASE + i * 0x40, 0x40);
             gCurrentPinballGame->nameSpacingOffset += 4;
         }
         else
         {
             index = gSpeciesInfo[gCurrentPinballGame->currentSpecies].name[i] - 'A';
-            DmaCopy16(3, gAlphabetTilesGfx[index], OBJ_TILE_ADDR(TILE_INDEX(1, 6, 0)) + i * 0x40, 0x40);
+            DmaCopy16(3, gAlphabetTilesGfx[index], OBJ_VRAM_ADDR_FX_BASE + i * 0x40, 0x40);
         }
     }
 
@@ -1086,12 +1086,12 @@ void InitWasCaughtBanner(void)
         if (gCaughtTextChars[i] == ' ')
         {
             //TILE_INDEX(1, 6, 20 + 2 * i)
-            DmaCopy16(3, gSpaceTileGfx, OBJ_TILE_ADDR(TILE_INDEX(1, 6, 0)) + (i + 10) * 0x40, 0x40);
+            DmaCopy16(3, gSpaceTileGfx, OBJ_VRAM_ADDR_FX_BASE + (i + 10) * 0x40, 0x40);
         }
         else
         {
             index = gCaughtTextChars[i] - 'A';
-            DmaCopy16(3, gAlphabetTilesGfx[index], OBJ_TILE_ADDR(TILE_INDEX(1, 6, 0)) + (i + 10) * 0x40, 0x40);
+            DmaCopy16(3, gAlphabetTilesGfx[index], OBJ_VRAM_ADDR_FX_BASE + (i + 10) * 0x40, 0x40);
         }
     }
 
@@ -1938,7 +1938,7 @@ void UpdateEggMode(void)
     case EGG_HATCH_SUBSTATE_SETUP_CATCH_ANIMATION:
         gCurrentPinballGame->activeFxType = FX_CAPTURE_MON_ABSORB;
         DmaCopy16(3, gCaptureHit_Pal, OBJ_PLTT_SLOT(PAL_IX_MON_SHADOW_PORTRAIT), PLTT_SLOT_SIZE);
-        DmaCopy16(3, gCaptureScreenTilesGfx, OBJ_TILE_ADDR(TILE_INDEX(1, 6, 0)), 0x1C00);
+        DmaCopy16(3, gCaptureScreenTilesGfx, OBJ_VRAM_ADDR_FX_BASE, 0x1C00);
         DmaCopy16(3, &gCaptureBallTilesGfx[gCurrentPinballGame->ballUpgradeType * 0x200], OBJ_TILE_ADDR(TILE_INDEX(1, 9, 6)), 0x80);
         DmaCopy16(3, &gCaptureBallTilesGfx[(gCurrentPinballGame->ballUpgradeType * 8 + 4) * 0x40], OBJ_TILE_ADDR(TILE_INDEX(1, 9, 27)), 0x80);
         gCurrentPinballGame->captureSequenceFrame = 0;

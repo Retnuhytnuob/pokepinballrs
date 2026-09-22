@@ -174,7 +174,7 @@ void UpdateCatchEmMode(void)
                     gCurrentPinballGame->bannerSlidePosition = -2500;
                     gCurrentPinballGame->bannerSlideTimer = 50;
                     gCurrentPinballGame->bannerSlideVelocity = 0;
-                    DmaCopy16(3, gModeBannerTilemaps[2], OBJ_TILE_ADDR(TILE_INDEX(1, 6, 0)), 0x2400);
+                    DmaCopy16(3, gModeBannerTilemaps[2], OBJ_VRAM_ADDR_FX_BASE, SIZE_OF_VRAM_MODE_BANNER_LOAD_TILES);
                     DmaCopy16(3, gModeBanner_Pals[2], OBJ_PLTT_SLOT(PAL_IX_BANNER), PLTT_SLOT_SIZE);
                     gMain.blendControl = 0xCE;
                 }
@@ -209,7 +209,7 @@ void UpdateCatchEmMode(void)
                     gCurrentPinballGame->bannerSlidePosition = -2500;
                     gCurrentPinballGame->bannerSlideTimer = 50;
                     gCurrentPinballGame->bannerSlideVelocity = 0;
-                    DmaCopy16(3, gModeBannerTilemaps[2], OBJ_TILE_ADDR(TILE_INDEX(1, 6, 0)), 0x2400);
+                    DmaCopy16(3, gModeBannerTilemaps[2], OBJ_VRAM_ADDR_FX_BASE, SIZE_OF_VRAM_MODE_BANNER_LOAD_TILES);
                     DmaCopy16(3, gModeBanner_Pals[2], OBJ_PLTT_SLOT(PAL_IX_BANNER), PLTT_SLOT_SIZE);
                     gMain.blendControl = 0xCE;
                 }
@@ -241,7 +241,7 @@ void UpdateCatchEmMode(void)
         else
         {
             gCurrentPinballGame->activeFxType = FX_CATCH_MON_REVEAL_PUFF;
-            DmaCopy16(3, gCatchMonAppearFx_Gfx, OBJ_TILE_ADDR(TILE_INDEX(1, 6, 0)), 0x1400);
+            DmaCopy16(3, gCatchMonAppearFx_Gfx, OBJ_VRAM_ADDR_FX_BASE, 0x1400);
             DmaCopy16(3, gCatchMonAppearFx_Pal, OBJ_PLTT_SLOT(PAL_IX_CATCH_TILE_FX), PLTT_SLOT_SIZE);
             m4aSongNumStart(SE_CATCH_MON_ENTITY_APPEARS);
             gCurrentPinballGame->boardSubState++;
@@ -382,7 +382,7 @@ void UpdateJirachiBonus(void)
                     gCurrentPinballGame->bannerSlidePosition = -2500;
                     gCurrentPinballGame->bannerSlideTimer = 50;
                     gCurrentPinballGame->bannerSlideVelocity = 0;
-                    DmaCopy16(3, gModeBannerTilemaps[5], OBJ_TILE_ADDR(TILE_INDEX(1, 6, 0)), 0x2400);
+                    DmaCopy16(3, gModeBannerTilemaps[5], OBJ_VRAM_ADDR_FX_BASE, SIZE_OF_VRAM_MODE_BANNER_LOAD_TILES);
                     DmaCopy16(3, gModeBanner_Pals[5], OBJ_PLTT_SLOT(PAL_IX_BANNER), PLTT_SLOT_SIZE);
                     gMain.blendControl = 0xCE;
                 }
@@ -416,7 +416,7 @@ void UpdateJirachiBonus(void)
                     gCurrentPinballGame->bannerSlidePosition = -2500;
                     gCurrentPinballGame->bannerSlideTimer = 50;
                     gCurrentPinballGame->bannerSlideVelocity = 0;
-                    DmaCopy16(3, gModeBannerTilemaps[5], OBJ_TILE_ADDR(TILE_INDEX(1, 6, 0)), 0x2400);
+                    DmaCopy16(3, gModeBannerTilemaps[5], OBJ_VRAM_ADDR_FX_BASE, SIZE_OF_VRAM_MODE_BANNER_LOAD_TILES);
                     DmaCopy16(3, gModeBanner_Pals[5], OBJ_PLTT_SLOT(PAL_IX_BANNER), PLTT_SLOT_SIZE);
                     gMain.blendControl = 0xCE;
                     return;

@@ -53,4 +53,15 @@
 #define BG_VRAM_ADDR_HUD_TILES_B         BG_TILE_ADDR(TILE_INDEX(1, 11, 0))
 #define SIZE_OF_VRAM_HUD_TILES_B         2 * MEM_SIZE_OF_TILE_ROW
 
+
+//Used for incidental fx, banners for starting/completing a mode, end of mode bonus screens, etc)
+#define OBJ_VRAM_ADDR_FX_BASE                OBJ_TILE_ADDR(TILE_INDEX(1, 6, 0))
+
+//Note: this includes extra tiles that end up unused, for the clean 9 row copy.
+//When a save is loaded during a banner scroll, it loads the larger 'travel' size,
+//just in case of it needing the larger travel banner. (doesn't care to preserve later tiles)
+#define SIZE_OF_VRAM_MODE_BANNER_LOAD_TILES     9 * MEM_SIZE_OF_TILE_ROW
+#define SIZE_OF_VRAM_MODE_BANNER_USED_TILES     8 * MEM_SIZE_OF_TILE_ROW + 14 * TILE_SIZE_4BPP
+#define SIZE_OF_VRAM_MODE_TRAVEL_BANNER_TILES   9 * MEM_SIZE_OF_TILE_ROW + 15 * TILE_SIZE_4BPP
+
 #endif

@@ -555,7 +555,7 @@ void RunMonCaptureSequence(void)
         gCurrentPinballGame->ball->positionQ8.y += gCurrentPinballGame->ball->velocity.y;
 
         gCurrentPinballGame->activeFxType = FX_CAPTURE_MON_ABSORB;
-        DmaCopy16(3, gCaptureScreenTilesGfx, OBJ_TILE_ADDR(TILE_INDEX(1, 6, 0)), 0x1C00);
+        DmaCopy16(3, gCaptureScreenTilesGfx, OBJ_VRAM_ADDR_FX_BASE, 0x1C00);
         DmaCopy16(3, &gCaptureBallTilesGfx[gCurrentPinballGame->ballUpgradeType << 9], OBJ_TILE_ADDR(TILE_INDEX(1, 9, 6)), 0x80);
         DmaCopy16(3, &gCaptureBallTilesGfx[((gCurrentPinballGame->ballUpgradeType * 8 + 4) << 6)], OBJ_TILE_ADDR(TILE_INDEX(1, 9, 27)), 0x80);
 

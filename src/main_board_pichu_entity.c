@@ -211,11 +211,11 @@ void UpdateKickbackLogic(void)
                 if (gCurrentPinballGame->outLanePikaPosition == PIKA_BOTH_SIDES
                     && gCurrentPinballGame->outLaneSide == OUTLANE_RIGHT)
                 {
-                    DmaCopy16(3, gPikaSaverFullCoverageGfx, OBJ_TILE_ADDR(TILE_INDEX(1, 6, 0)), 0x2400);
+                    DmaCopy16(3, gPikaSaverFullCoverageGfx, OBJ_VRAM_ADDR_FX_BASE, 0x2400);
                 }
                 else
                 {
-                    DmaCopy16(3, gPikaSaverPartialCoverageGfx, OBJ_TILE_ADDR(TILE_INDEX(1, 6, 0)), 0x2400);
+                    DmaCopy16(3, gPikaSaverPartialCoverageGfx, OBJ_VRAM_ADDR_FX_BASE, 0x2400);
                 }
             }
         }
