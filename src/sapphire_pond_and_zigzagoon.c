@@ -4,6 +4,7 @@
 #include "constants/bg_music.h"
 #include "constants/board/main_board.h"
 #include "constants/board/sapphire_states.h"
+#include "constants/mem_layout/sapphire.h"
 
 extern const s16 gPelipperIdleFrameIndices[];
 extern const s16 gPelipperSwallowAnimData[][3];
@@ -409,7 +410,7 @@ void UpdateZigzagoonEntity(void)
         gCurrentPinballGame->zigzagoonFxFrame = 0;
         gMain.spriteGroups[SG_SAPPHIRE_ZIGZAGOON_TRAIL_FX].active = TRUE;
         gCurrentPinballGame->activeFxType = FX_ZIGZAGOON_ROULETTE_STOP;
-        DmaCopy16(3, gSapphireBoardZigzagoonFx_Gfx, OBJ_VRAM_ADDR_FX_BASE, 0xC00);
+        DmaCopy16(3, gSapphireBoardZigzagoonFx_Gfx, OBJ_VRAM_ADDR_FX_BASE, SIZE_OF_VRAM_FX_ZIGZAGZOON_ROULETTE_STOP_TILES);
         m4aSongNumStart(SE_ZIGZAGOON_ROULETTE_STOP);
         gCurrentPinballGame->scoreAddedInFrame = SCORE_ZIGZAGOON_ROULETTE_STOP;
         break;

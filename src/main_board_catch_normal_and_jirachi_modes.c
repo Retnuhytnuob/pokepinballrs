@@ -241,7 +241,7 @@ void UpdateCatchEmMode(void)
         else
         {
             gCurrentPinballGame->activeFxType = FX_CATCH_MON_REVEAL_PUFF;
-            DmaCopy16(3, gCatchMonAppearFx_Gfx, OBJ_VRAM_ADDR_FX_BASE, 0x1400);
+            DmaCopy16(3, gCatchMonAppearFx_Gfx, OBJ_VRAM_ADDR_FX_BASE, SIZE_OF_VRAM_FX_MON_APPEAR_CLOUD_BURST_TILES);
             DmaCopy16(3, gCatchMonAppearFx_Pal, OBJ_PLTT_SLOT(PAL_IX_CATCH_TILE_FX), PLTT_SLOT_SIZE);
             m4aSongNumStart(SE_CATCH_MON_ENTITY_APPEARS);
             gCurrentPinballGame->boardSubState++;

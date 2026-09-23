@@ -211,11 +211,11 @@ void UpdateKickbackLogic(void)
                 if (gCurrentPinballGame->outLanePikaPosition == PIKA_BOTH_SIDES
                     && gCurrentPinballGame->outLaneSide == OUTLANE_RIGHT)
                 {
-                    DmaCopy16(3, gPikaSaverFullCoverageGfx, OBJ_VRAM_ADDR_FX_BASE, 0x2400);
+                    DmaCopy16(3, gPichuKickbackFx_Gfx, OBJ_VRAM_ADDR_FX_BASE, SIZE_OF_VRAM_PIKA_SAVER_KICKBACK_TILES);
                 }
                 else
                 {
-                    DmaCopy16(3, gPikaSaverPartialCoverageGfx, OBJ_VRAM_ADDR_FX_BASE, 0x2400);
+                    DmaCopy16(3, gPikachuKickbackFx_Gfx, OBJ_VRAM_ADDR_FX_BASE, SIZE_OF_VRAM_PIKA_SAVER_KICKBACK_TILES);
                 }
             }
         }
@@ -247,7 +247,7 @@ void UpdateKickbackLogic(void)
                     else
                         gCurrentPinballGame->pikaSaverTileIndex[outlaneChuteIx] = 0;
 
-                    DmaCopy16(3, gPikaSaverTilesGfx + (gCurrentPinballGame->pikaSaverTileIndex[outlaneChuteIx] * 0x180), OBJ_TILE_ADDR(TILE_INDEX(0, 1, 4 + 12 * outlaneChuteIx)), 0x180);
+                    DmaCopy16(3, gPikaSaverTilesGfx + (gCurrentPinballGame->pikaSaverTileIndex[outlaneChuteIx] * SIZE_OF_VRAM_PIKA_MON_TILES), OBJ_VRAM_ADDR_PIKA_MON_AT_SIDE_TILES + outlaneChuteIx * SIZE_OF_VRAM_PIKA_MON_TILES, SIZE_OF_VRAM_PIKA_MON_TILES);
                 }
             }
 
@@ -300,7 +300,7 @@ void UpdateKickbackLogic(void)
             {
                 if ((gMain.fieldFrameCount % 5) == 0)
                 {
-                    DmaCopy16(3, gPikaSaverTilesGfx + (gCurrentPinballGame->pikaSaverTileIndex[outlaneChuteIx] * 0x180), OBJ_TILE_ADDR(TILE_INDEX(0, 1, 4 + 12 * outlaneChuteIx)), 0x180);
+                    DmaCopy16(3, gPikaSaverTilesGfx + (gCurrentPinballGame->pikaSaverTileIndex[outlaneChuteIx] * SIZE_OF_VRAM_PIKA_MON_TILES), OBJ_VRAM_ADDR_PIKA_MON_AT_SIDE_TILES + outlaneChuteIx * SIZE_OF_VRAM_PIKA_MON_TILES, SIZE_OF_VRAM_PIKA_MON_TILES);
                 }
 
                 tempY = 380 - gCurrentPinballGame->cameraYOffset;

@@ -1403,12 +1403,12 @@ gPortraitAnim_Pals:: @ 0x081C02E4
 
 .include "data/board_data/spheal_board.inc"
 
-gPikaSaverFullCoverageGfx:: @ 0x08395A4C
-	.incbin "graphics/stage/main/pika_saver_full_coverage.4bpp"
+gPichuKickbackFx_Gfx:: @ 0x08395A4C
+	.incbin "graphics/stage/main/pichu_saver_kickback.4bpp"
 	.space 0x20
 
-gPikaSaverPartialCoverageGfx:: @ 0x08397E6C
-	.incbin "graphics/stage/main/pika_saver_partial_coverage.4bpp"
+gPikachuKickbackFx_Gfx:: @ 0x08397E6C
+	.incbin "graphics/stage/main/pikachu_saver_kickback.4bpp"
 	.space 0x20
 
 gCatchTargetCollisionBitmap:: @ 0x0839A28C

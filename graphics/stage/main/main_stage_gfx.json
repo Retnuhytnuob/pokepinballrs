@@ -313,11 +313,11 @@
       "width": 4
     },
     {
-      "gfx_filename": "pika_saver_full_coverage",
+      "gfx_filename": "pichu_saver_kickback",
       "oamshape": "pika_saver_coverage_shape.json"
     },
     {
-      "gfx_filename": "pika_saver_partial_coverage",
+      "gfx_filename": "pikachu_saver_kickback",
       "oamshape": "pika_saver_coverage_shape.json"
     },
     {

@@ -53,15 +53,50 @@
 #define BG_VRAM_ADDR_HUD_TILES_B         BG_TILE_ADDR(TILE_INDEX(1, 11, 0))
 #define SIZE_OF_VRAM_HUD_TILES_B         2 * MEM_SIZE_OF_TILE_ROW
 
+//Note: 2 sides worth of tiles are used
+#define OBJ_VRAM_ADDR_PIKA_MON_AT_SIDE_TILES            OBJ_TILE_ADDR(TILE_INDEX(0, 1, 4))
+#define SIZE_OF_VRAM_PIKA_MON_TILES                     12 * TILE_SIZE_4BPP
+
+//Important!: this copy stays when the ball saver scene runs and overwrites the one from the FX section
+#define OBJ_VRAM_ADDR_EVO_ITEM_STABLE_TILE              OBJ_TILE_ADDR(TILE_INDEX(0, 5, 22))
+#define SIZE_OF_VRAM_EVO_ITEM_STABLE_TILE               16 * TILE_SIZE_4BPP
 
 //Used for incidental fx, banners for starting/completing a mode, end of mode bonus screens, etc)
-#define OBJ_VRAM_ADDR_FX_BASE                OBJ_TILE_ADDR(TILE_INDEX(1, 6, 0))
+#define OBJ_VRAM_ADDR_FX_BASE                           OBJ_TILE_ADDR(TILE_INDEX(1, 6, 0))
 
 //Note: this includes extra tiles that end up unused, for the clean 9 row copy.
 //When a save is loaded during a banner scroll, it loads the larger 'travel' size,
 //just in case of it needing the larger travel banner. (doesn't care to preserve later tiles)
-#define SIZE_OF_VRAM_MODE_BANNER_LOAD_TILES     9 * MEM_SIZE_OF_TILE_ROW
-#define SIZE_OF_VRAM_MODE_BANNER_USED_TILES     8 * MEM_SIZE_OF_TILE_ROW + 14 * TILE_SIZE_4BPP
-#define SIZE_OF_VRAM_MODE_TRAVEL_BANNER_TILES   9 * MEM_SIZE_OF_TILE_ROW + 15 * TILE_SIZE_4BPP
+#define SIZE_OF_VRAM_MODE_BANNER_LOAD_TILES             9 * MEM_SIZE_OF_TILE_ROW
+#define SIZE_OF_VRAM_MODE_BANNER_USED_TILES             8 * MEM_SIZE_OF_TILE_ROW + 14 * TILE_SIZE_4BPP
+#define SIZE_OF_VRAM_MODE_TRAVEL_BANNER_TILES           9 * MEM_SIZE_OF_TILE_ROW + 15 * TILE_SIZE_4BPP
+
+#define SIZE_OF_VRAM_LETTER_TILE                        2 * TILE_SIZE_4BPP
+
+#define SIZE_OF_VRAM_FX_AREA_ROULETTE_SELECTED_TILES    20 * TILE_SIZE_4BPP
+#define SIZE_OF_VRAM_FX_TRAVEL_CUTSCENE                 6 * MEM_SIZE_OF_TILE_ROW
+#define SIZE_OF_VRAM_FX_TRAVEL_PAINTER                  36 * TILE_SIZE_4BPP //Loads over main cutscene tiles
+
+#define SIZE_OF_VRAM_PIKA_SAVER_KICKBACK_TILES          9 * MEM_SIZE_OF_TILE_ROW
+#define SIZE_OF_VRAM_BALL_SAVER_BANNER_AND_MON_TILES    9 * MEM_SIZE_OF_TILE_ROW
+#define SIZE_OF_VRAM_END_OF_BALL_BONUS_WINDOW_TILES     10 * MEM_SIZE_OF_TILE_ROW
+#define SIZE_OF_VRAM_GAME_OVER_TEXT_TILES               1 * MEM_SIZE_OF_TILE_ROW
+
+#define SIZE_OF_VRAM_EVO_ITEM_SPAWN_TILES               7 * MEM_SIZE_OF_TILE_ROW
+#define SIZE_OF_VRAM_EVO_CUTSCENE_TILES                 9 * MEM_SIZE_OF_TILE_ROW
+
+#define SIZE_OF_VRAM_FX_CATCH_REAVEAL_SEQUENTIAL_TILES  10 * MEM_SIZE_OF_TILE_ROW
+#define SIZE_OF_VRAM_FX_CATCH_BURST_LIGHTNING_TILES     8 * MEM_SIZE_OF_TILE_ROW
+#define SIZE_OF_VRAM_FX_CATCH_BURST_TILE_OUTLINE        2 * MEM_SIZE_OF_TILE_ROW
+#define SIZE_OF_VRAM_FX_CATCH_BURST_TILE_FLIGHT         8 * MEM_SIZE_OF_TILE_ROW
+#define SIZE_OF_VRAM_FX_CATCH_BURST_TILE_ELECTRIC       6 * MEM_SIZE_OF_TILE_ROW
+#define SIZE_OF_VRAM_FX_MON_APPEAR_CLOUD_BURST_TILES    5 * MEM_SIZE_OF_TILE_ROW
+#define SIZE_OF_VRAM_FX_MON_CATCH_CUTSCENE_TILES        7 * MEM_SIZE_OF_TILE_ROW
+
+//Loaded after main MON_CATCH_CUTSCENE_TILES
+#define OBJ_VRAM_ADDR_FX_MON_CATCH_OPEN_BALL_TILES1     OBJ_TILE_ADDR(TILE_INDEX(1, 9, 6))
+#define SIZE_OF_VRAM_FX_MON_CATCH_OPEN_BALL_TILES1      4 * TILE_SIZE_4BPP
+#define OBJ_VRAM_ADDR_FX_MON_CATCH_OPEN_BALL_TILES2     OBJ_TILE_ADDR(TILE_INDEX(1, 9, 27))
+#define SIZE_OF_VRAM_FX_MON_CATCH_OPEN_BALL_TILES2      4 * TILE_SIZE_4BPP
 
 #endif

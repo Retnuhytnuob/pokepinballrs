@@ -551,7 +551,7 @@ extern void UpdateSpoinkAnimation();
 extern void DrawSpoinkSprite();
 extern void RunEvolutionCutscene(void);
 //extern ? sub_2DE54();
-extern void RunTravelEventCutscene(void);
+extern void RunTravelPaintEventCutscene(void);
 extern void DecrementPelipperTimer();
 extern void UpdatePelipperPondEntity();
 extern void AnimateWailmerEntity();
