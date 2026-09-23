@@ -39,7 +39,7 @@
 
 #define BG_VRAM_ADDR_TIMER_TILEMAP_DATA   BG_TILE_ADDR(TILE_INDEX(0, 8, 22))
 //4 "tiles" of tilemap data
-#define SIZE_OF_VRAM_TIMER_TILEMAP_DATA   2 * MEM_SIZE_OF_TILEMAP_FOR_32_TILE_ROW 
+#define SIZE_OF_VRAM_TIMER_TILEMAP_DATA   2 * MEM_SIZE_OF_TILEMAP_FOR_32_TILE_ROW
 
 #define BG_VRAM_ADDR_HUD_TILEMAP_DATA     BG_TILE_ADDR(TILE_INDEX(0, 11, 28))
 //4 "tiles" of tilemap data
@@ -53,13 +53,42 @@
 #define BG_VRAM_ADDR_HUD_TILES_B         BG_TILE_ADDR(TILE_INDEX(1, 11, 0))
 #define SIZE_OF_VRAM_HUD_TILES_B         2 * MEM_SIZE_OF_TILE_ROW
 
+
+// ----------------------------------
+
+#define OBJ_VRAM_ADDR_FLIPPER_LEFT_TILES                OBJ_TILE_ADDR(TILE_INDEX(0, 0, 0))
+#define SIZE_OF_VRAM_FLIPPER_TILES                      16 * TILE_SIZE_4BPP
+#define OBJ_VRAM_ADDR_FLIPPER_RIGHT_TILES               OBJ_TILE_ADDR(TILE_INDEX(0, 0, 16))
+
+#define OBJ_VRAM_ADDR_BALL_TILES                        OBJ_TILE_ADDR(TILE_INDEX(0, 1, 0))
+#define SIZE_OF_VRAM_BALL_TILES                         4 * TILE_SIZE_4BPP
+
+#define OBJ_VRAM_ADDR_PAUSE_MENU_BALL_INDICATOR_BONUS_BOARD  OBJ_TILE_ADDR(TILE_INDEX(0, 1, 4))
 //Note: 2 sides worth of tiles are used
-#define OBJ_VRAM_ADDR_PIKA_MON_AT_SIDE_TILES            OBJ_TILE_ADDR(TILE_INDEX(0, 1, 4))
+#define OBJ_VRAM_ADDR_PIKA_MON_AT_LEFT_SIDE_TILES       OBJ_TILE_ADDR(TILE_INDEX(0, 1, 4))
 #define SIZE_OF_VRAM_PIKA_MON_TILES                     12 * TILE_SIZE_4BPP
+#define OBJ_VRAM_ADDR_PIKA_MON_AT_RIGHT_SIDE_TILES      OBJ_TILE_ADDR(TILE_INDEX(0, 1, 16))
+
+//Bonus Boards Only
+#define OBJ_VRAM_ADDR_FX_BALL_SPAWN_TILES_BONUS_BOARD   OBJ_TILE_ADDR(TILE_INDEX(0, 1, 25))
+#define SIZE_OF_VRAM_FX_BALL_SPAWN_TILES                16* TILE_SIZE_4BPP
+
+
+#define OBJ_VRAM_ADDR_PORTRAIT0_TILES                   OBJ_TILE_ADDR(TILE_INDEX(0, 3, 5))
+#define SIZE_OF_VRAM_PORTRAIT_TILES                     24 * TILE_SIZE_4BPP
+#define OBJ_VRAM_ADDR_PORTRAIT1_TILES                   OBJ_TILE_ADDR(TILE_INDEX(0, 3, 29))
 
 //Important!: this copy stays when the ball saver scene runs and overwrites the one from the FX section
 #define OBJ_VRAM_ADDR_EVO_ITEM_STABLE_TILE              OBJ_TILE_ADDR(TILE_INDEX(0, 5, 22))
 #define SIZE_OF_VRAM_EVO_ITEM_STABLE_TILE               16 * TILE_SIZE_4BPP
+
+#define OBJ_VRAM_ADDR_PAUSE_MENU_BALL_INDICATOR_MAIN_BOARD  OBJ_TILE_ADDR(TILE_INDEX(0, 6, 6))
+#define SIZE_OF_VRAM_PAUSE_MENU_BALL_INDICATOR              TILE_SIZE_4BPP
+
+//Main Boards only
+#define OBJ_VRAM_ADDR_FX_BALL_UPGRADE_TILES_MAIN_BOARD  OBJ_TILE_ADDR(TILE_INDEX(0, 7, 23))
+#define SIZE_OF_VRAM_FX_BALL_UPGRADE_TILES              16* TILE_SIZE_4BPP
+
 
 //Used for incidental fx, banners for starting/completing a mode, end of mode bonus screens, etc)
 #define OBJ_VRAM_ADDR_FX_BASE                           OBJ_TILE_ADDR(TILE_INDEX(1, 6, 0))
@@ -98,5 +127,16 @@
 #define SIZE_OF_VRAM_FX_MON_CATCH_OPEN_BALL_TILES1      4 * TILE_SIZE_4BPP
 #define OBJ_VRAM_ADDR_FX_MON_CATCH_OPEN_BALL_TILES2     OBJ_TILE_ADDR(TILE_INDEX(1, 9, 27))
 #define SIZE_OF_VRAM_FX_MON_CATCH_OPEN_BALL_TILES2      4 * TILE_SIZE_4BPP
+
+//Bonus board completion; 8 chars
+#define OBJ_VRAM_ADDR_BONUS_CLEAR_SCORE_TEXT(charIx)    OBJ_TILE_ADDR(TILE_INDEX(1, 12, 12 + 2 * charIx))
+#define SIZE_OF_VRAM_SCORE_TEXT_LETTER_TILE             2 * TILE_SIZE_4BPP
+//Bonus board; 1 tile
+#define OBJ_VRAM_ADDR_BONUS_CLEAR_SCORE_MULT_TEXT       OBJ_TILE_ADDR(TILE_INDEX(1, 12, 28))
+
+
+//Note: this is logically OBJ_TILE_ADDR(TILE_INDEX(1, 13, 22 * rowIx + charIx)), but that changes compilation
+#define OBJ_VRAM_ADDR_END_OF_BALL_BONUS_SUMMARY_TEXT(rowIx,charIx)  OBJ_TILE_ADDR(TILE_INDEX(1, 8, 0)) + (charIx + rowIx * 22 + 160) * TILE_SIZE_4BPP
+#define SIZE_OF_VRAM_END_OF_BALL_BONUS_SUMMARY_TEXT_CHAR_TILES      TILE_SIZE_4BPP
 
 #endif

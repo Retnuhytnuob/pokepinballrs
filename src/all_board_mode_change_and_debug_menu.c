@@ -601,13 +601,11 @@ void EndOfBallBonusSummary(void)
 
             if (gCurrentPinballGame->bonusTextRevealMask[i][j])
             {
-                //OBJ_TILE_ADDR(TILE_INDEX(1, 13, 22 * i + j))
-                DmaCopy16(3, gBonusSummaryCharTiles[var1], OBJ_TILE_ADDR(TILE_INDEX(1, 8, 0)) + (j + i * 22 + 160) * 0x20, 0x20);
+                DmaCopy16(3, gBonusSummaryCharTiles[var1], OBJ_VRAM_ADDR_END_OF_BALL_BONUS_SUMMARY_TEXT(i,j), SIZE_OF_VRAM_END_OF_BALL_BONUS_SUMMARY_TEXT_CHAR_TILES);
             }
             else
             {
-                //OBJ_TILE_ADDR(TILE_INDEX(1, 13, 22 * i + j))
-                DmaCopy16(3, gBonusSummaryCharTiles[48], OBJ_TILE_ADDR(TILE_INDEX(1, 8, 0)) + (j + i * 22 + 160) * 0x20, 0x20);
+                DmaCopy16(3, gBonusSummaryCharTiles[48], OBJ_VRAM_ADDR_END_OF_BALL_BONUS_SUMMARY_TEXT(i,j), SIZE_OF_VRAM_END_OF_BALL_BONUS_SUMMARY_TEXT_CHAR_TILES);
             }
         }
     }

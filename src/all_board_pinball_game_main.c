@@ -319,7 +319,7 @@ void InitPinballGameState(void)
             gCurrentPinballGame->chargeIndicatorXOffset = 0;
             gCurrentPinballGame->chargeIndicatorYOffset = 120;
             gCurrentPinballGame->fullChargeIndicatorBlinkTimer = 60;
-            DmaCopy16(3, gDxModePikachuObjTiles, OBJ_TILE_ADDR(TILE_INDEX(0, 1, 16)), 0x180);
+            DmaCopy16(3, gDxModePikachuObjTiles, OBJ_VRAM_ADDR_PIKA_MON_AT_RIGHT_SIDE_TILES, SIZE_OF_VRAM_PIKA_MON_TILES);
             gCurrentPinballGame->outLanePikaPosition = PIKA_BOTH_SIDES;
             gMain.fieldSpriteGroups[FIELD_SG_HATCH_MON_ENTITY]->active = FALSE;
             gCurrentPinballGame->pichuEntranceTimer = 1;
