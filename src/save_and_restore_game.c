@@ -494,15 +494,15 @@ void RestoreMainFieldDynamicGraphics(void)
     for (i = 0; i < SIDE_COUNT; i++)
     {
         var0 = gCurrentPinballGame->flipper[i].position / 2;
-        DmaCopy16(3, gFlipper_Gfx[var0], ((i * 0x200) + OBJ_TILE_ADDR(TILE_INDEX(0, 0, 0))), 0x200);
+        DmaCopy16(3, gFlipper_Gfx[var0], OBJ_VRAM_ADDR_FLIPPER_LEFT_TILES + i * SIZE_OF_VRAM_FLIPPER_TILES, SIZE_OF_VRAM_FLIPPER_TILES);
     }
 
     var0 = gCurrentPinballGame->ball->spinAngle / 0x1000;
-    DmaCopy16(3, gBallRotationTileGraphics[var0], OBJ_TILE_ADDR(TILE_INDEX(0, 1, 0)), 0x80);
+    DmaCopy16(3, gBallRotationTileGraphics[var0], OBJ_VRAM_ADDR_BALL_TILES, SIZE_OF_VRAM_BALL_TILES);
 
     for (i = 0; i <= 1; i++)
     {
-        DmaCopy16(3, gPikaSaverTilesGfx + ((var0 =gCurrentPinballGame->pikaSaverTileIndex[i]) * 0x180), OBJ_TILE_ADDR(TILE_INDEX(0, 1, 4 + 12 * i)), 0x180);
+        DmaCopy16(3, gPikaSaverTilesGfx + ((var0 =gCurrentPinballGame->pikaSaverTileIndex[i]) * SIZE_OF_VRAM_PIKA_MON_TILES), OBJ_VRAM_ADDR_PIKA_MON_AT_LEFT_SIDE_TILES + i * SIZE_OF_VRAM_PIKA_MON_TILES, SIZE_OF_VRAM_PIKA_MON_TILES);
     }
 
     var0 = gCurrentPinballGame->pikachuSpinFrame;
@@ -515,7 +515,7 @@ void RestoreMainFieldDynamicGraphics(void)
         switch (gCurrentPinballGame->portraitRenderMode[i])
         {
         case PORTRAIT_STATE_CURRENT_LOCATION:
-            DmaCopy16(3, gLocationPortraitGfx[gCurrentPinballGame->portraitGfxIndex[i]], OBJ_TILE_ADDR(TILE_INDEX(0, 3, 5 + 24 * i)), 0x300);
+            DmaCopy16(3, gLocationPortraitGfx[gCurrentPinballGame->portraitGfxIndex[i]], OBJ_VRAM_ADDR_PORTRAIT0_TILES + i * SIZE_OF_VRAM_PORTRAIT_TILES, SIZE_OF_VRAM_PORTRAIT_TILES);
             gCurrentPinballGame->ball += 0; //TODO: Dumb match is still a match...
             break;
         case PORTRAIT_STATE_EVO_PREVIEW:
@@ -544,7 +544,7 @@ void RestoreMainFieldDynamicGraphics(void)
             }
         case PORTRAIT_STATE_POKEMON_DISPLAY:
             // Bug: missing the * 0x20; but not a problem since only portrait 0 gets displayed
-            DmaCopy16(3, gMonPortraitGroupGfx[gCurrentPinballGame->portraitGfxIndex[i] / 15] + (gCurrentPinballGame->portraitGfxIndex[i] % 15) * 0x300, OBJ_TILE_ADDR(TILE_INDEX(0, 3, 5)) + (i * 0x18), 0x300);
+            DmaCopy16(3, gMonPortraitGroupGfx[gCurrentPinballGame->portraitGfxIndex[i] / 15] + (gCurrentPinballGame->portraitGfxIndex[i] % 15) * 0x300, OBJ_VRAM_ADDR_PORTRAIT0_TILES + (i * 0x18), SIZE_OF_VRAM_PORTRAIT_TILES);
             break;
         case PORTRAIT_STATE_SLOT_START_CARD:
         case PORTRAIT_STATE_ROULETTE_WHEEL:
@@ -552,7 +552,7 @@ void RestoreMainFieldDynamicGraphics(void)
         case PORTRAIT_STATE_SHOP_SELECTOR:
         case PORTRAIT_STATE_CONFIRMATION_PROMPT:
         case PORTRAIT_STATE_ROULETTE_OUTCOME:
-            DmaCopy16(3, gPortraitAnimFrameGraphics[gCurrentPinballGame->portraitGfxIndex[i]], OBJ_TILE_ADDR(TILE_INDEX(0, 3, 5 + 24 * i)), 0x300);
+            DmaCopy16(3, gPortraitAnimFrameGraphics[gCurrentPinballGame->portraitGfxIndex[i]], OBJ_VRAM_ADDR_PORTRAIT0_TILES + i * SIZE_OF_VRAM_PORTRAIT_TILES, SIZE_OF_VRAM_PORTRAIT_TILES);
             break;
         }
     }
@@ -619,9 +619,9 @@ void RestoreMainFieldDynamicGraphics(void)
     }
 
     DmaCopy16(3, gMainStageBonusTrap_Gfx[gCurrentPinballGame->bonusTrapAnimFrame], OBJ_TILE_ADDR(TILE_INDEX(0, 4, 30)), 0x300);
-    DmaCopy16(3, gEvoItemTilesGfxPtrs[gCurrentPinballGame->evoItemGfxIndex] +  var0 * 0x200, OBJ_TILE_ADDR(TILE_INDEX(0, 5, 22)), 0x200);
+    DmaCopy16(3, gEvoItemTilesGfxPtrs[gCurrentPinballGame->evoItemGfxIndex] +  var0 * SIZE_OF_VRAM_EVO_ITEM_STABLE_TILE, OBJ_VRAM_ADDR_EVO_ITEM_STABLE_TILE, SIZE_OF_VRAM_EVO_ITEM_STABLE_TILE);
     DmaCopy16(3, gEggFrameTilesGfx[(s16)gEggAnimationFrameData[gCurrentPinballGame->eggAnimFrameIndex][3]], OBJ_TILE_ADDR(TILE_INDEX(0, 7, 7)), 0x200);
-    DmaCopy16(3, gBallUpgradeFx_Gfx[gCurrentPinballGame->ballUpgradeFxTileIndex], OBJ_TILE_ADDR(TILE_INDEX(0, 7, 23)), 0x200);
+    DmaCopy16(3, gBallUpgradeFx_Gfx[gCurrentPinballGame->ballUpgradeFxTileIndex], OBJ_VRAM_ADDR_FX_BALL_UPGRADE_TILES_MAIN_BOARD, SIZE_OF_VRAM_FX_BALL_UPGRADE_TILES);
     return;
 }
 
@@ -691,9 +691,9 @@ void RestoreKyogreBonusGraphics(void)
     DmaCopy16(3, gKyogreBonusClear_Gfx, OBJ_VRAM_ADDR_KYOGRE_BANNER_TILES, SIZE_OF_VRAM_KYOGRE_BANNER_TILES);
     DmaCopy16(
         3,
-        gMonPortraitGroupGfx[gCurrentPinballGame->portraitGfxIndex[0] / 15] + (gCurrentPinballGame->portraitGfxIndex[0] % 15) * 0x300,
-        OBJ_TILE_ADDR(TILE_INDEX(0, 3, 5)),
-        0x300
+        gMonPortraitGroupGfx[gCurrentPinballGame->portraitGfxIndex[0] / 15] + (gCurrentPinballGame->portraitGfxIndex[0] % 15) * SIZE_OF_VRAM_PORTRAIT_TILES,
+        OBJ_VRAM_ADDR_PORTRAIT0_TILES,
+        SIZE_OF_VRAM_PORTRAIT_TILES
     );
 }
 
@@ -710,9 +710,9 @@ void RestoreGroudonBonusGraphics(void)
 
     DmaCopy16(
         3,
-        gMonPortraitGroupGfx[gCurrentPinballGame->portraitGfxIndex[0] / 15] + (gCurrentPinballGame->portraitGfxIndex[0] % 15) * 0x300,
-        OBJ_TILE_ADDR(TILE_INDEX(0, 3, 5)),
-        0x300
+        gMonPortraitGroupGfx[gCurrentPinballGame->portraitGfxIndex[0] / 15] + (gCurrentPinballGame->portraitGfxIndex[0] % 15) * SIZE_OF_VRAM_PORTRAIT_TILES,
+        OBJ_VRAM_ADDR_PORTRAIT0_TILES,
+        SIZE_OF_VRAM_PORTRAIT_TILES
     );
 }
 
@@ -741,9 +741,9 @@ void RestoreRayquazaBonusGraphics(void)
 
     DmaCopy16(
         3,
-        gMonPortraitGroupGfx[gCurrentPinballGame->portraitGfxIndex[0] / 15] + (gCurrentPinballGame->portraitGfxIndex[0] % 15) * 0x300,
-        OBJ_TILE_ADDR(TILE_INDEX(0, 3, 5)),
-        0x300
+        gMonPortraitGroupGfx[gCurrentPinballGame->portraitGfxIndex[0] / 15] + (gCurrentPinballGame->portraitGfxIndex[0] % 15) * SIZE_OF_VRAM_PORTRAIT_TILES,
+        OBJ_VRAM_ADDR_PORTRAIT0_TILES,
+        SIZE_OF_VRAM_PORTRAIT_TILES
     );
 }
 
