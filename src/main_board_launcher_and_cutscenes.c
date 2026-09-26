@@ -23,7 +23,7 @@ extern const u8 gCatchTile_BurstStage4_Gfx[];
 extern const Palette gCatchTile_BurstStage4_Pal;
 extern const s16 gSpoinkAnimFrameset[][2];
 extern const u8 gSpoinkEntity_Gfx[][0x1C0];
-extern const u8 gOneUpBannerSprite_Gfx[][0x200];
+extern const u8 gOneUpTreeckoSprite_Gfx[][0x200];
 extern const u8 gLifeCountDigit_Gfx[][0x40];
 extern const Palette gOneUpSprite_Pal;
 
@@ -73,7 +73,7 @@ void AnimateOneUpSprite(void)
                 index = 0;
             }
 
-            DmaCopy16(3, gOneUpBannerSprite_Gfx[index], OBJ_TILE_ADDR(TILE_INDEX(1, 4, 21)), 0x200);
+            DmaCopy16(3, gOneUpTreeckoSprite_Gfx[index], OBJ_VRAM_ADDR_FX_ONE_UP_TREECKO_DELIVERY_TILES, SIZE_OF_VRAM_FX_ONE_UP_TREECKO_DELIVERY_TILES);
         }
         else
         {
@@ -115,7 +115,7 @@ void AnimateOneUpSprite(void)
         if (gCurrentPinballGame->oneUpAnimTimer < 58)
         {
             index = gCurrentPinballGame->numLives - 1 + (((gCurrentPinballGame->oneUpAnimTimer % 16) / 8) * 9);
-            DmaCopy16(3, gLifeCountDigit_Gfx[index], OBJ_TILE_ADDR(TILE_INDEX(1, 5, 9)), 0x40);
+            DmaCopy16(3, gLifeCountDigit_Gfx[index], OBJ_VRAM_ADDR_FX_ONE_UP_LIFE_DIGIT_TILES, SIZE_OF_VRAM_FX_ONE_UP_LIFE_DITIT_TILES);
             oamSimple = &group->oam[2];
             gOamBuffer[oamSimple->oamId].x = oamSimple->xOffset + 216;
             gOamBuffer[oamSimple->oamId].y = oamSimple->yOffset - 112;
@@ -284,7 +284,7 @@ void DrawSpoinkSprite(void)
         else
             index = gSpoinkAnimFrameset[gCurrentPinballGame->spoinkAnimFrameIx][0];
 
-        DmaCopy16(3, gSpoinkEntity_Gfx[index], OBJ_TILE_ADDR(TILE_INDEX(0, 8, 7)), 0x1C0);
+        DmaCopy16(3, gSpoinkEntity_Gfx[index], OBJ_VRAM_ADDR_SPOINK_LAUNCHER_TILES, SIZE_OF_VRAM_SPOINK_LAUNCHER_TILES);
         group->baseX = 231 - gCurrentPinballGame->cameraXOffset;
         group->baseY = 376 - gCurrentPinballGame->cameraYOffset;
         for (i = 0; i < 3; i++)

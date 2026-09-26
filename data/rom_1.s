@@ -1676,7 +1676,7 @@ gRubyStageCyndaquil_Gfx:: @ 0x08449D8C
 	.incbin "graphics/stage/ruby/cyndaquil.4bpp"
 
 gJirachiFx_Gfx:: @ 0x0844AA0C
-	.incbin "graphics/stage/main/gunk_0844AA0C.4bpp"
+	.incbin "graphics/stage/main/jirachi_fx.4bpp"
 
 gSapphireStageBasket_Gfx:: @ 0x0844F20C
 	.incbin "graphics/stage/sapphire/seedot_basket.4bpp"
@@ -1687,14 +1687,14 @@ gKecleonStageKecleon_Gfx:: @ 0x0844F98C
 gKecleonStageKecleonFx_Gfx:: @ 0x0845588C
 	.incbin "graphics/stage/kecleon/kecleon_fx.4bpp"
 
-gOneUpBannerSprite_Gfx:: @ 0x08455E8C
-	.incbin "graphics/stage/misc/gunk_08455E8C.4bpp"
+gOneUpTreeckoSprite_Gfx:: @ 0x08455E8C
+	.incbin "graphics/stage/misc/treecko_1_up_deliverer.4bpp"
 
 gLifeCountDigit_Gfx:: @ 0x0845648C
-	.incbin "graphics/stage/misc/gunk_0845648C.4bpp"
+	.incbin "graphics/stage/misc/life_count_digit.4bpp"
 
-gPondBumper_Gfx:: @ 0x0845690C
-	.incbin "graphics/stage/misc/gunk_0845690C.4bpp"
+gShroomishBumperHit_Gfx:: @ 0x0845690C
+	.incbin "graphics/stage/sapphire/shroomish_bumper_hit.4bpp"
 
 gRubyStageNuzleaf_Gfx:: @ 0x0845710C
 	.incbin "graphics/stage/ruby/nuzleaf.4bpp"
@@ -1830,14 +1830,14 @@ gPelipper_Gfx:: @ 0x084BB16C
 gChargeFillIndicator_Gfx:: @ 0x084C00EC
 	.incbin "graphics/stage/main/charge_fill_indicator.4bpp"
 
-gPikaSaverTilesGfx:: @ 0x084C07EC
-	.incbin "graphics/stage/main/pika_saver_tiles.4bpp"
+gPikachuSaverTilesGfx:: @ 0x084C07EC
+	.incbin "graphics/stage/main/pikachu_saver_tiles.4bpp"
 
 gDxModePikachuObjTiles:: @ 0x084C0C6C
 	.incbin "graphics/stage/main/dx_mode_pikachu_obj_tiles.4bpp"
 
-gPikachuSaverTilesGfx:: @ 0x084C156C
-	.incbin "graphics/stage/main/pikachu_saver_tiles.4bpp"
+gPichuSaverTilesGfx:: @ 0x084C156C
+	.incbin "graphics/stage/main/pichu_saver_tiles.4bpp"
 
 gSapphirePlusle_Gfx:: @ 0x084C1E6C
 	.incbin "graphics/stage/sapphire/bumper_plusle.4bpp"
@@ -1854,7 +1854,7 @@ gRubyBoardShopDoor_Gfx:: @ 0x084ED0CC
 	.incbin "graphics/stage/ruby/shop_door.4bpp";
 
 gZigzagoonShockWallIndicator_Gfx:: @ 0x084ED6CC
-	.incbin "graphics/stage/gunk_084ED6CC.4bpp";
+	.incbin "graphics/stage/sapphire/zigzagoon_press_button_indicator.4bpp";
 
 gDusclopsBoardDusclops_Gfx:: @ 0x084EDACC
 	.incbin "graphics/stage/dusclops/dusclops.4bpp";
@@ -1862,8 +1862,8 @@ gDusclopsBoardDusclops_Gfx:: @ 0x084EDACC
 gRubyBoardSharpedo_Gfx:: @ 0x084F5ACC
 	.incbin "graphics/stage/ruby/sharpedo.4bpp";
 
-gPokemonNameDisplayGfx:: @ 0x084F61EC
-	.incbin "graphics/stage/main/gunk_084F61EC.4bpp";
+gMartEvoForegroundMenuUx_Gfx:: @ 0x084F61EC
+	.incbin "graphics/stage/main/mart_evo_menu_foreground.4bpp";
 
 gRubyBoardShop_Gfx:: @ 0x084F6B0C
 	.incbin "graphics/stage/ruby/shop.4bpp";
@@ -1907,8 +1907,8 @@ gMainBoardBallSaveLatiosArm_Gfx:: @ 0x085038CC
 gMainBoardEndOfBall_Gfx:: @ 0x0850398C
 	.incbin "graphics/stage/main/end_of_ball.4bpp";
 
-gBonusSummaryCharTiles:: @ 0x0850558C
-	.incbin "graphics/stage/misc/gunk_0850558C.4bpp";
+gEobBonusSummaryCharTiles:: @ 0x0850558C
+	.incbin "graphics/stage/misc/end_of_ball_summary_text_chars.4bpp";
 
 .space 0x40
 
@@ -2013,7 +2013,7 @@ gOptionsSEList:: @ 0x08527D66
     .2byte SE_BALL_SUMMARY_PAGE_SWIPE, SE_PAUSE_CURSOR_MOVE, SE_BONUS_PANEL_SLIDE, SE_PAUSING, SE_UNPAUSING
     .2byte SE_CATCH_MON_ENTITY_APPEARS, SE_PIKA_CHARGE_DO, SE_PIKA_CHARGE_RE, SE_PIKA_CHARGE_MI, SE_PIKA_CHARGE_FA
     .2byte SE_PIKA_CHARGE_SO, SE_PIKA_CHARGE_LA, SE_PIKA_CHARGE_TI, SE_PIKA_CHARGE_HIGH_DO, SE_EVO_CUTSCENE_MON_PORTRAIT_CHANGE
-    .2byte SE_RUBY_BUMPER_HIT, SE_CYNDAQUIL_EGG_GUARD_HIT, SE_AERODACTYL_EGG_FLIGHT, SE_CYNDAQUIL_BALL_EJECT_AFTER_EGG_ARRIVAL, SE_RUBY_MART_GATE_OPEN
+    .2byte SE_BUMPER_HIT, SE_CYNDAQUIL_EGG_GUARD_HIT, SE_AERODACTYL_EGG_FLIGHT, SE_CYNDAQUIL_BALL_EJECT_AFTER_EGG_ARRIVAL, SE_RUBY_MART_GATE_OPEN
     .2byte SE_SHARPEDO_BALL_EJECT, SE_SHOP_EJECT, SE_MAKUHITA_PUNCH, SE_CHIKORITA_LEAF_BLADE, SE_ZIGZAGOON_EMERGE
     .2byte SE_RUBY_BUMPER_EMERGES, SE_RUBY_BUMPER_LEAVES, SE_RUBY_MART_SIGN_CHANGED, SE_SPOINK_LAUNCHER_CHARGED, SE_SPOINK_LAUNCHER_FIRED
     .2byte SE_SHARPEDO_BITE, SE_NUZLEAF_HIT, SE_NUZLEAF_TEETERING, SE_NUZLEAF_FORMS_BRIDGE, SE_GULPIN_LANDS_OR_LEAVES

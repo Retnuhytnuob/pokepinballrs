@@ -13,7 +13,7 @@ extern const u8 gSapphireMinun_Gfx[][0x300];
 extern const u8 gSapphireMinunHeadElectricity_Gfx[][0x200];
 extern const u8 gSapphirePlusle_Gfx[][0x300];
 extern const u8 gSapphirePlusleHeadElectricity_Gfx[][0x200];
-extern const u8 gPondBumper_Gfx[][0x200];
+extern const u8 gShroomishBumperHit_Gfx[][0x200];
 
 void UpdateSapphireShopGateLogic(void)
 {
@@ -325,20 +325,20 @@ void CalculateRubyBumperBounce(void)
     gCurrentPinballGame->rubyBumperLogicPosition[2].y = (161 - ((gCurrentPinballGame->globalAnimFrameCounter + 20) % 60) / 30) * 10;
 }
 
-void HandleRubyBumperHit(void)
+void HandleSapphireBumperHit(void)
 {
     s16 i;
     struct SpriteGroup *group;
     struct OamDataSimple *oamSimple;
     s16 index;
 
-    group = &gMain.spriteGroups[SG_RUBY_WHISCASH];
+    group = &gMain.spriteGroups[SG_SAPPHIRE_SHROOMISH_BUMPERS];
     if (gCurrentPinballGame->bumperHitCountdown > 0)
     {
         if (gCurrentPinballGame->bumperHitCountdown == 2)
         {
             gCurrentPinballGame->scoreAddedInFrame = SCORE_BUMPER_HIT;
-            m4aSongNumStart(SE_RUBY_BUMPER_HIT);
+            m4aSongNumStart(SE_BUMPER_HIT);
             PlayRumble(7);
             if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_CATCH_EM_MODE
                 && gCurrentPinballGame->boardSubState == CATCH_EM_SUBSTATE_AWAITING_BUMPER_HITS)
@@ -403,7 +403,7 @@ void HandleRubyBumperHit(void)
                 index = ((gCurrentPinballGame->globalAnimFrameCounter + (i * 10)) % 30) / 15;
             }
 
-            DmaCopy16(3, &gPondBumper_Gfx[index], OBJ_TILE_ADDR(TILE_INDEX(0, 12, 29 + i * 16)), 0x200);
+            DmaCopy16(3, &gShroomishBumperHit_Gfx[index], OBJ_TILE_ADDR(TILE_INDEX(0, 12, 29 + i * 16)), 0x200);
 
             group->baseX = gCurrentPinballGame->rubyBumperLogicPosition[i].x / 10 - gCurrentPinballGame->cameraXOffset - 8;
             group->baseY = gCurrentPinballGame->rubyBumperLogicPosition[i].y / 10 - gCurrentPinballGame->cameraYOffset - 10;

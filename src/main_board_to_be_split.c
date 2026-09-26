@@ -10,13 +10,12 @@
 #define HATCH_MODE_SAVER_TIME TICKS_FOR_TIME(0,30)
 
 extern const s16 gEggHatchAnimData[28][3];
-extern const u8 gCatchSpriteFrameBuffer[][0x120];
+extern const u8 gHatchedWalkerAnimTileBuffer[][SIZE_OF_VRAM_HATCH_MON_ENTITY_TILES];
 extern const struct Vector32 gSapphireEggWaypoints[];
 extern const struct Vector32 gEggWalkPathWaypoints[][29];
 extern const Palette gCaptureHit_Pal;
 extern const u8 gCaptureScreenTilesGfx[];
 extern const u8 gCaptureBallTilesGfx[];
-extern const u8 gCatchAnimTileBuffer[];
 extern const u16 gCatchCreatureOamFramesets[48][4][3];
 extern const u16 gCyndaquilFrameIndices[];
 extern const struct Vector16 gCyndaquilCavePositions[];
@@ -380,7 +379,7 @@ void UpdateBonusStageSelect(void)
 
 void ShowBonusTrapSprite(void)
 {
-    DmaCopy16(3, gMainStageBonusTrap_Gfx[0], OBJ_TILE_ADDR(TILE_INDEX(0, 4, 30)), 0x300);
+    DmaCopy16(3, gMainStageBonusTrap_Gfx[0], OBJ_VRAM_ADDR_FX_CENTER_HOLE_GRAVITY_TILES, SIZE_OF_VRAM_FX_CENTER_HOLE_GRAVITY_TILES);
     gMain.fieldSpriteGroups[FIELD_SG_CENTER_HOLE_GRAVITY_FX]->active = TRUE;
     gCurrentPinballGame->bonusTrapEnabled = TRUE;
 }
@@ -408,7 +407,7 @@ void AnimateBonusTrapSprite(void)
         {
             if (gCurrentPinballGame->bonusTrapAnimFrame != gCurrentPinballGame->prevBonusTrapFrame)
             {
-                DmaCopy16(3, gMainStageBonusTrap_Gfx[gCurrentPinballGame->bonusTrapAnimFrame], OBJ_TILE_ADDR(TILE_INDEX(0, 4, 30)), 0x300);
+                DmaCopy16(3, gMainStageBonusTrap_Gfx[gCurrentPinballGame->bonusTrapAnimFrame], OBJ_VRAM_ADDR_FX_CENTER_HOLE_GRAVITY_TILES, SIZE_OF_VRAM_FX_CENTER_HOLE_GRAVITY_TILES);
                 gCurrentPinballGame->prevBonusTrapFrame = gCurrentPinballGame->bonusTrapAnimFrame;
             }
         }
@@ -463,11 +462,11 @@ void ProcessChargeIndicator(void)
                 gCurrentPinballGame->fullChargeIndicatorBlinkTimer = 60;
             }
 
-            DmaCopy16(3, gChargeFillIndicator_Gfx[chargeLevelIx], OBJ_TILE_ADDR(TILE_INDEX(0, 2, 23)), 0x80);
+            DmaCopy16(3, gChargeFillIndicator_Gfx[chargeLevelIx], OBJ_VRAM_ADDR_CHARGE_INDICATOR_CIRCLE_TILES, SIZE_OF_VRAM_CHARGE_INDICATOR_CIRCLE_TILES);
         }
         else
         {
-            DmaCopy16(3, gChargeFillIndicator_Gfx[gCurrentPinballGame->chargeFillValue], OBJ_TILE_ADDR(TILE_INDEX(0, 2, 23)), 0x80);
+            DmaCopy16(3, gChargeFillIndicator_Gfx[gCurrentPinballGame->chargeFillValue], OBJ_VRAM_ADDR_CHARGE_INDICATOR_CIRCLE_TILES, SIZE_OF_VRAM_CHARGE_INDICATOR_CIRCLE_TILES);
             gCurrentPinballGame->prevChargeFillValue = gCurrentPinballGame->chargeFillValue;
         }
     }
@@ -496,7 +495,7 @@ void ProcessChargeIndicator(void)
     }
 }
 
-void UpdateRubyEvolutionShopSprite(void)
+void UpdateRubyEvolutionShopSignSprite(void)
 {
     s16 i;
     struct SpriteGroup *group;
@@ -565,7 +564,7 @@ void UpdateRubyEvolutionShopSprite(void)
     }
 }
 
-void RenderEvolutionUI(s16 arg0)
+void RenderMartUI(s16 showPrice)
 {
     s16 i;
     struct SpriteGroup *group;
@@ -579,12 +578,12 @@ void RenderEvolutionUI(s16 arg0)
 
     group = gMain.fieldSpriteGroups[FIELD_SG_MAIN_SHOP_COINS];
     var1 = gShopItemData[gShopCursorToItemMap[gCurrentPinballGame->shopItemCursor]];
-    if (arg0)
+    if (showPrice)
     {
         index = LEAD_DIGIT_10S(var1[3]);
-        DmaCopy16(3, gDecimalDigitTilesGfx[index], OBJ_TILE_ADDR(TILE_INDEX(1, 7, 13)), 0x40);
+        DmaCopy16(3, gDecimalDigitTilesGfx[index], OBJ_VRAM_ADDR_MART_PRICE_TENS_DIGIT_TILES, SIZE_OF_VRAM_MART_PRICE_DIGIT);
         index = DIGIT_1S(var1[3]);
-        DmaCopy16(3, gDecimalDigitTilesGfx[index], OBJ_TILE_ADDR(TILE_INDEX(1, 7, 19)), 0x40);
+        DmaCopy16(3, gDecimalDigitTilesGfx[index], OBJ_VRAM_ADDR_MART_PRICE_ONES_DIGIT_TILES, SIZE_OF_VRAM_MART_PRICE_DIGIT);
     }
 
     if (group->active)
@@ -726,7 +725,7 @@ void RenderEvolutionUI(s16 arg0)
         }
 
         // Used for change selection sheen, sold out banner/greying
-        DmaCopy16(3, gShopPortraitOverlayGfx[index], OBJ_TILE_ADDR(TILE_INDEX(1, 8, 17)), 0x300);
+        DmaCopy16(3, gShopPortraitOverlayGfx[index], OBJ_VRAM_ADDR_MART_EVO_SELECTION_CHANGE_TILES, SIZE_OF_VRAM_MART_EVO_SELECTION_CHANGE_TILES);
         for (i = 0; i < 2; i++)
         {
             oamSimple = &group->oam[i];
@@ -904,7 +903,7 @@ void AnimateTotodileEggDelivery(void)
         {
             gCurrentPinballGame->portraitOffsetX = 0;
             gCurrentPinballGame->portraitOffsetY = 0;
-            DmaCopy16(3, gEggFrameTilesGfx[0], OBJ_TILE_ADDR(TILE_INDEX(0, 7, 7)), 0x200);
+            DmaCopy16(3, gEggFrameTilesGfx[0], OBJ_VRAM_ADDR_HATCH_EGG_TILES, SIZE_OF_VRAM_HATCH_EGG_TILES);
         }
 
         if (gCurrentPinballGame->totodileDeliveryFrame == 14)
@@ -982,7 +981,7 @@ void AnimateAerodactylEggDelivery(void)
         if (gCurrentPinballGame->eggDropTimer == 78)
             gCurrentPinballGame->scoreAddedInFrame = SCORE_AERODACTYL_EGG_DELIVERY;
 
-        DmaCopy16(3, gEggFrameTilesGfx[0], OBJ_TILE_ADDR(TILE_INDEX(0, 7, 7)), 0x200);
+        DmaCopy16(3, gEggFrameTilesGfx[0], OBJ_VRAM_ADDR_HATCH_EGG_TILES, SIZE_OF_VRAM_HATCH_EGG_TILES);
     }
     else
     {
@@ -1336,7 +1335,7 @@ void UpdateRubyEggHatchAnimation(void)
         index = gEggAnimationFrameData[gCurrentPinballGame->eggAnimFrameIndex][2];
         DmaCopy16(3, gRubyBoardHatchCave_Gfx[index], OBJ_TILE_ADDR(TILE_INDEX(0, 8, 21)), 0x480);
         index = gEggAnimationFrameData[gCurrentPinballGame->eggAnimFrameIndex][3];
-        DmaCopy16(3, gEggFrameTilesGfx[index], OBJ_TILE_ADDR(TILE_INDEX(0, 7, 7)), 0x200);
+        DmaCopy16(3, gEggFrameTilesGfx[index], OBJ_VRAM_ADDR_HATCH_EGG_TILES, SIZE_OF_VRAM_HATCH_EGG_TILES);
         gCurrentPinballGame->prevEggAnimFrame = gCurrentPinballGame->eggAnimFrameIndex;
     }
 
@@ -1716,7 +1715,7 @@ void UpdateEggMode(void)
 
         group->baseX = gCurrentPinballGame->walkMonXPos / 10 - gCurrentPinballGame->cameraXOffset;
         group->baseY = gCurrentPinballGame->walkMonYPos / 10 - gCurrentPinballGame->cameraYOffset;
-        DmaCopy16(3, gCatchSpriteFrameBuffer[var0], OBJ_TILE_ADDR(TILE_INDEX(0, 4, 21)), 0x120);
+        DmaCopy16(3, gHatchedWalkerAnimTileBuffer[var0], OBJ_VRAM_ADDR_HATCH_MON_ENTITY_TILES, SIZE_OF_VRAM_HATCH_MON_ENTITY_TILES);
         DmaCopy16(3, gCatchSpritePaletteBuffer, OBJ_PLTT_SLOT(PAL_IX_CATCH_MON), PLTT_SLOT_SIZE);
         for (i = 0; i < 4; i++)
         {
@@ -1806,7 +1805,7 @@ void UpdateEggMode(void)
             }
         }
 
-        DmaCopy16(3, gCatchSpriteFrameBuffer[var0], OBJ_TILE_ADDR(TILE_INDEX(0, 4, 21)), 0x120);
+        DmaCopy16(3, gHatchedWalkerAnimTileBuffer[var0], OBJ_VRAM_ADDR_HATCH_MON_ENTITY_TILES, SIZE_OF_VRAM_HATCH_MON_ENTITY_TILES);
         gCurrentPinballGame->waypointSubTimer++;
         group->baseX = gCurrentPinballGame->walkMonXPos / 10 - gCurrentPinballGame->cameraXOffset;
         group->baseY = gCurrentPinballGame->walkMonYPos / 10 - gCurrentPinballGame->cameraYOffset;
@@ -1891,7 +1890,7 @@ void UpdateEggMode(void)
         else if (group->baseY < -30)
             group->baseY = -30;
 
-        DmaCopy16(3, gCatchSpriteFrameBuffer[var0], OBJ_TILE_ADDR(TILE_INDEX(0, 4, 21)), 0x120);
+        DmaCopy16(3, gHatchedWalkerAnimTileBuffer[var0], OBJ_VRAM_ADDR_HATCH_MON_ENTITY_TILES, SIZE_OF_VRAM_HATCH_MON_ENTITY_TILES);
         for (i = 0; i < 4; i++)
         {
             oamSimple = &group->oam[i];
@@ -1955,7 +1954,7 @@ void UpdateEggMode(void)
         if (group->baseY > 180)
             group->baseY = 180;
 
-        DmaCopy16(3, gCatchAnimTileBuffer, OBJ_TILE_ADDR(TILE_INDEX(0, 4, 21)), 0x120);
+        DmaCopy16(3, gHatchedWalkerAnimTileBuffer[14], OBJ_VRAM_ADDR_HATCH_MON_ENTITY_TILES, SIZE_OF_VRAM_HATCH_MON_ENTITY_TILES);
         for (i = 0; i < 4; i++)
         {
             oamSimple = &group->oam[i];
@@ -1984,7 +1983,7 @@ void UpdateEggMode(void)
                 gOamBuffer[oamSimple->oamId].y = oamSimple->yOffset + group->baseY;
             }
 
-            DmaCopy16(3, gCatchAnimTileBuffer, OBJ_TILE_ADDR(TILE_INDEX(0, 4, 21)), 0x120);
+            DmaCopy16(3, gHatchedWalkerAnimTileBuffer[14], OBJ_VRAM_ADDR_HATCH_MON_ENTITY_TILES, SIZE_OF_VRAM_HATCH_MON_ENTITY_TILES);
             if (gCurrentPinballGame->captureSequenceTimer == 23)
                 gMain.fieldSpriteGroups[FIELD_SG_HATCH_MON_ENTITY]->active = FALSE;
         }

@@ -86,7 +86,7 @@ void UpdateSapphireEggHatchAnimation(void)
     if (gCurrentPinballGame->prevEggAnimFrame != gCurrentPinballGame->eggAnimFrameIndex)
     {
         index = gEggAnimationFrameData[gCurrentPinballGame->eggAnimFrameIndex][3];
-        DmaCopy16(3, &gEggFrameTilesGfx[index], OBJ_TILE_ADDR(TILE_INDEX(0, 7, 7)), 0x200);
+        DmaCopy16(3, &gEggFrameTilesGfx[index], OBJ_VRAM_ADDR_HATCH_EGG_TILES, SIZE_OF_VRAM_HATCH_EGG_TILES);
         gCurrentPinballGame->prevEggAnimFrame = gCurrentPinballGame->eggAnimFrameIndex;
     }
 

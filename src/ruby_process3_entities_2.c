@@ -459,7 +459,7 @@ void RubyPond_EntityLogic(void)
             gCurrentPinballGame->whiscashStateTimer = 0;
             gCurrentPinballGame->whiscashState = WHISCASH_STATE_ANGRY;
             gCurrentPinballGame->scoreAddedInFrame = SCORE_WHISCASH_HIT;
-            m4aSongNumStart(SE_RUBY_BUMPER_HIT);
+            m4aSongNumStart(SE_BUMPER_HIT);
             PlayRumble(7);
             if (gCurrentPinballGame->saverTimeRemaining)
                 gCurrentPinballGame->saverTimeRemaining = 1;
@@ -729,7 +729,7 @@ void RubyPondTriBumperHandleHitAndDraw(void)
         if (gCurrentPinballGame->bumperHitCountdown == 2)
         {
             gCurrentPinballGame->scoreAddedInFrame = SCORE_BUMPER_HIT;
-            m4aSongNumStart(SE_RUBY_BUMPER_HIT);
+            m4aSongNumStart(SE_BUMPER_HIT);
             PlayRumble(7);
             if (gCurrentPinballGame->boardState == MAIN_BOARD_STATE_CATCH_EM_MODE
                 && gCurrentPinballGame->boardSubState == CATCH_EM_SUBSTATE_AWAITING_BUMPER_HITS

@@ -20,7 +20,7 @@ extern const u8 gMainBoardBallSave_Gfx[];
 extern const u8 gMainBoardBallSaveLatios_Gfx[];
 extern const u8 gMainBoardBallSaveLatiosArm_Gfx[];
 extern const u8 gMainBoardEndOfBall_Gfx[];
-extern const u8 gBonusSummaryCharTiles[][0x20];
+extern const u8 gEobBonusSummaryCharTiles[][0x20];
 extern const u8 gMainBoardGameOverText_Gfx[];
 extern const Palette gBallSaver_Ruby_Pal;
 extern const Palette gBallSaver_Sapphire_Pal;
@@ -601,11 +601,11 @@ void EndOfBallBonusSummary(void)
 
             if (gCurrentPinballGame->bonusTextRevealMask[i][j])
             {
-                DmaCopy16(3, gBonusSummaryCharTiles[var1], OBJ_VRAM_ADDR_END_OF_BALL_BONUS_SUMMARY_TEXT(i,j), SIZE_OF_VRAM_END_OF_BALL_BONUS_SUMMARY_TEXT_CHAR_TILES);
+                DmaCopy16(3, gEobBonusSummaryCharTiles[var1], OBJ_VRAM_ADDR_END_OF_BALL_BONUS_SUMMARY_TEXT(i,j), SIZE_OF_VRAM_END_OF_BALL_BONUS_SUMMARY_TEXT_CHAR_TILES);
             }
             else
             {
-                DmaCopy16(3, gBonusSummaryCharTiles[48], OBJ_VRAM_ADDR_END_OF_BALL_BONUS_SUMMARY_TEXT(i,j), SIZE_OF_VRAM_END_OF_BALL_BONUS_SUMMARY_TEXT_CHAR_TILES);
+                DmaCopy16(3, gEobBonusSummaryCharTiles[48], OBJ_VRAM_ADDR_END_OF_BALL_BONUS_SUMMARY_TEXT(i,j), SIZE_OF_VRAM_END_OF_BALL_BONUS_SUMMARY_TEXT_CHAR_TILES);
             }
         }
     }

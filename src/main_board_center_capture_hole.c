@@ -13,7 +13,7 @@ extern struct SongHeader se_mon_catch_ball_woosh;
 extern struct SongHeader se_ball_upgrade;
 
 extern u16 gRouletteWheelContents[][7];
-extern const u8 gPikachuSaverTilesGfx[];
+extern const u8 gPichuSaverTilesGfx[];
 
 extern const s16 gCaptureSequenceTimings[34];
 extern const u8 gCaptureScreenTilesGfx[];
@@ -274,7 +274,7 @@ void GivePrize(void)
                 gCurrentPinballGame->fullChargeSlideAnimTimer = 0;
                 gCurrentPinballGame->chargeIndicatorYOffset = 120;
                 gCurrentPinballGame->fullChargeIndicatorBlinkTimer = 60;
-                DmaCopy16(3, gPikachuSaverTilesGfx, OBJ_TILE_ADDR(TILE_INDEX(0, 1, 16)), 0x180);
+                DmaCopy16(3, gPichuSaverTilesGfx, OBJ_VRAM_ADDR_PIKA_MON_AT_RIGHT_SIDE_TILES, SIZE_OF_VRAM_PIKA_MON_TILES);
                 gCurrentPinballGame->outLanePikaPosition = PIKA_BOTH_SIDES;
                 gMain.fieldSpriteGroups[FIELD_SG_HATCH_MON_ENTITY]->active = FALSE;
                 gCurrentPinballGame->pichuEntranceTimer = 1;
