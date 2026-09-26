@@ -4,6 +4,7 @@
 #include "constants/bg_music.h"
 #include "constants/board/main_board.h"
 #include "constants/board/sapphire_states.h"
+#include "constants/mem_layout/sapphire.h"
 
 extern const u8 gSapphireBoardShopShockWall_Gfx[][0x80];
 
@@ -227,7 +228,7 @@ void DrawSapphireShopGuards(void)
     group->baseX = 68 - gCurrentPinballGame->cameraXOffset;
     group->baseY = 144 - gCurrentPinballGame->cameraYOffset;
     index = gShopGuardianAnimFramesetData[gCurrentPinballGame->shopGuardianAnimFrames[MINUN_TARGET_BUTTON_IX]][0];
-    DmaCopy16(3, &gSapphireMinun_Gfx[index], OBJ_TILE_ADDR(TILE_INDEX(0, 11, 13)), 0x280);
+    DmaCopy16(3, &gSapphireMinun_Gfx[index], OBJ_VRAM_ADDR_MINUN_ENTITY_TILES, SIZE_OF_MINUN_ENTTIY_TILES);
     for (i = 0; i < 2; i++)
     {
         oamSimple = &group->oam[i];
@@ -241,7 +242,7 @@ void DrawSapphireShopGuards(void)
     {
         group->baseY = 144 - gCurrentPinballGame->cameraYOffset;
         index = gCurrentPinballGame->shopGuardianTargetHitFxTimer[MINUN_TARGET_BUTTON_IX] / 2;
-        DmaCopy16(3, &gSapphireMinunHeadElectricity_Gfx[index], OBJ_TILE_ADDR(TILE_INDEX(1, 1, 25)), 0x180);
+        DmaCopy16(3, &gSapphireMinunHeadElectricity_Gfx[index], OBJ_VRAM_ADDR_MINUN_ELECTRICTY_FX_TILES, SIZE_OF_MINUN_ELECTRICTY_FX_TILES);
     }
     else
     {
@@ -256,7 +257,7 @@ void DrawSapphireShopGuards(void)
     group->baseX = 36 - gCurrentPinballGame->cameraXOffset;
     group->baseY = 163 - gCurrentPinballGame->cameraYOffset;
     index = gShopGuardianAnimFramesetData[gCurrentPinballGame->shopGuardianAnimFrames[PLUSLE_TARGET_BUTTON_IX]][0];
-    DmaCopy16(3, &gSapphirePlusle_Gfx[index], OBJ_TILE_ADDR(TILE_INDEX(0, 12, 5)), 0x280);
+    DmaCopy16(3, &gSapphirePlusle_Gfx[index], OBJ_VRAM_ADDR_PLUSLE_ENTITY_TILES, SIZE_OF_PLUSLE_ENTTIY_TILES);
     for (i = 0; i < 2; i++)
     {
         oamSimple = &group->oam[i];
@@ -270,7 +271,7 @@ void DrawSapphireShopGuards(void)
     {
         group->baseY = 163 - gCurrentPinballGame->cameraYOffset;
         index = gCurrentPinballGame->shopGuardianTargetHitFxTimer[PLUSLE_TARGET_BUTTON_IX] / 2;
-        DmaCopy16(3, &gSapphirePlusleHeadElectricity_Gfx[index], OBJ_TILE_ADDR(TILE_INDEX(1, 2, 9)), 0x180);
+        DmaCopy16(3, &gSapphirePlusleHeadElectricity_Gfx[index], OBJ_VRAM_ADDR_PLUSLE_ELECTRICTY_FX_TILES, SIZE_OF_PLUSLE_ELECTRICTY_FX_TILES);
     }
     else
     {

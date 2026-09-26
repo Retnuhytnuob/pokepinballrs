@@ -313,7 +313,7 @@ void UpdatePelipperPondEntity(void)
 
     if (group->active)
     {
-        DmaCopy16(3, gPelipper_Gfx[frameId], OBJ_TILE_ADDR(TILE_INDEX(0, 8, 21)), 0x480);
+        DmaCopy16(3, gPelipper_Gfx[frameId], OBJ_VRAM_ADDR_PELIPPER_ENTITY_TILES, SIZE_OF_PELIPPER_ENTTIY_TILES);
         group->baseX = gCurrentPinballGame->pelipperPosX / 10 + 146 - gCurrentPinballGame->cameraXOffset;
         group->baseY = gCurrentPinballGame->pelipperPosY / 10 + 110 - gCurrentPinballGame->cameraYOffset + gCurrentPinballGame->pelipperYBobOffset / 10;
         for (i = 0; i < 4; i++)
@@ -350,7 +350,7 @@ void AnimateWailmerEntity(void)
     index = gWailmerAnimFrameMap[index][1];
     group->baseX = 164 - gCurrentPinballGame->cameraXOffset;
     group->baseY = 166 - gCurrentPinballGame->cameraYOffset;
-    DmaCopy16(3, gSapphireBoardWailmer_Gfx[index], OBJ_TILE_ADDR(TILE_INDEX(0, 9, 25)), 0x300);
+    DmaCopy16(3, gSapphireBoardWailmer_Gfx[index], OBJ_VRAM_ADDR_WAILMER_ENTITY_TILES, SIZE_OF_WAILMER_ENTTIY_TILES);
     for (i = 0; i < 2; i++)
     {
         oamSimple = &group->oam[i];
@@ -460,7 +460,7 @@ void DrawZigzagoonAndRouletteStopPrompt(void)
         group->baseX = 198 - gCurrentPinballGame->cameraXOffset;
         group->baseY = gCurrentPinballGame->sapphireBumperTimer + 284 - gCurrentPinballGame->cameraYOffset;
         index = gCurrentPinballGame->zigzagoonGfxFrame;
-        DmaCopy16(3, gSapphireBoardZigzagoon_Gfx[index], OBJ_TILE_ADDR(TILE_INDEX(0, 10, 17)), 0x380);
+        DmaCopy16(3, gSapphireBoardZigzagoon_Gfx[index], OBJ_VRAM_ADDR_ZIGZAGOON_ENTITY_TILES, SIZE_OF_ZIGZAGOON_ENTTIY_TILES);
         index = gCurrentPinballGame->zigzagoonOamFrame;
         for (i = 0; i < 3; i++)
         {
@@ -504,7 +504,7 @@ void DrawZigzagoonAndRouletteStopPrompt(void)
         {
             group->baseY = 260 - gCurrentPinballGame->cameraYOffset;
             index = (gCurrentPinballGame->globalAnimFrameCounter % 50) / 25;
-            DmaCopy16(3, &gZigzagoonShockWallIndicator_Gfx[index], OBJ_TILE_ADDR(TILE_INDEX(1, 3, 29)), 0x200);
+            DmaCopy16(3, &gZigzagoonShockWallIndicator_Gfx[index], OBJ_VRAM_ADDR_ZIGZAGOON_SPEECH_BUBBLE_TILES, SIZE_OF_ZIGZAGOON_SPEECH_BUBBLE_TILES);
         }
         else
         {

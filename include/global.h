@@ -322,7 +322,7 @@ struct PinballGame
     /*0x1A9*/ u8 shopBgAnimFrame;
     /*0x1AA*/ s8 shopPikaSaverMaxed;
     /*0x1AB*/ s8 shopDoorOpenLevel;
-    /*0x1AC*/ s8 shopSignFrame;
+    /*0x1AC*/ s8 sapphireShopSignFrame;
     /*0x1AD*/ s8 shopSignPaletteIndex;
     /*0x1AE*/ u8 shopOutcomeRepeatCount;
     /*0x1AF*/ u8 shopExtraBallPreviouslyPurchased;
