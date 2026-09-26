@@ -1019,13 +1019,13 @@ void LoadPokemonNameGraphics(void)
     {
         if (gSpeciesInfo[gCurrentPinballGame->currentSpecies].name[i] == ' ')
         {
-            DmaCopy16(3, gSpaceTileGfx, OBJ_VRAM_ADDR_FX_BASE + i * SIZE_OF_VRAM_LETTER_TILE, SIZE_OF_VRAM_LETTER_TILE);
+            DmaCopy16(3, gSpaceTileGfx, OBJ_VRAM_ADDR_MON_NAME_TEXT_CHAR(i), SIZE_OF_VRAM_LETTER_TILE);
             gCurrentPinballGame->nameSpacingOffset += 4;
         }
         else
         {
             index = gSpeciesInfo[gCurrentPinballGame->currentSpecies].name[i] - 'A';
-            DmaCopy16(3, gAlphabetTilesGfx[index], OBJ_VRAM_ADDR_FX_BASE + i * SIZE_OF_VRAM_LETTER_TILE, SIZE_OF_VRAM_LETTER_TILE);
+            DmaCopy16(3, gAlphabetTilesGfx[index], OBJ_VRAM_ADDR_MON_NAME_TEXT_CHAR(i), SIZE_OF_VRAM_LETTER_TILE);
         }
     }
 }
@@ -1070,13 +1070,13 @@ void InitWasCaughtBanner(void)
     {
         if (gSpeciesInfo[gCurrentPinballGame->currentSpecies].name[i] == ' ')
         {
-            DmaCopy16(3, gSpaceTileGfx, OBJ_VRAM_ADDR_FX_BASE + i * SIZE_OF_VRAM_LETTER_TILE, SIZE_OF_VRAM_LETTER_TILE);
+            DmaCopy16(3, gSpaceTileGfx, OBJ_VRAM_ADDR_MON_NAME_TEXT_CHAR(i), SIZE_OF_VRAM_LETTER_TILE);
             gCurrentPinballGame->nameSpacingOffset += 4;
         }
         else
         {
             index = gSpeciesInfo[gCurrentPinballGame->currentSpecies].name[i] - 'A';
-            DmaCopy16(3, gAlphabetTilesGfx[index], OBJ_VRAM_ADDR_FX_BASE + i * SIZE_OF_VRAM_LETTER_TILE, SIZE_OF_VRAM_LETTER_TILE);
+            DmaCopy16(3, gAlphabetTilesGfx[index], OBJ_VRAM_ADDR_MON_NAME_TEXT_CHAR(i), SIZE_OF_VRAM_LETTER_TILE);
         }
     }
 
@@ -1085,13 +1085,12 @@ void InitWasCaughtBanner(void)
     {
         if (gCaughtTextChars[i] == ' ')
         {
-            //TILE_INDEX(1, 6, 20 + 2 * i)
-            DmaCopy16(3, gSpaceTileGfx, OBJ_VRAM_ADDR_FX_BASE + (i + 10) * SIZE_OF_VRAM_LETTER_TILE, SIZE_OF_VRAM_LETTER_TILE);
+            DmaCopy16(3, gSpaceTileGfx, OBJ_VRAM_ADDR_WAS_CAUGHT_TEXT_CHAR(i), SIZE_OF_VRAM_LETTER_TILE);
         }
         else
         {
             index = gCaughtTextChars[i] - 'A';
-            DmaCopy16(3, gAlphabetTilesGfx[index], OBJ_VRAM_ADDR_FX_BASE + (i + 10) * SIZE_OF_VRAM_LETTER_TILE, SIZE_OF_VRAM_LETTER_TILE);
+            DmaCopy16(3, gAlphabetTilesGfx[index], OBJ_VRAM_ADDR_WAS_CAUGHT_TEXT_CHAR(i), SIZE_OF_VRAM_LETTER_TILE);
         }
     }
 

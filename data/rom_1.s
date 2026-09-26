@@ -1656,7 +1656,7 @@ gAlphabetTilesGfx:: @ 0x083FF04C
 	.incbin "graphics/stage/main/alphabet.4bpp"
 
 gSpaceTileGfx:: @ 0x083FFD4C
-	.space 0x40
+	.space 0x40  @ Note: this 0x40 space is required, and is used as a tile pair.
 
 gSapphireBoardWailmer_Gfx:: @ 0x083FFD8C
 	.incbin "graphics/stage/sapphire/wailmer.4bpp";

@@ -400,12 +400,12 @@ void RestoreFieldSpecificGraphics(void)
         {
             if (gSpeciesInfo[gCurrentPinballGame->currentSpecies].name[i] == ' ')
             {
-                DmaCopy16(3, gSpaceTileGfx, OBJ_VRAM_ADDR_FX_BASE + i * SIZE_OF_VRAM_LETTER_TILE, SIZE_OF_VRAM_LETTER_TILE);
+                DmaCopy16(3, gSpaceTileGfx, OBJ_VRAM_ADDR_MON_NAME_TEXT_CHAR(i), SIZE_OF_VRAM_LETTER_TILE);
             }
             else
             {
                 int letterTileIx = gSpeciesInfo[gCurrentPinballGame->currentSpecies].name[i] - 'A';
-                DmaCopy16(3, gAlphabetTilesGfx[letterTileIx], OBJ_VRAM_ADDR_FX_BASE + i * SIZE_OF_VRAM_LETTER_TILE, SIZE_OF_VRAM_LETTER_TILE);
+                DmaCopy16(3, gAlphabetTilesGfx[letterTileIx], OBJ_VRAM_ADDR_MON_NAME_TEXT_CHAR(i), SIZE_OF_VRAM_LETTER_TILE);
             }
         }
         DmaCopy16(3, gMartEvoForegroundMenuUx_Gfx, OBJ_VRAM_ADDR_MART_EVO_FOREGROUND_UX_TILES, SIZE_OF_VRAM_MART_EVO_FOREGROUND_UX_TILES);
@@ -415,12 +415,12 @@ void RestoreFieldSpecificGraphics(void)
         {
             if (gSpeciesInfo[gCurrentPinballGame->currentSpecies].name[i] == ' ')
             {
-                DmaCopy16(3, gSpaceTileGfx, OBJ_VRAM_ADDR_FX_BASE + i * SIZE_OF_VRAM_LETTER_TILE, SIZE_OF_VRAM_LETTER_TILE);
+                DmaCopy16(3, gSpaceTileGfx, OBJ_VRAM_ADDR_MON_NAME_TEXT_CHAR(i), SIZE_OF_VRAM_LETTER_TILE);
             }
             else
             {
                 int letterTileIx = gSpeciesInfo[gCurrentPinballGame->currentSpecies].name[i] - 'A';
-                DmaCopy16(3, gAlphabetTilesGfx[letterTileIx], OBJ_VRAM_ADDR_FX_BASE + i * SIZE_OF_VRAM_LETTER_TILE, SIZE_OF_VRAM_LETTER_TILE);
+                DmaCopy16(3, gAlphabetTilesGfx[letterTileIx], OBJ_VRAM_ADDR_MON_NAME_TEXT_CHAR(i), SIZE_OF_VRAM_LETTER_TILE);
             }
         }
 
@@ -428,13 +428,12 @@ void RestoreFieldSpecificGraphics(void)
         {
             if (gCaughtTextChars[i] == ' ')
             {
-                // TILE_INDEX(1, 6, 20 + 2 * i)
-                DmaCopy16(3, gSpaceTileGfx, OBJ_VRAM_ADDR_FX_BASE + (i + 10) * SIZE_OF_VRAM_LETTER_TILE, SIZE_OF_VRAM_LETTER_TILE);
+                DmaCopy16(3, gSpaceTileGfx, OBJ_VRAM_ADDR_WAS_CAUGHT_TEXT_CHAR(i), SIZE_OF_VRAM_LETTER_TILE);
             }
             else
             {
                 int letterTileIx = gCaughtTextChars[i] - 'A';
-                DmaCopy16(3, gAlphabetTilesGfx[letterTileIx], OBJ_VRAM_ADDR_FX_BASE + (i + 10) * SIZE_OF_VRAM_LETTER_TILE, SIZE_OF_VRAM_LETTER_TILE);
+                DmaCopy16(3, gAlphabetTilesGfx[letterTileIx], OBJ_VRAM_ADDR_WAS_CAUGHT_TEXT_CHAR(i), SIZE_OF_VRAM_LETTER_TILE);
             }
         }
         break;
@@ -453,9 +452,9 @@ void RestoreFieldSpecificGraphics(void)
         {
             var1 = gShopItemData[gShopCursorToItemMap[gCurrentPinballGame->shopItemCursor]];
             var2 = LEAD_DIGIT_10S(var1[3]);
-            DmaCopy16(3, gDecimalDigitTilesGfx[var2], OBJ_TILE_ADDR(TILE_INDEX(1, 7, 13)), SIZE_OF_VRAM_LETTER_TILE);
+            DmaCopy16(3, gDecimalDigitTilesGfx[var2], OBJ_VRAM_ADDR_MART_PRICE_TENS_DIGIT_TILES, SIZE_OF_VRAM_LETTER_TILE);
             var3 = DIGIT_1S(var1[3]);
-            DmaCopy16(3, gDecimalDigitTilesGfx[var3], OBJ_TILE_ADDR(TILE_INDEX(1, 7, 19)), SIZE_OF_VRAM_LETTER_TILE);
+            DmaCopy16(3, gDecimalDigitTilesGfx[var3], OBJ_VRAM_ADDR_MART_PRICE_ONES_DIGIT_TILES, SIZE_OF_VRAM_LETTER_TILE);
         }
         break;
     case FX_BALL_SAVED_CUTSCENE:
@@ -506,7 +505,7 @@ void RestoreMainFieldDynamicGraphics(void)
     }
 
     var0 = gCurrentPinballGame->pikachuSpinFrame;
-    DmaCopy16(3, gMainBoardPikaSpinner_Gfx[var0 = gCurrentPinballGame->pikachuSpinFrame], OBJ_TILE_ADDR(TILE_INDEX(0, 1, 28)), 0x120);
+    DmaCopy16(3, gMainBoardPikaSpinner_Gfx[var0 = gCurrentPinballGame->pikachuSpinFrame], OBJ_VRAM_ADDR_PIKA_CHARGE_SPINNER_TILES, SIZE_OF_VRAM_PIKA_CHARGE_SPINNER_TILES);
     var0 = gCurrentPinballGame->chargeFillValue;
     DmaCopy16(3, gChargeFillIndicator_Gfx[var0], OBJ_VRAM_ADDR_CHARGE_INDICATOR_CIRCLE_TILES, SIZE_OF_VRAM_CHARGE_INDICATOR_CIRCLE_TILES);
 
