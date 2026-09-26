@@ -3,6 +3,7 @@
 #include "main.h"
 #include "constants/bg_music.h"
 #include "constants/board/ruby_states.h"
+#include "constants/mem_layout/ruby.h"
 
 extern struct SongHeader se_whiscash_splashdown;
 
@@ -143,7 +144,7 @@ void UpdateNuzleafEntity(void)
     {
         group->baseX = gNuzleafPositions[gCurrentPinballGame->nuzleafPositionIndex][0] - gCurrentPinballGame->cameraXOffset;
         group->baseY = gNuzleafPositions[gCurrentPinballGame->nuzleafPositionIndex][1] - gCurrentPinballGame->cameraYOffset;
-        DmaCopy16(3, gRubyStageNuzleaf_Gfx[gCurrentPinballGame->nuzleafGfxTileIndex], OBJ_TILE_ADDR(TILE_INDEX(1, 0, 28)), 0x260);
+        DmaCopy16(3, gRubyStageNuzleaf_Gfx[gCurrentPinballGame->nuzleafGfxTileIndex], OBJ_VRAM_ADDR_NUZLEAF_TILES, SIZE_OF_VRAM_NUZLEAF_TILES);
         for (i = 0; i < 2; i++)
         {
             oamSimple = &group->oam[i];
@@ -219,7 +220,7 @@ void AnimateRubyShopDoor(void)
                 gCurrentPinballGame->shopDoorAnimDelay = 4;
             }
 
-            DmaCopy16(3, gRubyBoardShopDoor_Gfx[gCurrentPinballGame->shopDoorCurrentFrame], OBJ_TILE_ADDR(TILE_INDEX(0, 12, 12)), 0x180);
+            DmaCopy16(3, gRubyBoardShopDoor_Gfx[gCurrentPinballGame->shopDoorCurrentFrame], OBJ_VRAM_ADDR_RUBY_MART_DOOR_TILES, SIZE_OF_VRAM_RUBY_MART_DOOR_TILES);
         }
     }
 
@@ -253,7 +254,7 @@ void DrawWhiscash(void)
     {
         frameIx = frameData[0];
         DmaCopy16(3, gWhiscash_Pals[3*gCurrentPinballGame->paletteDimmingIx], OBJ_PLTT_SLOT(PAL_IX_RUBY_BUMPERS), PLTT_SLOT_SIZE);
-        DmaCopy16(3, gWhiscash_Gfx[frameIx], OBJ_TILE_ADDR(TILE_INDEX(1, 1, 20)), 0x460);
+        DmaCopy16(3, gWhiscash_Gfx[frameIx], OBJ_VRAM_ADDR_WHISCASH_TILES, SIZE_OF_VRAM_WHISCASH_TILES);
         gCurrentPinballGame->rubyBumperCollisionPosition[0].x = -248;
         gCurrentPinballGame->rubyBumperCollisionPosition[0].y = -316;
         group->baseX = frameData[2] + 124u - gCurrentPinballGame->cameraXOffset;
@@ -820,7 +821,7 @@ void RubyPondTriBumperHandleHitAndDraw(void)
                 var0 = (gCurrentPinballGame->globalAnimFrameCounter % 50) / 25;
             }
 
-            DmaCopy16(3, gLotadBumper_Gfx[var0], OBJ_TILE_ADDR(TILE_INDEX(0, 11, 20 + 8 * i)), 0x100);
+            DmaCopy16(3, gLotadBumper_Gfx[var0], OBJ_VRAM_ADDR_RUBY_BUMPER(i), SIZE_OF_VRAM_RUBY_BUMPER_TILES);
         }
 
         DmaCopy16(3, gLotadBumper_Pals[3*gCurrentPinballGame->paletteDimmingIx], OBJ_PLTT_SLOT(PAL_IX_RUBY_BUMPERS), PLTT_SLOT_SIZE);
@@ -848,7 +849,7 @@ void RubyPondTriBumperHandleHitAndDraw(void)
                 var0 = (gCurrentPinballGame->globalAnimFrameCounter % 50) / 25;
             }
 
-            DmaCopy16(3, gChinchouBumper_Gfx[var0], OBJ_TILE_ADDR(TILE_INDEX(0, 11, 20 + 8 * i)), 0x100);
+            DmaCopy16(3, gChinchouBumper_Gfx[var0], OBJ_VRAM_ADDR_RUBY_BUMPER(i), SIZE_OF_VRAM_RUBY_BUMPER_TILES);
         }
 
         DmaCopy16(3, gChinchouBumper_Pals[3*gCurrentPinballGame->paletteDimmingIx], OBJ_PLTT_SLOT(PAL_IX_RUBY_BUMPERS), PLTT_SLOT_SIZE);
@@ -886,12 +887,12 @@ void AnimateSharpedoEntity(void)
 
     index = (gMain.systemFrameCount % 55) / 11;
     group = &gMain.spriteGroups[SG_RUBY_SHARPEDO];
-    DmaCopy16(3, gRubyBoardSharpedo_Gfx[gCurrentPinballGame->catchHoleTileVariant], OBJ_TILE_ADDR(TILE_INDEX(0, 11, 1)), 0x260);
+    DmaCopy16(3, gRubyBoardSharpedo_Gfx[gCurrentPinballGame->sharpedoNextTileIx], OBJ_VRAM_ADDR_SHARPEDO_TILES, SIZE_OF_VRAM_SHARPEDO_TILES);
     if (gCurrentPinballGame->catchHoleAnimFrame)
         index = gCurrentPinballGame->catchHoleAnimFrame;
 
     oamIx = gSharpedoAnimFrameData[index][0];
-    gCurrentPinballGame->catchHoleTileVariant = gSharpedoAnimFrameData[index][1];
+    gCurrentPinballGame->sharpedoNextTileIx = gSharpedoAnimFrameData[index][1];
     group->baseX = 179 - gCurrentPinballGame->cameraXOffset;
     group->baseY = 174 - gCurrentPinballGame->cameraYOffset;
     for (i = 0; i < 3; i++)

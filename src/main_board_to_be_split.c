@@ -539,7 +539,7 @@ void UpdateRubyEvolutionShopSignSprite(void)
 
         if (gCurrentPinballGame->shopAnimTimer % 6 == 0)
         {
-            DmaCopy16(3, gRubyBoardShop_Gfx[index], OBJ_TILE_ADDR(TILE_INDEX(0, 15, 8)), 0x500);
+            DmaCopy16(3, gRubyBoardShop_Gfx[index], OBJ_VRAM_ADDR_RUBY_MART_SIGN_TILES, SIZE_OF_VRAM_RUBY_MART_SIGN_TILES);
         }
 
         group->baseX = 181 - gCurrentPinballGame->cameraXOffset;
@@ -1332,7 +1332,7 @@ void UpdateRubyEggHatchAnimation(void)
     if (gCurrentPinballGame->prevEggAnimFrame != gCurrentPinballGame->eggAnimFrameIndex)
     {
         index = gEggAnimationFrameData[gCurrentPinballGame->eggAnimFrameIndex][2];
-        DmaCopy16(3, gRubyBoardHatchCave_Gfx[index], OBJ_TILE_ADDR(TILE_INDEX(0, 8, 21)), 0x480);
+        DmaCopy16(3, gRubyBoardHatchCave_Gfx[index], OBJ_VRAM_ADDR_HATCH_CAVE_TILES, SIZE_OF_VRAM_HATCH_CAVE_TILES);
         index = gEggAnimationFrameData[gCurrentPinballGame->eggAnimFrameIndex][3];
         DmaCopy16(3, gEggFrameTilesGfx[index], OBJ_VRAM_ADDR_HATCH_EGG_TILES, SIZE_OF_VRAM_HATCH_EGG_TILES);
         gCurrentPinballGame->prevEggAnimFrame = gCurrentPinballGame->eggAnimFrameIndex;
@@ -1454,7 +1454,7 @@ void UpdateHatchCave(void)
         group->baseY = gCurrentPinballGame->cyndaquilCaveSpriteY - gCurrentPinballGame->cameraYOffset;
         if (var0 % 6 == 0)
         {
-            DmaCopy16(3, gRubyStageCyndaquil_Gfx[gCurrentPinballGame->cyndaquilFrame], OBJ_TILE_ADDR(TILE_INDEX(0, 12, 24)), 0x280);
+            DmaCopy16(3, gRubyStageCyndaquil_Gfx[gCurrentPinballGame->cyndaquilFrame], OBJ_VRAM_ADDR_CYNDAQUIL_TILES, SIZE_OF_VRAM_CYNDAQUIL_TILES);
         }
     }
     else if (gCurrentPinballGame->cyndaquilPosition == CYNDAQUIL_POSITION_CAVE_ENTRANCE)
@@ -1465,7 +1465,7 @@ void UpdateHatchCave(void)
             {
                 gCurrentPinballGame->eggAnimationPhase = EGG_ANIM_PHASE_CYNDAQUIL_ENTERS_BALL_JUMP;
                 gCurrentPinballGame->cyndaquilFrame = 1;
-                DmaCopy16(3, gRubyStageCyndaquil_Gfx[gCurrentPinballGame->cyndaquilFrame], OBJ_TILE_ADDR(TILE_INDEX(0, 12, 24)), 0x280);
+                DmaCopy16(3, gRubyStageCyndaquil_Gfx[gCurrentPinballGame->cyndaquilFrame], OBJ_VRAM_ADDR_CYNDAQUIL_TILES, SIZE_OF_VRAM_CYNDAQUIL_TILES);
                 gMain.modeChangeFlags |= MODE_CHANGE_BANNER;
                 gCurrentPinballGame->bannerDelayTimer = 0;
                 gCurrentPinballGame->bannerDisplayTimer = 60;

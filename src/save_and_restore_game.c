@@ -630,23 +630,23 @@ void RestoreRubyBoardTileGraphics(void)
     s16 var0;
 
     var0 = gEggAnimationFrameData[gCurrentPinballGame->eggAnimFrameIndex][2];
-    DmaCopy16(3, gRubyBoardHatchCave_Gfx[var0], OBJ_TILE_ADDR(TILE_INDEX(0, 8, 21)), 0x480);
+    DmaCopy16(3, gRubyBoardHatchCave_Gfx[var0], OBJ_VRAM_ADDR_HATCH_CAVE_TILES, SIZE_OF_VRAM_HATCH_CAVE_TILES);
     var0 = (gMain.systemFrameCount % 50) / 25;
-    DmaCopy16(3, gRubyChikoritaEntity[var0], OBJ_TILE_ADDR(TILE_INDEX(0, 9, 25)), 0x300);
-    DmaCopy16(3, gRubyBoardSharpedo_Gfx[gCurrentPinballGame->catchHoleTileVariant], OBJ_TILE_ADDR(TILE_INDEX(0, 11, 1)), 0x260);
+    DmaCopy16(3, gRubyChikoritaEntity[var0], OBJ_VRAM_ADDR_CHIKORITA_TILES, SIZE_OF_VRAM_CHIKORITA_TILES);
+    DmaCopy16(3, gRubyBoardSharpedo_Gfx[gCurrentPinballGame->sharpedoNextTileIx], OBJ_VRAM_ADDR_SHARPEDO_TILES, SIZE_OF_VRAM_SHARPEDO_TILES);
     for (i = 0; i < 2; i++)
-        DmaCopy16(3, gChinchouBumper_Gfx[var0], OBJ_TILE_ADDR(TILE_INDEX(0, 11, 20 + 8 * i)), 0x100);
+        DmaCopy16(3, gChinchouBumper_Gfx[var0], OBJ_VRAM_ADDR_RUBY_BUMPER(i), SIZE_OF_VRAM_RUBY_BUMPER_TILES);
 
     var0 = gCurrentPinballGame->shopDoorCurrentFrame & 0xF;
-    DmaCopy16(3, gRubyBoardShopDoor_Gfx[var0], OBJ_TILE_ADDR(TILE_INDEX(0, 12, 12)), 0x180);
+    DmaCopy16(3, gRubyBoardShopDoor_Gfx[var0], OBJ_VRAM_ADDR_RUBY_MART_DOOR_TILES, SIZE_OF_VRAM_RUBY_MART_DOOR_TILES);
     if (gCurrentPinballGame->cyndaquilPosition < CYNDAQUIL_POSITION_CAVE_ENTRANCE)
         gCurrentPinballGame->cyndaquilFrame = 0;
     else
         gCurrentPinballGame->cyndaquilFrame = 1;
 
-    DmaCopy16(3, gRubyStageCyndaquil_Gfx[gCurrentPinballGame->cyndaquilFrame], OBJ_TILE_ADDR(TILE_INDEX(0, 12, 24)), 0x280);
+    DmaCopy16(3, gRubyStageCyndaquil_Gfx[gCurrentPinballGame->cyndaquilFrame], OBJ_VRAM_ADDR_CYNDAQUIL_TILES, SIZE_OF_VRAM_CYNDAQUIL_TILES);
     var0 = gEvoShopAnimFrames[gCurrentPinballGame->evolutionShopActive][(gCurrentPinballGame->shopAnimTimer % 42) / 6];
-    DmaCopy16(3, gRubyBoardShop_Gfx[var0], OBJ_TILE_ADDR(TILE_INDEX(0, 15, 8)), 0x500);
+    DmaCopy16(3, gRubyBoardShop_Gfx[var0], OBJ_VRAM_ADDR_RUBY_MART_SIGN_TILES, SIZE_OF_VRAM_RUBY_MART_SIGN_TILES);
 }
 
 void RestoreSapphireBoardTileGraphics(void)

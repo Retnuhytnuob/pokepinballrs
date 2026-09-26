@@ -469,7 +469,7 @@ struct PinballGame
     /*0x2F1*/ u8 shopDoorCurrentFrame;
     /*0x2F2*/ u16 shopDoorAnimDelay;
     /*0x2F4*/ s8 catchHoleAnimFrame; //Sharpedo/Wailmer Oam Ix
-    /*0x2F5*/ s8 catchHoleTileVariant; //Sharpedo tile variant Ix
+    /*0x2F5*/ s8 sharpedoNextTileIx; //Sharpedo tile variant Ix
     /*0x2F6*/ u16 catchHolePauseTimer;
     /*0x2F8*/ s8 ballPowerUpOverride;
     /*0x2F9*/ s8 nuzleafPositionIndex;
