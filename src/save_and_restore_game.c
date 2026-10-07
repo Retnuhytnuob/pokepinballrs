@@ -17,8 +17,8 @@
 #include "constants/mem_layout/sapphire.h"
 
 extern EWRAM_DATA u8 gBoardBGTileBufferAlt[32 * 0x400];
+extern EWRAM_DATA u8 gBoardBGTileBuffer[];
 
-extern u8 gBoardBGTileBuffer[];
 extern const u8 gMainBoardBallSave_Gfx[];
 extern const u8 gMainBoardEndOfBall_Gfx[];
 extern const u8 gEvolutionCutsceneTilesGfx[];

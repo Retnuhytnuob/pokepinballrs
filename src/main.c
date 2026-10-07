@@ -10,6 +10,9 @@ EWRAM_DATA struct Main gMain;
 EWRAM_DATA IntrFunc *gVBlankIntrFuncPtr;
 EWRAM_DATA void (*gMainCallback)(void);
 EWRAM_DATA void (*gVCountIntrFuncShadow)(void);
+EWRAM_DATA void (*gVBlankIntrFuncShadow)(void);
+EWRAM_DATA void (*gMainCallbackShadow)(void);
+EWRAM_DATA IntrFunc *gVCountIntrFuncPtr;
 
 extern const s16 gSineTable[];
 extern const IntrFunc gIntrTableTemplate[14];

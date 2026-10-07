@@ -10,26 +10,28 @@
 
 EWRAM_DATA u8 gEReaderUnused1;
 EWRAM_DATA u8 gEReaderUnused2;
-EWRAM_DATA s16 gEReaderReceivedCardId;
-EWRAM_DATA s8 gEReaderLinkHandshakeStarted;
 EWRAM_DATA s8 gEReaderLinkDataReceived;
+EWRAM_DATA s16 gEReaderGeneralTimer;
+EWRAM_DATA s8 gEReaderTransitionStep;
+EWRAM_DATA s16 gEReaderCardIndex;
+EWRAM_DATA s8 gEReaderLinkHandshakeStarted;
+EWRAM_DATA s8 gEReaderTextAnimDelay;
+EWRAM_DATA s8 gEReaderStatusAnimSpriteGroup;
+EWRAM_DATA s8 gEReaderTextPageIndex;
 EWRAM_DATA s8 gEReaderLinkAckSent;
+EWRAM_DATA s8 gEReaderHeaderAnimSpriteGroup;
+
+
+EWRAM_DATA s16 gEReaderReceivedCardId;
 
 extern StateFunc gEReaderStateFuncs[11];
 extern s8 gEReaderTextCharIndex;
-extern s8 gEReaderTextAnimDelay;
 extern s8 gEReaderTextBlinkToggle;
-extern s8 gEReaderTextPageIndex;
 
-extern s8 gEReaderStatusAnimSpriteGroup;
 extern s8 gEReaderStatusSpriteVisible;
-extern s8 gEReaderHeaderAnimSpriteGroup;
-extern s8 gEReaderTransitionStep;
 extern s16 gEReaderTransitionTimer;
-extern s16 gEReaderGeneralTimer;
 extern s8 gEReaderExitTargetState;
 extern const u16 gEReaderTextGlyphTable[][3*0x18];
-extern s16 gEReaderCardIndex;
 extern s16 gLinkTimeoutCounter;
 
 extern s8 gEReaderTextLengths[10];

@@ -6,6 +6,18 @@
 EWRAM_DATA u16 sGbPlayerCurKeys;
 EWRAM_DATA u16 sGbPlayerPrevKeys;
 EWRAM_DATA u8 gGbPlayerTilemapBuffer[0X800];
+EWRAM_DATA int gRumbleLoopCounter;
+EWRAM_DATA int gRumbleFrameCounter;
+EWRAM_DATA int gRumbleMotorMode;
+EWRAM_DATA u32 gSio32ReconnectTimer;
+EWRAM_DATA int gSio32SerialEnabled;
+EWRAM_DATA int gRumblePatternIndex;
+EWRAM_DATA int gRumblePatternPosition;
+EWRAM_DATA int gRumbleCommand;
+EWRAM_DATA int gRumblePaused;
+EWRAM_DATA int gRumbleSpeedMode;
+EWRAM_DATA int gGameBoyPlayerEnabled;
+EWRAM_DATA u8 gSio32CommState;
 
 struct RfuSIO32Id {
     u8 MS_mode; //either 0 or 1

@@ -66,36 +66,56 @@ void LoadMonPortrait(s16);
 
 EWRAM_DATA s8 gPokedex_EraseSaveDataAccessCounter;
 EWRAM_DATA s8 gPokedex_EraseSaveDataAccessStep;
-
+EWRAM_DATA s8 gPokedexScrollActive;
+EWRAM_DATA s8 gPokedexSpriteIndexBase;
+EWRAM_DATA u16 gPokedexVramBuffer[0x400];
+EWRAM_DATA s16 gPokedexSpriteAnimTimer;
+EWRAM_DATA s16 gLinkTimeoutCounter;
+EWRAM_DATA s16 gPokedexAnimatedIconFrame;
 EWRAM_DATA u16 gLinkRecvBuffer[0x8][2];
 EWRAM_DATA s16 gPokedexCursorBlinkOffset;
-
-
-EWRAM_DATA u16 gPokedexVramBuffer[0x400];
+EWRAM_DATA u16 gLinkExchangeFrameCounter;
 EWRAM_DATA s16 gPokedexNumOwned;
-EWRAM_DATA s16 gPokedexSelectedMon;
-EWRAM_DATA s16 gPokedexNumSeen;
-EWRAM_DATA s16 gPokedexListPosition;
-EWRAM_DATA s16 gPokedexAnimatedIconFrame;
-EWRAM_DATA s16 gPokedexAnimatedIconTimer;
-EWRAM_DATA s16 gPokedexCursorOffset;
-EWRAM_DATA s16 gPokedexBlinkTimer;
-EWRAM_DATA s16 gPokedexScrollWaitFrames;
-EWRAM_DATA s8 gPokedexScrollActive;
-EWRAM_DATA s16 gPokedexSpriteAnimFrame;
-EWRAM_DATA s16 gPokedexSpriteAnimTimer;
-EWRAM_DATA s16 gPokedexPageIndicatorTimer;
-EWRAM_DATA s16 gPokedexShowAnimSprite;
+EWRAM_DATA s16 gPokedexLinkStateTimer;
+EWRAM_DATA u8 gLinkExchangeStep;
+EWRAM_DATA s8 gPokedexLinkTransferPhase;
+EWRAM_DATA u16 gGlyphLowerRowBuffer[0x20];
+EWRAM_DATA u16 gPokedexLinkSendCounter;
+EWRAM_DATA u8 gLinkPlayerCount;
+EWRAM_DATA s8 gPokedexShowPageIndicator;
+EWRAM_DATA s8 gPokedexMasterHandshakeState;
+EWRAM_DATA s16 gPokedexFlags[232];
+EWRAM_DATA s16 gPokedexFlagExchangeBuffer[226];
+EWRAM_DATA s16 gPokedexInfoWindowSlideStep;
 EWRAM_DATA s16 gPokedexShowPortrait;
 EWRAM_DATA s16 gPokedexShowCatchHatch[2];
+EWRAM_DATA s16 gPokedexListEntryCount;
+EWRAM_DATA s16 gPokedexCursorOffset;
+EWRAM_DATA s16 gPokedexShowAnimSprite;
+EWRAM_DATA u16 gPokedexInfoWindowBackupTiles[0x400];
+EWRAM_DATA u32 gLinkStatusResult;
+EWRAM_DATA u8 gLinkNegotiationFlags;
+EWRAM_DATA s16 gPokedexSelectedMon;
+EWRAM_DATA u32 gLinkConnectionState;
+EWRAM_DATA s16 gPokedexBlinkTimer;
+EWRAM_DATA u16 gGlyphUpperRowBuffer[0x20];
+EWRAM_DATA s16 gPokedexNumSeen;
+EWRAM_DATA s8 gPokedexShowPopupWindow;
+EWRAM_DATA u8 gLinkAdvanceState;
+EWRAM_DATA s8 gPokedexHandshakeRetryCount;
+
+
+
+EWRAM_DATA s16 gPokedexListPosition;
+EWRAM_DATA s16 gPokedexAnimatedIconTimer;
+EWRAM_DATA s16 gPokedexScrollWaitFrames;
+EWRAM_DATA s16 gPokedexSpriteAnimFrame;
+EWRAM_DATA s16 gPokedexPageIndicatorTimer;
 EWRAM_DATA s16 gPokedexDetailFrameCount;
-EWRAM_DATA s16 gPokedexInfoWindowSlideStep;
 EWRAM_DATA s8 gPokedexButtonPromptFrame;
 EWRAM_DATA s8 gPokedexShowButtonPrompt;
 EWRAM_DATA s16 gPokedexSpriteCategory;
 EWRAM_DATA s8 gPokedexShowCompletionBadge;
-EWRAM_DATA s16 gPokedexLinkStateTimer;
-EWRAM_DATA s8 gPokedexShowPopupWindow;
 
 /****
  *  Yellow confirmation/info window mode
@@ -107,34 +127,15 @@ EWRAM_DATA s8 gPokedexShowPopupWindow;
  * ****/
 EWRAM_DATA s8 gPokedexPopupTypeIndex;
 EWRAM_DATA s8 gPokedexDescriptionPage;
-EWRAM_DATA s8 gPokedexShowPageIndicator;
 EWRAM_DATA s8 gPokedexPageIndicatorBlink;
-EWRAM_DATA s8 gPokedexSpriteIndexBase;
-EWRAM_DATA s16 gPokedexFlags[0xE8];
-EWRAM_DATA s16 gPokedexFlagExchangeBuffer[0xE2];
-EWRAM_DATA s16 gPokedexListEntryCount;
-EWRAM_DATA u16 gPokedexInfoWindowBackupTiles[0x400];
-EWRAM_DATA u8 gLinkExchangeStep;
-EWRAM_DATA u32 gLinkStatusResult;
 EWRAM_DATA s16 gLinkSendBuffer[0xA];
-EWRAM_DATA u32 gLinkConnectionState;
-EWRAM_DATA u8 gLinkPlayerCount;
-EWRAM_DATA u8 gLinkNegotiationFlags;
-EWRAM_DATA u16 gLinkExchangeFrameCounter;
-EWRAM_DATA s16 gLinkTimeoutCounter;
 
-EWRAM_DATA s8 gPokedexLinkTransferPhase;
 
 extern Palette *gCatchMonPaletteGroups[];
 extern u8 *gCatchSpriteGfxPtrs[];
 
-extern u16 gPokedexLinkSendCounter;
 extern u16 gPokedexLinkChunkIndex;
-extern s8 gPokedexMasterHandshakeState;
 extern s8 gPokedexClientHandshakeState;
-extern s8 gPokedexHandshakeRetryCount;
-extern u16 gGlyphUpperRowBuffer[];
-extern u16 gGlyphLowerRowBuffer[];
 
 extern const struct SpriteSet *const gPokedexSpriteSets[];
 extern u16 gPokedexScrollbarY;

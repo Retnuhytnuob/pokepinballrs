@@ -115,10 +115,10 @@ EWRAM_DATA u8 sLinkFlowControlDelay;
 EWRAM_DATA u8 sHandshakePlayerCount;
 EWRAM_DATA u16 sSendNonzeroCheck;
 EWRAM_DATA u16 sRecvNonzeroCheck;
+EWRAM_DATA u8 gLastSendQueueCount;
+EWRAM_DATA u8 sRecvQueueSnapshot; // ???
 
 // TODO fix bss discard nonsense
-extern u8 gLastSendQueueCount;
-extern u8 sRecvQueueSnapshot; // ???
 extern s8 sLinkMasterHandshakeState;
 extern const struct OamData gEmptyOamData[128];
 

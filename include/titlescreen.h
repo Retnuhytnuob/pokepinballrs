@@ -23,9 +23,6 @@ struct TitlescreenStruct
 };
 
 
-extern u8 gTitleReturnedFromMenu;
 extern u16 gHighScoreEntrySource;
-extern const u8 *gTitleNoSaveMenuSpriteSets[];
-extern const u8 *gTitleSavedMenuSpriteSets[];
 
 #endif // GUARD_TITLESCREEN_H

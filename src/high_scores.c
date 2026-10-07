@@ -37,15 +37,20 @@ EWRAM_DATA s16 gScrollDirection;
 EWRAM_DATA s16 gScrollXOffset;
 EWRAM_DATA s8 gResetComboTimer;
 EWRAM_DATA s8 gResetComboCount;
-
-EWRAM_DATA u32 gHighScoreNameEntry[HIGH_SCORE_NAME_LENGTH];
-
-
 EWRAM_DATA s16 gCompletionBannerY;
 EWRAM_DATA s8 gLinkExchangeSendPhase;
+EWRAM_DATA u32 gHighScoreNameEntry[HIGH_SCORE_NAME_LENGTH];
 EWRAM_DATA u32 gMergedSapphireScoreIndex;
-EWRAM_DATA u32 gMergedRubyScoreIndex;
+EWRAM_DATA s8 gHighScoreShowPopupFlag;
+EWRAM_DATA s8 gCompletionBannerVisible;
+EWRAM_DATA u16 gLinkExchangeCommand;
 EWRAM_DATA s8 gLinkExchangeResult;
+EWRAM_DATA s8 gCompletionBannerDone;
+EWRAM_DATA s8 gHighScorePopupType;
+
+
+
+EWRAM_DATA u32 gMergedRubyScoreIndex;
 EWRAM_DATA s16 gScoreDigitBuffer[0x10];
 
 //Rom 2
@@ -58,13 +63,8 @@ extern const Palette gHighScoreBG_Pals[];
 extern u8 gHighScoreBallWatermark_Tilemap[];
 extern u8 gHighScoreText_Gfx[];
 extern s16 gHighScoreEntrySource;
-extern s8 gCompletionBannerDone;
-extern s8 gCompletionBannerVisible;
 extern s8 gCompletionBannerPhase;
 extern s8 gCompletionBannerSpriteGroup;
-extern s8 gHighScoreShowPopupFlag;
-extern s8 gHighScorePopupType;
-extern u16 gLinkExchangeCommand;
 extern u16 gLinkPacketCounter;
 extern s8 gLinkExchangeSendPhase;
 extern s8 gLinkExchangeRecvPhase;

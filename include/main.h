@@ -156,24 +156,13 @@ extern EWRAM_DATA struct Main gMain;
 extern EWRAM_DATA IntrFunc *gVBlankIntrFuncPtr;
 extern EWRAM_DATA void (*gMainCallback)(void);
 extern EWRAM_DATA void (*gVCountIntrFuncShadow)(void);
+extern EWRAM_DATA void (*gVBlankIntrFuncShadow)(void);
+extern EWRAM_DATA void (*gMainCallbackShadow)(void);
+extern EWRAM_DATA IntrFunc *gVCountIntrFuncPtr;
 
 
 extern u32 IntrMain[];
-extern IntrFunc *gVCountIntrFuncPtr;
-extern int gRumbleLoopCounter;
-extern int gRumbleFrameCounter;
-extern int gRumbleMotorMode;
-extern u32 gSio32ReconnectTimer;
-extern int gSio32SerialEnabled;
-extern int gRumblePatternIndex;
-extern int gRumblePatternPosition;
-extern int gRumbleCommand;
-extern int gRumblePaused;
-extern int gRumbleSpeedMode;
-extern int gGameBoyPlayerEnabled;
-extern u8 gSio32CommState;
-extern void (*gVBlankIntrFuncShadow)(void);
-extern void (*gMainCallbackShadow)(void);
+
 extern StateFunc gMainFuncs[];
 
 // sym_bss

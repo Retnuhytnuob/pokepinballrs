@@ -17,24 +17,33 @@
   7: Parade (Makuhita Wailmer Pelipper and Spoink)
   8: Wailmer ball eject
   9: Flying ball
-*/
+  */
 
-void IntroScene3Treecko_InitVars(void);
-void IntroScene3Treecko_RenderPokeball(void);
-void IntroScene4PlusleMinun_InitVars(void);
-void IntroScene5Mudkip_InitVars(void);
-extern void IntroScene5Mudkip_RenderAllSprites(void);
-void IntroScene6Chinchou_InitVars(void);
-void IntroScene6Chinchou_RenderStarSprites(void);
-void IntroScene7Parade_InitVars(void);
-void IntroScene7Parade_RenderWailmer(void);
-void IntroScene8WailmerLaunch_InitVars(void);
-void IntroScene8WailmerLaunch_RenderAllSprites(void);
-void IntroScene9BallFlight_InitVars(void);
-void IntroScene9BallFlight_RenderBallAndCloud(void);
+ void IntroScene3Treecko_InitVars(void);
+ void IntroScene3Treecko_RenderPokeball(void);
+ void IntroScene4PlusleMinun_InitVars(void);
+ void IntroScene5Mudkip_InitVars(void);
+ extern void IntroScene5Mudkip_RenderAllSprites(void);
+ void IntroScene6Chinchou_InitVars(void);
+ void IntroScene6Chinchou_RenderStarSprites(void);
+ void IntroScene7Parade_InitVars(void);
+ void IntroScene7Parade_RenderWailmer(void);
+ void IntroScene8WailmerLaunch_InitVars(void);
+ void IntroScene8WailmerLaunch_RenderAllSprites(void);
+ void IntroScene9BallFlight_InitVars(void);
+ void IntroScene9BallFlight_RenderBallAndCloud(void);
 
-EWRAM_DATA s32 gIntroScaleX;
-EWRAM_DATA s32 gIntroScaleY;
+ struct UnkStruct_0201A450
+ {
+     u16 posX;
+     s16 posY;
+     u16 velX;
+     s16 velY;
+     s16 animFrame;
+     s16 frameTimer;
+     s8 visible;
+}; // 0x10 size in memory
+
 struct UnkStruct_0202ADA0{
     s16 posX;
     s16 posY;
@@ -43,14 +52,27 @@ struct UnkStruct_0202ADA0{
     s16 animFrame;
     s16 frameTimer;
 };
+
+EWRAM_DATA s32 gIntroScaleX;
+EWRAM_DATA struct UnkStruct_0201A450 gIntroSpriteEntities[6];
+EWRAM_DATA u8 gIntroScene3Treecko_AltBG1TilemapBuffer[32 * 0x40]; //Perhaps twice this, from ewram gap
+EWRAM_DATA s32 gIntroScaleY;
+EWRAM_DATA u8 gIntroBlendSrc;
+EWRAM_DATA u16 gIntroTileBuffer[26 * 0x400];
+EWRAM_DATA s8 gIntroBGWhiteFlash;
+EWRAM_DATA s16 gIntroAnimStep;
 EWRAM_DATA struct UnkStruct_0202ADA0 gIntroBGParams[4];
+EWRAM_DATA u8 gIntroBlendDst;
+EWRAM_DATA s16 gIntroWailmerScaleY;
+EWRAM_DATA u8 gIntroPalSwapBuffer[0x20];
+EWRAM_DATA s8 gIntroScene6ChinchouEntitySpawnIndex;
+
+
+
 EWRAM_DATA s32 gIntroPalFadeLevel;
 EWRAM_DATA s8 gIntroScene6ChinchouVelocityIndex;
-EWRAM_DATA s8 gIntroScene6ChinchouEntitySpawnIndex;
 EWRAM_DATA s16 gIntroWailmerScaleX;
-EWRAM_DATA s16 gIntroWailmerScaleY;
 EWRAM_DATA s8 gIntroObjWhiteFlash;
-EWRAM_DATA s8 gIntroBGWhiteFlash;
 
 extern StateFunc gIntroStateFuncs[15];
 extern u8 gIntroCopyright_Tilemap[];
@@ -68,17 +90,12 @@ extern u8 gIntroScene1TorchicText_Gfx[];
 extern u8 gIntroScene1TorchicBall_Gfx[]; // Also used for scene 5
 extern s16 gIntroScene1Torchic_TileOffsets[0x8];
 
-extern u16 gIntroTileBuffer[];
 
 
 extern s16 gIntroFrameCounter;
-extern u8 gIntroBlendSrc;
-extern u8 gIntroBlendDst;
 extern s16 gIntroOverlayFadeStep;
-extern s16 gIntroAnimStep;
 extern s8 gIntroJingleVariant;
 extern s8 gIntroSceneIndex;
-extern u8 gIntroPalSwapBuffer[];
 
 extern u8 gIntroScene2Pikas_BG3Tilemap[];
 extern u8 gIntroScene2PikasSprites_Gfx[];
@@ -86,7 +103,6 @@ extern const Palette gIntroScene2Pikas_Pal[];
 extern u8 gIntroScene2Pikas_BG0Tilemap[];
 extern u8 gIntroScene2Pikas_BG1Tilemap[];
 
-extern u8 gIntroScene3Treecko_AltBG1TilemapBuffer[];
 
 extern const Palette gIntroScene3Treecko_Pal[];
 extern u8 gIntroScene3Treecko_BG0Tilemap[];
@@ -143,17 +159,7 @@ extern const struct SpriteSet *const gIntroScene9BallFlight_SpriteSets[];
 typedef void (*IntroFunc)(void);
 extern const IntroFunc gIntroSceneFuncs[];
 
-struct UnkStruct_0201A450
-{
-    u16 posX;
-    s16 posY;
-    u16 velX;
-    s16 velY;
-    s16 animFrame;
-    s16 frameTimer;
-    s8 visible;
-}; // 0x10 size in memory
-extern struct UnkStruct_0201A450 gIntroSpriteEntities[6];
+
 
 extern struct Vector16 gIntroScene1Torchic_BGAnimTiming[0x8];
 extern struct Vector16 gIntroScene1Torchic_ScaleOffsets[0x4];

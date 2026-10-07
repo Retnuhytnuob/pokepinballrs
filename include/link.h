@@ -62,7 +62,7 @@ extern void SerialCB(void);
 // extern IWRAM variable declarations
 
 // extern EWRAM variable declarations
-extern u8 gLinkAdvanceState;
+extern EWRAM_DATA u8 gLinkAdvanceState;
 extern struct Link gLink;
 
 // extern const definitions

@@ -64,6 +64,7 @@ struct OptionsData
 };
 
 EWRAM_DATA struct OptionsData gOptionsData;
+extern EWRAM_DATA int gGameBoyPlayerEnabled;
 
 
 
