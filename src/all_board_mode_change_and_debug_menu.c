@@ -9,9 +9,11 @@
 #define BALL_NORMAL_LAUNCH_SAVER_TIME TICKS_FOR_TIME(0,30)
 #define BONUS_SCORE_TALLY_STEP (200 * SCORE_K)
 
-extern s16 gGameOverLetterXOffsets[];
-extern s16 gGameOverLetterAmplitudes[];
-extern s16 gGameOverLetterYOffsets[];
+EWRAM_DATA s16 gGameOverLetterXOffsets[8];
+EWRAM_DATA s16 gGameOverLetterAmplitudes[8];
+EWRAM_DATA s16 gGameOverLetterYOffsets[8];
+
+
 
 extern const u8 gDebugTextStrings[];
 extern const u8 gDebugMenuValueTemplate[];

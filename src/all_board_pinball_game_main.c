@@ -8,7 +8,8 @@
 #include "constants/mem_layout/intro.h"
 
 
-extern u32 gReplayFrameCounter;
+EWRAM_DATA u32 gReplayFrameCounter;
+
 extern const Palette gBall_Pals[];
 
 typedef void (*VoidFunc)(void);

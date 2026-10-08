@@ -540,9 +540,7 @@ gCatchSpritePalettes: @ 0x020306D0
 gGameOverLetterAmplitudes: @ 0x02030750
 	.space 0x10
 gCatchSpriteGfxBuffer: @ 0x02030760
-	.space 0x900
-gCatchSpriteFlashGfx: @ 0x02031060
-	.space 0x480
+	.space 0xD80
 gCurrentPinballGame: @ 0x20314E0
 	.space 0x20
 gGameOverLetterYOffsets: @ 0x02031500

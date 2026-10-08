@@ -18,6 +18,7 @@
 
 extern EWRAM_DATA u8 gBoardBGTileBufferAlt[32 * 0x400];
 extern EWRAM_DATA u8 gBoardBGTileBuffer[];
+extern EWRAM_DATA u8 gCatchSpriteGfxBuffer[3][0x480];
 
 extern const u8 gMainBoardBallSave_Gfx[];
 extern const u8 gMainBoardEndOfBall_Gfx[];
@@ -53,8 +54,6 @@ extern const u8 gSapphireTravelPaint_Gfx[];
 extern const Palette gSapphirePainter_Pals;
 extern const u8 gCatchMonAppearFx_Gfx[];
 extern const u8 gSapphireBoardZigzagoonFx_Gfx[];
-extern u8 gCatchSpriteGfxBuffer[];
-extern u8 gCatchSpriteFlashGfx[];
 
 extern const u8 gAlphabetTilesGfx[][0x40];
 extern const u8 gSpaceTileGfx[0x40];
@@ -588,7 +587,7 @@ void RestoreMainFieldDynamicGraphics(void)
         case CATCH_EM_SUBSTATE_SETUP_CATCH_HIT_COUNT:
             if ((u32) gCurrentPinballGame->captureFlashTimer > 4)
             {
-                DmaCopy16(3, gCatchSpriteFlashGfx, OBJ_VRAM_ADDR_CATCH_MON_ENTITY_TILES, SIZE_OF_VRAM_CATCH_MON_ENTITY_TILES);
+                DmaCopy16(3, gCatchSpriteGfxBuffer[2], OBJ_VRAM_ADDR_CATCH_MON_ENTITY_TILES, SIZE_OF_VRAM_CATCH_MON_ENTITY_TILES);
             }
             else
             {
@@ -600,7 +599,7 @@ void RestoreMainFieldDynamicGraphics(void)
             {
                 if (gCurrentPinballGame->captureFlashTimer > 4)
                 {
-                    DmaCopy16(3, gCatchSpriteFlashGfx, OBJ_VRAM_ADDR_CATCH_MON_ENTITY_TILES, SIZE_OF_VRAM_CATCH_MON_ENTITY_TILES);
+                    DmaCopy16(3, gCatchSpriteGfxBuffer[2], OBJ_VRAM_ADDR_CATCH_MON_ENTITY_TILES, SIZE_OF_VRAM_CATCH_MON_ENTITY_TILES);
                 }
                 else
                 {
@@ -618,7 +617,7 @@ void RestoreMainFieldDynamicGraphics(void)
         case JIRACHI_CATCH_SUBSTATE_SETUP_CATCH_HIT_COUNT:
             if (gCurrentPinballGame->captureFlashTimer > 4U)
             {
-                DmaCopy16(3, gCatchSpriteFlashGfx, OBJ_VRAM_ADDR_CATCH_MON_ENTITY_TILES, SIZE_OF_VRAM_CATCH_MON_ENTITY_TILES);
+                DmaCopy16(3, gCatchSpriteGfxBuffer[2], OBJ_VRAM_ADDR_CATCH_MON_ENTITY_TILES, SIZE_OF_VRAM_CATCH_MON_ENTITY_TILES);
             }
             else
             {
@@ -630,7 +629,7 @@ void RestoreMainFieldDynamicGraphics(void)
             {
                 if (gCurrentPinballGame->captureFlashTimer > 4U)
                 {
-                    DmaCopy16(3, gCatchSpriteFlashGfx, OBJ_VRAM_ADDR_CATCH_MON_ENTITY_TILES, SIZE_OF_VRAM_CATCH_MON_ENTITY_TILES);
+                    DmaCopy16(3, gCatchSpriteGfxBuffer[2], OBJ_VRAM_ADDR_CATCH_MON_ENTITY_TILES, SIZE_OF_VRAM_CATCH_MON_ENTITY_TILES);
                 }
                 else
                 {

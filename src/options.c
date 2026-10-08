@@ -65,8 +65,8 @@ struct OptionsData
 
 EWRAM_DATA struct OptionsData gOptionsData;
 extern EWRAM_DATA int gGameBoyPlayerEnabled;
-
-
+EWRAM_DATA u8 gCustomButtonConfigs[5][10];
+EWRAM_DATA u8 gCustomButtonConfigTileIds[10];
 
 
 struct ButtonInfoView
@@ -96,14 +96,12 @@ struct ButtonInfoView
 extern struct ButtonInfoView gButtonInfoTable[11];
 
 
-extern u8 gCustomButtonConfigs[][10];
 extern u8 gDefaultButtonConfigs[4][10];
 extern struct {u8 tileId; s16 frameDuration;} gButtonAnimData[];
 extern const Palette gGBAButtonIcons_Pals[];
 
 
 extern s16 gMain_saveData_customButtonConfig[][2];
-extern u8 gCustomButtonConfigTileIds[];
 
 extern const Palette gOptionsBackground_Pals[];
 extern const u8 gOptionsText_Gfx[];

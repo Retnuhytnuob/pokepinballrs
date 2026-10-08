@@ -989,9 +989,9 @@ struct FlipperLineSegment
 };
 
 
-extern struct PinballGame *gCurrentPinballGame;
-extern struct BoardConfig gBoardConfig;
-extern u32 gReplayFrameCounter;
+extern EWRAM_DATA struct PinballGame *gCurrentPinballGame;
+extern EWRAM_DATA struct BoardConfig gBoardConfig;
+
 extern const Palette gBall_Pals[];
 extern const u8 *const gModeBannerTilemaps[];
 extern const Palette *const gModeBanner_Pals[];

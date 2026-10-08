@@ -22,7 +22,4 @@ struct TitlescreenStruct
     /*0x14*/ s16 idleFramesCounter;
 };
 
-
-extern u16 gHighScoreEntrySource;
-
 #endif // GUARD_TITLESCREEN_H

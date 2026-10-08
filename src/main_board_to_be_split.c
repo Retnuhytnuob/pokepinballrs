@@ -9,8 +9,11 @@
 
 #define HATCH_MODE_SAVER_TIME TICKS_FOR_TIME(0,30)
 
-extern const s16 gEggHatchAnimData[28][3];
-extern const u8 gHatchedWalkerAnimTileBuffer[][SIZE_OF_VRAM_HATCH_MON_ENTITY_TILES];
+EWRAM_DATA const u8 gHatchedWalkerAnimTileBuffer[15][SIZE_OF_VRAM_HATCH_MON_ENTITY_TILES];
+EWRAM_DATA u8 gCatchSpritePaletteBuffer[0x20];
+
+
+extern const s16 gEggHatchAnimData[14][3];
 extern const struct Vector32 gSapphireEggWaypoints[];
 extern const struct Vector32 gEggWalkPathWaypoints[][29];
 extern const Palette gCaptureHit_Pal;
@@ -45,7 +48,6 @@ extern const Palette gRubyShopSign_Pal;
 
 extern const u16 gAngleToDirectionTable[];
 
-extern u8 gCatchSpritePaletteBuffer[];
 extern const u16 gShopCursorToItemMap[];
 extern const u16 gShopItemData[][4];
 extern const u8 gMainStageBonusTrap_Gfx[][0x300];

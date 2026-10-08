@@ -5,6 +5,8 @@
 #include "m4a.h"
 #include "constants/bg_music.h"
 
+extern EWRAM_DATA u32 gReplayFrameCounter;
+
 extern const StateFunc gIdlePinballGameStateFuncs[];
 extern struct ReplayInputFrame gIdleBoardConfig0;
 extern struct ReplayInputFrame gIdleBoardConfig2;

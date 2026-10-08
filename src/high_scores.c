@@ -47,11 +47,16 @@ EWRAM_DATA u16 gLinkExchangeCommand;
 EWRAM_DATA s8 gLinkExchangeResult;
 EWRAM_DATA s8 gCompletionBannerDone;
 EWRAM_DATA s8 gHighScorePopupType;
-
-
-
+EWRAM_DATA s8 gCompletionBannerPhase;
 EWRAM_DATA u32 gMergedRubyScoreIndex;
+EWRAM_DATA s8 gLinkExchangeTimeout;
+EWRAM_DATA struct HighScoreEntry gRemoteTopScores[2];
+EWRAM_DATA s8 gCompletionBannerSpriteGroup;
+EWRAM_DATA s16 gHighScoreEntrySource;
+EWRAM_DATA s8 gLinkExchangeRecvPhase;
+EWRAM_DATA u16 gLinkPacketCounter;
 EWRAM_DATA s16 gScoreDigitBuffer[0x10];
+EWRAM_DATA struct HighScoreEntry gWorkingHighScores[MAIN_FIELD_COUNT][NUM_HIGH_SCORES];
 
 //Rom 2
 extern const u16 gHighScoreCharToTileMap[];
@@ -62,17 +67,9 @@ extern StateFunc gIdleHighScoresStateFuncs[3];
 extern const Palette gHighScoreBG_Pals[];
 extern u8 gHighScoreBallWatermark_Tilemap[];
 extern u8 gHighScoreText_Gfx[];
-extern s16 gHighScoreEntrySource;
-extern s8 gCompletionBannerPhase;
-extern s8 gCompletionBannerSpriteGroup;
-extern u16 gLinkPacketCounter;
 extern s8 gLinkExchangeSendPhase;
-extern s8 gLinkExchangeRecvPhase;
-extern s8 gLinkExchangeTimeout;
 
 
-extern struct HighScoreEntry gWorkingHighScores[MAIN_FIELD_COUNT][NUM_HIGH_SCORES];
-extern struct HighScoreEntry gRemoteTopScores[2];
 extern u8 gHighScoreBallWatermark_Gfx[];
 extern u8 gHighScoreScoreTable_Tilemap[];
 extern const Palette gHighScoreSprite_Pals[];

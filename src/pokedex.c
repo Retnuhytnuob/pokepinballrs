@@ -103,20 +103,8 @@ EWRAM_DATA s16 gPokedexNumSeen;
 EWRAM_DATA s8 gPokedexShowPopupWindow;
 EWRAM_DATA u8 gLinkAdvanceState;
 EWRAM_DATA s8 gPokedexHandshakeRetryCount;
-
-
-
-EWRAM_DATA s16 gPokedexListPosition;
-EWRAM_DATA s16 gPokedexAnimatedIconTimer;
-EWRAM_DATA s16 gPokedexScrollWaitFrames;
-EWRAM_DATA s16 gPokedexSpriteAnimFrame;
-EWRAM_DATA s16 gPokedexPageIndicatorTimer;
-EWRAM_DATA s16 gPokedexDetailFrameCount;
 EWRAM_DATA s8 gPokedexButtonPromptFrame;
-EWRAM_DATA s8 gPokedexShowButtonPrompt;
-EWRAM_DATA s16 gPokedexSpriteCategory;
-EWRAM_DATA s8 gPokedexShowCompletionBadge;
-
+EWRAM_DATA s16 gPokedexPageIndicatorTimer;
 /****
  *  Yellow confirmation/info window mode
  *  0= Transmession connection prompt,
@@ -126,19 +114,27 @@ EWRAM_DATA s8 gPokedexShowCompletionBadge;
  *  4= delete save data confirmation
  * ****/
 EWRAM_DATA s8 gPokedexPopupTypeIndex;
-EWRAM_DATA s8 gPokedexDescriptionPage;
+EWRAM_DATA s16 gPokedexAnimatedIconTimer;
+EWRAM_DATA s8 gPokedexShowButtonPrompt;
+EWRAM_DATA u16 gPokedexScrollbarY;
+EWRAM_DATA s16 gPokedexSpriteAnimFrame;
+EWRAM_DATA s16 gPokedexSpriteCategory;
+EWRAM_DATA s8 gPokedexClientHandshakeState;
+EWRAM_DATA s16 gPokedexScrollWaitFrames;
+EWRAM_DATA s8 gPokedexShowCompletionBadge;
 EWRAM_DATA s8 gPokedexPageIndicatorBlink;
+EWRAM_DATA s16 gPokedexListPosition;
+EWRAM_DATA u16 gPokedexLinkChunkIndex;
+EWRAM_DATA s16 gPokedexDetailFrameCount;
 EWRAM_DATA s16 gLinkSendBuffer[0xA];
+EWRAM_DATA s8 gPokedexDescriptionPage;
 
 
 extern Palette *gCatchMonPaletteGroups[];
 extern u8 *gCatchSpriteGfxPtrs[];
 
-extern u16 gPokedexLinkChunkIndex;
-extern s8 gPokedexClientHandshakeState;
 
 extern const struct SpriteSet *const gPokedexSpriteSets[];
-extern u16 gPokedexScrollbarY;
 extern const u16 gPokedexAnimBaseTileNums[][4];
 extern const u16 gPokedexCatchAnimTileOffsets[][20];
 extern const s16 gPokedexCatchAnimIndices[];

@@ -18,6 +18,8 @@ EWRAM_DATA s8 gAutoDisplayTitlescreenMenu;
 EWRAM_DATA const u8 *gTitleNoSaveMenuSpriteSets[7];
 EWRAM_DATA const u8 *gTitleSavedMenuSpriteSets[7];
 EWRAM_DATA u8 gTitleReturnedFromMenu;
+extern EWRAM_DATA u16 gHighScoreEntrySource;
+
 
 
 extern u32 gHighScoreNameEntry[HIGH_SCORE_NAME_LENGTH];

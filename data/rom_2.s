@@ -7455,7 +7455,7 @@ gKecleonPlantAnimIndices:: @ 0x086AEA68
 	.byte 0,0,1,0,0,0,2,0
 
 gKecleonSpriteYSortData:: @ 0x086AEA70
-    @ 14 sets: {Pointer, 2 u8 vals, 0x2 spacer}
+    @ 14 sets: {spriteset pointer, ySortKey, spriteIndex, 0x2 spacer}
     .4byte gKecleonBushBottomRightBottomSpriteSet
     .byte 131,0
     .space 0x2

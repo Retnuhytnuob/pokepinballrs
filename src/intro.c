@@ -66,13 +66,17 @@ EWRAM_DATA u8 gIntroBlendDst;
 EWRAM_DATA s16 gIntroWailmerScaleY;
 EWRAM_DATA u8 gIntroPalSwapBuffer[0x20];
 EWRAM_DATA s8 gIntroScene6ChinchouEntitySpawnIndex;
-
-
-
-EWRAM_DATA s32 gIntroPalFadeLevel;
-EWRAM_DATA s8 gIntroScene6ChinchouVelocityIndex;
-EWRAM_DATA s16 gIntroWailmerScaleX;
 EWRAM_DATA s8 gIntroObjWhiteFlash;
+EWRAM_DATA s32 gIntroPalFadeLevel;
+EWRAM_DATA s16 gIntroFrameCounter;
+EWRAM_DATA s8 gIntroScene6ChinchouVelocityIndex;
+EWRAM_DATA s16 gIntroOverlayFadeStep;
+EWRAM_DATA s8 gIntroJingleVariant;
+EWRAM_DATA s16 gIntroWailmerScaleX;
+EWRAM_DATA s8 gIntroSceneIndex;
+
+
+
 
 extern StateFunc gIntroStateFuncs[15];
 extern u8 gIntroCopyright_Tilemap[];
@@ -92,10 +96,6 @@ extern s16 gIntroScene1Torchic_TileOffsets[0x8];
 
 
 
-extern s16 gIntroFrameCounter;
-extern s16 gIntroOverlayFadeStep;
-extern s8 gIntroJingleVariant;
-extern s8 gIntroSceneIndex;
 
 extern u8 gIntroScene2Pikas_BG3Tilemap[];
 extern u8 gIntroScene2PikasSprites_Gfx[];

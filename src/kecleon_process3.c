@@ -14,8 +14,8 @@ extern void UpdateKecleonScopeVision(void);
 extern void RenderKecleonBoardElements(void);
 extern void SortKecleonSpritesByY(void);
 
-extern const struct SpriteSet *gKecleonSpriteSets[];
-extern u8 gKecleonSpriteGroupOrderMap[];
+EWRAM_DATA const struct SpriteSet *gKecleonSpriteSets[33];
+extern EWRAM_DATA  u8 gKecleonSpriteGroupOrderMap[24];
 
 extern const Palette gBonusStageObjPal[];
 

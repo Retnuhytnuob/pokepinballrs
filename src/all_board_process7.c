@@ -5,9 +5,11 @@
 #include "m4a.h"
 #include "constants/mem_layout/shared.h"
 
+EWRAM_DATA u8 gKecleonSpriteGroupOrderMap[24];
+
+
 extern const u32 gBallSpawnGlowTiles_Type1[][0x80];
 extern const u32 gBallSpawnGlowTiles_Type2[][0x80];
-extern u8 gKecleonSpriteGroupOrderMap[];
 extern const u8 gBallRotationTileGraphics[][0x80];
 extern const u8 gBallUpgradeFx_Gfx[][0x200];
 

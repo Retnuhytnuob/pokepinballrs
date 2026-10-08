@@ -9,6 +9,8 @@ extern void UpdateFrameProcess7_DrawBall_MainBoards(void);
 extern void UpdateFrameProcess7_DrawBall_BonusBoards(void);
 extern void RunMonCaptureSequence(void);
 
+EWRAM_DATA struct PinballGame *gCurrentPinballGame;
+EWRAM_DATA struct BoardConfig gBoardConfig;
 
 void InitFrameProcess5_BallMovement_AllBoards(void)
 {
