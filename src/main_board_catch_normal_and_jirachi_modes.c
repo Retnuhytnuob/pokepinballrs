@@ -15,11 +15,14 @@ extern EWRAM_DATA Palette gCatchSpritePalettes[4];
 EWRAM_DATA u8 gCatchSpriteGfxBuffer[3][0x480];
 extern EWRAM_DATA u8 gCatchSpritePaletteBuffer[0x20];
 
-extern struct BoardConfig gBoardConfig;
-
+// Rom_1 data
+extern const Palette gTimer_Default_Pal;
 extern const u8 gCatchMonAppearFx_Gfx[];
 extern const Palette gCatchMonAppearFx_Pal;
-extern const Palette gTimer_Default_Pal;
+
+
+extern struct BoardConfig gBoardConfig;
+
 extern const u8 gJirachiFx_Gfx[][0x480];
 extern const Palette gCaptureHit_Pal;
 extern const s16 gCatchMonRevealFrameData[8][2];

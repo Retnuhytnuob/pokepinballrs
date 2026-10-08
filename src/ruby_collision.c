@@ -5,12 +5,15 @@
 #include "constants/board/ruby_states.h"
 #include "constants/collision.h"
 
+// Rom_1 data
+extern const u16 gSharedBumperCollisionMap[];
 extern const u16 gRubyLinooneLeftCollisionMap[];
 extern const u16 gRubyLinooneRightCollisionMap[];
 extern const u16 gWhiscashCollisionMap[];
 
+
+
 extern struct SongHeader se_evo_get_arrow_earned;
-extern const u16 gSharedBumperCollisionMap[];
 
 s16 CollisionCheck_Ruby(struct Vector16 *ballPosition, u16* collisionAngle) {
     struct Vector16 vec1;

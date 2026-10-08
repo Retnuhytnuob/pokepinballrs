@@ -13,11 +13,12 @@ EWRAM_DATA s16 gGameOverLetterXOffsets[8];
 EWRAM_DATA s16 gGameOverLetterAmplitudes[8];
 EWRAM_DATA s16 gGameOverLetterYOffsets[8];
 
-
-
+// Rom_1 data
 extern const u8 gDebugTextStrings[];
 extern const u8 gDebugMenuValueTemplate[];
 extern u8 gDebugMenuCursorText[];
+
+
 extern const u8 gMainBoardBallSave_Gfx[];
 extern const u8 gMainBoardBallSaveLatios_Gfx[];
 extern const u8 gMainBoardBallSaveLatiosArm_Gfx[];

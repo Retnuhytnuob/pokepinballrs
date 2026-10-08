@@ -10,11 +10,13 @@
 #include "constants/board/rayquaza_states.h"
 #include "constants/mem_layout/shared.h"
 
-extern const u8 gKecleonBonusClear_Gfx[];
-extern const u8 gKyogreBonusClear_Gfx[];
-extern const u8 gGroudonBonusClear_Gfx[];
-extern const u8 gRayquazaBonusClear_Gfx[];
-extern const u8 gDusclopsBonusClear_Gfx[];
+// Rom_1 data
+extern const u8 gDusclopsBonusClear_Gfx[0x2000];
+extern const u8 gKecleonBonusClear_Gfx[0x2000];
+extern const u8 gKyogreBonusClear_Gfx[0x2000];
+extern const u8 gGroudonBonusClear_Gfx[0x2000];
+extern const u8 gRayquazaBonusClear_Gfx[0x2000];
+
 
 void FadeToMainBoard(void)
 {

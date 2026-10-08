@@ -7,11 +7,12 @@
 
 EWRAM_DATA u8 gKecleonSpriteGroupOrderMap[24];
 
-
-extern const u32 gBallSpawnGlowTiles_Type1[][0x80];
-extern const u32 gBallSpawnGlowTiles_Type2[][0x80];
+// Rom_1 data
 extern const u8 gBallRotationTileGraphics[][0x80];
 extern const u8 gBallUpgradeFx_Gfx[][0x200];
+extern const u32 gBallSpawnGlowTiles_Type2[][0x80];
+extern const u32 gBallSpawnGlowTiles_Type1[][0x80];
+
 
 //Called once per frame; 7th process, Draws the ball & related graphics
 void UpdateFrameProcess7_DrawBall_MainBoards(void)

@@ -27,9 +27,17 @@ EWRAM_DATA s16 gEReaderTransitionTimer;
 EWRAM_DATA s8 gEReaderTextBlinkToggle;
 EWRAM_DATA s8 gEReaderTextCharIndex;
 
+// Rom_1 data
+extern const StateFunc gEReaderStateFuncs[11];
+extern const u8 gEReaderText_Tilemap[];
+extern const u8 gEReaderOverlay_Tilemap[];
+extern const u8 gEReaderBackground_Gfx[];
+extern const Palette gEReaderBackground_Pals[];
+extern const Palette gPokedexBackground_Pals[];
+extern const Palette gPokedexSprites_Pals[];
+extern const u8 gPokedexSprites_Gfx[];
+extern const u8 gEReaderText_Gfx[];
 
-
-extern StateFunc gEReaderStateFuncs[11];
 
 extern const u16 gEReaderTextGlyphTable[][3*0x18];
 extern s16 gLinkTimeoutCounter;
@@ -37,17 +45,8 @@ extern s16 gLinkTimeoutCounter;
 extern s8 gEReaderTextLengths[10];
 extern s8 gEReaderTextHasNextPage[10];
 extern u8 gEReaderCardStartPages[NUM_EREADER_CARDS + 1];
-extern u8 gPokedexSprites_Gfx[];
-extern const Palette gEReaderBackground_Pals[];
-extern u8 gEReaderText_Tilemap[];
 // extern u8 gUnknown_0807D000[]; // dead declaration, never referenced
-extern u16 gTempGfxBuffer[];
-extern u8 gEReaderBackground_Gfx[];
-extern u8 gEReaderOverlay_Tilemap[];
 extern s16 gEReaderTransitionStepDurations[];
-extern u8 gEReaderText_Gfx[];
-extern const Palette gPokedexBackground_Pals[];
-extern const Palette gPokedexSprites_Pals[];
 extern const struct SpriteSet * const gEReaderSpriteSets[13];
 
 enum EReaderState{

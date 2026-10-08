@@ -33,24 +33,25 @@ EWRAM_DATA s8 gBonusFieldSelectState = BONUS_FIELD_SELECT_STATE_CHOOSE_FIELD;
 EWRAM_DATA s8 gBonusFieldSelectNextMainState = STATE_INTRO;
 EWRAM_DATA u8 gBonusFieldHighlightPalette = PAL_IX_0;
 
-
-
-
+// Rom_1 data
 extern void (*const gBonusFieldSelectStateFuncs[])(void);
+extern const u8 gBonusFieldSelectBg0_Tilemap[];
+extern const u8 gBonusFieldSelectBg1_Tilemap[];
+extern const u8 gBonusFieldSelectBg2_Tilemap[];
+extern const Palette gBonusFieldSelectStages_Pals[];
+extern const u8 gBonusFieldSelectStages_Gfx[];
+extern const u8 gFieldSelectWindow_Gfx[];
+extern const Palette gFieldSelectSpritePals[];
+extern const u8 gFieldSelectSpriteGfx[];
+
+
+
 
 extern const struct SpriteSet *const gBonusFieldSelectSpriteSets[16];
 extern const struct VectorU16 gBonusFieldStageIconPositions[];
 extern const struct VectorU16 gBonusFieldSpeedIndicatorPositions[];
 extern const u8 gBonusFieldMenuSelectionToField[];
 
-extern const u8 gBonusFieldSelectBg0_Tilemap[];
-extern const u8 gBonusFieldSelectBg1_Tilemap[];
-extern const u8 gBonusFieldSelectBg2_Tilemap[];
-extern const Palette gBonusFieldSelectStages_Pals[];
-extern const u8 gBonusFieldSelectStages_Gfx[];
-extern u8 gFieldSelectWindow_Gfx[];
-extern u16 gFieldSelectSpritePals[];
-extern u8 gFieldSelectSpriteGfx[];
 
 void InitBonusFieldSelectState(void);
 void RenderBonusFieldSelectSprites(void);

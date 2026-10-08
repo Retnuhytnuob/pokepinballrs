@@ -974,8 +974,8 @@ struct BoardConfig
     /*0x06*/ s16 idleDemoDuration;
     /*0x08*/ s16 caughtSpeciesCount;
     /*0x0A*/ u8 fillerA[0x2];
-    /*0x0C*/ struct PinballGame *pinballGame;
-    /*0x10*/ struct ReplayInputFrame *replayInputData;
+    /*0x0C*/ const struct PinballGame *pinballGame;
+    /*0x10*/ const struct ReplayInputFrame *replayInputData;
     /*0x14*/ struct FieldBoardLayout fieldLayout;
     /*0x68*/ const u16 (*flipperCollisionData)[96*96]; //pointer to an Array of 96x96 px data
 };
@@ -992,7 +992,9 @@ struct FlipperLineSegment
 extern EWRAM_DATA struct PinballGame *gCurrentPinballGame;
 extern EWRAM_DATA struct BoardConfig gBoardConfig;
 
+// Rom_1 data
 extern const Palette gBall_Pals[];
+
 extern const u8 *const gModeBannerTilemaps[];
 extern const Palette *const gModeBanner_Pals[];
 

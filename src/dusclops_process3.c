@@ -14,13 +14,16 @@
 #define DUSKULL_ALLOWED_TO_SPAWN DUSKULL_NEEDED_TO_PHASE_TRANSFER - DUSKULL_CONCURRENT_MAX + 1
 #define DUSCLOPS_HITS_NEEDED_TO_SUCCEED 5
 
+// Rom_1 data
+extern const u16 gDusclopsBossGuardReadyTileOffsets[];
+extern const u8 gDusclopsBonusClear_Gfx[0x2000];
+extern const Palette gBonusStageObjPal[];
+extern const Palette gDusclopsAnimPalettes[];
+
+
 extern struct SongHeader se_duskull_appear;
 extern struct SongHeader se_dusclops_appear;
 extern s16 DuskullFramesetData[][3];
-extern u16 gDusclopsBossGuardReadyTileOffsets[];
-extern const Palette gBonusStageObjPal[];
-extern const Palette gDusclopsAnimPalettes[];
-extern const u8 gDusclopsBonusClear_Gfx[];
 extern u16 gDusclopsBoardDusclopsAppearFx_Gfx[];
 extern u16 gDusclopsBoardDusclops_Gfx[];
 extern u8 gDusclopsBoardDusclopsBallGrabSwirl_Gfx[];

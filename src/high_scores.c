@@ -58,31 +58,6 @@ EWRAM_DATA u16 gLinkPacketCounter;
 EWRAM_DATA s16 gScoreDigitBuffer[0x10];
 EWRAM_DATA struct HighScoreEntry gWorkingHighScores[MAIN_FIELD_COUNT][NUM_HIGH_SCORES];
 
-//Rom 2
-extern const u16 gHighScoreCharToTileMap[];
-
-//Rom
-extern StateFunc gHighScoresStateFuncs[15];
-extern StateFunc gIdleHighScoresStateFuncs[3];
-extern const Palette gHighScoreBG_Pals[];
-extern u8 gHighScoreBallWatermark_Tilemap[];
-extern u8 gHighScoreText_Gfx[];
-extern s8 gLinkExchangeSendPhase;
-
-
-extern u8 gHighScoreBallWatermark_Gfx[];
-extern u8 gHighScoreScoreTable_Tilemap[];
-extern const Palette gHighScoreSprite_Pals[];
-extern u8 gHighScoreDialogs_Gfx[];
-extern u32 gHighScoreNameRowTilemapOffsets[8];
-extern const struct HighScoreEntry gDefaultHighScores[2][8];
-extern const s8 gScorePaletteAnimOffsets[3]; //Sized based on call using gHighScoreScreenState.paletteAnimPhase + data
-extern const s8 gScorePaletteResetOffsets[3]; //Same as above
-extern const struct SpriteSet *const gNameEntryCursorSpriteSets[];
-extern const struct SpriteSet *const gHighScoreScreenSpriteSets[];
-extern const struct SpriteSet *const gCompletionBannerSpriteSets[];
-extern const struct VectorU32 gHighScoreNamePixelPositions[2][8];
-
 
 struct HighScoreNamePosition
 {
@@ -90,7 +65,33 @@ struct HighScoreNamePosition
     u32 yPixelPosition;
     u32 fieldWidth;
 };
+// Rom_1 data
+extern const StateFunc gHighScoresStateFuncs[15];
+extern const StateFunc gIdleHighScoresStateFuncs[3];
+extern const struct HighScoreEntry gDefaultHighScores[2][8];
 extern const struct HighScoreNamePosition gHighScoreNamePositions[][8];
+extern const struct VectorU32 gHighScoreNamePixelPositions[2][8];
+extern const u32 gHighScoreNameRowTilemapOffsets[8];
+extern const u8 gHighScoreScoreTable_Tilemap[];
+extern const u8 gHighScoreText_Gfx[];
+extern const u8 gHighScoreBallWatermark_Tilemap[];
+extern const u8 gHighScoreBallWatermark_Gfx[];
+extern const Palette gHighScoreBG_Pals[];
+extern const Palette gHighScoreSprite_Pals[];
+extern const u8 gHighScoreDialogs_Gfx[];
+
+
+extern s8 gLinkExchangeSendPhase;
+
+extern const s8 gScorePaletteAnimOffsets[3]; //Sized based on call using gHighScoreScreenState.paletteAnimPhase + data
+extern const s8 gScorePaletteResetOffsets[3]; //Same as above
+extern const struct SpriteSet *const gNameEntryCursorSpriteSets[];
+extern const struct SpriteSet *const gHighScoreScreenSpriteSets[];
+extern const struct SpriteSet *const gCompletionBannerSpriteSets[];
+
+//Rom 2
+extern const u16 gHighScoreCharToTileMap[];
+
 
 
 enum HighScoreStates{

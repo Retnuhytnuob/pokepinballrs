@@ -6,7 +6,10 @@
 #include "constants/board/main_board.h"
 #include "constants/collision.h"
 
-extern u8 gCatchTargetCollisionBitmap[];
+// Rom_1 data
+extern const u8 gCatchTargetCollisionBitmap[];
+
+
 extern u16 gFlipperCollisionAngles[][2];
 extern u16 gFlipperLaunchVelocityParams[][2];
 extern s8 gFlipperCollisionFrameMapping[][5];

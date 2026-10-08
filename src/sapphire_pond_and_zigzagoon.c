@@ -6,9 +6,12 @@
 #include "constants/board/sapphire_states.h"
 #include "constants/mem_layout/sapphire.h"
 
+// Rom_1 data
+extern const s8 gPelipperFlyAnimTable[][2];
+
+
 extern const s16 gPelipperIdleFrameIndices[];
 extern const s16 gPelipperSwallowAnimData[][3];
-extern const s8 gPelipperFlyAnimTable[][2];
 extern const u8 gPelipper_Gfx[][0x480];
 extern const u16 gPelipperPondSpritesheetOam[20][4][3];
 extern const s16 gWailmerAnimFrameMap[][2];

@@ -15,14 +15,11 @@ EWRAM_DATA s8 gEReaderAccessCounter;
 EWRAM_DATA s8 gTitleTransitionActive;
 EWRAM_DATA s8 gTitleRestartDebounce;
 EWRAM_DATA s8 gAutoDisplayTitlescreenMenu;
+extern EWRAM_DATA u32 gHighScoreNameEntry[HIGH_SCORE_NAME_LENGTH];
 EWRAM_DATA const u8 *gTitleNoSaveMenuSpriteSets[7];
 EWRAM_DATA const u8 *gTitleSavedMenuSpriteSets[7];
 EWRAM_DATA u8 gTitleReturnedFromMenu;
 extern EWRAM_DATA u16 gHighScoreEntrySource;
-
-
-
-extern u32 gHighScoreNameEntry[HIGH_SCORE_NAME_LENGTH];
 
 // ------------------------
 
@@ -50,8 +47,16 @@ enum
     SUBSTATE_FADE_TO_MENU_ACTION,
 };
 
+// Rom_1 data
+extern const StateFunc gTitlescreenStateFuncs[];
+extern const u8 gTitlescreenBgTilemap[];
+extern const Palette gTitlescreenBg_Pals[];
+extern const u8 gTitlescreenBg_Gfx[];
+extern const u8 gTitlescreenSpritesNoSavedGame_Gfx[];
+extern const u8 gTitlescreenSpritesSavedGame_Gfx[];
+extern const Palette gTitlescreenSprites_Pals[];
 
-extern StateFunc gTitlescreenStateFuncs[];
+
 extern const Palette gGBAButtonIcons_Pals[];
 extern const u8 gOptionsSprites_Gfx[];
 extern const s16 gTitleMenuStateTable[11];
@@ -67,12 +72,6 @@ extern const s8 gTitleMenuRetractDurations[];
 extern const u8 *const gTitleSavedDefaultSprites[7];
 extern const u8 *const gTitleSavedAnimSprites[];
 extern const s16 gEReaderAccessButtonSequence[];
-extern const u8 gTitlescreenBgTilemap[];
-extern const u16 gTitlescreenBg_Pals[];
-extern const u8 gTitlescreenBg_Gfx[];
-extern const u8 gTitlescreenSpritesNoSavedGame_Gfx[];
-extern const u8 gTitlescreenSpritesSavedGame_Gfx[];
-extern const u16 gTitlescreenSprites_Pals[];
 extern struct VectorU16 gTitleNoSaveArrowPositions[4];
 extern struct VectorU16 gTitleNoSaveSelectorPositions[4];
 extern struct VectorU16 gTitleSavedArrowPositions[5];

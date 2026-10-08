@@ -8,8 +8,12 @@
 
 #define RAYQUAZA_MODE_TIME TICKS_FOR_TIME(3,0)
 
+// Rom_1 data
 extern const s16 gLightningGrabAnimFrameIndices[];
-extern const u8 gRayquazaBonusClear_Gfx[];
+extern const u8 gRayquazaBonusClear_Gfx[0x2000];
+extern const Palette gBonusStageObjPal[];
+
+
 extern const u8 gRayquazaSkyBackgroundGfx[];
 extern const u8 gRayquazaTornadoGfx[][0x280];
 extern const u8 gRayquazaFlyby_Gfx[];
@@ -26,7 +30,6 @@ extern const u16 gRayquazaLightningStrikeOamData[12][7][3];
 extern const u16 gRayquazaLightningChargeRingOamData[10][3][3];
 extern const u16 gRayquazaMainBodyOamData[212][3];
 
-extern const Palette gBonusStageObjPal[];
 
 void InitFrameProcess3_BoardLogic_RayquazaBoard(void)
 {

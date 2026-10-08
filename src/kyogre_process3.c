@@ -8,11 +8,15 @@
 
 #define KYOGRE_MODE_TIME TICKS_FOR_TIME(3,0)
 
-extern const u8 gKyogreBonusClear_Gfx[];
+// Rom_1 data
+extern const u8 gKyogreBonusClear_Gfx[0x2000];
 extern const Palette gKyogreWaterAnimFrame_Pals[];
+extern const Palette gBonusStageObjPal[];
 extern const u16 gKyogreWaterBackgroundTilemap[];
 extern const Palette gKyogreIntroShorePalette[];
 extern const Palette gKyogreIntroIcePalette[];
+
+
 extern const u8 gKyogreSurfacingFx_Gfx[][0xC0];
 extern const u8 gKyogreFreeze_Gfx[][0x3C0];
 extern const u8 gKyogreTopPosition_Gfx[][0x580];
@@ -38,7 +42,6 @@ extern const u16 gKyogreBgSpriteBaseTileNums[];
 extern const s16 gKyogreIntroPaletteCycleIndices[];
 extern const u16 gKyogrefreezeTrapOamData[28][4][3];
 extern const u16 gKyogreMainBodyOamData[66][10][3];
-extern const Palette gBonusStageObjPal[];
 
 
 void InitFrameProcess3_BoardLogic_KyogreBoard(void)

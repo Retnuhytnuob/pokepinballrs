@@ -6,10 +6,13 @@
 #include "constants/board/sapphire_states.h"
 #include "constants/mem_layout/sapphire.h"
 
+// Rom_1 data
+extern const s16 gBumperMosaicValues[];
+
+
 extern const u8 gSapphireBoardShopShockWall_Gfx[][0x80];
 
 extern const s16 gShopGuardianAnimFramesetData[][2];
-extern const s16 gBumperMosaicValues[];
 extern const u8 gSapphireMinun_Gfx[][0x300];
 extern const u8 gSapphireMinunHeadElectricity_Gfx[][0x200];
 extern const u8 gSapphirePlusle_Gfx[][0x300];

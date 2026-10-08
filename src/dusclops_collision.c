@@ -3,6 +3,7 @@
 #include "constants/board/dusclops_states.h"
 #include "constants/collision.h"
 
+// Rom_1 data
 extern const u16 gSharedBumperCollisionMap[];
 extern const u16 gDusclopsBodyCollisionMap[];
 

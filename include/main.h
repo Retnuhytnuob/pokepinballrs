@@ -167,12 +167,12 @@ extern StateFunc gMainFuncs[];
 
 // sym_bss
 
-extern u16 gTempGfxBuffer[];
-extern u8 gEReaderTextTileBuffer[3][0x800];
-extern u16 gTextTilemapBuffer[];
-extern struct OamData gOamBuffer[128];
-extern u32 IntrMain_Buffer[0x200];
-extern u16 gBG0TilemapBuffer[];
+extern IWRAM_DATA u16 gTempGfxBuffer[];
+extern IWRAM_DATA u8 gEReaderTextTileBuffer[3][0x800];
+extern IWRAM_DATA u16 gTextTilemapBuffer[];
+extern IWRAM_DATA struct OamData gOamBuffer[128];
+extern IWRAM_DATA u32 IntrMain_Buffer[0x200];
+extern IWRAM_DATA u16 gBG0TilemapBuffer[32 * 0x40];
 
 // ----
 

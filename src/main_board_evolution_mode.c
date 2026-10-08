@@ -7,13 +7,16 @@
 #define EVO_MODE_TIME TICKS_FOR_TIME(2,0)
 #define EVO_SAVER_TIME TICKS_FOR_TIME(1,0)
 
+// Rom_1 data
+extern const Palette gEvoItem_Pals[];
+extern const Palette gTimer_Default_Pal;
+
+
 extern struct SongHeader se_evo_item_appear;
 extern struct SongHeader se_evo_item_finish_appear;
 extern struct SongHeader se_evo_item_collected;
 
-extern const Palette gTimer_Default_Pal;
 extern const u8 *gEvoItemAppear_GfxList[];
-extern const Palette gEvoItem_Pals[];
 extern const s16 gEvoItemAppearFrameThresholds[];
 extern const u16 gEvoItemAnimOamFramesets[58][15];
 extern const struct Vector16 gEvoItemPositions[][8];

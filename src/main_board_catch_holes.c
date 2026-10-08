@@ -6,13 +6,15 @@
 #include "inline_load_lighting_pal.h"
 #include "constants/mem_layout/ruby.h"
 
-extern const u8 gMartEvoForegroundMenuUx_Gfx[];
-extern const Palette gShopNameDisplay_Pals[];
-extern const u16 gShopCursorToItemMap[];
-extern u8 gShopModeBG0_0_Tilemap[];
-extern const Palette gShopEvoUI_Pals[];
+// Rom_1 data
 extern const Palette gEvoNameDisplay_Pals[];
-extern u8 gEvoModeBG0_0_Tilemap[];
+extern const Palette gShopNameDisplay_Pals[];
+extern const u8 gEvoModeBG0_0_Tilemap[];
+extern const Palette gShopEvoUI_Pals[];
+extern const u8 gShopModeBG0_0_Tilemap[];
+
+extern const u8 gMartEvoForegroundMenuUx_Gfx[];
+extern const u16 gShopCursorToItemMap[];
 extern const u16 gShopItemData[][4];
 extern u32 gShopEvoBGAnimFrames[];
 

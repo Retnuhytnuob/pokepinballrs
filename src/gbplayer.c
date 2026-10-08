@@ -35,11 +35,13 @@ EWRAM_DATA u32 gSio32RemoteDeviceId;
 
 // -----
 
+// Rom_1 data
 extern const Palette gGbPlayerPalettes[];
 extern const u8 gGbPlayerGfx[];
 extern const u8 gGbPlayerTilemap[];
+extern const u16 Sio32ConnectionData[4];
+
 extern const int *gRumblePatterns[];
-extern u16 Sio32ConnectionData[4];
 
 /*static*/ void ReadGbPlayerKeys(void)
 {

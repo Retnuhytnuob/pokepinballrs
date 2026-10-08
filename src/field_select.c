@@ -6,6 +6,17 @@
 #include "titlescreen.h"
 #include "constants/mem_layout/field_select.h"
 
+static void RenderFieldSelectSprites(void);
+static void InitFieldSelectData(void);
+
+enum FieldSelectStates
+{
+    FIELD_SELECT_STATE_CHOOSE_FIELD,
+    FIELD_SELECT_STATE_1,
+    FIELD_SELECT_STATE_BALL_SPEED,
+    FIELD_SELECT_STATE_3,
+};
+
 struct FieldSelectData
 {
     u16 rubyFieldSpriteGroup;
@@ -25,32 +36,23 @@ struct FieldSelectData
 EWRAM_DATA struct FieldSelectData gFieldSelectData;
 EWRAM_DATA s8 gFieldSelectSoftReset;
 
+// Rom_1 data
+extern const void (*gFieldSelectStateFuncs[])(void);
+extern const u8 gFieldSelectBG0Tilemap[];
+extern const u8 gFieldSelectWindow_Gfx[];
+extern const u8 gFieldSelectFrameShadowTilemap[];
+extern const u8 gFieldSelectMiniFields_Gfx[];
+extern const u8 gFieldSelectWindowTilemap[];
+extern const Palette gFieldSelectBGPals[];
+extern const Palette gFieldSelectSpritePals[];
+extern const u8 gFieldSelectSpriteGfx[];
 
-static void RenderFieldSelectSprites(void);
-static void InitFieldSelectData(void);
-
-enum FieldSelectStates
-{
-    FIELD_SELECT_STATE_CHOOSE_FIELD,
-    FIELD_SELECT_STATE_1,
-    FIELD_SELECT_STATE_BALL_SPEED,
-    FIELD_SELECT_STATE_3,
-};
 
 
 extern struct {u16 rubyTransitionFrames[5]; u16 sapphireTransitionFrames[5];} gFieldTransitionAnimData;
 extern struct VectorU16 gFieldSelectBallSpeedPositions[];
 extern const struct SpriteSet *const gFieldSelectSpriteSets[];
 
-extern void (*gFieldSelectStateFuncs[])(void);
-extern u8 gFieldSelectBG0Tilemap[];
-extern u8 gFieldSelectWindow_Gfx[];
-extern u8 gFieldSelectFrameShadowTilemap[];
-extern u8 gFieldSelectMiniFields_Gfx[];
-extern u8 gFieldSelectWindowTilemap[];
-extern u16 gFieldSelectBGPals[];
-extern u16 gFieldSelectSpritePals[];
-extern u8 gFieldSelectSpriteGfx[];
 
 void FieldSelectMain(void)
 {

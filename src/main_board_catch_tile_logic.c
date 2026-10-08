@@ -4,16 +4,9 @@
 #include "constants/bg_music.h"
 #include "constants/board/main_board.h"
 
-extern const s16 gCatchTile_SequentialFramesetData[][2];
-extern const u16 gCatchTile_SequentialBreakSpritesheetOam[28][18];
-extern const s16 gCatchTile_RevealSparkleTimings[];
-extern const u16 gCatchTile_RevealOamFramesets[16][18];
+// Rom_1 data
 extern const u8 gCatchTile_RevealTilesGfx[];
 extern const Palette gCatchTile_Reveal_Pal;
-extern const u16 gCatchTile_BurstRevealOamFramesets0[18][18];
-extern const u16 gCatchTile_BurstRevealOamFramesets1[22][12];
-extern const s16 gCatchTile_RevealFinalTimings[];
-
 extern const u8 gCatchTile_BurstStart_Gfx[];
 extern const Palette gCatchTile_BurstStart_Pal;
 extern const u8 gCatchTile_BurstStage2_Gfx[];
@@ -22,6 +15,16 @@ extern const u8 gCatchTile_BurstStage3_Gfx[];
 extern const Palette gCatchTile_BurstStage3_Pal;
 extern const u8 gCatchTile_BurstStage4_Gfx[];
 extern const Palette gCatchTile_BurstStage4_Pal;
+
+
+extern const s16 gCatchTile_SequentialFramesetData[][2];
+extern const u16 gCatchTile_SequentialBreakSpritesheetOam[28][18];
+extern const s16 gCatchTile_RevealSparkleTimings[];
+extern const u16 gCatchTile_RevealOamFramesets[16][18];
+extern const u16 gCatchTile_BurstRevealOamFramesets0[18][18];
+extern const u16 gCatchTile_BurstRevealOamFramesets1[22][12];
+extern const s16 gCatchTile_RevealFinalTimings[];
+
 
 
 void DisableCatchTileDisplay(void)

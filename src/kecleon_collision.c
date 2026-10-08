@@ -2,6 +2,7 @@
 #include "constants/board/kecleon_states.h"
 #include "constants/collision.h"
 
+// Rom_1 data
 extern u16 gKecleonUprightCollisionMap[0x1600];
 extern u16 gKecleonKnockedDownCollisionMap[0x1600];
 

@@ -129,6 +129,36 @@ EWRAM_DATA s16 gPokedexDetailFrameCount;
 EWRAM_DATA s16 gLinkSendBuffer[0xA];
 EWRAM_DATA s8 gPokedexDescriptionPage;
 
+struct PokedexEntry
+{
+    /*0x00*/ u16 dexNum[DEX_NUM_DIGITS];
+    /*0x06*/ u16 heightWeight[POKEMON_HEIGHT_WEIGHT_TEXT_LENGTH];
+    /*0x18*/ s16 name[POKEMON_NAME_LENGTH];
+    /*0x2C*/ s16 category[POKEMON_CATEGORY_NAME_LENGTH];
+    // The dex description has 2 pages with 3 lines each. Each line
+    // is 42 characters long.
+    /*0x42*/ s16 description[2 * 3 * POKEMON_DEX_LINE_LENGTH];
+}; /* size=0x23C */
+
+// Rom_1 data
+extern const u16 gDexInfoWindowMiddleRowTiles[];
+extern const u16 gDexInfoWindowBottomRowTiles[];
+extern const u16 gDexInfoWindowEmptyRowTiles[];
+extern const u16 gDexInfoWindowEmptyTextRowTiles[];
+extern const StateFunc gPokedexStateFuncs[];
+extern const struct PokedexEntry gPokedexEntries[];
+extern const u16 gPokedexBg1_Tilemap[];
+extern const u16 gPokedexBgText_Gfx[];
+extern const u16 gPokedexInfoWindowTilemap[];
+extern const u16 gPokedexBg2_Tilemap[];
+extern const u16 gPokedexBg_Gfx[];
+extern const u16 gPokedexBg3_Tilemap[];
+extern const Palette gPokedexBackground_Pals[];
+extern const Palette gPokedexSprites_Pals[];
+extern const u8 gPokedexSprites_Gfx[];
+extern const u8 gPokedexTextGlyphs_Gfx[];
+
+
 
 extern Palette *gCatchMonPaletteGroups[];
 extern u8 *gCatchSpriteGfxPtrs[];
@@ -143,21 +173,7 @@ extern const s16 gPokedexAnimFrameDurations[][51];
 extern s16 gPokedexListNameVramOffsets[];
 extern u8 *gMonPortraitGroupGfx[];
 extern const Palette *gMonPortraitGroupPals[];
-extern u16 gPokedexBg1_Tilemap[];
-extern u16 gPokedexBgText_Gfx[];
-extern u16 gPokedexBg2_Tilemap[];
-extern u16 gPokedexBg_Gfx[];
-extern u16 gPokedexBg3_Tilemap[];
-extern const Palette gPokedexBackground_Pals[];
-extern const Palette gPokedexSprites_Pals[];
-extern u8 gPokedexSprites_Gfx[];
-extern u16 gDexInfoWindowEmptyTextRowTiles[];
-extern u16 gDexInfoWindowMiddleRowTiles[];
-extern u16 gDexInfoWindowBottomRowTiles[];
-extern u16 gDexInfoWindowEmptyRowTiles[];
-extern u16 gPokedexInfoWindowTilemap[];
 
-extern StateFunc gPokedexStateFuncs[];
 
 
 extern s16 gDexAnimationIx[];
@@ -173,20 +189,8 @@ enum PokedexPopupType {
 // The japanese and english text glyphs are sourced from the same blob of tile graphics, and
 // each glyph is two tiles high.
 #define ENGLISH_GLYPHS_START 0x2820
-extern const u8 gPokedexTextGlyphs_Gfx[];
 
-struct PokedexEntry
-{
-    /*0x00*/ u16 dexNum[DEX_NUM_DIGITS];
-    /*0x06*/ u16 heightWeight[POKEMON_HEIGHT_WEIGHT_TEXT_LENGTH];
-    /*0x18*/ s16 name[POKEMON_NAME_LENGTH];
-    /*0x2C*/ s16 category[POKEMON_CATEGORY_NAME_LENGTH];
-    // The dex description has 2 pages with 3 lines each. Each line
-    // is 42 characters long.
-    /*0x42*/ s16 description[2 * 3 * POKEMON_DEX_LINE_LENGTH];
-}; /* size=0x23C */
 
-extern const struct PokedexEntry gPokedexEntries[];
 
 void PokedexMain(void)
 {
@@ -2007,7 +2011,7 @@ void LoadMonPortrait(s16 species)
     switch (state)
     {
         case SPECIES_DEX_UNSEEN:
-            CopyBgTilesRect(gPokedexSprites_Gfx + 0x5C00, (void*)OBJ_VRAM_ADDR_POKEDEX_MON_SPRITE_RECT, 24, 1);
+            CopyBgTilesRect(&gPokedexSprites_Gfx[0x5C00], (void*)OBJ_VRAM_ADDR_POKEDEX_MON_SPRITE_RECT, 24, 1);
             DmaCopy16(3, gPokedexSprites_Pals, OBJ_PLTT_SLOT(PAL_IX_BALL), PLTT_SLOT_SIZE);
             break;
         case SPECIES_DEX_SEEN:

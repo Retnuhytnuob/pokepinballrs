@@ -3,6 +3,7 @@
 #include "constants/board/spheal_states.h"
 #include "constants/collision.h"
 
+// Rom_1 data
 extern const u16 gSphealRampCollisionMap[0x1000];
 extern const u16 gSphealFrozenIceCollisionMap[0x1000];
 

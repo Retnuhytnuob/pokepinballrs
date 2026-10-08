@@ -12,13 +12,19 @@
 EWRAM_DATA const u8 gHatchedWalkerAnimTileBuffer[15][SIZE_OF_VRAM_HATCH_MON_ENTITY_TILES];
 EWRAM_DATA u8 gCatchSpritePaletteBuffer[0x20];
 
+// Rom_1 data
+extern const u8 gCaptureBallTilesGfx[];
+extern const u8 gCaptureScreenTilesGfx[];
+extern const u8 gAerodactlyFlight_Gfx[];
+extern const Palette gAerodactlyFlight_Pal;
+extern const Palette gTotodile_Pal;
+extern const Palette gRubyShopSign_Pal;
+
 
 extern const s16 gEggHatchAnimData[14][3];
 extern const struct Vector32 gSapphireEggWaypoints[];
 extern const struct Vector32 gEggWalkPathWaypoints[][29];
 extern const Palette gCaptureHit_Pal;
-extern const u8 gCaptureScreenTilesGfx[];
-extern const u8 gCaptureBallTilesGfx[];
 extern const u16 gCatchCreatureOamFramesets[48][4][3];
 extern const u16 gCyndaquilFrameIndices[];
 extern const struct Vector16 gCyndaquilCavePositions[];
@@ -30,11 +36,8 @@ extern const u8 gAlphabetTilesGfx[][0x40];
 extern const s16 gCaughtTextChars[];
 extern const struct Vector16 gFlyingCreatureCameraOffsets[];
 extern const u16 gAerodactylEggDeliveryCutsceneFramesets[14][15];
-extern const u8 gAerodactlyFlight_Gfx[];
-extern const Palette gAerodactlyFlight_Pal;
 extern const u16 gPikaSaverFrameData[][2];
 extern const u16 gTotodileEggDeliveryCutsceneFramesets[82][6][3];
-extern const Palette gTotodile_Pal;
 extern const u8 gTotodileEggDelivery_Gfx[];
 extern const u16 gCoinRewardAnimOamFramesets[18][3];
 extern const u16 gShopNumberOamFramesets[4][15];
@@ -44,7 +47,6 @@ extern const u8 gShopPortraitOverlayGfx[][0x300];
 extern const u8 gDecimalDigitTilesGfx[][0x40];
 extern const s16 gEvoShopAnimFrames[][7];
 extern const u8 gRubyBoardShop_Gfx[][0x500];
-extern const Palette gRubyShopSign_Pal;
 
 extern const u16 gAngleToDirectionTable[];
 

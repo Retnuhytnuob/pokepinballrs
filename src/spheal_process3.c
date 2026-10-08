@@ -13,6 +13,14 @@ struct SphealFlightPath
     struct Vector16 *pathWaypoints;
     s16 pathLength;
 };
+
+// Rom_1 data
+extern const s8 gSphealScoreDigitSpriteIndices[];
+extern const Palette gBonusStageObjPal[];
+extern const u16 gSphealWaterBackgroundTilemap[];
+
+
+
 extern const struct SphealFlightPath gSphealFlightPathData[];
 
 extern const s16 gSphealWhiscashAnimFrameset[][4];
@@ -23,8 +31,6 @@ extern struct SongHeader se_spheal_end_whistle;
 extern struct SongHeader se_sealeo_hit_thud;
 extern struct SongHeader se_sealeo_nose_bounce;
 
-extern const s8 gSphealScoreDigitSpriteIndices[];
-extern const u16 gSphealWaterBackgroundTilemap[];
 extern const u8 gSphealNetGfx[][0x200];
 extern const u8 gSphealNetFrontGfx[][0x180];
 extern const u8 gSphealFlyingEnemyVariantSprites[][0x120];
@@ -37,7 +43,6 @@ extern const u16 gSealeoFramesetData[][2];
 extern const u16 gSphealFramesetData[][3];
 extern const u16 gSphealFlyingEnemyOamData[126][4][3];
 
-extern const Palette gBonusStageObjPal[];
 
 
 void InitFrameProcess3_BoardLogic_SphealBoard(void)

@@ -3,16 +3,17 @@
 #include "constants/board/center_screen_states.h"
 #include "constants/board/main_board.h"
 
+// Rom_1 data
 //Should be of type Palette; causes match errors with the fakematch
 extern const u16 gLocation_Pals[];
 extern const u16 gPortraitAnim_Pals[];
+extern const u8 gPortraitAnimFrameGraphics[][0x300];
 
 extern const u16 gPortraitPaletteSlots[2];
 extern const s16 gRouletteOutcomeFrameOffsets[];
 
 extern const u8 gLocationPortraitGfx[][0x300];
 extern const u16 gShopItemData[][4];
-extern const u8 gPortraitAnimFrameGraphics[][0x300];
 extern u8 *gMonPortraitGroupGfx[];
 extern const Palette *gMonPortraitGroupPals[];
 extern const u16 gShopCursorToItemMap[];

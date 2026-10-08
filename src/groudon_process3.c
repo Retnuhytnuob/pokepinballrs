@@ -8,7 +8,12 @@
 
 #define GROUDON_MODE_TIME TICKS_FOR_TIME(3,0)
 
-extern const u8 gGroudonBonusClear_Gfx[];
+// Rom_1 data
+extern const u8 gGroudonBonusClear_Gfx[0x2000];
+extern const Palette gBonusStageObjPal[];
+extern const u16 gGroudonLavaPaletteCycleData[]; //Should be of type Palette
+
+
 extern const u8 gGroudonAttackFx_Gfx[];
 extern const s8 gGroudonBoardBoulders_Gfx[][0x300];
 extern struct SongHeader se_groudon_hit;
@@ -34,8 +39,6 @@ extern const u16 gGroudonProjectileAttackOamData[12][6][3];
 extern const u16 gGroudonMainBodyOamData[166][19][3];
 extern const u16 gGroudonFirePillarOamData[58][10][3];
 
-extern const Palette gBonusStageObjPal[];
-extern const u8 gGroudonLavaPaletteCycleData[];
 
 void InitFrameProcess3_BoardLogic_GroudonBoard(void)
 {
@@ -1698,8 +1701,8 @@ void AnimateGroudonBackground(void)
     struct OamDataSimple *oamSimple;
 
     var0 = gGroudonLavaPaletteAnimIndices[(gMain.systemFrameCount % 144) / 24];
-    DmaCopy16(3, &gGroudonLavaPaletteCycleData[var0 * PLTT_SLOT_SIZE], BG_PLTT_SLOT(PAL_IX_0), PLTT_SLOT_SIZE);
-    DmaCopy16(3, &gGroudonLavaPaletteCycleData[(var0 + 4) * PLTT_SLOT_SIZE], BG_PLTT_SLOT(PAL_IX_4), PLTT_SLOT_SIZE);
+    DmaCopy16(3, &gGroudonLavaPaletteCycleData[var0 * 0x10], BG_PLTT_SLOT(PAL_IX_0), PLTT_SLOT_SIZE);
+    DmaCopy16(3, &gGroudonLavaPaletteCycleData[(var0 + 4) * 0x10], BG_PLTT_SLOT(PAL_IX_4), PLTT_SLOT_SIZE);
 
     var0 = gGroudonBgTileAnimIndices[(gMain.systemFrameCount % 96) / 24];
     for (i = 0; i < 4; i++)

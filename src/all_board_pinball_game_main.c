@@ -10,8 +10,6 @@
 
 EWRAM_DATA u32 gReplayFrameCounter;
 
-extern const Palette gBall_Pals[];
-
 typedef void (*VoidFunc)(void);
 
 struct BoardProcessPair
@@ -36,12 +34,16 @@ struct BoardProcessPair
  */
 EWRAM_DATA struct BoardProcessPair CurrentBoardProcPairs[PER_FRAME_PROCESS_PHASE_COUNT];
 
+// Rom_1 data
+extern const StateFunc gPinballGameStateFuncs[];
+
+
+
 extern const struct BoardProcessPair gBoardProcPairs[];
 extern const VoidFunc gFieldInitFuncs[];
 extern struct SpriteGroup *gMainFieldSpriteGroups[][60];
 extern struct SpriteGroup *gBonusFieldSpriteGroups[][30];
 
-extern const StateFunc gPinballGameStateFuncs[];
 extern const u8 gDxModePikachuObjTiles[];
 
 extern void SaveGameToSram(void);

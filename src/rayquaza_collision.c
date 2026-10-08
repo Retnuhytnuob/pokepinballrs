@@ -3,6 +3,7 @@
 #include "constants/board/rayquaza_states.h"
 #include "constants/collision.h"
 
+// Rom_1 data
 extern u16 gRayquazaBodyCollisionMap[0x4000];
 
 

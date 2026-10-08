@@ -378,7 +378,7 @@ extern void ResetPokedex(void);
 
 extern void CopyString(int, int, int, int, int, int);
 void SetStringPalette(int, int, int, int, u16);
-extern void CopyBgTilesRect(void *volatile, void *volatile, s16, s16);
+extern void CopyBgTilesRect(const void * volatile, void *volatile, s16, s16);
 //extern ? FadeOutToWhite();
 extern void ClearHighScoreNameEntry(void);
 

@@ -7,15 +7,17 @@
 
 extern EWRAM_DATA u32 gReplayFrameCounter;
 
+// Rom_1 data
 extern const StateFunc gIdlePinballGameStateFuncs[];
-extern struct ReplayInputFrame gIdleBoardConfig0;
-extern struct ReplayInputFrame gIdleBoardConfig2;
-extern struct ReplayInputFrame gIdleBoardConfig3;
-extern struct ReplayInputFrame gIdleBoardConfig1;
-extern struct PinballGame gIdleBoardGameState0;
-extern struct PinballGame gIdleBoardGameState2;
-extern struct PinballGame gIdleBoardGameState3;
-extern struct PinballGame gIdleBoardGameState1;
+extern const struct ReplayInputFrame gIdleBoardConfig0;
+extern const struct ReplayInputFrame gIdleBoardConfig2;
+extern const struct ReplayInputFrame gIdleBoardConfig3;
+extern const struct ReplayInputFrame gIdleBoardConfig1;
+extern const struct PinballGame gIdleBoardGameState0;
+extern const struct PinballGame gIdleBoardGameState2;
+extern const struct PinballGame gIdleBoardGameState3;
+extern const struct PinballGame gIdleBoardGameState1;
+
 
 void IdlePinballGameMain(void)
 {

@@ -14,7 +14,10 @@ EWRAM_DATA void (*gVBlankIntrFuncShadow)(void);
 EWRAM_DATA void (*gMainCallbackShadow)(void);
 EWRAM_DATA IntrFunc *gVCountIntrFuncPtr;
 
+// Rom_1 data
 extern const s16 gSineTable[];
+
+
 extern const IntrFunc gIntrTableTemplate[14];
 
 static void InitGame(void);
