@@ -14,6 +14,7 @@ EWRAM_DATA Palette gCatchSpritePalettes[4];
 extern const u8 gCaptureBallTilesGfx[];
 extern const u8 gCaptureScreenTilesGfx[];
 extern const u16 gPokeballCaptureOamFrames[][0x30];
+extern const u8 gPichuSaverTilesGfx[];
 
 
 extern struct SongHeader se_roulette_tick;
@@ -21,7 +22,6 @@ extern struct SongHeader se_mon_catch_ball_woosh;
 extern struct SongHeader se_ball_upgrade;
 
 extern u16 gRouletteWheelContents[][7];
-extern const u8 gPichuSaverTilesGfx[];
 
 extern const s16 gCaptureSequenceTimings[34];
 extern const s8 gCaptureShakeOffsets[];

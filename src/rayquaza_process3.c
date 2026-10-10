@@ -12,13 +12,13 @@
 extern const s16 gLightningGrabAnimFrameIndices[];
 extern const u8 gRayquazaBonusClear_Gfx[0x2000];
 extern const Palette gBonusStageObjPal[];
-
-
 extern const u8 gRayquazaSkyBackgroundGfx[];
 extern const u8 gRayquazaTornadoGfx[][0x280];
 extern const u8 gRayquazaFlyby_Gfx[];
 extern const u8 gRayquazaSpriteSheet[];
 extern const u8 gRayquazaBodyVariantTiles[][0x800];
+
+
 extern const s16 gScreenShakeOscillationValues[];
 extern const u16 gRayquazaAnimFramesetTable[][3];
 extern const struct Vector16 gRayquazaTornadoSpawnPos[32];

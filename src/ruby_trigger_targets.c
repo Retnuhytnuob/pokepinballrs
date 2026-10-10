@@ -5,17 +5,20 @@
 #include "constants/board/ruby_states.h"
 #include "constants/mem_layout/ruby.h"
 
+// Rom_1 data
+extern const u8 gRubyChikoritaEntity[][0x300];
+extern const u8 gChikoritaProjectileTiles[][0x80];
+extern const u8 gChikoritaExplosionTiles[][0x100];
+extern const u8 gRubyStageGulpin_Gfx[][0x180];
 extern const u8 gLinooneBumperGfx[][0x100];
+
+
 extern const u16 gLinooneBumperGfxFrameIndices[][2];
 
 extern const s16 gGulpinAnimData[][5];
 extern const u16 gGulpinOamData[146][18];
-extern const u8 gRubyStageGulpin_Gfx[][0x180];
 
 extern const s16 gChikoritaFlashFrameIndices[];
-extern const u8 gChikoritaExplosionTiles[][0x100];
-extern const u8 gChikoritaProjectileTiles[][0x80];
-extern const u8 gRubyChikoritaEntity[][0x300];
 
 //ruby
 void UpdateChikoritaAttackAnimation(void)

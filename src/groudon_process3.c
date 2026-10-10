@@ -12,10 +12,10 @@
 extern const u8 gGroudonBonusClear_Gfx[0x2000];
 extern const Palette gBonusStageObjPal[];
 extern const u16 gGroudonLavaPaletteCycleData[]; //Should be of type Palette
-
-
 extern const u8 gGroudonAttackFx_Gfx[];
 extern const s8 gGroudonBoardBoulders_Gfx[][0x300];
+
+
 extern struct SongHeader se_groudon_hit;
 extern struct SongHeader se_groudon_lands;
 extern struct SongHeader se_groudon_spits_fire;

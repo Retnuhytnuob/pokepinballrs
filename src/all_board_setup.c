@@ -60,13 +60,6 @@ extern const u8 gSphealBoardBG2Tilemap[];
 extern const u8 gSphealBoardCompressedBGTiles[];
 extern const u8 gBoardHudTiles_B[];
 extern const u8 gBoardHudTiles_A[];
-
-
-extern const s16 gScrollTileUpdateTable[][4];
-
-extern const struct BoardCollisionDataSet gBoardCollisionDataSets[][2];
-
-
 extern const u8 gRubyIntroSprites_Gfx[];
 extern const u8 gSapphireIntroSprites_Gfx[];
 extern const u8 gDusclopsIntroSprite_Gfx[];
@@ -75,6 +68,13 @@ extern const u8 gKyogreIntroSprite_Gfx[];
 extern const u8 gGroudonIntroSprite_Gfx[];
 extern const u8 gRayquazaIntroSprite_Gfx[];
 extern const u8 gSphealIntroSprites_Gfx[];
+
+
+extern const s16 gScrollTileUpdateTable[][4];
+
+extern const struct BoardCollisionDataSet gBoardCollisionDataSets[][2];
+
+
 
 extern const struct FieldBoardLayout gFieldBoardConfigs[];
 

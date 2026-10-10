@@ -6,7 +6,10 @@
 #include "constants/bg_music.h"
 #include "constants/board/main_board.h"
 
-extern u8 gFlipper_Gfx[][0x200];
+// Rom_1 data
+extern const u8 gFlipper_Gfx[][0x200];
+
+
 extern struct FlipperLineSegment gFlipperLineGeometry[13];
 extern u16 gFlipperBaseXPositions[2];
 

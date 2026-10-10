@@ -19,11 +19,11 @@ extern EWRAM_DATA u8 gCatchSpritePaletteBuffer[0x20];
 extern const Palette gTimer_Default_Pal;
 extern const u8 gCatchMonAppearFx_Gfx[];
 extern const Palette gCatchMonAppearFx_Pal;
+extern const u8 gJirachiFx_Gfx[][0x480];
 
 
 extern struct BoardConfig gBoardConfig;
 
-extern const u8 gJirachiFx_Gfx[][0x480];
 extern const Palette gCaptureHit_Pal;
 extern const s16 gCatchMonRevealFrameData[8][2];
 extern const struct Vector16 gJirachiWaypoints[];

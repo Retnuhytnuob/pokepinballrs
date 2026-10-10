@@ -5,9 +5,9 @@
 #include "constants/board/ruby_states.h"
 #include "constants/mem_layout/ruby.h"
 
+// Rom_1 data
 extern const u8 gRubyMakuhitaGfx[][0x300];
 extern const u8 gRubyBoardRampPrize_Gfx[][0x80];
-
 
 void UpdateMakuhitaEntity(void)
 {

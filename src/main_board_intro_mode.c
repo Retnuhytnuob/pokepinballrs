@@ -13,11 +13,11 @@ extern const s16 gAreaPortraitIndexes[];
 extern const s16 gPondBumperRetractFrames[];
 extern const s16 gBoardArrowAnimFrames[];
 extern const Palette gTravelPortrait_Pal;
+extern const u8 gAreaRouletteSelectedFx_Gfx[];
 
 
 extern const u16 gAreaRouletteOamFramesets[18][27];
 
-extern const u8 gAreaRouletteSelectedFx_Gfx[];
 
 
 void InitBoardIntroMode(void)

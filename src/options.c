@@ -68,6 +68,20 @@ extern EWRAM_DATA int gGameBoyPlayerEnabled;
 EWRAM_DATA u8 gCustomButtonConfigs[5][10];
 EWRAM_DATA u8 gCustomButtonConfigTileIds[10];
 
+// Rom_1 data
+extern const u16 gOptionsBGMList[];
+extern const u16 gOptionsSEList[];
+extern const u8 gDefaultButtonConfigs[4][10];
+extern const u8 gDefaultCustomButtonConfigTileIds[];
+extern const void (*const gOptionsStateFuncs[])(void);
+extern const u8 gOptionsText_Tilemap[];
+extern const u8 gOptionsText_Gfx[];
+extern const u8 gOptionsBackground_Tilemap[];
+extern const u8 gOptionsBackground_Gfx[];
+extern const Palette gOptionsBackground_Pals[];
+extern const Palette gGBAButtonIcons_Pals[];
+extern const u8 gOptionsSprites_Gfx[];
+
 
 struct ButtonInfoView
 {
@@ -96,28 +110,17 @@ struct ButtonInfoView
 extern struct ButtonInfoView gButtonInfoTable[11];
 
 
-extern u8 gDefaultButtonConfigs[4][10];
 extern struct {u8 tileId; s16 frameDuration;} gButtonAnimData[];
-extern const Palette gGBAButtonIcons_Pals[];
 
 
 extern s16 gMain_saveData_customButtonConfig[][2];
 
-extern const Palette gOptionsBackground_Pals[];
-extern const u8 gOptionsText_Gfx[];
-extern const u8 gOptionsBackground_Gfx[];
-extern const u8 gOptionsText_Tilemap[];
-extern const u8 gOptionsBackground_Tilemap[];
-extern u16 gOptionsBGMList[];
-extern u16 gOptionsSEList[];
 
 
 extern const struct Vector16 gOptionsCursorPositionTable[];
 extern const u16 gOptionsBGMSelectorYPositions[];
 extern const struct SpriteSet *const gOptionsSpriteSets[];
-extern const u8 gOptionsSprites_Gfx[];
 
-extern void (*const gOptionsStateFuncs[])(void);
 
 
 
@@ -857,8 +860,6 @@ void InitCustomButtonConfigDisplay(void)
         }
     }
 }
-
-extern const u8 gDefaultCustomButtonConfigTileIds[];
 
 void SetButtonConfigInputs(s8 buttonConfigType)
 {

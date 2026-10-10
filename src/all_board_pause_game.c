@@ -6,8 +6,6 @@
 // Rom_1 data
 extern const struct Vector16 gPauseMenuSpriteOffsets[];
 extern const u16 gPauseMenuTextAnimFrames[];
-
-
 extern const u8 gPauseMenuText_Gfx[][0x20];
 
 

@@ -4,7 +4,9 @@
 #include "main.h"
 #include "constants/species_rs.h"
 
+// Rom_1 data
 extern const u16 gSpeciesRSToCryId[];
+
 extern struct ToneData gPokemonCryToneBank0[];
 extern struct ToneData gPokemonCryToneBank1[];
 extern struct ToneData gPokemonCryToneBank2[];

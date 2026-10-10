@@ -44,59 +44,59 @@ extern const u8 gAerodactlyFlight_Gfx[];
 extern const u8 gPortraitAnimFrameGraphics[][0x300];
 extern const u8 gBallRotationTileGraphics[][0x80];
 extern const u8 gBallUpgradeFx_Gfx[][0x200];
-
-
-
+extern const u8 gRubyChikoritaEntity[][0x300];
+extern const u8 gRayquazaSkyBackgroundGfx[0x2800];
+extern const u8 gChinchouBumper_Gfx[][0x100];
+extern const u8 gFlipper_Gfx[][0x200];
+extern const u8 gAlphabetTilesGfx[][0x40];
+extern const u8 gSpaceTileGfx[0x40];
+extern const u8 gMainStageBonusTrap_Gfx[][0x300];
+extern const u8 gRubyStageCyndaquil_Gfx[][0x280];
+extern const u8 gDecimalDigitTilesGfx[][0x40];
+extern const u8 gLocationPortraitGfx[][0x300];
+extern const u8 gTotodileEggDelivery_Gfx[];
+extern const u8 gHatchMachineElevator_Gfx[][0x440];
+extern const u8 gGroudonAttackFx_Gfx[0x2000];
+extern const u8 gRayquazaFlyby_Gfx[0x1C00];
+extern const u8 gRayquazaSpriteSheet[0x860];
+extern const u8 gSphealResultsScreenGfx[0x800];
+extern const u8 gChargeFillIndicator_Gfx[][0x80];
+extern const u8 gPikachuSaverTilesGfx[];
+extern const u8 gRubyBoardShopDoor_Gfx[][0x180];
+extern const u8 gRubyBoardSharpedo_Gfx[][0x260];
+extern const u8 gMartEvoForegroundMenuUx_Gfx[];
+extern const u8 gRubyBoardShop_Gfx[][0x500];
+extern const u8 gAreaRouletteSelectedFx_Gfx[];
+extern const u8 gMainBoardPikaSpinner_Gfx[][0x120];
+extern const u8 gRubyBoardHatchCave_Gfx[][0x480];
+extern const u8 gEggFrameTilesGfx[][0x200];
 extern const u8 gMainBoardBallSave_Gfx[];
 extern const u8 gMainBoardEndOfBall_Gfx[];
+extern const u8 gSapphireBoardZigzagoonFx_Gfx[];
 
-extern const u8 gAreaRouletteSelectedFx_Gfx[];
 
-extern const u8 gTotodileEggDelivery_Gfx[];
+
+
+
 
 
 extern const u8 *gEvoItemAppear_GfxList[];
 extern const s16 gEvoShopAnimFrames[][7];
 extern const u16 gShopCursorToItemMap[];
 
-extern const u8 gRubyBoardHatchCave_Gfx[][0x480];
-extern const u8 gRubyChikoritaEntity[][0x300];
-extern const u8 gRubyBoardSharpedo_Gfx[][0x260];
-extern const u8 gChinchouBumper_Gfx[][0x100];
-extern const u8 gRubyBoardShopDoor_Gfx[][0x180];
-extern const u8 gRubyStageCyndaquil_Gfx[][0x280];
-extern const u8 gRubyBoardShop_Gfx[][0x500];
 
-extern const u8 gSapphireBoardZigzagoonFx_Gfx[];
 
-extern const u8 gAlphabetTilesGfx[][0x40];
-extern const u8 gSpaceTileGfx[0x40];
-extern const u8 gDecimalDigitTilesGfx[][0x40];
-extern const u8 gMartEvoForegroundMenuUx_Gfx[];
 extern const s16 gCaughtTextChars[];
 
-extern const u8 gHatchMachineElevator_Gfx[][0x440];
 extern const s16 gHoleAnimKeyframeData[][2];
 
-extern const u8 gGroudonAttackFx_Gfx[0x2000];
-extern const u8 gRayquazaSkyBackgroundGfx[0x2800];
-extern const u8 gRayquazaFlyby_Gfx[0x1C00];
-extern const u8 gRayquazaSpriteSheet[0x860];
-extern const u8 gSphealResultsScreenGfx[0x800];
-extern u8 gFlipper_Gfx[][0x200];
 extern const u16 gShopItemData[][4];
 
 extern u8 *gMonPortraitGroupGfx[];
 extern const Palette *gMonPortraitGroupPals[];
 
 
-extern const u8 gMainStageBonusTrap_Gfx[][0x300];
 
-extern const u8 gLocationPortraitGfx[][0x300];
-extern const u8 gChargeFillIndicator_Gfx[][0x80];
-extern const u8 gPikachuSaverTilesGfx[];
-extern const u8 gMainBoardPikaSpinner_Gfx[][0x120];
-extern const u8 gEggFrameTilesGfx[][0x200];
 extern const u8 *gEvoItemTilesGfxPtrs[];
 extern const u16 gEggAnimationFrameData[][4];
 

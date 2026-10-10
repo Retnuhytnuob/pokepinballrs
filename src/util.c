@@ -186,7 +186,7 @@ void ClearSprites(void)
     }
 }
 
-void DrawTextToTilemap(u8 *arg0, s16 arg1, s16 arg2)
+void DrawTextToTilemap(u8 const *arg0, s16 arg1, s16 arg2)
 {
     // Rumble Pak related?
     s16 var0 = strlen(arg0) - 1;

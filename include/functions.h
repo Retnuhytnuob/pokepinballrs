@@ -92,7 +92,7 @@ void ResetDisplayState(void);
 void ClearGraphicsMemory(void);
 void ClearBgTilemapAndOffsets(void);
 void ClearSprites(void);
-void DrawTextToTilemap(u8 *arg0, s16 arg1, s16 arg2);
+void DrawTextToTilemap(u8 const *arg0, s16 arg1, s16 arg2);
 u8 *FormatIntToString(int arg0, u8 *arg1, int arg2, s16 arg3);
 void SetMatrixScale(s16 xScale, s16 yScale, s16 matrixNum);
 

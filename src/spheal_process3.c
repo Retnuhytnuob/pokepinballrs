@@ -18,6 +18,13 @@ struct SphealFlightPath
 extern const s8 gSphealScoreDigitSpriteIndices[];
 extern const Palette gBonusStageObjPal[];
 extern const u16 gSphealWaterBackgroundTilemap[];
+extern const u8 gSphealNetGfx[][0x200];
+extern const u8 gSphealNetFrontGfx[][0x180];
+extern const u8 gSphealFlyingEnemyVariantSprites[][0x120];
+extern const u8 gSphealMinionBodySprites[][0x800];
+extern const u8 gSphealResultsScreenGfx[];
+extern const u8 gWhiscash_Gfx[][0x480];
+extern const u8 gPelipper_Gfx[][0x480];
 
 
 
@@ -31,13 +38,6 @@ extern struct SongHeader se_spheal_end_whistle;
 extern struct SongHeader se_sealeo_hit_thud;
 extern struct SongHeader se_sealeo_nose_bounce;
 
-extern const u8 gSphealNetGfx[][0x200];
-extern const u8 gSphealNetFrontGfx[][0x180];
-extern const u8 gSphealFlyingEnemyVariantSprites[][0x120];
-extern const u8 gSphealMinionBodySprites[][0x800];
-extern const u8 gSphealResultsScreenGfx[];
-extern const u8 gWhiscash_Gfx[][0x480];
-extern const u8 gPelipper_Gfx[][0x480];
 extern const s16 gWaterTilePaletteCycle[];
 extern const u16 gSealeoFramesetData[][2];
 extern const u16 gSphealFramesetData[][3];

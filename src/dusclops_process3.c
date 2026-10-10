@@ -19,14 +19,18 @@ extern const u16 gDusclopsBossGuardReadyTileOffsets[];
 extern const u8 gDusclopsBonusClear_Gfx[0x2000];
 extern const Palette gBonusStageObjPal[];
 extern const Palette gDusclopsAnimPalettes[];
+extern const u16 gDusclopsBoardDusclopsAppearFx_Gfx[];
+extern const u16 gDusclopsBoardDusclops_Gfx[];
+extern const u8 gDusclopsBoardDusclopsBallGrabSwirl_Gfx[];
+extern const u8 gDusclopsBoardDuskull_Gfx[];
+
+
+extern const u16 gDuskullSpritesheetOam[][2][3];
 
 
 extern struct SongHeader se_duskull_appear;
 extern struct SongHeader se_dusclops_appear;
 extern s16 DuskullFramesetData[][3];
-extern u16 gDusclopsBoardDusclopsAppearFx_Gfx[];
-extern u16 gDusclopsBoardDusclops_Gfx[];
-extern u8 gDusclopsBoardDusclopsBallGrabSwirl_Gfx[];
 extern s16 DuclopsFramesetData[][2];
 
 
@@ -565,8 +569,6 @@ void DuskullPhase_ProcessEntityLogic(void) {
     }
 }
 
-extern const u8 gDusclopsBoardDuskull_Gfx[];
-extern const u16 gDuskullSpritesheetOam[][2][3];
 void DuskullPhase_ProcessGraphics() {
     s16 i, animPiece;
     s16 oamIx;

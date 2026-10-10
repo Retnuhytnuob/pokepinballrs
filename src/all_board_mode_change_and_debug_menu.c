@@ -16,9 +16,7 @@ EWRAM_DATA s16 gGameOverLetterYOffsets[8];
 // Rom_1 data
 extern const u8 gDebugTextStrings[];
 extern const u8 gDebugMenuValueTemplate[];
-extern u8 gDebugMenuCursorText[];
-
-
+extern const u8 gDebugMenuCursorText[];
 extern const u8 gMainBoardBallSave_Gfx[];
 extern const u8 gMainBoardBallSaveLatios_Gfx[];
 extern const u8 gMainBoardBallSaveLatiosArm_Gfx[];
@@ -29,6 +27,8 @@ extern const Palette gBallSaver_Ruby_Pal;
 extern const Palette gBallSaver_Sapphire_Pal;
 extern const Palette gEndOfBallBonus_Ruby_Pal;
 extern const Palette gEndOfBallBonus_Sapphire_Pal;
+
+
 extern const s8 gBonusSummaryTextTemplates[][EOB_SUMMARY_LINES][EOB_SUMMARY_CHARS_PER_LINE];
 
 // Handle debug system flags

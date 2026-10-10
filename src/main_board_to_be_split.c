@@ -19,6 +19,17 @@ extern const u8 gAerodactlyFlight_Gfx[];
 extern const Palette gAerodactlyFlight_Pal;
 extern const Palette gTotodile_Pal;
 extern const Palette gRubyShopSign_Pal;
+extern const u8 gAlphabetTilesGfx[][0x40];
+extern const u8 gSpaceTileGfx[0x40];
+extern const u8 gMainStageBonusTrap_Gfx[][0x300];
+extern const u8 gRubyStageCyndaquil_Gfx[][0x280];
+extern const u8 gShopPortraitOverlayGfx[][0x300];
+extern const u8 gDecimalDigitTilesGfx[][0x40];
+extern const u8 gTotodileEggDelivery_Gfx[];
+extern const u8 gChargeFillIndicator_Gfx[][0x80];
+extern const u8 gRubyBoardShop_Gfx[][0x500];
+extern const u8 gRubyBoardHatchCave_Gfx[][0x480];
+extern const u8 gEggFrameTilesGfx[][0x200];
 
 
 extern const s16 gEggHatchAnimData[14][3];
@@ -28,33 +39,22 @@ extern const Palette gCaptureHit_Pal;
 extern const u16 gCatchCreatureOamFramesets[48][4][3];
 extern const u16 gCyndaquilFrameIndices[];
 extern const struct Vector16 gCyndaquilCavePositions[];
-extern const u8 gRubyStageCyndaquil_Gfx[][0x280];
-extern const u8 gRubyBoardHatchCave_Gfx[][0x480];
 extern const u16 gEggOamFramestates[40][2][3];
-extern const u8 gSpaceTileGfx[0x40];
-extern const u8 gAlphabetTilesGfx[][0x40];
 extern const s16 gCaughtTextChars[];
 extern const struct Vector16 gFlyingCreatureCameraOffsets[];
 extern const u16 gAerodactylEggDeliveryCutsceneFramesets[14][15];
 extern const u16 gPikaSaverFrameData[][2];
 extern const u16 gTotodileEggDeliveryCutsceneFramesets[82][6][3];
-extern const u8 gTotodileEggDelivery_Gfx[];
 extern const u16 gCoinRewardAnimOamFramesets[18][3];
 extern const u16 gShopNumberOamFramesets[4][15];
 extern const s16 gArrowBounceOffsets[];
 extern const s16 gTimerIndicatorFrames[];
-extern const u8 gShopPortraitOverlayGfx[][0x300];
-extern const u8 gDecimalDigitTilesGfx[][0x40];
 extern const s16 gEvoShopAnimFrames[][7];
-extern const u8 gRubyBoardShop_Gfx[][0x500];
 
 extern const u16 gAngleToDirectionTable[];
 
 extern const u16 gShopCursorToItemMap[];
 extern const u16 gShopItemData[][4];
-extern const u8 gMainStageBonusTrap_Gfx[][0x300];
-extern const u8 gChargeFillIndicator_Gfx[][0x80];
-extern const u8 gEggFrameTilesGfx[][0x200];
 extern const u16 gEggAnimationFrameData[][4];
 
 // This is the 'Gravity Well' in the center of the board.

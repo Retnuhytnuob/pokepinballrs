@@ -55,10 +55,10 @@ extern const u8 gTitlescreenBg_Gfx[];
 extern const u8 gTitlescreenSpritesNoSavedGame_Gfx[];
 extern const u8 gTitlescreenSpritesSavedGame_Gfx[];
 extern const Palette gTitlescreenSprites_Pals[];
-
-
 extern const Palette gGBAButtonIcons_Pals[];
 extern const u8 gOptionsSprites_Gfx[];
+
+
 extern const s16 gTitleMenuStateTable[11];
 extern const s8 gTitlePressStartAnimDurations[4];
 extern const s8 gTitleMenuSlideInAnimData[6][2];

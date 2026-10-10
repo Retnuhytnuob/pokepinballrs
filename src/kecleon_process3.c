@@ -33,13 +33,13 @@ struct KecleonSpriteSortEntry
 extern const u8 gKecleonBonusClear_Gfx[0x2000];
 extern const Palette gBonusStageObjPal[];
 extern const u16 gKecleonScopeOverlayTilemap[];
-
-
-
-
-
 extern const u8 gKecleonStageKecleon_Gfx[][0x280];
 extern const u8 gKecleonStageKecleonFx_Gfx[][0x100];
+
+
+
+
+
 extern struct SongHeader se_kecleon_side_look;
 extern struct SongHeader se_kecleon_vanish;
 extern struct SongHeader se_kecleon_startled;

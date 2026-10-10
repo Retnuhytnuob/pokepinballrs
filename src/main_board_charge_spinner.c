@@ -4,10 +4,12 @@
 #include "constants/bg_music.h"
 #include "constants/board/main_board.h"
 
+// Rom_1 data
+extern const u8 gMainBoardPikaSpinner_Gfx[][0x120];
+
 extern struct SongHeader se_pika_full_charge_1_up;
 extern struct SongHeader se_pika_spinner_clack;
 
-extern const u8 gMainBoardPikaSpinner_Gfx[][0x120];
 
 void UpdatePikachuChargeCounter(void)
 {
