@@ -11,6 +11,7 @@
 EWRAM_DATA u8 gEReaderUnused1;
 EWRAM_DATA u8 gEReaderUnused2;
 EWRAM_DATA s8 gEReaderLinkDataReceived;
+extern EWRAM_DATA s16 gLinkTimeoutCounter;
 EWRAM_DATA s16 gEReaderGeneralTimer;
 EWRAM_DATA s8 gEReaderTransitionStep;
 EWRAM_DATA s16 gEReaderCardIndex;
@@ -38,16 +39,13 @@ extern const Palette gPokedexSprites_Pals[];
 extern const u8 gPokedexSprites_Gfx[];
 extern const u8 gEReaderText_Gfx[];
 
-
+// Rom_2 data
 extern const u16 gEReaderTextGlyphTable[][3*0x18];
-extern s16 gLinkTimeoutCounter;
-
-extern s8 gEReaderTextLengths[10];
-extern s8 gEReaderTextHasNextPage[10];
-extern u8 gEReaderCardStartPages[NUM_EREADER_CARDS + 1];
-// extern u8 gUnknown_0807D000[]; // dead declaration, never referenced
-extern s16 gEReaderTransitionStepDurations[];
 extern const struct SpriteSet * const gEReaderSpriteSets[13];
+extern const s16 gEReaderTransitionStepDurations[];
+extern const s8 gEReaderTextLengths[10];
+extern const s8 gEReaderTextHasNextPage[10];
+extern const u8 gEReaderCardStartPages[NUM_EREADER_CARDS + 1];
 
 enum EReaderState{
     EREADER_STATE_LOAD_GRAPHICS = 0,

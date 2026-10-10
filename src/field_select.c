@@ -47,12 +47,10 @@ extern const Palette gFieldSelectBGPals[];
 extern const Palette gFieldSelectSpritePals[];
 extern const u8 gFieldSelectSpriteGfx[];
 
-
-
-extern struct {u16 rubyTransitionFrames[5]; u16 sapphireTransitionFrames[5];} gFieldTransitionAnimData;
-extern struct VectorU16 gFieldSelectBallSpeedPositions[];
+// Rom_2 data
 extern const struct SpriteSet *const gFieldSelectSpriteSets[];
-
+extern const struct {u16 rubyTransitionFrames[5]; u16 sapphireTransitionFrames[5];} gFieldTransitionAnimData;
+extern const struct VectorU16 gFieldSelectBallSpeedPositions[];
 
 void FieldSelectMain(void)
 {

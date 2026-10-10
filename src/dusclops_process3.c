@@ -24,14 +24,14 @@ extern const u16 gDusclopsBoardDusclops_Gfx[];
 extern const u8 gDusclopsBoardDusclopsBallGrabSwirl_Gfx[];
 extern const u8 gDusclopsBoardDuskull_Gfx[];
 
+extern const struct SongHeader se_duskull_appear;
+extern const struct SongHeader se_dusclops_appear;
 
-extern const u16 gDuskullSpritesheetOam[][2][3];
 
 
-extern struct SongHeader se_duskull_appear;
-extern struct SongHeader se_dusclops_appear;
 extern s16 DuskullFramesetData[][3];
 extern s16 DuclopsFramesetData[][2];
+extern const u16 gDuskullSpritesheetOam[][2][3];
 
 
 void InitFrameProcess3_BoardLogic_DusclopsBoard(void)

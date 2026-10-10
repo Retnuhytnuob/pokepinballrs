@@ -14,9 +14,10 @@ extern const Palette gShopEvoUI_Pals[];
 extern const u8 gShopModeBG0_0_Tilemap[];
 extern const u8 gMartEvoForegroundMenuUx_Gfx[];
 
-extern const u16 gShopCursorToItemMap[];
+// Rom_2 data
 extern const u16 gShopItemData[][4];
-extern u32 gShopEvoBGAnimFrames[];
+extern const u16 gShopCursorToItemMap[];
+extern const u32 gShopEvoBGAnimFrames[];
 
 /// @brief 
 /// @param arg0 0 = shop, 1= evolution selection

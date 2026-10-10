@@ -874,7 +874,7 @@ struct PinballGame
     /*0x74B*/ u8 filler74B[0x1];
     /*0x74C*/ volatile u8 savedObjPalette[2][OBJ_PLTT_SIZE];
     /*0xB4C*/ volatile u8 savedBgPalette[2][BG_PLTT_SIZE];
-    /*0xF4C*/ struct SongHeader *savedBgmSongHeader;
+    /*0xF4C*/ const struct SongHeader *savedBgmSongHeader;
     /*0xF50*/ u8 fillerF50[0x8];
     /*0xF58*/ struct BgOffsets bgOffsets0;
     /*0xF5C*/ struct BgOffsets bgOffsets1;
@@ -995,8 +995,11 @@ extern EWRAM_DATA struct BoardConfig gBoardConfig;
 // Rom_1 data
 extern const Palette gBall_Pals[];
 
+// Rom_2 data
 extern const u8 *const gModeBannerTilemaps[];
 extern const Palette *const gModeBanner_Pals[];
+
+
 
 extern const struct PokemonSpecies gSpeciesInfo[];
 

@@ -74,31 +74,24 @@ extern const u8 gMainBoardBallSave_Gfx[];
 extern const u8 gMainBoardEndOfBall_Gfx[];
 extern const u8 gSapphireBoardZigzagoonFx_Gfx[];
 
-
-
-
-
-
-
-extern const u8 *gEvoItemAppear_GfxList[];
-extern const s16 gEvoShopAnimFrames[][7];
-extern const u16 gShopCursorToItemMap[];
-
-
-
+// Rom_2 data
 extern const s16 gCaughtTextChars[];
+extern const u16 gShopItemData[][4];
+extern const u16 gShopCursorToItemMap[];
+extern const u16 gEggAnimationFrameData[][4];
+extern const s16 gEvoShopAnimFrames[][7];
+extern const u8 *gEvoItemAppear_GfxList[];
+extern const u8 *gEvoItemTilesGfxPtrs[];
+
 
 extern const s16 gHoleAnimKeyframeData[][2];
 
-extern const u16 gShopItemData[][4];
 
 extern u8 *gMonPortraitGroupGfx[];
 extern const Palette *gMonPortraitGroupPals[];
 
 
 
-extern const u8 *gEvoItemTilesGfxPtrs[];
-extern const u16 gEggAnimationFrameData[][4];
 
 void SaveGameStateSnapshot(s16);
 

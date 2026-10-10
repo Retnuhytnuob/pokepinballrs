@@ -16,8 +16,10 @@ extern const Palette gCatchTile_BurstStage3_Pal;
 extern const u8 gCatchTile_BurstStage4_Gfx[];
 extern const Palette gCatchTile_BurstStage4_Pal;
 
-
+// Rom_2 data
 extern const s16 gCatchTile_SequentialFramesetData[][2];
+
+
 extern const u16 gCatchTile_SequentialBreakSpritesheetOam[28][18];
 extern const s16 gCatchTile_RevealSparkleTimings[];
 extern const u16 gCatchTile_RevealOamFramesets[16][18];

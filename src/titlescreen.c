@@ -58,12 +58,16 @@ extern const Palette gTitlescreenSprites_Pals[];
 extern const Palette gGBAButtonIcons_Pals[];
 extern const u8 gOptionsSprites_Gfx[];
 
-
+// Rom_2 data
 extern const s16 gTitleMenuStateTable[11];
 extern const s8 gTitlePressStartAnimDurations[4];
 extern const s8 gTitleMenuSlideInAnimData[6][2];
 extern const s8 gTitleMenuSlideOutAnimSpriteGroupData[9][2];
+extern const struct VectorU16 gTitleNoSaveArrowPositions[4];
+extern const struct VectorU16 gTitleNoSaveSelectorPositions[4];
 extern const u16 gTitleNoSaveMenuActions[4];
+extern const struct VectorU16 gTitleSavedArrowPositions[5];
+extern const struct VectorU16 gTitleSavedSelectorPositions[5];
 extern const u16 gTitleSavedMenuActions[];
 extern const struct SpriteSet *const gTitlePressStartSpriteSets[];
 extern const u8 *const gTitleNoSaveDefaultSprites[7];
@@ -72,10 +76,6 @@ extern const s8 gTitleMenuRetractDurations[];
 extern const u8 *const gTitleSavedDefaultSprites[7];
 extern const u8 *const gTitleSavedAnimSprites[];
 extern const s16 gEReaderAccessButtonSequence[];
-extern struct VectorU16 gTitleNoSaveArrowPositions[4];
-extern struct VectorU16 gTitleNoSaveSelectorPositions[4];
-extern struct VectorU16 gTitleSavedArrowPositions[5];
-extern struct VectorU16 gTitleSavedSelectorPositions[5];
 
 void ClearHighScoreNameEntry(void)
 {

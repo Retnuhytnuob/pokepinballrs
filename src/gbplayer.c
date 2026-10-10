@@ -41,6 +41,7 @@ extern const u8 gGbPlayerGfx[];
 extern const u8 gGbPlayerTilemap[];
 extern const u16 Sio32ConnectionData[4];
 
+// Rom_2 data
 extern const int *gRumblePatterns[];
 
 /*static*/ void ReadGbPlayerKeys(void)

@@ -11,16 +11,18 @@
 extern const Palette gEvoItem_Pals[];
 extern const Palette gTimer_Default_Pal;
 
+extern const struct SongHeader se_evo_item_appear;
+extern const struct SongHeader se_evo_item_finish_appear;
+extern const struct SongHeader se_evo_item_collected;
 
-extern struct SongHeader se_evo_item_appear;
-extern struct SongHeader se_evo_item_finish_appear;
-extern struct SongHeader se_evo_item_collected;
-
+// Rom_2 data
+extern const struct Vector16 gEvoItemPositions[][8];
 extern const u8 *gEvoItemAppear_GfxList[];
+extern const u8 *gEvoItemTilesGfxPtrs[];
+
+
 extern const s16 gEvoItemAppearFrameThresholds[];
 extern const u16 gEvoItemAnimOamFramesets[58][15];
-extern const struct Vector16 gEvoItemPositions[][8];
-extern const u8 *gEvoItemTilesGfxPtrs[];
 
 void CleanupEvolutionModeState(void)
 {

@@ -24,7 +24,7 @@ extern const s16 gZigzagoonAnimKeyframes[][3];
 extern const u16 gSapphireBoardZigzagoonSpritesheetOam[42][3][3];
 extern const u16 gZigzagoonFxSpritesheetOam[14][7][3];
 
-extern struct SongHeader se_pelipper_wing_flap;
+extern const struct SongHeader se_pelipper_wing_flap;
 
 void DecrementPelipperTimer(void)
 {

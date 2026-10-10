@@ -10,14 +10,16 @@ extern const u16 gPortraitAnim_Pals[];
 extern const u8 gPortraitAnimFrameGraphics[][0x300];
 extern const u8 gLocationPortraitGfx[][0x300];
 
-
+// Rom_2 data
+extern const u16 gShopItemData[][4];
+extern const u16 gShopCursorToItemMap[];
 extern const u16 gPortraitPaletteSlots[2];
 extern const s16 gRouletteOutcomeFrameOffsets[];
 
-extern const u16 gShopItemData[][4];
+
+
 extern u8 *gMonPortraitGroupGfx[];
 extern const Palette *gMonPortraitGroupPals[];
-extern const u16 gShopCursorToItemMap[];
 
 /*
     File is used for the center screen display on the main board.

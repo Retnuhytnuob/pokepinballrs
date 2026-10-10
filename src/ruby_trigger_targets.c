@@ -12,13 +12,14 @@ extern const u8 gChikoritaExplosionTiles[][0x100];
 extern const u8 gRubyStageGulpin_Gfx[][0x180];
 extern const u8 gLinooneBumperGfx[][0x100];
 
-
+// Rom_2 data
+extern const s16 gChikoritaFlashFrameIndices[];
+extern const s16 gGulpinAnimData[][5];
 extern const u16 gLinooneBumperGfxFrameIndices[][2];
 
-extern const s16 gGulpinAnimData[][5];
+
 extern const u16 gGulpinOamData[146][18];
 
-extern const s16 gChikoritaFlashFrameIndices[];
 
 //ruby
 void UpdateChikoritaAttackAnimation(void)

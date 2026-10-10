@@ -8,8 +8,8 @@
 // Rom_1 data
 extern const u16 gSharedBumperCollisionMap[];
 
-
-extern u16 gSapphireTargetBumperIndexMap[];
+// Rom_2 data
+extern const u16 gSapphireTargetBumperIndexMap[];
 
 s16 CollisionCheck_Sapphire(struct Vector16 *ballPosition, u16* collisionAngle) {
     struct Vector16 vec1;

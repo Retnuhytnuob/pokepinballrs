@@ -44,9 +44,7 @@ extern const u8 gFieldSelectWindow_Gfx[];
 extern const Palette gFieldSelectSpritePals[];
 extern const u8 gFieldSelectSpriteGfx[];
 
-
-
-
+// Rom_2 data
 extern const struct SpriteSet *const gBonusFieldSelectSpriteSets[16];
 extern const struct VectorU16 gBonusFieldStageIconPositions[];
 extern const struct VectorU16 gBonusFieldSpeedIndicatorPositions[];

@@ -21,13 +21,13 @@ extern const u8 gKyogreTopPosition_Gfx[][0x580];
 extern const u8 gKyogreBreach_Gfx[][0x4C0];
 extern const u8 gKyogreWhirlpoolTrap_Gfx[][0x200];
 
+extern const struct SongHeader se_kyogre_hit;
+extern const struct SongHeader se_kyogre_breach_surface;
+extern const struct SongHeader se_kyogre_dive;
+extern const struct SongHeader se_kyogre_spawn_whirlpool;
+extern const struct SongHeader se_kyogre_freeze_ring;
+extern const struct SongHeader se_kyogre_departs;
 
-extern struct SongHeader se_kyogre_hit;
-extern struct SongHeader se_kyogre_breach_surface;
-extern struct SongHeader se_kyogre_dive;
-extern struct SongHeader se_kyogre_spawn_whirlpool;
-extern struct SongHeader se_kyogre_freeze_ring;
-extern struct SongHeader se_kyogre_departs;
 extern const Palette *gKyogreFadeInPaletteProgression[];
 extern const u16 gKyogreAnimFramesetTable[][3];
 extern const s16 gKyogreRisingPaletteCycleIndices[];

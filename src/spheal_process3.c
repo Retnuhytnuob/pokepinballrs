@@ -26,17 +26,16 @@ extern const u8 gSphealResultsScreenGfx[];
 extern const u8 gWhiscash_Gfx[][0x480];
 extern const u8 gPelipper_Gfx[][0x480];
 
-
+extern const struct SongHeader se_spheal_hit;
+extern const struct SongHeader se_spheal_net_swoosh;
+extern const struct SongHeader se_spheal_crowd_cheer;
+extern const struct SongHeader se_spheal_end_whistle;
+extern const struct SongHeader se_sealeo_hit_thud;
+extern const struct SongHeader se_sealeo_nose_bounce;
 
 extern const struct SphealFlightPath gSphealFlightPathData[];
 
 extern const s16 gSphealWhiscashAnimFrameset[][4];
-extern struct SongHeader se_spheal_hit;
-extern struct SongHeader se_spheal_net_swoosh;
-extern struct SongHeader se_spheal_crowd_cheer;
-extern struct SongHeader se_spheal_end_whistle;
-extern struct SongHeader se_sealeo_hit_thud;
-extern struct SongHeader se_sealeo_nose_bounce;
 
 extern const s16 gWaterTilePaletteCycle[];
 extern const u16 gSealeoFramesetData[][2];

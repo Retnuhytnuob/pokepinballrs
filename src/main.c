@@ -17,7 +17,7 @@ EWRAM_DATA IntrFunc *gVCountIntrFuncPtr;
 // Rom_1 data
 extern const s16 gSineTable[];
 
-
+// Rom_2 data
 extern const IntrFunc gIntrTableTemplate[14];
 
 static void InitGame(void);

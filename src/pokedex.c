@@ -158,25 +158,26 @@ extern const Palette gPokedexSprites_Pals[];
 extern const u8 gPokedexSprites_Gfx[];
 extern const u8 gPokedexTextGlyphs_Gfx[];
 
+// Rom_2 data
+extern const u16 gPokedexAnimBaseTileNums[][4];
+extern const u16 gPokedexCatchAnimTileOffsets[][20];
+extern const u16 gPokedexHatchAnimTileOffsets[][51];
+extern const s16 gPokedexAnimFrameDurations[][51];
+extern const struct SpriteSet *const gPokedexSpriteSets[];
+extern const s16 gDexAnimationIx[];
+extern const s16 gPokedexCatchAnimIndices[];
+extern s16 gPokedexListNameVramOffsets[]; //TODO: should be const
 
 
 extern Palette *gCatchMonPaletteGroups[];
 extern u8 *gCatchSpriteGfxPtrs[];
 
 
-extern const struct SpriteSet *const gPokedexSpriteSets[];
-extern const u16 gPokedexAnimBaseTileNums[][4];
-extern const u16 gPokedexCatchAnimTileOffsets[][20];
-extern const s16 gPokedexCatchAnimIndices[];
-extern const u16 gPokedexHatchAnimTileOffsets[][51];
-extern const s16 gPokedexAnimFrameDurations[][51];
-extern s16 gPokedexListNameVramOffsets[];
 extern u8 *gMonPortraitGroupGfx[];
 extern const Palette *gMonPortraitGroupPals[];
 
 
 
-extern s16 gDexAnimationIx[];
 
 enum PokedexPopupType {
     POKEDEX_POPUP_TRANSMISSION_CONNECT_PROMPT = 0,

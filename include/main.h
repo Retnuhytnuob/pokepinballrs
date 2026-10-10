@@ -163,6 +163,7 @@ extern EWRAM_DATA IntrFunc *gVCountIntrFuncPtr;
 
 extern u32 IntrMain[];
 
+// Rom_2 data
 extern StateFunc gMainFuncs[];
 
 // sym_bss

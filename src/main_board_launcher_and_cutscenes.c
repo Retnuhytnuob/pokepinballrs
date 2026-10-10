@@ -23,6 +23,8 @@ extern const u8 gLifeCountDigit_Gfx[][0x40];
 extern const u8 gRubyTravelVolbeat_Gfx[][0x480];
 extern const u8 gSapphireTravelIllumise_Gfx[][0x480];
 
+extern const struct SongHeader se_pika_full_charge_1_up;
+extern const struct SongHeader se_kecleon_side_look;
 
 extern const u8 gSapphireTravelPaint_Gfx[];
 extern const s16 gTravelEventAnimData[][3];
@@ -33,8 +35,6 @@ extern const u16 gEvolutionSparkleSpritesheetOam[20][12];
 extern const s16 gSpoinkAnimFrameset[][2];
 extern const Palette gOneUpSprite_Pal;
 
-extern struct SongHeader se_kecleon_side_look;
-extern struct SongHeader se_pika_full_charge_1_up;
 
 
 

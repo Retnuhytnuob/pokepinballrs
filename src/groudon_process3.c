@@ -15,12 +15,13 @@ extern const u16 gGroudonLavaPaletteCycleData[]; //Should be of type Palette
 extern const u8 gGroudonAttackFx_Gfx[];
 extern const s8 gGroudonBoardBoulders_Gfx[][0x300];
 
+extern const struct SongHeader se_groudon_hit;
+extern const struct SongHeader se_groudon_lands;
+extern const struct SongHeader se_groudon_spits_fire;
+extern const struct SongHeader se_groudon_fire_ring;
+extern const struct SongHeader se_groudon_fire_grab;
 
-extern struct SongHeader se_groudon_hit;
-extern struct SongHeader se_groudon_lands;
-extern struct SongHeader se_groudon_spits_fire;
-extern struct SongHeader se_groudon_fire_ring;
-extern struct SongHeader se_groudon_fire_grab;
+
 extern const s16 gShockwaveSplashDistanceThresholds[];
 extern const s16 gScreenShakeOscillationValues[];
 extern const s16 gGroudonFootstepShakePatterns[][31];

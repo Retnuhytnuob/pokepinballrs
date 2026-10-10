@@ -36,18 +36,16 @@ extern const u16 gKecleonScopeOverlayTilemap[];
 extern const u8 gKecleonStageKecleon_Gfx[][0x280];
 extern const u8 gKecleonStageKecleonFx_Gfx[][0x100];
 
+extern const struct SongHeader se_kecleon_side_look;
+extern const struct SongHeader se_kecleon_vanish;
+extern const struct SongHeader se_kecleon_startled;
+extern const struct SongHeader se_kecleon_running;
+extern const struct SongHeader se_kecleon_knocked_over;
+extern const struct SongHeader se_kecleon_hit_damaged;
+extern const struct SongHeader se_kecleon_hits_ground_defeated;
+extern const struct SongHeader se_kecleon_seeing_stars;
 
 
-
-
-extern struct SongHeader se_kecleon_side_look;
-extern struct SongHeader se_kecleon_vanish;
-extern struct SongHeader se_kecleon_startled;
-extern struct SongHeader se_kecleon_running;
-extern struct SongHeader se_kecleon_knocked_over;
-extern struct SongHeader se_kecleon_hit_damaged;
-extern struct SongHeader se_kecleon_hits_ground_defeated;
-extern struct SongHeader se_kecleon_seeing_stars;
 extern const u16 gKecleonAnimFramesetTable[][3];
 extern const s16 gKecleonOverlayTileAnimIndices[];
 extern const u16 gKecleonVisibleWalkDirectionMap[];

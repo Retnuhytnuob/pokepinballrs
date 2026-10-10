@@ -18,19 +18,20 @@ extern const u8 gWhiscash_Gfx[][0x480];
 extern const u8 gRubyBoardShopDoor_Gfx[][0x180];
 extern const u8 gRubyBoardSharpedo_Gfx[][0x260];
 
+extern const struct SongHeader se_whiscash_splashdown;
 
-extern struct SongHeader se_whiscash_splashdown;
-
-extern const s16 gSharpedoAnimFrameData[][2];
-extern const u16 gSharpedoSpritesheetOam[42][3][3];
-extern const struct Vector16 gChinchouWaypointPositions[];
-
-extern const s16 gWhiscashFramesetData[][4];
-extern const s16 gWhiscashShakeOffsets[];
-
-
+// Rom_2 data
 extern const s16 gNuzleafAnimFrameData[50][3];
-extern const s16 gNuzleafPositions[][2]; // Would be a Vector16, if it didn't impact compilation.
+extern const s16 gNuzleafPositions[][2]; // TODO: Would be a Vector16, if it didn't impact compilation.
+extern const s16 gWhiscashFramesetData[][4];
+extern const struct Vector16 gChinchouWaypointPositions[];
+extern const s16 gWhiscashShakeOffsets[];
+extern const s16 gSharpedoAnimFrameData[][2];
+
+extern const u16 gSharpedoSpritesheetOam[42][3][3];
+
+
+
 extern const u16 gNuzleafOamData[58][6];
 
 #define MIN_POND_SWITCHES_BEFORE_WHISCASH_AVAILABLE 3

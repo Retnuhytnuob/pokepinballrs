@@ -4,6 +4,8 @@
 #include "constants/bg_music.h"
 #include "constants/board/ruby_states.h"
 
+extern const struct SongHeader se_ball_upgrade;
+
 extern const u8 *gRubyBallPowerUpLightTilePointers[][3];
 extern const u16 gBallUpgradeFx_TileIndicies[];
 extern const u8 *gRubyCatchArrowTilePointer[][4];
@@ -23,7 +25,6 @@ extern const s16 gCoinRewardLevelTimerThresholds[];
 extern const u8 *gRubyEvoArrowTilePtrs[][5][3];
 extern const u8 *gRubyGetArrowTilePtrs[][5][3];
 
-extern struct SongHeader se_ball_upgrade;
 
 
 void UpdateRubyBoardAnimations(void)

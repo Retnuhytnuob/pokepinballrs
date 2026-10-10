@@ -80,18 +80,13 @@ extern const Palette gHighScoreBG_Pals[];
 extern const Palette gHighScoreSprite_Pals[];
 extern const u8 gHighScoreDialogs_Gfx[];
 
-
-extern s8 gLinkExchangeSendPhase;
-
-extern const s8 gScorePaletteAnimOffsets[3]; //Sized based on call using gHighScoreScreenState.paletteAnimPhase + data
-extern const s8 gScorePaletteResetOffsets[3]; //Same as above
+// Rom_2 data
 extern const struct SpriteSet *const gNameEntryCursorSpriteSets[];
 extern const struct SpriteSet *const gHighScoreScreenSpriteSets[];
 extern const struct SpriteSet *const gCompletionBannerSpriteSets[];
-
-//Rom 2
+extern const s8 gScorePaletteAnimOffsets[3]; //Sized based on call using gHighScoreScreenState.paletteAnimPhase + data
+extern const s8 gScorePaletteResetOffsets[3]; //Same as above
 extern const u16 gHighScoreCharToTileMap[];
-
 
 
 enum HighScoreStates{

@@ -139,34 +139,12 @@ extern const u8 gIntroScene9BallFlight_BG3Tilemap[];
 extern const u8 gIntroScene9BallFlightClouds_Gfx[];
 extern const u8 gIntroScene9BallFlightall_Gfx[];
 
-
-// Rom 2
-extern s16 gIntroScene1Torchic_TileOffsets[0x8];
-
-
-
-
-extern const struct SpriteSet *const gIntroScene9BallFlight_SpriteSets[];
-
-
-
-
-extern struct Vector16 gIntroScene1Torchic_BGAnimTiming[0x8];
-extern struct Vector16 gIntroScene1Torchic_ScaleOffsets[0x4];
-extern struct Vector16 gIntroScene5Mudkip_BGAnimTiming[];
-extern struct Vector16 gIntroScene7Parade_WailmerQuadOffsets[0x4];
-
 struct IntroAnimVelocity {
     s8 velocityX;
     s8 velocityY;
     s8 frameDuration;
     s8 spawnFrame;
 };
-
-extern struct IntroAnimVelocity gIntroScene6Chinchou_ScrollVelocity[];
-extern struct IntroAnimVelocity gIntroScene6Chinchou_EntityMovement[];
-
-extern const struct SpriteSet *const gIntroScene8WailmerLaunch_SpriteSets[];
 
 struct IntroDebrisMovement
 {
@@ -177,23 +155,26 @@ struct IntroDebrisMovement
     u8 filler4;
     u8 oamPriority;
 }; // 0x8 size in memory
-extern const struct IntroDebrisMovement gIntroScene8WailmerLaunch_DebrisMovement[];
 
-extern s16 gTitleRevealJingle[][10][2];
-
-// Rom_2
-extern struct Vector16 gIntroScene1Torchic_BGAnimTiming[0x8];
-extern s16 gIntroScene1Torchic_TileOffsets[0x8];
+// Rom_2 data
 extern const struct SpriteSet *const gIntroScene1Torchic_SpriteSets[];
-extern struct Vector16 gIntroScene1Torchic_ScaleOffsets[0x4];
+extern const struct Vector16 gIntroScene1Torchic_BGAnimTiming[0x8];
+extern const s16 gIntroScene1Torchic_TileOffsets[0x8];
+extern const struct Vector16 gIntroScene1Torchic_ScaleOffsets[0x4];
+extern const s16 gTitleRevealJingle[][10][2];
 extern const struct SpriteSet *const gIntroScene3Treecko_SpriteSets[];
 extern const struct SpriteSet *const gIntroScene5Mudkip_SpriteSets[];
-extern s16 gIntroScene5Mudkip_TileOffsets[];
-
-extern u8 gIntroScene6Chinchou_BounceFlags[];
+extern const struct Vector16 gIntroScene5Mudkip_BGAnimTiming[];
+extern const s16 gIntroScene5Mudkip_TileOffsets[];
 extern const struct SpriteSet *const gIntroScene6Chinchou_SpriteSets[];
-
+extern const struct IntroAnimVelocity gIntroScene6Chinchou_ScrollVelocity[];
+extern const u8 gIntroScene6Chinchou_BounceFlags[];
+extern const struct IntroAnimVelocity gIntroScene6Chinchou_EntityMovement[];
 extern const struct SpriteSet *const gIntroScene7Parade_SpriteSets[];
+extern const struct Vector16 gIntroScene7Parade_WailmerQuadOffsets[0x4];
+extern const struct SpriteSet *const gIntroScene8WailmerLaunch_SpriteSets[];
+extern const struct IntroDebrisMovement gIntroScene8WailmerLaunch_DebrisMovement[];
+extern const struct SpriteSet *const gIntroScene9BallFlight_SpriteSets[];
 extern s8 gIntroScene9BallFlight_BallXFrameAdjustTable[];
 
 // --------

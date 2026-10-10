@@ -11,9 +11,7 @@ extern const u16 gRubyLinooneLeftCollisionMap[];
 extern const u16 gRubyLinooneRightCollisionMap[];
 extern const u16 gWhiscashCollisionMap[];
 
-
-
-extern struct SongHeader se_evo_get_arrow_earned;
+extern const struct SongHeader se_evo_get_arrow_earned;
 
 s16 CollisionCheck_Ruby(struct Vector16 *ballPosition, u16* collisionAngle) {
     struct Vector16 vec1;
