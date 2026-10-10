@@ -82,16 +82,9 @@ extern const u16 gEggAnimationFrameData[][4];
 extern const s16 gEvoShopAnimFrames[][7];
 extern const u8 *gEvoItemAppear_GfxList[];
 extern const u8 *gEvoItemTilesGfxPtrs[];
-
-
 extern const s16 gHoleAnimKeyframeData[][2];
-
-
-extern u8 *gMonPortraitGroupGfx[];
 extern const Palette *gMonPortraitGroupPals[];
-
-
-
+extern const u8 *gMonPortraitGroupGfx[];
 
 void SaveGameStateSnapshot(s16);
 

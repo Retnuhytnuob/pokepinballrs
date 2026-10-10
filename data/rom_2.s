@@ -8832,7 +8832,7 @@ gBallUpgradeFx_TileIndicies:: @ 0x086B0E20
     .2byte 5
     .align 2, 0
 
-gSlingshotHitFrameIndices:: @ 0x086B0E60
+gSapphireSlingshotHitFrameIndices:: @ 0x086B0E60
     .2byte 0,1,1,1,1,0
 
 gSapphirePSquareIndicator:: @ 0x086B0E6C
@@ -8860,7 +8860,7 @@ gSapphireProgressDigitTilePtrs:: @ 0x086B0E9C
     .4byte gSapphireProgressDigit9_TensTop, gSapphireProgressDigit9_TensBot, gSapphireProgressDigit9_OnesTop, gSapphireProgressDigit9_OnesBot
     .4byte BG_ADDR_FOR_BOARD_WRAP(23, 17), BG_ADDR_FOR_BOARD_WRAP(24, 17), BG_ADDR_FOR_BOARD_WRAP(23, 18), BG_ADDR_FOR_BOARD_WRAP(24, 18)
 
-gRotatingBackgroundTilePtrs:: @ 0x086B0F4C
+gWailmerWaterTilePtrs:: @ 0x086B0F4C
     @ 5 sets of 4
     @ fifth set has destination address
     .4byte gWailmerWaterFrame0Row0, gWailmerWaterFrame0Row1, gWailmerWaterFrame0Row2, gWailmerWaterFrame0Row3

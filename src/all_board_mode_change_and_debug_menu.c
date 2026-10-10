@@ -28,7 +28,7 @@ extern const Palette gBallSaver_Sapphire_Pal;
 extern const Palette gEndOfBallBonus_Ruby_Pal;
 extern const Palette gEndOfBallBonus_Sapphire_Pal;
 
-
+// Rom_2 data
 extern const s8 gBonusSummaryTextTemplates[][EOB_SUMMARY_LINES][EOB_SUMMARY_CHARS_PER_LINE];
 
 // Handle debug system flags

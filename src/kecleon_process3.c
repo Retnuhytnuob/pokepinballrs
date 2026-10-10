@@ -45,14 +45,14 @@ extern const struct SongHeader se_kecleon_hit_damaged;
 extern const struct SongHeader se_kecleon_hits_ground_defeated;
 extern const struct SongHeader se_kecleon_seeing_stars;
 
-
+// Rom_2 data
 extern const u16 gKecleonAnimFramesetTable[][3];
-extern const s16 gKecleonOverlayTileAnimIndices[];
 extern const u16 gKecleonVisibleWalkDirectionMap[];
 extern const u16 gKecleonInvisibleDashDirectionMap[];
 extern const struct KecleonMoveNode gKecleonMovementTargetGraph[];
 extern const struct Vector16 gKecleonScopeFallTargets[];
 extern const u16 *gKecleonOverlayTilemapPointers[];
+extern const s16 gKecleonOverlayTileAnimIndices[];
 extern const s16 gKecleonPlantAnimIndices[];
 extern const struct KecleonSpriteSortEntry gKecleonSpriteYSortData[];
 extern const u16 gKecleonLowerBodyOamData[126][2][3];

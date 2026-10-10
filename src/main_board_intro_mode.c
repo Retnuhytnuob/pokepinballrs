@@ -15,10 +15,8 @@ extern const s16 gBoardArrowAnimFrames[];
 extern const Palette gTravelPortrait_Pal;
 extern const u8 gAreaRouletteSelectedFx_Gfx[];
 
-
+// Rom_2 data
 extern const u16 gAreaRouletteOamFramesets[18][27];
-
-
 
 void InitBoardIntroMode(void)
 {

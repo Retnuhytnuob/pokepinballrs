@@ -15,8 +15,7 @@ extern const u8 gSapphirePlusle_Gfx[][0x300];
 extern const u8 gSapphirePlusleHeadElectricity_Gfx[][0x200];
 extern const u8 gSapphireBoardShopShockWall_Gfx[][0x80];
 
-
-
+// Rom_2 data
 extern const s16 gShopGuardianAnimFramesetData[][2];
 
 void UpdateSapphireShopGateLogic(void)

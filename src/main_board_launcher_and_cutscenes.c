@@ -26,14 +26,17 @@ extern const u8 gSapphireTravelIllumise_Gfx[][0x480];
 extern const struct SongHeader se_pika_full_charge_1_up;
 extern const struct SongHeader se_kecleon_side_look;
 
-extern const u8 gSapphireTravelPaint_Gfx[];
-extern const s16 gTravelEventAnimData[][3];
-extern u16 gTravelEventSpritesheetOam[][18];
+// Rom_2 data
 extern const s16 gCatchTile_RevealFinalTimings[];
-extern const u16 gCatchTile_BurstRevealOamFramesets1[22][12];
-extern const u16 gEvolutionSparkleSpritesheetOam[20][12];
-extern const s16 gSpoinkAnimFrameset[][2];
 extern const Palette gOneUpSprite_Pal;
+extern const s16 gSpoinkAnimFrameset[][2];
+extern const s16 gTravelEventAnimData[][3];
+extern const u16 gTravelEventSpritesheetOam[][18];
+extern const u16 gEvolutionSparkleSpritesheetOam[20][12];
+extern const u16 gCatchTile_BurstRevealOamFramesets1[22][12];
+
+
+extern const u8 gSapphireTravelPaint_Gfx[];
 
 
 

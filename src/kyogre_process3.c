@@ -28,6 +28,7 @@ extern const struct SongHeader se_kyogre_spawn_whirlpool;
 extern const struct SongHeader se_kyogre_freeze_ring;
 extern const struct SongHeader se_kyogre_departs;
 
+// Rom_2 data
 extern const Palette *gKyogreFadeInPaletteProgression[];
 extern const u16 gKyogreAnimFramesetTable[][3];
 extern const s16 gKyogreRisingPaletteCycleIndices[];
@@ -42,7 +43,6 @@ extern const u16 gKyogreBgSpriteBaseTileNums[];
 extern const s16 gKyogreIntroPaletteCycleIndices[];
 extern const u16 gKyogrefreezeTrapOamData[28][4][3];
 extern const u16 gKyogreMainBodyOamData[66][10][3];
-
 
 void InitFrameProcess3_BoardLogic_KyogreBoard(void)
 {

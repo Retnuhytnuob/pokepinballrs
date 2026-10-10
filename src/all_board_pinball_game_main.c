@@ -38,13 +38,11 @@ EWRAM_DATA struct BoardProcessPair CurrentBoardProcPairs[PER_FRAME_PROCESS_PHASE
 extern const StateFunc gPinballGameStateFuncs[];
 extern const u8 gDxModePikachuObjTiles[];
 
-
-
+// Rom_2 data
+extern struct SpriteGroup *const gMainFieldSpriteGroups[][60];
+extern struct SpriteGroup *const gBonusFieldSpriteGroups[][30];
 extern const struct BoardProcessPair gBoardProcPairs[];
 extern const VoidFunc gFieldInitFuncs[];
-extern struct SpriteGroup *gMainFieldSpriteGroups[][60];
-extern struct SpriteGroup *gBonusFieldSpriteGroups[][30];
-
 
 extern void SaveGameToSram(void);
 extern void RestoreGameState(u16);

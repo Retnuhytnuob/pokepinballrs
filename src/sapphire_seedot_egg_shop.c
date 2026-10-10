@@ -19,17 +19,13 @@ extern const u8 gSapphireBoardSeedot_Gfx[][0x180];
 
 // Rom_2 data
 extern const u16 gEggAnimationFrameData[][4];
-
-extern const u16 gEggOamFramestates[40][2][3];
-extern const u16 gSeedotBasketBounceFrames[];
 extern const u16 gSeedotBaseXPositions[];
-extern const u16 gSapphireBoardSeedotSpritesheetOam[6][6][2][3];
-
-extern const s16 gHoleAnimKeyframeData[][2];
-
-extern struct Vector16 gSplashEffectPositions[];
+extern const u16 gSeedotBasketBounceFrames[];
+extern const struct Vector16 gSplashEffectPositions[];
 extern const s16 gSplashEffectTileIndices[][2];
-
+extern const s16 gHoleAnimKeyframeData[][2];
+extern const u16 gSapphireBoardSeedotSpritesheetOam[6][6][2][3];
+extern const u16 gEggOamFramestates[40][2][3];
 
 void InitSapphireEggHatchAnimation(void)
 {

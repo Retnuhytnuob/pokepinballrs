@@ -10,7 +10,7 @@
 // Rom_1 data
 extern const Palette gTimer_Default_Pal;
 
-
+// Rom_2 data
 extern const Palette gTimer_Warning_Pal;
 extern const Palette gTimer_Slow_Pal;
 

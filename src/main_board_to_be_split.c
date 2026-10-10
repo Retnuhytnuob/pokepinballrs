@@ -42,22 +42,18 @@ extern const s16 gEggHatchAnimData[14][3];
 extern const struct Vector32 gEggWalkPathWaypoints[][29];
 extern const struct Vector32 gSapphireEggWaypoints[];
 extern const u16 gAngleToDirectionTable[];
-
-
-extern const u16 gCatchCreatureOamFramesets[48][4][3];
-extern const u16 gCyndaquilFrameIndices[];
-extern const struct Vector16 gCyndaquilCavePositions[];
-extern const u16 gEggOamFramestates[40][2][3];
-extern const struct Vector16 gFlyingCreatureCameraOffsets[];
-extern const u16 gAerodactylEggDeliveryCutsceneFramesets[14][15];
-extern const u16 gPikaSaverFrameData[][2];
-extern const u16 gTotodileEggDeliveryCutsceneFramesets[82][6][3];
-extern const u16 gCoinRewardAnimOamFramesets[18][3];
-extern const u16 gShopNumberOamFramesets[4][15];
 extern const s16 gArrowBounceOffsets[];
 extern const s16 gTimerIndicatorFrames[];
-
-
+extern const u16 gPikaSaverFrameData[][2];
+extern const struct Vector16 gFlyingCreatureCameraOffsets[];
+extern const struct Vector16 gCyndaquilCavePositions[];
+extern const u16 gCyndaquilFrameIndices[];
+extern const u16 gTotodileEggDeliveryCutsceneFramesets[82][6][3];
+extern const u16 gShopNumberOamFramesets[4][15];
+extern const u16 gCoinRewardAnimOamFramesets[18][3];
+extern const u16 gAerodactylEggDeliveryCutsceneFramesets[14][15];
+extern const u16 gCatchCreatureOamFramesets[48][4][3];
+extern const u16 gEggOamFramestates[40][2][3];
 
 // This is the 'Gravity Well' in the center of the board.
 // Used with travel confirmation, bonus board entry, roulette, etc

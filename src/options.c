@@ -93,9 +93,12 @@ struct ButtonInfoView
     u8 y;
 };
 
-/*** 
+
+// Rom_2 data
+
+/***
 * index button associations:
-*   0 : A button 
+*   0 : A button
 *   1 : B button
 *   2 : Select button
 *   3 : Start button
@@ -107,22 +110,14 @@ struct ButtonInfoView
 *   9 : L button
 *   10 : Combiner sprite
 ***/
-extern struct ButtonInfoView gButtonInfoTable[11];
-
-
-extern struct {u8 tileId; s16 frameDuration;} gButtonAnimData[];
-
-
-extern s16 gMain_saveData_customButtonConfig[][2];
-
-
-
+extern const struct ButtonInfoView gButtonInfoTable[11];
 extern const struct Vector16 gOptionsCursorPositionTable[];
 extern const u16 gOptionsBGMSelectorYPositions[];
+extern const struct {u8 tileId; s16 frameDuration;} gButtonAnimData[];
 extern const struct SpriteSet *const gOptionsSpriteSets[];
 
-
-
+//TODO: should be able to be referenced from gMain
+extern EWRAM_DATA s16 gMain_saveData_customButtonConfig[][2];
 
 void Options_Main(void)
 {

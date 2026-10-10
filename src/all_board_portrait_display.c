@@ -15,11 +15,8 @@ extern const u16 gShopItemData[][4];
 extern const u16 gShopCursorToItemMap[];
 extern const u16 gPortraitPaletteSlots[2];
 extern const s16 gRouletteOutcomeFrameOffsets[];
-
-
-
-extern u8 *gMonPortraitGroupGfx[];
 extern const Palette *gMonPortraitGroupPals[];
+extern const u8 *gMonPortraitGroupGfx[];
 
 /*
     File is used for the center screen display on the main board.

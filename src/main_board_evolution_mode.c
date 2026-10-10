@@ -19,8 +19,6 @@ extern const struct SongHeader se_evo_item_collected;
 extern const struct Vector16 gEvoItemPositions[][8];
 extern const u8 *gEvoItemAppear_GfxList[];
 extern const u8 *gEvoItemTilesGfxPtrs[];
-
-
 extern const s16 gEvoItemAppearFrameThresholds[];
 extern const u16 gEvoItemAnimOamFramesets[58][15];
 

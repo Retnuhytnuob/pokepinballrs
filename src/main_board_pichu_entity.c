@@ -18,13 +18,11 @@ extern const struct SongHeader se_pika_no_kickback;
 extern const u16 gAngleToDirectionTable[];
 extern const u16 gCatchOverlayAnimData[][2];
 extern const s16 gPikaSaverAnimFrameTable[100];
-
-
-extern s16 gOutlaneCenterXPositions[3];
-extern s16 gPikaKickbackFiringAnimOamFramesets[28][12];
+extern const s16 gOutlaneCenterXPositions[3];
 extern const struct Vector32 gPikaSaverWaypoints[];
+extern const s16 gPikaKickbackFiringAnimOamFramesets[28][12];
 
-// Should potentially be replacable with gMonHatchSpriteGroupGfx[5];
+// TODO: Should potentially be replacable with gMonHatchSpriteGroupGfx[5];
 extern const u8 gMonHatchSpriteGroup5_Gfx[];
 
 void UpdateKickbackLogic(void)

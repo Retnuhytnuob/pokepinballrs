@@ -16,10 +16,7 @@ extern const u8 gLinooneBumperGfx[][0x100];
 extern const s16 gChikoritaFlashFrameIndices[];
 extern const s16 gGulpinAnimData[][5];
 extern const u16 gLinooneBumperGfxFrameIndices[][2];
-
-
 extern const u16 gGulpinOamData[146][18];
-
 
 //ruby
 void UpdateChikoritaAttackAnimation(void)

@@ -18,18 +18,17 @@ extern const u8 gRayquazaFlyby_Gfx[];
 extern const u8 gRayquazaSpriteSheet[];
 extern const u8 gRayquazaBodyVariantTiles[][0x800];
 
-
+// Rom_2 data
 extern const s16 gScreenShakeOscillationValues[];
 extern const u16 gRayquazaAnimFramesetTable[][3];
 extern const struct Vector16 gRayquazaTornadoSpawnPos[32];
 extern const s16 gRayquazaCloudScrollPositions[];
-extern const u16 gRayquazaLightningWarningStrikeOamData[39][6][3];
 extern const u16 gRayquazaHitBurstOamData[10][5][3];
 extern const u16 gRayquazaWhirlwindGrabOamData[20][2][3];
 extern const u16 gRayquazaLightningStrikeOamData[12][7][3];
+extern const u16 gRayquazaLightningWarningStrikeOamData[39][6][3];
 extern const u16 gRayquazaLightningChargeRingOamData[10][3][3];
 extern const u16 gRayquazaMainBodyOamData[212][3];
-
 
 void InitFrameProcess3_BoardLogic_RayquazaBoard(void)
 {

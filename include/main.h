@@ -97,7 +97,7 @@ struct Main
      * Boss bonus boards use those 2, plus an additional 5 for the 'capture' cutscene.
      * Main boards have several, for shared features on the 2 main boards.
      ***/
-    /*0x44*/ struct SpriteGroup **fieldSpriteGroups;
+    /*0x44*/ struct SpriteGroup *const *fieldSpriteGroups;
     /*0x48*/ int rngValue;
     /*0x4C*/ u32 systemFrameCount;
     /*0x50*/ u32 fieldFrameCount;

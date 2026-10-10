@@ -14,17 +14,17 @@ extern const u8 gZigzagoonShockWallIndicator_Gfx[][0x200];
 extern const u8 gSapphireBoardZigzagoon_Gfx[][0x380];
 extern const u8 gSapphireBoardZigzagoonFx_Gfx[];
 
-
-extern const s16 gPelipperIdleFrameIndices[];
-extern const s16 gPelipperSwallowAnimData[][3];
-extern const u16 gPelipperPondSpritesheetOam[20][4][3];
-extern const s16 gWailmerAnimFrameMap[][2];
-extern const u16 gWailmerSpritesheetOam[26][2][3];
-extern const s16 gZigzagoonAnimKeyframes[][3];
-extern const u16 gSapphireBoardZigzagoonSpritesheetOam[42][3][3];
-extern const u16 gZigzagoonFxSpritesheetOam[14][7][3];
-
 extern const struct SongHeader se_pelipper_wing_flap;
+
+// Rom_2 data
+extern const s16 gPelipperSwallowAnimData[][3];
+extern const s16 gPelipperIdleFrameIndices[];
+extern const s16 gWailmerAnimFrameMap[][2];
+extern const s16 gZigzagoonAnimKeyframes[][3];
+extern const u16 gZigzagoonFxSpritesheetOam[14][7][3];
+extern const u16 gSapphireBoardZigzagoonSpritesheetOam[42][3][3];
+extern const u16 gPelipperPondSpritesheetOam[20][4][3];
+extern const u16 gWailmerSpritesheetOam[26][2][3];
 
 void DecrementPelipperTimer(void)
 {

@@ -21,8 +21,7 @@ extern const struct SongHeader se_groudon_spits_fire;
 extern const struct SongHeader se_groudon_fire_ring;
 extern const struct SongHeader se_groudon_fire_grab;
 
-
-extern const s16 gShockwaveSplashDistanceThresholds[];
+// Rom_2 data
 extern const s16 gScreenShakeOscillationValues[];
 extern const s16 gGroudonFootstepShakePatterns[][31];
 extern const s16 gGroudonCryShakePattern[];
@@ -39,6 +38,8 @@ extern const u16 gGroudonProjectileOamData[24][4][3];
 extern const u16 gGroudonProjectileAttackOamData[12][6][3];
 extern const u16 gGroudonMainBodyOamData[166][19][3];
 extern const u16 gGroudonFirePillarOamData[58][10][3];
+
+extern const s16 gShockwaveSplashDistanceThresholds[];
 
 
 void InitFrameProcess3_BoardLogic_GroudonBoard(void)

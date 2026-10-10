@@ -33,16 +33,13 @@ extern const struct SongHeader se_spheal_end_whistle;
 extern const struct SongHeader se_sealeo_hit_thud;
 extern const struct SongHeader se_sealeo_nose_bounce;
 
-extern const struct SphealFlightPath gSphealFlightPathData[];
-
-extern const s16 gSphealWhiscashAnimFrameset[][4];
-
+// Rom_2 data
 extern const s16 gWaterTilePaletteCycle[];
+extern const struct SphealFlightPath gSphealFlightPathData[];
 extern const u16 gSealeoFramesetData[][2];
 extern const u16 gSphealFramesetData[][3];
+extern const s16 gSphealWhiscashAnimFrameset[][4];
 extern const u16 gSphealFlyingEnemyOamData[126][4][3];
-
-
 
 void InitFrameProcess3_BoardLogic_SphealBoard(void)
 {

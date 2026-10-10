@@ -167,17 +167,10 @@ extern const struct SpriteSet *const gPokedexSpriteSets[];
 extern const s16 gDexAnimationIx[];
 extern const s16 gPokedexCatchAnimIndices[];
 extern s16 gPokedexListNameVramOffsets[]; //TODO: should be const
-
-
-extern Palette *gCatchMonPaletteGroups[];
-extern u8 *gCatchSpriteGfxPtrs[];
-
-
-extern u8 *gMonPortraitGroupGfx[];
+extern const Palette *gCatchMonPaletteGroups[];
 extern const Palette *gMonPortraitGroupPals[];
-
-
-
+extern const u8 *gCatchSpriteGfxPtrs[];
+extern const u8 *gMonPortraitGroupGfx[];
 
 enum PokedexPopupType {
     POKEDEX_POPUP_TRANSMISSION_CONNECT_PROMPT = 0,

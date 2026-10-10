@@ -33,13 +33,10 @@ extern EWRAM_DATA u8 gLinkNegotiationFlags;
 extern EWRAM_DATA u16 gLinkExchangeFrameCounter;
 extern EWRAM_DATA s16 gLinkTimeoutCounter;
 
-
-
-
-
-// Rom_2
-extern u8 (*gMonHatchSpriteGroupGfx[])[0x10E0];
+// Rom_2 data
 extern const Palette *gMonHatchSpriteGroupPals[];
+
+extern const u8 (*gMonHatchSpriteGroupGfx[])[0x10E0];
 
 /*
     Note: gMain lives at gUnknown_0200B0C0 in running memory.

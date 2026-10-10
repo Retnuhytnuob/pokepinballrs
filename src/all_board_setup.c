@@ -69,14 +69,10 @@ extern const u8 gGroudonIntroSprite_Gfx[];
 extern const u8 gRayquazaIntroSprite_Gfx[];
 extern const u8 gSphealIntroSprites_Gfx[];
 
-
-extern const s16 gScrollTileUpdateTable[][4];
-
+// Rom_2 data
 extern const struct BoardCollisionDataSet gBoardCollisionDataSets[][2];
-
-
-
 extern const struct FieldBoardLayout gFieldBoardConfigs[];
+extern const s16 gScrollTileUpdateTable[][4];
 
 void loadFieldBoardGraphics(void)
 {
