@@ -9,9 +9,9 @@
 #define KYOGRE_MODE_TIME TICKS_FOR_TIME(3,0)
 
 // Rom_1 data
-extern const u8 gKyogreBonusClear_Gfx[0x2000];
+extern const u8 gKyogreBonusClear_Gfx[SIZE_OF_VRAM_KYOGRE_BANNER_TILES];
 extern const Palette gKyogreWaterAnimFrame_Pals[];
-extern const Palette gBonusStageObjPal[];
+extern const Palette gBonusStageObjPal;
 extern const u16 gKyogreWaterBackgroundTilemap[];
 extern const Palette gKyogreIntroShorePalette[];
 extern const Palette gKyogreIntroIcePalette[];

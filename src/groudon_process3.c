@@ -9,10 +9,10 @@
 #define GROUDON_MODE_TIME TICKS_FOR_TIME(3,0)
 
 // Rom_1 data
-extern const u8 gGroudonBonusClear_Gfx[0x2000];
-extern const Palette gBonusStageObjPal[];
+extern const u8 gGroudonBonusClear_Gfx[SIZE_OF_VRAM_GROUDON_BANNER_TILES];
+extern const Palette gBonusStageObjPal;
 extern const u16 gGroudonLavaPaletteCycleData[]; //Should be of type Palette
-extern const u8 gGroudonAttackFx_Gfx[];
+extern const u8 gGroudonAttackFx_Gfx[SIZE_OF_VRAM_GROUDON_ATTACK_FX_TILES];
 extern const s8 gGroudonBoardBoulders_Gfx[][0x300];
 
 extern const struct SongHeader se_groudon_hit;
@@ -23,7 +23,7 @@ extern const struct SongHeader se_groudon_fire_grab;
 
 // Rom_2 data
 extern const s16 gShockwaveSplashDistanceThresholds[];
-extern const s16 gScreenShakeOscillationValues[];
+extern const s16 gScreenShakeOscillationValues[12];
 extern const s16 gGroudonFootstepShakePatterns[][31];
 extern const s16 gGroudonCryShakePattern[];
 extern const u16 gGroudonAnimFramesetTable[][2];

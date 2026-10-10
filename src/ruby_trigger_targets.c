@@ -6,7 +6,7 @@
 #include "constants/mem_layout/ruby.h"
 
 // Rom_1 data
-extern const u8 gRubyChikoritaEntity[][0x300];
+extern const u8 gRubyChikoritaEntity[][SIZE_OF_VRAM_CHIKORITA_TILES];
 extern const u8 gChikoritaProjectileTiles[][0x80];
 extern const u8 gChikoritaExplosionTiles[][0x100];
 extern const u8 gRubyStageGulpin_Gfx[][0x180];

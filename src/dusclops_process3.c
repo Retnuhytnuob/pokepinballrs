@@ -16,8 +16,8 @@
 
 // Rom_1 data
 extern const u16 gDusclopsBossGuardReadyTileOffsets[];
-extern const u8 gDusclopsBonusClear_Gfx[0x2000];
-extern const Palette gBonusStageObjPal[];
+extern const u8 gDusclopsBonusClear_Gfx[SIZE_OF_VRAM_DUSCLOPS_BANNER_TILES];
+extern const Palette gBonusStageObjPal;
 extern const Palette gDusclopsAnimPalettes[];
 extern const u16 gDusclopsBoardDusclopsAppearFx_Gfx[];
 extern const u16 gDusclopsBoardDusclops_Gfx[];

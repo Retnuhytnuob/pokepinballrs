@@ -7,8 +7,8 @@
 //Should be of type Palette; causes match errors with the fakematch
 extern const u16 gLocation_Pals[];
 extern const u16 gPortraitAnim_Pals[];
-extern const u8 gPortraitAnimFrameGraphics[][0x300];
-extern const u8 gLocationPortraitGfx[][0x300];
+extern const u8 gPortraitAnimFrameGraphics[][SIZE_OF_VRAM_PORTRAIT_TILES];
+extern const u8 gLocationPortraitGfx[][SIZE_OF_VRAM_PORTRAIT_TILES];
 
 // Rom_2 data
 extern const u16 gShopItemData[][4];

@@ -13,7 +13,7 @@ extern const Palette gSapphireShopSign_Pals[];
 extern const u8 gSapphireStageBasket_Gfx[][0x280];
 extern const u8 gHatchMachineSparkleFx_Gfx[][0x100];
 extern const u8 gSapphireShopSignTileGfx[][0x480];
-extern const u8 gHatchMachineElevator_Gfx[][0x440];
+extern const u8 gHatchMachineElevator_Gfx[][SIZE_OF_VRAM_HATCH_MACHINE_ALL_TILES];
 extern const u8 gEggFrameTilesGfx[][0x200];
 extern const u8 gSapphireBoardSeedot_Gfx[][0x180];
 

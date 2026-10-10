@@ -11,7 +11,7 @@ extern const s16 gLotadBobOffsets[];
 extern const Palette gChinchouBumper_Pals[];
 extern const Palette gLotadBumper_Pals[];
 extern const Palette gWhiscash_Pals[];
-extern const u8 gChinchouBumper_Gfx[][0x100];
+extern const u8 gChinchouBumper_Gfx[][SIZE_OF_VRAM_RUBY_BUMPER_TILES];
 extern const u8 gLotadBumper_Gfx[][0x100];
 extern const u8 gRubyStageNuzleaf_Gfx[][0x280];
 extern const u8 gWhiscash_Gfx[][0x480];

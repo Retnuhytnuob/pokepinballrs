@@ -10,7 +10,7 @@ EWRAM_DATA u8 gPaletteFadeRGBCache[16][3];
 extern const s16 gAreaRouletteTable[][AREA_TABLE_SLOT_COUNT];
 extern const s16 gAreaPortraitIndexes[];
 extern const Palette gFieldVariant_Pals[][6];
-extern const u8 gEvolutionCutsceneTilesGfx[];
+extern const u8 gEvolutionCutsceneTilesGfx[SIZE_OF_VRAM_EVO_CUTSCENE_TILES];
 extern const Palette gBoardActionObj_Pals[];
 extern const u8 gRubyTravelPaint_Gfx[];
 extern const Palette gRubyPainter_Pals;

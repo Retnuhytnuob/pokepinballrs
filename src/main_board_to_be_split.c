@@ -10,24 +10,24 @@
 #define HATCH_MODE_SAVER_TIME TICKS_FOR_TIME(0,30)
 
 EWRAM_DATA const u8 gHatchedWalkerAnimTileBuffer[15][SIZE_OF_VRAM_HATCH_MON_ENTITY_TILES];
-EWRAM_DATA u8 gCatchSpritePaletteBuffer[0x20];
+EWRAM_DATA Palette gCatchSpritePaletteBuffer;
 
 // Rom_1 data
 extern const u8 gCaptureBallTilesGfx[];
-extern const u8 gCaptureScreenTilesGfx[];
+extern const u8 gCaptureScreenTilesGfx[SIZE_OF_VRAM_FX_MON_CATCH_CUTSCENE_TILES];
 extern const u8 gAerodactlyFlight_Gfx[];
 extern const Palette gAerodactlyFlight_Pal;
 extern const Palette gTotodile_Pal;
 extern const Palette gRubyShopSign_Pal;
-extern const u8 gAlphabetTilesGfx[][0x40];
-extern const u8 gSpaceTileGfx[0x40];
-extern const u8 gMainStageBonusTrap_Gfx[][0x300];
-extern const u8 gRubyStageCyndaquil_Gfx[][0x280];
-extern const u8 gShopPortraitOverlayGfx[][0x300];
-extern const u8 gDecimalDigitTilesGfx[][0x40];
-extern const u8 gTotodileEggDelivery_Gfx[];
-extern const u8 gChargeFillIndicator_Gfx[][0x80];
-extern const u8 gRubyBoardShop_Gfx[][0x500];
+extern const u8 gAlphabetTilesGfx[][SIZE_OF_VRAM_LETTER_TILE];
+extern const u8 gSpaceTileGfx[SIZE_OF_VRAM_LETTER_TILE];
+extern const u8 gMainStageBonusTrap_Gfx[][SIZE_OF_VRAM_FX_CENTER_HOLE_GRAVITY_TILES];
+extern const u8 gRubyStageCyndaquil_Gfx[][SIZE_OF_VRAM_CYNDAQUIL_TILES];
+extern const u8 gShopPortraitOverlayGfx[][SIZE_OF_VRAM_MART_EVO_SELECTION_CHANGE_TILES];
+extern const u8 gDecimalDigitTilesGfx[][SIZE_OF_VRAM_MART_PRICE_DIGIT];
+extern const u8 gTotodileEggDelivery_Gfx[SIZE_OF_VRAM_TOTODILE_EGG_DELIVERY_TILES];
+extern const u8 gChargeFillIndicator_Gfx[][SIZE_OF_VRAM_CHARGE_INDICATOR_CIRCLE_TILES];
+extern const u8 gRubyBoardShop_Gfx[][SIZE_OF_VRAM_RUBY_MART_SIGN_TILES];
 extern const u8 gRubyBoardHatchCave_Gfx[][0x480];
 extern const u8 gEggFrameTilesGfx[][0x200];
 

@@ -12,7 +12,7 @@ EWRAM_DATA Palette gCatchSpritePalettes[4];
 
 // Rom_1 data
 extern const u8 gCaptureBallTilesGfx[];
-extern const u8 gCaptureScreenTilesGfx[];
+extern const u8 gCaptureScreenTilesGfx[SIZE_OF_VRAM_FX_MON_CATCH_CUTSCENE_TILES];
 extern const u16 gPokeballCaptureOamFrames[][0x30];
 extern const u8 gPichuSaverTilesGfx[];
 
@@ -23,7 +23,7 @@ extern const struct SongHeader se_mon_catch_ball_woosh;
 // Rom_2 data
 extern const s16 gCaptureSequenceTimings[34];
 extern const s8 gCaptureShakeOffsets[];
-extern const u16 gRouletteWheelContents[][7];
+extern u16 gRouletteWheelContents[][7]; //TODO: should be const
 
 void InitRouletteWheel(void)
 {
@@ -1328,4 +1328,3 @@ void RunMonCaptureSequence(void)
         gCurrentPinballGame->ball->prevPositionsQ0[i + 1].y = gCurrentPinballGame->ball->prevPositionsQ0[i].y;
     }
 }
-                  

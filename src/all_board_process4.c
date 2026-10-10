@@ -7,7 +7,7 @@
 #include "constants/board/main_board.h"
 
 // Rom_1 data
-extern const u8 gFlipper_Gfx[][0x200];
+extern const u8 gFlipper_Gfx[][SIZE_OF_VRAM_FLIPPER_TILES];
 
 // Rom_2 data
 extern const struct FlipperLineSegment gFlipperLineGeometry[13];

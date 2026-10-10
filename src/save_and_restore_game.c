@@ -18,16 +18,16 @@
 
 extern EWRAM_DATA u8 gBoardBGTileBufferAlt[32 * 0x400];
 extern EWRAM_DATA u8 gBoardBGTileBuffer[];
-extern EWRAM_DATA u8 gCatchSpriteGfxBuffer[3][0x480];
+extern EWRAM_DATA u8 gCatchSpriteGfxBuffer[3][SIZE_OF_VRAM_CATCH_MON_ENTITY_TILES];
 
 // Rom_1 data
-extern const u8 gDusclopsBonusClear_Gfx[0x2000];
-extern const u8 gKecleonBonusClear_Gfx[0x2000];
-extern const u8 gKyogreBonusClear_Gfx[0x2000];
-extern const u8 gGroudonBonusClear_Gfx[0x2000];
-extern const u8 gRayquazaBonusClear_Gfx[0x2000];
-extern const u8 gCaptureScreenTilesGfx[];
-extern const u8 gEvolutionCutsceneTilesGfx[];
+extern const u8 gDusclopsBonusClear_Gfx[SIZE_OF_VRAM_DUSCLOPS_BANNER_TILES];
+extern const u8 gKecleonBonusClear_Gfx[SIZE_OF_VRAM_KECLEON_BANNER_TILES];
+extern const u8 gKyogreBonusClear_Gfx[SIZE_OF_VRAM_KYOGRE_BANNER_TILES];
+extern const u8 gGroudonBonusClear_Gfx[SIZE_OF_VRAM_GROUDON_BANNER_TILES];
+extern const u8 gRayquazaBonusClear_Gfx[SIZE_OF_VRAM_RAYQUAZA_BANNER_TILES];
+extern const u8 gCaptureScreenTilesGfx[SIZE_OF_VRAM_FX_MON_CATCH_CUTSCENE_TILES];
+extern const u8 gEvolutionCutsceneTilesGfx[SIZE_OF_VRAM_EVO_CUTSCENE_TILES];
 extern const u8 gRubyTravelPaint_Gfx[];
 extern const Palette gRubyPainter_Pals;
 extern const u8 gSapphireTravelPaint_Gfx[];
@@ -41,31 +41,31 @@ extern const u8 gCatchTile_BurstStage2_Gfx[];
 extern const u8 gCatchTile_BurstStage3_Gfx[];
 extern const u8 gCatchTile_BurstStage4_Gfx[];
 extern const u8 gAerodactlyFlight_Gfx[];
-extern const u8 gPortraitAnimFrameGraphics[][0x300];
-extern const u8 gBallRotationTileGraphics[][0x80];
-extern const u8 gBallUpgradeFx_Gfx[][0x200];
-extern const u8 gRubyChikoritaEntity[][0x300];
-extern const u8 gRayquazaSkyBackgroundGfx[0x2800];
-extern const u8 gChinchouBumper_Gfx[][0x100];
-extern const u8 gFlipper_Gfx[][0x200];
-extern const u8 gAlphabetTilesGfx[][0x40];
-extern const u8 gSpaceTileGfx[0x40];
-extern const u8 gMainStageBonusTrap_Gfx[][0x300];
-extern const u8 gRubyStageCyndaquil_Gfx[][0x280];
-extern const u8 gDecimalDigitTilesGfx[][0x40];
-extern const u8 gLocationPortraitGfx[][0x300];
-extern const u8 gTotodileEggDelivery_Gfx[];
-extern const u8 gHatchMachineElevator_Gfx[][0x440];
-extern const u8 gGroudonAttackFx_Gfx[0x2000];
-extern const u8 gRayquazaFlyby_Gfx[0x1C00];
-extern const u8 gRayquazaSpriteSheet[0x860];
+extern const u8 gPortraitAnimFrameGraphics[][SIZE_OF_VRAM_PORTRAIT_TILES];
+extern const u8 gBallRotationTileGraphics[][SIZE_OF_VRAM_BALL_TILES];
+extern const u8 gBallUpgradeFx_Gfx[][SIZE_OF_VRAM_FX_BALL_UPGRADE_TILES];
+extern const u8 gRubyChikoritaEntity[][SIZE_OF_VRAM_CHIKORITA_TILES];
+extern const u8 gRayquazaSkyBackgroundGfx[SIZE_OF_VRAM_RAYQUAZA_INTRO_CLOUDS_TILES];
+extern const u8 gChinchouBumper_Gfx[][SIZE_OF_VRAM_RUBY_BUMPER_TILES];
+extern const u8 gFlipper_Gfx[][SIZE_OF_VRAM_FLIPPER_TILES];
+extern const u8 gAlphabetTilesGfx[][SIZE_OF_VRAM_LETTER_TILE];
+extern const u8 gSpaceTileGfx[SIZE_OF_VRAM_LETTER_TILE];
+extern const u8 gMainStageBonusTrap_Gfx[][SIZE_OF_VRAM_FX_CENTER_HOLE_GRAVITY_TILES];
+extern const u8 gRubyStageCyndaquil_Gfx[][SIZE_OF_VRAM_CYNDAQUIL_TILES];
+extern const u8 gDecimalDigitTilesGfx[][SIZE_OF_VRAM_MART_PRICE_DIGIT];
+extern const u8 gLocationPortraitGfx[][SIZE_OF_VRAM_PORTRAIT_TILES];
+extern const u8 gTotodileEggDelivery_Gfx[SIZE_OF_VRAM_TOTODILE_EGG_DELIVERY_TILES];
+extern const u8 gHatchMachineElevator_Gfx[][SIZE_OF_VRAM_HATCH_MACHINE_ALL_TILES];
+extern const u8 gGroudonAttackFx_Gfx[SIZE_OF_VRAM_GROUDON_ATTACK_FX_TILES];
+extern const u8 gRayquazaFlyby_Gfx[SIZE_OF_VRAM_RAYQUAZA_FLYBY_TILES];
+extern const u8 gRayquazaSpriteSheet[SIZE_OF_VRAM_RAYQUAZA_TILES];
 extern const u8 gSphealResultsScreenGfx[0x800];
-extern const u8 gChargeFillIndicator_Gfx[][0x80];
+extern const u8 gChargeFillIndicator_Gfx[][SIZE_OF_VRAM_CHARGE_INDICATOR_CIRCLE_TILES];
 extern const u8 gPikachuSaverTilesGfx[];
 extern const u8 gRubyBoardShopDoor_Gfx[][0x180];
 extern const u8 gRubyBoardSharpedo_Gfx[][0x260];
 extern const u8 gMartEvoForegroundMenuUx_Gfx[];
-extern const u8 gRubyBoardShop_Gfx[][0x500];
+extern const u8 gRubyBoardShop_Gfx[][SIZE_OF_VRAM_RUBY_MART_SIGN_TILES];
 extern const u8 gAreaRouletteSelectedFx_Gfx[];
 extern const u8 gMainBoardPikaSpinner_Gfx[][0x120];
 extern const u8 gRubyBoardHatchCave_Gfx[][0x480];
@@ -465,9 +465,9 @@ void RestoreFieldSpecificGraphics(void)
         {
             var1 = gShopItemData[gShopCursorToItemMap[gCurrentPinballGame->shopItemCursor]];
             var2 = LEAD_DIGIT_10S(var1[3]);
-            DmaCopy16(3, gDecimalDigitTilesGfx[var2], OBJ_VRAM_ADDR_MART_PRICE_TENS_DIGIT_TILES, SIZE_OF_VRAM_LETTER_TILE);
+            DmaCopy16(3, gDecimalDigitTilesGfx[var2], OBJ_VRAM_ADDR_MART_PRICE_TENS_DIGIT_TILES, SIZE_OF_VRAM_MART_PRICE_DIGIT);
             var3 = DIGIT_1S(var1[3]);
-            DmaCopy16(3, gDecimalDigitTilesGfx[var3], OBJ_VRAM_ADDR_MART_PRICE_ONES_DIGIT_TILES, SIZE_OF_VRAM_LETTER_TILE);
+            DmaCopy16(3, gDecimalDigitTilesGfx[var3], OBJ_VRAM_ADDR_MART_PRICE_ONES_DIGIT_TILES, SIZE_OF_VRAM_MART_PRICE_DIGIT);
         }
         break;
     case FX_BALL_SAVED_CUTSCENE:

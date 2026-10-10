@@ -12,8 +12,8 @@
 
 extern EWRAM_DATA u8 gHatchedWalkerAnimTileBuffer[15][SIZE_OF_VRAM_HATCH_MON_ENTITY_TILES];
 extern EWRAM_DATA Palette gCatchSpritePalettes[4];
-EWRAM_DATA u8 gCatchSpriteGfxBuffer[3][0x480];
-extern EWRAM_DATA u8 gCatchSpritePaletteBuffer[0x20];
+EWRAM_DATA u8 gCatchSpriteGfxBuffer[3][SIZE_OF_VRAM_CATCH_MON_ENTITY_TILES];
+extern EWRAM_DATA Palette gCatchSpritePaletteBuffer;
 
 // Rom_1 data
 extern const Palette gTimer_Default_Pal;
@@ -603,7 +603,7 @@ void LoadMonFieldSpriteGraphics(void)
     src0 = gMonHatchSpriteGroupGfx[eggIndex / 6][eggIndex % 6];
     src1 = &gMonHatchSpriteGroupPals[eggIndex / 6][eggIndex % 6];
     DmaCopy16(3, src0, gHatchedWalkerAnimTileBuffer, 0x10E0);
-    DmaCopy16(3, src1, gCatchSpritePaletteBuffer, 0x20);
+    DmaCopy16(3, src1, gCatchSpritePaletteBuffer, PLTT_SLOT_SIZE);
 }
 
 void DrawCatchMonBoardSprite(void)

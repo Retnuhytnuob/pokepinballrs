@@ -16,7 +16,7 @@ struct SphealFlightPath
 
 // Rom_1 data
 extern const s8 gSphealScoreDigitSpriteIndices[];
-extern const Palette gBonusStageObjPal[];
+extern const Palette gBonusStageObjPal;
 extern const u16 gSphealWaterBackgroundTilemap[];
 extern const u8 gSphealNetGfx[][0x200];
 extern const u8 gSphealNetFrontGfx[][0x180];

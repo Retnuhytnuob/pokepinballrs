@@ -21,7 +21,7 @@ extern const u8 gMainBoardBallSave_Gfx[];
 extern const u8 gMainBoardBallSaveLatios_Gfx[];
 extern const u8 gMainBoardBallSaveLatiosArm_Gfx[];
 extern const u8 gMainBoardEndOfBall_Gfx[];
-extern const u8 gEobBonusSummaryCharTiles[][0x20];
+extern const u8 gEobBonusSummaryCharTiles[][SIZE_OF_VRAM_END_OF_BALL_BONUS_SUMMARY_TEXT_CHAR_TILES];
 extern const u8 gMainBoardGameOverText_Gfx[];
 extern const Palette gBallSaver_Ruby_Pal;
 extern const Palette gBallSaver_Sapphire_Pal;

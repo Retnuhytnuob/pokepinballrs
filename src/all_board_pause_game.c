@@ -6,7 +6,7 @@
 // Rom_1 data
 extern const struct Vector16 gPauseMenuSpriteOffsets[];
 extern const u16 gPauseMenuTextAnimFrames[];
-extern const u8 gPauseMenuText_Gfx[][0x20];
+extern const u8 gPauseMenuText_Gfx[][SIZE_OF_VRAM_PAUSE_MENU_BALL_INDICATOR];
 
 
 // Pauses the game and saves the blend settings

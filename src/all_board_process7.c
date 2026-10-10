@@ -8,8 +8,8 @@
 EWRAM_DATA u8 gKecleonSpriteGroupOrderMap[24];
 
 // Rom_1 data
-extern const u8 gBallRotationTileGraphics[][0x80];
-extern const u8 gBallUpgradeFx_Gfx[][0x200];
+extern const u8 gBallRotationTileGraphics[][SIZE_OF_VRAM_BALL_TILES];
+extern const u8 gBallUpgradeFx_Gfx[][SIZE_OF_VRAM_FX_BALL_UPGRADE_TILES];
 extern const u32 gBallSpawnGlowTiles_Type2[][0x80];
 extern const u32 gBallSpawnGlowTiles_Type1[][0x80];
 

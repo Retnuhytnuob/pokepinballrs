@@ -7,7 +7,6 @@
 
 // Rom_1 data
 extern const Palette gFieldVariant_Pals[][6];
-extern const u8 gRubyStageCyndaquil_Gfx[][0x280];
 
 void DrawBoardEdgeBanner(void)
 {
