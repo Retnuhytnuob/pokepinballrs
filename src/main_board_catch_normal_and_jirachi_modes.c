@@ -33,12 +33,6 @@ extern const u16 gJirachiFloatOamFramesets[68][3][3];
 extern const u16 gCatchMonRevealOamFramesets[14][18];
 extern const u8 (*gCatchSpriteGfxPtrs[])[0x480];
 
-
-extern struct BoardConfig gBoardConfig;
-
-
-
-
 enum catchTileRevealStates {
     CATCH_TILE_REVEAL_NONE = 0,
     CATCH_TILE_REVEAL_ONE_AT_A_TIME = 1,

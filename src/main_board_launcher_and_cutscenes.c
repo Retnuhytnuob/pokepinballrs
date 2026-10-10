@@ -14,6 +14,7 @@ extern const u8 gEvolutionCutsceneTilesGfx[];
 extern const Palette gBoardActionObj_Pals[];
 extern const u8 gRubyTravelPaint_Gfx[];
 extern const Palette gRubyPainter_Pals;
+extern const u8 gSapphireTravelPaint_Gfx[];
 extern const Palette gSapphirePainter_Pals;
 extern const u8 gCatchTile_BurstStage4_Gfx[];
 extern const Palette gCatchTile_BurstStage4_Pal;
@@ -34,12 +35,6 @@ extern const s16 gTravelEventAnimData[][3];
 extern const u16 gTravelEventSpritesheetOam[][18];
 extern const u16 gEvolutionSparkleSpritesheetOam[20][12];
 extern const u16 gCatchTile_BurstRevealOamFramesets1[22][12];
-
-
-extern const u8 gSapphireTravelPaint_Gfx[];
-
-
-
 
 void AnimateOneUpSprite(void)
 {
