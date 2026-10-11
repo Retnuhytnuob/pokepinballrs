@@ -27,8 +27,8 @@ extern const s16 gWhiscashFramesetData[][4];
 extern const struct Vector16 gChinchouWaypointPositions[];
 extern const s16 gWhiscashShakeOffsets[];
 extern const s16 gSharpedoAnimFrameData[][2];
-extern const u16 gNuzleafOamData[58][6];
-extern const u16 gSharpedoSpritesheetOam[42][3][3];
+extern const u16 gNuzleafOamData[29][2 * 3]; //TODO: should be OamDataPacked
+extern const union OamDataPacked gSharpedoOamData[21][3];
 
 #define MIN_POND_SWITCHES_BEFORE_WHISCASH_AVAILABLE 3
 
@@ -899,7 +899,7 @@ void AnimateSharpedoEntity(void)
     {
         oamSimple = &group->oam[i];
         dst = (u16*)&gOamBuffer[oamSimple->oamId];
-        src = gSharpedoSpritesheetOam[oamIx][i];
+        src = gSharpedoOamData[oamIx][i].raw;
         *dst++ = *src++;
         *dst++ = *src++;
         *dst++ = *src++;

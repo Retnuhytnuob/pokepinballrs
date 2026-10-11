@@ -5,7 +5,7 @@
 //sym_ewram
 EWRAM_DATA u16 sGbPlayerCurKeys;
 EWRAM_DATA u16 sGbPlayerPrevKeys;
-EWRAM_DATA u8 gGbPlayerTilemapBuffer[0X800];
+EWRAM_DATA u8 gGbPlayerTilemapBuffer[BG_SCREEN_SIZE];
 EWRAM_DATA int gRumbleLoopCounter;
 EWRAM_DATA int gRumbleFrameCounter;
 EWRAM_DATA int gRumbleMotorMode;

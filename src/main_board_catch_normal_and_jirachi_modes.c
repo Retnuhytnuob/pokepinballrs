@@ -17,7 +17,7 @@ extern EWRAM_DATA Palette gCatchSpritePaletteBuffer;
 
 // Rom_1 data
 extern const Palette gTimer_Default_Pal;
-extern const u8 gCatchMonAppearFx_Gfx[];
+extern const u8 gCatchMonAppearFx_Gfx[SIZE_OF_VRAM_FX_MON_APPEAR_CLOUD_BURST_TILES];
 extern const Palette gCatchMonAppearFx_Pal;
 extern const u8 gJirachiFx_Gfx[][0x480];
 
@@ -29,8 +29,8 @@ extern const s16 gCatchMonRevealFrameData[8][2];
 extern const struct Vector16 gJirachiWaypoints[];
 extern const u16 gJirachiStarFrameIndices[][10];
 extern const Palette *gCatchMonPaletteGroups[];
-extern const u16 gJirachiFloatOamFramesets[68][3][3];
-extern const u16 gCatchMonRevealOamFramesets[14][18];
+extern const union OamDataPacked gJirachiFloatOamData[34][3];
+extern const u16 gCatchMonRevealOamData[14][18];
 extern const u8 (*gCatchSpriteGfxPtrs[])[0x480];
 
 enum catchTileRevealStates {
@@ -773,7 +773,7 @@ void DrawJirachiSprites(void)
             {
                 oamSimple = &group->oam[i];
                 dst = (u16*)&gOamBuffer[oamSimple->oamId];
-                src = gJirachiFloatOamFramesets[var1][i];
+                src = gJirachiFloatOamData[var1][i].raw;
                 *dst++ = *src++;
                 *dst++ = *src++;
                 *dst++ = *src++;
@@ -898,9 +898,9 @@ void PlayCatchMonAppearsAnimation(void)
         {
             oamSimple = &group->oam[i];
             dst = (u16*)&gOamBuffer[oamSimple->oamId];
-            *dst++ = gCatchMonRevealOamFramesets[gCatchMonRevealFrameData[gCurrentPinballGame->catchRevealFrameId][0]][i*3+0];
-            *dst++ = gCatchMonRevealOamFramesets[gCatchMonRevealFrameData[gCurrentPinballGame->catchRevealFrameId][0]][i*3+1];
-            *dst++ = gCatchMonRevealOamFramesets[gCatchMonRevealFrameData[gCurrentPinballGame->catchRevealFrameId][0]][i*3+2];
+            *dst++ = gCatchMonRevealOamData[gCatchMonRevealFrameData[gCurrentPinballGame->catchRevealFrameId][0]][i*3+0];
+            *dst++ = gCatchMonRevealOamData[gCatchMonRevealFrameData[gCurrentPinballGame->catchRevealFrameId][0]][i*3+1];
+            *dst++ = gCatchMonRevealOamData[gCatchMonRevealFrameData[gCurrentPinballGame->catchRevealFrameId][0]][i*3+2];
 
             gOamBuffer[oamSimple->oamId].x += group->baseX;
             gOamBuffer[oamSimple->oamId].y += group->baseY;

@@ -50,6 +50,7 @@ struct PlttData
     u16 unused_15:1;
 };
 
+// TODO: Should this be using a union with a variant with a 5 bit matrixNum (no h/v flip) for handling oother affine modes?
 struct OamData
 {
     /*0x00*/ u32 y:8;
@@ -69,6 +70,36 @@ struct OamData
              u16 priority:2;    // 0x400, 0x800 -> 0xC00
              u16 paletteNum:4;
     /*0x06*/ u16 affineParam;
+};
+
+union __attribute__((packed, aligned(2))) OamDataPacked
+{
+    u16 raw[3];
+/*
+    struct {
+        // 0x00
+        u32 y:8;
+
+        //0x01
+        u32 affineMode:2;  // 0x1, 0x2 -> 0x4
+        u32 objMode:2;     // 0x4, 0x8 -> 0xC
+        u32 mosaic:1;      // 0x10
+        u32 bpp:1;         // 0x20
+        u32 shape:2;       // 0x40, 0x80 -> 0xC0
+
+        //0x02
+        u32 x:9;
+        u32 matrixNum:3;   // This is not using its full 5 bits?
+        u32 hFlip:1;
+        u32 vFlip:1;
+        u32 size:2;
+
+        //0x04
+        u16 tileNum:10;    // 0x3FF
+        u16 priority:2;    // 0x400, 0x800 -> 0xC00
+        u16 paletteNum:4;
+    } fields;
+    */
 };
 
 struct BgAffineSrcData

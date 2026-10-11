@@ -5,25 +5,25 @@
 #include "constants/board/main_board.h"
 
 // Rom_1 data
-extern const u8 gCatchTile_RevealTilesGfx[];
+extern const u8 gCatchTile_RevealTilesGfx[SIZE_OF_VRAM_FX_CATCH_REAVEAL_SEQUENTIAL_TILES];
 extern const Palette gCatchTile_Reveal_Pal;
-extern const u8 gCatchTile_BurstStart_Gfx[];
+extern const u8 gCatchTile_BurstStart_Gfx[SIZE_OF_VRAM_FX_CATCH_BURST_LIGHTNING_TILES];
 extern const Palette gCatchTile_BurstStart_Pal;
-extern const u8 gCatchTile_BurstStage2_Gfx[];
+extern const u8 gCatchTile_BurstStage2_Gfx[SIZE_OF_VRAM_FX_CATCH_BURST_TILE_OUTLINE];
 extern const Palette gCatchTile_BurstStage2_Pal;
-extern const u8 gCatchTile_BurstStage3_Gfx[];
+extern const u8 gCatchTile_BurstStage3_Gfx[SIZE_OF_VRAM_FX_CATCH_BURST_TILE_FLIGHT];
 extern const Palette gCatchTile_BurstStage3_Pal;
-extern const u8 gCatchTile_BurstStage4_Gfx[];
+extern const u8 gCatchTile_BurstStage4_Gfx[SIZE_OF_VRAM_FX_CATCH_BURST_TILE_ELECTRIC];
 extern const Palette gCatchTile_BurstStage4_Pal;
 
 // Rom_2 data
 extern const s16 gCatchTile_SequentialFramesetData[][2];
 extern const s16 gCatchTile_RevealSparkleTimings[];
 extern const s16 gCatchTile_RevealFinalTimings[];
-extern const u16 gCatchTile_BurstRevealOamFramesets1[22][12];
-extern const u16 gCatchTile_BurstRevealOamFramesets0[18][18];
-extern const u16 gCatchTile_RevealOamFramesets[16][18];
-extern const u16 gCatchTile_SequentialBreakSpritesheetOam[28][18];
+extern const u16 gCatchTile_BurstRevealOamData1[22][12];
+extern const u16 gCatchTile_BurstRevealOamData0[18][18];
+extern const u16 gCatchTile_RevealOamData[16][18];
+extern const u16 gCatchTile_SequentialBreakOamData[28][18];
 
 void DisableCatchTileDisplay(void)
 {
@@ -164,9 +164,9 @@ void RevealCatchTilesSequential(void)
     {
         oamSimple = &group->oam[i];
         dst = (u16 *)&gOamBuffer[oamSimple->oamId];
-        *dst++ = gCatchTile_SequentialBreakSpritesheetOam[gCatchTile_SequentialFramesetData[gCurrentPinballGame->catchRevealFrameId][0]][i * 3 + 0];
-        *dst++ = gCatchTile_SequentialBreakSpritesheetOam[gCatchTile_SequentialFramesetData[gCurrentPinballGame->catchRevealFrameId][0]][i * 3 + 1];
-        *dst++ = gCatchTile_SequentialBreakSpritesheetOam[gCatchTile_SequentialFramesetData[gCurrentPinballGame->catchRevealFrameId][0]][i * 3 + 2];
+        *dst++ = gCatchTile_SequentialBreakOamData[gCatchTile_SequentialFramesetData[gCurrentPinballGame->catchRevealFrameId][0]][i * 3 + 0];
+        *dst++ = gCatchTile_SequentialBreakOamData[gCatchTile_SequentialFramesetData[gCurrentPinballGame->catchRevealFrameId][0]][i * 3 + 1];
+        *dst++ = gCatchTile_SequentialBreakOamData[gCatchTile_SequentialFramesetData[gCurrentPinballGame->catchRevealFrameId][0]][i * 3 + 2];
 
         gOamBuffer[oamSimple->oamId].priority = 3;
         gOamBuffer[oamSimple->oamId].x += group->baseX;
@@ -234,9 +234,9 @@ void RevealCatchTilesBurst(void)
         {
             oamSimple = &group->oam[i];
             dst = (u16 *)&gOamBuffer[oamSimple->oamId];
-            *dst++ = gCatchTile_RevealOamFramesets[tileFrameIx][i * 3 + 0];
-            *dst++ = gCatchTile_RevealOamFramesets[tileFrameIx][i * 3 + 1];
-            *dst++ = gCatchTile_RevealOamFramesets[tileFrameIx][i * 3 + 2];
+            *dst++ = gCatchTile_RevealOamData[tileFrameIx][i * 3 + 0];
+            *dst++ = gCatchTile_RevealOamData[tileFrameIx][i * 3 + 1];
+            *dst++ = gCatchTile_RevealOamData[tileFrameIx][i * 3 + 2];
 
             gOamBuffer[oamSimple->oamId].x += group->baseX;
             gOamBuffer[oamSimple->oamId].y += group->baseY;
@@ -275,9 +275,9 @@ void RevealCatchTilesBurst(void)
         {
             oamSimple = &group->oam[i];
             dst = (u16 *)&gOamBuffer[oamSimple->oamId];
-            *dst++ = gCatchTile_BurstRevealOamFramesets0[tileFrameIx][i * 3 + 0];
-            *dst++ = gCatchTile_BurstRevealOamFramesets0[tileFrameIx][i * 3 + 1];
-            *dst++ = gCatchTile_BurstRevealOamFramesets0[tileFrameIx][i * 3 + 2];
+            *dst++ = gCatchTile_BurstRevealOamData0[tileFrameIx][i * 3 + 0];
+            *dst++ = gCatchTile_BurstRevealOamData0[tileFrameIx][i * 3 + 1];
+            *dst++ = gCatchTile_BurstRevealOamData0[tileFrameIx][i * 3 + 2];
 
             gOamBuffer[oamSimple->oamId].x += group->baseX;
             gOamBuffer[oamSimple->oamId].y += group->baseY;
@@ -370,9 +370,9 @@ void RevealCatchTilesBurst(void)
         {
             oamSimple = &group->oam[i];
             dst = (u16 *)&gOamBuffer[oamSimple->oamId];
-            *dst++ = gCatchTile_BurstRevealOamFramesets1[tileFrameIx][i * 3 + 0];
-            *dst++ = gCatchTile_BurstRevealOamFramesets1[tileFrameIx][i * 3 + 1];
-            *dst++ = gCatchTile_BurstRevealOamFramesets1[tileFrameIx][i * 3 + 2];
+            *dst++ = gCatchTile_BurstRevealOamData1[tileFrameIx][i * 3 + 0];
+            *dst++ = gCatchTile_BurstRevealOamData1[tileFrameIx][i * 3 + 1];
+            *dst++ = gCatchTile_BurstRevealOamData1[tileFrameIx][i * 3 + 2];
 
             gOamBuffer[oamSimple->oamId].x += group->baseX;
             gOamBuffer[oamSimple->oamId].y += group->baseY;

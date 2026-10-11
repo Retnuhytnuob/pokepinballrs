@@ -24,8 +24,8 @@ extern const u16 gSeedotBasketBounceFrames[];
 extern const struct Vector16 gSplashEffectPositions[];
 extern const s16 gSplashEffectTileIndices[][2];
 extern const s16 gHoleAnimKeyframeData[][2];
-extern const u16 gSapphireBoardSeedotSpritesheetOam[6][6][2][3];
-extern const u16 gEggOamFramestates[40][2][3];
+extern const union OamDataPacked gSapphireBoardSeedotOamData[6][6][2];
+extern const union OamDataPacked gEggOamFramestates[40][2];
 
 void InitSapphireEggHatchAnimation(void)
 {
@@ -162,7 +162,7 @@ void UpdateSapphireEggHatchAnimation(void)
     {
         oamSimple = &group->oam[i];
         dst = (u16*)&gOamBuffer[oamSimple->oamId];
-        src = gEggOamFramestates[sp0][i];
+        src = gEggOamFramestates[sp0][i].raw;
         *dst++ = *src++;
         *dst++ = *src++;
         *dst++ = *src++;
@@ -436,7 +436,7 @@ void DrawSapphireSeedotAndBasketSprites(void)
         {
             oamSimple = &group->oam[i];
             dst = (u16*)&gOamBuffer[oamSimple->oamId];
-            src = gSapphireBoardSeedotSpritesheetOam[j][index][i];
+            src = gSapphireBoardSeedotOamData[j][index][i].raw;
             *dst++ = *src++;
             *dst++ = *src++;
             *dst++ = *src++;

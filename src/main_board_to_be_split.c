@@ -15,7 +15,7 @@ EWRAM_DATA Palette gCatchSpritePaletteBuffer;
 // Rom_1 data
 extern const u8 gCaptureBallTilesGfx[];
 extern const u8 gCaptureScreenTilesGfx[SIZE_OF_VRAM_FX_MON_CATCH_CUTSCENE_TILES];
-extern const u8 gAerodactlyFlight_Gfx[];
+extern const u8 gAerodactlyFlight_Gfx[SIZE_OF_VRAM_AERODACTYL_EGG_DELIVERY_TILES];
 extern const Palette gAerodactlyFlight_Pal;
 extern const Palette gTotodile_Pal;
 extern const Palette gRubyShopSign_Pal;
@@ -48,12 +48,12 @@ extern const u16 gPikaSaverFrameData[][2];
 extern const struct Vector16 gFlyingCreatureCameraOffsets[];
 extern const struct Vector16 gCyndaquilCavePositions[];
 extern const u16 gCyndaquilFrameIndices[];
-extern const u16 gTotodileEggDeliveryCutsceneFramesets[82][6][3];
-extern const u16 gShopNumberOamFramesets[4][15];
-extern const u16 gCoinRewardAnimOamFramesets[18][3];
-extern const u16 gAerodactylEggDeliveryCutsceneFramesets[14][15];
-extern const u16 gCatchCreatureOamFramesets[48][4][3];
-extern const u16 gEggOamFramestates[40][2][3];
+extern const union OamDataPacked gTotodileEggDeliveryCutsceneOamData[82][6];
+extern const u16 gShopNumberOamData[2][5 * 3]; // TODO: Should use the union OamDataPacked
+extern const union OamDataPacked gCoinRewardAnimOamData[18];
+extern const u16 gAerodactylEggDeliveryCutsceneOamData[7][5 * 3]; // TODO: Should use the union OamDataPacked
+extern const union OamDataPacked gCatchCreatureOamData[24][4];
+extern const union OamDataPacked gEggOamFramestates[40][2];
 
 // This is the 'Gravity Well' in the center of the board.
 // Used with travel confirmation, bonus board entry, roulette, etc
@@ -616,9 +616,10 @@ void RenderMartUI(s16 showPrice)
         {
             oamSimple = &group->oam[i];
             dst = (u16 *)&gOamBuffer[oamSimple->oamId];
-            *dst++ = gShopNumberOamFramesets[index][i * 3 + 0];
-            *dst++ = gShopNumberOamFramesets[index][i * 3 + 1];
-            *dst++ = gShopNumberOamFramesets[index][i * 3 + 2];
+            // TODO: should match normal OAM loading
+            *dst++ = gShopNumberOamData[index][i * 3 + 0];
+            *dst++ = gShopNumberOamData[index][i * 3 + 1];
+            *dst++ = gShopNumberOamData[index][i * 3 + 2];
 
             gOamBuffer[oamSimple->oamId].x += group->baseX;
             gOamBuffer[oamSimple->oamId].y += group->baseY;
@@ -824,8 +825,9 @@ void AnimateCoinReward(void)
                     var0 = (17 - gCurrentPinballGame->coinBounceTimer[i]) / 2;
 
                 oamSimple = &group->oam[i];
-                dst = (u16*)&gOamBuffer[oamSimple->oamId];
-                src = gCoinRewardAnimOamFramesets[var0];
+                dst = (u16 *)&gOamBuffer[oamSimple->oamId];
+                src = gCoinRewardAnimOamData[var0].raw;
+
                 *dst++ = *src++;
                 *dst++ = *src++;
                 *dst++ = *src++;
@@ -928,7 +930,7 @@ void AnimateTotodileEggDelivery(void)
     {
         oamSimple = &group->oam[i];
         dst = (u16*)&gOamBuffer[oamSimple->oamId];
-        src = gTotodileEggDeliveryCutsceneFramesets[var0][i];
+        src = gTotodileEggDeliveryCutsceneOamData[var0][i].raw;
         *dst++ = *src++;
         *dst++ = *src++;
         *dst++ = *src++;
@@ -1005,9 +1007,10 @@ void AnimateAerodactylEggDelivery(void)
     {
         oamSimple = &group->oam[i];
         dst = (u16 *)&gOamBuffer[oamSimple->oamId];
-        *dst++ = gAerodactylEggDeliveryCutsceneFramesets[var0][i * 3 + 0];
-        *dst++ = gAerodactylEggDeliveryCutsceneFramesets[var0][i * 3 + 1];
-        *dst++ = gAerodactylEggDeliveryCutsceneFramesets[var0][i * 3 + 2];
+        // TODO: should mirror other oam usage, with the src/dest
+        *dst++ = gAerodactylEggDeliveryCutsceneOamData[var0][i * 3 + 0];
+        *dst++ = gAerodactylEggDeliveryCutsceneOamData[var0][i * 3 + 1];
+        *dst++ = gAerodactylEggDeliveryCutsceneOamData[var0][i * 3 + 2];
 
         gOamBuffer[oamSimple->oamId].x += group->baseX;
         gOamBuffer[oamSimple->oamId].y += group->baseY;
@@ -1418,7 +1421,7 @@ void UpdateRubyEggHatchAnimation(void)
     {
         oamSimple = &group->oam[i];
         dst = (u16*)&gOamBuffer[oamSimple->oamId];
-        src = gEggOamFramestates[caveFrameIx][i];
+        src = gEggOamFramestates[caveFrameIx][i].raw;
         *dst++ = *src++;
         *dst++ = *src++;
         *dst++ = *src++;
@@ -1728,7 +1731,7 @@ void UpdateEggMode(void)
         {
             oamSimple = &group->oam[i];
             dst = (u16*)&gOamBuffer[oamSimple->oamId];
-            src = gCatchCreatureOamFramesets[var1][i];
+            src = gCatchCreatureOamData[var1][i].raw;
             *dst++ = *src++;
             *dst++ = *src++;
             *dst++ = *src++;

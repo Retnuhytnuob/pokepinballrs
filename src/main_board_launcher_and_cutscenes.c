@@ -12,11 +12,11 @@ extern const s16 gAreaPortraitIndexes[];
 extern const Palette gFieldVariant_Pals[][6];
 extern const u8 gEvolutionCutsceneTilesGfx[SIZE_OF_VRAM_EVO_CUTSCENE_TILES];
 extern const Palette gBoardActionObj_Pals[];
-extern const u8 gRubyTravelPaint_Gfx[];
+extern const u8 gRubyTravelPaint_Gfx[SIZE_OF_VRAM_FX_TRAVEL_CUTSCENE];
 extern const Palette gRubyPainter_Pals;
-extern const u8 gSapphireTravelPaint_Gfx[];
+extern const u8 gSapphireTravelPaint_Gfx[SIZE_OF_VRAM_FX_TRAVEL_CUTSCENE];
 extern const Palette gSapphirePainter_Pals;
-extern const u8 gCatchTile_BurstStage4_Gfx[];
+extern const u8 gCatchTile_BurstStage4_Gfx[SIZE_OF_VRAM_FX_CATCH_BURST_TILE_ELECTRIC];
 extern const Palette gCatchTile_BurstStage4_Pal;
 extern const u8 gSpoinkEntity_Gfx[][0x1C0];
 extern const u8 gOneUpTreeckoSprite_Gfx[][0x200];
@@ -32,9 +32,9 @@ extern const s16 gCatchTile_RevealFinalTimings[];
 extern const Palette gOneUpSprite_Pal;
 extern const s16 gSpoinkAnimFrameset[][2];
 extern const s16 gTravelEventAnimData[][3];
-extern const u16 gTravelEventSpritesheetOam[][18];
-extern const u16 gEvolutionSparkleSpritesheetOam[20][12];
-extern const u16 gCatchTile_BurstRevealOamFramesets1[22][12];
+extern const u16 gTravelEventOamData[7][6 * 3]; // TODO: should be union OamDataPacked
+extern const u16 gEvolutionSparkleOamData[10][4 * 3]; // TODO: should be union OamDataPacked
+extern const u16 gCatchTile_BurstRevealOamData1[22][12];
 
 void AnimateOneUpSprite(void)
 {
@@ -604,9 +604,9 @@ void RunEvolutionCutscene(void)
             {
                 oamSimple = &group->oam[i];
                 dst = (u16*)&gOamBuffer[oamSimple->oamId];
-                *dst++ = gEvolutionSparkleSpritesheetOam[index][i * 3 + 0];
-                *dst++ = gEvolutionSparkleSpritesheetOam[index][i * 3 + 1];
-                *dst++ = gEvolutionSparkleSpritesheetOam[index][i * 3 + 2];
+                *dst++ = gEvolutionSparkleOamData[index][i * 3 + 0];
+                *dst++ = gEvolutionSparkleOamData[index][i * 3 + 1];
+                *dst++ = gEvolutionSparkleOamData[index][i * 3 + 2];
                 gOamBuffer[oamSimple->oamId].x += group->baseX + sp0[0];
                 gOamBuffer[oamSimple->oamId].y += group->baseY;
             }
@@ -694,9 +694,9 @@ void RunEvolutionCutscene(void)
             {
                 oamSimple = &group->oam[i];
                 dst = (u16*)&gOamBuffer[oamSimple->oamId];
-                *dst++ = gCatchTile_BurstRevealOamFramesets1[index][i * 3 + 0];
-                *dst++ = gCatchTile_BurstRevealOamFramesets1[index][i * 3 + 1];
-                *dst++ = gCatchTile_BurstRevealOamFramesets1[index][i * 3 + 2];
+                *dst++ = gCatchTile_BurstRevealOamData1[index][i * 3 + 0];
+                *dst++ = gCatchTile_BurstRevealOamData1[index][i * 3 + 1];
+                *dst++ = gCatchTile_BurstRevealOamData1[index][i * 3 + 2];
                 gOamBuffer[oamSimple->oamId].x += group->baseX;
                 gOamBuffer[oamSimple->oamId].y += group->baseY;
             }
@@ -850,9 +850,10 @@ void RunTravelPaintEventCutscene(void)
         {
             oamSimple = &group->oam[i];
             dst =(u16*) &gOamBuffer[oamSimple->oamId];
-            *dst++ = gTravelEventSpritesheetOam[index][i * 3 + 0];
-            *dst++ = gTravelEventSpritesheetOam[index][i * 3 + 1];
-            *dst++ = gTravelEventSpritesheetOam[index][i * 3 + 2];
+            // TODO: should follow standard src pattern
+            *dst++ = gTravelEventOamData[index][i * 3 + 0];
+            *dst++ = gTravelEventOamData[index][i * 3 + 1];
+            *dst++ = gTravelEventOamData[index][i * 3 + 2];
             gOamBuffer[oamSimple->oamId].x +=  group->baseX;
             gOamBuffer[oamSimple->oamId].y +=  group->baseY;
         }

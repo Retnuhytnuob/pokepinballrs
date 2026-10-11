@@ -21,10 +21,10 @@ extern const s16 gPelipperSwallowAnimData[][3];
 extern const s16 gPelipperIdleFrameIndices[];
 extern const s16 gWailmerAnimFrameMap[][2];
 extern const s16 gZigzagoonAnimKeyframes[][3];
-extern const u16 gZigzagoonFxSpritesheetOam[14][7][3];
-extern const u16 gSapphireBoardZigzagoonSpritesheetOam[42][3][3];
-extern const u16 gPelipperPondSpritesheetOam[20][4][3];
-extern const u16 gWailmerSpritesheetOam[26][2][3];
+extern const union OamDataPacked gZigzagoonFxOamData[7][7];
+extern const union OamDataPacked gSapphireBoardZigzagoonOamData[21][3];
+extern const union OamDataPacked gPelipperPondOamData[10][4];
+extern const u16 gWailmerOamData[26][2][3];
 
 void DecrementPelipperTimer(void)
 {
@@ -323,7 +323,7 @@ void UpdatePelipperPondEntity(void)
         {
             oamSimple = &group->oam[i];
             dst = (u16*)&gOamBuffer[oamSimple->oamId];
-            src = gPelipperPondSpritesheetOam[framesetIx][i];
+            src = gPelipperPondOamData[framesetIx][i].raw;
             *dst++ = *src++;
             *dst++ = *src++;
             *dst++ = *src++;
@@ -358,7 +358,7 @@ void AnimateWailmerEntity(void)
     {
         oamSimple = &group->oam[i];
         dst = (u16*)&gOamBuffer[oamSimple->oamId];
-        src = gWailmerSpritesheetOam[oamIx][i];
+        src = gWailmerOamData[oamIx][i];
         *dst++ = *src++;
         *dst++ = *src++;
         *dst++ = *src++;
@@ -469,7 +469,7 @@ void DrawZigzagoonAndRouletteStopPrompt(void)
         {
             oamSimple = &group->oam[i];
             dst = (u16*)&gOamBuffer[oamSimple->oamId];
-            src = gSapphireBoardZigzagoonSpritesheetOam[index][i];
+            src = gSapphireBoardZigzagoonOamData[index][i].raw;
             *dst++ = *src++;
             *dst++ = *src++;
             *dst++ = *src++;
@@ -489,7 +489,7 @@ void DrawZigzagoonAndRouletteStopPrompt(void)
         {
             oamSimple = &group->oam[i];
             dst = (u16*)&gOamBuffer[oamSimple->oamId];
-            src = gZigzagoonFxSpritesheetOam[index][i];
+            src = gZigzagoonFxOamData[index][i].raw;
             *dst++ = *src++;
             *dst++ = *src++;
             *dst++ = *src++;

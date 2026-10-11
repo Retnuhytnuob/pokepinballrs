@@ -34,11 +34,11 @@ extern const s16 gGroudonBoulderBaseSpriteIndices[];
 extern const s16 gGroudonLavaPaletteAnimIndices[];
 extern const s16 gGroudonBgTileAnimIndices[];
 extern const u16 gGroudonBgSpriteBaseTileNums[];
-extern const u16 gGroudonBallGrabOamData[12][2][3];
-extern const u16 gGroudonProjectileOamData[24][4][3];
-extern const u16 gGroudonProjectileAttackOamData[12][6][3];
-extern const u16 gGroudonMainBodyOamData[166][19][3];
-extern const u16 gGroudonFirePillarOamData[58][10][3];
+extern const union OamDataPacked gGroudonBallGrabOamData[6][2];
+extern const union OamDataPacked gGroudonProjectileOamData[12][4];
+extern const union OamDataPacked gGroudonProjectileAttackOamData[6][6];
+extern const union OamDataPacked gGroudonMainBodyOamData[83][19];
+extern const union OamDataPacked gGroudonFirePillarOamData[29][10];
 
 
 void InitFrameProcess3_BoardLogic_GroudonBoard(void)
@@ -871,7 +871,7 @@ void RenderGroudonSprites(void)
             {
                 oamSimple = &group->oam[i];
                 dst = (u16*)&gOamBuffer[oamSimple->oamId];
-                src = gGroudonMainBodyOamData[oamAnimFrameIx][i];
+                src = gGroudonMainBodyOamData[oamAnimFrameIx][i].raw;
                 *dst++ = *src++;
                 *dst++ = *src++;
                 *dst++ = *src++;
@@ -888,7 +888,7 @@ void RenderGroudonSprites(void)
             {
                 oamSimple = &group->oam[i];
                 dst = (u16*)&gOamBuffer[oamSimple->oamId];
-                src = gGroudonMainBodyOamData[oamAnimFrameIx][i];
+                src = gGroudonMainBodyOamData[oamAnimFrameIx][i].raw;
                 *dst++ = *src++;
                 *dst++ = *src++;
                 *dst++ = *src++;
@@ -904,7 +904,7 @@ void RenderGroudonSprites(void)
             {
                 oamSimple = &group->oam[i];
                 dst = (u16*)&gOamBuffer[oamSimple->oamId];
-                src = gGroudonMainBodyOamData[oamAnimFrameIx][i];
+                src = gGroudonMainBodyOamData[oamAnimFrameIx][i].raw;
                 *dst++ = *src++;
                 *dst++ = *src++;
                 *dst++ = *src++;
@@ -933,7 +933,7 @@ void RenderGroudonSprites(void)
         {
             oamSimple = &group->oam[i];
             dst = (u16*)&gOamBuffer[oamSimple->oamId];
-            src = gGroudonProjectileAttackOamData[oamAnimFrameIx][i];
+            src = gGroudonProjectileAttackOamData[oamAnimFrameIx][i].raw;
             *dst++ = *src++;
             *dst++ = *src++;
             *dst++ = *src++;
@@ -1084,7 +1084,7 @@ void UpdateGroudonFieldEntities(void)
         {
             oamSimple = &group->oam[j];
             dst = (u16*)&gOamBuffer[oamSimple->oamId];
-            src = gGroudonBallGrabOamData[varSL][j];
+            src = gGroudonBallGrabOamData[varSL][j].raw;
             *dst++ = *src++;
             *dst++ = *src++;
             *dst++ = *src++;
@@ -1166,7 +1166,7 @@ void UpdateGroudonFieldEntities(void)
         {
             oamSimple = &group->oam[j];
             dst = (u16*)&gOamBuffer[oamSimple->oamId];
-            src = gGroudonProjectileOamData[varSL][j];
+            src = gGroudonProjectileOamData[varSL][j].raw;
             *dst++ = *src++;
             *dst++ = *src++;
             *dst++ = *src++;
@@ -1532,7 +1532,7 @@ void UpdateGroudonFieldEntities(void)
                 {
                     oamSimple = &group->oam[j];
                     dst = (u16*)&gOamBuffer[oamSimple->oamId];
-                    src = gGroudonFirePillarOamData[varSL][j];
+                    src = gGroudonFirePillarOamData[varSL][j].raw;
                     *dst++ = *src++;
                     *dst++ = *src++;
                     *dst++ = *src++;
@@ -1548,7 +1548,7 @@ void UpdateGroudonFieldEntities(void)
                 {
                     oamSimple = &group->oam[j];
                     dst = (u16*)&gOamBuffer[oamSimple->oamId];
-                    src = gGroudonFirePillarOamData[varSL][j];
+                    src = gGroudonFirePillarOamData[varSL][j].raw;
                     *dst++ = *src++;
                     *dst++ = *src++;
                     *dst++ = *src++;

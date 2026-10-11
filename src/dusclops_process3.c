@@ -30,7 +30,7 @@ extern const struct SongHeader se_dusclops_appear;
 // Rom_2 data
 extern const s16 DuskullFramesetData[][3];
 extern const s16 DuclopsFramesetData[][2];
-extern const u16 gDuskullSpritesheetOam[][2][3];
+extern const union OamDataPacked gDuskullOamData[][2];
 
 void InitFrameProcess3_BoardLogic_DusclopsBoard(void)
 {
@@ -612,7 +612,7 @@ void DuskullPhase_ProcessGraphics() {
                 oamData = &spriteGroup->oam[animPiece];
 
                 dst = (u16*)&gOamBuffer[oamData->oamId];
-                src = gDuskullSpritesheetOam[oamIx][animPiece];
+                src = gDuskullOamData[oamIx][animPiece].raw;
                 *dst++ = *src++;
                 *dst++ = *src++;
                 *dst++ = *src++;
@@ -630,7 +630,7 @@ void DuskullPhase_ProcessGraphics() {
             {
                 oamData = &spriteGroup->oam[animPiece];
                 dst = (u16*)&gOamBuffer[oamData->oamId];
-                src = gDuskullSpritesheetOam[oamIx][animPiece];
+                src = gDuskullOamData[oamIx][animPiece].raw;
                 *dst++ = *src++;
                 *dst++ = *src++;
                 *dst++ = *src++;

@@ -5,8 +5,8 @@
 #include "constants/board/main_board.h"
 
 // Rom_1 data
-extern const u8 gPichuKickbackFx_Gfx[];
-extern const u8 gPikachuKickbackFx_Gfx[];
+extern const u8 gPichuKickbackFx_Gfx[SIZE_OF_VRAM_PIKA_SAVER_KICKBACK_TILES];
+extern const u8 gPikachuKickbackFx_Gfx[SIZE_OF_VRAM_PIKA_SAVER_KICKBACK_TILES];
 extern const u8 gPikachuSaverTilesGfx[];
 extern const u8 gPichuSaverTilesGfx[];
 
@@ -20,7 +20,7 @@ extern const u16 gCatchOverlayAnimData[][2];
 extern const s16 gPikaSaverAnimFrameTable[100];
 extern const s16 gOutlaneCenterXPositions[3];
 extern const struct Vector32 gPikaSaverWaypoints[];
-extern const s16 gPikaKickbackFiringAnimOamFramesets[28][12];
+extern const s16 gPikaKickbackFiringAnimOamData[28][12];
 
 // TODO: Should potentially be replacable with gMonHatchSpriteGroupGfx[5];
 extern const u8 gMonHatchSpriteGroup5_Gfx[];
@@ -288,9 +288,9 @@ void UpdateKickbackLogic(void)
             {
                 oamSimple = &spriteGroup->oam[j];
                 dst = (u16 *)&gOamBuffer[oamSimple->oamId];
-                *dst++ = gPikaKickbackFiringAnimOamFramesets[oamIx][j * 3 + 0];
-                *dst++ = gPikaKickbackFiringAnimOamFramesets[oamIx][j * 3 + 1];
-                *dst++ = gPikaKickbackFiringAnimOamFramesets[oamIx][j * 3 + 2];
+                *dst++ = gPikaKickbackFiringAnimOamData[oamIx][j * 3 + 0];
+                *dst++ = gPikaKickbackFiringAnimOamData[oamIx][j * 3 + 1];
+                *dst++ = gPikaKickbackFiringAnimOamData[oamIx][j * 3 + 2];
 
                 gOamBuffer[oamSimple->oamId].x += spriteGroup->baseX;
                 gOamBuffer[oamSimple->oamId].y += spriteGroup->baseY;

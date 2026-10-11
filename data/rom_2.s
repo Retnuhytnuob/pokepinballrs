@@ -10020,7 +10020,7 @@ gSapphireBoardSpriteSets:: @ 0x086B24E0
 .4byte gTreecko1UpDeliverySpriteSet
 
 
-gJirachiFloatOamFramesets:: @ 0x086B263C
+gJirachiFloatOamData:: @ 0x086B263C
     packed_sprite_oam x=0x0, y=0x0, spriteSize=SPRITE_SIZE_8x8, tileNum=0x291, priority=0x1, paletteNum=PAL_IX_CATCH_MON
     packed_sprite_oam x=0x0, y=0x0, spriteSize=SPRITE_SIZE_8x8, tileNum=0x291, priority=0x1, paletteNum=PAL_IX_CATCH_MON
     packed_sprite_oam x=0x0, y=0x0, spriteSize=SPRITE_SIZE_8x8, tileNum=0x291, priority=0x1, paletteNum=PAL_IX_CATCH_MON
@@ -10125,7 +10125,7 @@ gJirachiFloatOamFramesets:: @ 0x086B263C
     packed_sprite_oam x=0xD, y=0x1B, spriteSize=SPRITE_SIZE_8x8, tileNum=0x291, priority=0x1, paletteNum=PAL_IX_CATCH_MON
 
 
-gTotodileEggDeliveryCutsceneFramesets:: @ 0x086B28A0
+gTotodileEggDeliveryCutsceneOamData:: @ 0x086B28A0
     packed_sprite_oam x=-0xC, y=-0x2A, spriteSize=SPRITE_SIZE_32x16, tileNum=0x2c0, paletteNum=PAL_IX_RUBY_EGG_DELIVERER
     packed_sprite_oam x=-0xC, y=-0x1A, spriteSize=SPRITE_SIZE_32x8, tileNum=0x2c8, paletteNum=PAL_IX_RUBY_EGG_DELIVERER
     packed_sprite_oam x=-0xC, y=-0x2A, spriteSize=SPRITE_SIZE_32x16, tileNum=0x2c0, paletteNum=PAL_IX_RUBY_EGG_DELIVERER
@@ -10876,7 +10876,7 @@ gGulpinOamData:: @ 0x086B2FC0
     packed_sprite_oam x=0x0, y=0x10, spriteSize=SPRITE_SIZE_32x8, tileNum=0x1e4, priority=0x1, paletteNum=PAL_IX_GULPIN
 
 
-gSharpedoSpritesheetOam:: @ 0x086B3A04
+gSharpedoOamData:: @ 0x086B3A04
     packed_sprite_oam x=0xA, y=-0x1, spriteSize=SPRITE_SIZE_8x16, tileNum=0x161, priority=0x1, paletteNum=PAL_IX_SHARPEDO
     packed_sprite_oam x=0x0, y=0xF, spriteSize=SPRITE_SIZE_32x32, tileNum=0x163, priority=0x1, paletteNum=PAL_IX_SHARPEDO
     packed_sprite_oam x=0x20, y=0x17, spriteSize=SPRITE_SIZE_8x8, tileNum=0x173, priority=0x1, paletteNum=PAL_IX_SHARPEDO
@@ -10942,7 +10942,7 @@ gSharpedoSpritesheetOam:: @ 0x086B3A04
     packed_sprite_oam x=0x1E, y=0x18, spriteSize=SPRITE_SIZE_8x8, tileNum=0x173, priority=0x1, paletteNum=PAL_IX_SHARPEDO
 
 
-gZigzagoonFxSpritesheetOam:: @ 0x086B3B7E
+gZigzagoonFxOamData:: @ 0x086B3B7E
     packed_sprite_oam x=0x0, y=0x0, spriteSize=SPRITE_SIZE_8x8, tileNum=0x31a, priority=0x1, paletteNum=PAL_IX_ZIGZAGOON
     packed_sprite_oam x=0x0, y=0x0, spriteSize=SPRITE_SIZE_8x8, tileNum=0x31a, priority=0x1, paletteNum=PAL_IX_ZIGZAGOON
     packed_sprite_oam x=0x0, y=0x0, spriteSize=SPRITE_SIZE_8x8, tileNum=0x31a, priority=0x1, paletteNum=PAL_IX_ZIGZAGOON
@@ -10994,7 +10994,7 @@ gZigzagoonFxSpritesheetOam:: @ 0x086B3B7E
     packed_sprite_oam x=0x0, y=0x0, spriteSize=SPRITE_SIZE_8x8, tileNum=0x31a, priority=0x1, paletteNum=PAL_IX_ZIGZAGOON
 
 
-gSapphireBoardZigzagoonSpritesheetOam:: @ 0x086B3CA4
+gSapphireBoardZigzagoonOamData:: @ 0x086B3CA4
     packed_sprite_oam x=0x0, y=0x0, spriteSize=SPRITE_SIZE_32x32, tileNum=0x151, priority=0x1, paletteNum=PAL_IX_ZIGZAGOON
     packed_sprite_oam x=0x20, y=0x0, spriteSize=SPRITE_SIZE_16x32, tileNum=0x161, priority=0x1, paletteNum=PAL_IX_ZIGZAGOON
     packed_sprite_oam x=0x0, y=0x20, spriteSize=SPRITE_SIZE_32x8, tileNum=0x169, priority=0x1, paletteNum=PAL_IX_ZIGZAGOON
@@ -11060,7 +11060,7 @@ gSapphireBoardZigzagoonSpritesheetOam:: @ 0x086B3CA4
     packed_sprite_oam x=0x0, y=0x20, spriteSize=SPRITE_SIZE_32x8, tileNum=0x169, priority=0x1, paletteNum=PAL_IX_ZIGZAGOON
 
 
-gSapphireBoardSeedotSpritesheetOam:: @ 0x086B3E1E
+gSapphireBoardSeedotOamData:: @ 0x086B3E1E
     packed_sprite_oam x=0x0, y=0x0, spriteSize=SPRITE_SIZE_16x32, tileNum=0x1e1, priority=0x1, paletteNum=PAL_IX_SEEDOT
     packed_sprite_oam x=0x10, y=0x0, spriteSize=SPRITE_SIZE_8x32, tileNum=0x1e9, priority=0x1, paletteNum=PAL_IX_SEEDOT
     packed_sprite_oam x=0x0, y=0x0, spriteSize=SPRITE_SIZE_16x32, tileNum=0x1e1, priority=0x1, paletteNum=PAL_IX_SEEDOT
@@ -11099,7 +11099,7 @@ gSapphireBoardSeedotSpritesheetOam:: @ 0x086B3E1E
     packed_sprite_oam x=-0x20, y=-0x18, spriteSize=SPRITE_SIZE_8x32, tileNum=0x201, priority=0x1, paletteNum=PAL_IX_SEEDOT
 
 
-gPelipperPondSpritesheetOam:: @ 0x086B3EF6
+gPelipperPondOamData:: @ 0x086B3EF6
     packed_sprite_oam x=0x0, y=0x0, mosaic=0x1, spriteSize=SPRITE_SIZE_32x32, tileNum=0x115, priority=0x1, paletteNum=PAL_IX_PELIPPER
     packed_sprite_oam x=0x20, y=0x0, mosaic=0x1, spriteSize=SPRITE_SIZE_16x32, tileNum=0x125, priority=0x1, paletteNum=PAL_IX_PELIPPER
     packed_sprite_oam x=0x0, y=0x20, mosaic=0x1, spriteSize=SPRITE_SIZE_32x16, tileNum=0x12d, priority=0x1, paletteNum=PAL_IX_PELIPPER
@@ -11142,7 +11142,10 @@ gPelipperPondSpritesheetOam:: @ 0x086B3EF6
     packed_sprite_oam x=0x0, y=0x20, mosaic=0x1, spriteSize=SPRITE_SIZE_16x16, hFlip=0x1, tileNum=0x135, priority=0x1, paletteNum=PAL_IX_PELIPPER
 
 
-gTravelEventSpritesheetOam:: @ 0x086B3FE6
+gTravelEventOamData:: @ 0x086B3FE6
+    @ Data used is 7 sets of 6 pieces.
+    @ Data listed here has an additional 8 entries, all with ST_OAM_OBJ_BLEND
+
     packed_sprite_oam x=0x0, y=-0x8, spriteSize=SPRITE_SIZE_32x32, tileNum=0x2c0, paletteNum=PAL_IX_TRAVEL_PAINTER
     packed_sprite_oam x=0x20, y=-0x8, spriteSize=SPRITE_SIZE_16x32, tileNum=0x2d0, paletteNum=PAL_IX_TRAVEL_PAINTER
     packed_sprite_oam x=0x0, y=0x18, spriteSize=SPRITE_SIZE_32x16, tileNum=0x2d8, paletteNum=PAL_IX_TRAVEL_PAINTER
@@ -11196,7 +11199,7 @@ gTravelEventSpritesheetOam:: @ 0x086B3FE6
 
 
 
-gEvolutionSparkleSpritesheetOam:: @ 0x086B4112
+gEvolutionSparkleOamData:: @ 0x086B4112
     packed_sprite_oam x=-0x38, y=0x0, spriteSize=SPRITE_SIZE_16x32, tileNum=0x386, paletteNum=PAL_IX_14
     packed_sprite_oam x=-0x38, y=0x0, spriteSize=SPRITE_SIZE_16x32, tileNum=0x386, paletteNum=PAL_IX_14
     packed_sprite_oam x=-0x38, y=0x0, spriteSize=SPRITE_SIZE_16x32, tileNum=0x386, paletteNum=PAL_IX_14
@@ -11239,7 +11242,7 @@ gEvolutionSparkleSpritesheetOam:: @ 0x086B4112
     packed_sprite_oam x=0x20, y=0x18, spriteSize=SPRITE_SIZE_16x16, tileNum=0x3b2, paletteNum=PAL_IX_14
 
 
-gEvoItemAnimOamFramesets:: @ 0x086B4202
+gEvoItemAnimOamData:: @ 0x086B4202
     packed_sprite_oam x=-0x10, y=-0x10, spriteSize=SPRITE_SIZE_32x16, tileNum=0x2c0, paletteNum=PAL_IX_EVO_ITEM
     packed_sprite_oam x=-0x10, y=0x0, spriteSize=SPRITE_SIZE_32x16, hFlip=0x1, vFlip=0x1, tileNum=0x2c0, paletteNum=PAL_IX_EVO_ITEM
     packed_sprite_oam x=-0x10, y=-0x10, spriteSize=SPRITE_SIZE_32x16, tileNum=0x2c0, paletteNum=PAL_IX_EVO_ITEM
@@ -11495,7 +11498,7 @@ gModeBannerOamAttributes:: @ 0x086B4568
     packed_sprite_oam x=0x61, y=0x40, spriteSize=SPRITE_SIZE_16x8, tileNum=0x3cc, paletteNum=PAL_IX_BANNER
 
 
-gShopNumberOamFramesets:: @ 0x086B47DE
+gShopNumberOamData:: @ 0x086B47DE
     packed_sprite_oam x=0x0, y=0x0, spriteSize=SPRITE_SIZE_8x32, tileNum=0x2f5, paletteNum=PAL_IX_SHOP_UI
     packed_sprite_oam x=0x8, y=0x0, spriteSize=SPRITE_SIZE_32x32, tileNum=0x2f9, paletteNum=PAL_IX_SHOP_UI
     packed_sprite_oam x=0x48, y=0x0, spriteSize=SPRITE_SIZE_8x32, hFlip=0x1, tileNum=0x2f5, paletteNum=PAL_IX_SHOP_UI
@@ -11508,7 +11511,7 @@ gShopNumberOamFramesets:: @ 0x086B47DE
     packed_sprite_oam x=0x68, y=0x0, spriteSize=SPRITE_SIZE_16x32, tileNum=0x309, paletteNum=PAL_IX_SHOP_UI
 
 
-gCoinRewardAnimOamFramesets:: @ 0x086B481A
+gCoinRewardAnimOamData:: @ 0x086B481A
     packed_sprite_oam x=-0x10, y=0x0, spriteSize=SPRITE_SIZE_16x16, tileNum=0xdb, paletteNum=PAL_IX_COINS
     packed_sprite_oam x=-0x10, y=0x4, spriteSize=SPRITE_SIZE_16x16, tileNum=0xdf, paletteNum=PAL_IX_COINS
     packed_sprite_oam x=-0x10, y=-0x8, spriteSize=SPRITE_SIZE_16x16, tileNum=0xe3, paletteNum=PAL_IX_COINS
@@ -11520,7 +11523,7 @@ gCoinRewardAnimOamFramesets:: @ 0x086B481A
     packed_sprite_oam x=-0x10, y=-0x19, spriteSize=SPRITE_SIZE_16x16, tileNum=0xdb, paletteNum=PAL_IX_COINS
 
 
-gAerodactylEggDeliveryCutsceneFramesets:: @ 0x086B4850
+gAerodactylEggDeliveryCutsceneOamData:: @ 0x086B4850
     packed_sprite_oam x=0x3, y=0xA, spriteSize=SPRITE_SIZE_32x32, tileNum=0x2c0, paletteNum=PAL_IX_RUBY_EGG_DELIVERER
     packed_sprite_oam x=0x3, y=0x2A, spriteSize=SPRITE_SIZE_16x8, tileNum=0x2d0, paletteNum=PAL_IX_RUBY_EGG_DELIVERER
     packed_sprite_oam x=0x23, y=0x2, spriteSize=SPRITE_SIZE_16x32, tileNum=0x2d2, paletteNum=PAL_IX_RUBY_EGG_DELIVERER
@@ -11558,7 +11561,7 @@ gAerodactylEggDeliveryCutsceneFramesets:: @ 0x086B4850
     packed_sprite_oam x=0x4, y=0x27, spriteSize=SPRITE_SIZE_16x8, tileNum=0x2f8, paletteNum=PAL_IX_RUBY_EGG_DELIVERER
 
 
-gPikaKickbackFiringAnimOamFramesets:: @ 0x086B4922
+gPikaKickbackFiringAnimOamData:: @ 0x086B4922
     packed_sprite_oam x=0x0, y=0x0, spriteSize=SPRITE_SIZE_32x16, tileNum=0x2c0, priority=0x2, paletteNum=PAL_IX_PIKA_KICKBACK
     packed_sprite_oam x=0x8, y=0x10, spriteSize=SPRITE_SIZE_16x8, tileNum=0x2c8, priority=0x2, paletteNum=PAL_IX_PIKA_KICKBACK
     packed_sprite_oam x=0x0, y=0x0, spriteSize=SPRITE_SIZE_32x16, tileNum=0x2c0, priority=0x2, paletteNum=PAL_IX_PIKA_KICKBACK
@@ -11617,7 +11620,7 @@ gPikaKickbackFiringAnimOamFramesets:: @ 0x086B4922
     packed_sprite_oam x=0x0, y=-0x8, spriteSize=SPRITE_SIZE_32x32, tileNum=0x3c3, priority=0x2, paletteNum=PAL_IX_PIKA_KICKBACK
 
 
-gWailmerSpritesheetOam:: @ 0x086B4A72
+gWailmerOamData:: @ 0x086B4A72
     packed_sprite_oam x=0x0, y=0x0, mosaic=0x1, spriteSize=SPRITE_SIZE_32x32, tileNum=0x139, priority=0x3, paletteNum=PAL_IX_WAILMER
     packed_sprite_oam x=0x20, y=0x0, mosaic=0x1, spriteSize=SPRITE_SIZE_16x32, tileNum=0x149, priority=0x3, paletteNum=PAL_IX_WAILMER
     packed_sprite_oam x=0x0, y=0x0, mosaic=0x1, spriteSize=SPRITE_SIZE_32x32, tileNum=0x139, priority=0x3, paletteNum=PAL_IX_WAILMER
@@ -11646,7 +11649,7 @@ gWailmerSpritesheetOam:: @ 0x086B4A72
     packed_sprite_oam x=0x20, y=0x0, mosaic=0x1, spriteSize=SPRITE_SIZE_16x32, tileNum=0x149, priority=0x3, paletteNum=PAL_IX_WAILMER
 
 
-gCatchCreatureOamFramesets:: @ 0x086B4B0E
+gCatchCreatureOamData:: @ 0x086B4B0E
     packed_sprite_oam x=0x0, y=0x0, spriteSize=SPRITE_SIZE_16x16, tileNum=0x95, priority=0x1, paletteNum=PAL_IX_CATCH_MON
     packed_sprite_oam x=0x10, y=0x0, spriteSize=SPRITE_SIZE_8x16, tileNum=0x99, priority=0x1, paletteNum=PAL_IX_CATCH_MON
     packed_sprite_oam x=0x0, y=0x10, spriteSize=SPRITE_SIZE_16x8, tileNum=0x9b, priority=0x1, paletteNum=PAL_IX_CATCH_MON
@@ -11796,7 +11799,7 @@ gCatchTileParticleOamAttributes:: @ 0x086B4E3E
     packed_sprite_oam x=0x0, y=0x0, spriteSize=SPRITE_SIZE_64x64, tileNum=0x340, paletteNum=PAL_IX_CATCH_TILE_FX
     packed_sprite_oam x=0x0, y=0x0, spriteSize=SPRITE_SIZE_64x64, tileNum=0x300, paletteNum=PAL_IX_CATCH_TILE_FX
 
-gCatchTile_BurstRevealOamFramesets1:: @ 0x086B4E62
+gCatchTile_BurstRevealOamData1:: @ 0x086B4E62
     packed_sprite_oam x=0x18, y=0x18, spriteSize=SPRITE_SIZE_16x16, tileNum=0x2c8, paletteNum=PAL_IX_CATCH_TILE_FX
     packed_sprite_oam x=0x28, y=0x8, spriteSize=SPRITE_SIZE_16x32, tileNum=0x2c0, paletteNum=PAL_IX_CATCH_TILE_FX
     packed_sprite_oam x=0x18, y=0x18, spriteSize=SPRITE_SIZE_16x16, tileNum=0x2c8, paletteNum=PAL_IX_CATCH_TILE_FX
@@ -11843,7 +11846,7 @@ gCatchTile_BurstRevealOamFramesets1:: @ 0x086B4E62
     packed_sprite_oam x=-0xE, y=-0x8, spriteSize=SPRITE_SIZE_16x32, tileNum=0x356, paletteNum=PAL_IX_CATCH_TILE_FX
 
 
-gCatchTile_BurstRevealOamFramesets0:: @ 0x086B4F6A
+gCatchTile_BurstRevealOamData0:: @ 0x086B4F6A
     packed_sprite_oam x=0x0, y=0x0, spriteSize=SPRITE_SIZE_16x16, tileNum=0x2c4, paletteNum=PAL_IX_CATCH_TILE_FX
     packed_sprite_oam x=0x10, y=0x0, spriteSize=SPRITE_SIZE_16x16, tileNum=0x2c0, paletteNum=PAL_IX_CATCH_TILE_FX
     packed_sprite_oam x=0x20, y=0x0, spriteSize=SPRITE_SIZE_16x16, tileNum=0x2c0, paletteNum=PAL_IX_CATCH_TILE_FX
@@ -11900,7 +11903,7 @@ gCatchTile_BurstRevealOamFramesets0:: @ 0x086B4F6A
     packed_sprite_oam x=0x0, y=0x10, spriteSize=SPRITE_SIZE_16x16, tileNum=0x2c0, paletteNum=PAL_IX_CATCH_TILE_FX
 
 
-gCatchTile_RevealOamFramesets:: @ 0x086B50AE
+gCatchTile_RevealOamData:: @ 0x086B50AE
     packed_sprite_oam x=0x0, y=-0x10, spriteSize=SPRITE_SIZE_16x32, tileNum=0x2c0, paletteNum=PAL_IX_CATCH_TILE_FX
     packed_sprite_oam x=0x0, y=-0x10, spriteSize=SPRITE_SIZE_16x32, tileNum=0x2c0, paletteNum=PAL_IX_CATCH_TILE_FX
     packed_sprite_oam x=0x0, y=-0x10, spriteSize=SPRITE_SIZE_16x32, tileNum=0x2c0, paletteNum=PAL_IX_CATCH_TILE_FX
@@ -11951,7 +11954,7 @@ gCatchTile_RevealOamFramesets:: @ 0x086B50AE
     packed_sprite_oam x=0x8, y=0x38, spriteSize=SPRITE_SIZE_8x16, tileNum=0x3ae, paletteNum=PAL_IX_CATCH_TILE_FX
 
 
-gAreaRouletteOamFramesets:: @ 0x086B51CE
+gAreaRouletteOamData:: @ 0x086B51CE
     packed_sprite_oam x=0x0, y=0x0, spriteSize=SPRITE_SIZE_16x16, tileNum=0x2c0, paletteNum=PAL_IX_14
     packed_sprite_oam x=0x10, y=0x0, spriteSize=SPRITE_SIZE_16x16, tileNum=0x2c0, paletteNum=PAL_IX_14
     packed_sprite_oam x=0x0, y=0x10, spriteSize=SPRITE_SIZE_16x16, tileNum=0x2c0, paletteNum=PAL_IX_14
@@ -12045,7 +12048,7 @@ gHatchAnimOamAttributes:: @ 0x086B53B4
     packed_sprite_oam x=0x0, y=0x0, spriteSize=SPRITE_SIZE_8x8, tileNum=0x326, paletteNum=PAL_IX_14
     packed_sprite_oam x=0x0, y=0x0, spriteSize=SPRITE_SIZE_8x8, tileNum=0x3C0, paletteNum=PAL_IX_14
 
-gCatchTile_SequentialBreakSpritesheetOam:: @ 0x086B53E4
+gCatchTile_SequentialBreakOamData:: @ 0x086B53E4
     packed_sprite_oam x=-0x8, y=-0x8, spriteSize=SPRITE_SIZE_32x32, tileNum=0x2c0, paletteNum=PAL_IX_CATCH_TILE_FX
     packed_sprite_oam x=0x0, y=0x0, spriteSize=SPRITE_SIZE_16x16, tileNum=0x2d0, paletteNum=PAL_IX_CATCH_TILE_FX
     packed_sprite_oam x=-0x8, y=-0x8, spriteSize=SPRITE_SIZE_32x32, tileNum=0x2c0, paletteNum=PAL_IX_CATCH_TILE_FX
@@ -12132,7 +12135,7 @@ gCatchTile_SequentialBreakSpritesheetOam:: @ 0x086B53E4
     packed_sprite_oam x=0x8, y=0x5, spriteSize=SPRITE_SIZE_32x32, hFlip=0x1, vFlip=0x1, tileNum=0x3a1, paletteNum=PAL_IX_CATCH_TILE_FX
 
 
-gCatchMonRevealOamFramesets:: @ 0x086B55DC
+gCatchMonRevealOamData:: @ 0x086B55DC
     packed_sprite_oam x=0x10, y=0x8, spriteSize=SPRITE_SIZE_16x16, tileNum=0x2c0, paletteNum=PAL_IX_CATCH_TILE_FX
     packed_sprite_oam x=0x10, y=0x8, spriteSize=SPRITE_SIZE_16x16, tileNum=0x2c0, paletteNum=PAL_IX_CATCH_TILE_FX
     packed_sprite_oam x=0x10, y=0x8, spriteSize=SPRITE_SIZE_16x16, tileNum=0x2c0, paletteNum=PAL_IX_CATCH_TILE_FX
@@ -15372,7 +15375,7 @@ gKecleonUpperBodyOamData:: @ 0x086B9DAC
     packed_sprite_oam x=0x18, y=0x24, objMode=ST_OAM_OBJ_BLEND, spriteSize=SPRITE_SIZE_32x8, hFlip=0x1, tileNum=0x59, priority=0x2, paletteNum=PAL_IX_2
 
 
-gDuskullSpritesheetOam:: @ 0x086BA0A0
+gDuskullOamData:: @ 0x086BA0A0
 	packed_sprite_oam x=0x0, y=0x0, objMode=ST_OAM_OBJ_BLEND, spriteSize=SPRITE_SIZE_32x32, tileNum=0x49, priority=0x1, paletteNum=PAL_IX_2
     packed_sprite_oam x=0x20, y=0x0, objMode=ST_OAM_OBJ_BLEND, spriteSize=SPRITE_SIZE_8x32, tileNum=0x59, priority=0x1, paletteNum=PAL_IX_2
     packed_sprite_oam x=0x0, y=0x0, objMode=ST_OAM_OBJ_BLEND, spriteSize=SPRITE_SIZE_32x32, tileNum=0x49, priority=0x1, paletteNum=PAL_IX_2

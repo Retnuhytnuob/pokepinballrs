@@ -16,7 +16,7 @@ extern const Palette gTravelPortrait_Pal;
 extern const u8 gAreaRouletteSelectedFx_Gfx[];
 
 // Rom_2 data
-extern const u16 gAreaRouletteOamFramesets[18][27];
+extern const u16 gAreaRouletteOamData[18][27];
 
 void InitBoardIntroMode(void)
 {
@@ -251,9 +251,9 @@ void UpdateBoardIntroMode(void)
                 {
                     oamSimple = &group->oam[i];
                     dst = (u16 *)&gOamBuffer[oamSimple->oamId];
-                    *dst++ = gAreaRouletteOamFramesets[var0][i * 3 + 0];
-                    *dst++ = gAreaRouletteOamFramesets[var0][i * 3 + 1];
-                    *dst++ = gAreaRouletteOamFramesets[var0][i * 3 + 2];
+                    *dst++ = gAreaRouletteOamData[var0][i * 3 + 0];
+                    *dst++ = gAreaRouletteOamData[var0][i * 3 + 1];
+                    *dst++ = gAreaRouletteOamData[var0][i * 3 + 2];
 
                     gOamBuffer[oamSimple->oamId].x += group->baseX;
                     gOamBuffer[oamSimple->oamId].y += group->baseY;

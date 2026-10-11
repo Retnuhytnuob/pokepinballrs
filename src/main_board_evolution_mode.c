@@ -20,7 +20,7 @@ extern const struct Vector16 gEvoItemPositions[][8];
 extern const u8 *gEvoItemAppear_GfxList[];
 extern const u8 *gEvoItemTilesGfxPtrs[];
 extern const s16 gEvoItemAppearFrameThresholds[];
-extern const u16 gEvoItemAnimOamFramesets[58][15];
+extern const u16 gEvoItemAnimOamData[58][15];
 
 void CleanupEvolutionModeState(void)
 {
@@ -431,9 +431,9 @@ void UpdateEvolutionItemAnimation(void)
         {
             oamSimple = &group->oam[i];
             dst = (u16 *)&gOamBuffer[oamSimple->oamId];
-            *dst++ = gEvoItemAnimOamFramesets[gCurrentPinballGame->evoItemAnimFrame][i * 3 + 0];
-            *dst++ = gEvoItemAnimOamFramesets[gCurrentPinballGame->evoItemAnimFrame][i * 3 + 1];
-            *dst++ = gEvoItemAnimOamFramesets[gCurrentPinballGame->evoItemAnimFrame][i * 3 + 2];
+            *dst++ = gEvoItemAnimOamData[gCurrentPinballGame->evoItemAnimFrame][i * 3 + 0];
+            *dst++ = gEvoItemAnimOamData[gCurrentPinballGame->evoItemAnimFrame][i * 3 + 1];
+            *dst++ = gEvoItemAnimOamData[gCurrentPinballGame->evoItemAnimFrame][i * 3 + 2];
 
             gOamBuffer[oamSimple->oamId].x += group->baseX;
             gOamBuffer[oamSimple->oamId].y += group->baseY;
