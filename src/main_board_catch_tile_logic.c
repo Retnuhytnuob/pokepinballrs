@@ -5,15 +5,15 @@
 #include "constants/board/main_board.h"
 
 // Rom_1 data
-extern const u8 gCatchTile_RevealTilesGfx[];
+extern const u8 gCatchTile_RevealTilesGfx[SIZE_OF_VRAM_FX_CATCH_REAVEAL_SEQUENTIAL_TILES];
 extern const Palette gCatchTile_Reveal_Pal;
-extern const u8 gCatchTile_BurstStart_Gfx[];
+extern const u8 gCatchTile_BurstStart_Gfx[SIZE_OF_VRAM_FX_CATCH_BURST_LIGHTNING_TILES];
 extern const Palette gCatchTile_BurstStart_Pal;
-extern const u8 gCatchTile_BurstStage2_Gfx[];
+extern const u8 gCatchTile_BurstStage2_Gfx[SIZE_OF_VRAM_FX_CATCH_BURST_TILE_OUTLINE];
 extern const Palette gCatchTile_BurstStage2_Pal;
-extern const u8 gCatchTile_BurstStage3_Gfx[];
+extern const u8 gCatchTile_BurstStage3_Gfx[SIZE_OF_VRAM_FX_CATCH_BURST_TILE_FLIGHT];
 extern const Palette gCatchTile_BurstStage3_Pal;
-extern const u8 gCatchTile_BurstStage4_Gfx[];
+extern const u8 gCatchTile_BurstStage4_Gfx[SIZE_OF_VRAM_FX_CATCH_BURST_TILE_ELECTRIC];
 extern const Palette gCatchTile_BurstStage4_Pal;
 
 // Rom_2 data

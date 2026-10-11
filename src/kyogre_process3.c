@@ -15,11 +15,11 @@ extern const Palette gBonusStageObjPal;
 extern const u16 gKyogreWaterBackgroundTilemap[];
 extern const Palette gKyogreIntroShorePalette[];
 extern const Palette gKyogreIntroIcePalette[];
-extern const u8 gKyogreSurfacingFx_Gfx[][0xC0];
-extern const u8 gKyogreFreeze_Gfx[][0x3C0];
-extern const u8 gKyogreTopPosition_Gfx[][0x580];
-extern const u8 gKyogreBreach_Gfx[][0x4C0];
-extern const u8 gKyogreWhirlpoolTrap_Gfx[][0x200];
+extern const u8 gKyogreSurfacingFx_Gfx[][SIZE_OF_VRAM_KYOGRE_SURFACE_FX_TILES];
+extern const u8 gKyogreFreeze_Gfx[][SIZE_OF_VRAM_KYOGRE_FREEZE_TILES];
+extern const u8 gKyogreTopPosition_Gfx[][SIZE_OF_VRAM_KYOGRE_TOP_TILES];
+extern const u8 gKyogreBreach_Gfx[][SIZE_OF_VRAM_KYOGRE_BREACH_TILES];
+extern const u8 gKyogreWhirlpoolTrap_Gfx[][SIZE_OF_VRAM_KYOGRE_WHIRLPOOL];
 
 extern const struct SongHeader se_kyogre_hit;
 extern const struct SongHeader se_kyogre_breach_surface;

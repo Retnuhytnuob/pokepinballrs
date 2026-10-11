@@ -17,9 +17,9 @@ extern EWRAM_DATA Palette gCatchSpritePaletteBuffer;
 
 // Rom_1 data
 extern const Palette gTimer_Default_Pal;
-extern const u8 gCatchMonAppearFx_Gfx[];
+extern const u8 gCatchMonAppearFx_Gfx[SIZE_OF_VRAM_FX_CATCH_REAVEAL_SEQUENTIAL_TILES];
 extern const Palette gCatchMonAppearFx_Pal;
-extern const u8 gJirachiFx_Gfx[][0x480];
+extern const u8 gJirachiFx_Gfx[][SIZE_OF_VRAM_CATCH_MON_ENTITY_TILES];
 
 extern const struct SongHeader se_evo_item_appear;
 
@@ -31,7 +31,7 @@ extern const u16 gJirachiStarFrameIndices[][10];
 extern const Palette *gCatchMonPaletteGroups[];
 extern const u16 gJirachiFloatOamFramesets[68][3][3];
 extern const u16 gCatchMonRevealOamFramesets[14][18];
-extern const u8 (*gCatchSpriteGfxPtrs[])[0x480];
+extern const u8 (*gCatchSpriteGfxPtrs[])[SIZE_OF_VRAM_CATCH_MON_ENTITY_TILES];
 
 enum catchTileRevealStates {
     CATCH_TILE_REVEAL_NONE = 0,

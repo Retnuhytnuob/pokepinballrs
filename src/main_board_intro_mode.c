@@ -13,7 +13,7 @@ extern const s16 gAreaPortraitIndexes[];
 extern const s16 gPondBumperRetractFrames[];
 extern const s16 gBoardArrowAnimFrames[];
 extern const Palette gTravelPortrait_Pal;
-extern const u8 gAreaRouletteSelectedFx_Gfx[];
+extern const u8 gAreaRouletteSelectedFx_Gfx[SIZE_OF_VRAM_FX_AREA_ROULETTE_SELECTED_TILES];
 
 // Rom_2 data
 extern const u16 gAreaRouletteOamFramesets[18][27];

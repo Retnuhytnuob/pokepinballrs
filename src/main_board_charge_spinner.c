@@ -5,7 +5,7 @@
 #include "constants/board/main_board.h"
 
 // Rom_1 data
-extern const u8 gMainBoardPikaSpinner_Gfx[][0x120];
+extern const u8 gMainBoardPikaSpinner_Gfx[][SIZE_OF_VRAM_PIKA_CHARGE_SPINNER_TILES];
 
 extern const struct SongHeader se_pika_spinner_clack;
 extern const struct SongHeader se_pika_full_charge_1_up;

@@ -32,9 +32,9 @@ struct KecleonSpriteSortEntry
 // Rom_1 data
 extern const u8 gKecleonBonusClear_Gfx[SIZE_OF_VRAM_KECLEON_BANNER_TILES];
 extern const Palette gBonusStageObjPal;
-extern const u16 gKecleonScopeOverlayTilemap[];
-extern const u8 gKecleonStageKecleon_Gfx[][0x280];
-extern const u8 gKecleonStageKecleonFx_Gfx[][0x100];
+extern const u16 gKecleonScopeOverlayTilemap[MEM_SIZE_OF_TILEMAP_256_BY_256];
+extern const u8 gKecleonStageKecleon_Gfx[][SIZE_OF_VRAM_KECLEON_TILES];
+extern const u8 gKecleonStageKecleonFx_Gfx[][SIZE_OF_VRAM_KECLEON_TRIP_FX_TILES];
 
 extern const struct SongHeader se_kecleon_side_look;
 extern const struct SongHeader se_kecleon_vanish;

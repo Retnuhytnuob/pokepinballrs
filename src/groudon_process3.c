@@ -13,7 +13,7 @@ extern const u8 gGroudonBonusClear_Gfx[SIZE_OF_VRAM_GROUDON_BANNER_TILES];
 extern const Palette gBonusStageObjPal;
 extern const u16 gGroudonLavaPaletteCycleData[]; //Should be of type Palette
 extern const u8 gGroudonAttackFx_Gfx[SIZE_OF_VRAM_GROUDON_ATTACK_FX_TILES];
-extern const s8 gGroudonBoardBoulders_Gfx[][0x300];
+extern const s8 gGroudonBoardBoulders_Gfx[][SIZE_OF_VRAM_GROUDON_BOULDER_TILES];
 
 extern const struct SongHeader se_groudon_hit;
 extern const struct SongHeader se_groudon_lands;

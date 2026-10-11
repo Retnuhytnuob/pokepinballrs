@@ -8,11 +8,11 @@
 
 // Rom_1 data
 extern const s8 gPelipperFlyAnimTable[][2];
-extern const u8 gSapphireBoardWailmer_Gfx[][0x300];
-extern const u8 gPelipper_Gfx[][0x480];
-extern const u8 gZigzagoonShockWallIndicator_Gfx[][0x200];
-extern const u8 gSapphireBoardZigzagoon_Gfx[][0x380];
-extern const u8 gSapphireBoardZigzagoonFx_Gfx[];
+extern const u8 gSapphireBoardWailmer_Gfx[][SIZE_OF_WAILMER_ENTTIY_TILES];
+extern const u8 gPelipper_Gfx[][SIZE_OF_PELIPPER_ENTTIY_TILES];
+extern const u8 gZigzagoonShockWallIndicator_Gfx[][SIZE_OF_ZIGZAGOON_SPEECH_BUBBLE_TILES];
+extern const u8 gSapphireBoardZigzagoon_Gfx[][SIZE_OF_ZIGZAGOON_ENTTIY_TILES];
+extern const u8 gSapphireBoardZigzagoonFx_Gfx[SIZE_OF_VRAM_FX_ZIGZAGZOON_ROULETTE_STOP_TILES];
 
 extern const struct SongHeader se_pelipper_wing_flap;
 

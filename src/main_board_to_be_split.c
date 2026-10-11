@@ -13,9 +13,9 @@ EWRAM_DATA const u8 gHatchedWalkerAnimTileBuffer[15][SIZE_OF_VRAM_HATCH_MON_ENTI
 EWRAM_DATA Palette gCatchSpritePaletteBuffer;
 
 // Rom_1 data
-extern const u8 gCaptureBallTilesGfx[];
+extern const u8 gCaptureBallTilesGfx[]; //TODO: apply size (math grouping chunks don't match with needed size)
 extern const u8 gCaptureScreenTilesGfx[SIZE_OF_VRAM_FX_MON_CATCH_CUTSCENE_TILES];
-extern const u8 gAerodactlyFlight_Gfx[];
+extern const u8 gAerodactlyFlight_Gfx[SIZE_OF_VRAM_AERODACTYL_EGG_DELIVERY_TILES];
 extern const Palette gAerodactlyFlight_Pal;
 extern const Palette gTotodile_Pal;
 extern const Palette gRubyShopSign_Pal;
@@ -28,8 +28,8 @@ extern const u8 gDecimalDigitTilesGfx[][SIZE_OF_VRAM_MART_PRICE_DIGIT];
 extern const u8 gTotodileEggDelivery_Gfx[SIZE_OF_VRAM_TOTODILE_EGG_DELIVERY_TILES];
 extern const u8 gChargeFillIndicator_Gfx[][SIZE_OF_VRAM_CHARGE_INDICATOR_CIRCLE_TILES];
 extern const u8 gRubyBoardShop_Gfx[][SIZE_OF_VRAM_RUBY_MART_SIGN_TILES];
-extern const u8 gRubyBoardHatchCave_Gfx[][0x480];
-extern const u8 gEggFrameTilesGfx[][0x200];
+extern const u8 gRubyBoardHatchCave_Gfx[][SIZE_OF_VRAM_HATCH_CAVE_TILES];
+extern const u8 gEggFrameTilesGfx[][SIZE_OF_VRAM_HATCH_EGG_TILES];
 
 // Rom_2 data
 extern const Palette gCaptureHit_Pal;
@@ -1946,7 +1946,9 @@ void UpdateEggMode(void)
         gCurrentPinballGame->activeFxType = FX_CAPTURE_MON_ABSORB;
         DmaCopy16(3, gCaptureHit_Pal, OBJ_PLTT_SLOT(PAL_IX_MON_SHADOW_PORTRAIT), PLTT_SLOT_SIZE);
         DmaCopy16(3, gCaptureScreenTilesGfx, OBJ_VRAM_ADDR_FX_BASE, SIZE_OF_VRAM_FX_MON_CATCH_CUTSCENE_TILES);
-        DmaCopy16(3, &gCaptureBallTilesGfx[gCurrentPinballGame->ballUpgradeType * 0x200], OBJ_VRAM_ADDR_FX_MON_CATCH_OPEN_BALL_TILES1, SIZE_OF_VRAM_FX_MON_CATCH_OPEN_BALL_TILES1);
+
+        // Note: only replaces the lid. The bits to the right/bottom that are part of the bottom of the ball are shared
+        DmaCopy16(3, &gCaptureBallTilesGfx[gCurrentPinballGame->ballUpgradeType * 4 * 0x80], OBJ_VRAM_ADDR_FX_MON_CATCH_OPEN_BALL_TILES1, SIZE_OF_VRAM_FX_MON_CATCH_OPEN_BALL_TILES1);
         DmaCopy16(3, &gCaptureBallTilesGfx[(gCurrentPinballGame->ballUpgradeType * 8 + 4) * 0x40], OBJ_VRAM_ADDR_FX_MON_CATCH_OPEN_BALL_TILES2, SIZE_OF_VRAM_FX_MON_CATCH_OPEN_BALL_TILES2);
         gCurrentPinballGame->captureSequenceFrame = 0;
         gCurrentPinballGame->captureState = MON_CAPTURE_SPECIAL_STATE_CAPTURE_CUTSCENE;

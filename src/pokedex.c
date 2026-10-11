@@ -169,7 +169,7 @@ extern const s16 gPokedexCatchAnimIndices[];
 extern s16 gPokedexListNameVramOffsets[]; //TODO: should be const
 extern const Palette *gCatchMonPaletteGroups[];
 extern const Palette *gMonPortraitGroupPals[];
-extern const u8 *gCatchSpriteGfxPtrs[];
+extern const u8 *gCatchSpriteGfxPtrs[SIZE_OF_VRAM_CATCH_MON_ENTITY_TILES];
 extern const u8 *gMonPortraitGroupGfx[];
 
 enum PokedexPopupType {

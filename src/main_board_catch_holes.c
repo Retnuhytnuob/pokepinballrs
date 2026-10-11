@@ -12,7 +12,7 @@ extern const Palette gShopNameDisplay_Pals[];
 extern const u8 gEvoModeBG0_0_Tilemap[];
 extern const Palette gShopEvoUI_Pals[];
 extern const u8 gShopModeBG0_0_Tilemap[];
-extern const u8 gMartEvoForegroundMenuUx_Gfx[];
+extern const u8 gMartEvoForegroundMenuUx_Gfx[SIZE_OF_VRAM_MART_EVO_FOREGROUND_UX_TILES];
 
 // Rom_2 data
 extern const u16 gShopItemData[][4];

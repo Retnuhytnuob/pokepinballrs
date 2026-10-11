@@ -5,10 +5,10 @@
 #include "constants/board/main_board.h"
 
 // Rom_1 data
-extern const u8 gPichuKickbackFx_Gfx[];
-extern const u8 gPikachuKickbackFx_Gfx[];
-extern const u8 gPikachuSaverTilesGfx[];
-extern const u8 gPichuSaverTilesGfx[];
+extern const u8 gPichuKickbackFx_Gfx[SIZE_OF_VRAM_PIKA_SAVER_KICKBACK_TILES];
+extern const u8 gPikachuKickbackFx_Gfx[SIZE_OF_VRAM_PIKA_SAVER_KICKBACK_TILES];
+extern const u8 gPikachuSaverTilesGfx[][SIZE_OF_VRAM_PIKA_MON_TILES];
+extern const u8 gPichuSaverTilesGfx[SIZE_OF_VRAM_PIKA_MON_TILES];
 
 extern const struct SongHeader se_pikachu_kickback;
 extern const struct SongHeader se_pichu_kickback;
@@ -116,7 +116,7 @@ void UpdateKickbackLogic(void)
             else
                 gCurrentPinballGame->pikaSaverTileIndex[outlaneChuteIx] = 2;
 
-            DmaCopy16(3, gPikachuSaverTilesGfx + (gCurrentPinballGame->pikaSaverTileIndex[outlaneChuteIx] * SIZE_OF_VRAM_PIKA_MON_TILES), OBJ_VRAM_ADDR_PIKA_MON_AT_LEFT_SIDE_TILES + outlaneChuteIx * SIZE_OF_VRAM_PIKA_MON_TILES, SIZE_OF_VRAM_PIKA_MON_TILES);
+            DmaCopy16(3, gPikachuSaverTilesGfx[gCurrentPinballGame->pikaSaverTileIndex[outlaneChuteIx]], OBJ_VRAM_ADDR_PIKA_MON_AT_LEFT_SIDE_TILES + outlaneChuteIx * SIZE_OF_VRAM_PIKA_MON_TILES, SIZE_OF_VRAM_PIKA_MON_TILES);
         }
 
         if (gCurrentPinballGame->outLanePikaPosition == PIKA_BOTH_SIDES)
@@ -256,7 +256,7 @@ void UpdateKickbackLogic(void)
                     else
                         gCurrentPinballGame->pikaSaverTileIndex[outlaneChuteIx] = 0;
 
-                    DmaCopy16(3, gPikachuSaverTilesGfx + (gCurrentPinballGame->pikaSaverTileIndex[outlaneChuteIx] * SIZE_OF_VRAM_PIKA_MON_TILES), OBJ_VRAM_ADDR_PIKA_MON_AT_LEFT_SIDE_TILES + outlaneChuteIx * SIZE_OF_VRAM_PIKA_MON_TILES, SIZE_OF_VRAM_PIKA_MON_TILES);
+                    DmaCopy16(3, gPikachuSaverTilesGfx[gCurrentPinballGame->pikaSaverTileIndex[outlaneChuteIx]], OBJ_VRAM_ADDR_PIKA_MON_AT_LEFT_SIDE_TILES + outlaneChuteIx * SIZE_OF_VRAM_PIKA_MON_TILES, SIZE_OF_VRAM_PIKA_MON_TILES);
                 }
             }
 
@@ -309,7 +309,7 @@ void UpdateKickbackLogic(void)
             {
                 if ((gMain.fieldFrameCount % 5) == 0)
                 {
-                    DmaCopy16(3, gPikachuSaverTilesGfx + (gCurrentPinballGame->pikaSaverTileIndex[outlaneChuteIx] * SIZE_OF_VRAM_PIKA_MON_TILES), OBJ_VRAM_ADDR_PIKA_MON_AT_LEFT_SIDE_TILES + outlaneChuteIx * SIZE_OF_VRAM_PIKA_MON_TILES, SIZE_OF_VRAM_PIKA_MON_TILES);
+                    DmaCopy16(3, gPikachuSaverTilesGfx[gCurrentPinballGame->pikaSaverTileIndex[outlaneChuteIx]], OBJ_VRAM_ADDR_PIKA_MON_AT_LEFT_SIDE_TILES + outlaneChuteIx * SIZE_OF_VRAM_PIKA_MON_TILES, SIZE_OF_VRAM_PIKA_MON_TILES);
                 }
 
                 tempY = 380 - gCurrentPinballGame->cameraYOffset;

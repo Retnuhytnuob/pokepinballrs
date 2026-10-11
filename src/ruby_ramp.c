@@ -6,8 +6,8 @@
 #include "constants/mem_layout/ruby.h"
 
 // Rom_1 data
-extern const u8 gRubyMakuhitaGfx[][0x300];
-extern const u8 gRubyBoardRampPrize_Gfx[][0x80];
+extern const u8 gRubyMakuhitaGfx[][SIZE_OF_VRAM_MAKUHITA_TILES];
+extern const u8 gRubyBoardRampPrize_Gfx[][SIZE_OF_VRAM_RAMP_PRIZE_TILES];
 
 void UpdateMakuhitaEntity(void)
 {

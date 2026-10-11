@@ -7,10 +7,10 @@
 
 // Rom_1 data
 extern const u8 gRubyChikoritaEntity[][SIZE_OF_VRAM_CHIKORITA_TILES];
-extern const u8 gChikoritaProjectileTiles[][0x80];
-extern const u8 gChikoritaExplosionTiles[][0x100];
-extern const u8 gRubyStageGulpin_Gfx[][0x180];
-extern const u8 gLinooneBumperGfx[][0x100];
+extern const u8 gChikoritaProjectileTiles[][SIZE_OF_VRAM_CHIKORITA_BLADE_TILES];
+extern const u8 gChikoritaExplosionTiles[][SIZE_OF_VRAM_CHIKORITA_BLADE_HIT_FX_TILES];
+extern const u8 gRubyStageGulpin_Gfx[][SIZE_OF_VRAM_GULPIN_TILES];
+extern const u8 gLinooneBumperGfx[][SIZE_OF_VRAM_RUBY_LINOONE_TILES];
 
 // Rom_2 data
 extern const s16 gChikoritaFlashFrameIndices[];

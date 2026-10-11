@@ -12,11 +12,11 @@ extern const Palette gChinchouBumper_Pals[];
 extern const Palette gLotadBumper_Pals[];
 extern const Palette gWhiscash_Pals[];
 extern const u8 gChinchouBumper_Gfx[][SIZE_OF_VRAM_RUBY_BUMPER_TILES];
-extern const u8 gLotadBumper_Gfx[][0x100];
-extern const u8 gRubyStageNuzleaf_Gfx[][0x280];
-extern const u8 gWhiscash_Gfx[][0x480];
-extern const u8 gRubyBoardShopDoor_Gfx[][0x180];
-extern const u8 gRubyBoardSharpedo_Gfx[][0x260];
+extern const u8 gLotadBumper_Gfx[][SIZE_OF_VRAM_RUBY_BUMPER_TILES];
+extern const u8 gRubyStageNuzleaf_Gfx[][SIZE_OF_VRAM_NUZLEAF_RAW_TILES];
+extern const u8 gWhiscash_Gfx[][SIZE_OF_VRAM_WHISCASH_RAW_TILES];
+extern const u8 gRubyBoardShopDoor_Gfx[][SIZE_OF_VRAM_RUBY_MART_DOOR_TILES];
+extern const u8 gRubyBoardSharpedo_Gfx[][SIZE_OF_VRAM_SHARPEDO_TILES];
 
 extern const struct SongHeader se_whiscash_splashdown;
 
